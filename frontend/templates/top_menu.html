@@ -1,0 +1,17 @@
+{% load menu_item %}
+<div class="masthead">
+    <h3 class="text-muted">Дайджест новостей из мира Python</h3>
+    <ul class="nav nav-justified">
+        {% li_menu_item "url:frontend:home" "Главная" %}
+        {% li_menu_item "url:frontend:issues" "Выпуски" %}
+        <li>
+            <a href="#">Разделы</a>
+        </li>
+        <li>
+            <a href="#">Лента</a>
+        </li>
+        <li>
+            <a href="#">О проекте</a>
+        </li>
+    </ul>
+</div>

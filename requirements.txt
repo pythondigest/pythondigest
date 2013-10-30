@@ -1,0 +1,5 @@
+Django>=1.5,<1.6
+sorl-thumbnail
+south
+django-menus
+django-digg-paginator

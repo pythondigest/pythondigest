@@ -1,0 +1,30 @@
+{% if is_paginated %}
+<div>
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li><a href="{{ base_url }}?page={{ page_obj.previous_page_number }}">&larr;</a>
+    {% else %}
+        <li><a>&larr;</a>
+    {% endif %}
+
+    {% for num in page_obj.page_range %}
+       <li>
+       {% if not num %} ...
+       {% else %}
+        {% if num = page_obj.number %}
+        <a>{{ num }}</a>
+        {% else %}
+        <a href="{{ base_url }}?page={{ num }}">{{ num }}</a>
+        {% endif %}
+       {% endif %}
+       </li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <li><a href="{{ base_url }}?page={{ page_obj.next_page_number }}">&rarr;</a>
+    {% else %}
+        <li><a>&rarr;</a>
+    {% endif %}
+    </ul>
+</div>
+{% endif %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load menu_item thumbnail %}
+
+{% block content %}
+<div class="container cards-list">
+    <div class="row">
+        {% for item in items %}
+           <div class="col-md-4">
+              <div class="container item-card">
+                  <div class="bs-example">
+                    <a href="{% url 'frontend:issue_view' pk=item.pk %}">#{{ item.pk }} {{ item.title }}</a>
+                  </div>
+                  <div class="highlight">
+                    {% thumbnail item.image "x200" as im %}
+                    <img src="{{ im.url }}" height="200px" width="100%">
+                    {% endthumbnail %}
+                    <p class="text-left brief">
+                    {{ item.description }}
+                    </p>
+                  </div>
+              </div>
+           </div>
+        {% empty %}
+           <p>Пока еще ни одного выпуска</p>
+        {% endfor %}
+    </div>
+</div>
+{% include "pagination.html" %}
+{% endblock %}
