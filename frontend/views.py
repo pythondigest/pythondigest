@@ -37,9 +37,6 @@ class IssueView(DetailView):
 
         items = self.object.item_set.filter(status='active').order_by('-section__priority', '-priority')
 
-        for i in items:
-            print i.title
-
         context.update({
             'items': items
         })

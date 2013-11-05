@@ -12,7 +12,8 @@ class SectionAdmin(admin.ModelAdmin):
 admin.site.register(Section, SectionAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
-    pass
+    list_filter = ('status', 'issue',)
+    list_display = ('title', 'status', 'issue', 'related_to_date')
 admin.site.register(Item, ItemAdmin)
 
 class ResourceAdmin(admin.ModelAdmin):
