@@ -14,9 +14,7 @@
             </div>
             {% if item.language = 'en' %}<i class="icon-en"></i>{% endif %}
             <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-            {% if item.description %}
-            <p class="text-muted">{{ item.description|safe }}</p>
-            {% endif %}
+            <p class="text-muted">{{ item.description|default:''|safe }}</p>
         </div>
     {% endfor %}
 </div>
