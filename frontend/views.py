@@ -19,7 +19,7 @@ class IssuesList(ListView):
     Список выпусков
     '''
     template_name = 'issues_list.html'
-    queryset = Issue.objects.filter(status='active').order_by('published_at')
+    queryset = Issue.objects.filter(status='active').order_by('-published_at')
     context_object_name = 'items'
     paginate_by = 9
     paginator_class = DiggPaginator
@@ -48,7 +48,7 @@ class NewsList(ListView):
     Лента новостей
     '''
     template_name = 'news_list.html'
-    queryset = Item.objects.filter(status='active').prefetch_related('issue', 'section').order_by('related_to_date', 'created_at')
+    queryset = Item.objects.filter(status='active').prefetch_related('issue', 'section').order_by('-related_to_date', '-created_at')
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
