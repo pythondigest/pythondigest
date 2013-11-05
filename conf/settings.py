@@ -137,6 +137,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'sorl.thumbnail',
+    'pytils',
     "menus",
     'digest',
     'frontend'

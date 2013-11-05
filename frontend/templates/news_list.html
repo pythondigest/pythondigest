@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load pytils_dt %}
+{% block content %}
+<div class="container cards-list">
+    {% for item in items %}
+        <div class="item-container">
+            <div class="text-warning">
+                <small>
+                    {{ item.related_to_date|default:item.created_at|ru_strftime:"%d %B %Y" }}
+                    {% if item.section %}
+                     → {{ item.section.title }}
+                    {% endif %}
+                </small>
+            </div>
+            {% if item.language = 'en' %}<i class="icon-en"></i>{% endif %}
+            <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+            {% if item.description %}
+            <p class="text-muted">{{ item.description|safe }}</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% include "pagination.html" %}
+{% endblock %}
