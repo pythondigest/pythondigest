@@ -1,14 +1,14 @@
 {% if is_paginated %}
 <div>
-    <ul class="pagination">
+    <ul class="pagination pagination-sm">
     {% if page_obj.has_previous %}
         <li><a href="{{ base_url }}?page={{ page_obj.previous_page_number }}">&larr;</a>
     {% else %}
-        <li><a>&larr;</a>
+        <li class="disabled"><a>&larr;</a>
     {% endif %}
 
     {% for num in page_obj.page_range %}
-       <li>
+       <li {% if num = page_obj.number %}class="active"{% endif %}>
        {% if not num %} ...
        {% else %}
         {% if num = page_obj.number %}
@@ -23,7 +23,7 @@
     {% if page_obj.has_next %}
         <li><a href="{{ base_url }}?page={{ page_obj.next_page_number }}">&rarr;</a>
     {% else %}
-        <li><a>&rarr;</a>
+        <li class="disabled"><a>&rarr;</a>
     {% endif %}
     </ul>
 </div>
