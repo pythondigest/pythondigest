@@ -1,6 +1,16 @@
 {% load menu_item %}
 <div class="masthead">
-    <h3 class="text-muted">Дайджест новостей из мира Python</h3>
+    <div class="row">
+        <div class="col-md-8">
+            <h3 class="text-muted">Дайджест новостей из мира Python</h3>
+        </div>
+        <div class="col-md-4">
+          <script type="text/javascript" src="/static/js/vendor/orphus/orphus.js"></script>
+          <a href="http://orphus.ru" id="orphus" target="_blank">
+              <img alt="Система Orphus" src="/static/js/vendor/orphus/orphus.gif">
+          </a>
+        </div>
+    </div>
     <ul class="nav nav-justified">
         {% li_menu_item "url:frontend:home" "Главная" %}
         {% li_menu_item "url:frontend:issues" "Выпуски" %}

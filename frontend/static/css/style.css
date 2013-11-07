@@ -168,3 +168,9 @@
     background:url(../img/eng.jpg);
     display: inline-block;
 }
+
+#orphus img {
+    width: 240px;
+    height: 80px;
+    float:right;
+}
