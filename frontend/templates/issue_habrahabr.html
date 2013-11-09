@@ -1,0 +1,9 @@
+{% regroup items by section as groups %}
+{% for data in groups %}<h2>{{ data.grouper.title }}</h2>
+<ul>
+{% for item in data.list%}
+<li>{% if item.language = 'en' %} <img src="https://dl.dropboxusercontent.com/u/19986711/python/flag_uk.gif" />{% endif %} <a href="{{ item.link }}">{{ item.title }}</a>
+{% if item.description %}<p>{{ item.description|default:''|safe }}</p>{% endif %}</li>
+{% endfor %}
+</ul>
+{% endfor %}

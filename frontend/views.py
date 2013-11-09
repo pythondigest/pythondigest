@@ -43,6 +43,14 @@ class IssueView(DetailView):
 
         return context
 
+class HabrView(IssueView):
+    '''
+    Рендерер выпуска для публикации на habrahabr.ru
+    '''
+    template_name = 'issue_habrahabr.html'
+    content_type = 'text/plain'
+
+
 class NewsList(ListView):
     '''
     Лента новостей
