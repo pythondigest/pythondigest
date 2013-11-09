@@ -166,7 +166,7 @@ class Item(models.Model):
         verbose_name=u'Язык новости',
         max_length=2,
         choices=ITEM_LANGUAGE_CHOICES,
-        default='ru',
+        default='en',
     )
     created_at = models.DateField(
         verbose_name=u'Дата публикации',
