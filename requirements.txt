@@ -3,3 +3,4 @@ sorl-thumbnail
 south
 django-menus
 django-digg-paginator
+bootstrap-admin
