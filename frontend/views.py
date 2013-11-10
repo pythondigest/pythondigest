@@ -56,7 +56,7 @@ class NewsList(ListView):
     Лента новостей
     '''
     template_name = 'news_list.html'
-    queryset = Item.objects.filter(status='active').prefetch_related('issue', 'section').order_by('-related_to_date', '-created_at')
+    queryset = Item.objects.filter(status='active').prefetch_related('issue', 'section').order_by('-created_at')
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
