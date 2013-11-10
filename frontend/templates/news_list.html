@@ -6,7 +6,10 @@
         <div class="item-container">
             <div class="text-warning">
                 <small>
-                    {{ item.related_to_date|default:item.created_at|ru_strftime:"%d %B %Y" }}
+                    {{ item.created_at|ru_strftime:"%d %B %Y" }}
+                    {% if item.related_to_date %}
+                    → {{ item.related_to_date|ru_strftime:"%d %B %Y" }}
+                    {% endif %}
                     {% if item.section %}
                      → {{ item.section.title }}
                     {% endif %}
