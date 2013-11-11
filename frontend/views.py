@@ -60,3 +60,10 @@ class NewsList(ListView):
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
+
+    def get_queryset(self):
+        qs = super(NewsList, self).get_queryset()
+        lang = self.request.GET.get('lang')
+        if lang in ['ru', 'en']:
+            qs = qs.filter(language=lang)
+        return qs
