@@ -98,6 +98,7 @@ TEMPLATE_LOADERS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
+    'concurrency.middleware.ConcurrencyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -105,6 +106,9 @@ MIDDLEWARE_CLASSES = (
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+CONCURRENCY_HANDLER409 = 'digest.views.conflict'
+CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
 
 ROOT_URLCONF = 'conf.urls'
 
@@ -141,7 +145,8 @@ INSTALLED_APPS = (
     'pytils',
     "menus",
     'digest',
-    'frontend'
+    'frontend',
+    'concurrency',
 )
 
 # A sample logging configuration. The only tangible logging
