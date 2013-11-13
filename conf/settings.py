@@ -141,7 +141,8 @@ INSTALLED_APPS = (
     'pytils',
     "menus",
     'digest',
-    'frontend'
+    'frontend',
+    'concurrency',
 )
 
 # A sample logging configuration. The only tangible logging
