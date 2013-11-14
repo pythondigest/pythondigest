@@ -21,6 +21,7 @@ class Issue(models.Model):
         null=True, blank=True,
     )
     image = models.ImageField(
+        verbose_name=u'Постер',
         upload_to='issues',
         null=True, blank=True,
     )
