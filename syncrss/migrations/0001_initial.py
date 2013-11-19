@@ -15,7 +15,7 @@ class Migration(SchemaMigration):
             ('description', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('link', self.gf('django.db.models.fields.URLField')(max_length=200)),
             ('status', self.gf('django.db.models.fields.BooleanField')(default=True)),
-            ('sync_date', self.gf('django.db.models.fields.DateField')()),
+            ('sync_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('version', self.gf('concurrency.fields.IntegerVersionField')(name='version', db_tablespace='')),
         ))
         db.send_create_signal(u'syncrss', ['ResourceRSS'])
@@ -56,7 +56,7 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'link': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
             'status': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'sync_date': ('django.db.models.fields.DateField', [], {}),
+            'sync_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
             'version': ('concurrency.fields.IntegerVersionField', [], {'name': "'version'", 'db_tablespace': "''"})
         }

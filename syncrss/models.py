@@ -24,6 +24,8 @@ class ResourceRSS(models.Model):
     )
     sync_date = models.DateField(
         verbose_name=u'Дата синхронизации',
+        null=True,
+        blank=True,
     )
     version = IntegerVersionField()
 
