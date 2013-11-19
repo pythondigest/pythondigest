@@ -22,8 +22,8 @@ class ResourceRSS(models.Model):
         verbose_name=u'Обновлять поток',
         default=True,
     )
-    sync_date = models.DateField(
-        verbose_name=u'Дата синхронизации',
+    sync_date = models.DateTimeField(
+        verbose_name=u'Дата последнего обновления',
         null=True,
         blank=True,
     )
