@@ -145,6 +145,7 @@ INSTALLED_APPS = (
     'pytils',
     "menus",
     'digest',
+    'syncrss',
     'frontend',
     'concurrency',
 )
