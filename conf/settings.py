@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'syncrss',
     'frontend',
     'concurrency',
+    'djcelery',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -178,6 +179,16 @@ LOGGING = {
         },
     }
 }
+
+import djcelery
+
+djcelery.setup_loader()
+
+BROKER_URL = "redis://localhost:6379/0";
+CELERY_RESULT_BACKEND = "database";
+CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler";
+CELERYBEAT_PIDFILE = '/tmp/celerybeat.pid'
+CELERYBEAT_SCHEDULE = {} # Will add tasks later
 
 try:
     from local_settings import *
