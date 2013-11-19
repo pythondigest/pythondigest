@@ -8,22 +8,25 @@ from .models import ResourceRSS, RawItem
 
 @task
 def update_rss():
-    for rec in ResourceRSS.objects.filter(status=True):
-        print rec.link
+    for resource in ResourceRSS.objects.filter(status=True):
         try:
-            data =feedparser.parse(rec.link)
-            #updated_date = datetime.fromtimestamp(mktime(data.feed.updated_parsed))
-            #sync_date = rec.sync_date(updated_date)
-            with transaction.commit_on_success():
-                for item in data.entries:
-                    print item.title
-                    entry = RawItem(
-                            title=item.title,
-                            description=item.title,
-                            link=item.link,
-                            related_to_date=datetime.fromtimestamp(\
-                                            mktime(item.updated_parsed)),
-                    )
-                    entry.save()
+            data =feedparser.parse(resource.link)
+            updated_date = datetime.fromtimestamp(mktime(data.feed.updated_parsed))
+            if resource.sync_date < updated_date:
+                with transaction.commit_on_success():
+                    for item in data.entries:
+                        print item.title
+                        entry = RawItem(
+                                title=item.title,
+                                description=item.title,
+                                link=item.link,
+                                related_to_date=datetime.fromtimestamp(\
+                                                mktime(item.updated_parsed)),
+                        )
+                        if entry and (not resource.sync_date or \
+                                     entry.related_to_date > resource.sync_date):
+                            entry.save()
+                resource.sync_date = updated_date
+                resource.save()
         except Exception as e:
             print ('sync failes: %s' % e)
