@@ -2,6 +2,14 @@
 from django.db import models
 from concurrency.fields import IntegerVersionField
 
+from digest.models import Section
+
+STATUS_CHOICES = (
+    ('pending', u'Ожидает рассмотрения'),
+    ('active', u'Активная'),
+    ('draft', u'Черновик'),
+)
+
 LANGUAGE_CHOICES = (
     ('ru', u'Русский'),
     ('en', u'Английский'),
@@ -53,6 +61,12 @@ class RawItem(models.Model):
     '''
         "Сырые" новости из RSS
     '''
+    section = models.ForeignKey(
+        Section,
+        verbose_name=u'Раздел',
+        null=True,
+        blank=True,
+    )
     title = models.CharField(
         max_length=255,
         verbose_name=u'Заголовок',
@@ -73,6 +87,12 @@ class RawItem(models.Model):
     )
     related_to_date = models.DateField(
         verbose_name=u'Дата новости',
+    )
+    status = models.CharField(
+        verbose_name=u'Статус',
+        max_length=10,
+        choices=STATUS_CHOICES,
+        default='pending',
     )
     language = models.CharField(
         verbose_name=u'Язык новости',

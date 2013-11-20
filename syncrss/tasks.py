@@ -23,8 +23,10 @@ def update_rss():
                         #     related_to_date=datetime.now()
                         entry = RawItem(
                                 title=item.title,
+                                resource_rss=resource,
                                 description=item.title,
                                 link=item.link,
+                                language=resource.language,
                                 related_to_date=datetime.fromtimestamp(\
                                                 mktime(item.published_parsed)),
                         )
