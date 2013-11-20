@@ -2,6 +2,11 @@
 from django.db import models
 from concurrency.fields import IntegerVersionField
 
+LANGUAGE_CHOICES = (
+    ('ru', u'Русский'),
+    ('en', u'Английский'),
+)
+
 class ResourceRSS(models.Model):
     '''
         RSS resource model
@@ -27,6 +32,12 @@ class ResourceRSS(models.Model):
         null=True,
         blank=True,
     )
+    language = models.CharField(
+        verbose_name=u'Язык ресурса',
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
+        default='en',
+    )
     version = IntegerVersionField()
 
     def __unicode__(self):
@@ -51,11 +62,22 @@ class RawItem(models.Model):
         null=True,
         blank=True,
     )
+    resource_rss = models.ForeignKey(
+        ResourceRSS,
+        verbose_name=u'Источник',
+        null=True,
+        blank=True,
+    )
     link = models.URLField(
         verbose_name=u'Ссылка',
     )
     related_to_date = models.DateField(
         verbose_name=u'Дата новости',
+    )
+    language = models.CharField(
+        verbose_name=u'Язык новости',
+        max_length=2,
+        choices=LANGUAGE_CHOICES,
     )
     version = IntegerVersionField()
 
