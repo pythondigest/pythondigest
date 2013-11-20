@@ -6,5 +6,6 @@ django-digg-paginator
 bootstrap-admin
 django-concurrency
 django-celery
+django-redis-cache
 redis
 feedparser

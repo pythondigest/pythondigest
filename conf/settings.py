@@ -188,7 +188,7 @@ BROKER_URL = "redis://localhost:6379/0";
 CELERY_RESULT_BACKEND = "database";
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler";
 CELERYBEAT_PIDFILE = '/tmp/celerybeat.pid'
-CELERYBEAT_SCHEDULE = {} # Will add tasks later
+CELERYBEAT_SCHEDULE = {}
 
 try:
     from local_settings import *
