@@ -7,3 +7,4 @@ bootstrap-admin
 django-concurrency
 django-celery
 redis
+feedparser
