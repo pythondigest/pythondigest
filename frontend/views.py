@@ -57,15 +57,11 @@ class NewsList(ListView):
     Лента новостей
     '''
     template_name = 'news_list.html'
-    queryset = Item.objects.filter(status='active').prefetch_related('issue', 'section').order_by('-created_at')
+    queryset = Item.objects.filter(status='active').prefetch_related('issue',\
+                                    'section').order_by('-created_at')
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(NewsList, self).get_context_data(*args, **kwargs)
-        context['itemsrss'] = RawItem.objects.filter(status='active')
-        return context
 
     def get_queryset(self):
         qs = super(NewsList, self).get_queryset()
