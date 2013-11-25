@@ -1,6 +1,16 @@
 # -*- coding: utf-8 -*-
+import os
+from sleekxmpp import ClientXMPP
+
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
+
+user_jid = os.environ["USER_JID"]
+user_pass = os.environ["JID_PASS"]
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
@@ -188,3 +198,16 @@ class Item(models.Model):
     class Meta:
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
+
+
+@receiver(post_save, sender=Item)
+def send_item(instance, **kwargs):
+    if instance.status == 'active':
+        mess = '*python '+ instance.title + ' ' + instance.link
+        xmpp = ClientXMPP(user_jid, user_pass)
+        xmpp.connect()
+        def on_start(e):
+            xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
+            xmpp.disconnect(wait=True)
+        xmpp.add_event_handler('session_start', on_start)
+        xmpp.process()
