@@ -1,22 +1,16 @@
 # -*- coding: utf-8 -*-
-import os
-from sleekxmpp import ClientXMPP
-
-from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-
 from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
 
-user_jid = os.environ["USER_JID"]
-user_pass = os.environ["JID_PASS"]
+from django.conf import settings
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
     ('draft', u'Черновик'),
 )
-
 
 class Issue(models.Model):
     '''
@@ -202,10 +196,23 @@ class Item(models.Model):
 
 @receiver(post_save, sender=Item)
 def send_item(instance, **kwargs):
+    '''
+    По событию сохранения активной новости отправляет ее в juick
+    А тот в свою очередь репостит в twitter
+    '''
     if instance.status == 'active':
-        mess = '*python '+ instance.title + ' ' + instance.link
-        xmpp = ClientXMPP(user_jid, user_pass)
+        mess = u'%s %s %s %s' % (
+            settings.JUICK_TAGS,
+            instance.title,
+            instance.link,
+            instance.description
+        )
+        xmpp = ClientXMPP(
+            settings.JABBER_USER,
+            settings.JABBER_PASS
+        )
         xmpp.connect()
+
         def on_start(e):
             xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
             xmpp.disconnect(wait=True)

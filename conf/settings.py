@@ -178,6 +178,10 @@ LOGGING = {
     }
 }
 
+JABBER_USER = ''
+JABBER_PASS = ''
+JUICK_TAGS = '*python'
+
 try:
     from local_settings import *
 except ImportError:
