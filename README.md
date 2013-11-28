@@ -12,7 +12,6 @@ python-news-digest
  - Поиск по новостям (sphinx?)
  - Постинг ссылок на хорошие новости анонимусами с морды сайта
 
-Новости теперь транслируются в juick и twitter
+Новости теперь транслируются в juick
 
-https://twitter.com/PythonDigest  
 http://juick.com/python-digest/
