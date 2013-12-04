@@ -32,9 +32,12 @@
     </div>
     {% endfor %}
 </div>
-<form action='.' method="GET">
-<table>{{ form }}</table>
-<input type="submit"/>
+<form class="form-inline" role="form">
+    <div class="form-group">
+        <input type="text" name="q" type="email" class="form-control small" value="{{ request.GET.q|default:'' }}" placeholder="Что будем искать?">
+    </div>
+    <button type="submit" class="btn btn-default">Поиск</button>
 </form>
+
 {% include "pagination.html" %}
 {% endblock %}

@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-# Create your views here.
-from django.shortcuts import get_object_or_404, render_to_response
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
 from django.db.models import Q
-from django.template import RequestContext
-from .forms import SearchForm
 
 class Index(TemplateView):
     '''
@@ -70,8 +66,8 @@ class NewsList(ListView):
 
         search = self.request.GET.get('q')
         if search:
-            filter = Q(title__icontains=search) | Q(descripton__icontains=search)
-            items = items.filter(filter)
+            filters = Q(title__icontains=search) | Q(description__icontains=search)
+            items = items.filter(filters)
 
         items = items.prefetch_related('issue', 'section')
         items = items.order_by('-created_at', '-related_to_date')
@@ -79,5 +75,4 @@ class NewsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
-        context['form'] = SearchForm()
         return context
