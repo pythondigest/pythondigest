@@ -178,3 +178,8 @@
 #rss-link {
     float: left;
 }
+
+.nopad {
+    padding: 0;
+    margin-bottom: 15px;
+}
