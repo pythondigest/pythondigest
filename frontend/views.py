@@ -63,19 +63,18 @@ class NewsList(ListView):
     model = Item
 
     def get_queryset(self):
-        items = super(NewsList, self).get_queryset()
+        items = super(NewsList, self).get_queryset().filter(status='active')
         lang = self.request.GET.get('lang')
         if lang in ['ru', 'en']:
             items = items.filter(language=lang)
-        print lang
-        if 'q' in self.request.GET and self.request.GET['q']:
-            search = self.request.GET['q']
-            items = items.filter(Q(title__icontains=search)| \
-                                 Q(descripton__icontains=search))
-        else:
-            items = items.filter(status='active'). \
-                            prefetch_related('issue', 'section'). \
-                            order_by('-created_at', '-related_to_date')
+
+        search = self.request.GET.get('q')
+        if search:
+            filter = Q(title__icontains=search) | Q(descripton__icontains=search)
+            items = items.filter(filter)
+
+        items = items.prefetch_related('issue', 'section')
+        items = items.order_by('-created_at', '-related_to_date')
         return items
 
     def get_context_data(self, **kwargs):
