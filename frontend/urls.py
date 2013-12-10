@@ -6,11 +6,13 @@ from frontend.views import (
     IssuesList,
     IssueView,
     HabrView,
-    NewsList
+    NewsList,
+    AddNews,
 )
 
 urlpatterns = patterns(
     'frontend.urls',
+    url(r'^add/', AddNews.as_view(), name='addnews'),
     url(r'^feed/$', NewsList.as_view(), name='feed'),
     url(r'^rss/$', LatestEntriesFeed(), name='rss'),
     url(r'^issues/$', IssuesList.as_view(), name='issues'),

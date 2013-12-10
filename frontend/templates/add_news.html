@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+ {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-error">
+                <strong>{{ error|escape }} - {{field.label}}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-error">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<form action='.' method="POST">{% csrf_token %}
+    {{ form.title.label }}*:{{ form.title }}
+    {{ form.link.label }}*:{{ form.link }}
+    {{ form.description.label }}:{{ form.description }}
+<input type="submit" value="Send" class="btn btn-default"/>
+</form>
+{% endblock %}
