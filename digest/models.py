@@ -137,6 +137,7 @@ class Item(models.Model):
     section = models.ForeignKey(
         Section,
         verbose_name=u'Раздел',
+        null=True, blank=True,
     )
     title = models.CharField(
         max_length=255,
@@ -156,7 +157,7 @@ class Item(models.Model):
         verbose_name=u'Источник',
         null=True, blank=True,
     )
-    link = models.CharField(
+    link = models.URLField(
         max_length=255,
         verbose_name=u'Ссылка',
     )

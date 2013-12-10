@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-from django.views.generic import TemplateView, ListView, DetailView, FormView
 from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
 from django.db.models import Q
+from django.views.generic import TemplateView, ListView, DetailView, FormView
+import datetime
+
+from forms import AddNewsForm
 
 class Index(TemplateView):
     '''
@@ -76,3 +79,20 @@ class NewsList(ListView):
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
         return context
+
+class AddNews(FormView):
+    template_name = "add_news.html"
+    form_class = AddNewsForm
+    success_url = "/"
+
+    def form_valid(self, form):
+        title = self.request.POST['title']
+        link = self.request.POST['link']
+        description = self.request.POST['description']
+        Item.objects.create(title=title,
+                            link=link,
+                            description=description,
+                            status='pending',
+                            related_to_date = datetime.datetime.now(),
+                            )
+        return super(AddNews, self).form_valid(form)
