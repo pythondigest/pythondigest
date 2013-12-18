@@ -15,6 +15,7 @@ admin.site.register(Section, SectionAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue',)
+    search_fields = ('title', 'description',)
     list_display = ('title', 'status', 'issue', 'related_to_date')
     radio_fields = {'language': admin.HORIZONTAL}
 admin.site.register(Item, ItemAdmin)
