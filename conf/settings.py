@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'digest',
     'frontend',
     'concurrency',
+    'massadmin'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -185,4 +186,4 @@ JUICK_TAGS = '*python'
 try:
     from local_settings import *
 except ImportError:
-    print 'No local settings imported!'
+    pass
