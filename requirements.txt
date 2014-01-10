@@ -6,3 +6,4 @@ django-digg-paginator
 bootstrap-admin
 django-concurrency
 sleekxmpp
+-e git+https://github.com/liberation/django-massadmin.git@3698237b15d55df1a73d6e5ad7868dbca0f88654#egg=massadmin-master
