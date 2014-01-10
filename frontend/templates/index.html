@@ -7,9 +7,7 @@
         <h1>Все самое интересное <br>прямо здесь и сейчас!</h1>
         <p class="lead">Новости собираются с мира по нитке на совершенно безвозмездной основе. Ты легко можешь посодействовать проекту добавив ссылку на интересную новость, статью, интервью или проект о python. А еще можно форкнуть код этого
            <a href="https://github.com/alrusdi/python-news-digest">проекта на Github</a> и помочь в развитии его функциональности.</p>
-        {% comment %}
-        <p><a class="btn btn-lg btn-success" href="#">Добавить новость</a></p>
-        {% endcomment %}
+        <p><a class="btn btn-lg btn-success" href="{% url 'frontend:addnews' %}">Добавить новость</a></p>
       </div>
       {% comment %}
       <!-- Example row of columns -->

@@ -15,13 +15,20 @@
   
   <body>
     <div class="container">
+      {% if messages %}
+        <div class="alert alert-success">
+            {% for message in messages %}
+            {{ message }}<br>
+            {% endfor %}
+        </div>
+      {% endif %}
       {% block top_menu %}
       {% include "top_menu.html" %}
       {% endblock %}
       {% block content %}{% endblock %}
       <!-- Site footer -->
       <div class="footer">
-        <p>&copy; Дайджест новостей о python 2013</p>
+        <p>&copy; Дайджест новостей о python 2013 — {% now "Y" %}</p>
       </div>
     </div>
     <!-- /container -->

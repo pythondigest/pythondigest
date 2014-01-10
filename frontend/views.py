@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.contrib import messages
 from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
 from django.db.models import Q
@@ -80,19 +81,24 @@ class NewsList(ListView):
         context = super(NewsList, self).get_context_data(**kwargs)
         return context
 
+
 class AddNews(FormView):
     template_name = "add_news.html"
     form_class = AddNewsForm
-    success_url = "/"
 
-    def form_valid(self, form):
-        title = self.request.POST['title']
+    def get_success_url(self):
+        title = self.request.POST['title'].strip() or 'Без заголовка'
         link = self.request.POST['link']
         description = self.request.POST['description']
+        section = self.request.POST['section']
         Item.objects.create(title=title,
                             link=link,
                             description=description,
                             status='pending',
-                            related_to_date = datetime.datetime.now(),
+                            related_to_date=datetime.datetime.now(),
+                            section_id=section
                             )
-        return super(AddNews, self).form_valid(form)
+        messages.info(
+            self.request, u'Ваша ссылка успешно добавлена на рассмотрение'
+        )
+        return '/'
