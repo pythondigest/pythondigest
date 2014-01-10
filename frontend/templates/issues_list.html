@@ -12,7 +12,9 @@
                   </div>
                   <div class="highlight">
                     {% thumbnail item.image "x200" as im %}
+                    <a href="{% url 'frontend:issue_view' pk=item.pk %}">
                     <img src="{{ im.url }}" height="200px" width="100%">
+                    </a>
                     {% endthumbnail %}
                     <p class="text-left brief">
                     {{ item.description }}
