@@ -2,7 +2,7 @@
 {% for data in groups %}<h2>{{ data.grouper.title }}</h2>
 <ul>
 {% for item in data.list%}
-<li>{% if item.language = 'en' %} <img src="http://habrastorage.org/storage3/298/0c0/2a7/2980c02a72bd945cb3cbba4528c8ee06.gif"/>{% endif %} <a href="{{ item.link }}">{{ item.title }}</a>
+<li>{% if item.language = 'ru' %} <img src="http://habr.habrastorage.org/post_images/893/6b3/cdf/8936b3cdf907df5d4a1ff64c9b4aaf29.jpg"/>{% endif %} <a href="{{ item.link }}">{{ item.title }}</a>
 {% if item.description %}<p>{{ item.description|default:''|safe }}</p>{% endif %}</li>
 {% endfor %}
 </ul>
