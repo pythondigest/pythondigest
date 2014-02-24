@@ -1,9 +1,13 @@
-Django>=1.5,<1.6
-sorl-thumbnail
-south
-django-menus
-django-digg-paginator
-bootstrap-admin
-django-concurrency
-sleekxmpp
--e git+https://github.com/liberation/django-massadmin.git@3698237b15d55df1a73d6e5ad7868dbca0f88654#egg=massadmin-master
+Django==1.5.5
+Pillow==2.3.0
+South==0.8.4
+argparse==1.2.1
+bootstrap-admin==0.3.0
+django-concurrency==0.7.1
+django-digg-paginator==0.0.1
+django-mass-edit==1.5.1
+django-menus==1.1.2
+pytils==0.3
+sleekxmpp==1.2.4
+sorl-thumbnail==11.12
+wsgiref==0.1.2
