@@ -82,6 +82,11 @@ class Section(models.Model):
         default='active',
     )
     version = IntegerVersionField()
+    habr_icon = models.CharField(
+        max_length=255,
+        verbose_name=u'Иконка для хабры',
+        null=True, blank=True
+    )
 
     def __unicode__(self):
         return self.title

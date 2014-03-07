@@ -1,5 +1,5 @@
 {% regroup items by section as groups %}
-{% for data in groups %}<h2>{{ data.grouper.title }}</h2>
+{% for data in groups %}<h2>{% if data.grouper.habr_icon %}{{ data.grouper.habr_icon|safe }}{% endif %} {{ data.grouper.title }}</h2>
 <ul>
 {% for item in data.list%}
 <li>{% if item.language = 'ru' %} <img src="http://habr.habrastorage.org/post_images/893/6b3/cdf/8936b3cdf907df5d4a1ff64c9b4aaf29.jpg"/>{% endif %} <a href="{{ item.link }}">{{ item.title }}</a>
