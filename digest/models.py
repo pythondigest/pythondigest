@@ -92,6 +92,7 @@ class Section(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['-pk']
         verbose_name = u'Раздел'
         verbose_name_plural = u'Разделы'
 
