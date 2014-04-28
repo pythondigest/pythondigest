@@ -180,19 +180,6 @@ LOGGING = {
     }
 }
 
-import djcelery
-
-djcelery.setup_loader()
-
-BROKER_URL = "redis://localhost:6379/0";
-CELERY_RESULT_BACKEND = "database";
-CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler";
-CELERYBEAT_PIDFILE = '/tmp/celerybeat.pid'
-CELERYBEAT_SCHEDULE = {}
-JABBER_USER = ''
-JABBER_PASS = ''
-JUICK_TAGS = '*python'
-
 
 try:
     from local_settings import *

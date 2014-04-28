@@ -53,6 +53,7 @@ class Issue(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['-pk']
         verbose_name = u'Выпуск дайджеста'
         verbose_name_plural = u'Выпуски дайджеста'
 

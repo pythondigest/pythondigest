@@ -51,7 +51,6 @@ class ResourceRSS(models.Model):
     def __unicode__(self):
         return self.title
 
-
     class Meta:
         verbose_name = u'Источник'
         verbose_name_plural = u'Источники'
@@ -105,5 +104,6 @@ class RawItem(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['-related_to_date']
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
