@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-# Create your views here.
-from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, ListView, DetailView
+import datetime
+
+from django.contrib import messages
 from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
-from syncrss.models import RawItem
 
+from django.db.models import Q
+from django.views.generic import TemplateView, ListView, DetailView, FormView
+
+
+from forms import AddNewsForm
 
 
 class Index(TemplateView):
@@ -57,15 +61,48 @@ class NewsList(ListView):
     Лента новостей
     '''
     template_name = 'news_list.html'
-    queryset = Item.objects.filter(status='active').prefetch_related('issue',\
-                                    'section').order_by('-created_at')
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
+    model = Item
 
     def get_queryset(self):
-        qs = super(NewsList, self).get_queryset()
+        items = super(NewsList, self).get_queryset().filter(status='active')
         lang = self.request.GET.get('lang')
         if lang in ['ru', 'en']:
-            qs = qs.filter(language=lang)
-        return qs
+            items = items.filter(language=lang)
+
+        search = self.request.GET.get('q')
+        if search:
+            filters = Q(title__icontains=search) | Q(description__icontains=search)
+            items = items.filter(filters)
+
+        items = items.prefetch_related('issue', 'section')
+        items = items.order_by('-created_at', '-related_to_date')
+        return items
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsList, self).get_context_data(**kwargs)
+        return context
+
+
+class AddNews(FormView):
+    template_name = "add_news.html"
+    form_class = AddNewsForm
+
+    def get_success_url(self):
+        title = self.request.POST['title'].strip() or 'Без заголовка'
+        link = self.request.POST['link']
+        description = self.request.POST['description']
+        section = self.request.POST['section']
+        Item.objects.create(title=title,
+                            link=link,
+                            description=description,
+                            status='pending',
+                            related_to_date=datetime.datetime.now(),
+                            section_id=section
+                            )
+        messages.info(
+            self.request, u'Ваша ссылка успешно добавлена на рассмотрение'
+        )
+        return '/'

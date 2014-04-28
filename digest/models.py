@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
-from django.db import models
+from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
+
+from django.conf import settings
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
     ('draft', u'Черновик'),
 )
-
 
 class Issue(models.Model):
     '''
@@ -78,11 +82,17 @@ class Section(models.Model):
         default='active',
     )
     version = IntegerVersionField()
+    habr_icon = models.CharField(
+        max_length=255,
+        verbose_name=u'Иконка для хабры',
+        null=True, blank=True
+    )
 
     def __unicode__(self):
         return self.title
 
     class Meta:
+        ordering = ['-pk']
         verbose_name = u'Раздел'
         verbose_name_plural = u'Разделы'
 
@@ -133,6 +143,7 @@ class Item(models.Model):
     section = models.ForeignKey(
         Section,
         verbose_name=u'Раздел',
+        null=True, blank=True,
     )
     title = models.CharField(
         max_length=255,
@@ -152,7 +163,7 @@ class Item(models.Model):
         verbose_name=u'Источник',
         null=True, blank=True,
     )
-    link = models.CharField(
+    link = models.URLField(
         max_length=255,
         verbose_name=u'Ссылка',
     )
@@ -188,3 +199,29 @@ class Item(models.Model):
     class Meta:
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
+
+
+#@receiver(post_save, sender=Item)
+#def send_item(instance, **kwargs):
+#    '''
+#    По событию сохранения активной новости отправляет ее в juick
+#    А тот в свою очередь репостит в twitter
+#    '''
+#    if instance.status == 'active':
+#        mess = u'%s %s %s %s' % (
+#            settings.JUICK_TAGS,
+#            instance.title,
+#            instance.link,
+#            instance.description
+#        )
+#        xmpp = ClientXMPP(
+#            settings.JABBER_USER,
+#            settings.JABBER_PASS
+#        )
+#        xmpp.connect()
+
+#        def on_start(e):
+#            xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
+#            xmpp.disconnect(wait=True)
+#        xmpp.add_event_handler('session_start', on_start)
+#        xmpp.process()

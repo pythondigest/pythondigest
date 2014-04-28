@@ -148,7 +148,7 @@ INSTALLED_APPS = (
     'syncrss',
     'frontend',
     'concurrency',
-    'djcelery',
+    'massadmin'
 )
 
 # A sample logging configuration. The only tangible logging
@@ -189,8 +189,12 @@ CELERY_RESULT_BACKEND = "database";
 CELERYBEAT_SCHEDULER = "djcelery.schedulers.DatabaseScheduler";
 CELERYBEAT_PIDFILE = '/tmp/celerybeat.pid'
 CELERYBEAT_SCHEDULE = {}
+JABBER_USER = ''
+JABBER_PASS = ''
+JUICK_TAGS = '*python'
+
 
 try:
     from local_settings import *
 except ImportError:
-    print 'No local settings imported!'
+    pass

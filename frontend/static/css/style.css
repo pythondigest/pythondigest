@@ -178,3 +178,16 @@
 #rss-link {
     float: left;
 }
+
+.nopad {
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+.has-error ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    color: #B94A48;
+    font-size: x-small;
+}

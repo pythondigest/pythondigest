@@ -1,4 +1,5 @@
 # coding=utf-8
+import datetime
 from django.contrib.syndication.views import Feed
 from digest.models import Item
 
@@ -9,9 +10,7 @@ class LatestEntriesFeed(Feed):
     """
     title = u"Дайджест новостей о python"
     link = "/"
-    description = u"""Новости собираются с мира по нитке на совершенно безвозмезной основе. Ты легко можешь
-    посодействовать проекту добавив ссылку на интересную новость, статью, интервью или проект о python. А еще можно
-    форкнуть код этого проекта на Github и помочь в развитии его функциональности."""
+    description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
 
     @staticmethod
     def items():
@@ -25,3 +24,6 @@ class LatestEntriesFeed(Feed):
 
     def item_link(self, item):
         return item.link
+        
+    def item_pubdate(self, item):
+        return datetime.datetime.combine(item.created_at, datetime.time(0,0,0))
