@@ -54,6 +54,7 @@ class HabrView(IssueView):
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
+    
 
 
 class NewsList(ListView):
