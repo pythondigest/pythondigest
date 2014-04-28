@@ -110,7 +110,7 @@ class Resource(models.Model):
         verbose_name=u'Описание',
         null=True, blank=True,
     )
-    link = models.CharField(
+    link = models.URLField(
         max_length=255,
         verbose_name=u'Ссылка',
     )
