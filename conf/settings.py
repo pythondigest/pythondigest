@@ -148,7 +148,6 @@ INSTALLED_APPS = (
     'syncrss',
     'frontend',
     'concurrency',
-    'massadmin'
 )
 
 # A sample logging configuration. The only tangible logging
