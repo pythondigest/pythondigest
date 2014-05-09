@@ -3,7 +3,7 @@
 from django.contrib import admin
 from django import forms
 from django.core.urlresolvers import reverse
-from digest.models import Issue, Section, Item, Resource
+from digest.models import Issue, Section, Item, Resource, UserEmail
 
 
 class IssueAdmin(admin.ModelAdmin):
@@ -44,3 +44,8 @@ class ResourceAdmin(admin.ModelAdmin):
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 admin.site.register(Resource, ResourceAdmin)
+
+
+class UserEmailAdmin(admin.ModelAdmin):
+    fields = ['useremail']
+admin.site.register(UserEmail, UserEmailAdmin)

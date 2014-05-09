@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
 
 from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
@@ -202,6 +202,30 @@ class Item(models.Model):
         verbose_name_plural = u'Новости'
 
 
+class UserEmail(models.Model):
+    '''
+    Адреса для email рассылки
+    '''
+
+    useremail = models.EmailField(unique=True,
+            blank=False,
+            null=False,
+            max_length=255)
+
+    def __unicode__(self):
+        return self.useremail
+
+
+@receiver(post_save, sender=Issue)
+def send_email(instance, **kwargs):
+
+    emails = UserEmail.objects.all().values_list('useremail', flat=True)
+
+    if instance.status == 'active':
+        send_mail(instance.title, instance.description,
+            "Python Digest <example@example.com>", emails)
+
+
 #@receiver(post_save, sender=Item)
 #def send_item(instance, **kwargs):
 #    '''
@@ -220,7 +244,6 @@ class Item(models.Model):
 #            settings.JABBER_PASS
 #        )
 #        xmpp.connect()
-
 #        def on_start(e):
 #            xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
 #            xmpp.disconnect(wait=True)

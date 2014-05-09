@@ -148,6 +148,7 @@ INSTALLED_APPS = (
     'syncrss',
     'frontend',
     'concurrency',
+    'djrill',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -178,6 +179,10 @@ LOGGING = {
         },
     }
 }
+
+
+MANDRILL_API_KEY = "<your Mandrill key>"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 
 
 try:
