@@ -4,27 +4,32 @@
 {% block content %}
 <div class="container cards-list">
     <div class="row">
-        {% for item in items %}
-           <div class="col-md-4">
-              <div class="container item-card">
-                  <div class="bs-example">
-                    <a href="{% url 'frontend:issue_view' pk=item.pk %}">{{ item.title }}</a>
-                  </div>
-                  <div class="highlight">
-                    {% thumbnail item.image "x200" as im %}
-                    <a href="{% url 'frontend:issue_view' pk=item.pk %}">
-                    <img src="{{ im.url }}" height="200px" width="100%">
-                    </a>
-                    {% endthumbnail %}
-                    <p class="text-left brief">
-                    {{ item.description }}
-                    </p>
-                  </div>
-              </div>
-           </div>
-        {% empty %}
+
+    {% for item in items %}
+    {% thumbnail item.image "x200" as im %}
+        <div class="thumb col-sm-4 col-lg-4 col-md-4">
+        
+            <a href="{% url 'frontend:issue_view' pk=item.pk %}" 
+               title="Дайджест python, {{ item.title }}  {{ item.description }}"> 
+                      <div class="thumbnail">
+                        
+                        <div class="issue-title">
+                            {{item.title}}
+                        </div>
+                        
+                        <div class="issue-img">
+                            <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
+                        </div>
+                        
+                      </div>
+            </a>
+        
+        </div>
+    {% endthumbnail %}
+    {% empty %}
            <p>Пока еще ни одного выпуска</p>
-        {% endfor %}
+    {% endfor %}
+
     </div>
 </div>
 {% include "pagination.html" %}
