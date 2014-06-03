@@ -14,8 +14,6 @@ def update_rss():
             print ('sync failed: %s' % e)
             continue
 
-        print res.link
-        print data.feed.keys()
         if 'updated_parsed' not in data.feed.keys():
             updated_date = to_datetime(data.entries[0].published_parsed)
         else:
@@ -24,7 +22,7 @@ def update_rss():
         if res.sync_date and res.sync_date >= updated_date:
             continue
 
-        with transaction.commit_on_success():
+        with transaction.atomic():
             for item in data.entries:
                 #NOTE need exist published in item like
                 # if not 'published_parsed':
