@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
 
 from django.conf import settings
@@ -49,7 +48,7 @@ class Issue(models.Model):
     )
     version = IntegerVersionField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -89,7 +88,7 @@ class Section(models.Model):
         null=True, blank=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -116,7 +115,7 @@ class Resource(models.Model):
     )
     version = IntegerVersionField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
 
@@ -194,35 +193,9 @@ class Item(models.Model):
     )
     version = IntegerVersionField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
-
-
-#@receiver(post_save, sender=Item)
-#def send_item(instance, **kwargs):
-#    '''
-#    По событию сохранения активной новости отправляет ее в juick
-#    А тот в свою очередь репостит в twitter
-#    '''
-#    if instance.status == 'active':
-#        mess = u'%s %s %s %s' % (
-#            settings.JUICK_TAGS,
-#            instance.title,
-#            instance.link,
-#            instance.description
-#        )
-#        xmpp = ClientXMPP(
-#            settings.JABBER_USER,
-#            settings.JABBER_PASS
-#        )
-#        xmpp.connect()
-
-#        def on_start(e):
-#            xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
-#            xmpp.disconnect(wait=True)
-#        xmpp.add_event_handler('session_start', on_start)
-#        xmpp.process()

@@ -1,4 +1,4 @@
-from feeds import LatestEntriesFeed
+from .feeds import LatestEntriesFeed
 from django.conf.urls import patterns, url
 
 from frontend.views import (

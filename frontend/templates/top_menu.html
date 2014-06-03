@@ -1,4 +1,3 @@
-{% load menu_item %}
 <div class="masthead">
     <div class="row">
         <div class="col-md-8">
@@ -12,9 +11,15 @@
         </div>
     </div>
     <ul class="nav nav-justified">
-        {% li_menu_item "url:frontend:home" "Главная" %}
-        {% li_menu_item "url:frontend:issues" "Выпуски" %}
-        {% li_menu_item "url:frontend:feed" "Лента" %}
+    	<li>
+    	<a href="{% url "frontend:home" %}">Главная</a>
+	</li>
+	<li>
+	<a href="{% url "frontend:issues" %}">Выпуски</a>
+	</li>
+	<li>
+	<a href="{% url "frontend:feed" %}">Лента</a>
+	</li>
         {% comment %}
         <li>
             <a href="#">О проекте</a>

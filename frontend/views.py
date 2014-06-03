@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 
 
-from forms import AddNewsForm
+from .forms import AddNewsForm
 
 
 class Index(TemplateView):
