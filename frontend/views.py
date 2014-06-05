@@ -12,12 +12,21 @@ from django.views.generic import TemplateView, ListView, DetailView, FormView
 from forms import AddNewsForm
 
 
-class Index(TemplateView):
+class Index(DetailView):
     '''
     Главная страница
     '''
     template_name = 'index.html'
-
+    model = Issue
+    context_object_name = 'index'
+    
+    def get_object(self):
+        issue = self.model.objects.filter(status='active').latest('published_at')
+        items = Item.objects.filter(issue=issue).order_by('-section__priority', '-priority')
+        return {
+                'issue': issue,
+                'items': items,
+        }
 
 class IssuesList(ListView):
     '''
