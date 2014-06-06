@@ -11,16 +11,18 @@ admin.site.register(ResourceRSS, ResourceRSSAdmin)
 
 
 def make_published(modeladmin, request, queryset):
-    #queryset.update(status='active')
-    #print(queryset)
-    for i in queryset:
+    for news in queryset:
         # soooo... ugly
-        obj = Item(title=i.title, \
-            description=i.description, \
-            link=i.link,status=i.status, \
-            related_to_date=i.related_to_date, language=i.language, \
-            version=i.version)
+        obj = Item(title=news.title, \
+            description=news.description, \
+            link=news.link,status=news.status, \
+            related_to_date=news.related_to_date, \
+            language=news.language, \
+            version=news.version)
         obj.save()
+    # закоментить если не нужно чтобы новости удалялись
+    queryset.delete()
+
 make_published.short_description = "Перенести выделенные новости в ленту"
 
 class RawItemAdmin(admin.ModelAdmin):
