@@ -13,13 +13,15 @@ admin.site.register(ResourceRSS, ResourceRSSAdmin)
 def make_published(modeladmin, request, queryset):
     for news in queryset:
         # soooo... ugly
-        obj = Item(title=news.title, \
+        feed = Item.objects.filter(link=news.link).exists()
+        if not feed:
+            obj = Item(title=news.title, \
             description=news.description, \
             link=news.link,status=news.status, \
             related_to_date=news.related_to_date, \
             language=news.language, \
             version=news.version)
-        obj.save()
+            obj.save()
     # закоментить если не нужно чтобы новости удалялись
     queryset.delete()
 
