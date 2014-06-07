@@ -1,5 +1,5 @@
 {% if is_paginated %}
-<div>
+<div class="container" align="center">
     <ul class="pagination pagination-sm">
     {% if page_obj.has_previous %}
         <li><a href="{{ base_url }}?page={{ page_obj.previous_page_number }}{% if request.GET.lang %}&lang={{ request.GET.lang }}{% endif %}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}">&larr;</a>
@@ -9,7 +9,7 @@
 
     {% for num in page_obj.page_range %}
        <li {% if num = page_obj.number %}class="active"{% endif %}>
-       {% if not num %} ...
+       {% if not num %}<li class="disabled"><a>...</a>
        {% else %}
         {% if num = page_obj.number %}
         <a>{{ num }}</a>
