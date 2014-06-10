@@ -15,7 +15,9 @@ LANGUAGE_CHOICES = (
     ('en', u'Английский'),
 )
 
+
 class ResourceRSS(models.Model):
+
     '''
         RSS resource model
     '''
@@ -57,6 +59,7 @@ class ResourceRSS(models.Model):
 
 
 class RawItem(models.Model):
+
     '''
         "Сырые" новости из RSS
     '''

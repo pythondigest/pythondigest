@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'syncrss',
     'frontend',
     'concurrency',
+    'subscribe',
 )
 
 # A sample logging configuration. The only tangible logging
