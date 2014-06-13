@@ -6,8 +6,7 @@ class SubscribersAdmin(admin.ModelAdmin):
 
     list_display = ('useremail',
                     'subscribe',
-                    'id_subscriber',
-                    'subscriber_add')
+                    'id_subscriber')
 
 
 admin.site.register(Subscribers, SubscribersAdmin)

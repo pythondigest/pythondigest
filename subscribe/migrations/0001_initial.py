@@ -13,15 +13,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Subscribers',
             fields=[
-                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', primary_key=True, serialize=False, auto_created=True)),
                 ('useremail', models.EmailField(max_length=75, unique=True)),
                 ('subscribe', models.BooleanField(default=True)),
-                ('subscriber_add', models.DateField(auto_now_add=True, verbose_name='Дата добавления')),
-                ('id_subscriber', models.CharField(max_length=50, unique=True, default='41ebd1c339c5440aa998f42f6de799d4')),
+                ('id_subscriber', models.CharField(max_length=50, default='9f5385332cd44a98b6cc0eae4eac4ec8', unique=True)),
             ],
             options={
-                'verbose_name': 'Получателя рассылки',
                 'verbose_name_plural': 'Получатели рассылки',
+                'verbose_name': 'Получателя рассылки',
             },
             bases=(models.Model,),
         ),
