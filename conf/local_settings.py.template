@@ -140,16 +140,14 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
-    'south',
     'sorl.thumbnail',
     'pytils',
     "menus",
     'digest',
+    'django_extensions',
     'syncrss',
     'frontend',
     'concurrency',
-    'djcelery',
-    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging

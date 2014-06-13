@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Добавление новости</h1>
+{% for error in form.non_field_errors %}
+    <div class="alert alert-danger">
+        <strong>{{ error|escape }}</strong>
+    </div>
+{% endfor %}
+
+<form role="form" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-group {% if field.errors %}has-error{%endif %}" {% if field.is_hidden %}style="display: none" {% endif %} >
+          <label class="control-label">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+          <div class="error">{{ field.errors }}</div>
+          {{ field }}
+    </div>
+    {% endfor %}
+    <input type="submit" value="Отправить" class="btn btn-default"/>
+</form>
+{% endblock %}

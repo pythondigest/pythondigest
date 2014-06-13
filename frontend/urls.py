@@ -10,8 +10,14 @@ from frontend.views import (
     AddNews,
 )
 
+
+from subscribe.views import AddSubscriber, unsubscribe
+
+
 urlpatterns = patterns(
     'frontend.urls',
+    url(r'^unsubscribe/(?P<username>\w+)/(?P<token>\w+)/$', 'unsubscribe', name='unsubscribe'),
+    url(r'^subscribe/', AddSubscriber.as_view(), name='addsubscribe'),
     url(r'^add/', AddNews.as_view(), name='addnews'),
     url(r'^feed/$', NewsList.as_view(), name='feed'),
     url(r'^rss/$', LatestEntriesFeed(), name='rss'),
