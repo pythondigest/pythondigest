@@ -5,6 +5,10 @@ from django.conf import settings
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
+
+from subscribe.models import Subscribers
+
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
@@ -199,3 +203,21 @@ class Item(models.Model):
     class Meta:
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
+
+
+
+@receiver(post_save, sender=Issue)
+def send_email(sender, instance, **kwargs):
+
+    emails = Subscribers.objects.all().values_list('useremail', flat=True)
+    obj = Issue.objects.get(id=instance.id)
+
+    if (instance.status == 'active'):
+        items = obj.item_set.filter(status='active').order_by('-section__priority', '-priority')
+        links = items.values_list('link', flat=True)
+        for _ in links:
+            print (_)
+        send_mail(instance.title, instance.description,
+                  "Python Digest <example@example.com>", emails)
+    #NOTE
+    # create html for email list
