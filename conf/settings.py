@@ -148,6 +148,8 @@ INSTALLED_APPS = (
     'frontend',
     'concurrency',
     'subscribe',
+    'djrill',
+    'django_extensions',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -179,6 +181,10 @@ LOGGING = {
     }
 }
 
+## MADRILL SETTINS
+MANDRILL_API_KEY = "api_key"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
+##
 
 try:
     from local_settings import *

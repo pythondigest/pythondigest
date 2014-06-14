@@ -1,0 +1,4 @@
+{% for item in obj_list%}
+<li>{% if item.language = 'ru' %} <img src="http://habr.habrastorage.org/post_images/893/6b3/cdf/8936b3cdf907df5d4a1ff64c9b4aaf29.jpg"/>{% endif %} <a href="{{ item.link }}">{{ item.link }}</a>
+{% if item.description %}<p>{{ item.description|default:''|safe }}</p>{% endif %}</li>
+{% endfor %}

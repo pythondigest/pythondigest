@@ -10,3 +10,4 @@ django-digg-paginator
 pytils==0.3
 git+git://github.com/mariocesar/sorl-thumbnail.git@v11.12.1b
 feedparser==5.1.3
+djrill==1.1.1
