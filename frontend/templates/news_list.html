@@ -2,17 +2,8 @@
 {% load pytils_dt %}
 {% block content %}
 <div class="container cards-list">
-    <div class="col-md-6 nopad">
-        {% spaceless %}
-        <form class="form-inline" role="form">
-            <div class="form-group">
-                <input type="text" name="q" type="text" class="form-control small" value="{{ request.GET.q|default:'' }}" placeholder="Что будем искать?">
-            </div>
-            <button type="submit" class="btn btn-default">Поиск</button>
-        </form>
-        {% endspaceless %}
-    </div>
-    <div class="col-md-6 nopad" style="text-align: right;">
+
+    <div class="col-md-12 nopad" style="text-align: right;">
         {% with lang=request.GET.lang|default:'any' %}
         <div class="btn-group">
             <a class="btn btn-default {% if lang == 'any' %}active{% endif%}" href="{% url 'frontend:feed' %}">Все</a>
