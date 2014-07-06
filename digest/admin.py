@@ -5,6 +5,8 @@ from django import forms
 from django.core.urlresolvers import reverse
 from digest.models import Issue, Section, Item, Resource
 
+from django.contrib.sites.models import Site
+admin.site.unregister(Site)
 
 class IssueAdmin(admin.ModelAdmin):
     list_display = ('title', 'frontend_link', 'habr_link')
