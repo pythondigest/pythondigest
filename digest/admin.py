@@ -33,9 +33,15 @@ admin.site.register(Section, SectionAdmin)
 class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'is_editors_choice')
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'status', 'is_editors_choice', 'issue', 'related_to_date')
+    list_display = ('title', 'status', 'is_editors_choice', 'external_link', 'issue', 'related_to_date')
     list_editable = ('is_editors_choice',)
     radio_fields = {'language': admin.HORIZONTAL}
+
+    def external_link(self, obj):
+        lnk = obj.link
+        return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
+    external_link.allow_tags = True
+    external_link.short_description = u"Ссылка"
 admin.site.register(Item, ItemAdmin)
 
 
