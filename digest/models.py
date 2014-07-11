@@ -150,6 +150,10 @@ class Item(models.Model):
         max_length=255,
         verbose_name=u'Заголовок',
     )
+    is_editors_choice = models.BooleanField(
+        verbose_name=u'Выбор редакции',
+        default=False,
+    )
     description = models.TextField(
         verbose_name=u'Описание',
         null=True, blank=True,
