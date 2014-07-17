@@ -1,4 +1,7 @@
-/* new-markup */
+/* ===================================================== */
+/*              new design ... by owlman75               */
+/* ===================================================== */
+
 html, body{min-height:100%;height:auto;margin:0;padding:0;}
 
 .site-body {
@@ -13,13 +16,6 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     -webkit-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
 
 }
-
-.cont{
-    padding-top:20px;
-    padding-bottom:25px;
-}
-
-/* Top */
 
 .top-logo {
     height:100px;
@@ -55,8 +51,6 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     
 }
 
-/* Search */
-
 .search-form {
     margin-top:30px;
     height:36px;
@@ -82,8 +76,6 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 
 }
 
-/* Jumbotron */
-
 .jumb {
     background-color:#777;
     color:#fff;
@@ -101,7 +93,10 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     font-size:11pt;
 }
 
-/* navbar */
+.cont{
+    padding-top:20px;
+    padding-bottom:25px;
+}
 
 .navbar {
     margin:0;
@@ -155,6 +150,10 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     color:#ccc;
 }
 
+/* ===================================================== */
+/*            end  new design ... by owlman75            */
+/* ===================================================== */
+
 
 .icon-en {
     width: 15px;
@@ -165,9 +164,9 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 
 
 
-/* ========================================================= */
-/* issue-list thumb, thumbinail, issue-title ... by owlman75 */
-/* ========================================================= */
+/* ================================================ */
+/*issue-list thumb, thumbinail, issue-title ... by owlman75 */
+/* ================================================ */
 
 .thumb { 
     opacity: 0.9;
@@ -202,13 +201,26 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     text-align:center;
 }
 
-/* ============================================================= */
-/* end issue-list thumb, thumbinail, issue-title ... by owlman75 */
-/* ============================================================= */
+/* ===================================================== */
+/* end issue-list tumb, tumbinail, title ... by owlman75 */
+/* ===================================================== */
 
+/* Index description */
+.index-description {
+    margin-top:10px;
+    
+}
+.index-description-content {
+    padding-top:10px;
+    font:normal 12pt/20pt Arial;
+    text-align: justify;
+    text-indent: 15px;
+}
+/* Index description */
 
-
-/* Adaptive */
+/* ===================================================== */
+/*                        Adaptive                       */
+/* ===================================================== */
 
 /* wide desktop */
 @media (min-width: 1200px) {
@@ -283,3 +295,6 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
         margin:15px;
     }
 }
+/* ===================================================== */
+/*                    End adaptive                       */
+/* ===================================================== */
