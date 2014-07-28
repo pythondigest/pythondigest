@@ -2,9 +2,13 @@
 {% load menu_item thumbnail %}
 
 {% block extra_head %}
+<title>{{ object.title }}</title>
 {% thumbnail object.image "350" as im %}
 <link rel="image_src" href="http://pythondigest.ru/{{ im.url }}">
 {% endthumbnail %}
+
+<meta name="description" content='{{ object.description|strip_tags }}'>
+<meta name="og:description" content='{{ object.description|strip_tags }}'>
 {% endblock %}
 
 {% block content %}
