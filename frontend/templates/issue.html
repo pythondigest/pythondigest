@@ -2,7 +2,7 @@
 {% load menu_item thumbnail %}
 
 {% block extra_head %}
-{% thumbnail item.image "350" as im %}
+{% thumbnail object.image "350" as im %}
 <link rel="image_src" href="http://pythondigest.ru/">
 {% endthumbnail %}
 {% endblock %}
