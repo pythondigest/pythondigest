@@ -4,7 +4,6 @@
 {% block page_title %}{{ object.title }}{% endblock %}
 
 {% block extra_head %}
-<title>{{ object.title }}</title>
 {% thumbnail object.image "350" as im %}
 <link rel="image_src" href="http://pythondigest.ru/{{ im.url }}">
 {% endthumbnail %}
