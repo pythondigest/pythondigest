@@ -34,7 +34,9 @@
             {% for item in data.list%}
                 <div class="item-container">
                 {% if item.language = 'en' %}<i class="icon-en"></i>{% endif %}
-                <a href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                <noindex>
+                    <a rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                </noindex>
                 <p class="text-muted">{{ item.description|default:''|safe }}</p>
                 </div>
             {% endfor %}
