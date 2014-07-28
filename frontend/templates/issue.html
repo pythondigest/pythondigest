@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% load menu_item thumbnail %}
 
+{% block extra_head %}
+{% thumbnail item.image "350" as im %}
+<link rel="image_src" href="http://pythondigest.ru/">
+{% endthumbnail %}
+{% endblock %}
+
 {% block content %}
 <div class="container cards-list">
     <h1>{{ object.title }}</h1>
