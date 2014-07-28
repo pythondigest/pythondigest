@@ -7,8 +7,8 @@
 <link rel="image_src" href="http://pythondigest.ru/{{ im.url }}">
 {% endthumbnail %}
 
-<meta name="description" content='{{ object.description|strip_tags }}'>
-<meta name="og:description" content='{{ object.description|strip_tags }}'>
+<meta name="description" content='{{ object.description|striptags }}'>
+<meta name="og:description" content='{{ object.description|striptags }}'>
 {% endblock %}
 
 {% block content %}
