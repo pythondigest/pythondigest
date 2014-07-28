@@ -50,6 +50,10 @@
         {% li_menu_item "url:frontend:home" "<i class='fa fa-home fa-lg'></i>" %}
         {% li_menu_item "url:frontend:issues" "ВЫПУСКИ" %}
         {% li_menu_item "url:frontend:feed" "ЛЕНТА" %}
+          {% if perms.admin %}
+             {% li_menu_item "url:admin:index" "АДМ.ПАНЕЛЬ" %}
+             <a type="button" class="btn btn-default" href="/admin/" >Админка</a>
+          {% endif %}
         {% comment %}
         <li>
             <a href="#">О проекте</a>
