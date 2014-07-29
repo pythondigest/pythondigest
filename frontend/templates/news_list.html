@@ -28,6 +28,9 @@
             {% if item.language = 'en' %}<i class="icon-en"></i>{% endif %}
             <noindex>
                 <a rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                {% if item.is_editors_choice %}
+                            &nbsp;<i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
+                {% endif %}
             </noindex>
             <p class="text-muted">{{ item.description|default:''|safe }}</p>
         </div>
