@@ -34,8 +34,9 @@
                 </div>
             {% endfor %}
 
-
-            {% include "disqus.html" with identifier='issue_'|add:index.issue.pk %}
+            {% with index.issue.pk|lower as id %}
+            {% include "disqus.html" with identifier='issue_'|add:id %}
+            {% endwith %}
         </div>
     </div>
 </div>

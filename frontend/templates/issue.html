@@ -47,7 +47,10 @@
         </div>
     {% endfor %}
 
-    {% include "disqus.html" with identifier='issue_'|add:object.pk %}
+    {% with object.pk|lower as id %}
+    {% include "disqus.html" with identifier='issue_'|add:id %}
+    {% endwith %}
+
 </div>
 
 {% endblock %}
