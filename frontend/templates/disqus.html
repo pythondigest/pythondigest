@@ -2,6 +2,9 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
     var disqus_shortname = 'pythondigest'; // required: replace example with your forum shortname
+    {% if identifier %}
+    var disqus_identifier = '{{ identifier }}';
+    {% endif %}
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {

@@ -47,7 +47,7 @@
         </div>
     {% endfor %}
 
-    {% include "disqus.html" %}
+    {% include "disqus.html" with identifier='issue_'|add:item.pk %}
 </div>
 
 {% endblock %}

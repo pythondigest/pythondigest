@@ -33,9 +33,10 @@
                     {% endfor %}
                 </div>
             {% endfor %}
+
+            {% include "disqus.html" with identifier='issue_'|add:item.pk %}
         </div>
     </div>
 </div>
-{% include "pagination.html" %}
 
 {% endblock %}
