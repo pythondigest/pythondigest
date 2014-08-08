@@ -1,5 +1,6 @@
 # coding=utf-8
 import datetime
+import pytils
 from django.contrib.syndication.views import Feed
 from digest.models import Item, Issue
 
@@ -42,7 +43,10 @@ class IssuesFeed(Feed):
         return Issue.objects.filter(status='active').order_by('-published_at')[:10]
 
     def item_title(self, item):
-        return u'Дайджест о python и близлежащих технологиях: %s' % item.title
+        df = pytils.dt.ru_strftime(u'%d %B %Y', item.date_from, inflected=True)
+        dt = pytils.dt.ru_strftime(u'%d %B %Y', item.date_to, inflected=True)
+        return u'''Python-digest #%s. Новости, интересные проекты,
+        статьи и интервью [%s — %s]''' % (item.pk, df, dt)
 
     def item_description(self, item):
         return item.description
