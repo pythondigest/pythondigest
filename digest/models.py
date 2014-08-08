@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.core.urlresolvers import reverse
 from sleekxmpp import ClientXMPP
 from concurrency.fields import IntegerVersionField
 
@@ -51,6 +52,11 @@ class Issue(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    @property
+    def link(self):
+        return reverse('frontend:issue_view', kwargs={'pk': self.pk})
+
 
     class Meta:
         ordering = ['-pk']
