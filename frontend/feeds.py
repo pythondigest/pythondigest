@@ -42,7 +42,7 @@ class IssuesFeed(Feed):
         return Issue.objects.filter(status='active').order_by('-published_at')[:10]
 
     def item_title(self, item):
-        return item.title
+        return u'Дайджест о python и близлежащих технологиях: %s' % item.title
 
     def item_description(self, item):
         return item.description
