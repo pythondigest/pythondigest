@@ -24,5 +24,6 @@
 
   Editor: Ivan <Dead_Angel>
   Github: https://github.com/dead23angel
+  Twitter: @dead_hart_angel
   Site: http://coderweb.ru
   Habr: http://habrahabr.ru/users/Dead_Angel/
