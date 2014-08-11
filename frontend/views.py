@@ -22,7 +22,7 @@ class Index(DetailView):
     
     def get_object(self):
         issue = self.model.objects.filter(status='active').latest('published_at')
-        items = Item.objects.filter(issue=issue).order_by('-section__priority', '-priority')
+        items = issue.item_set.filter(status='active').order_by('-section__priority', '-priority')
         return {
                 'issue': issue,
                 'items': items,
