@@ -63,7 +63,7 @@ class HabrView(IssueView):
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
-    
+
 
 
 class NewsList(ListView):
@@ -86,6 +86,10 @@ class NewsList(ListView):
         if search:
             filters = Q(title__icontains=search) | Q(description__icontains=search)
             items = items.filter(filters)
+
+        section = self.request.GET.get('section')
+        if section:
+            items = items.filter(section__pk=section)
 
         items = items.prefetch_related('issue', 'section')
         items = items.order_by('-created_at', '-related_to_date')
