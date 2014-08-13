@@ -29,6 +29,11 @@ def update_rss():
                 #NOTE need exist published in item like
                 # if not 'published_parsed':
                 #     related_to_date=datetime.now()
+
+                item = RawItem.objects.filter(link=item.link).count()
+                if item:
+                    continue
+
                 entry = RawItem(
                     title=item.title,
                     resource_rss=res,
