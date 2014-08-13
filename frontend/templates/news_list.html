@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% load pytils_dt %}
+{% load common %}
+
 {% block content %}
-<div class="container cards-list">
+<div class="container news-list">
 
     <div class="col-md-12 nopad" style="text-align: right;">
         {% with lang=request.GET.lang|default:'any' %}
         <div class="btn-group">
-            <a class="btn btn-default {% if lang == 'any' %}active{% endif%}" href="{% url 'frontend:feed' %}">Все</a>
-            <a class="btn btn-default {% if lang == 'ru' %}active{% endif%}" href="{% url 'frontend:feed' %}?lang=ru">Только на русском</a>
-            <a class="btn btn-default {% if lang == 'en' %}active{% endif%}" href="{% url 'frontend:feed' %}?lang=en">Только на английском</a>
+            <a class="btn btn-default {% if lang == 'any' %}active{% endif%}" href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
+            <a class="btn btn-default {% if lang == 'ru' %}active{% endif%}" href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только на русском</a>
+            <a class="btn btn-default {% if lang == 'en' %}active{% endif%}" href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только на английском</a>
         </div>
         {% endwith %}
     </div>
@@ -21,7 +23,7 @@
                     → {{ item.related_to_date|ru_strftime:"%d %B %Y" }}
                     {% endif %}
                     {% if item.section %}
-                     → {{ item.section.title }}
+                     → <a href="{% modify_url 'set_query_param_np' 'section' item.section.pk %}" class="section-link">{{ item.section.title }}</a>
                     {% endif %}
                 </small>
             </div>
