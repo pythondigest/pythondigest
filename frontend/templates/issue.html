@@ -14,7 +14,7 @@
 
 {% block content %}
 <div class="container cards-list">
-    <h1>{{ object.title }}</h1>
+    <h1>{{ object.title }}&nbsp;<small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_from|date:"d.m.Y" }})</small></h1>
 
     <div class="index-description row">
         <div class="col-md-8 pull-left">
