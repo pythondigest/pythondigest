@@ -18,12 +18,12 @@
         <div class="item-container">
             <div class="text-warning">
                 <small>
-                    {{ item.created_at|ru_strftime:"%d %B %Y" }}
-                    {% if item.related_to_date %}
-                    → {{ item.related_to_date|ru_strftime:"%d %B %Y" }}
+                    {{ item.created_at|date:"d.m.Y" }}
+                    {% if item.issue.status = 'active' %}
+                    <i class="fa fa-file-text-o"></i> <a href="{{ item.issue.link }}" class="section-link">{{ item.issue.title }}</a> ({{ item.issue.date_from|date:"d.m.Y" }} - {{ item.issue.date_to|date:"d.m.Y" }})
                     {% endif %}
                     {% if item.section %}
-                     → <a href="{% modify_url 'set_query_param_np' 'section' item.section.pk %}" class="section-link">{{ item.section.title }}</a>
+                    <i class="fa fa-folder-o"></i> <a href="{% modify_url 'set_query_param_np' 'section' item.section.pk %}" class="section-link">{{ item.section.title }}</a>
                     {% endif %}
                 </small>
             </div>
