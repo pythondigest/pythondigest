@@ -39,7 +39,7 @@ class ItemAdmin(admin.ModelAdmin):
 
     def external_link(self, obj):
         lnk = obj.link
-        return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
+        return u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
 admin.site.register(Item, ItemAdmin)
