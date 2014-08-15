@@ -33,16 +33,34 @@
         <div class="items-group-container">
             <h2>{{ data.grouper.title }}</h2>
             {% for item in data.list%}
-                <div class="item-container">
-                {% if item.language = 'en' %}<i class="icon-en"></i>{% endif %}
-                <noindex>
-                    <a rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                    {% if item.is_editors_choice %}
-                        &nbsp;<i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
-                    {% endif %}                    
-                </noindex>
-                <p class="text-muted">{{ item.description|default:''|safe }}</p>
-                </div>
+        <div class="item-container">
+            <noindex>
+            <div class="issue-item">
+                      <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource 
+                        {% if item.language = 'en' %}
+                            en
+                        {% elif item.language = 'ru'%}
+                            ru
+                        {% endif %}
+                      ">
+                      &nbsp;
+                      </span>
+                <a class="issue-item-title" rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                <span title="Язык новости" class="issue-item-bages">
+                      <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge issue-item-resource" target="_blank">
+                            {{ item.resource }}
+                      </a>
+                      
+                      {% if item.is_editors_choice %}
+                      <span class="badge issue-item-resource">
+                          <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
+                      </span>
+                      {% endif %}
+                </span>
+                <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
+            </div>
+            </noindex>
+        </div>
             {% endfor %}
         </div>
     {% endfor %}

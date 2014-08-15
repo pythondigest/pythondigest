@@ -221,12 +221,92 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     text-align: justify;
     text-indent: 15px;
 }
-/* Index description */
+/* End Index description */
+
+/* ===================================================== */
+/*     issue-items news-line-items ... by owlman75       */
+/* ===================================================== */
+.news-line-dates {
+    color:#DBC09A;
+}
+
+.news-line-dates > small > a,
+.news-line-dates > small > a:hover,
+.news-line-dates > small > a:visited,
+.news-line-dates > small > a:active {
+    color:#DBC09A;
+}
+
+.news-line-item {
+    padding:5px 0 5px 10px;
+    border-bottom:dotted 1px #eee;
+}
+
+.issue-item {
+    padding:5px 0 5px 0;
+    border-bottom:dotted 1px #eee;
+}
+
+.news-line-item > a,
+.issue-item > a {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.news-line-item-resource {
+    opacity: 0.4;
+    color: #58A6E2;
+    background-color: #fff;
+    border:solid 1px #58A6E2;
+    font-size: 8px;
+    font-weight: bold;
+}
+
+.issue-item-resource {
+    opacity: 0.4;
+    color: #58A6E2;
+    background-color: #fff;
+    border:solid 1px #58A6E2;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.en {
+    background-image:url('/static/img/gb.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+}
+
+.ru {
+    background-image:url('/static/img/ru.png');
+    background-repeat:no-repeat;
+    background-position:center center;
+}
 
 
 .goodnews {
-    color:#7fbd6f;
+    color:#58A6E2;
 }
+
+.issue-item-language {
+    font-size: 8px;
+    height:13px;
+}
+
+.news-line-item-bages > a:hover,
+.issue-item-bages > a:hover {
+    opacity: 1.0;
+    color: #58A6E2;
+}
+
+.issue-item-description {
+    padding-top:5px;
+    padding-left:23px;
+}
+
+/* ===================================================== */
+/*  End issue-items news-line-items ... by owlman75      */
+/* ===================================================== */
 
 
 
