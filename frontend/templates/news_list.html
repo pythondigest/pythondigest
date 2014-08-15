@@ -27,10 +27,11 @@
                       ">
                       &nbsp;
                       </span>
-                      
+                      {% if item.resource %}
                       <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge news-line-item-resource" target="_blank">
                             {{ item.resource }}
                       </a>
+                      {% endif %}
                       
                       {% if item.is_editors_choice %}
                       <span class="badge news-line-item-resource">
