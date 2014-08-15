@@ -402,6 +402,10 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
     color: #c09853;
 }
 
+.news-list .item-container {
+    margin-bottom: 15px;
+}
+
 /* ================================================ */
-/*                    end News list (feed)              */
+/*                    end News list (feed)          */
 /* ================================================ */
