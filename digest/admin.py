@@ -39,9 +39,18 @@ class ItemAdmin(admin.ModelAdmin):
 
     def external_link(self, obj):
         lnk = obj.link
-        return u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+        ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+        username = obj.user.username if obj.user else u'Гость'
+        ret = u'%s<br>Добавил: %s' % (ret, username)
+        return ret
+
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.user = request.user
+        super(ItemAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Item, ItemAdmin)
 
 
