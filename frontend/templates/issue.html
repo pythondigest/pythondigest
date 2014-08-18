@@ -47,9 +47,11 @@
                       </span>
                 <a class="issue-item-title" rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
                 <span title="Язык новости" class="issue-item-bages">
+                      {% if item.resource %}
                       <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge issue-item-resource" target="_blank">
                             {{ item.resource }}
                       </a>
+                      {% endif %}
                       
                       {% if item.is_editors_choice %}
                       <span class="badge issue-item-resource">
