@@ -179,7 +179,7 @@ class Item(models.Model):
     related_to_date = models.DateField(
         verbose_name=u'Дата, к которой имеет отношение новость',
         help_text=u'Например, дата публикации новости на источнике',
-        default=datetime.datetime.today(),
+        default=datetime.datetime.today,
     )
     status = models.CharField(
         verbose_name=u'Статус',
