@@ -50,6 +50,8 @@ class ItemAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         if not obj.pk:
             obj.user = request.user
+            if not obj.issue:
+                obj.issue = Issue.objects.latest('pk')
         super(ItemAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Item, ItemAdmin)
 
