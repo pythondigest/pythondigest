@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from concurrency.fields import IntegerVersionField
@@ -178,12 +179,13 @@ class Item(models.Model):
     related_to_date = models.DateField(
         verbose_name=u'Дата, к которой имеет отношение новость',
         help_text=u'Например, дата публикации новости на источнике',
+        default=datetime.datetime.today(),
     )
     status = models.CharField(
         verbose_name=u'Статус',
         max_length=10,
         choices=ITEM_STATUS_CHOICES,
-        default='active',
+        default='pending',
     )
     language = models.CharField(
         verbose_name=u'Язык новости',
