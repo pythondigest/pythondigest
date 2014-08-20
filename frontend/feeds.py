@@ -69,3 +69,6 @@ class IssuesFeed(CommonFeed):
         dt = pytils.dt.ru_strftime(u'%d %B %Y', item.date_to, inflected=True)
         return u'''Python-digest #%s. Новости, интересные проекты,
         статьи и интервью [%s — %s]''' % (item.pk, df, dt)
+
+    def item_pubdate(self, item):
+        return datetime.datetime.combine(item.published_at, datetime.time(0,0,0))
