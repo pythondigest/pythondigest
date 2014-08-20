@@ -1,4 +1,4 @@
-from feeds import LatestEntriesFeed, IssuesFeed
+from feeds import AllEntriesFeed, RussianEntriesFeed, IssuesFeed
 from django.conf.urls import patterns, url
 
 from frontend.views import (
@@ -14,7 +14,8 @@ urlpatterns = patterns(
     'frontend.urls',
     url(r'^add/', AddNews.as_view(), name='addnews'),
     url(r'^feed/$', NewsList.as_view(), name='feed'),
-    url(r'^rss/$', LatestEntriesFeed(), name='rss'),
+    url(r'^rss/$', AllEntriesFeed(), name='rss'),
+    url(r'^rss/ru/$', RussianEntriesFeed(), name='russian_rss'),
     url(r'^rss/issues/$', IssuesFeed(), name='issues_rss'),
     url(r'^issues/$', IssuesList.as_view(), name='issues'),
     url(r'^issue/(?P<pk>[0-9]+)/$', IssueView.as_view(), name='issue_view'),
