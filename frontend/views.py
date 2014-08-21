@@ -2,6 +2,7 @@
 import datetime
 
 from django.contrib import messages
+from django.shortcuts import get_object_or_404
 from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
 
@@ -10,6 +11,7 @@ from django.views.generic import TemplateView, ListView, DetailView, FormView
 
 
 from forms import AddNewsForm
+from frontend.models import EditorMaterial
 
 
 class Index(DetailView):
@@ -27,6 +29,7 @@ class Index(DetailView):
                 'issue': issue,
                 'items': items,
         }
+
 
 class IssuesList(ListView):
     '''
@@ -57,13 +60,13 @@ class IssueView(DetailView):
 
         return context
 
+
 class HabrView(IssueView):
     '''
     Рендерер выпуска для публикации на habrahabr.ru
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
-
 
 
 class NewsList(ListView):
@@ -120,3 +123,22 @@ class AddNews(FormView):
             self.request, u'Ваша ссылка успешно добавлена на рассмотрение'
         )
         return '/'
+
+
+class ViewEditorMaterial(TemplateView):
+    template_name = 'editor_material_view.html'
+
+    def get_context_data(self, **kwargs):
+        section = kwargs.get('section', 'landing')
+        slug = kwargs.get('slug')
+
+        material = get_object_or_404(
+            EditorMaterial,
+            slug=slug,
+            section=section,
+            status='active'
+        )
+
+        return {
+            'material': material
+        }

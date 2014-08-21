@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from django import forms
 from django.core.urlresolvers import reverse
 from digest.models import Issue, Section, Item, Resource
 
 from django.contrib.sites.models import Site
 admin.site.unregister(Site)
+
 
 class IssueAdmin(admin.ModelAdmin):
     list_display = ('title', 'frontend_link', 'habr_link')
@@ -35,7 +35,10 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'is_editors_choice', 'external_link', 'issue', 'related_to_date')
     list_editable = ('is_editors_choice',)
-    radio_fields = {'language': admin.HORIZONTAL}
+    radio_fields = {
+        'language': admin.HORIZONTAL,
+        'status': admin.HORIZONTAL,
+    }
 
     def external_link(self, obj):
         lnk = obj.link
