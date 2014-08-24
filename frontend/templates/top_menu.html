@@ -50,9 +50,9 @@
         {% li_menu_item "url:frontend:home" "<i class='fa fa-home fa-lg'></i>" %}
         {% li_menu_item "url:frontend:issues" "ВЫПУСКИ" %}
         {% li_menu_item "url:frontend:feed" "ЛЕНТА" %}
-          {% if perms.admin %}
+        {% if request.user.is_staff %}
              {% li_menu_item "url:admin:index" "АДМ.ПАНЕЛЬ" %}
-          {% endif %}
+        {% endif %}
         {% comment %}
         <li>
             <a href="#">О проекте</a>
