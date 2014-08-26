@@ -27,6 +27,7 @@ def get_tweets():
                 for i in excl:
                     if tw_lnk.find(i) > -1 and i <> '':
                         excl_link=True
+                        break
                     else:
                         excl_link = False
                 
