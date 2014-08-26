@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
+from django.db import models
+from django import forms
 from django.core.urlresolvers import reverse
-from digest.models import Issue, Section, Item, Resource
+from digest.models import Issue, Section, Item, Resource, AutoImportResource
 
 from django.contrib.sites.models import Site
 admin.site.unregister(Site)
@@ -67,3 +69,15 @@ class ResourceAdmin(admin.ModelAdmin):
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 admin.site.register(Resource, ResourceAdmin)
+
+
+class AutoImportResourceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit')
+    formfield_overrides = {
+            models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1 })},
+        }
+    def link_html(self,obj):
+        return u'<a target="_blank" href="%s">%s</a>' % (obj.link, obj.link)
+    link_html.allow_tags = True
+    link_html.short_description = u"Ссылка"
+admin.site.register(AutoImportResource, AutoImportResourceAdmin)

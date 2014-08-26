@@ -133,6 +133,7 @@ ITEM_STATUS_CHOICES = (
     ('pending', u'Ожидает рассмотрения'),
     ('active', u'Активная'),
     ('draft', u'Черновик'),
+    ('autoimport', u'Добавлена автоимпортом'),
 )
 
 ITEM_LANGUAGE_CHOICES = (
@@ -215,3 +216,62 @@ class Item(models.Model):
     class Meta:
         verbose_name = u'Новость'
         verbose_name_plural = u'Новости'
+
+
+class AutoImportResource(models.Model):
+    '''
+    Источники импорта новостей
+    '''
+    TYPE_RESOURCE = (
+        ('twitter', u'Сообщения аккаунтов в твиттере'),
+        ('rss', u'RSS фид'),
+    )
+    
+    name = models.CharField(
+        max_length=255,
+        verbose_name=u'Название источника',
+    )
+    link = models.URLField(
+        max_length=255,
+        verbose_name=u'Ссылка',
+    )
+    type_res = models.CharField(
+        max_length=255,
+        verbose_name=u'Тип источника',
+        choices=TYPE_RESOURCE,
+        default='twitter',
+    )
+    resource = models.ForeignKey(
+        Resource,
+        verbose_name=u'Источник',
+        null=True, 
+        blank=True,
+    )
+    incl = models.CharField(
+        max_length=255,
+        verbose_name=u'Обязательное содержание',
+        help_text='Условие отбора новостей <br /> \
+                   Включение вида [text] <br /> \
+                   Включение при выводе будет удалено',
+        null=True,
+        blank=True,
+    )
+    excl = models.TextField(
+        verbose_name=u'Список исключений',
+        help_text='Список источников подлежащих исключению через ", "',
+        null=True,
+        blank=True,
+    )
+    in_edit = models.BooleanField(
+        verbose_name=u'На тестировании',
+        default=False,
+    )
+
+
+    def __unicode__(self):
+        return self.name
+
+
+    class Meta:
+        verbose_name = u'Источник импорта новостей'
+        verbose_name_plural = u'Источники импорта новостей'
