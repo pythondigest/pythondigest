@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
+import string
 from django.core.management.base import BaseCommand
 from urllib import urlopen
 from BeautifulSoup import BeautifulSoup
 from digest.models import AutoImportResource, Item
+from django.conf import settings
+
 
 def get_tweets():
     '''
@@ -15,25 +18,23 @@ def get_tweets():
         soup = BeautifulSoup( url )
         url.close()
 
-        num = 0
-
         resource = src.resource
-        excl = src.excl.split(', ')
+        excl = src.excl.split(',')
+        excl = filter(string.strip, excl)
 
         for p in soup.findAll('p', 'ProfileTweet-text js-tweet-text u-dir'):
             try:
                 tw_lnk = p.find('a', 'twitter-timeline-link').get('data-expanded-url')
-                
+                tw_text = p.contents[0]
+
+                excl_link = False
                 for i in excl:
-                    if tw_lnk.find(i) > -1 and i <> '':
-                        excl_link=True
+                    if i in tw_lnk:
+                        excl_link = True
                         break
-                    else:
-                        excl_link = False
                 
-                if not excl_link and p.contents[0].find(src.incl) > -1:
-                    num = num + 1
-                    tw_txt = p.contents[0].replace(src.incl, '')
+                if not excl_link and src.incl in tw_text:
+                    tw_txt = tw_text.replace(src.incl, '')
                     dsp.append([tw_txt, tw_lnk, resource])
             except:
                 pass
@@ -41,27 +42,27 @@ def get_tweets():
     return dsp
 
 
+def save_new_tweets():
+    for i in get_tweets():
+        try:
+            Item.objects.get(link=i[1])
+        except Item.DoesNotExist:
+            Item(
+                title=i[0],
+                resource=i[2],
+                link=i[1],
+                status='autoimport',
+                user=settings.BOT_USER_ID,
+            ).save()
+
 
 class Command(BaseCommand):
     
     args = 'no arguments!'
-    help = u''
+    help = u'News import from external resources'
 
     def handle(self, *args, **options):
         '''
         Основной метод - точка входа
         '''
-        for i in get_tweets():
-            
-            try:
-                lastnews = Item.objects.get(link = i[1])
-                #print 'Not add: ' + i[0]
-            except Item.DoesNotExist:
-                #print 'Add: ' + i[0]
-                R = Item(
-                        title = i[0],
-                        resource = i[2],
-                        link = i[1],
-                        status = 'autoimport',
-                    )
-                R.save()
+        save_new_tweets()

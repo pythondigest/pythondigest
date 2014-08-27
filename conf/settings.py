@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for news_digest project.
 from os import path
 DEBUG = True
@@ -179,6 +180,8 @@ LOGGING = {
     }
 }
 
+# ID пользователя от имени когорого будут импортироваться данные
+BOT_USER_ID = 11
 
 try:
     from local_settings import *
