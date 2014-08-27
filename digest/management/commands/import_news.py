@@ -44,16 +44,17 @@ def get_tweets():
 
 def save_new_tweets():
     for i in get_tweets():
-        try:
-            Item.objects.get(link=i[1])
-        except Item.DoesNotExist:
-            Item(
-                title=i[0],
-                resource=i[2],
-                link=i[1],
-                status='autoimport',
-                user=settings.BOT_USER_ID,
-            ).save()
+        ct = Item.objects.filter(link=i[1])[0:1]
+        if ct:
+            continue
+
+        Item(
+            title=i[0],
+            resource=i[2],
+            link=i[1],
+            status='autoimport',
+            user_id=settings.BOT_USER_ID,
+        ).save()
 
 
 class Command(BaseCommand):
