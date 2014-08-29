@@ -63,10 +63,11 @@ class ItemAdmin(admin.ModelAdmin):
                     la = qs.filter(status='active').order_by('-pk')[0:1].get()
                     # последний неактивный
                     lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
-
-                    obj.issue = lna or la
                 except Issue.DoesNotExist:
                     pass
+
+            if la or lna:
+                obj.issue = lna or la
 
         super(ItemAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Item, ItemAdmin)
