@@ -66,8 +66,8 @@ class ItemAdmin(admin.ModelAdmin):
                 except Issue.DoesNotExist:
                     pass
 
-            if la or lna:
-                obj.issue = lna or la
+                if la or lna:
+                    obj.issue = lna or la
 
         super(ItemAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Item, ItemAdmin)
