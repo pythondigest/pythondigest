@@ -141,7 +141,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
-    'south',
     'sorl.thumbnail',
     'pytils',
     "menus",
