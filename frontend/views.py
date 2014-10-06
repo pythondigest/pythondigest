@@ -3,14 +3,14 @@ import datetime
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from digest.models import Issue, Item
+from digest.models import Issue, Item, IssueHabr
 from digg_paginator import DiggPaginator
 
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 
 
-from forms import AddNewsForm
+from .forms import AddNewsForm
 from frontend.models import EditorMaterial
 
 
@@ -67,6 +67,31 @@ class HabrView(IssueView):
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
+
+
+class HabrMountView(DetailView):
+    '''
+    Рендерер выпуска для публикации на habrahabr.rug
+    '''
+    template_name = 'issue_habrahabr.html'
+    content_type = 'text/plain'
+    context_object_name = 'items'
+
+    model = IssueHabr
+
+    def get_context_data(self, **kwargs):
+
+        issue = IssueHabr.objects.get(id=self.kwargs["pk"])
+
+        context = super(HabrMountView, self).get_context_data()
+
+        items = Item.objects.filter(related_to_date__range=(issue.date_from, issue.date_to), is_editors_choice=True)
+
+        context.update({
+            'items': items
+        })
+
+        return context
 
 
 class NewsList(ListView):

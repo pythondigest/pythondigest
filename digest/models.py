@@ -62,6 +62,52 @@ class Issue(models.Model):
         verbose_name_plural = u'Выпуски дайджеста'
 
 
+class IssueHabr(models.Model):
+    '''
+    Выпуск дайджеста для хабрахабр
+    '''
+    title = models.CharField(
+        max_length=255,
+        verbose_name=u'Заголовок',
+    )
+    description = models.TextField(
+        verbose_name=u'Описание',
+        null=True, blank=True,
+    )
+    image = models.ImageField(
+        verbose_name=u'Постер',
+        upload_to='issues',
+        null=True, blank=True,
+    )
+    date_from = models.DateField(
+        verbose_name=u'Начало освещаемого периода',
+        null=True, blank=True,
+    )
+    date_to = models.DateField(
+        verbose_name=u'Завершение освещаемого периода',
+        null=True, blank=True,
+    )
+    published_at = models.DateField(
+        verbose_name=u'Дата публикации',
+        null=True, blank=True,
+    )
+    status = models.CharField(
+        verbose_name=u'Статус',
+        max_length=10,
+        choices=ISSUE_STATUS_CHOICES,
+        default='draft',
+    )
+    version = IntegerVersionField()
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-pk']
+        verbose_name = u'Хабрадайджест'
+        verbose_name_plural = u'Хабрадайджесты'
+
+
 SECTION_STATUS_CHOICES = (
     ('pending', u'Ожидает провери'),
     ('active', u'Активный'),

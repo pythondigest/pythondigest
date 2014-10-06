@@ -1,4 +1,4 @@
-from feeds import AllEntriesFeed, RussianEntriesFeed, IssuesFeed
+from .feeds import AllEntriesFeed, RussianEntriesFeed, IssuesFeed
 from django.conf.urls import patterns, url
 
 from frontend.views import (
@@ -6,6 +6,7 @@ from frontend.views import (
     IssuesList,
     IssueView,
     HabrView,
+    HabrMountView,
     NewsList,
     AddNews,
     ViewEditorMaterial
@@ -20,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^issues/$', IssuesList.as_view(), name='issues'),
     url(r'^issue/(?P<pk>[0-9]+)/$', IssueView.as_view(), name='issue_view'),
     url(r'^habr/(?P<pk>[0-9]+)/$', HabrView.as_view(), name='habr_issue_view'),
+    url(r'^habrmount/(?P<pk>[0-9]+)/$', HabrMountView.as_view(), name='habrmount_issue_view'),
     url(r'^(?P<section>[a-z\-]+)/(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='editor_material'),
     url(r'^(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='landing'),
     url(r'^$', Index.as_view(), name='home'),
