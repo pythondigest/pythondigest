@@ -256,6 +256,10 @@ class Item(models.Model):
     )
     version = IntegerVersionField()
 
+    @property
+    def internal_link(self):
+        return reverse('frontend:item', kwargs={'pk': self.pk})
+
     def __unicode__(self):
         return self.title
 

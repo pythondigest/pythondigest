@@ -38,6 +38,9 @@ class AllEntriesFeed(CommonFeed):
     link = "/"
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
 
+    def item_link(self, item):
+        return item.internal_link
+
 
 class RussianEntriesFeed(CommonFeed):
     """
@@ -46,6 +49,9 @@ class RussianEntriesFeed(CommonFeed):
     title = u"Дайджест новостей о python"
     link = "/"
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."""
+
+    def item_link(self, item):
+        return item.internal_link
 
     @staticmethod
     def items():

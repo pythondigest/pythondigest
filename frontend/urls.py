@@ -8,11 +8,13 @@ from frontend.views import (
     HabrView,
     NewsList,
     AddNews,
-    ViewEditorMaterial
+    ViewEditorMaterial,
+    ItemView
 )
 
 urlpatterns = patterns('',
-    url(r'^add/', AddNews.as_view(), name='addnews'),
+    url(r'^view/(?P<pk>[0-9]+)/$', ItemView.as_view(), name='item'),
+    url(r'^add/$', AddNews.as_view(), name='addnews'),
     url(r'^feed/$', NewsList.as_view(), name='feed'),
     url(r'^rss/$', AllEntriesFeed(), name='rss'),
     url(r'^rss/ru/$', RussianEntriesFeed(), name='russian_rss'),
@@ -23,5 +25,6 @@ urlpatterns = patterns('',
     url(r'^(?P<section>[a-z\-]+)/(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='editor_material'),
     url(r'^(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='landing'),
     url(r'^$', Index.as_view(), name='home'),
+
 )
 

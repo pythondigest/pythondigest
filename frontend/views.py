@@ -164,3 +164,11 @@ class ViewEditorMaterial(TemplateView):
         return {
             'material': material
         }
+
+class ItemView(DetailView):
+    """
+    Просмотр отдельной новости
+    """
+    template_name = 'news_item.html'
+    context_object_name = 'item'
+    model = Item
