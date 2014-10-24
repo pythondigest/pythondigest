@@ -109,7 +109,7 @@ class IssueHabr(models.Model):
 
 
 SECTION_STATUS_CHOICES = (
-    ('pending', u'Ожидает провери'),
+    ('pending', u'Ожидает проверки'),
     ('active', u'Активный'),
 )
 

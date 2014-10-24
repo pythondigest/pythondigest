@@ -61,17 +61,9 @@ class IssueView(DetailView):
         return context
 
 
-class HabrView(IssueView):
+class HabrView(DetailView):
     '''
     Рендерер выпуска для публикации на habrahabr.ru
-    '''
-    template_name = 'issue_habrahabr.html'
-    content_type = 'text/plain'
-
-
-class HabrMountView(DetailView):
-    '''
-    Рендерер выпуска для публикации на habrahabr.rug
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
@@ -83,9 +75,14 @@ class HabrMountView(DetailView):
 
         issue = IssueHabr.objects.get(id=self.kwargs["pk"])
 
-        context = super(HabrMountView, self).get_context_data()
+        context = super(HabrView, self).get_context_data()
 
-        items = Item.objects.filter(related_to_date__range=(issue.date_from, issue.date_to), is_editors_choice=True)
+        items = Item.objects.filter(
+            related_to_date__range=(issue.date_from, issue.date_to),
+            is_editors_choice=True
+        )
+        items = items.prefetch_related('issue', 'section')
+        items = items.order_by('-created_at', '-related_to_date')
 
         context.update({
             'items': items

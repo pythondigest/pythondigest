@@ -182,6 +182,8 @@ LOGGING = {
 # ID пользователя от имени когорого будут импортироваться данные
 BOT_USER_ID = 11
 
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
+
 try:
     from local_settings import *
 except ImportError:

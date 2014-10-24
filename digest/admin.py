@@ -31,7 +31,7 @@ class IssueHabrAdmin(admin.ModelAdmin):
     list_display = ('title', 'habr_link')
 
     def habr_link(self,obj):
-        lnk = reverse('frontend:habrmount_issue_view', kwargs={'pk': obj.pk})
+        lnk = reverse('frontend:habr_issue_view', kwargs={'pk': obj.pk})
         return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
     habr_link.allow_tags = True
     habr_link.short_description = u"Хабраверстка"
