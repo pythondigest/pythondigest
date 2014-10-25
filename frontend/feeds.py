@@ -29,25 +29,21 @@ class CommonFeed(Feed):
     def item_pubdate(self, item):
         return datetime.datetime.combine(item.created_at, datetime.time(0,0,0))
 
-
 class AllEntriesFeed(CommonFeed):
-    """
-    Лента РСС для новостей
-    """
-    title = u"Дайджест новостей о python"
-    link = "/"
-    description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
+    pass
 
+class TwitterEntriesFeed(CommonFeed):
+    """
+    Лента РСС для twitter
+    """
     def item_link(self, item):
         return item.internal_link
 
 
 class RussianEntriesFeed(CommonFeed):
     """
-    Лента РСС для новостей
+    Лента РСС для русскоязычных новостей
     """
-    title = u"Дайджест новостей о python"
-    link = "/"
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."""
 
     def item_link(self, item):
