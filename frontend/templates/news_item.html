@@ -3,7 +3,6 @@
 {% load common %}
 
 {% block content %}
-<h1>Просмотр новости</h1>
 <div class="container news-list">
     {% with item=object %}
         <div class="item-container">
@@ -47,8 +46,9 @@
             </div>
             <noindex>
             <div class="news-line-item">
-                <a rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
+                <h3>{{ item.title }}</h3>
                 <p class="text-muted">{{ item.description|default:''|safe }}</p>
+                <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ item.link }}" target="_blank">Читать >></a>
             </div>
             </noindex>
         </div>
