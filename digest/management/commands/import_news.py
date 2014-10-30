@@ -19,7 +19,7 @@ def get_tweets():
         url.close()
 
         resource = src.resource
-        excl = src.excl.split(',')
+        excl = (src.excl or '').split(',')
         excl = filter(len, map(string.strip, excl))
 
         for p in soup.findAll('p', 'ProfileTweet-text js-tweet-text u-dir'):
