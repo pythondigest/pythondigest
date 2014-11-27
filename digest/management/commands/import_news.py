@@ -57,6 +57,23 @@ def save_new_tweets():
         ).save()
 
 
+def import_rss():
+    for src in AutoImportResource.objects.filter(type_res='rss', in_edit=True):
+
+        rssnews = feedparser.parse(src.link)
+        for n in rssnews.entries:
+            try:
+                lastnews = Item.objects.get(link = n.link)
+            except Item.DoesNotExist:
+                Item(
+                    title=n.title,
+                    resource=src.resource,
+                    link=n.link,
+                    status='autoimport',
+                    user_id=settings.BOT_USER_ID,
+                ).save()
+
+
 class Command(BaseCommand):
     
     args = 'no arguments!'
@@ -67,3 +84,4 @@ class Command(BaseCommand):
         Основной метод - точка входа
         '''
         save_new_tweets()
+        import_rss()
