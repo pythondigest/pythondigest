@@ -49,6 +49,23 @@ def get_tweets():
     return dsp
 
 
+def get_rss():
+    for src in AutoImportResource.objects.filter(type_res='rss', in_edit=True):
+        print '\n\n' + '='*25
+        print '  ' + src.name
+        print '='*25 + '\n'
+        
+        
+        num = 0
+        rssnews = feedparser.parse(src.link)
+        for n in rssnews.entries:
+            try:
+                lastnews = Item.objects.get(link = n.link)
+            except Item.DoesNotExist:
+                num += 1
+                print '%d: Title: %s (%s)' % (num, n.title, n.link)
+                print src.resource
+
 
 class Command(BaseCommand):
     
@@ -60,4 +77,5 @@ class Command(BaseCommand):
         Основной метод - точка входа
         '''
         print get_tweets()
+        print get_rss()
         
