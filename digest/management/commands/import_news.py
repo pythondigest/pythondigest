@@ -58,7 +58,7 @@ def save_new_tweets():
 
 
 def import_rss():
-    for src in AutoImportResource.objects.filter(type_res='rss', in_edit=True):
+    for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
 
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
