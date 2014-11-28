@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import string
+import feedparser
 from django.core.management.base import BaseCommand
 from urllib import urlopen
 from BeautifulSoup import BeautifulSoup
