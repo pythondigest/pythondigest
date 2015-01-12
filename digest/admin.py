@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 
 from django.contrib import admin
 from django.db import models
@@ -48,6 +49,7 @@ class ItemAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'is_editors_choice', 'external_link', 'resource', 'issue', 'related_to_date')
     list_editable = ('is_editors_choice',)
+    exclude = ('modified_at'),
     radio_fields = {
         'language': admin.HORIZONTAL,
         'status': admin.HORIZONTAL,
@@ -64,6 +66,7 @@ class ItemAdmin(admin.ModelAdmin):
     external_link.short_description = u"Ссылка"
 
     def save_model(self, request, obj, form, change):
+        prev_status = False
         if not obj.pk:
             obj.user = request.user
             if not obj.issue:
@@ -79,6 +82,14 @@ class ItemAdmin(admin.ModelAdmin):
 
                 if la or lna:
                     obj.issue = lna or la
+        else:
+            old_obj = Item.objects.get(pk=obj.pk)
+            prev_status = old_obj.status
+
+        # Обновление времени модификации при смене статуса на активный
+        new_status = form.cleaned_data.get('status')
+        if not prev_status == 'active' and new_status == 'active':
+            obj.modified_at = datetime.now()
 
         super(ItemAdmin, self).save_model(request, obj, form, change)
 admin.site.register(Item, ItemAdmin)

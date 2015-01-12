@@ -244,6 +244,10 @@ class Item(models.Model):
         verbose_name=u'Дата публикации',
         auto_now_add=True,
     )
+    modified_at = models.DateField(
+        verbose_name=u'Дата изменения',
+        null=True, blank=True,
+    )
     priority = models.PositiveIntegerField(
         verbose_name=u'Приоритет при показе',
         default=0,
