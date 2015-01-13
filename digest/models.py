@@ -244,7 +244,7 @@ class Item(models.Model):
         verbose_name=u'Дата публикации',
         auto_now_add=True,
     )
-    modified_at = models.DateField(
+    modified_at = models.DateTimeField(
         verbose_name=u'Дата изменения',
         null=True, blank=True,
     )
