@@ -15,7 +15,7 @@ class CommonFeed(Feed):
 
     @staticmethod
     def items():
-        return Item.objects.filter(status='active').order_by('-created_at')[:10]
+        return Item.objects.filter(status='active').order_by('-modified_at')[:10]
 
     def item_title(self, item):
         return item.title
@@ -51,7 +51,7 @@ class RussianEntriesFeed(CommonFeed):
 
     @staticmethod
     def items():
-        return Item.objects.filter(status='active', language='ru').order_by('-created_at')[:10]
+        return Item.objects.filter(status='active', language='ru').order_by('-modified_at')[:10]
 
 
 class IssuesFeed(CommonFeed):
