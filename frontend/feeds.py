@@ -27,7 +27,7 @@ class CommonFeed(Feed):
         return item.link
 
     def item_pubdate(self, item):
-        return datetime.datetime.combine(item.created_at, datetime.time(0,0,0))
+        return item.modified_at
 
 class AllEntriesFeed(CommonFeed):
     pass
