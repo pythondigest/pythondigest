@@ -35,3 +35,5 @@
 </div>
 {% include "pagination.html" %}
 {% endblock %}
+
+{% block rss_url %}{% url 'frontend:issues_rss' %}{% endblock %}
