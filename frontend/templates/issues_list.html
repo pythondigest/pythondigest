@@ -10,18 +10,19 @@
         <div class="thumb col-sm-4 col-lg-4 col-md-4">
         
             <a href="{% url 'frontend:issue_view' pk=item.pk %}" 
-               title="Дайджест python, {{ item.title }}  {{ item.description }}"> 
-                      <div class="thumbnail">
-                        
-                        <div class="issue-title">
-                            {{item.title}}
-                        </div>
-                        
-                        <div class="issue-img">
-                            <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
-                        </div>
-                        
-                      </div>
+               title="Дайджест python, {{ item.title }}  {{ item.description|striptags }}">
+                <div class="thumbnail">
+
+                    <div class="issue-title">
+                        {{ item.title }}
+                        <div class="issue-date">({{ item.date_from|date:"d.m.Y" }} - {{ item.date_to|date:"d.m.Y" }})</div>
+                    </div>
+
+                    <div class="issue-img">
+                        <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
+                    </div>
+
+                </div>
             </a>
         
         </div>

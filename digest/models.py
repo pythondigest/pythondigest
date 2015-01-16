@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-from sleekxmpp import ClientXMPP
+import datetime
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from concurrency.fields import IntegerVersionField
 
-from django.conf import settings
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
@@ -52,14 +51,65 @@ class Issue(models.Model):
     def __unicode__(self):
         return self.title
 
+    @property
+    def link(self):
+        return reverse('frontend:issue_view', kwargs={'pk': self.pk})
+
+
     class Meta:
         ordering = ['-pk']
         verbose_name = u'Выпуск дайджеста'
         verbose_name_plural = u'Выпуски дайджеста'
 
 
+class IssueHabr(models.Model):
+    '''
+    Выпуск дайджеста для хабрахабр
+    '''
+    title = models.CharField(
+        max_length=255,
+        verbose_name=u'Заголовок',
+    )
+    description = models.TextField(
+        verbose_name=u'Описание',
+        null=True, blank=True,
+    )
+    image = models.ImageField(
+        verbose_name=u'Постер',
+        upload_to='issues',
+        null=True, blank=True,
+    )
+    date_from = models.DateField(
+        verbose_name=u'Начало освещаемого периода',
+        null=True, blank=True,
+    )
+    date_to = models.DateField(
+        verbose_name=u'Завершение освещаемого периода',
+        null=True, blank=True,
+    )
+    published_at = models.DateField(
+        verbose_name=u'Дата публикации',
+        null=True, blank=True,
+    )
+    status = models.CharField(
+        verbose_name=u'Статус',
+        max_length=10,
+        choices=ISSUE_STATUS_CHOICES,
+        default='draft',
+    )
+    version = IntegerVersionField()
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-pk']
+        verbose_name = u'Хабрадайджест'
+        verbose_name_plural = u'Хабрадайджесты'
+
+
 SECTION_STATUS_CHOICES = (
-    ('pending', u'Ожидает провери'),
+    ('pending', u'Ожидает проверки'),
     ('active', u'Активный'),
 )
 
@@ -129,6 +179,7 @@ ITEM_STATUS_CHOICES = (
     ('pending', u'Ожидает рассмотрения'),
     ('active', u'Активная'),
     ('draft', u'Черновик'),
+    ('autoimport', u'Добавлена автоимпортом'),
 )
 
 ITEM_LANGUAGE_CHOICES = (
@@ -149,6 +200,10 @@ class Item(models.Model):
     title = models.CharField(
         max_length=255,
         verbose_name=u'Заголовок',
+    )
+    is_editors_choice = models.BooleanField(
+        verbose_name=u'Выбор редакции',
+        default=False,
     )
     description = models.TextField(
         verbose_name=u'Описание',
@@ -171,12 +226,13 @@ class Item(models.Model):
     related_to_date = models.DateField(
         verbose_name=u'Дата, к которой имеет отношение новость',
         help_text=u'Например, дата публикации новости на источнике',
+        default=datetime.datetime.today,
     )
     status = models.CharField(
         verbose_name=u'Статус',
         max_length=10,
         choices=ITEM_STATUS_CHOICES,
-        default='active',
+        default='pending',
     )
     language = models.CharField(
         verbose_name=u'Язык новости',
@@ -188,11 +244,25 @@ class Item(models.Model):
         verbose_name=u'Дата публикации',
         auto_now_add=True,
     )
+    modified_at = models.DateTimeField(
+        verbose_name=u'Дата изменения',
+        null=True, blank=True,
+    )
     priority = models.PositiveIntegerField(
         verbose_name=u'Приоритет при показе',
         default=0,
     )
+    user = models.ForeignKey(
+        User,
+        verbose_name=u'Кто добавил новость',
+        editable=False,
+        null=True, blank=True,
+    )
     version = IntegerVersionField()
+
+    @property
+    def internal_link(self):
+        return reverse('frontend:item', kwargs={'pk': self.pk})
 
     def __unicode__(self):
         return self.title
@@ -202,27 +272,60 @@ class Item(models.Model):
         verbose_name_plural = u'Новости'
 
 
-#@receiver(post_save, sender=Item)
-#def send_item(instance, **kwargs):
-#    '''
-#    По событию сохранения активной новости отправляет ее в juick
-#    А тот в свою очередь репостит в twitter
-#    '''
-#    if instance.status == 'active':
-#        mess = u'%s %s %s %s' % (
-#            settings.JUICK_TAGS,
-#            instance.title,
-#            instance.link,
-#            instance.description
-#        )
-#        xmpp = ClientXMPP(
-#            settings.JABBER_USER,
-#            settings.JABBER_PASS
-#        )
-#        xmpp.connect()
+class AutoImportResource(models.Model):
+    '''
+    Источники импорта новостей
+    '''
+    TYPE_RESOURCE = (
+        ('twitter', u'Сообщения аккаунтов в твиттере'),
+        ('rss', u'RSS фид'),
+    )
+    
+    name = models.CharField(
+        max_length=255,
+        verbose_name=u'Название источника',
+    )
+    link = models.URLField(
+        max_length=255,
+        verbose_name=u'Ссылка',
+    )
+    type_res = models.CharField(
+        max_length=255,
+        verbose_name=u'Тип источника',
+        choices=TYPE_RESOURCE,
+        default='twitter',
+    )
+    resource = models.ForeignKey(
+        Resource,
+        verbose_name=u'Источник',
+        null=True, 
+        blank=True,
+    )
+    incl = models.CharField(
+        max_length=255,
+        verbose_name=u'Обязательное содержание',
+        help_text='Условие отбора новостей <br /> \
+                   Включение вида [text] <br /> \
+                   Включение при выводе будет удалено',
+        null=True,
+        blank=True,
+    )
+    excl = models.TextField(
+        verbose_name=u'Список исключений',
+        help_text='Список источников подлежащих исключению через ", "',
+        null=True,
+        blank=True,
+    )
+    in_edit = models.BooleanField(
+        verbose_name=u'На тестировании',
+        default=False,
+    )
 
-#        def on_start(e):
-#            xmpp.send_message(mto='juick@juick.com', mbody=mess, mtype='chat')
-#            xmpp.disconnect(wait=True)
-#        xmpp.add_event_handler('session_start', on_start)
-#        xmpp.process()
+
+    def __unicode__(self):
+        return self.name
+
+
+    class Meta:
+        verbose_name = u'Источник импорта новостей'
+        verbose_name_plural = u'Источники импорта новостей'

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load menu_item thumbnail %}
+
+{% block page_title %}{{ material.title }}{% endblock %}
+
+{% block content %}
+<div class="container cards-list">
+    <div class="editor-material row">
+        <h1>{{ material.title }} </h1>
+        {{ material.contents|safe }}
+        <div class="material-postscriptum">
+            <small>Автор: {{ material.user }} Опубликовано: {{ material.created_at|date:'d.m.Y' }}</small>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,27 +1,28 @@
+{% load common %}
 {% if is_paginated %}
-<div>
+<div class="container" align="center">
     <ul class="pagination pagination-sm">
     {% if page_obj.has_previous %}
-        <li><a href="{{ base_url }}?page={{ page_obj.previous_page_number }}{% if request.GET.lang %}&lang={{ request.GET.lang }}{% endif %}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}">&larr;</a>
+        <li><a href="{% modify_url 'set_query_param' 'page' page_obj.previous_page_number %}">&larr;</a>
     {% else %}
         <li class="disabled"><a>&larr;</a>
     {% endif %}
 
     {% for num in page_obj.page_range %}
        <li {% if num = page_obj.number %}class="active"{% endif %}>
-       {% if not num %} ...
+       {% if not num %}<li class="disabled"><a>...</a>
        {% else %}
         {% if num = page_obj.number %}
         <a>{{ num }}</a>
         {% else %}
-        <a href="{{ base_url }}?page={{ num }}{% if request.GET.lang %}&lang={{ request.GET.lang }}{% endif %}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}">{{ num }}</a>
+        <a href="{% modify_url 'set_query_param' 'page' num %}">{{ num }}</a>
         {% endif %}
        {% endif %}
        </li>
     {% endfor %}
 
     {% if page_obj.has_next %}
-        <li><a href="{{ base_url }}?page={{ page_obj.next_page_number }}{% if request.GET.lang %}&lang={{ request.GET.lang }}{% endif %}{% if request.GET.q %}&q={{request.GET.q }}{% endif %}">&rarr;</a>
+        <li><a href="{% modify_url 'set_query_param' 'page' page_obj.next_page_number %}">&rarr;</a>
     {% else %}
         <li class="disabled"><a>&rarr;</a>
     {% endif %}

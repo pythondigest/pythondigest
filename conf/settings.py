@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Django settings for news_digest project.
 from os import path
 DEBUG = True
@@ -140,12 +141,10 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
-    'south',
     'sorl.thumbnail',
     'pytils',
     "menus",
     'digest',
-    'syncrss',
     'frontend',
     'concurrency',
 )
@@ -179,6 +178,10 @@ LOGGING = {
     }
 }
 
+# ID пользователя от имени когорого будут импортироваться данные
+BOT_USER_ID = 11
+
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 try:
     from local_settings import *

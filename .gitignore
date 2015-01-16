@@ -5,3 +5,6 @@ db.sqlite
 logs/*
 .idea/
 .idea/*
+env/
+
+

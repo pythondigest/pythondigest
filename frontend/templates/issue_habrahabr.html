@@ -1,3 +1,5 @@
+{% load thumbnail %}
+{% thumbnail object.image '350x350' as im %}<img src="http://pythondigest.ru{{ im.url }}" align="left" alt="">{% endthumbnail %} {{ object.description|safe }}
 {% regroup items by section as groups %}
 {% for data in groups %}<br><h2>{% if data.grouper.habr_icon %}{{ data.grouper.habr_icon|safe }}{% endif %} {{ data.grouper.title }}</h2><br>
 <ul>

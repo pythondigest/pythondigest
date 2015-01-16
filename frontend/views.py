@@ -2,21 +2,33 @@
 import datetime
 
 from django.contrib import messages
-from digest.models import Issue, Item
+from django.shortcuts import get_object_or_404
+from digest.models import Issue, Item, IssueHabr
 from digg_paginator import DiggPaginator
 
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView, DetailView, FormView
 
 
-from forms import AddNewsForm
+from .forms import AddNewsForm
+from frontend.models import EditorMaterial
 
 
-class Index(TemplateView):
+class Index(DetailView):
     '''
     Главная страница
     '''
     template_name = 'index.html'
+    model = Issue
+    context_object_name = 'index'
+    
+    def get_object(self):
+        issue = self.model.objects.filter(status='active').latest('published_at')
+        items = issue.item_set.filter(status='active').order_by('-section__priority', '-priority')
+        return {
+                'issue': issue,
+                'items': items,
+        }
 
 
 class IssuesList(ListView):
@@ -48,13 +60,35 @@ class IssueView(DetailView):
 
         return context
 
-class HabrView(IssueView):
+
+class HabrView(DetailView):
     '''
     Рендерер выпуска для публикации на habrahabr.ru
     '''
     template_name = 'issue_habrahabr.html'
     content_type = 'text/plain'
-    
+    context_object_name = 'items'
+
+    model = IssueHabr
+
+    def get_context_data(self, **kwargs):
+
+        issue = IssueHabr.objects.get(id=self.kwargs["pk"])
+
+        context = super(HabrView, self).get_context_data()
+
+        items = Item.objects.filter(
+            related_to_date__range=(issue.date_from, issue.date_to),
+            is_editors_choice=True
+        )
+        items = items.prefetch_related('issue', 'section')
+        items = items.order_by('-created_at', '-related_to_date')
+
+        context.update({
+            'items': items
+        })
+
+        return context
 
 
 class NewsList(ListView):
@@ -77,6 +111,10 @@ class NewsList(ListView):
         if search:
             filters = Q(title__icontains=search) | Q(description__icontains=search)
             items = items.filter(filters)
+
+        section = self.request.GET.get('section')
+        if section:
+            items = items.filter(section__pk=section)
 
         items = items.prefetch_related('issue', 'section')
         items = items.order_by('-created_at', '-related_to_date')
@@ -107,3 +145,30 @@ class AddNews(FormView):
             self.request, u'Ваша ссылка успешно добавлена на рассмотрение'
         )
         return '/'
+
+
+class ViewEditorMaterial(TemplateView):
+    template_name = 'editor_material_view.html'
+
+    def get_context_data(self, **kwargs):
+        section = kwargs.get('section', 'landing')
+        slug = kwargs.get('slug')
+
+        material = get_object_or_404(
+            EditorMaterial,
+            slug=slug,
+            section=section,
+            status='active'
+        )
+
+        return {
+            'material': material
+        }
+
+class ItemView(DetailView):
+    """
+    Просмотр отдельной новости
+    """
+    template_name = 'news_item.html'
+    context_object_name = 'item'
+    model = Item

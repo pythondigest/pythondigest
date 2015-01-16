@@ -1,0 +1,29 @@
+  _____       _   _                 _____  _                 _   
+ |  __ \     | | | |               |  __ \(_)               | |  
+ | |__) |   _| |_| |__   ___  _ __ | |  | |_  __ _  ___  ___| |_ 
+ |  ___/ | | | __| '_ \ / _ \| '_ \| |  | | |/ _` |/ _ \/ __| __|
+ | |   | |_| | |_| | | | (_) | | | | |__| | | (_| |  __/\__ \ |_ 
+ |_|    \__, |\__|_| |_|\___/|_| |_|_____/|_|\__, |\___||___/\__|
+         __/ |                                __/ |              
+        |___/                                |___/ 
+
+/* TEAM */
+  Idea, Base code: Alexander <alrusdi>
+  Twitter: @alrusdi_tmn
+  Github: https://github.com/alrusdi
+  Habr: http://habrahabr.ru/users/alrusdi/
+
+  Design, Programing: Andrey <owlman>
+  Twitter: @owlmannet
+  Site: http://owlman.net/
+  Habr: http://habrahabr.ru/users/owlman75/
+
+  Programming: <axce1>
+  Github: https://github.com/axce1
+  Habr: http://habrahabr.ru/users/axce1/
+
+  Editor: Ivan <Dead_Angel>
+  Github: https://github.com/dead23angel
+  Twitter: @dead_hart_angel
+  Site: http://coderweb.ru
+  Habr: http://habrahabr.ru/users/Dead_Angel/
