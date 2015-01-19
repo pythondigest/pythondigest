@@ -1,4 +1,4 @@
-Django==1.7.0
+Django==1.7.3
 Pillow==2.3.0
 argparse==1.2.1
 bootstrap-admin==0.3.0
