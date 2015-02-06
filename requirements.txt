@@ -10,3 +10,4 @@ sorl-thumbnail==11.12.1b
 feedparser==5.1.3
 URLObject==2.3.4
 BeautifulSoup 
+pygoogle-simple

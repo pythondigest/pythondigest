@@ -6,6 +6,8 @@ from urllib import urlopen
 from BeautifulSoup import BeautifulSoup
 from digest.models import AutoImportResource, Item
 from django.conf import settings
+from pygoogle import pygoogle
+import datetime
 
 
 def get_tweets():
@@ -66,6 +68,7 @@ def import_rss():
             try:
                 lastnews = Item.objects.get(link = n.link)
             except Item.DoesNotExist:
+                fresh_google_check(n)
                 Item(
                     title=n.title,
                     resource=src.resource,
@@ -73,6 +76,32 @@ def import_rss():
                     status='autoimport',
                     user_id=settings.BOT_USER_ID,
                 ).save()
+
+
+def fresh_google_check(entry):
+    '''
+    Проверяет, индексировался ли уже ресурс гуглом раньше за 2 недели до сегодня.
+    Если `да` - приписывает к заголовку [!]
+    '''
+    today = datetime.date.today()
+    date_s = date_to_julian_day( today - datetime.timedelta(days=365 * 4) )
+    date_e = date_to_julian_day( today - datetime.timedelta(days=7 * 2) )
+    query = u'site:%s daterange:%s-%s' % (entry.link, date_s, date_e,)
+    g = pygoogle(query.encode('utf-8'))
+    g.pages = 1
+    if g.get_result_count():
+        entry.title + ' [!]'
+
+
+def date_to_julian_day(my_date):
+    '''
+    Returns the Julian day number of a date.
+    Origin: http://code-highlights.blogspot.ru/2013/01/julian-date-in-python.html
+    '''
+    a = (14 - my_date.month)//12
+    y = my_date.year + 4800 - a
+    m = my_date.month + 12*a - 3
+    return my_date.day + ((153*m + 2)//5) + 365*y + y//4 - y//100 + y//400 - 32045
 
 
 class Command(BaseCommand):
