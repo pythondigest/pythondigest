@@ -23,11 +23,21 @@ class Index(DetailView):
     context_object_name = 'index'
     
     def get_object(self):
-        issue = self.model.objects.filter(status='active').latest('published_at')
-        items = issue.item_set.filter(status='active').order_by('-section__priority', '-priority')
+
+        issue = False
+        try:
+            issue = self.model.objects.filter(status='active').latest('published_at')
+        except Issue.DoesNotExist:
+            pass
+
+        items = []
+        if issue:
+            qs = issue.item_set.filter(status='active')
+            items = qs.order_by('-section__priority', '-priority')
+
         return {
-                'issue': issue,
-                'items': items,
+            'issue': issue,
+            'items': items,
         }
 
 
