@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import random
 import string
 import feedparser
 from django.core.management.base import BaseCommand
@@ -8,6 +9,7 @@ from digest.models import AutoImportResource, Item
 from django.conf import settings
 from pygoogle import pygoogle
 import datetime
+from time import sleep
 
 
 def get_tweets():
@@ -17,8 +19,8 @@ def get_tweets():
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=False):
 
-        url = urlopen( src.link )
-        soup = BeautifulSoup( url )
+        url = urlopen(src.link)
+        soup = BeautifulSoup(url)
         url.close()
 
         resource = src.resource
@@ -51,8 +53,12 @@ def save_new_tweets():
         if ct:
             continue
 
+        title = i[0]
+        #if fresh_google_check(i[1]):
+        #    title = u'[!] %s' % title
+
         Item(
-            title=i[0],
+            title=title,
             resource=i[2],
             link=i[1],
             status='autoimport',
@@ -68,9 +74,12 @@ def import_rss():
             try:
                 lastnews = Item.objects.get(link = n.link)
             except Item.DoesNotExist:
-                fresh_google_check(n)
+                title = n.title
+                #if fresh_google_check(n.link):
+                #    title = u'[!] %s' % title
+
                 Item(
-                    title=n.title,
+                    title=title,
                     resource=src.resource,
                     link=n.link,
                     status='autoimport',
@@ -78,19 +87,19 @@ def import_rss():
                 ).save()
 
 
-def fresh_google_check(entry):
+def fresh_google_check(link):
     '''
-    Проверяет, индексировался ли уже ресурс гуглом раньше за 2 недели до сегодня.
-    Если `да` - приписывает к заголовку [!]
+    Проверяет, индексировался ли уже ресурс гуглом раньше
+    чем за 2 недели до сегодня.
     '''
+    sleep(random.random())
     today = datetime.date.today()
-    date_s = date_to_julian_day( today - datetime.timedelta(days=365 * 4) )
+    date_s = date_to_julian_day( today - datetime.timedelta(days=365 * 8) )
     date_e = date_to_julian_day( today - datetime.timedelta(days=7 * 2) )
-    query = u'site:%s daterange:%s-%s' % (entry.link, date_s, date_e,)
+    query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
     g = pygoogle(query.encode('utf-8'))
     g.pages = 1
-    if g.get_result_count():
-        entry.title + ' [!]'
+    return bool(g.get_result_count())
 
 
 def date_to_julian_day(my_date):
