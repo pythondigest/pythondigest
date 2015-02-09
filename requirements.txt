@@ -11,3 +11,4 @@ feedparser==5.1.3
 URLObject==2.3.4
 BeautifulSoup 
 pygoogle-simple
+stem==1.3.0

@@ -183,6 +183,10 @@ BOT_USER_ID = 11
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
+PROXIES_FOR_GOOGLING = {}
+TOR_CONTROLLER_PWD = ''
+
+
 try:
     from local_settings import *
 except ImportError:

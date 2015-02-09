@@ -8,8 +8,11 @@ from BeautifulSoup import BeautifulSoup
 from digest.models import AutoImportResource, Item
 from django.conf import settings
 from pygoogle import pygoogle
+from pygoogle.pygoogle import PyGoogleHttpException
 import datetime
 from time import sleep
+import stem
+from stem import control
 
 
 def get_tweets():
@@ -54,8 +57,8 @@ def save_new_tweets():
             continue
 
         title = i[0]
-        #if fresh_google_check(i[1]):
-        #    title = u'[!] %s' % title
+        if fresh_google_check(i[1]):
+            title = u'[!] %s' % title
 
         Item(
             title=title,
@@ -72,11 +75,11 @@ def import_rss():
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
             try:
-                lastnews = Item.objects.get(link = n.link)
+               Item.objects.get(link=n.link)
             except Item.DoesNotExist:
                 title = n.title
-                #if fresh_google_check(n.link):
-                #    title = u'[!] %s' % title
+                if fresh_google_check(n.link):
+                    title = u'[!] %s' % title
 
                 Item(
                     title=title,
@@ -87,19 +90,38 @@ def import_rss():
                 ).save()
 
 
-def fresh_google_check(link):
+def renew_connection():
+    with control.Controller.from_port(port=9051) as ctl:
+        ctl.authenticate('megator')
+        ctl.signal(stem.Signal.NEWNYM)
+        sleep(5)
+
+def fresh_google_check(link, attempt=0):
     '''
     Проверяет, индексировался ли уже ресурс гуглом раньше
     чем за 2 недели до сегодня.
     '''
-    sleep(random.random())
     today = datetime.date.today()
     date_s = date_to_julian_day( today - datetime.timedelta(days=365 * 8) )
     date_e = date_to_julian_day( today - datetime.timedelta(days=7 * 2) )
     query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
-    g = pygoogle(query.encode('utf-8'))
-    g.pages = 1
-    return bool(g.get_result_count())
+
+    res = False
+    for i in range(0, 5):
+        g = pygoogle(
+            query.encode('utf-8'),
+            raise_http_exceptions=True,
+            proxies=settings.PROXIES_FOR_GOOGLING
+        )
+
+        try:
+            res = bool(g.get_result_count())
+        except PyGoogleHttpException as e:
+            renew_connection()
+            continue
+        break
+
+    return res
 
 
 def date_to_julian_day(my_date):
