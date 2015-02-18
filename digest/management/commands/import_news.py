@@ -92,7 +92,7 @@ def import_rss():
 
 def renew_connection():
     with control.Controller.from_port(port=9051) as ctl:
-        ctl.authenticate('megator')
+        ctl.authenticate(settings.TOR_CONTROLLER_PWD)
         ctl.signal(stem.Signal.NEWNYM)
         sleep(5)
 
