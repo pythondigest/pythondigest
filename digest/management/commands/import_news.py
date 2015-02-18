@@ -76,7 +76,7 @@ def import_rss():
         for n in rssnews.entries:
             try:
                Item.objects.get(link=n.link)
-            except Item.DoesNotExist:
+            except (Item.DoesNotExist, Item.MultipleObjectsReturned) as e:
                 title = n.title
                 if fresh_google_check(n.link):
                     title = u'[!] %s' % title
