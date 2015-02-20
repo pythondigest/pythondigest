@@ -52,7 +52,7 @@ def get_tweets():
 
 def save_new_tweets():
     for i in get_tweets():
-        ct = Item.objects.filter(link=i[1])[0:1]
+        ct = len(Item.objects.filter(link=i[1])[0:1])
         if ct:
             continue
 
@@ -74,20 +74,21 @@ def import_rss():
 
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
-            try:
-               Item.objects.get(link=n.link)
-            except (Item.DoesNotExist, Item.MultipleObjectsReturned) as e:
-                title = n.title
-                if fresh_google_check(n.link):
-                    title = u'[!] %s' % title
+            ct = len(Item.objects.filter(link=n.link)[0:1])
+            if ct:
+                continue
 
-                Item(
-                    title=title,
-                    resource=src.resource,
-                    link=n.link,
-                    status='autoimport',
-                    user_id=settings.BOT_USER_ID,
-                ).save()
+            title = n.title
+            if fresh_google_check(n.link):
+                title = u'[!] %s' % title
+
+            Item(
+                title=title,
+                resource=src.resource,
+                link=n.link,
+                status='autoimport',
+                user_id=settings.BOT_USER_ID,
+            ).save()
 
 
 def renew_connection():
