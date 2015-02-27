@@ -5,7 +5,14 @@
 
 {% block extra_head %}
 {% thumbnail object.image "350" as im %}
-<link rel="image_src" href="http://pythondigest.ru/{{ im.url }}">
+<link rel="image_src" href="http://pythondigest.ru{{ im.url }}">
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@pydigest" />
+<meta name="twitter:title" content="{{ object.title }} еженедельного дайджеста новостей о #python уже в эфире!" />
+<meta name="twitter:description" content="Читать" />
+<meta name="twitter:image" content="http://pythondigest.ru{{ im.url }}" />
+<meta name="twitter:url" content="http://pythondigest.ru{{ object.link }}" />
 {% endthumbnail %}
 
 <meta name="description" content='{{ object.description|striptags|truncatechars:500 }}'>
