@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
-import random
 import string
 import feedparser
 from django.core.management.base import BaseCommand
-from urllib import urlopen
-from BeautifulSoup import BeautifulSoup
+
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
+
+
+from bs4 import BeautifulSoup
+
 from digest.models import AutoImportResource, Item
 from django.conf import settings
 from pygoogle import pygoogle
@@ -27,8 +33,10 @@ def get_tweets():
         url.close()
 
         resource = src.resource
-        excl = (src.excl or '').split(',')
-        excl = filter(len, map(string.strip, excl))
+        excl = []
+        for s in (src.excl or '').split(','):
+            v = s.strip()
+            excl.append(v)
 
         for p in soup.findAll('p', 'ProfileTweet-text js-tweet-text u-dir'):
             try:
