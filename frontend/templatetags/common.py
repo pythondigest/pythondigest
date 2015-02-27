@@ -1,6 +1,7 @@
 # -*- coding: utf8 -*-
 from urlobject import URLObject
 
+from django.utils.six import text_type
 from django import template
 
 register = template.Library()
@@ -25,7 +26,7 @@ def modify_url_(url, operation, *args):
 
     op = getattr(url, operation, None)
     if callable(op):
-        return unicode(op(*args))
+        return text_type(op(*args))
     raise Exception('%s is incorrect function name for urlobject.URLObject' % operation)
 
 @register.simple_tag(takes_context=True)
