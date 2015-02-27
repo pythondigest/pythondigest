@@ -2,16 +2,52 @@
 import datetime
 
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
 from digest.models import Issue, Item, IssueHabr
 from digg_paginator import DiggPaginator
 
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView, DetailView, FormView
+from django.conf import settings
 
 
 from .forms import AddNewsForm
 from frontend.models import EditorMaterial
+
+
+class Sitemap(TemplateView):
+    content_type = 'text/xml'
+    template_name = 'sitemap.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(Sitemap, self).get_context_data(**kwargs)
+        items = [
+            {
+                'loc': '',
+                'changefreq': 'weekly',
+            },
+            {
+                'loc': reverse('frontend:issues'),
+                'changefreq': 'weekly',
+            },
+            {
+                'loc': reverse('frontend:feed'),
+                'changefreq': 'daily',
+            },
+        ]
+
+        for issue in Issue.objects.filter(status='active'):
+            items.append({
+                'loc': issue.link,
+                'changefreq': 'weekly',
+            })
+
+        ctx.update({
+            'records': items,
+            'domain': 'http://%s' % settings.BASE_DOMAIN
+        })
+        return ctx
 
 
 class Index(DetailView):

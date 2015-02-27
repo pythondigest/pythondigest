@@ -9,7 +9,8 @@ from frontend.views import (
     NewsList,
     AddNews,
     ViewEditorMaterial,
-    ItemView
+    ItemView,
+    Sitemap
 )
 
 urlpatterns = patterns('',
@@ -24,6 +25,7 @@ urlpatterns = patterns('',
     url(r'^issues/$', IssuesList.as_view(), name='issues'),
     url(r'^issue/(?P<pk>[0-9]+)/$', IssueView.as_view(), name='issue_view'),
     url(r'^habr/(?P<pk>[0-9]+)/$', HabrView.as_view(), name='habr_issue_view'),
+    url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
     url(r'^(?P<section>[a-z\-]+)/(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='editor_material'),
     url(r'^(?P<slug>[a-z\-]+)/$', ViewEditorMaterial.as_view(), name='landing'),
     url(r'^$', Index.as_view(), name='home'),

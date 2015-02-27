@@ -186,6 +186,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ''
 
+BASE_DOMAIN = 'pythondigest.ru'
 
 try:
     from local_settings import *
