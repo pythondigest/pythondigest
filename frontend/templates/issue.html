@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% load menu_item thumbnail %}
 
-{% block page_title %}{{ object.title }}{% endblock %}
+{% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
+{% block page_description %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
 
 {% block extra_head %}
 {% thumbnail object.image "350" as im %}
