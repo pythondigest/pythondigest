@@ -1,4 +1,4 @@
-Django==1.7.5
+Django==1.7.6
 Pillow==2.3.0
 argparse==1.2.1
 git+ssh://git@github.com/alrusdi/django-admin-bootstrap-legacy.git
