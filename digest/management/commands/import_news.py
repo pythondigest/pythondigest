@@ -16,9 +16,16 @@ from django.conf import settings
 from pygoogle import pygoogle
 from pygoogle.pygoogle import PyGoogleHttpException
 import datetime
-from time import sleep
+from time import sleep, mktime
 import stem
 from stem import control
+
+
+def time_struct_to_datetime(time_struct):
+    timestamp = mktime(time_struct)
+    dt = datetime.datetime.fromtimestam(timestamp)
+    return dt
+
 
 
 def get_tweets():
@@ -81,10 +88,18 @@ def import_rss():
     for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
 
         rssnews = feedparser.parse(src.link)
+        today = datetime.date.today()
+        week_before = today - datetime.timedelta(weeks=1)
         for n in rssnews.entries:
             ct = len(Item.objects.filter(link=n.link)[0:1])
             if ct:
                 continue
+
+            time_struct = n.published_parsed
+            if time_struct:
+                dt = time_struct_to_datetime(time_struct)
+                if dt < week_before:
+                    continue
 
             title = n.title
             if fresh_google_check(n.link):
