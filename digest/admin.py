@@ -5,14 +5,14 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 from django.core.urlresolvers import reverse
-from digest.models import Issue, IssueHabr, Section, Item, Resource, AutoImportResource
+from digest.models import Issue, Section, Item, Resource, AutoImportResource
 
 from django.contrib.sites.models import Site
 admin.site.unregister(Site)
 
 
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ('title', 'frontend_link', 'habr_link')
+    list_display = ('title', 'frontend_link',)
 
     def frontend_link(self,obj):
         lnk = reverse('frontend:issue_view', kwargs={'pk': obj.pk})
@@ -20,23 +20,7 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.allow_tags = True
     frontend_link.short_description = u"Просмотр"
 
-    def habr_link(self,obj):
-        lnk = reverse('frontend:habr_issue_view', kwargs={'pk': obj.pk})
-        return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
-    habr_link.allow_tags = True
-    habr_link.short_description = u"Хабраверстка"
 admin.site.register(Issue, IssueAdmin)
-
-
-class IssueHabrAdmin(admin.ModelAdmin):
-    list_display = ('title', 'habr_link')
-
-    def habr_link(self,obj):
-        lnk = reverse('frontend:habr_issue_view', kwargs={'pk': obj.pk})
-        return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
-    habr_link.allow_tags = True
-    habr_link.short_description = u"Хабраверстка"
-admin.site.register(IssueHabr, IssueHabrAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):
