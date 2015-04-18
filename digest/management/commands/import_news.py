@@ -23,7 +23,7 @@ from stem import control
 
 def time_struct_to_datetime(time_struct):
     timestamp = mktime(time_struct)
-    dt = datetime.datetime.fromtimestam(timestamp)
+    dt = datetime.datetime.fromtimestamp(timestamp)
     return dt
 
 
@@ -95,10 +95,10 @@ def import_rss():
             if ct:
                 continue
 
-            time_struct = n.published_parsed
+            time_struct = getattr(n, 'published_parsed', None)
             if time_struct:
                 dt = time_struct_to_datetime(time_struct)
-                if dt < week_before:
+                if dt.date() < week_before:
                     continue
 
             title = n.title
