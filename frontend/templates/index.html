@@ -3,19 +3,21 @@
 {% block content %}
 <div class="container cards-list">
     {% if index.issue %}
-    <h1><small>Текущий выпуск:</small> {{ index.issue }}</h1>
+    {% with object=index.issue %}
+    <h1><small>Текущий выпуск:</small> {{ object.title }}&nbsp;<small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small></h1>
     <div class="index-description row">
         {% if object.description %}
         <div class="col-md-8 pull-left">
             <div class="index-description-content text-muted">
-                {{ index.issue.description|safe }}
+                {{ object.description|safe }}
             </div>
         </div>
         {% endif %}
         <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-            <img src="{{ index.issue.image.url }}" alt="pythondigest.ru: {{ index.issue }}" class="img-thumbnail">
+            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ index.issue }}" class="img-thumbnail">
         </div>
     </div>
+    {% endwith %}
     {% endif %}
     <div class="row">
         <div class="col-md-12">
