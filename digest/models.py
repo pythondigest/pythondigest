@@ -46,7 +46,9 @@ class Issue(models.Model):
         choices=ISSUE_STATUS_CHOICES,
         default='draft',
     )
-    version = IntegerVersionField()
+    version = IntegerVersionField(
+        verbose_name=u'Версия'
+    )
 
     def __unicode__(self):
         return self.title
@@ -60,52 +62,6 @@ class Issue(models.Model):
         ordering = ['-pk']
         verbose_name = u'Выпуск дайджеста'
         verbose_name_plural = u'Выпуски дайджеста'
-
-
-class IssueHabr(models.Model):
-    '''
-    Выпуск дайджеста для хабрахабр
-    '''
-    title = models.CharField(
-        max_length=255,
-        verbose_name=u'Заголовок',
-    )
-    description = models.TextField(
-        verbose_name=u'Описание',
-        null=True, blank=True,
-    )
-    image = models.ImageField(
-        verbose_name=u'Постер',
-        upload_to='issues',
-        null=True, blank=True,
-    )
-    date_from = models.DateField(
-        verbose_name=u'Начало освещаемого периода',
-        null=True, blank=True,
-    )
-    date_to = models.DateField(
-        verbose_name=u'Завершение освещаемого периода',
-        null=True, blank=True,
-    )
-    published_at = models.DateField(
-        verbose_name=u'Дата публикации',
-        null=True, blank=True,
-    )
-    status = models.CharField(
-        verbose_name=u'Статус',
-        max_length=10,
-        choices=ISSUE_STATUS_CHOICES,
-        default='draft',
-    )
-    version = IntegerVersionField()
-
-    def __unicode__(self):
-        return self.title
-
-    class Meta:
-        ordering = ['-pk']
-        verbose_name = u'Хабрадайджест'
-        verbose_name_plural = u'Хабрадайджесты'
 
 
 SECTION_STATUS_CHOICES = (
@@ -132,7 +88,9 @@ class Section(models.Model):
         choices=SECTION_STATUS_CHOICES,
         default='active',
     )
-    version = IntegerVersionField()
+    version = IntegerVersionField(
+        verbose_name=u'Версия'
+    )
     habr_icon = models.CharField(
         max_length=255,
         verbose_name=u'Иконка для хабры',
@@ -164,7 +122,9 @@ class Resource(models.Model):
         max_length=255,
         verbose_name=u'Ссылка',
     )
-    version = IntegerVersionField()
+    version = IntegerVersionField(
+        verbose_name=u'Версия'
+    )
 
     def __unicode__(self):
         return self.title
@@ -258,7 +218,9 @@ class Item(models.Model):
         editable=False,
         null=True, blank=True,
     )
-    version = IntegerVersionField()
+    version = IntegerVersionField(
+        verbose_name=u'Версия'
+    )
 
     @property
     def internal_link(self):

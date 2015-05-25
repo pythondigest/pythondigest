@@ -33,9 +33,9 @@
         </div>
         {% endif %}
         <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-            {% thumbnail object.image "350" as im %}
-            <img src="{{ im.url }}" alt="pythondigest.ru: {{ object.title }}" class="img-thumbnail">
-            {% endthumbnail %}
+        {% if object.image %}
+            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
+        {% endif %}
         </div>
     </div>
     {% regroup items by section as groups %}

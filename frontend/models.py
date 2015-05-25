@@ -71,4 +71,4 @@ class EditorMaterial(models.Model):
     class Meta:
         unique_together = ('slug', 'section',)
         verbose_name = u'Материал редакции'
-        verbose_name_plural = u'материалы редакции'
+        verbose_name_plural = u'Материалы редакции'

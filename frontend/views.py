@@ -4,7 +4,7 @@ import datetime
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
-from digest.models import Issue, Item, IssueHabr
+from digest.models import Issue, Item
 from digg_paginator import DiggPaginator
 
 from django.db.models import Q
@@ -99,36 +99,6 @@ class IssueView(DetailView):
         context = super(IssueView, self).get_context_data(**kwargs)
 
         items = self.object.item_set.filter(status='active').order_by('-section__priority', '-priority')
-
-        context.update({
-            'items': items
-        })
-
-        return context
-
-
-class HabrView(DetailView):
-    '''
-    Рендерер выпуска для публикации на habrahabr.ru
-    '''
-    template_name = 'issue_habrahabr.html'
-    content_type = 'text/plain'
-    context_object_name = 'items'
-
-    model = IssueHabr
-
-    def get_context_data(self, **kwargs):
-
-        issue = IssueHabr.objects.get(id=self.kwargs["pk"])
-
-        context = super(HabrView, self).get_context_data()
-
-        items = Item.objects.filter(
-            related_to_date__range=(issue.date_from, issue.date_to),
-            is_editors_choice=True
-        )
-        items = items.prefetch_related('issue', 'section')
-        items = items.order_by('-created_at', '-related_to_date')
 
         context.update({
             'items': items
