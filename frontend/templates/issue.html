@@ -25,12 +25,14 @@
     <h1>{{ object.title }}&nbsp;<small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small></h1>
 
     <div class="index-description row">
+        {% if object.description %}
         <div class="col-md-8 pull-left">
             <div class="index-description-content text-muted">
                 {{ object.description|safe }}
             </div>
         </div>
-        <div class="col-md-4 pull-right">
+        {% endif %}
+        <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
             {% thumbnail object.image "350" as im %}
             <img src="{{ im.url }}" alt="pythondigest.ru: {{ object.title }}" class="img-thumbnail">
             {% endthumbnail %}

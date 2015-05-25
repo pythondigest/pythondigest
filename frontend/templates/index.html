@@ -2,19 +2,21 @@
 
 {% block content %}
 <div class="container cards-list">
+    {% if index.issue %}
+    <h1><small>Текущий выпуск:</small> {{ index.issue }}</h1>
     <div class="index-description row">
-        {% if index.issue %}
+        {% if object.description %}
         <div class="col-md-8 pull-left">
-            <h1><small>Текущий выпуск:</small> {{ index.issue }}</h1>
             <div class="index-description-content text-muted">
                 {{ index.issue.description|safe }}
             </div>
         </div>
-        <div class="col-md-4 pull-right">
+        {% endif %}
+        <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
             <img src="{{ index.issue.image.url }}" alt="pythondigest.ru: {{ index.issue }}" class="img-thumbnail">
         </div>
-        {% endif %}
     </div>
+    {% endif %}
     <div class="row">
         <div class="col-md-12">
         <div class="col-md-4 pull-right visible-lg" style="margin-left:20px;width:349px;">
