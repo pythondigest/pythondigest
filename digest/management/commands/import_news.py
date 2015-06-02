@@ -34,28 +34,20 @@ def get_tweets():
     '''
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=False):
-
         url = urlopen(src.link)
         soup = BeautifulSoup(url)
         url.close()
 
         resource = src.resource
-        excl = []
-        for s in (src.excl or '').split(','):
-            v = s.strip()
-            excl.append(v)
+        excl = [s for s in (src.excl or '').split(',') if s]
 
-        for p in soup.findAll('p', 'ProfileTweet-text js-tweet-text u-dir'):
+        for p in soup.findAll('p', 'tweet-text'):
             try:
                 tw_lnk = p.find('a', 'twitter-timeline-link').get('data-expanded-url')
                 tw_text = p.contents[0]
 
-                excl_link = False
-                for i in excl:
-                    if i in tw_lnk:
-                        excl_link = True
-                        break
-                
+                excl_link = bool([i for i in excl if i in tw_lnk])
+
                 if not excl_link and src.incl in tw_text:
                     tw_txt = tw_text.replace(src.incl, '')
                     dsp.append([tw_txt, tw_lnk, resource])
