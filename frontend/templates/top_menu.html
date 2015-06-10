@@ -56,7 +56,9 @@
                     <a href="{% url 'frontend:feed' %}">ЛЕНТА</a>
                 </li>
                 {% if request.user.is_staff %}
-                    {% li_menu_item "url:admin:index" "АДМ.ПАНЕЛЬ" %}
+                <li>
+                    <a href="{% url 'admin:index' %}">АДМ.ПАНЕЛЬ</a>
+                </li>
                 {% endif %}
             </ul>
         </div>
