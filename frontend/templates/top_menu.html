@@ -19,13 +19,13 @@
             </div>
             <script type="text/javascript" src="/static/js/vendor/orphus/orphus.js"></script>
             <div class="top-orfo hidden-xs hidden-sm col-md-4">
-              <a href="http://orphus.ru" id="orphus" target="_blank">
-                  <img alt="Система Orphus" src="/static/js/vendor/orphus/orphus.gif">
-              </a>
+                <a href="http://orphus.ru" id="orphus" target="_blank">
+                    <img alt="Система Orphus" src="/static/js/vendor/orphus/orphus.gif">
+                </a>
             </div>
             <div class="top-orfo col-md-12 hidden-md hidden-lg">
                 <a href="http://orphus.ru" id="orphus" target="_blank">
-                  Заметили ошибку в тексте? Выделите мышкой и нажмите Ctrl + Enter
+                    Заметили ошибку в тексте? Выделите мышкой и нажмите Ctrl + Enter
                 </a>
             </div>
         </div>
@@ -33,52 +33,60 @@
 {% endspaceless %}
 
 <nav class="navbar navbar-default" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li {% if active_menu_item == 'home' %}class="active"{% endif %}>
+                    <a href="{% url 'frontend:home' %}"><i class='fa fa-home fa-lg'></i></a>
+                </li>
+                <li {% if active_menu_item == 'issues_list' %}class="active"{% endif %}>
+                    <a href="{% url 'frontend:issues' %}">ВЫПУСКИ</a>
+                </li>
+                <li {% if active_menu_item == 'feed' %}class="active"{% endif %}>
+                    <a href="{% url 'frontend:feed' %}">ЛЕНТА</a>
+                </li>
+                {% if request.user.is_staff %}
+                    {% li_menu_item "url:admin:index" "АДМ.ПАНЕЛЬ" %}
+                {% endif %}
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        {% li_menu_item "url:frontend:home" "<i class='fa fa-home fa-lg'></i>" %}
-        {% li_menu_item "url:frontend:issues" "ВЫПУСКИ" %}
-        {% li_menu_item "url:frontend:feed" "ЛЕНТА" %}
-        {% if request.user.is_staff %}
-             {% li_menu_item "url:admin:index" "АДМ.ПАНЕЛЬ" %}
-        {% endif %}
-        {% comment %}
-        <li>
-            <a href="#">О проекте</a>
-        </li>
-        {% endcomment %}
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 </nav>
 
 
-    <!-- Jumbotron -->
-    <div class="jumb hidden-xs">
-      <div class="container alert alert-dismissable">
+<!-- Jumbotron -->
+<div class="jumb hidden-xs">
+    <div class="container alert alert-dismissable">
         {#<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>#}
         <div class="jumb-text col-md-12">
-            Новости собираются с мира по нитке на совершенно безвозмездной основе.
+            Новости собираются с мира по нитке на совершенно безвозмездной
+            основе.
         </div>
         <div class="jumb-text col-md-9">
-            Ты легко можешь посодействовать проекту, добавив ссылку на интересную новость, статью, интервью или проект о python.
+            Ты легко можешь посодействовать проекту, добавив ссылку на
+            интересную новость, статью, интервью или проект о python.
         </div>
         <div class="jump-btn col-md-3" align="center">
-            <a class="btn btn-lg btn-success" href="{% url 'frontend:addnews' %}">Добавить новость</a>
+            <a class="btn btn-lg btn-success" href="{% url 'frontend:addnews' %}">Добавить
+                новость</a>
         </div>
         <div class="jumb-text col-md-12 pull-left">
-            А еще можно форкнуть код этого проекта на <i class="fa fa-github-alt"></i> Github и помочь в развитии его функциональности.
+            А еще можно форкнуть код этого проекта на
+            <i class="fa fa-github-alt"></i> Github и помочь в развитии его
+            функциональности.
         </div>
-      </div>
     </div>
+</div>

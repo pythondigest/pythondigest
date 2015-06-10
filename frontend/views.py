@@ -50,7 +50,7 @@ class Sitemap(TemplateView):
         return ctx
 
 
-class Index(DetailView):
+class Index(TemplateView):
     '''
     Главная страница
     '''
@@ -58,8 +58,8 @@ class Index(DetailView):
     model = Issue
     context_object_name = 'index'
     
-    def get_object(self):
-
+    def get_context_data(self, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
         issue = False
         try:
             issue = self.model.objects.filter(status='active').latest('published_at')
@@ -71,10 +71,12 @@ class Index(DetailView):
             qs = issue.item_set.filter(status='active')
             items = qs.order_by('-section__priority', '-priority')
 
-        return {
+        context.update({
             'issue': issue,
             'items': items,
-        }
+            'active_menu_item': 'home'
+        })
+        return context
 
 
 class IssuesList(ListView):
@@ -86,6 +88,11 @@ class IssuesList(ListView):
     context_object_name = 'items'
     paginate_by = 9
     paginator_class = DiggPaginator
+    
+    def get_context_data(self, **kwargs):
+        context = super(IssuesList, self).get_context_data(**kwargs)
+        context['active_menu_item'] = 'issues_list'
+        return context
 
 
 class IssueView(DetailView):
@@ -101,7 +108,8 @@ class IssueView(DetailView):
         items = self.object.item_set.filter(status='active').order_by('-section__priority', '-priority')
 
         context.update({
-            'items': items
+            'items': items,
+            'active_menu_item': 'issue_view'
         })
 
         return context
@@ -138,6 +146,7 @@ class NewsList(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(NewsList, self).get_context_data(**kwargs)
+        context['active_menu_item'] = 'feed'
         return context
 
 

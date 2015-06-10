@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="container cards-list">
-    {% if index.issue %}
-    {% with object=index.issue %}
+    {% if issue %}
+    {% with object=issue %}
     <h1><small>Текущий выпуск:</small> {{ object.title }}&nbsp;<small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small></h1>
     <div class="index-description row">
         {% if object.description %}
@@ -14,7 +14,7 @@
         </div>
         {% endif %}
         <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ index.issue }}" class="img-thumbnail">
+            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
         </div>
     </div>
     {% endwith %}
@@ -58,7 +58,7 @@
             </div>
         </div>
 
-            {% regroup index.items by section as groups %}
+            {% regroup items by section as groups %}
             {% for data in groups %}
                 <div class="items-group-container">
                     <h2>{{ data.grouper.title }}</h2>
@@ -67,9 +67,9 @@
             <noindex>
             <div class="issue-item">
                       <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource 
-                        {% if item.language = 'en' %}
+                        {% if item.language == 'en' %}
                             en
-                        {% elif item.language = 'ru'%}
+                        {% elif item.language == 'ru'%}
                             ru
                         {% endif %}
                       ">
@@ -97,7 +97,7 @@
                 </div>
             {% endfor %}
 
-            {% with index.issue.pk|lower as id %}
+            {% with issue.pk|lower as id %}
             {% include "disqus.html" with identifier='issue_'|add:id %}
             {% endwith %}
         </div>
