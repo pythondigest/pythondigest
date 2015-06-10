@@ -27,7 +27,6 @@ INSTALLED_APPS = (
 
     'sorl.thumbnail',
     'pytils',
-    "menus",
     'concurrency',
 
     'digest',
