@@ -5,9 +5,9 @@ from django.contrib import admin
 from django.db import models
 from django import forms
 from django.core.urlresolvers import reverse
-from digest.models import Issue, Section, Item, Resource, AutoImportResource
-
 from django.contrib.sites.models import Site
+
+from digest.models import Issue, Section, Item, Resource, AutoImportResource
 admin.site.unregister(Site)
 
 
@@ -31,9 +31,11 @@ admin.site.register(Section, SectionAdmin)
 class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'status', 'is_editors_choice', 'external_link', 'resource', 'issue', 'related_to_date')
+    list_display = (
+        'title', 'status', 'is_editors_choice', 'external_link', 'issue',
+        'related_to_date',)
     list_editable = ('is_editors_choice',)
-    exclude = ('modified_at'),
+    exclude = ('modified_at',),
     radio_fields = {
         'language': admin.HORIZONTAL,
         'status': admin.HORIZONTAL,
