@@ -139,6 +139,7 @@ ITEM_STATUS_CHOICES = (
     ('pending', u'Ожидает рассмотрения'),
     ('active', u'Активная'),
     ('draft', u'Черновик'),
+    ('moderated', u'Отмодерировано'),
     ('autoimport', u'Добавлена автоимпортом'),
 )
 
