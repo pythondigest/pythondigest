@@ -32,7 +32,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = (
-        'title', 'status', 'is_editors_choice', 'external_link', 'issue',
+        'title', 'status', 'external_link', 'is_editors_choice',
         'related_to_date',)
     list_editable = ('is_editors_choice',)
     exclude = ('modified_at',),
