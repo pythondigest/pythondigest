@@ -6,6 +6,8 @@ from django.db import models
 from django import forms
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from goslate import Goslate
+from django.core.cache import cache
 
 from digest.models import Issue, Section, Item, Resource, AutoImportResource
 admin.site.unregister(Site)
@@ -32,14 +34,37 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = (
-        'title', 'status', 'external_link', 'is_editors_choice',
-        'related_to_date',)
+        '_title', 'status', 'external_link', 'is_editors_choice',
+        'related_to_date')
+
     list_editable = ('is_editors_choice',)
     exclude = ('modified_at',),
     radio_fields = {
         'language': admin.HORIZONTAL,
         'status': admin.HORIZONTAL,
     }
+
+    def _title(self, obj):
+        if obj.id:
+            opts = self.model._meta
+            link = "<a href='%s' target='_blank'>%s</a>" % (reverse(
+                'admin:%s_%s_change' % (
+                    opts.app_label, opts.object_name.lower()),
+                args=[obj.id]
+            ), obj.title)
+
+            cache_key = '_pydigest_%s_title' % obj.id
+            translate = cache.get(cache_key)
+            if translate is None:
+                translate = Goslate().translate(obj.title, 'ru')
+                cache.set(cache_key, translate)
+            if translate != obj.title:
+                result = u"%s <br> Перевод: %s" % (link, translate)
+            else:
+                result = link
+            return result
+        else:
+            return u"(save to edit details)"
 
     def external_link(self, obj):
         lnk = obj.link
@@ -48,6 +73,8 @@ class ItemAdmin(admin.ModelAdmin):
         ret = u'%s<br>Добавил: %s' % (ret, username)
         return ret
 
+    _title.short_description = u"Title"
+    _title.allow_tags = True
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
 
