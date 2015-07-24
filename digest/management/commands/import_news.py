@@ -103,6 +103,7 @@ def import_rss():
                 link=n.link,
                 status='autoimport',
                 user_id=settings.BOT_USER_ID,
+                language=src.language if src.language else 'en'
             ).save()
 
 

@@ -92,7 +92,7 @@ admin.site.register(Resource, ResourceAdmin)
 
 
 class AutoImportResourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit')
+    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit', 'language')
     formfield_overrides = {
             models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1 })},
         }

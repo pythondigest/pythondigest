@@ -129,7 +129,6 @@ class Resource(models.Model):
     def __unicode__(self):
         return self.title
 
-
     class Meta:
         verbose_name = u'Источник'
         verbose_name_plural = u'Источники'
@@ -282,6 +281,13 @@ class AutoImportResource(models.Model):
     in_edit = models.BooleanField(
         verbose_name=u'На тестировании',
         default=False,
+    )
+
+    language = models.CharField(
+        verbose_name=u'Язык источника',
+        max_length=2,
+        choices=ITEM_LANGUAGE_CHOICES,
+        default='en',
     )
 
 
