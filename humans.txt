@@ -27,3 +27,9 @@
   Twitter: @dead_hart_angel
   Site: http://coderweb.ru
   Habr: http://habrahabr.ru/users/Dead_Angel/
+
+  Programing, Editor: Alexander Sapronov <Warm0ngeR1>
+  Github: https://github.com/WarmongeR1/
+  Twitter: @sapronovalex92
+  Site: http://sapronov.me
+  Habr: http://habrahabr.ru/users/WarmongeR/
