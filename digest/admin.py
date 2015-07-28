@@ -29,6 +29,16 @@ admin.site.register(Section, SectionAdmin)
 
 
 class ItemAdmin(admin.ModelAdmin):
+    fields = (
+        'section',
+        'title',
+        'is_editors_choice',
+        'description',
+        'issue',
+        'link',
+        'status',
+        'language',
+    )
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = (

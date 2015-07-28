@@ -307,10 +307,8 @@ class AutoImportResource(models.Model):
         default='en',
     )
 
-
     def __unicode__(self):
         return self.name
-
 
     class Meta:
         verbose_name = u'Источник импорта новостей'
