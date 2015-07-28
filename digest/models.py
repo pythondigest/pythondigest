@@ -190,7 +190,7 @@ class Item(models.Model):
         verbose_name=u'Ссылка',
     )
     related_to_date = models.DateField(
-        verbose_name=u'Дата, к которой имеет отношение новость',
+        verbose_name=u'Дата',
         help_text=u'Например, дата публикации новости на источнике',
         default=datetime.datetime.today,
     )
