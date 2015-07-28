@@ -1,15 +1,22 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from concurrency.fields import IntegerVersionField
-
 from django.db import models
 
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
     ('draft', u'Черновик'),
 )
+
+
+def get_start_end_of_week(dt):
+    start = dt - datetime.timedelta(days=dt.weekday())
+    end = start + datetime.timedelta(days=6)
+    return start, end
+
 
 class Issue(models.Model):
     '''
@@ -56,7 +63,6 @@ class Issue(models.Model):
     @property
     def link(self):
         return reverse('frontend:issue_view', kwargs={'pk': self.pk})
-
 
     class Meta:
         ordering = ['-pk']
@@ -221,6 +227,17 @@ class Item(models.Model):
     version = IntegerVersionField(
         verbose_name=u'Версия'
     )
+
+    def save(self, *args, **kwargs):
+        try:
+            if self.issue is None:
+                date_from, date_to = get_start_end_of_week(self.created_at)
+                issue = Issue.objects.filter(date_from=date_from, date_to=date_to)
+                assert len(issue) == 1
+                self.issue = issue[0]
+        except Exception as e:
+            pass
+        super(Item, self).save(*args, **kwargs)
 
     @property
     def internal_link(self):

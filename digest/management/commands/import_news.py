@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import string
 import feedparser
 from django.core.management.base import BaseCommand
 
@@ -105,7 +104,6 @@ def import_rss():
                 user_id=settings.BOT_USER_ID,
                 language=src.language if src.language else 'en'
             ).save()
-
 
 def renew_connection():
     with control.Controller.from_port(port=9051) as ctl:
