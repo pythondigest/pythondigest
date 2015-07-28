@@ -134,15 +134,6 @@ LOGGING = {
     }
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'redis_cache.RedisCache',
-        'LOCATION': [
-            '<host>:<port>',
-        ],
-    },
-}
-
 
 
 # ID пользователя от имени когорого будут импортироваться данные
