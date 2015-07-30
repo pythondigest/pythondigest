@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import feedparser
 from django.core.management.base import BaseCommand
+import requests
 
 try:
     from urllib.request import urlopen
@@ -10,7 +11,8 @@ except ImportError:
 
 from bs4 import BeautifulSoup
 
-from digest.models import AutoImportResource, Item
+from digest.models import AutoImportResource, Item, ParsingRules, Section, \
+    ITEM_STATUS_CHOICES
 from django.conf import settings
 from pygoogle import pygoogle
 from pygoogle.pygoogle import PyGoogleHttpException
@@ -24,6 +26,57 @@ def time_struct_to_datetime(time_struct):
     timestamp = mktime(time_struct)
     dt = datetime.datetime.fromtimestamp(timestamp)
     return dt
+
+
+def _get_http_code(url):
+    try:
+        r = requests.head(url)
+        result = r.status_code
+    except requests.ConnectionError:
+        result = 404
+    return result
+
+
+def _apply_parsing_rules(entry, rules, sections, statuses):
+    item_data = {
+        'item_title': entry.title,
+        'item_url': entry.link,
+        # 'http_code': _get_http_code(entry.link),
+    }
+    data = {}
+
+    for rule in rules:
+        if rule.then_element == 'status' and (
+                        data.get('status') == 'moderated' or data.get(
+                    'status') == 'active'):
+            continue
+        if rule.then_element == 'category' and 'category' in data:
+            continue
+
+        if_item = item_data.get(rule.if_element, None)
+        if if_item is not None:
+            if_action = rule.if_action
+            if_value = rule.if_value
+
+            if (if_action == 'not_equal' and if_item != if_value) or \
+                    (if_action == 'contains' and if_value in if_item) or \
+                    (if_action == 'equal' and if_item == if_value):
+                then_element = rule.then_element
+                # then_action = rule.then_action
+                then_value = rule.then_value
+
+                # only set
+                if (
+                                then_element == 'status' and then_value in statuses) or \
+                        (then_element == 'category' and sections.filter(
+                            title=then_value).exists()):
+
+                    data[then_element] = then_value
+
+                elif then_element == 'http_code':
+                    data['status'] = 'moderated'
+    return data
+
 
 
 
@@ -76,6 +129,9 @@ def save_new_tweets():
 
 
 def import_rss():
+    rules = ParsingRules.objects.all()
+    sections = Section.objects.all()
+    item_statuses = [x[0] for x in ITEM_STATUS_CHOICES]
     for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
 
         rssnews = feedparser.parse(src.link)
@@ -92,6 +148,10 @@ def import_rss():
                 if dt.date() < week_before:
                     continue
 
+            data = {}
+            if rules:
+                data = _apply_parsing_rules(n, rules, sections, item_statuses)
+
             title = n.title
             if fresh_google_check(n.link):
                 title = u'[!] %s' % title
@@ -100,8 +160,9 @@ def import_rss():
                 title=title,
                 resource=src.resource,
                 link=n.link,
-                status='autoimport',
+                status=data.get('status', 'autoimport'),
                 user_id=settings.BOT_USER_ID,
+                section=data.get('category'),
                 language=src.language if src.language else 'en'
             ).save()
 

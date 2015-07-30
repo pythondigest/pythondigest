@@ -313,3 +313,77 @@ class AutoImportResource(models.Model):
     class Meta:
         verbose_name = u'Источник импорта новостей'
         verbose_name_plural = u'Источники импорта новостей'
+
+class ParsingRules(models.Model):
+
+    IF_ELEMENTS = (
+        ('item_title', u'Заголовок новости'),
+        ('item_url', u'Url новости'),
+        ('item_content', u'Текст новости'),
+        ('http_code', u'HTTP Code'),
+    )
+
+    IF_ACTIONS = (
+        ('equal', u'Равен'),
+        ('contains', u'Содержит'),
+        ('not_equal', u'Не равен'),
+    )
+
+    THEN_ELEMENT = (
+        ('category', u'Категория'),
+        ('status', u'Статус'),
+    )
+
+    THEN_ACTION = (
+        ('set', u'Установить'),
+    )
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name=u'Название правила',
+    )
+
+    if_element = models.CharField(
+        max_length=255,
+        verbose_name=u'Элемент условия',
+        choices=IF_ELEMENTS,
+        default='item_title',
+    )
+
+    if_action = models.CharField(
+        max_length=255,
+        verbose_name=u'Условие',
+        choices=IF_ACTIONS,
+        default='consist',
+    )
+
+    if_value = models.CharField(
+        max_length=255,
+        verbose_name=u'Значение',
+    )
+
+    then_element = models.CharField(
+        max_length=255,
+        verbose_name=u'Элемент действия',
+        choices=THEN_ELEMENT,
+        default='item_title',
+    )
+
+    then_action = models.CharField(
+        max_length=255,
+        verbose_name=u'Действие',
+        choices=THEN_ACTION,
+        default='item_title',
+    )
+
+    then_value = models.CharField(
+        max_length=255,
+        verbose_name=u'Значение',
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'Правило обработки'
+        verbose_name_plural = u'Правила обработки'

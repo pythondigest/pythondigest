@@ -7,7 +7,7 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 
-from digest.models import Issue, Section, Item, Resource, AutoImportResource
+from digest.models import Issue, Section, Item, Resource, AutoImportResource, ParsingRules
 admin.site.unregister(Site)
 
 
@@ -27,6 +27,10 @@ class SectionAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Section, SectionAdmin)
 
+
+class ParsingRulesAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(ParsingRules, ParsingRulesAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
     fields = (

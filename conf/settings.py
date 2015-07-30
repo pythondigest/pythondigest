@@ -22,16 +22,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'bootstrap_admin',
-    #
-    #
-    # 'bootstrap3',
-    # 'django_admin_bootstrapped',
-    #
-    'grappelli.dashboard',
-    'grappelli',
-
-    # 'suit',
+    'bootstrap_admin',
 
     'django.contrib.admin',
 
@@ -155,8 +146,6 @@ BOT_USER_ID = 11
 
 PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ''
-
-GRAPPELLI_INDEX_DASHBOARD = 'conf.dashboard.CustomIndexDashboard'
 
 BASE_DOMAIN = 'pythondigest.ru'
 
