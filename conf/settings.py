@@ -22,7 +22,17 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'bootstrap_admin',
+    # 'bootstrap_admin',
+    #
+    #
+    # 'bootstrap3',
+    # 'django_admin_bootstrapped',
+    #
+    'grappelli.dashboard',
+    'grappelli',
+
+    # 'suit',
+
     'django.contrib.admin',
 
     'sorl.thumbnail',
@@ -33,6 +43,8 @@ INSTALLED_APPS = (
     'frontend',
 
 )
+
+DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 
 
 MIDDLEWARE_CLASSES = (
@@ -60,7 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+
             ],
         },
     },
@@ -141,6 +155,8 @@ BOT_USER_ID = 11
 
 PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ''
+
+GRAPPELLI_INDEX_DASHBOARD = 'conf.dashboard.CustomIndexDashboard'
 
 BASE_DOMAIN = 'pythondigest.ru'
 
