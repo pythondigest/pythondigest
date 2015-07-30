@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+import re
+
 import feedparser
 from django.core.management.base import BaseCommand
+from readability import Document
 import requests
+
+import digest
 
 try:
     from urllib.request import urlopen
@@ -22,29 +27,19 @@ import stem
 from stem import control
 
 
-def time_struct_to_datetime(time_struct):
-    timestamp = mktime(time_struct)
-    dt = datetime.datetime.fromtimestamp(timestamp)
-    return dt
-
-
-def _get_http_code(url):
+def _get_http_data(url):
     try:
-        r = requests.head(url)
-        result = r.status_code
+        r = requests.get(url)
+        readable_article = Document(r.content).summary()
+        status_code = r.status_code
+        result = status_code, readable_article
     except requests.ConnectionError:
-        result = 404
+        result = 404, None
     return result
 
 
-def _apply_parsing_rules(entry, rules, sections, statuses):
-    item_data = {
-        'item_title': entry.title,
-        'item_url': entry.link,
-        # 'http_code': _get_http_code(entry.link),
-    }
+def _apply_parsing_rules(item_data, rules, sections, statuses):
     data = {}
-
     for rule in rules:
         if rule.then_element == 'status' and (
                         data.get('status') == 'moderated' or data.get(
@@ -57,10 +52,13 @@ def _apply_parsing_rules(entry, rules, sections, statuses):
         if if_item is not None:
             if_action = rule.if_action
             if_value = rule.if_value
+            pattern = re.compile(if_value) if if_action == 'regex' else None
 
             if (if_action == 'not_equal' and if_item != if_value) or \
                     (if_action == 'contains' and if_value in if_item) or \
-                    (if_action == 'equal' and if_item == if_value):
+                    (if_action == 'equal' and if_item == if_value) or \
+                    (pattern is not None and pattern.search(
+                        if_item) is not None):
                 then_element = rule.then_element
                 # then_action = rule.then_action
                 then_value = rule.then_value
@@ -75,9 +73,20 @@ def _apply_parsing_rules(entry, rules, sections, statuses):
 
                 elif then_element == 'http_code':
                     data['status'] = 'moderated'
+
+    if 'category' in data:
+        try:
+            data['category'] = sections.get(
+                title=data.get('category'))
+        except digest.models.DoesNotExist:
+            pass
     return data
 
 
+def time_struct_to_datetime(time_struct):
+    timestamp = mktime(time_struct)
+    dt = datetime.datetime.fromtimestamp(timestamp)
+    return dt
 
 
 def get_tweets():
@@ -88,6 +97,7 @@ def get_tweets():
     for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=False):
         url = urlopen(src.link)
         soup = BeautifulSoup(url)
+        http_code = url.getcode()
         url.close()
 
         resource = src.resource
@@ -102,7 +112,7 @@ def get_tweets():
 
                 if not excl_link and src.incl in tw_text:
                     tw_txt = tw_text.replace(src.incl, '')
-                    dsp.append([tw_txt, tw_lnk, resource])
+                    dsp.append([tw_txt, tw_lnk, resource, http_code])
             except:
                 pass
 
@@ -110,6 +120,9 @@ def get_tweets():
 
 
 def save_new_tweets():
+    rules = ParsingRules.objects.all()
+    sections = Section.objects.all()
+    item_statuses = [x[0] for x in ITEM_STATUS_CHOICES]
     for i in get_tweets():
         ct = len(Item.objects.filter(link=i[1])[0:1])
         if ct:
@@ -119,12 +132,23 @@ def save_new_tweets():
         if fresh_google_check(i[1]):
             title = u'[!] %s' % title
 
+        data = {}
+        if rules:
+            item_data = {
+                'item_title': i[0],
+                'item_url': i[1],
+                'http_code': i[3]
+            }
+            data = _apply_parsing_rules(item_data, rules, sections,
+                                        item_statuses)
+
         Item(
             title=title,
             resource=i[2],
             link=i[1],
-            status='autoimport',
-            user_id=settings.BOT_USER_ID,
+            section=data.get('category', None),
+            status=data.get('status', 'autoimport'),
+            user_id=settings.BOT_USER_ID
         ).save()
 
 
@@ -149,8 +173,19 @@ def import_rss():
                     continue
 
             data = {}
+            section = None
             if rules:
-                data = _apply_parsing_rules(n, rules, sections, item_statuses)
+                http_code, content = _get_http_data(n.link)
+
+                item_data = {
+                    'item_title': n.title,
+                    'item_url': n.link,
+                    'http_code': http_code,
+                    'item_content': content,
+                    'item_description': n.summary,
+                }
+                data = _apply_parsing_rules(item_data, rules, sections,
+                                            item_statuses)
 
             title = n.title
             if fresh_google_check(n.link):
@@ -162,7 +197,7 @@ def import_rss():
                 link=n.link,
                 status=data.get('status', 'autoimport'),
                 user_id=settings.BOT_USER_ID,
-                section=data.get('category'),
+                section=data.get('category', None),
                 language=src.language if src.language else 'en'
             ).save()
 

@@ -5,9 +5,10 @@ import feedparser
 from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
 
+from digest.management.commands.import_news import _apply_parsing_rules
+
 from digest.models import AutoImportResource, Item, ParsingRules, \
     ITEM_STATUS_CHOICES, Section
-import requests
 
 def get_tweets():
     '''
@@ -53,53 +54,6 @@ def get_tweets():
         print '-'*25
     return dsp
 
-
-def _get_http_code(url):
-    try:
-        r = requests.head(url)
-        result = r.status_code
-    except requests.ConnectionError:
-        result = 404
-    return result
-
-
-def _apply_parsing_rules(entry, rules, sections, statuses):
-    item_data = {
-        'item_title': entry.title,
-        'item_url': entry.link,
-        # 'http_code': _get_http_code(entry.link),
-    }
-    data = {}
-
-    for rule in rules:
-        if rule.then_element == 'status' and (data.get('status') == 'moderated' or data.get('status') == 'active'):
-            continue
-        if rule.then_element == 'category' and 'category' in data:
-            continue
-
-        if_item = item_data.get(rule.if_element, None)
-        if if_item is not None:
-            if_action = rule.if_action
-            if_value = rule.if_value
-
-            if (if_action == 'not_equal' and if_item != if_value) or \
-                    (if_action == 'contains' and if_value in if_item) or \
-                    (if_action == 'equal' and if_item == if_value):
-                then_element = rule.then_element
-                # then_action = rule.then_action
-                then_value = rule.then_value
-
-                # only set
-                if (
-                        then_element == 'status' and then_value in statuses) or \
-                        (then_element == 'category' and sections.filter(
-                            title=then_value).exists()):
-
-                    data[then_element] = then_value
-
-                elif then_element == 'http_code':
-                    data['status'] = 'moderated'
-    return data
 
 
 def get_rss():

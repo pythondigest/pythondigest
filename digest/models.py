@@ -320,6 +320,7 @@ class ParsingRules(models.Model):
         ('item_title', u'Заголовок новости'),
         ('item_url', u'Url новости'),
         ('item_content', u'Текст новости'),
+        ('item_description', u'Описание новости'),
         ('http_code', u'HTTP Code'),
     )
 
@@ -327,6 +328,7 @@ class ParsingRules(models.Model):
         ('equal', u'Равен'),
         ('contains', u'Содержит'),
         ('not_equal', u'Не равен'),
+        ('regex', u'Regex match'),
     )
 
     THEN_ELEMENT = (
