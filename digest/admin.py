@@ -7,7 +7,8 @@ from django import forms
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 
-from digest.models import Issue, Section, Item, Resource, AutoImportResource, ParsingRules
+from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
+    ParsingRules, Tag
 admin.site.unregister(Site)
 
 
@@ -32,6 +33,14 @@ class ParsingRulesAdmin(admin.ModelAdmin):
     pass
 admin.site.register(ParsingRules, ParsingRulesAdmin)
 
+
+class TagAdmin(admin.ModelAdmin):
+    pass
+
+
+admin.site.register(Tag, TagAdmin)
+
+
 class ItemAdmin(admin.ModelAdmin):
     fields = (
         'section',
@@ -43,7 +52,9 @@ class ItemAdmin(admin.ModelAdmin):
         'status',
         'language',
         'related_to_date',
+        'tags',
     )
+    filter_horizontal = ('tags',)
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = (
@@ -114,9 +125,12 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit', 'language')
     formfield_overrides = {
             models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1 })},
-        }
+    }
+
     def link_html(self,obj):
         return u'<a target="_blank" href="%s">%s</a>' % (obj.link, obj.link)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
+
+
 admin.site.register(AutoImportResource, AutoImportResourceAdmin)

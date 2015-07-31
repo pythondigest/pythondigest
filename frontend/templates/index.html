@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+
+
+
+
 <div class="container cards-list">
     {% if issue %}
     {% with object=issue %}
@@ -58,41 +64,48 @@
             </div>
         </div>
 
+
             {% regroup items by section as groups %}
             {% for data in groups %}
                 <div class="items-group-container">
                     <h2>{{ data.grouper.title }}</h2>
                     {% for item in data.list%}
-        <div class="item-container">
-            <noindex>
-            <div class="issue-item">
-                      <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource 
-                        {% if item.language == 'en' %}
-                            en
-                        {% elif item.language == 'ru'%}
-                            ru
-                        {% endif %}
-                      ">
-                      &nbsp;
-                      </span>
-                <a class="issue-item-title" rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                <span class="issue-item-bages">
-                    {% if item.resource %}
-                    <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge issue-item-resource" target="_blank">
-                        {{ item.resource }}
-                    </a>
-                    {% endif %}
+                        <div class="item-container">
+                            <noindex>
+                            <div class="issue-item">
+                                      <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
+                                        {% if item.language == 'en' %}
+                                            en
+                                        {% elif item.language == 'ru'%}
+                                            ru
+                                        {% endif %}
+                                      ">
+                                      &nbsp;
+                                      </span>
+                                <a class="issue-item-title"
+                                   onclick="trackUrl('{{ item.link }}', '{{ item.section }}', '{{ item.get_tags_str }}');"
+                                   rel="nofollow"
+                                   href="{{ item.link }}"
+                                   target="_blank">
+                                    {{ item.title }}
+                                </a>
+                                <span class="issue-item-bages">
+                                    {% if item.resource %}
+                                    <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge issue-item-resource" target="_blank">
+                                        {{ item.resource }}
+                                    </a>
+                                    {% endif %}
 
-                    {% if item.is_editors_choice %}
-                    <span class="badge issue-item-resource">
-                      <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
-                    </span>
-                    {% endif %}
-                </span>
-                <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
-            </div>
-            </noindex>
-        </div>
+                                    {% if item.is_editors_choice %}
+                                    <span class="badge issue-item-resource">
+                                      <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
+                                    </span>
+                                    {% endif %}
+                                </span>
+                                <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
+                            </div>
+                            </noindex>
+                        </div>
                     {% endfor %}
                 </div>
             {% endfor %}
@@ -104,4 +117,23 @@
     </div>
 </div>
 
+<script>
+
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-45532681-1', 'pythondigest.ru', {'name': 'url_tracker'});
+var trackUrl = function(url, section, tags) {
+
+       {#    console.log(url, section, tags);#}
+       ga('url_tracker.send', 'pageview',
+               {
+                   'url': url,
+                   'section': section,
+                   'tags': tags
+               });
+};
+</script>
 {% endblock %}

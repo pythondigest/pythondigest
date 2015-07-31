@@ -18,6 +18,20 @@ def get_start_end_of_week(dt):
     return start, end
 
 
+class Tag(models.Model):
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name=u'Название тэга',
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'Тэг к новости'
+        verbose_name_plural = u'Тэги к новостям'
+
 class Issue(models.Model):
     '''
     Выпуск дайджеста
@@ -228,6 +242,12 @@ class Item(models.Model):
         verbose_name=u'Версия'
     )
 
+    tags = models.ManyToManyField(
+        Tag,
+        verbose_name=u'Тэги',
+        blank=True,
+    )
+
     def save(self, *args, **kwargs):
         try:
             if self.issue is None:
@@ -242,6 +262,14 @@ class Item(models.Model):
     @property
     def internal_link(self):
         return reverse('frontend:item', kwargs={'pk': self.pk})
+
+    @property
+    def get_tags_str(self):
+        if self.tags and self.tags.all():
+            result = ','.join([x.name for x in self.tags.all()])
+        else:
+            result = 'Without tag'
+        return result
 
     def __unicode__(self):
         return self.title
@@ -313,6 +341,7 @@ class AutoImportResource(models.Model):
     class Meta:
         verbose_name = u'Источник импорта новостей'
         verbose_name_plural = u'Источники импорта новостей'
+
 
 class ParsingRules(models.Model):
 
