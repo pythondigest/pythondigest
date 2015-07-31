@@ -361,12 +361,14 @@ class ParsingRules(models.Model):
     )
 
     THEN_ELEMENT = (
-        ('category', u'Категория'),
+        ('section', u'Раздел'),
         ('status', u'Статус'),
+        ('tags', u'Тэг новости'),
     )
 
     THEN_ACTION = (
         ('set', u'Установить'),
+        ('add', u'Добавить'),
     )
 
     name = models.CharField(

@@ -5,10 +5,11 @@ import feedparser
 from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
 
-from digest.management.commands.import_news import _apply_parsing_rules
+from digest.management.commands.import_news import parsing, \
+    _apply_parsing_rules, \
+    _get_http_data
+from digest.models import AutoImportResource, Item
 
-from digest.models import AutoImportResource, Item, ParsingRules, \
-    ITEM_STATUS_CHOICES, Section
 
 def get_tweets():
     '''
@@ -55,11 +56,7 @@ def get_tweets():
     return dsp
 
 
-
-def get_rss():
-    rules = ParsingRules.objects.all()
-    sections = Section.objects.all()
-    item_statuses = [x[0] for x in ITEM_STATUS_CHOICES]
+def get_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
         print '\n\n' + '='*25
         print '  ' + src.name
@@ -68,8 +65,19 @@ def get_rss():
         num = 0
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
-            if rules:
-                data = _apply_parsing_rules(n, rules, sections, item_statuses)
+            data = {}
+            section = None
+            if kwargs.get('query_rules'):
+                http_code, content = _get_http_data(n.link)
+
+                item_data = {
+                    'item_title': n.title,
+                    'item_url': n.link,
+                    'http_code': http_code,
+                    'item_content': content,
+                    'item_description': n.summary,
+                }
+                data = _apply_parsing_rules(item_data, **kwargs)
                 print(data)
             try:
                 lastnews = Item.objects.get(link = n.link)
@@ -89,5 +97,4 @@ class Command(BaseCommand):
         Основной метод - точка входа
         '''
         print get_tweets()
-        print get_rss()
-        
+        print parsing(get_rss)

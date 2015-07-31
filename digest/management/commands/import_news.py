@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import re
 
 import feedparser
@@ -17,7 +18,7 @@ except ImportError:
 from bs4 import BeautifulSoup
 
 from digest.models import AutoImportResource, Item, ParsingRules, Section, \
-    ITEM_STATUS_CHOICES
+    ITEM_STATUS_CHOICES, Tag
 from django.conf import settings
 from pygoogle import pygoogle
 from pygoogle.pygoogle import PyGoogleHttpException
@@ -38,14 +39,17 @@ def _get_http_data(url):
     return result
 
 
-def _apply_parsing_rules(item_data, rules, sections, statuses):
+def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
+                         query_tags):
+    tags_names = [x.name for x in query_tags.all()]
     data = {}
-    for rule in rules:
-        if rule.then_element == 'status' and (
-                        data.get('status') == 'moderated' or data.get(
+    for rule in query_rules:
+        if rule.then_element == 'status' and \
+                (data.get('status') == 'moderated' or
+                         data.get(
                     'status') == 'active'):
             continue
-        if rule.then_element == 'category' and 'category' in data:
+        if rule.then_element == 'section' and 'section' in data:
             continue
 
         if_item = item_data.get(rule.if_element, None)
@@ -60,26 +64,43 @@ def _apply_parsing_rules(item_data, rules, sections, statuses):
                     (pattern is not None and pattern.search(
                         if_item) is not None):
                 then_element = rule.then_element
-                # then_action = rule.then_action
+                then_action = rule.then_action
                 then_value = rule.then_value
 
-                # only set
-                if (
-                                then_element == 'status' and then_value in statuses) or \
-                        (then_element == 'category' and sections.filter(
-                            title=then_value).exists()):
-
-                    data[then_element] = then_value
-
+                if ((
+                            then_element == 'status' and then_value in query_statuses) or \
+                            (
+                                    then_element == 'section' and query_sections.filter(
+                                title=then_value).exists())
+                    ):
+                    if then_action == 'set':
+                        data[then_element] = then_value
+                if then_element == 'tags' and then_value in tags_names:
+                    if then_action == 'add':
+                        try:
+                            data[then_element].append(then_value)
+                        except KeyError:
+                            data[then_element] = [then_value]
                 elif then_element == 'http_code':
                     data['status'] = 'moderated'
 
-    if 'category' in data:
+    # исключений не должно быть,
+    # ибо по коду везде очевидно что объект сущесвтует
+    # но пускай будет проверка на существование
+    if 'section' in data:
         try:
-            data['category'] = sections.get(
-                title=data.get('category'))
+            data['section'] = query_sections.get(
+                title=data.get('section'))
         except digest.models.DoesNotExist:
             pass
+    if 'tags' in data:
+        _tags = []
+        for x in data['tags']:
+            try:
+                _tags.append(query_tags.get(name=x))
+            except digest.models.DoesNotExist:
+                pass
+        data['tags'] = _tags
     return data
 
 
@@ -119,10 +140,16 @@ def get_tweets():
     return dsp
 
 
-def save_new_tweets():
-    rules = ParsingRules.objects.all()
-    sections = Section.objects.all()
-    item_statuses = [x[0] for x in ITEM_STATUS_CHOICES]
+def parsing(func):
+    data = {'query_rules': ParsingRules.objects.all(),
+            'query_sections': Section.objects.all(),
+            'query_tags': Tag.objects.all(),
+            'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
+            }
+    func(**data)
+
+
+def save_new_tweets(**kwargs):
     for i in get_tweets():
         ct = len(Item.objects.filter(link=i[1])[0:1])
         if ct:
@@ -133,29 +160,30 @@ def save_new_tweets():
             title = u'[!] %s' % title
 
         data = {}
-        if rules:
+        if kwargs.get('rules'):
             item_data = {
                 'item_title': i[0],
                 'item_url': i[1],
                 'http_code': i[3]
             }
-            data = _apply_parsing_rules(item_data, rules, sections,
-                                        item_statuses)
+            data = _apply_parsing_rules(item_data, **kwargs)
 
-        Item(
+        _a = Item(
             title=title,
             resource=i[2],
             link=i[1],
-            section=data.get('category', None),
+            section=data.get('section', None),
             status=data.get('status', 'autoimport'),
             user_id=settings.BOT_USER_ID
-        ).save()
+        )
+
+        _a.save()
+        if data.get('tags'):
+            _a.tags.add(*data.get('tags'))
+            _a.save()
 
 
-def import_rss():
-    rules = ParsingRules.objects.all()
-    sections = Section.objects.all()
-    item_statuses = [x[0] for x in ITEM_STATUS_CHOICES]
+def import_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
 
         rssnews = feedparser.parse(src.link)
@@ -174,7 +202,7 @@ def import_rss():
 
             data = {}
             section = None
-            if rules:
+            if kwargs.get('query_rules'):
                 http_code, content = _get_http_data(n.link)
 
                 item_data = {
@@ -184,22 +212,27 @@ def import_rss():
                     'item_content': content,
                     'item_description': n.summary,
                 }
-                data = _apply_parsing_rules(item_data, rules, sections,
-                                            item_statuses)
+                data = _apply_parsing_rules(item_data, **kwargs)
 
             title = n.title
             if fresh_google_check(n.link):
                 title = u'[!] %s' % title
 
-            Item(
+            _a = Item(
                 title=title,
                 resource=src.resource,
                 link=n.link,
+
                 status=data.get('status', 'autoimport'),
                 user_id=settings.BOT_USER_ID,
-                section=data.get('category', None),
+                section=data.get('section', None),
                 language=src.language if src.language else 'en'
-            ).save()
+            )
+
+            _a.save()
+            if data.get('tags'):
+                _a.tags.add(*data.get('tags'))
+                _a.save()
 
 def renew_connection():
     with control.Controller.from_port(port=9051) as ctl:
@@ -255,5 +288,5 @@ class Command(BaseCommand):
         '''
         Основной метод - точка входа
         '''
-        save_new_tweets()
-        import_rss()
+        # parsing(save_new_tweets)
+        parsing(import_rss)
