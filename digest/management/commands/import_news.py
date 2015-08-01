@@ -32,10 +32,10 @@ def _get_http_data(url):
     try:
         r = requests.get(url)
         readable_article = Document(r.content).summary()
-        status_code = r.status_code
+        status_code = str(r.status_code)
         result = status_code, readable_article
     except requests.ConnectionError:
-        result = 404, None
+        result = str(404), None
     return result
 
 
