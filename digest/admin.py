@@ -30,7 +30,39 @@ admin.site.register(Section, SectionAdmin)
 
 
 class ParsingRulesAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'name',
+        'if_element',
+        '_get_if_action',
+        'then_element',
+        '_get_then_action',
+    )
+
+    list_filter = (
+        'if_element',
+        'if_action',
+        'then_element',
+        'then_action',
+    )
+
+    search_fields = (
+        'name',
+        'if_value',
+        'then_value',
+    )
+
+    def _get_if_action(self, obj):
+        return u"{}: <i>{}</i>".format(obj.get_if_action_display(), obj.if_value)
+
+    _get_if_action.allow_tags = True
+    _get_if_action.short_description = u"Условие"
+
+    def _get_then_action(self, obj):
+        return u"{}: <i>{}</i>".format(obj.get_then_action_display(), obj.then_value)
+
+    _get_then_action.allow_tags = True
+    _get_then_action.short_description = u"Действие"
+
 admin.site.register(ParsingRules, ParsingRulesAdmin)
 
 
