@@ -59,6 +59,19 @@
 
         ga('create', 'UA-45532681-1', 'pythondigest.ru');
         ga('send', 'pageview');
+
+        ga('create', 'UA-45532681-1', 'pythondigest.ru', {'name': 'url_tracker'});
+        var trackUrl = function(url, section, tags) {
+
+               {#    console.log(url, section, tags);#}
+               ga('url_tracker.send', 'pageview',
+                       {
+                           'url': url,
+                           'section': section,
+                           'tags': tags
+                       });
+        };
+
     </script>
 
     {% if not perms.admin %}

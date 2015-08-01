@@ -9,9 +9,9 @@
             <noindex>
             <div class="news-line-item-bages">
                       <span title="Язык новости" class="badge news-line-item-resource
-                        {% if item.language = 'en' %}
+                        {% if item.language == 'en' %}
                             en
-                        {% elif item.language = 'ru'%}
+                        {% elif item.language == 'ru'%}
                             ru
                         {% endif %}
                       ">
