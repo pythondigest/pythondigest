@@ -162,7 +162,7 @@ def save_new_tweets(**kwargs):
         data = {}
         if kwargs.get('rules'):
             item_data = {
-                'item_title': i[0],
+                'item_title': title,
                 'item_url': i[1],
                 'http_code': i[3]
             }
@@ -200,23 +200,23 @@ def import_rss(**kwargs):
                 if dt.date() < week_before:
                     continue
 
+            title = n.title
+            if fresh_google_check(n.link):
+                title = u'[!] %s' % title
+
             data = {}
             section = None
             if kwargs.get('query_rules'):
                 http_code, content = _get_http_data(n.link)
 
                 item_data = {
-                    'item_title': n.title,
+                    'item_title': title,
                     'item_url': n.link,
                     'http_code': http_code,
                     'item_content': content,
                     'item_description': n.summary,
                 }
                 data = _apply_parsing_rules(item_data, **kwargs)
-
-            title = n.title
-            if fresh_google_check(n.link):
-                title = u'[!] %s' % title
 
             _a = Item(
                 title=title,
