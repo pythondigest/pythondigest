@@ -32,6 +32,7 @@ admin.site.register(Section, SectionAdmin)
 class ParsingRulesAdmin(admin.ModelAdmin):
     list_display = (
         'name',
+        'is_activated',
         'if_element',
         '_get_if_action',
         'then_element',
@@ -39,13 +40,19 @@ class ParsingRulesAdmin(admin.ModelAdmin):
     )
 
     list_filter = (
+        'is_activated',
         'if_element',
         'if_action',
         'then_element',
         'then_action',
     )
 
+    list_editable = (
+        'is_activated',
+    )
+
     search_fields = (
+        'is_activated',
         'name',
         'if_value',
         'then_value',

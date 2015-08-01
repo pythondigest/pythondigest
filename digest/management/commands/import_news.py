@@ -69,9 +69,7 @@ def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
 
                 if ((
                             then_element == 'status' and then_value in query_statuses) or \
-                            (
-                                    then_element == 'section' and query_sections.filter(
-                                title=then_value).exists())
+                            (then_element == 'section' and query_sections.filter(title=then_value).exists())
                     ):
                     if then_action == 'set':
                         data[then_element] = then_value
@@ -141,7 +139,7 @@ def get_tweets():
 
 
 def parsing(func):
-    data = {'query_rules': ParsingRules.objects.all(),
+    data = {'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
             'query_sections': Section.objects.all(),
             'query_tags': Tag.objects.all(),
             'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]

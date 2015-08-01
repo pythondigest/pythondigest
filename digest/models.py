@@ -376,6 +376,11 @@ class ParsingRules(models.Model):
         verbose_name=u'Название правила',
     )
 
+    is_activated = models.BooleanField(
+        verbose_name=u'Включено',
+        default=True,
+    )
+
     if_element = models.CharField(
         max_length=255,
         verbose_name=u'Элемент условия',
