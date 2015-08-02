@@ -286,5 +286,5 @@ class Command(BaseCommand):
         '''
         Основной метод - точка входа
         '''
-        # parsing(save_new_tweets)
+        parsing(save_new_tweets)
         parsing(import_rss)
