@@ -61,15 +61,14 @@
         ga('send', 'pageview');
 
         ga('create', 'UA-45532681-1', 'pythondigest.ru', {'name': 'url_tracker'});
-        var trackUrl = function(url, section, tags) {
+        var trackUrl = function(id_news, section, tags) {
 
-            ga('url_tracker.send',
+            ga('url_tracker.send', 'event',
                     {
-                        'hitType': 'event',
-                        'category': section,
-                        'action': 'click',
-                        'label': url,
-                        'value': tags
+                        'eventCategory': section,
+                        'eventAction': 'NewsLinkClick',
+                        'eventLabel': tags,
+                        'eventValue': id_news
                     });
 
         };

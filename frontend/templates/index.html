@@ -83,7 +83,7 @@
                                       &nbsp;
                                       </span>
                                 <a class="issue-item-title"
-                                   onclick="trackUrl('{{ item.link }}', '{{ item.section }}', '{{ item.get_tags_str }}');"
+                                   onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
                                    rel="nofollow"
                                    href="{{ item.link }}"
                                    target="_blank">
