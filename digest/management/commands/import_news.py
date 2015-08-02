@@ -39,10 +39,25 @@ def _get_http_data(url):
     return result
 
 
+
+def _get_tags_for_item(item_data, tags_names):
+    return_tags = []
+
+    for _, value in item_data.items():
+        words = value.split()
+        return_tags.extend([tag for tag in tags_names if (tag in words)])
+    return list(set(return_tags))
+
+
 def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
                          query_tags):
     tags_names = [x.name for x in query_tags.all()]
     data = {}
+
+    _tags_of_item = _get_tags_for_item(item_data, tags_names)
+    if _tags_of_item:
+        data['tags'] = _tags_of_item
+
     for rule in query_rules:
         if rule.then_element == 'status' and \
                 (data.get('status') == 'moderated' or
@@ -93,6 +108,7 @@ def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
             pass
     if 'tags' in data:
         _tags = []
+        data['tags'] = list(set(data['tags']))
         for x in data['tags']:
             try:
                 _tags.append(query_tags.get(name=x))
