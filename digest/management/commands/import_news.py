@@ -158,7 +158,7 @@ def save_new_tweets(**kwargs):
             title = u'[!] %s' % title
 
         data = {}
-        if kwargs.get('rules'):
+        if kwargs.get('query_rules'):
             item_data = {
                 'item_title': title,
                 'item_url': i[1],
