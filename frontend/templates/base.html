@@ -63,13 +63,15 @@
         ga('create', 'UA-45532681-1', 'pythondigest.ru', {'name': 'url_tracker'});
         var trackUrl = function(url, section, tags) {
 
-               {#    console.log(url, section, tags);#}
-               ga('url_tracker.send', 'pageview',
-                       {
-                           'url': url,
-                           'section': section,
-                           'tags': tags
-                       });
+            ga('url_tracker.send',
+                    {
+                        'hitType': 'event',
+                        'category': section,
+                        'action': 'click',
+                        'label': url,
+                        'value': tags
+                    });
+
         };
 
     </script>
