@@ -52,7 +52,7 @@ def _get_tags_for_item(item_data, tags_names):
 
 def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
                          query_tags):
-    tags_names = [x.name for x in query_tags.all()]
+    tags_names = list(query_tags.values_list('name', flat=True))
     data = {}
 
     _tags_of_item = _get_tags_for_item(item_data, tags_names)
