@@ -44,8 +44,9 @@ def _get_tags_for_item(item_data, tags_names):
     return_tags = []
 
     for _, value in item_data.items():
-        words = value.split()
-        return_tags.extend([tag for tag in tags_names if (tag in words)])
+        if isinstance(value, str):
+            words = value.split()
+            return_tags.extend([tag for tag in tags_names if (tag in words)])
     return list(set(return_tags))
 
 
