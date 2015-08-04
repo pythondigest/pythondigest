@@ -46,7 +46,7 @@ def _get_tags_for_item(item_data, tags_names):
     for _, value in item_data.items():
         if isinstance(value, str) and value:
             words = map(lambda x: x.lower(), value.split())
-            return_tags.extend([tag for tag in tags_names if (tag in words)])
+            return_tags.extend([tag for tag in tags_names if (tag.lower() in words)])
     return list(set(return_tags))
 
 
@@ -55,7 +55,7 @@ def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
     tags_names = list(query_tags.values_list('name', flat=True))
     data = {}
 
-    _tags_of_item = _get_tags_for_item(item_data, map(lambda x: x.lower(), tags_names))
+    _tags_of_item = _get_tags_for_item(item_data, tags_names)
     if _tags_of_item:
         data['tags'] = _tags_of_item
 
