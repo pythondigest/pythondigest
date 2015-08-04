@@ -136,8 +136,8 @@ class NewsList(ListView):
             filters = Q(title__icontains=search) | Q(description__icontains=search)
             items = items.filter(filters)
 
-        section = self.request.GET.get('section')
-        if section:
+        section = self.request.GET.get('section', '')
+        if section.isdigit():
             items = items.filter(section__pk=section)
 
         items = items.prefetch_related('issue', 'section')
