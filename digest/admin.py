@@ -13,9 +13,31 @@ admin.site.unregister(Site)
 
 
 class IssueAdmin(admin.ModelAdmin):
-    list_display = ('title', 'frontend_link',)
 
-    def frontend_link(self,obj):
+    list_display = (
+        'title',
+        'news_count',
+        'issue_date',
+        'frontend_link',
+    )
+
+    list_filter = (
+        'date_from',
+        'date_to',
+    )
+
+    def issue_date(self, obj):
+        return u"С %s по %s" % (obj.date_from, obj.date_to)
+
+    issue_date.short_description = u"Период"
+
+    def news_count(self, obj):
+        return u"%s" % Item.objects.filter(issue__pk=obj.pk,
+                                           status='active').count()
+
+    news_count.short_description = u"Количество новостей"
+
+    def frontend_link(self, obj):
         lnk = reverse('frontend:issue_view', kwargs={'pk': obj.pk})
         return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
     frontend_link.allow_tags = True
