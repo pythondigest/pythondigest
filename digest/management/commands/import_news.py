@@ -81,6 +81,7 @@ def import_rss(**kwargs):
                 'content': content,
                 'description': n.summary,
                 'resource': src.resource,
+                'language': src.language,
             }
             data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
                 'query_rules') else {}
