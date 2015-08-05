@@ -25,7 +25,7 @@ class Tag(models.Model):
         verbose_name=u'Название тэга',
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -71,7 +71,7 @@ class Issue(models.Model):
         verbose_name=u'Версия'
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @property
@@ -117,7 +117,7 @@ class Section(models.Model):
         null=True, blank=True
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -146,7 +146,7 @@ class Resource(models.Model):
         verbose_name=u'Версия'
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -271,7 +271,7 @@ class Item(models.Model):
             result = 'Without tag'
         return result
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
@@ -335,7 +335,7 @@ class AutoImportResource(models.Model):
         default='en',
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -360,7 +360,7 @@ class Package(models.Model):
         verbose_name=u'Ссылка',
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -371,10 +371,10 @@ class Package(models.Model):
 class ParsingRules(models.Model):
 
     IF_ELEMENTS = (
-        ('item_title', u'Заголовок новости'),
-        ('item_url', u'Url новости'),
-        ('item_content', u'Текст новости'),
-        ('item_description', u'Описание новости'),
+        ('title', u'Заголовок новости'),
+        ('url', u'Url новости'),
+        ('content', u'Текст новости'),
+        ('description', u'Описание новости'),
         ('http_code', u'HTTP Code'),
     )
 
@@ -386,6 +386,7 @@ class ParsingRules(models.Model):
     )
 
     THEN_ELEMENT = (
+        ('title', u'Заголовок новости'),
         ('section', u'Раздел'),
         ('status', u'Статус'),
         ('tags', u'Тэг новости'),
@@ -394,6 +395,7 @@ class ParsingRules(models.Model):
     THEN_ACTION = (
         ('set', u'Установить'),
         ('add', u'Добавить'),
+        ('remove', u'Удалить часть строки'),
     )
 
     name = models.CharField(
@@ -444,7 +446,7 @@ class ParsingRules(models.Model):
         verbose_name=u'Значение',
     )
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
