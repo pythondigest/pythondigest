@@ -343,6 +343,31 @@ class AutoImportResource(models.Model):
         verbose_name_plural = u'Источники импорта новостей'
 
 
+class Package(models.Model):
+
+    name = models.CharField(
+        max_length=255,
+        verbose_name=u'Название',
+    )
+
+    description = models.TextField(
+        verbose_name=u'Описание',
+        null=True, blank=True,
+    )
+
+    url = models.CharField(
+        max_length=255,
+        verbose_name=u'Ссылка',
+    )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'Библиотека'
+        verbose_name_plural = u'Библиотеки'
+
+
 class ParsingRules(models.Model):
 
     IF_ELEMENTS = (

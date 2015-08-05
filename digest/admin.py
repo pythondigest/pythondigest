@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
 
 from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
-    ParsingRules, Tag
+    ParsingRules, Tag, Package
 admin.site.unregister(Site)
 
 
@@ -195,3 +195,8 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
 
 
 admin.site.register(AutoImportResource, AutoImportResourceAdmin)
+
+
+class PackageAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Package, PackageAdmin)
