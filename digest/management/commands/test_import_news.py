@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from digest.management.commands import fresh_google_check
+
 try:
     from urllib.request import urlopen
 except ImportError:
@@ -10,7 +12,7 @@ from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
 
 from digest.management.commands.import_news import parsing, \
-    _apply_parsing_rules, \
+    apply_parsing_rules, \
     _get_http_data_of_url
 from digest.models import AutoImportResource, Item
 
@@ -69,22 +71,31 @@ def get_rss(**kwargs):
         num = 0
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
-            data = {}
-            section = None
-            if kwargs.get('query_rules'):
-                http_code, content = _get_http_data_of_url(n.link)
 
-                item_data = {
-                    'item_title': n.title,
-                    'item_url': n.link,
-                    'http_code': http_code,
-                    'item_content': content,
-                    'item_description': n.summary,
-                }
-                data = _apply_parsing_rules(item_data, **kwargs)
-                print(data)
+            title = u'[!] %s' % n.title if fresh_google_check(
+                n.title, debug=True) else n.title
+
+            http_code, content = _get_http_data_of_url(n.link)
+
+            item_data = {
+                'title': title,
+                'link': n.link,
+                'http_code': http_code,
+                'content': content,
+                'description': n.summary,
+                'resource': src.resource,
+            }
+            data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
+                'query_rules') else {}
+            item_data.update(data)
+
+            print_str = ''
+            print_str += 'status: %s' % item_data['status'] if ('status' in item_data) else ''
+            print_str += 'tags: %s' % item_data['tags'] if ('tags' in item_data) else ''
+            print_str += 'section: %s' % item_data['section'] if ('section' in item_data) else ''
+            print(print_str)
             try:
-                lastnews = Item.objects.get(link = n.link)
+                lastnews = Item.objects.get(link=item_data.get('link'))
             except Item.DoesNotExist:
                 num += 1
                 print('%d: Title: %s (%s)' % (num, n.title, n.link))

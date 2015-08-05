@@ -1,18 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen
-
 from django.conf import settings
-
 from django.core.management.base import BaseCommand
 
 from digest.management.commands.import_news import get_tweets_by_url
 from digest.models import Package, Item, Section, Resource
-
+from digest.management.commands import save_item
 
 
 def save_news_release_items(items):
@@ -54,10 +48,10 @@ def parse():
         except Exception:
             return
 
-        data = []
         tweets_data = get_tweets_by_url(base_url)
 
         for text, link, http_code in tweets_data:
+            print(text, link)
             for x in packages:
                 if 'python' in text and "python/%s" % x.get(
                         'name').lower() in text:
@@ -76,19 +70,15 @@ def parse():
                         x.get('url')
                     )
 
-                    data.append(
-                        {
-                            'title': name,
-                            'link': link,
-                            'resource': resource,
-                            'status': 'active',
-                            'section': section,
-                            'language': 'en',
-                            'description': description,
-                        }
-                    )
-        save_news_release_items(data)
-
+                    save_item({
+                        'title': name,
+                        'link': link,
+                        'resource': resource,
+                        'status': 'active',
+                        'section': section,
+                        'language': 'en',
+                        'description': description,
+                    })
 
 class Command(BaseCommand):
     args = 'no arguments!'
