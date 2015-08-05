@@ -6,6 +6,7 @@ from time import mktime
 
 import feedparser
 from django.core.management.base import BaseCommand
+import re
 
 from digest.management.commands import _get_http_data_of_url, \
     fresh_google_check, get_tweets_by_url, \
@@ -79,7 +80,7 @@ def import_rss(**kwargs):
                 'link': n.link,
                 'http_code': http_code,
                 'content': content,
-                'description': n.summary,
+                'description': re.sub("<.*?>", "", n.summary),
                 'resource': src.resource,
                 'language': src.language,
             }
