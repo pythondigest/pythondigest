@@ -1,40 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from digest.management.commands.import_news import get_tweets_by_url
-from digest.models import Package, Item, Section, Resource
+from digest.models import Package, Section, Resource
 from digest.management.commands import save_item
 
-
-def save_news_release_items(items):
-    for item in items:
-        assert 'title' in item
-        assert 'resource' in item
-        assert 'link' in item
-        assert 'status' in item
-        assert 'section' in item
-
-        if not Item.objects.filter(title=item.get('title'),
-                                   link=item.get('link'),
-                                   description=item.get('description')).exists():
-            _a = Item(
-                title=item.get('title'),
-                resource=item.get('resource'),
-                link=item.get('link'),
-                description=item.get('description'),
-                status=item.get('status', 'autoimport'),
-                user_id=settings.BOT_USER_ID,
-                section=item.get('section', None),
-                language=item.get('language') if item.get('language') else 'en'
-            )
-
-            _a.save()
-            if item.get('tags'):
-                _a.tags.add(*item.get('tags'))
-            _a.save()
 
 
 def parse():
