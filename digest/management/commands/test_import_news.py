@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 from digest.management.commands.import_news import parsing, \
     _apply_parsing_rules, \
-    _get_http_data
+    _get_http_data_of_url
 from digest.models import AutoImportResource, Item
 
 
@@ -68,7 +68,7 @@ def get_rss(**kwargs):
             data = {}
             section = None
             if kwargs.get('query_rules'):
-                http_code, content = _get_http_data(n.link)
+                http_code, content = _get_http_data_of_url(n.link)
 
                 item_data = {
                     'item_title': n.title,

@@ -24,31 +24,63 @@ from pygoogle import pygoogle
 from pygoogle.pygoogle import PyGoogleHttpException
 import datetime
 from time import sleep, mktime
-import stem
-from stem import control
+from stem import control, Signal
 
 
-def _get_http_data(url):
+def _get_http_data_of_url(url):
+    """
+    Возвращает http-статус, текст новости по url
+    В случае не успеха - '404', None
+    :param url:
+    :return:
+    """
+
     try:
+        assert isinstance(url,
+                          (unicode, str)), "Not valid url: %s, type (%s)" % (
+        url, type(url))
         r = requests.get(url)
         readable_article = Document(r.content).summary()
         status_code = str(r.status_code)
         result = status_code, readable_article
-    except requests.ConnectionError:
+
+    except (requests.ConnectionError, AssertionError) as e:
         result = str(404), None
     return result
 
 
-
 def _get_tags_for_item(item_data, tags_names):
-    return_tags = []
+    """
 
-    for _, value in item_data.items():
-        if isinstance(value, str) and value:
-            words = map(lambda x: x.lower(), value.split())
-            return_tags.extend([tag for tag in tags_names if (tag.lower() in words)])
-    return list(set(return_tags))
+    item_data - словарь.
+    tags_names - list строк
 
+    значения в словаре item_data, если значение строка
+        то сплитится о пробелу и сравнивается с каждым тегом
+        если совпадает, то возвращает совпадение
+
+    :param item_data:
+    :param tags_names:
+    :return:
+    """
+
+    try:
+        assert isinstance(item_data, dict)
+        assert isinstance(tags_names, list)
+        return_tags = []
+
+        for _, value in item_data.items():
+            if isinstance(value, (unicode, str)) and value:
+                words = map(lambda x: x.lower(), value.split())
+                return_tags.extend(
+                    [tag for tag in tags_names if (tag.lower() in words)])
+        result = list(set(return_tags))
+    except AssertionError:
+        result = []
+    return result
+
+
+# ----------
 
 def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
                          query_tags):
@@ -119,50 +151,38 @@ def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
     return data
 
 
-def time_struct_to_datetime(time_struct):
-    timestamp = mktime(time_struct)
-    dt = datetime.datetime.fromtimestamp(timestamp)
-    return dt
+def get_tweets_by_url(base_url):
+    url = urlopen(base_url)
+    soup = BeautifulSoup(url)
+    http_code = url.getcode()
+    url.close()
 
+    result = []
+    for p in soup.findAll('p', 'tweet-text'):
+        try:
+            tw_lnk = p.find('a', 'twitter-timeline-link').get(
+                'data-expanded-url')
+            tw_text = p.contents[0]
+            result.append([tw_text, tw_lnk, http_code])
+        except:
+            pass
+    return result
 
 def get_tweets():
-    '''
-    Импорт твитов пользователя
-    '''
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=False):
-        url = urlopen(src.link)
-        soup = BeautifulSoup(url)
-        http_code = url.getcode()
-        url.close()
 
         resource = src.resource
         excl = [s for s in (src.excl or '').split(',') if s]
 
-        for p in soup.findAll('p', 'tweet-text'):
-            try:
-                tw_lnk = p.find('a', 'twitter-timeline-link').get('data-expanded-url')
-                tw_text = p.contents[0]
+        tweets_data = get_tweets_by_url(src.link)
 
-                excl_link = bool([i for i in excl if i in tw_lnk])
-
-                if not excl_link and src.incl in tw_text:
-                    tw_txt = tw_text.replace(src.incl, '')
-                    dsp.append([tw_txt, tw_lnk, resource, http_code])
-            except:
-                pass
-
+        for text, link, http_code in tweets_data:
+            excl_link = bool([i for i in excl if i in link])
+            if not excl_link and src.incl in text:
+                tw_txt = text.replace(src.incl, '')
+                dsp.append([tw_txt, link, resource, http_code])
     return dsp
-
-
-def parsing(func):
-    data = {'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
-            'query_sections': Section.objects.all(),
-            'query_tags': Tag.objects.all(),
-            'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
-            }
-    func(**data)
-
 
 def save_new_tweets(**kwargs):
     for i in get_tweets():
@@ -211,7 +231,8 @@ def import_rss(**kwargs):
 
             time_struct = getattr(n, 'published_parsed', None)
             if time_struct:
-                dt = time_struct_to_datetime(time_struct)
+                _timestamp = mktime(time_struct)
+                dt = datetime.datetime.fromtimestamp(_timestamp)
                 if dt.date() < week_before:
                     continue
 
@@ -222,7 +243,8 @@ def import_rss(**kwargs):
             data = {}
             section = None
             if kwargs.get('query_rules'):
-                http_code, content = _get_http_data(n.link)
+                print("sa")
+                http_code, content = _get_http_data_of_url(n.link)
 
                 item_data = {
                     'item_title': title,
@@ -249,50 +271,79 @@ def import_rss(**kwargs):
                 _a.tags.add(*data.get('tags'))
                 _a.save()
 
+
 def renew_connection():
     with control.Controller.from_port(port=9051) as ctl:
         ctl.authenticate(settings.TOR_CONTROLLER_PWD)
-        ctl.signal(stem.Signal.NEWNYM)
+        ctl.signal(Signal.NEWNYM)
         sleep(5)
 
-def fresh_google_check(link, attempt=0):
-    '''
+
+def fresh_google_check(link, attempt=5):
+    """
     Проверяет, индексировался ли уже ресурс гуглом раньше
     чем за 2 недели до сегодня.
-    '''
-    today = datetime.date.today()
-    date_s = date_to_julian_day( today - datetime.timedelta(days=365 * 8) )
-    date_e = date_to_julian_day( today - datetime.timedelta(days=7 * 2) )
-    query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
+    :param link:
+    :param attempt:
+    :return:
+    """
+    try:
+        assert isinstance(link, str)
+        today = datetime.date.today()
+        date_s = date_to_julian_day(today - datetime.timedelta(days=365 * 8))
+        date_e = date_to_julian_day(today - datetime.timedelta(days=7 * 2))
+        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
 
-    res = False
-    for i in range(0, 5):
-        g = pygoogle(
-            query.encode('utf-8'),
-            raise_http_exceptions=True,
-            proxies=settings.PROXIES_FOR_GOOGLING
-        )
+        result = False
+        for i in range(0, attempt):
+            g = pygoogle(
+                query.encode('utf-8'),
+                raise_http_exceptions=True,
+                proxies=settings.PROXIES_FOR_GOOGLING
+            )
 
-        try:
-            res = bool(g.get_result_count())
-        except PyGoogleHttpException as e:
-            renew_connection()
-            continue
-        break
+            try:
+                result = bool(g.get_result_count())
+            except PyGoogleHttpException as e:
+                renew_connection()
+                continue
+            break
+    except AssertionError:
+        result = False
 
-    return res
-
+    return result
 
 def date_to_julian_day(my_date):
-    '''
+    """
     Returns the Julian day number of a date.
     Origin: http://code-highlights.blogspot.ru/2013/01/julian-date-in-python.html
-    '''
-    a = (14 - my_date.month)//12
+    :param my_date:
+    :return:
+    """
+    a = (14 - my_date.month) // 12
     y = my_date.year + 4800 - a
-    m = my_date.month + 12*a - 3
-    return my_date.day + ((153*m + 2)//5) + 365*y + y//4 - y//100 + y//400 - 32045
+    m = my_date.month + 12 * a - 3
+    return my_date.day + \
+           ((153 * m + 2) // 5) + \
+           365 * y + \
+           y // 4 - \
+           y // 100 + \
+           y // 400 - \
+           32045
 
+
+def parsing(func):
+    """
+
+    :param func:
+    :return:
+    """
+    data = {'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
+            'query_sections': Section.objects.all(),
+            'query_tags': Tag.objects.all(),
+            'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
+            }
+    func(**data)
 
 class Command(BaseCommand):
     
