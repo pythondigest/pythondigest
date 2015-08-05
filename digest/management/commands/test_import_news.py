@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
-from urllib import urlopen
+try:
+    from urllib.request import urlopen
+except ImportError:
+    from urllib2 import urlopen
+
 
 import feedparser
 from django.core.management.base import BaseCommand
@@ -23,24 +27,24 @@ def get_tweets():
 
         num = 0
         
-        print '\n\n' + '='*25
-        print '  ' + src.name
-        print '='*25 + '\n'
+        print('\n\n' + '='*25)
+        print('  ' + src.name)
+        print('='*25 + '\n')
         resource = src.resource
         excl = src.excl.split(', ')
-        print 'Исключения:'
-        print '-'*25
+        print('Исключения:')
+        print('-'*25)
         for i in excl:
-            print i
-        print '\n'
-        print 'Распарсенные твитты:'
-        print '-'*25
+            print(i)
+        print('\n')
+        print('Распарсенные твитты:')
+        print('-'*25)
         for p in soup.findAll('p', 'ProfileTweet-text js-tweet-text u-dir'):
             try:
                 tw_lnk = p.find('a', 'twitter-timeline-link').get('data-expanded-url')
                 
                 for i in excl:
-                    if tw_lnk.find(i) > -1 and i <> '':
+                    if tw_lnk.find(i) > -1 and i != '':
                         excl_link=True
                     else:
                         excl_link = False
@@ -48,19 +52,19 @@ def get_tweets():
                 if not excl_link and p.contents[0].find(src.incl) > -1:
                     num = num + 1
                     tw_txt = p.contents[0].replace(src.incl, '')
-                    print str(num) + '. excl:' + str(excl_link) + ' ' + tw_txt + '---  ' + tw_lnk
+                    print(str(num) + '. excl:' + str(excl_link) + ' ' + tw_txt + '---  ' + tw_lnk)
                     dsp.append([tw_txt, tw_lnk, resource])
             except:
                 pass
-        print '-'*25
+        print('-'*25)
     return dsp
 
 
 def get_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
-        print '\n\n' + '='*25
-        print '  ' + src.name
-        print '=' * 25 + '\n'
+        print('\n\n' + '='*25)
+        print('  ' + src.name)
+        print('=' * 25 + '\n')
 
         num = 0
         rssnews = feedparser.parse(src.link)
@@ -83,7 +87,7 @@ def get_rss(**kwargs):
                 lastnews = Item.objects.get(link = n.link)
             except Item.DoesNotExist:
                 num += 1
-                print '%d: Title: %s (%s)' % (num, n.title, n.link)
+                print('%d: Title: %s (%s)' % (num, n.title, n.link))
                 # print src.resource
 
 
@@ -96,5 +100,5 @@ class Command(BaseCommand):
         '''
         Основной метод - точка входа
         '''
-        print get_tweets()
-        print parsing(get_rss)
+        print(get_tweets())
+        print(parsing(get_rss))

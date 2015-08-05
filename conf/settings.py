@@ -14,6 +14,7 @@ THUMBNAIL_DEBUG = False
 ALLOWED_HOSTS = ['pythondigest.ru']
 
 
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,6 +151,6 @@ TOR_CONTROLLER_PWD = ''
 BASE_DOMAIN = 'pythondigest.ru'
 
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass

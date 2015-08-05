@@ -36,8 +36,7 @@ def _get_http_data_of_url(url):
     """
 
     try:
-        assert isinstance(url,
-                          (unicode, str)), "Not valid url: %s, type (%s)" % (
+        assert isinstance(url, str), "Not valid url: %s, type (%s)" % (
         url, type(url))
         r = requests.get(url)
         readable_article = Document(r.content).summary()
@@ -70,7 +69,7 @@ def _get_tags_for_item(item_data, tags_names):
         return_tags = []
 
         for _, value in item_data.items():
-            if isinstance(value, (unicode, str)) and value:
+            if isinstance(value, str) and value:
                 words = map(lambda x: x.lower(), value.split())
                 return_tags.extend(
                     [tag for tag in tags_names if (tag.lower() in words)])
@@ -153,7 +152,7 @@ def _apply_parsing_rules(item_data, query_rules, query_sections, query_statuses,
 
 def get_tweets_by_url(base_url):
     url = urlopen(base_url)
-    soup = BeautifulSoup(url)
+    soup = BeautifulSoup(url, 'lxml')
     http_code = url.getcode()
     url.close()
 
