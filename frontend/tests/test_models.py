@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from django.utils import timezone
 User = get_user_model()
 
-from frontend.models import EditorMaterial
+from frontend.models import EditorMaterial, Tip
 
 
 class EditorMaterialTest(TestCase):
@@ -62,8 +62,12 @@ class EditorMaterialTest(TestCase):
 
 class TipTest(TestCase):
 
-    def test_str(self):
-        pass
+    @classmethod
+    def setUpTestData(cls):
 
-    def test_active_default_value(self):
-        pass
+        cls.tip1 = Tip.objects.create(text='advice 1')
+        cls.tip2 = Tip.objects.create(text='advice 2', active=False)
+
+    def test_str(self):
+
+        self.assertEqual(str(self.tip1), 'advice 1')
