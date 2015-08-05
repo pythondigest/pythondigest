@@ -1,8 +1,8 @@
 # coding=utf-8
 
 from django.contrib import admin
-from django.core.urlresolvers import reverse
-from frontend.models import EditorMaterial
+
+from frontend.models import EditorMaterial, Tip
 
 
 class EditorMaterialAdmin(admin.ModelAdmin):
@@ -26,3 +26,17 @@ class EditorMaterialAdmin(admin.ModelAdmin):
             obj.user = request.user
         super(EditorMaterialAdmin, self).save_model(request, obj, form, change)
 admin.site.register(EditorMaterial, EditorMaterialAdmin)
+
+
+class TipAdmin(admin.ModelAdmin):
+    list_display = (
+        'text',
+        'active'
+    )
+
+    list_editable = (
+        'active',
+    )
+
+
+admin.site.register(Tip, TipAdmin)

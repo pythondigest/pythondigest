@@ -65,10 +65,29 @@ class EditorMaterial(models.Model):
             return reverse('frontend:landing', kwargs=view_kwargs)
         return reverse('frontend:editor_material', kwargs=view_kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     class Meta:
         unique_together = ('slug', 'section',)
         verbose_name = u'Материал редакции'
         verbose_name_plural = u'Материалы редакции'
+
+
+class Tip(models.Model):
+
+    text = models.TextField(
+        verbose_name=u'Совет'
+    )
+
+    active = models.BooleanField(
+        verbose_name=u'Активен',
+        default=True,
+    )
+
+    def __str__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = u'Рекомендация'
+        verbose_name_plural = u'Рекомендации'

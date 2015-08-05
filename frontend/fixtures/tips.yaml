@@ -1,0 +1,177 @@
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Используйте raise NotImplemented вместо pass, когда хотите оставить на потом написание функционала #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Уверены, что в функции у аргумента такой-то тип? Заиспользуйте assert и спите спокойно #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Метод класса вызывается только в классе? Скройте его, добавив перед названием _ #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Будь котиком, добавляй строку # -*- encoding: utf-8 -*- в начале файла #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Рекомендации форматирования кода написаны кровью из глаз программистов #pep8 #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'ok, У #python есть философия - выполните import this в REPL'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'А ведь #python3 на 30% производительней #python2  #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Хороший тон - вести файл requirements.txt с необходимыми для работы модулями #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'В #python всё объекты, попробуйте dir(int)'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: '#python имеет много реализаций, самая известная это CPython'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'CPython честно исполняет каждую строчку. Меньше строк - больше скорость :) #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'PyPy - интерпретатор #python написан на #python, а точнее на rpython'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'PyPy исполняет смысл вашего кода, а не сам код #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'С помощью pyformat легко привести код к #pep8 #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'isort приведет в порядок импорты модулей #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'asyncio стандарт асинхронности в #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'в #python 3.5 синтаксис асинхронности будет элементарен'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'unittest это порт JUnit. Пишите тесты. #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Используйте lxml или beautifulsoup для парсинга html #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'pip и easy_install упрощают установку модулей для #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'virtualenv спасет много нервов при разработке #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'django, flask, bottle позволят разработать прототип web-проекта за часы. #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'debugtoolbar для django и flask это первое, что стоит ставить #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: '#python сможет освоить любой, даже "домохозяйка"'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'уроки от google по #python позволят за пару часов освоить язык'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'С помощью pygame можно написать игру #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'mypy - интересная возможность статической проверки #python кода'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'mypy - повышает строгость и явность кода #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'functools и itertools помогают в написании кода в функциональном стиле #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'модуль lazy позволяет сделать функции ленивыми #fp #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'декоратор functools.lru_cache позволяет кэшеировать результаты вызовов функций #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'eval - зло #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'exec - очень плохо #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'ast хорошо подходит для парсинга структурированных текстов #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Используйте pyparsing или ply для парсинга текста #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'caffe отлично подходит для погружения в deep learning #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: '#python и #R применяются при анализе данных'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'На основе numpy для #python построено множество инструментов для обработки данных'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'pandas содержит набор готовых инструментов для обработки данных #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Qt + #python = PyQt - разрабатываем GUI программы за минимальный срок'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Утилита youtube-dl написана #python. Качайте youtube-ролики без труда'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'pycharm отличная IDE для написания #python кода'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'scrapy - удобный инструмент для парсинга сайтов #python'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'генераторы списков и словарей - отличный синтаксический сахар #python'
+
