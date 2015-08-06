@@ -257,11 +257,25 @@ class Item(models.Model):
 
     def save(self, *args, **kwargs):
         try:
-            if self.issue is None:
+            if self.issue is None and self.created_at is not None:
                 date_from, date_to = get_start_end_of_week(self.created_at)
                 issue = Issue.objects.filter(date_from=date_from, date_to=date_to)
-                assert len(issue) == 1
-                self.issue = issue[0]
+                if issue.count() == 0:
+                    # если нет выпуска, то создадим
+                    old_issue = Issue.objects.latest('date_to')
+                    cnt_issue = int(old_issue.title.replace('Выпуск ', '')) + 1
+                    new_issue = Issue(
+                        title='Выпуск %s' % cnt_issue,
+                        date_from=date_from,
+                        date_to=date_to,
+                    )
+                    new_issue.save()
+                    self.issue = new_issue
+                elif issue.count() == 1:
+                    self.issue = issue[0]
+                else:
+                    raise Exception("Несколько выпусков на неделе")
+
         except Exception as e:
             pass
         super(Item, self).save(*args, **kwargs)

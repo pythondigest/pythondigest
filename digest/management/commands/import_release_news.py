@@ -23,7 +23,6 @@ def parse():
         tweets_data = get_tweets_by_url(base_url)
 
         for text, link, http_code in tweets_data:
-            print(text, link)
             for x in packages:
                 if 'python' in text and "python/%s" % x.get(
                         'name').lower() in text:
