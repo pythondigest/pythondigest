@@ -80,12 +80,10 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
         assert isinstance(item_data, dict)
         assert isinstance(tags_names, list)
         return_tags = []
-
         for _, value in item_data.items():
             if isinstance(value, str) and value:
-                words = map(lambda x: x.lower(), value.split())
                 return_tags.extend(
-                    [tag for tag in tags_names if (tag.lower() in words)])
+                    [tag for tag in tags_names if (tag.lower() in value.lower())])
         result = list(set(return_tags))
     except AssertionError:
         result = []
