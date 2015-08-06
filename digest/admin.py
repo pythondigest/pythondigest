@@ -97,7 +97,7 @@ admin.site.register(ParsingRules, ParsingRulesAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ('name', )
 
 
 admin.site.register(Tag, TagAdmin)
