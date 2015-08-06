@@ -60,9 +60,11 @@ class EditorMaterial(models.Model):
     @property
     def link(self):
         view_kwargs = {'slug': self.slug, 'section': self.section}
+
         if self.section == 'landing':
             del view_kwargs['section']
             return reverse('frontend:landing', kwargs=view_kwargs)
+
         return reverse('frontend:editor_material', kwargs=view_kwargs)
 
     def __str__(self):
