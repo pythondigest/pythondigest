@@ -6,6 +6,8 @@ from django.core.urlresolvers import reverse
 from concurrency.fields import IntegerVersionField
 from django.db import models
 
+from frontend.models import Tip
+
 ISSUE_STATUS_CHOICES = (
     ('active', u'Активный'),
     ('draft', u'Черновик'),
@@ -70,6 +72,11 @@ class Issue(models.Model):
     version = IntegerVersionField(
         verbose_name=u'Версия'
     )
+
+    tip = models.ForeignKey(Tip,
+                            null=True,
+                            blank=True,
+                            verbose_name=u'Совет')
 
     def __str__(self):
         return self.title

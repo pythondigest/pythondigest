@@ -6,6 +6,7 @@ from django.db import models
 from django import forms
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from digest.forms import ItemStatusForm
 
 from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
     ParsingRules, Tag, Package
@@ -103,16 +104,16 @@ admin.site.register(Tag, TagAdmin)
 
 
 class ItemAdmin(admin.ModelAdmin):
+
+    form = ItemStatusForm
     fields = (
         'section',
         'title',
         'is_editors_choice',
         'description',
-        'issue',
         'link',
         'status',
         'language',
-        'related_to_date',
         'tags',
     )
     filter_horizontal = ('tags',)
