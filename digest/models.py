@@ -25,6 +25,8 @@ class Tag(models.Model):
     name = models.CharField(
         max_length=255,
         verbose_name=u'Название тэга',
+        unique=True,
+
     )
 
     def __str__(self):
