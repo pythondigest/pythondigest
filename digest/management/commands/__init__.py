@@ -179,7 +179,7 @@ def _make_then_action(then_action,
     tags_names = tags
 
     # ---------------------
-    def _make_then_action_set(then_element, then_value):
+    def _make_then_action_set(then_element: str, then_value: str):
         result = {}
         if (then_element == 'status' and then_value in query_statuses) or \
                 (then_element == 'section' and query_sections.filter(
@@ -189,11 +189,14 @@ def _make_then_action(then_action,
         if then_element == 'http_code' and then_value == '404':
             result = {'status': 'moderated'}
 
+        if then_element in ['title', 'description'] and then_value:
+            result = {then_element: then_value}
+
         return result
 
     # ---------------------
 
-    def _make_then_action_add(then_element, then_value):
+    def _make_then_action_add(then_element: str, then_value: str):
         result = {}
         if then_element == 'tags' and then_value in tags_names:
             result = {then_element: then_value}
@@ -202,15 +205,22 @@ def _make_then_action(then_action,
 
     # ---------------------
 
-    def _make_then_action_remove(then_element, then_value):
-        pass
+    def _make_then_action_remove_sub_string(then_element: str,
+                                            then_value: str,
+                                            if_item: str):
+        result = {}
+
+        if then_element in ['title', 'description'] and then_value:
+            result = {then_element: if_item.replace(then_value, '')}
+
+        return result
 
     # ---------------------
 
     functions = {
         'set': _make_then_action_set,
         'add': _make_then_action_add,
-        'remove': _make_then_action_remove,
+        'remove': _make_then_action_remove_sub_string,
     }
 
     return functions.get(then_action)
@@ -250,6 +260,8 @@ def apply_parsing_rules(item_data: dict,
                                              tags_names)
                 if then_action == 'set':
                     data.update(function(then_element, then_value))
+                elif then_action == 'remove':
+                    data.update(function(then_element, then_value, if_item))
                 elif then_action == 'add':
                     if then_element in data:
                         data[then_element].extend(list(

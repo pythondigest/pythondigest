@@ -387,6 +387,7 @@ class ParsingRules(models.Model):
 
     THEN_ELEMENT = (
         ('title', u'Заголовок новости'),
+        ('description', u'Описание новости'),
         ('section', u'Раздел'),
         ('status', u'Статус'),
         ('tags', u'Тэг новости'),

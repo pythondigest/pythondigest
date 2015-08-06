@@ -98,7 +98,7 @@ def get_rss(**kwargs):
                 lastnews = Item.objects.get(link=item_data.get('link'))
             except Item.DoesNotExist:
                 num += 1
-                print('%d: Title: %s (%s)' % (num, n.title, n.link))
+                print('%d: Title: %s (%s)' % (num, item_data.get('title'), item_data.get('link')))
                 # print src.resource
 
 
