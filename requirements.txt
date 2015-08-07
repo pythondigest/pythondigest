@@ -12,4 +12,4 @@ stem==1.4.0
 URLObject==2.4.0
 requests==2.7.0
 readability-lxml==0.6.0.5
-PyYAML
+PyYAML==3.11
