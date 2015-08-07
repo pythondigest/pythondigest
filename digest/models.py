@@ -257,6 +257,11 @@ class Item(models.Model):
         blank=True,
     )
 
+    to_update = models.BooleanField(
+        verbose_name=u'Обновить новость',
+        default=False,
+    )
+
     def save(self, *args, **kwargs):
         try:
             if self.issue is None and self.created_at is not None:

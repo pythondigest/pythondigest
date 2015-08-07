@@ -14,7 +14,7 @@ from django.contrib.admin.options import get_ul_class
 
 
 class ItemStatusForm(ModelForm):
-    status = ChoiceField(
+    status = ChoiceField(label=u"Статус",
         widget=widgets.AdminRadioSelect(
             attrs={'class': get_ul_class(admin.HORIZONTAL)}),
         choices=ITEM_STATUS_CHOICES)

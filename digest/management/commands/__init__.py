@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import re
+import pickle
 
 from readability import Document
 import requests
@@ -325,3 +326,13 @@ def save_item(item):
             _a.save()
         elif item.get('status') == 'active':
             _a.save()
+
+
+def save_pickle_file(filepath, data):
+    with open(filepath, 'wb') as fio:
+        pickle.dump(data, fio)
+
+
+def load_pickle_file(filepath):
+    with open(filepath, 'rb') as fio:
+        return pickle.load(fio)

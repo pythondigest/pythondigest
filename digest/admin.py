@@ -114,6 +114,7 @@ class ItemAdmin(admin.ModelAdmin):
         'link',
         'status',
         'language',
+        'to_update',
         'tags',
     )
     filter_horizontal = ('tags',)
