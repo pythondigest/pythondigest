@@ -52,7 +52,10 @@ class AddNewsFormTest(TestCase):
         }
 
     def test_name_field_is_HoneypotField(self):
-        pass
+
+        form = AddNewsForm()
+
+        self.assertIsInstance(form.fields['name'], HoneypotField)
 
     def test_form_save_with_valid_data(self):
 
