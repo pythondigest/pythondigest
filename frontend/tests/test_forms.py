@@ -3,9 +3,55 @@ from django.contrib.auth import get_user_model
 from django.forms import ValidationError
 User = get_user_model()
 
-from digest.models import Item, Section
-from frontend.models import EditorMaterial, Tip
+from digest.models import Section
 from frontend.forms import HoneypotWidget, HoneypotField, AddNewsForm
+
+
+class HoneypotWidgetTest(TestCase):
+
+    def test_always_rendered_as_hidden(self):
+
+        widget = HoneypotWidget()
+
+        self.assertTrue(widget.is_hidden)
+
+    def test_init_if_class_in_attrs(self):
+
+        widget = HoneypotWidget(attrs={'class': 'titanic'})
+
+        self.assertNotIn('style', widget.attrs)
+        self.assertEqual(widget.attrs['class'], 'titanic')
+
+    def test_init_if_class_not_in_attrs(self):
+
+        widget = HoneypotWidget(attrs={'spam': 1, 'ham': 2})
+
+        self.assertEqual(widget.attrs['style'], 'display:none')
+
+    def test_init_if_style_in_attrs_and_class_is_no(self):
+
+        widget = HoneypotWidget(attrs={'style': 'float:none'})
+
+        self.assertEqual(widget.attrs['style'], 'display:none')
+
+    def test_render_if_html_comment_is_true(self):
+
+        widget = HoneypotWidget(html_comment=True)
+
+        html = widget.render('field_name', 'Field value')
+
+        # Просто проверяем что содержимое закомментировано
+        self.assertTrue(html.startswith('<!--'))
+        self.assertTrue(html.endswith('-->'))
+
+    def test_render_if_html_comment_is_false(self):
+
+        widget = HoneypotWidget(html_comment=False)
+
+        html = widget.render('field_name', 'Field value')
+
+        self.assertIn('field_name', html)
+        self.assertIn('Field value', html)
 
 
 class HoneypotFieldTest(TestCase):
