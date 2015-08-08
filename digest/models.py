@@ -400,7 +400,7 @@ class ParsingRules(models.Model):
 
     IF_ELEMENTS = (
         ('title', u'Заголовок новости'),
-        ('url', u'Url новости'),
+        ('link', u'Url новости'),
         ('content', u'Текст новости'),
         ('description', u'Описание новости'),
         ('http_code', u'HTTP Code'),
