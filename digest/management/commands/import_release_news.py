@@ -2,11 +2,10 @@
 from __future__ import unicode_literals
 
 from django.core.management.base import BaseCommand
+from digest.management.commands import save_item
 
 from digest.management.commands.import_news import get_tweets_by_url
 from digest.models import Package, Section, Resource
-from digest.management.commands import save_item
-
 
 
 def parse():
@@ -24,8 +23,9 @@ def parse():
 
         for text, link, http_code in tweets_data:
             for x in packages:
-                if 'python' in text and "python/%s" % x.get(
-                        'name').lower() in text:
+
+                # hindi COOOOODE
+                if 'python' in text and "python/%s" % x.get('name').lower() == text.split(' of')[1].replace('was released:', '').strip().lower():
                     name = u"{} - {}".format(
                         x.get('name'),
                         text.split(' of')[0]
