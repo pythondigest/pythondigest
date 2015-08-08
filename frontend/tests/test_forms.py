@@ -1,10 +1,43 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
+from django.forms import ValidationError
 User = get_user_model()
 
 from digest.models import Item, Section
 from frontend.models import EditorMaterial, Tip
 from frontend.forms import HoneypotWidget, HoneypotField, AddNewsForm
+
+
+class HoneypotFieldTest(TestCase):
+
+    def test_class_of_widget(self):
+
+        field = HoneypotField()
+
+        self.assertIsInstance(field.widget, HoneypotWidget)
+
+    def test_initial_and_value_in_EMPTY_VALUES(self):
+
+        field = HoneypotField(initial=None)
+
+        output = field.clean('')
+
+        self.assertEqual(output, '')
+
+    def test_initial_not_in_EMPTY_VALUES_and_value_is_equal_to_initial(self):
+
+        field = HoneypotField(initial='foobar')
+
+        output = field.clean('foobar')
+
+        self.assertEqual(output, 'foobar')
+
+    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self):
+
+        field = HoneypotField(initial='foobar')
+
+        with self.assertRaises(ValidationError):
+            field.clean('pizza')
 
 
 # Стили виджетов не протестированы, т.к. не влияют на работоспособность формы.
@@ -17,6 +50,9 @@ class AddNewsFormTest(TestCase):
             'status': 'active',
             'version': '1',
         }
+
+    def test_name_field_is_HoneypotField(self):
+        pass
 
     def test_form_save_with_valid_data(self):
 
