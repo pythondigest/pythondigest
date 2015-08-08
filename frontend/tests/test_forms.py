@@ -50,6 +50,7 @@ class HoneypotWidgetTest(TestCase):
 
         html = widget.render('field_name', 'Field value')
 
+        # Нет нужды проверять всю разметку. Только наличие данных
         self.assertIn('field_name', html)
         self.assertIn('Field value', html)
 
