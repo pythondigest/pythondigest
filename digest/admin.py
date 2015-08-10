@@ -114,8 +114,6 @@ class ItemAdmin(admin.ModelAdmin):
         'link',
         'status',
         'language',
-        'to_update',
-        'tags',
     )
     filter_horizontal = ('tags',)
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user', 'related_to_date')
