@@ -39,7 +39,8 @@ def import_tweets(**kwargs):
         if ct:
             continue
 
-        title = u'[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
+        # title = u'[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
+        title = i[0]
         item_data = {
             'title': title,
             'link': i[1],
@@ -70,8 +71,9 @@ def import_rss(**kwargs):
                 if dt.date() < week_before:
                     continue
 
-            title = u'[!] %s' % n.title if fresh_google_check(
-                n.title) else n.title
+            title = n.title
+            # title = u'[!] %s' % n.title if fresh_google_check(
+            #    n.title) else n.title
 
             http_code, content = _get_http_data_of_url(n.link)
 
