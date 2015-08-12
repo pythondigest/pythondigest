@@ -24,8 +24,7 @@ def _generate_release_item(package_name: str,
         package_data.get('name'),
         package_version
     )
-    description = u"Вышла новая версия пакета {0} - {1}." \
-                  u" {2}." \
+    description = u"{2}." \
                   u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
                   u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
         package_data.get('name'),
