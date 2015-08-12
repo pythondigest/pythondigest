@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import datetime
-import pprint
 from time import mktime
 
 import feedparser
@@ -10,7 +9,6 @@ from django.core.management.base import BaseCommand
 
 from digest.models import Item
 from digest.management.commands import save_item
-from digest.management.commands.import_news import get_tweets_by_url
 from digest.models import Package, Section, Resource
 
 
@@ -65,7 +63,7 @@ def parse_rss():
     saved_packages = []
     for n in feedparser.parse(url).entries:
         ct = len(Item.objects.filter(link=n.link)[0:1])
-        if ct and not ('python' in n.title):
+        if ct or not ('python' in n.title):
             continue
 
         time_struct = getattr(n, 'published_parsed', None)
