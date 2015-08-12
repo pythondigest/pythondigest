@@ -62,8 +62,12 @@ def parse_rss():
     week_before = today - datetime.timedelta(weeks=1)
     saved_packages = []
     for n in feedparser.parse(url).entries:
+        package_name, package_version = n.title.split()
+        package_name = package_name.replace('python/', '')
+
         ct = len(Item.objects.filter(link=n.link)[0:1])
         if ct or not ('python' in n.title):
+            saved_packages.append(package_name)
             continue
 
         time_struct = getattr(n, 'published_parsed', None)
@@ -74,9 +78,6 @@ def parse_rss():
                 continue
 
         try:
-            package_name, package_version = n.title.split()
-
-            package_name = package_name.replace('python/', '')
             if not (package_name in packages.keys()) or package_name in saved_packages:
                 continue
 
