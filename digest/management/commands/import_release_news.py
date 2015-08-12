@@ -1,62 +1,105 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.management.base import BaseCommand
-from digest.management.commands import save_item
+import datetime
+import pprint
+from time import mktime
 
+import feedparser
+from django.core.management.base import BaseCommand
+
+from digest.models import Item
+from digest.management.commands import save_item
 from digest.management.commands.import_news import get_tweets_by_url
 from digest.models import Package, Section, Resource
 
 
-def parse():
-    base_url = 'https://twitter.com/NewReleaseNotes/'
-    packages = list(Package.objects.all().values('name', 'description', 'url'))
+def _generate_release_item(package_name: str,
+                           package_version: str,
+                           link: str,
+                           resource: Resource,
+                           section: Section,
+                           package_data: dict):
+    name = u"{} - {}".format(
+        package_data.get('name'),
+        package_version
+    )
+    description = u"Вышла новая версия пакета {0} - {1}." \
+                  u" {2}." \
+                  u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
+                  u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
+        package_data.get('name'),
+        package_version,
+        package_data.get('description'),
+        link,
+        package_data.get('url')
+    )
 
-    if packages:
+    return {
+        'title': name,
+        'link': link,
+        'resource': resource,
+        'status': 'active',
+        'section': section,
+        'language': 'en',
+        'description': description,
+    }
+
+def parse_rss():
+    # todo
+    # hardcode
+    # это личная лента модератора
+    # по возможности заменить на ленту спец. созданную для pydigest
+    url = 'https://allmychanges.com/rss/05a5ec600331b03741bd08244afa11cb/'
+
+    try:
+        packages = {x.get('name'): x for x in
+                    list(Package.objects.all()
+                         .values('name', 'description', 'url'))}
+        section = Section.objects.get(title=u'Релизы')
+        resource = Resource.objects.get(link='http://allmychanges.com/')
+    except Exception:
+        return
+
+    today = datetime.date.today()
+    week_before = today - datetime.timedelta(weeks=1)
+    saved_packages = []
+    for n in feedparser.parse(url).entries:
+        ct = len(Item.objects.filter(link=n.link)[0:1])
+        if ct and not ('python' in n.title):
+            continue
+
+        time_struct = getattr(n, 'published_parsed', None)
+        if time_struct:
+            _timestamp = mktime(time_struct)
+            dt = datetime.datetime.fromtimestamp(_timestamp)
+            if dt.date() < week_before:
+                continue
+
         try:
-            section = Section.objects.get(title=u'Релизы')
-            resource = Resource.objects.get(link='http://allmychanges.com/')
-        except Exception:
-            return
+            package_name, package_version = n.title.split()
 
-        tweets_data = get_tweets_by_url(base_url)
+            package_name = package_name.replace('python/', '')
+            if not (package_name in packages.keys()) or package_name in saved_packages:
+                continue
 
-        for text, link, http_code in tweets_data:
-            for x in packages:
+            item_data = _generate_release_item(
+                package_name,
+                package_version,
+                n.link,
+                resource,
+                section,
+                packages.get(package_name)
+            )
+            saved_packages.append(package_name)
+            save_item(item_data)
+        except Exception as e:
+            continue
 
-                # hindi COOOOODE
-                if 'python' in text and "python/%s" % x.get('name').lower() == text.split(' of')[1].replace('was released:', '').strip().lower():
-                    name = u"{} - {}".format(
-                        x.get('name'),
-                        text.split(' of')[0]
-                    )
-                    description = u"Вышла новая версия пакета {0} - {1}." \
-                                  u" {2}." \
-                                  u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
-                                  u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
-                        x.get('name'),
-                        text.split(' of')[0],
-                        x.get('description'),
-                        link,
-                        x.get('url')
-                    )
-
-                    save_item({
-                        'title': name,
-                        'link': link,
-                        'resource': resource,
-                        'status': 'active',
-                        'section': section,
-                        'language': 'en',
-                        'description': description,
-                    })
 
 class Command(BaseCommand):
     args = 'no arguments!'
     help = u'News import from external resources'
 
     def handle(self, *args, **options):
-        '''
-        Основной метод - точка входа
-        '''
-        parse()
+        parse_rss()
