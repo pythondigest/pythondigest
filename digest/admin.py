@@ -28,6 +28,11 @@ class IssueAdmin(admin.ModelAdmin):
         'date_to',
     )
 
+    exclude = (
+        'last_item',
+        'version',
+    )
+
     def issue_date(self, obj):
         return u"С %s по %s" % (obj.date_from, obj.date_to)
 
@@ -255,6 +260,20 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'status': admin.HORIZONTAL,
     }
 
+    actions = ['make_moderated']
+
+    def make_moderated(self, request, queryset):
+        try:
+            item = queryset.latest('pk')
+            _start_week, _end_week = get_start_end_of_week(item.related_to_date)
+            issue = Issue.objects.filter(date_from=_start_week, date_to=_end_week)
+            assert len(issue) == 1
+            issue.update(last_item=item.pk)
+        except Exception:
+            raise
+
+    make_moderated.short_description = 'Отмодерирован'
+
     def get_queryset(self, request):
 
         # todo
@@ -279,11 +298,20 @@ class ItemModeratorAdmin(admin.ModelAdmin):
                 current_issue = current_issue[0]
             else:
                 current_issue = before_issue[0]
-            return self.model.objects.filter(
-                status__in=['pending', 'moderated', 'autoimport'],
-                related_to_date__range=[current_issue.date_from, current_issue.date_to])
+
+            if current_issue.last_item is None:
+                result = self.model.objects.filter(
+                    status__in=['pending', 'moderated', 'autoimport'],
+                    related_to_date__range=[current_issue.date_from, current_issue.date_to])
+            else:
+                result = self.model.objects.filter(
+                    status__in=['pending', 'moderated', 'autoimport'],
+                    related_to_date__range=[current_issue.date_from, current_issue.date_to],
+                    pk__gt=current_issue.last_item,
+                )
         except AssertionError:
-            super(ItemModeratorAdmin).get_queryset(request)
+            result = super(ItemModeratorAdmin).get_queryset(request)
+        return result
 
     def external_link(self, obj):
         lnk = obj.link

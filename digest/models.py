@@ -80,6 +80,12 @@ class Issue(models.Model):
                             blank=True,
                             verbose_name=u'Совет')
 
+    last_item = models.IntegerField(
+        verbose_name='Последняя модерированая новость',
+        blank=True,
+        null=True,
+    )
+
     def __str__(self):
         return self.title
 
