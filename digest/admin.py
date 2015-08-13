@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from django.contrib import admin
 from django.db import models
@@ -9,7 +9,8 @@ from django.contrib.sites.models import Site
 
 from digest.forms import ItemStatusForm
 from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
-    ParsingRules, Tag, Package
+    ParsingRules, Tag, Package, get_start_end_of_week
+
 admin.site.unregister(Site)
 
 
@@ -209,3 +210,118 @@ admin.site.register(AutoImportResource, AutoImportResourceAdmin)
 class PackageAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Package, PackageAdmin)
+
+
+class ItemModerator(Item):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Новости (эксперимент)'
+
+
+class ItemModeratorAdmin(admin.ModelAdmin):
+    form = ItemStatusForm
+    fields = (
+        'section',
+        'title',
+        'is_editors_choice',
+        'description',
+        'link',
+        'status',
+        'language',
+    )
+    filter_horizontal = ('tags',)
+    list_filter = (
+        'status',
+        'issue',
+        'section',
+        'is_editors_choice',
+        'user',
+        'related_to_date',
+        'resource',
+    )
+    search_fields = ('title', 'description', 'link', 'resource__title')
+    list_display = (
+        'title',
+        'status',
+        'external_link',
+        'related_to_date',
+        'is_editors_choice',
+    )
+
+    list_editable = ('is_editors_choice',)
+    exclude = ('modified_at',),
+    radio_fields = {
+        'language': admin.HORIZONTAL,
+        'status': admin.HORIZONTAL,
+    }
+
+    def get_queryset(self, request):
+
+        # todo
+        # потом переписать на логику:
+        # ищем связку выпусков
+        # неактивный, а перед ним активный
+        # если такая есть, то публикуем новости у которых время в периоде
+        # неактивного
+        # если нету, то  отдаем все
+
+        # сейчас логика такая:
+        # берем выпуск за текущую неделю
+        # если перед ним активный, то показываем новость за текущую неделю
+        # если нет, то все новости показываем
+        try:
+            start_week, end_week  = get_start_end_of_week(datetime.now().date())
+            before_issue = Issue.objects.filter(date_to=end_week - timedelta(days=7))
+            assert len(before_issue) == 1
+            if before_issue[0].status == 'active':
+                current_issue = Issue.objects.filter(date_to=end_week, date_from=start_week)
+                assert len(current_issue) == 1
+                current_issue = current_issue[0]
+            else:
+                current_issue = before_issue[0]
+            return self.model.objects.filter(
+                status__in=['pending', 'moderated', 'autoimport'],
+                related_to_date__range=[current_issue.date_from, current_issue.date_to])
+        except AssertionError:
+            super(ItemModeratorAdmin).get_queryset(request)
+
+    def external_link(self, obj):
+        lnk = obj.link
+        ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+        username = obj.user.username if obj.user else u'Гость'
+        ret = u'%s<br>Добавил: %s' % (ret, username)
+        return ret
+
+    external_link.allow_tags = True
+    external_link.short_description = u"Ссылка"
+
+    def save_model(self, request, obj, form, change):
+        prev_status = False
+        if not obj.pk:
+            obj.user = request.user
+            if not obj.issue:
+                la = lna = False
+                qs = Issue.objects
+                try:
+                    # последний активный
+                    la = qs.filter(status='active').order_by('-pk')[0:1].get()
+                    # последний неактивный
+                    lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
+                except Issue.DoesNotExist:
+                    pass
+
+                if la or lna:
+                    obj.issue = lna or la
+        else:
+            old_obj = Item.objects.get(pk=obj.pk)
+            prev_status = old_obj.status
+
+        # Обновление времени модификации при смене статуса на активный
+        new_status = form.cleaned_data.get('status')
+        if not prev_status == 'active' and new_status == 'active':
+            obj.modified_at = datetime.now()
+
+        super(ItemModeratorAdmin, self).save_model(request, obj, form, change)
+
+
+admin.site.register(ItemModerator, ItemModeratorAdmin)
