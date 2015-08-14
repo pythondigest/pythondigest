@@ -19,9 +19,11 @@
             </div>
         </div>
         {% endif %}
+        {% if object.image %}
         <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
             <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
         </div>
+        {% endif %}
     </div>
     {% endwith %}
     {% endif %}
