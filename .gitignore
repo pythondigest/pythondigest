@@ -6,5 +6,4 @@ logs/*
 .idea/
 .idea/*
 env/
-
-
+/conf/*.cfg

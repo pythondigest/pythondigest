@@ -13,3 +13,6 @@ URLObject==2.4.0
 requests==2.7.0
 readability-lxml==0.6.0.5
 PyYAML==3.11
+django-user-accounts==1.2.0
+
+git+https://github.com/WarmongeR1/allmychanges.git

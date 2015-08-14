@@ -1,3 +1,5 @@
+from django.conf.urls import patterns, url
+
 from .feeds import (
     AllEntriesFeed,
     TwitterEntriesFeed,
@@ -12,15 +14,12 @@ from .feeds import (
     ItemVideoFeed,
     ItemPackagesFeed
 )
-from django.conf.urls import patterns, url
-
 from frontend.views import (
     Index,
     IssuesList,
     IssueView,
     NewsList,
     AddNews,
-    ViewEditorMaterial,
     ItemView,
     Sitemap
 )
@@ -48,8 +47,6 @@ urlpatterns = patterns('',
     url(r'^issues/$', IssuesList.as_view(), name='issues'),
     url(r'^issue/(?P<pk>[0-9]+)/$', IssueView.as_view(), name='issue_view'),
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
-    url(r'^(?P<section>[a-z0-9\-]+)/(?P<slug>[a-z0-9\-]+)/$', ViewEditorMaterial.as_view(), name='editor_material'),
-    url(r'^(?P<slug>[a-z0-9\-]+)/$', ViewEditorMaterial.as_view(), name='landing'),
     url(r'^$', Index.as_view(), name='home'),
 
 )

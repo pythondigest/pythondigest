@@ -34,6 +34,9 @@ INSTALLED_APPS = (
     'digest',
     'frontend',
 
+    'account',
+    'django_forms_bootstrap',
+
 )
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
@@ -48,6 +51,9 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+
+    "account.middleware.LocaleMiddleware",
+    "account.middleware.TimezoneMiddleware",
 )
 
 
@@ -66,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'account.context_processors.account',
 
             ],
         },
