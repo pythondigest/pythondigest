@@ -1,19 +1,13 @@
 # -*- encoding: utf-8 -*-
 
 from __future__ import unicode_literals
-import os
 
 from django.core.management.base import BaseCommand
 from allmychanges.api import search_category, track_changelog, get_changelogs
 from allmychanges.config import read_config
 
-from conf.settings import BASE_DIR
-
-
 def subscribe_all_python():
-    config_path = os.path.join(BASE_DIR, 'allmychanges.cfg')
-    assert os.path.exists(config_path)
-    config = read_config(config_path)
+    config = read_config()
 
     section = 'python'
 
