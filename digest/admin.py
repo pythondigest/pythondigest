@@ -299,14 +299,12 @@ class ItemModeratorAdmin(admin.ModelAdmin):
             else:
                 current_issue = before_issue[0]
 
-            if current_issue.last_item is None:
-                result = self.model.objects.filter(
-                    status__in=['pending', 'moderated', 'autoimport'],
+            result = self.model.objects.filter(
+                status__in=['pending', 'moderated', 'active', 'autoimport'],
                     related_to_date__range=[current_issue.date_from, current_issue.date_to])
-            else:
-                result = self.model.objects.filter(
-                    status__in=['pending', 'moderated', 'autoimport'],
-                    related_to_date__range=[current_issue.date_from, current_issue.date_to],
+
+            if current_issue.last_item is not None:
+                result = result.filter(
                     pk__gt=current_issue.last_item,
                 )
         except AssertionError:
