@@ -9,10 +9,10 @@
     {% endif %}
 
     {% for num in page_obj.page_range %}
-       <li {% if num = page_obj.number %}class="active"{% endif %}>
+       <li {% if num == page_obj.number %}class="active"{% endif %}>
        {% if not num %}<li class="disabled"><a>...</a>
        {% else %}
-        {% if num = page_obj.number %}
+        {% if num == page_obj.number %}
         <a>{{ num }}</a>
         {% else %}
         <a href="{% modify_url 'set_query_param' 'page' num %}">{{ num }}</a>
