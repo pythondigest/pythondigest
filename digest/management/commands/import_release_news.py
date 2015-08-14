@@ -43,11 +43,8 @@ def _generate_release_item(package_name: str,
     }
 
 def parse_rss():
-    # todo
-    # hardcode
-    # это личная лента модератора
-    # по возможности заменить на ленту спец. созданную для pydigest
-    url = 'https://allmychanges.com/rss/05a5ec600331b03741bd08244afa11cb/'
+
+    url = 'https://allmychanges.com/rss/03afbe621916b2f2145f111075db0759/'
 
     try:
         packages = {x.get('name'): x for x in
