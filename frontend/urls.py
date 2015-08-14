@@ -1,4 +1,17 @@
-from .feeds import AllEntriesFeed, TwitterEntriesFeed, RussianEntriesFeed, IssuesFeed
+from .feeds import (
+    AllEntriesFeed,
+    TwitterEntriesFeed,
+    RussianEntriesFeed,
+    IssuesFeed,
+    ItemArticleFeed,
+    ItemBookDocFeed,
+    ItemEventFeed,
+    ItemNewsFeed,
+    ItemRecommendFeed,
+    ItemReleaseFeed,
+    ItemVideoFeed,
+    ItemPackagesFeed
+)
 from django.conf.urls import patterns, url
 
 from frontend.views import (
@@ -21,6 +34,17 @@ urlpatterns = patterns('',
     url(r'^rss/twitter/$', TwitterEntriesFeed(), name='rss_twitter'),
     url(r'^rss/ru/$', RussianEntriesFeed(), name='russian_rss'),
     url(r'^rss/issues/$', IssuesFeed(), name='issues_rss'),
+    # hindi
+    # solution
+    url(r'^rss/video/$', ItemVideoFeed(), name='video_rss'),
+    url(r'^rss/recommend/$', ItemRecommendFeed(), name='recommend_rss'),
+    url(r'^rss/news/$', ItemNewsFeed(), name='news_rss'),
+    url(r'^rss/bookdoc/$', ItemBookDocFeed(), name='book_doc_rss'),
+    url(r'^rss/event/$', ItemEventFeed(), name='event_rss'),
+    url(r'^rss/article/$', ItemArticleFeed(), name='article_rss'),
+    url(r'^rss/release/$', ItemReleaseFeed(), name='release_rss'),
+    url(r'^rss/packages/$', ItemPackagesFeed(), name='packages_rss'),
+
     url(r'^issues/$', IssuesList.as_view(), name='issues'),
     url(r'^issue/(?P<pk>[0-9]+)/$', IssueView.as_view(), name='issue_view'),
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),

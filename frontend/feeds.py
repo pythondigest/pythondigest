@@ -1,21 +1,16 @@
 # coding=utf-8
 import datetime
+
 import pytils
 from django.contrib.syndication.views import Feed
-from digest.models import Item, Issue
+
+from digest.models import Item, Issue, Section
 
 
-class CommonFeed(Feed):
-    """
-    Лента РСС для новостей
-    """
+class DigestFeed(Feed):
     title = u"Дайджест новостей о python"
     link = "/"
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
-
-    @staticmethod
-    def items():
-        return Item.objects.filter(status='active').order_by('-modified_at')[:10]
 
     def item_title(self, item):
         return item.title
@@ -29,10 +24,23 @@ class CommonFeed(Feed):
     def item_pubdate(self, item):
         return item.modified_at
 
-class AllEntriesFeed(CommonFeed):
+
+class ItemDigestFeed(DigestFeed):
+    """
+    Лента РСС для новостей
+    """
+
+    @staticmethod
+    def items():
+        return Item.objects.filter(status='active').order_by('-modified_at')[
+               :10]
+
+
+class AllEntriesFeed(ItemDigestFeed):
     pass
 
-class TwitterEntriesFeed(CommonFeed):
+
+class TwitterEntriesFeed(ItemDigestFeed):
     """
     Лента РСС для twitter
     """
@@ -40,7 +48,7 @@ class TwitterEntriesFeed(CommonFeed):
         return item.internal_link
 
 
-class RussianEntriesFeed(CommonFeed):
+class RussianEntriesFeed(ItemDigestFeed):
     """
     Лента РСС для русскоязычных новостей
     """
@@ -54,7 +62,7 @@ class RussianEntriesFeed(CommonFeed):
         return Item.objects.filter(status='active', language='ru').order_by('-modified_at')[:10]
 
 
-class IssuesFeed(CommonFeed):
+class IssuesFeed(ItemDigestFeed):
     """
     Лента РСС для выпусков новостей
     """
@@ -74,3 +82,45 @@ class IssuesFeed(CommonFeed):
 
     def item_pubdate(self, item):
         return datetime.datetime.combine(item.published_at, datetime.time(0,0,0))
+
+
+class SectionFeed(DigestFeed):
+    """
+    Лента с категориями новостей
+    """
+    section = 'all'
+
+    def items(self):
+        section = Section.objects.filter(title=self.section)
+        if self.section == 'all' or len(section) != 1:
+            result = Item.objects.filter(status='active') \
+                         .order_by('-modified_at')[:10]
+        else:
+            result = Item.objects.filter(status='active',
+                                         section=section[0]).order_by(
+                '-modified_at')[:10]
+        return result
+
+class ItemVideoFeed(SectionFeed):
+    section = 'Видео'
+
+class ItemRecommendFeed(SectionFeed):
+    section = 'Советуем'
+
+class ItemNewsFeed(SectionFeed):
+    section = 'Новости'
+
+class ItemBookDocFeed(SectionFeed):
+    section = 'Книги и документация'
+
+class ItemEventFeed(SectionFeed):
+    section = 'Конференции, события, встречи разработчиков'
+
+class ItemArticleFeed(SectionFeed):
+    section = 'Статьи и интервью'
+
+class ItemReleaseFeed(SectionFeed):
+    section = 'Релизы'
+
+class ItemPackagesFeed(SectionFeed):
+    section = 'Интересные проекты, инструменты, библиотеки'
