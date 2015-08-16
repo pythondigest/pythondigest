@@ -43,6 +43,12 @@ class Sitemap(TemplateView):
                 'changefreq': 'weekly',
             })
 
+        for item in Item.objects.filter(status='active'):
+            items.append({
+                'loc': "/view/%s" % item.pk,
+                'changefreq': 'never',
+            })
+
         ctx.update({
             'records': items,
             'domain': 'http://%s' % settings.BASE_DOMAIN
