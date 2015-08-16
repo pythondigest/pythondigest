@@ -35,7 +35,6 @@ INSTALLED_APPS = (
     'frontend',
 
     'account',
-    'django_forms_bootstrap',
 
 )
 
