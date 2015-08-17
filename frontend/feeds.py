@@ -81,7 +81,10 @@ class IssuesFeed(ItemDigestFeed):
         статьи и интервью [%s — %s]''' % (item.pk, df, dt)
 
     def item_pubdate(self, item):
-        return datetime.datetime.combine(item.published_at, datetime.time(0,0,0))
+        if item.published_at is not None:
+            return datetime.datetime.combine(item.published_at, datetime.time(0,0,0))
+        else:
+            return item.published_at
 
 
 class SectionFeed(DigestFeed):
