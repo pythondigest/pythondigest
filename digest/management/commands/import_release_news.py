@@ -47,7 +47,7 @@ def parse_rss():
     url = 'https://allmychanges.com/rss/03afbe621916b2f2145f111075db0759/'
 
     try:
-        packages = {x.get('name'): x for x in
+        packages = {x.get('name').strip(): x for x in
                     list(Package.objects.all()
                          .values('name', 'description', 'url'))}
         section = Section.objects.get(title=u'Релизы')
