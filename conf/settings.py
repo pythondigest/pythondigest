@@ -24,9 +24,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'bootstrap_admin',
-
     'django.contrib.admin',
 
+    'bootstrapform',
     'sorl.thumbnail',
     'pytils',
     'concurrency',
@@ -34,7 +34,9 @@ INSTALLED_APPS = (
     'digest',
     'frontend',
 
+
     'account',
+    'rosetta',
 
 )
 
@@ -45,6 +47,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -72,7 +75,6 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'account.context_processors.account',
-
             ],
         },
     },
@@ -95,6 +97,9 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 SITE_ID = 1
+LOCALE_PATHS = (
+    path.join(BASE_DIR, 'locale'),
+)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
@@ -146,7 +151,11 @@ LOGGING = {
     }
 }
 
-
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sendgrid_username'
+EMAIL_HOST_PASSWORD = 'sendgrid_password'
 
 # ID пользователя от имени когорого будут импортироваться данные
 BOT_USER_ID = 11

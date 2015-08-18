@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-08-18 12:54+0300\n"
+"PO-Revision-Date: 2015-08-18 12:59+0230\n"
+"Last-Translator: b'  <>'\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translated-Using: django-rosetta 0.7.6\n"
+
+#: conf/settings.py:108
+msgid "English"
+msgstr "Английский"
+
+#: conf/settings.py:109
+msgid "German"
+msgstr "Немецкий"
+
+#: frontend/templates/404.html:5
+msgid "Not Found"
+msgstr "Не найдена"
+
+#: frontend/templates/404.html:9
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: frontend/templates/404.html:10
+msgid "We're sorry but that page could not be found."
+msgstr ""
+
+#: frontend/templates/500.html:5
+msgid "Server Error"
+msgstr ""
+
+#: frontend/templates/500.html:9
+msgid "Something went wrong"
+msgstr "Что-то произошло не так"
+
+#: frontend/templates/500.html:10
+msgid ""
+"We're sorry but a server error has occurred. We've been notified and will "
+"look into it as soon as possible."
+msgstr ""
+
+#: frontend/templates/_account_bar.html:12
+#: frontend/templates/account/base.html:9 frontend/templates/top_menu.html:75
+msgid "Settings"
+msgstr "Настройки"
+
+#: frontend/templates/_account_bar.html:14 frontend/templates/top_menu.html:77
+msgid "Admin"
+msgstr "Администрация"
+
+#: frontend/templates/_account_bar.html:18
+#: frontend/templates/account/logout.html:5
+#: frontend/templates/account/logout.html:11
+#: frontend/templates/account/logout.html:15
+#: frontend/templates/top_menu.html:81
+msgid "Log out"
+msgstr "Выход"
+
+#: frontend/templates/_account_bar.html:23
+#: frontend/templates/account/login.html:7
+#: frontend/templates/account/login.html:19
+#: frontend/templates/account/signup.html:23
+#: frontend/templates/top_menu.html:86
+msgid "Log in"
+msgstr "Вход"
+
+#: frontend/templates/_account_bar.html:25
+#: frontend/templates/account/login.html:25
+#: frontend/templates/account/signup.html:7
+#: frontend/templates/account/signup.html:13
+#: frontend/templates/account/signup.html:19
+#: frontend/templates/account/signup_closed.html:5
+#: frontend/templates/top_menu.html:88
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: frontend/templates/account/base.html:12
+#: frontend/templates/account/settings.html:8
+#: frontend/templates/account/settings.html:14
+msgid "Account"
+msgstr "Аккаунт"
+
+#: frontend/templates/account/base.html:15
+#: frontend/templates/account/password_change.html:8
+#: frontend/templates/account/password_change.html:14
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: frontend/templates/account/base.html:18
+msgid "Delete account"
+msgstr "Удалить аккаунт"
+
+#: frontend/templates/account/delete.html:7
+#: frontend/templates/account/delete.html:10
+msgid "Delete Account"
+msgstr "Удалить аккаунт"
+
+#: frontend/templates/account/delete.html:12
+#, python-format
+msgid ""
+"If you go ahead and delete your account, your information will be "
+"<b>expunged within %(ACCOUNT_DELETION_EXPUNGE_HOURS)s hours</b>."
+msgstr ""
+
+#: frontend/templates/account/delete.html:16
+msgid "Delete My Account"
+msgstr "Удалить мой аккаунт"
+
+#: frontend/templates/account/email/email_confirmation_message.txt:1
+#, python-format
+msgid ""
+"A user on %(site_name)s has created an account using this email address.\n"
+"\n"
+"To confirm this email address, go to %(activate_url)s\n"
+"\n"
+"If you did not sign up for this site, you can ignore this message.\n"
+msgstr ""
+
+#: frontend/templates/account/email/email_confirmation_subject.txt:1
+#, python-format
+msgid "Confirm email address for %(site_name)s"
+msgstr ""
+
+#: frontend/templates/account/email/invite_user.txt:1
+#, python-format
+msgid ""
+"You have been invited to sign up at %(name)s.\n"
+"\n"
+"%(signup_url)s\n"
+msgstr ""
+
+#: frontend/templates/account/email/invite_user_subject.txt:1
+#, python-format
+msgid "Create an account on %(name)s"
+msgstr ""
+
+#: frontend/templates/account/email/password_change.txt:1
+#, python-format
+msgid ""
+"This is the email notification to confirm your password has been changed on "
+"%(now)s."
+msgstr ""
+
+#: frontend/templates/account/email/password_change_subject.txt:1
+msgid "Change password email notification"
+msgstr ""
+
+#: frontend/templates/account/email/password_reset.txt:1
+#, python-format
+msgid ""
+"You're receiving this email because you or someone else has requested a password for your user account at %(site_name)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password.\n"
+"\n"
+"%(password_reset_url)s\n"
+msgstr ""
+
+#: frontend/templates/account/email/password_reset_subject.txt:1
+#, python-format
+msgid "[%(site_name)s] Password reset"
+msgstr ""
+
+#: frontend/templates/account/email_confirm.html:5
+#: frontend/templates/account/email_confirm.html:11
+msgid "Confirm Email"
+msgstr ""
+
+#: frontend/templates/account/email_confirm.html:14
+#, python-format
+msgid "Confirm email address <b>%(email)s</b>?"
+msgstr ""
+
+#: frontend/templates/account/email_confirm.html:15
+msgid "Confirm"
+msgstr ""
+
+#: frontend/templates/account/email_confirmation_sent.html:5
+#: frontend/templates/account/email_confirmation_sent.html:8
+msgid "Confirm your email address"
+msgstr ""
+
+#: frontend/templates/account/email_confirmation_sent.html:10
+#, python-format
+msgid ""
+"We have sent you an email to <b>%(email)s</b> for verification. Follow the "
+"link provided to finalize the signup process. If you do not receive it "
+"within a few minutes, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: frontend/templates/account/email_confirmation_sent.html:11
+msgid "Go back"
+msgstr ""
+
+#: frontend/templates/account/email_confirmed.html:5
+#: frontend/templates/account/email_confirmed.html:8
+msgid "Email confirmed"
+msgstr ""
+
+#: frontend/templates/account/email_confirmed.html:9
+#, python-format
+msgid "You have confirmed <b>%(email)s</b>"
+msgstr ""
+
+#: frontend/templates/account/login.html:13
+msgid "Log in to an existing account"
+msgstr ""
+
+#: frontend/templates/account/login.html:20
+msgid "Forgot your password?"
+msgstr ""
+
+#: frontend/templates/account/login.html:25
+msgid "Don't have an account?"
+msgstr ""
+
+#: frontend/templates/account/logout.html:14
+msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: frontend/templates/account/password_change.html:18
+#: frontend/templates/account/password_reset_token.html:16
+#: frontend/templates/account/settings.html:17
+msgid "Save"
+msgstr ""
+
+#: frontend/templates/account/password_reset.html:7
+#: frontend/templates/account/password_reset.html:15
+msgid "Password reset"
+msgstr ""
+
+#: frontend/templates/account/password_reset.html:16
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr ""
+
+#: frontend/templates/account/password_reset.html:22
+msgid "Reset my password"
+msgstr ""
+
+#: frontend/templates/account/password_reset.html:29
+#, python-format
+msgid ""
+"If you have any trouble resetting your password, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: frontend/templates/account/password_reset_sent.html:6
+#: frontend/templates/account/password_reset_sent.html:9
+msgid "Password reset sent"
+msgstr ""
+
+#: frontend/templates/account/password_reset_sent.html:11
+#, python-format
+msgid ""
+"We have sent you an email. If you do not receive it within a few minutes, "
+"try resending or contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: frontend/templates/account/password_reset_sent.html:20
+msgid "Resend"
+msgstr ""
+
+#: frontend/templates/account/password_reset_sent.html:25
+#, python-format
+msgid ""
+"We have resent the password email. If you do not receive it within a few "
+"minutes, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: frontend/templates/account/password_reset_token.html:6
+#: frontend/templates/account/password_reset_token.html:12
+msgid "Set your new password"
+msgstr ""
+
+#: frontend/templates/account/password_reset_token_fail.html:5
+#: frontend/templates/account/password_reset_token_fail.html:8
+msgid "Bad token"
+msgstr ""
+
+#: frontend/templates/account/password_reset_token_fail.html:10
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(url)s\">new password reset</a>."
+msgstr ""
+
+#: frontend/templates/account/signup.html:23
+msgid "Already have an account?"
+msgstr ""
+
+#: frontend/templates/account/signup_closed.html:8
+msgid "This site is in private beta"
+msgstr ""
+
+#: frontend/templates/account/signup_closed.html:9
+msgid "If you have signup code you can enter it below."
+msgstr ""
+
+#: frontend/templates/account/signup_closed.html:11
+msgid "Your signup code..."
+msgstr ""

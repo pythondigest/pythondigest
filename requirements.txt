@@ -14,5 +14,8 @@ requests==2.7.0
 readability-lxml==0.6.0.5
 PyYAML==3.11
 django-user-accounts==1.2.0
+Fabric==1.10.2
+django-rosetta==0.7.6
+django-bootstrap-form==3.2
+git+https://github.com/svetlyak40wt/allmychanges
 
-git+https://github.com/WarmongeR1/allmychanges.git
