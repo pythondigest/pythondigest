@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from concurrency.fields import IntegerVersionField
 from django.db import models
-
+from django.utils.translation import ugettext as _
 from frontend.models import Tip
 
 ISSUE_STATUS_CHOICES = (
@@ -479,6 +479,11 @@ class ParsingRules(models.Model):
     then_value = models.CharField(
         max_length=255,
         verbose_name=u'Значение',
+    )
+
+    weight = models.PositiveIntegerField(
+        default=100,
+        verbose_name=_("Weight")
     )
 
     def __str__(self):

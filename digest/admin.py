@@ -62,6 +62,7 @@ class ParsingRulesAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'is_activated',
+        'weight',
         'if_element',
         '_get_if_action',
         'then_element',
