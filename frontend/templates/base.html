@@ -39,13 +39,7 @@
     <div class="site-body">
         <div class="content-body container">
             {% if messages %}
-                <div class="alert alert-success">
-                    {% for message in messages %}
-                        {{ message }}<br>
-                    {% endfor %}
-                </div>
                 {% include "_messages.html" %}
-
             {% endif %}
 
             {% block nav_bar %}
