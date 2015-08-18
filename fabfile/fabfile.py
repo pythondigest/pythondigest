@@ -17,9 +17,16 @@ def pull():
 
 def deploy():
     pull()
+    update_libs()
     migrate()
     static()
     restart()
+
+
+def update_libs():
+    with prefix('source %s' % ENV_PATH):
+        with cd(REPO_FOLDER):
+            run("pip install -r requirements.txt")
 
 
 def restart():
