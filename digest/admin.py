@@ -105,6 +105,62 @@ admin.site.register(ParsingRules, ParsingRulesAdmin)
 class TagAdmin(admin.ModelAdmin):
     search_fields = ('name', )
 
+    list_display = (
+        'name',
+        'news_count',
+        'news_count_last_week',
+        'news_count_last_month',
+    )
+
+    def _get_text(self, active_cnt, all_cnt):
+        return "<font color='green'><b>{}</b></font> / " \
+               "<font color='gray'>{}</font>".format(
+            active_cnt,
+            all_cnt
+        )
+
+    def news_count(self, obj):
+        return self._get_text(
+            Item.objects.filter(status='active', tags__name=obj.name).count(),
+            Item.objects.filter(tags__name=obj.name).count())
+
+    def news_count_last_week(self, obj):
+        now = datetime.now().date()
+        week_before = datetime.now().date() - timedelta(weeks=1)
+        return self._get_text(
+            Item.objects.filter(status='active',
+                                tags__name=obj.name,
+                                created_at__range=(week_before, now)
+                                ).count(),
+            Item.objects.filter(tags__name=obj.name,
+                                created_at__range=(week_before, now)
+                                ).count(),
+        )
+
+    def news_count_last_month(self, obj):
+        now = datetime.now().date()
+        week_before = datetime.now().date() - timedelta(weeks=4)
+        return self._get_text(
+            Item.objects.filter(status='active',
+                                tags__name=obj.name,
+                                created_at__range=(week_before, now)
+                                ).count(),
+            Item.objects.filter(tags__name=obj.name,
+                                created_at__range=(week_before, now)
+                                ).count(),
+        )
+
+
+    news_count.short_description = u"Активных/всего новостей"
+    news_count.allow_tags = True
+
+    news_count_last_week.short_description = u"Активных/всего за неделю"
+    news_count_last_week.allow_tags = True
+
+    news_count_last_month.short_description = u"Активных/всего за 4 недели"
+    news_count_last_month.allow_tags = True
+
+
 
 admin.site.register(Tag, TagAdmin)
 
@@ -120,6 +176,7 @@ class ItemAdmin(admin.ModelAdmin):
         'link',
         'status',
         'language',
+        'tags',
     )
     filter_horizontal = ('tags',)
     list_filter = (
