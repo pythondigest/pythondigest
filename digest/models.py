@@ -170,11 +170,11 @@ class Resource(models.Model):
 
 
 ITEM_STATUS_CHOICES = (
-    ('pending', u'Ожидает рассмотрения'),
+    ('pending', u'На рассмотрении'),
     ('active', u'Активная'),
     ('draft', u'Черновик'),
-    ('moderated', u'Отмодерировано'),
-    ('autoimport', u'Добавлена автоимпортом'),
+    ('moderated', u'Рассмотрена'),
+    ('autoimport', u'Автоимпорт'),
 )
 
 ITEM_LANGUAGE_CHOICES = (
