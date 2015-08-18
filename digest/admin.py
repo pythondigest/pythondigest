@@ -230,10 +230,15 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'title',
         'is_editors_choice',
         'description',
-        'link',
+        'external_link_edit',
         'status',
         'language',
     )
+
+    readonly_fields = (
+        'external_link_edit',
+    )
+
     filter_horizontal = ('tags',)
     list_filter = (
         'status',
@@ -320,6 +325,13 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
+
+    def external_link_edit(self, obj):
+        ret = u'<a target="_blank" href="{0}">{0}</a>'.format(obj.link)
+        return ret
+
+    external_link_edit.allow_tags = True
+    external_link_edit.short_description = u"Ссылка"
 
     def save_model(self, request, obj, form, change):
         prev_status = False
