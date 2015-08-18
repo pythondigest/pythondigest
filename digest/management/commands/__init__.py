@@ -239,7 +239,7 @@ def apply_parsing_rules(item_data: dict,
     if _tags_of_item:
         data['tags'] = list(_tags_of_item)
 
-    for rule in query_rules:
+    for rule in query_rules.order_by('-weight'):
         if rule.then_element == 'status' and \
                 (data.get('status') == 'moderated' or \
                              data.get('status') == 'active'):

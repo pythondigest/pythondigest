@@ -8,24 +8,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 12:54+0300\n"
+"POT-Creation-Date: 2015-08-18 14:28+0300\n"
 "PO-Revision-Date: 2015-08-18 12:59+0230\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Translated-Using: django-rosetta 0.7.6\n"
 
-#: conf/settings.py:108
-msgid "English"
-msgstr "Английский"
-
-#: conf/settings.py:109
-msgid "German"
-msgstr "Немецкий"
+#: digest/models.py:486
+msgid "Weight"
+msgstr ""
 
 #: frontend/templates/404.html:5
 msgid "Not Found"
@@ -54,11 +51,11 @@ msgid ""
 msgstr ""
 
 #: frontend/templates/_account_bar.html:12
-#: frontend/templates/account/base.html:9 frontend/templates/top_menu.html:75
+#: frontend/templates/account/base.html:9 frontend/templates/top_menu.html:70
 msgid "Settings"
 msgstr "Настройки"
 
-#: frontend/templates/_account_bar.html:14 frontend/templates/top_menu.html:77
+#: frontend/templates/_account_bar.html:14 frontend/templates/top_menu.html:72
 msgid "Admin"
 msgstr "Администрация"
 
@@ -66,7 +63,7 @@ msgstr "Администрация"
 #: frontend/templates/account/logout.html:5
 #: frontend/templates/account/logout.html:11
 #: frontend/templates/account/logout.html:15
-#: frontend/templates/top_menu.html:81
+#: frontend/templates/top_menu.html:76
 msgid "Log out"
 msgstr "Выход"
 
@@ -74,7 +71,7 @@ msgstr "Выход"
 #: frontend/templates/account/login.html:7
 #: frontend/templates/account/login.html:19
 #: frontend/templates/account/signup.html:23
-#: frontend/templates/top_menu.html:86
+#: frontend/templates/top_menu.html:81
 msgid "Log in"
 msgstr "Вход"
 
@@ -84,7 +81,7 @@ msgstr "Вход"
 #: frontend/templates/account/signup.html:13
 #: frontend/templates/account/signup.html:19
 #: frontend/templates/account/signup_closed.html:5
-#: frontend/templates/top_menu.html:88
+#: frontend/templates/top_menu.html:83
 msgid "Sign up"
 msgstr "Регистрация"
 
@@ -162,8 +159,10 @@ msgstr ""
 #: frontend/templates/account/email/password_reset.txt:1
 #, python-format
 msgid ""
-"You're receiving this email because you or someone else has requested a password for your user account at %(site_name)s.\n"
-"It can be safely ignored if you did not request a password reset. Click the link below to reset your password.\n"
+"You're receiving this email because you or someone else has requested a "
+"password for your user account at %(site_name)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the "
+"link below to reset your password.\n"
 "\n"
 "%(password_reset_url)s\n"
 msgstr ""
@@ -197,8 +196,8 @@ msgstr ""
 msgid ""
 "We have sent you an email to <b>%(email)s</b> for verification. Follow the "
 "link provided to finalize the signup process. If you do not receive it "
-"within a few minutes, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"within a few minutes, contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s"
+"\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
 #: frontend/templates/account/email_confirmation_sent.html:11
@@ -255,8 +254,8 @@ msgstr ""
 #: frontend/templates/account/password_reset.html:29
 #, python-format
 msgid ""
-"If you have any trouble resetting your password, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"If you have any trouble resetting your password, contact us at <a href="
+"\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
 #: frontend/templates/account/password_reset_sent.html:6
@@ -268,8 +267,8 @@ msgstr ""
 #, python-format
 msgid ""
 "We have sent you an email. If you do not receive it within a few minutes, "
-"try resending or contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"try resending or contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">"
+"%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
 #: frontend/templates/account/password_reset_sent.html:20
@@ -280,8 +279,8 @@ msgstr ""
 #, python-format
 msgid ""
 "We have resent the password email. If you do not receive it within a few "
-"minutes, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"minutes, contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">"
+"%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
 #: frontend/templates/account/password_reset_token.html:6
@@ -316,3 +315,9 @@ msgstr ""
 #: frontend/templates/account/signup_closed.html:11
 msgid "Your signup code..."
 msgstr ""
+
+#~ msgid "English"
+#~ msgstr "Английский"
+
+#~ msgid "German"
+#~ msgstr "Немецкий"
