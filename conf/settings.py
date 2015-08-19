@@ -89,24 +89,18 @@ AUTHENTICATION_BACKENDS = (
 
     'social.backends.github.GithubOAuth2',  # ok
     'social.backends.vk.VKOAuth2',  # ok
-    'social.backends.twitter.TwitterOAuth',  #
+    'social.backends.twitter.TwitterOAuth',  # ok
+    'social.backends.facebook.FacebookOAuth2',  # ok
 
-    'social.backends.facebook.FacebookOAuth2',
-
-    'social.backends.bitbucket.BitbucketOAuth',
-
+    # 'social.backends.bitbucket.BitbucketOAuth',
 
     'social.backends.google.GoogleOAuth',
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOpenId',
     'social.backends.google.GooglePlusAuth',
     'social.backends.google.GoogleOpenIdConnect',
-    'social.backends.instagram.InstagramOAuth2',
-    'social.backends.linkedin.LinkedinOAuth',
-    'social.backends.linkedin.LinkedinOAuth2',
-    'social.backends.livejournal.LiveJournalOpenId',
-    'social.backends.mailru.MailruOAuth2',
-    'social.backends.odnoklassniki.OdnoklassnikiOAuth2',
+
+    # 'social.backends.linkedin.LinkedinOAuth2',
     'social.backends.open_id.OpenIdAuth',
 
 
@@ -246,6 +240,10 @@ SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
 
 SOCIAL_AUTH_TWITTER_KEY = ''
 SOCIAL_AUTH_TWITTER_SECRET = ''
+
+SOCIAL_AUTH_GOOGLE_OAUTH_KEY = ''
+SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = ''
+
 
 try:
     from .local_settings import *
