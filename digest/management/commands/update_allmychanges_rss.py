@@ -7,6 +7,7 @@ from allmychanges.api import search_category, track_changelog, get_changelogs
 from allmychanges.config import read_config
 import os
 
+
 def subscribe_all_python():
     config = read_config(os.path.join(os.path.dirname(__file__), 'allmychanges.cfg'))
 

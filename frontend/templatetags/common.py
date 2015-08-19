@@ -2,16 +2,16 @@
 from __future__ import unicode_literals
 import re
 
-from django.conf import settings
-
+from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
-
 from urlobject import URLObject
+
+from django.conf import settings
 from django.utils.six import text_type
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_text
 from django import template
-from social.backends.oauth import OAuthAuth
+
 
 name_re = re.compile(r'([^O])Auth')
 LEVEL_TAGS = get_level_tags()
@@ -48,6 +48,7 @@ def get_message_tags(message):
         return alert_level_tag
     return ''
 
+
 def modify_url_(url, operation, *args):
     """
     Враппер для функций модуля urlobject
@@ -69,6 +70,7 @@ def modify_url_(url, operation, *args):
     if callable(op):
         return text_type(op(*args))
     raise Exception('%s is incorrect function name for urlobject.URLObject' % operation)
+
 
 @register.simple_tag(takes_context=True)
 def modify_url(context, operation, *params):

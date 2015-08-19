@@ -197,6 +197,7 @@ class ViewEditorMaterial(TemplateView):
             'material': material
         }
 
+
 class ItemView(DetailView):
     """
     Просмотр отдельной новости

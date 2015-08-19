@@ -32,8 +32,7 @@ class ItemDigestFeed(DigestFeed):
 
     @staticmethod
     def items():
-        return Item.objects.filter(status='active').order_by('-modified_at')[
-               :10]
+        return Item.objects.filter(status='active').order_by('-modified_at')[:10]
 
 
 class AllEntriesFeed(ItemDigestFeed):
@@ -82,7 +81,7 @@ class IssuesFeed(ItemDigestFeed):
 
     def item_pubdate(self, item):
         if item.published_at is not None:
-            return datetime.datetime.combine(item.published_at, datetime.time(0,0,0))
+            return datetime.datetime.combine(item.published_at, datetime.time(0, 0, 0))
         else:
             return item.published_at
 
@@ -104,26 +103,34 @@ class SectionFeed(DigestFeed):
                 '-modified_at')[:10]
         return result
 
+
 class ItemVideoFeed(SectionFeed):
     section = 'Видео'
+
 
 class ItemRecommendFeed(SectionFeed):
     section = 'Советуем'
 
+
 class ItemNewsFeed(SectionFeed):
     section = 'Новости'
+
 
 class ItemBookDocFeed(SectionFeed):
     section = 'Книги и документация'
 
+
 class ItemEventFeed(SectionFeed):
     section = 'Конференции, события, встречи разработчиков'
+
 
 class ItemArticleFeed(SectionFeed):
     section = 'Статьи и интервью'
 
+
 class ItemReleaseFeed(SectionFeed):
     section = 'Релизы'
+
 
 class ItemPackagesFeed(SectionFeed):
     section = 'Интересные проекты, инструменты, библиотеки'

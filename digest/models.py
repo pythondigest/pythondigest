@@ -36,6 +36,7 @@ class Tag(models.Model):
         verbose_name = u'Тэг к новости'
         verbose_name_plural = u'Тэги к новостям'
 
+
 class Issue(models.Model):
     '''
     Выпуск дайджеста

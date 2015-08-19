@@ -15,7 +15,7 @@ class HoneypotWidget(forms.TextInput):
 
         super(HoneypotWidget, self).__init__(attrs, *args, **kwargs)
 
-        if not 'class' in self.attrs:
+        if 'class' not in self.attrs:
             self.attrs['style'] = 'display:none'
 
     def render(self, *args, **kwargs):
