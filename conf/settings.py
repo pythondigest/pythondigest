@@ -96,9 +96,8 @@ AUTHENTICATION_BACKENDS = (
 
     'social.backends.google.GoogleOAuth2',
 
-
     # 'social.backends.linkedin.LinkedinOAuth2',
-    'social.backends.open_id.OpenIdAuth',
+    # 'social.backends.open_id.OpenIdAuth',
 
 
     'social.backends.email.EmailAuth',
@@ -214,7 +213,6 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'conf.pipeline.require_email',
     'social.pipeline.mail.mail_validation',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
