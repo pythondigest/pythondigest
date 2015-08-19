@@ -89,7 +89,6 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.bitbucket.BitbucketOAuth',
     'social.backends.facebook.FacebookAppOAuth2',
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.flickr.FlickrOAuth',
     'social.backends.github.GithubOAuth2',
     'social.backends.google.GoogleOAuth',
     'social.backends.google.GoogleOAuth2',
@@ -207,6 +206,35 @@ PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ''
 
 BASE_DOMAIN = 'pythondigest.ru'
+
+
+# SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
+SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
+SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'conf.mail.send_validation'
+SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
+# SOCIAL_AUTH_USERNAME_FORM_URL = '/signup-username'
+SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
+
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'conf.pipeline.require_email',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.debug.debug',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    'social.pipeline.debug.debug'
+)
+
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = ''
+SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
+
 
 try:
     from .local_settings import *
