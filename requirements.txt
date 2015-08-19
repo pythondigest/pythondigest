@@ -19,3 +19,6 @@ django-rosetta==0.7.6
 django-bootstrap-form==3.2
 git+https://github.com/svetlyak40wt/allmychanges
 
+
+
+python-social-auth

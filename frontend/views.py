@@ -14,6 +14,7 @@ from django.conf import settings
 
 from .forms import AddNewsForm
 from frontend.models import EditorMaterial
+from social.backends.utils import load_backends
 
 
 class Sitemap(TemplateView):
@@ -80,7 +81,7 @@ class Index(TemplateView):
         context.update({
             'issue': issue,
             'items': items,
-            'active_menu_item': 'home'
+            'active_menu_item': 'home',
         })
         return context
 

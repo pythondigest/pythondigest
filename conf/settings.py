@@ -37,10 +37,12 @@ INSTALLED_APPS = (
 
     'account',
     'rosetta',
+    'social.apps.django_app.default',
 
 )
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 
 MIDDLEWARE_CLASSES = (
@@ -75,10 +77,21 @@ TEMPLATES = [
                 'django.core.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
                 'account.context_processors.account',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
 ]
+
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.open_id.OpenIdAuth',
+    'social.backends.google.GoogleOAuth2',
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
@@ -89,6 +102,14 @@ DATABASES = {
         'NAME': path.join(BASE_DIR, 'db.sqlite'),
     }
 }
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
+    'https://www.googleapis.com/auth/drive',
+    'https://www.googleapis.com/auth/userinfo.profile'
+]
 
 
 TIME_ZONE = 'Europe/Moscow'
