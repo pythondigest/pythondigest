@@ -102,7 +102,6 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.mailru.MailruOAuth2',
     'social.backends.odnoklassniki.OdnoklassnikiOAuth2',
     'social.backends.open_id.OpenIdAuth',
-    'social.backends.openstreetmap.OpenStreetMapOAuth',
     'social.backends.reddit.RedditOAuth2',
     'social.backends.stackoverflow.StackoverflowOAuth2',
     'social.backends.twitter.TwitterOAuth',
@@ -234,7 +233,8 @@ SOCIAL_AUTH_PIPELINE = (
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = ''
 SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
-
+SOCIAL_AUTH_GITHUB_KEY = ''
+SOCIAL_AUTH_GITHUB_SECRET = ''
 
 try:
     from .local_settings import *
