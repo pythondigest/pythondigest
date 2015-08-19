@@ -87,7 +87,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.open_id.OpenIdAuth',
-    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth',
     'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
