@@ -6,12 +6,26 @@ from django.db import models
 from django import forms
 from django.core.urlresolvers import reverse
 from django.contrib.sites.models import Site
+from django.utils.html import escape
 
 from digest.forms import ItemStatusForm
 from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
     ParsingRules, Tag, Package, get_start_end_of_week
 
 admin.site.unregister(Site)
+
+
+def _link_html(obj):
+    link = escape(obj.link)
+    return u'<a target="_blank" href="%s">%s</a>' % (link, link)
+
+
+def _external_link(obj):
+    lnk = escape(obj.link)
+    ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+    username = obj.user.username if obj.user else u'Гость'
+    ret = u'%s<br>Добавил: %s' % (ret, username)
+    return ret
 
 
 class IssueAdmin(admin.ModelAdmin):
@@ -205,13 +219,7 @@ class ItemAdmin(admin.ModelAdmin):
         'status': admin.HORIZONTAL,
     }
 
-    def external_link(self, obj):
-        lnk = obj.link
-        ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
-        username = obj.user.username if obj.user else u'Гость'
-        ret = u'%s<br>Добавил: %s' % (ret, username)
-        return ret
-
+    external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
 
@@ -248,8 +256,7 @@ admin.site.register(Item, ItemAdmin)
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'link_html')
 
-    def link_html(self,obj):
-        return u'<a target="_blank" href="%s">%s</a>' % (obj.link, obj.link)
+    link_html = lambda s, obj: _link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 admin.site.register(Resource, ResourceAdmin)
@@ -261,8 +268,7 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
             models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1 })},
     }
 
-    def link_html(self,obj):
-        return u'<a target="_blank" href="%s">%s</a>' % (obj.link, obj.link)
+    link_html = lambda s, obj: _link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 
@@ -374,20 +380,11 @@ class ItemModeratorAdmin(admin.ModelAdmin):
             result = super(ItemModeratorAdmin).get_queryset(request)
         return result
 
-    def external_link(self, obj):
-        lnk = obj.link
-        ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
-        username = obj.user.username if obj.user else u'Гость'
-        ret = u'%s<br>Добавил: %s' % (ret, username)
-        return ret
-
+    external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
 
-    def external_link_edit(self, obj):
-        ret = u'<a target="_blank" href="{0}">{0}</a>'.format(obj.link)
-        return ret
-
+    external_link_edit = lambda s, obj: _link_html(obj)
     external_link_edit.allow_tags = True
     external_link_edit.short_description = u"Ссылка"
 
