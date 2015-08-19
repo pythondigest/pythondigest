@@ -94,11 +94,8 @@ AUTHENTICATION_BACKENDS = (
 
     # 'social.backends.bitbucket.BitbucketOAuth',
 
-    'social.backends.google.GoogleOAuth',
     'social.backends.google.GoogleOAuth2',
-    'social.backends.google.GoogleOpenId',
-    'social.backends.google.GooglePlusAuth',
-    'social.backends.google.GoogleOpenIdConnect',
+
 
     # 'social.backends.linkedin.LinkedinOAuth2',
     'social.backends.open_id.OpenIdAuth',
