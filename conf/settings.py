@@ -92,7 +92,6 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.twitter.TwitterOAuth',  #
 
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.facebook.FacebookOAuth2',
 
     'social.backends.bitbucket.BitbucketOAuth',
 
@@ -245,6 +244,8 @@ SOCIAL_AUTH_FACEBOOK_KEY = ''
 SOCIAL_AUTH_FACEBOOK_SECRET = ''
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
 
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
 
 try:
     from .local_settings import *
