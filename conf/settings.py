@@ -86,10 +86,17 @@ TEMPLATES = [
 
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.bitbucket.BitbucketOAuth',
-    'social.backends.facebook.FacebookAppOAuth2',
+
+    'social.backends.github.GithubOAuth2',  # ok
+    'social.backends.vk.VKOAuth2',  # ok
+    'social.backends.twitter.TwitterOAuth',  #
+
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.github.GithubOAuth2',
+    'social.backends.facebook.FacebookOAuth2',
+
+    'social.backends.bitbucket.BitbucketOAuth',
+
+
     'social.backends.google.GoogleOAuth',
     'social.backends.google.GoogleOAuth2',
     'social.backends.google.GoogleOpenId',
@@ -102,11 +109,8 @@ AUTHENTICATION_BACKENDS = (
     'social.backends.mailru.MailruOAuth2',
     'social.backends.odnoklassniki.OdnoklassnikiOAuth2',
     'social.backends.open_id.OpenIdAuth',
-    'social.backends.reddit.RedditOAuth2',
-    'social.backends.stackoverflow.StackoverflowOAuth2',
-    'social.backends.twitter.TwitterOAuth',
-    'social.backends.vk.VKOAuth2',
-    'social.backends.yandex.YandexOAuth2',
+
+
     'social.backends.email.EmailAuth',
     'social.backends.username.UsernameAuth',
     'django.contrib.auth.backends.ModelBackend',
@@ -233,8 +237,14 @@ SOCIAL_AUTH_PIPELINE = (
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = ''
 SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
+
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
+
+SOCIAL_AUTH_FACEBOOK_KEY = ''
+SOCIAL_AUTH_FACEBOOK_SECRET = ''
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
+
 
 try:
     from .local_settings import *

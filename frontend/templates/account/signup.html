@@ -9,6 +9,10 @@
 
 {% block body %}
     <div class="row">
+
+
+        <h2> Регистрация через openid в процессе настройки</h2>
+
         <div class="col-md-4">
             <form id="signup_form" method="post" action="{% url "account_signup" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
                 <legend>{% trans "Sign up" %}</legend>
