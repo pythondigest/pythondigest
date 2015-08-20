@@ -41,16 +41,7 @@ class EditorMaterialTest(TestCase):
         with self.assertRaises(IntegrityError):
             self.em2.save()
 
-    def test_link_if_section_is_not_landing(self):
-
-        self.assertEqual(self.em1.link, '/news/slug1/')
-
-    def test_link_if_section_is_landing(self):
-
-        self.assertEqual(self.em3.link, '/slug3/')
-
     def test_created_at_field_is_auto_now_add(self):
-
         past = timezone.now()
         em = EditorMaterial.objects.create(title='Заголовок',
             slug='slug', section='landing', status='draft', announce='Анонс',

@@ -1,6 +1,6 @@
 beautifulsoup4==4.4.0
 bootstrap-admin-legacy==0.1.4
-Django==1.8.3
+Django==1.8.4
 django-concurrency==0.9
 django-digg-paginator==0.1.3
 feedparser==5.2.1
