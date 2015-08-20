@@ -4,6 +4,7 @@ from concurrency.views import ConflictResponse
 from django.template import loader
 from django.template.context import RequestContext
 
+
 def conflict(request, target=None, template_name='409.html'):
     template = loader.get_template(template_name)
     message = 'Вот незадача! Кажется эту новость обновили раньше =( \

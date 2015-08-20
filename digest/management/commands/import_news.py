@@ -105,6 +105,7 @@ def parsing(func):
             }
     func(**data)
 
+
 class Command(BaseCommand):
     
     args = 'no arguments!'

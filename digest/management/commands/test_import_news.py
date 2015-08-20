@@ -23,8 +23,8 @@ def get_tweets():
     '''
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=True):
-        url = urlopen( src.link )
-        soup = BeautifulSoup( url )
+        url = urlopen(src.link)
+        soup = BeautifulSoup(url)
         url.close()
 
         num = 0

@@ -129,10 +129,7 @@ class TagAdmin(admin.ModelAdmin):
 
     def _get_text(self, active_cnt, all_cnt):
         return "<font color='green'><b>{}</b></font> / " \
-               "<font color='gray'>{}</font>".format(
-            active_cnt,
-            all_cnt
-        )
+               "<font color='gray'>{}</font>".format(active_cnt, all_cnt)
 
     def news_count(self, obj):
         return self._get_text(
@@ -165,7 +162,6 @@ class TagAdmin(admin.ModelAdmin):
                                 ).count(),
         )
 
-
     news_count.short_description = u"Активных/всего новостей"
     news_count.allow_tags = True
 
@@ -174,7 +170,6 @@ class TagAdmin(admin.ModelAdmin):
 
     news_count_last_month.short_description = u"Активных/всего за 4 недели"
     news_count_last_month.allow_tags = True
-
 
 
 admin.site.register(Tag, TagAdmin)
@@ -265,7 +260,7 @@ admin.site.register(Resource, ResourceAdmin)
 class AutoImportResourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit', 'language')
     formfield_overrides = {
-            models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1 })},
+        models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1})},
     }
 
     link_html = lambda s, obj: _link_html(obj)
@@ -358,7 +353,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         # если перед ним активный, то показываем новость за текущую неделю
         # если нет, то все новости показываем
         try:
-            start_week, end_week  = get_start_end_of_week(datetime.now().date())
+            start_week, end_week = get_start_end_of_week(datetime.now().date())
             before_issue = Issue.objects.filter(date_to=end_week - timedelta(days=7))
             assert len(before_issue) == 1
             if before_issue[0].status == 'active':
@@ -370,14 +365,15 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
             result = self.model.objects.filter(
                 status__in=['pending', 'moderated', 'active', 'autoimport'],
-                    related_to_date__range=[current_issue.date_from, current_issue.date_to])
+                related_to_date__range=[current_issue.date_from, current_issue.date_to]
+            )
 
             if current_issue.last_item is not None:
                 result = result.filter(
                     pk__gt=current_issue.last_item,
                 )
         except AssertionError:
-            result = super(ItemModeratorAdmin).get_queryset(request)
+            result = super(ItemModeratorAdmin, self).get_queryset(request)
         return result
 
     external_link = lambda s, obj: _external_link(obj)
