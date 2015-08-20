@@ -18,5 +18,4 @@ Fabric==1.10.2
 django-rosetta==0.7.6
 django-bootstrap-form==3.2
 python-social-auth==0.2.12
-
-git+https://github.com/svetlyak40wt/allmychanges
+allmychanges==0.7.0
