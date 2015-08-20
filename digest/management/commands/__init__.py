@@ -33,12 +33,12 @@ def _date_to_julian_day(my_date):
     y = my_date.year + 4800 - a
     m = my_date.month + 12 * a - 3
     return my_date.day + \
-           ((153 * m + 2) // 5) + \
-           365 * y + \
-           y // 4 - \
-           y // 100 + \
-           y // 400 - \
-           32045
+        ((153 * m + 2) // 5) + \
+        365 * y + \
+        y // 4 - \
+        y // 100 + \
+        y // 400 - \
+        32045
 
 
 def _get_http_data_of_url(url: str):
@@ -50,7 +50,7 @@ def _get_http_data_of_url(url: str):
     """
 
     try:
-        assert isinstance(url, str), "Not valid url: %s, type (%s)" % \
+        assert isinstance(url, str), 'Not valid url: %s, type (%s)' % \
                                      (url, type(url))
         r = requests.get(url)
         readable_article = Document(r.content).summary()
@@ -83,8 +83,8 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
         return_tags = []
         for _, value in item_data.items():
             if isinstance(value, str) and value:
-                return_tags.extend(
-                    [tag for tag in tags_names if (tag.lower() in value.lower())])
+                return_tags.extend([tag for tag in tags_names
+                                    if (tag.lower() in value.lower())])
         result = list(set(return_tags))
     except AssertionError:
         result = []
@@ -99,12 +99,13 @@ def renew_connection():
 
 
 def fresh_google_check(link: str, attempt=5, debug=False):
-    """
-    Проверяет, индексировался ли уже ресурс гуглом раньше
+    """Проверяет, индексировался ли уже ресурс гуглом раньше.
+
     чем за 2 недели до сегодня.
     :param link:
     :param attempt:
     :return:
+
     """
     if debug:
         return False
@@ -113,15 +114,13 @@ def fresh_google_check(link: str, attempt=5, debug=False):
         today = datetime.date.today()
         date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
         date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
-        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
+        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e, )
 
         result = False
         for i in range(0, attempt):
-            g = pygoogle(
-                query.encode('utf-8'),
-                raise_http_exceptions=True,
-                proxies=settings.PROXIES_FOR_GOOGLING
-            )
+            g = pygoogle(query.encode('utf-8'),
+                         raise_http_exceptions=True,
+                         proxies=settings.PROXIES_FOR_GOOGLING)
 
             try:
                 result = bool(g.get_result_count())
@@ -152,13 +151,13 @@ def get_tweets_by_url(base_url: str):
             pass
     return result
 
+# -------------------
+# -------------------
+# -------------------
+# -------------------
+# -------------------
+# -------------------
 
-# -------------------
-# -------------------
-# -------------------
-# -------------------
-# -------------------
-# -------------------
 
 def _check_if_action(if_action: str, if_item: str, if_value: str):
     pattern = re.compile(if_value) if if_action == 'regex' else None
@@ -169,11 +168,7 @@ def _check_if_action(if_action: str, if_item: str, if_value: str):
                if_item) is not None)
 
 
-def _make_then_action(then_action,
-                      rules,
-                      sections,
-                      statuses,
-                      tags):
+def _make_then_action(then_action, rules, sections, statuses, tags):
     query_rules = rules
     query_sections = sections
     query_statuses = statuses
@@ -206,8 +201,7 @@ def _make_then_action(then_action,
 
     # ---------------------
 
-    def _make_then_action_remove_sub_string(then_element: str,
-                                            then_value: str,
+    def _make_then_action_remove_sub_string(then_element: str, then_value: str,
                                             if_item: str):
         result = {}
 
@@ -227,11 +221,8 @@ def _make_then_action(then_action,
     return functions.get(then_action)
 
 
-def apply_parsing_rules(item_data: dict,
-                        query_rules,
-                        query_sections,
-                        query_statuses,
-                        query_tags):
+def apply_parsing_rules(item_data: dict, query_rules, query_sections,
+                        query_statuses, query_tags):
     tags_names = list(query_tags.values_list('name', flat=True))
     data = {}
 
@@ -241,8 +232,8 @@ def apply_parsing_rules(item_data: dict,
 
     for rule in query_rules.order_by('-weight'):
         if rule.then_element == 'status' and \
-                (data.get('status') == 'moderated' or \
-                             data.get('status') == 'active'):
+                (data.get('status') == 'moderated' or
+                 data.get('status') == 'active'):
             continue
         if rule.then_element == 'section' and 'section' in data:
             continue
@@ -254,10 +245,8 @@ def apply_parsing_rules(item_data: dict,
                 then_action = rule.then_action
                 then_value = rule.then_value
 
-                function = _make_then_action(then_action,
-                                             query_rules,
-                                             query_sections,
-                                             query_statuses,
+                function = _make_then_action(then_action, query_rules,
+                                             query_sections, query_statuses,
                                              tags_names)
                 if then_action == 'set':
                     data.update(function(then_element, then_value))
@@ -265,21 +254,20 @@ def apply_parsing_rules(item_data: dict,
                     data.update(function(then_element, then_value, if_item))
                 elif then_action == 'add':
                     if then_element in data:
-                        data[then_element].extend(list(
-                            function(then_element, then_value).get(then_element,
-                                                                   [])))
+                        data[then_element].extend(
+                            list(function(then_element, then_value).get(
+                                then_element, [])))
                     else:
                         data[then_element] = list(function(then_element,
-                                                      then_value) \
-                            .get(then_element, []))
+                                                           then_value)
+                                                  .get(then_element, []))
 
     # исключений не должно быть,
     # ибо по коду везде очевидно что объект сущесвтует
     # но пускай будет проверка на существование
     if 'section' in data:
         try:
-            data['section'] = query_sections.get(
-                title=data.get('section'))
+            data['section'] = query_sections.get(title=data.get('section'))
         except Exception:
             pass
     if 'tags' in data:
@@ -292,7 +280,6 @@ def apply_parsing_rules(item_data: dict,
                 pass
         data['tags'] = _tags
     return data
-
 
 # -------------------
 # -------------------
@@ -316,8 +303,7 @@ def save_item(item):
             status=item.get('status', 'autoimport'),
             user_id=settings.BOT_USER_ID,
             section=item.get('section', None),
-            language=item.get('language') if item.get('language') else 'en'
-        )
+            language=item.get('language') if item.get('language') else 'en')
 
         _a.save()
 

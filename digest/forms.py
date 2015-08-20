@@ -1,24 +1,20 @@
 # -*- encoding: utf-8 -*-
 from django.contrib import admin
 from django.contrib.admin import widgets
-from django.forms import ModelForm, ChoiceField
+from django.contrib.admin.options import get_ul_class
+from django.forms import ChoiceField, ModelForm
 
 from .models import Item
 
-ITEM_STATUS_CHOICES = (
-    ('active', u'Активная'),
-    ('moderated', u'Отмодерировано'),
-)
-
-from django.contrib.admin.options import get_ul_class
+ITEM_STATUS_CHOICES = (('active', u'Активная'),
+                       ('moderated', u'Отмодерировано'), )
 
 
 class ItemStatusForm(ModelForm):
     status = ChoiceField(label=u"Статус",
                          widget=widgets.AdminRadioSelect(
                              attrs={'class': get_ul_class(admin.HORIZONTAL)}),
-                         choices=ITEM_STATUS_CHOICES
-                         )
+                         choices=ITEM_STATUS_CHOICES)
 
     class Meta:
         model = Item

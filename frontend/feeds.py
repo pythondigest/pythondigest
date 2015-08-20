@@ -1,15 +1,15 @@
 # coding=utf-8
 import datetime
 
-import pytils
 from django.contrib.syndication.views import Feed
 
-from digest.models import Item, Issue, Section
+import pytils
+from digest.models import Issue, Item, Section
 
 
 class DigestFeed(Feed):
     title = u"Дайджест новостей о python"
-    link = "/"
+    link = '/'
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
 
     def item_title(self, item):
@@ -26,13 +26,13 @@ class DigestFeed(Feed):
 
 
 class ItemDigestFeed(DigestFeed):
-    """
-    Лента РСС для новостей
-    """
+
+    """Лента РСС для новостей."""
 
     @staticmethod
     def items():
-        return Item.objects.filter(status='active').order_by('-modified_at')[:10]
+        return Item.objects.filter(status='active').order_by(
+            '-modified_at')[:10]
 
 
 class AllEntriesFeed(ItemDigestFeed):
@@ -40,17 +40,16 @@ class AllEntriesFeed(ItemDigestFeed):
 
 
 class TwitterEntriesFeed(ItemDigestFeed):
-    """
-    Лента РСС для twitter
-    """
+
+    """Лента РСС для twitter."""
+
     def item_link(self, item):
         return item.internal_link
 
 
 class RussianEntriesFeed(ItemDigestFeed):
-    """
-    Лента РСС для русскоязычных новостей
-    """
+
+    """Лента РСС для русскоязычных новостей."""
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."""
 
     def item_link(self, item):
@@ -58,20 +57,21 @@ class RussianEntriesFeed(ItemDigestFeed):
 
     @staticmethod
     def items():
-        return Item.objects.filter(status='active', language='ru').order_by('-modified_at')[:10]
+        return Item.objects.filter(status='active',
+                                   language='ru').order_by('-modified_at')[:10]
 
 
 class IssuesFeed(ItemDigestFeed):
-    """
-    Лента РСС для выпусков новостей
-    """
+
+    """Лента РСС для выпусков новостей."""
     title = u"Дайджест новостей о python - все выпуски"
-    link = "/issues/"
+    link = '/issues/'
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
 
     @staticmethod
     def items():
-        return Issue.objects.filter(status='active').order_by('-published_at')[:10]
+        return Issue.objects.filter(status='active').order_by(
+            '-published_at')[:10]
 
     def item_title(self, item):
         df = pytils.dt.ru_strftime(u'%d %B %Y', item.date_from, inflected=True)
@@ -81,15 +81,15 @@ class IssuesFeed(ItemDigestFeed):
 
     def item_pubdate(self, item):
         if item.published_at is not None:
-            return datetime.datetime.combine(item.published_at, datetime.time(0, 0, 0))
+            return datetime.datetime.combine(item.published_at,
+                                             datetime.time(0, 0, 0))
         else:
             return item.published_at
 
 
 class SectionFeed(DigestFeed):
-    """
-    Лента с категориями новостей
-    """
+
+    """Лента с категориями новостей."""
     section = 'all'
 
     def items(self):
@@ -100,7 +100,7 @@ class SectionFeed(DigestFeed):
         else:
             result = Item.objects.filter(status='active',
                                          section=section[0]).order_by(
-                '-modified_at')[:10]
+                                             '-modified_at')[:10]
         return result
 
 

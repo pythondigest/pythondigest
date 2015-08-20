@@ -1,17 +1,17 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import re
+
+from django import template
+from django.conf import settings
+from django.contrib.messages.utils import get_level_tags
+from django.utils.encoding import force_text
+from django.utils.six import text_type
 
 from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
 from urlobject import URLObject
-
-from django.conf import settings
-from django.utils.six import text_type
-from django.contrib.messages.utils import get_level_tags
-from django.utils.encoding import force_text
-from django import template
-
 
 name_re = re.compile(r'([^O])Auth')
 LEVEL_TAGS = get_level_tags()
@@ -27,14 +27,15 @@ def get_message_tags(message):
 
     Messages in Django >= 1.7 have a message.level_tag attr
     """
-    level_tag = force_text(LEVEL_TAGS.get(message.level, ''), strings_only=True)
-    if level_tag == "error":
+    level_tag = force_text(LEVEL_TAGS.get(message.level, ''),
+                           strings_only=True)
+    if level_tag == 'error':
         # Alias the error tag as danger, since .alert-error no longer exists
         # in Bootstrap 3
-        level_tag = "danger"
+        level_tag = 'danger'
 
     if level_tag:
-        alert_level_tag = "alert-{tag}".format(tag=level_tag)
+        alert_level_tag = 'alert-{tag}'.format(tag=level_tag)
     else:
         alert_level_tag = None
 
@@ -69,7 +70,8 @@ def modify_url_(url, operation, *args):
     op = getattr(url, operation, None)
     if callable(op):
         return text_type(op(*args))
-    raise Exception('%s is incorrect function name for urlobject.URLObject' % operation)
+    raise Exception('%s is incorrect function name for urlobject.URLObject' %
+                    operation)
 
 
 @register.simple_tag(takes_context=True)
@@ -152,8 +154,7 @@ def associated(context, backend):
     if user and user.is_authenticated():
         try:
             context['association'] = user.social_auth.filter(
-                provider=backend.name
-            )[0]
+                provider=backend.name)[0]
         except IndexError:
             pass
     return ''

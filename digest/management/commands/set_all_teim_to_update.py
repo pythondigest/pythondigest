@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 from django.core.management.base import BaseCommand
 
 from digest.management.commands import save_pickle_file
-
 from digest.models import Item
 
 
@@ -18,5 +17,6 @@ class Command(BaseCommand):
         """
         items = Item.objects.all()
         save_pickle_file('./pk_list.pickle',
-                         list(items.values_list('pk', flat=True)))
+                         list(items.values_list('pk',
+                                                flat=True)))
         items.update(to_update=True)

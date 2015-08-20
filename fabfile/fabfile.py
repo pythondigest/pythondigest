@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# 
+#
 import os
 
 from fabric.api import *
@@ -26,7 +26,7 @@ def deploy():
 def update_libs():
     with prefix('source %s' % ENV_PATH):
         with cd(REPO_FOLDER):
-            run("pip install -r requirements.txt")
+            run('pip install -r requirements.txt')
 
 
 def restart():
@@ -36,10 +36,10 @@ def restart():
 def migrate():
     with prefix('source %s' % ENV_PATH):
         with cd(REPO_FOLDER):
-            run("python manage.py migrate --noinput")
+            run('python manage.py migrate --noinput')
 
 
 def static():
     with prefix('source %s' % ENV_PATH):
         with cd(REPO_FOLDER):
-            run("python manage.py collectstatic --noinput")
+            run('python manage.py collectstatic --noinput')

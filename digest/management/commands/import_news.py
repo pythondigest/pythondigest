@@ -2,22 +2,22 @@
 from __future__ import unicode_literals
 
 import datetime
+import re
 from time import mktime
 
-import feedparser
 from django.core.management.base import BaseCommand
-import re
 
+import feedparser
 from digest.management.commands import _get_http_data_of_url, \
-    fresh_google_check, get_tweets_by_url, \
-    apply_parsing_rules, save_item
-from digest.models import AutoImportResource, Item, ParsingRules, Section, \
-    ITEM_STATUS_CHOICES, Tag
+    apply_parsing_rules, fresh_google_check, get_tweets_by_url, save_item
+from digest.models import ITEM_STATUS_CHOICES, \
+    AutoImportResource, Item, ParsingRules, Section, Tag
 
 
 def get_tweets():
     dsp = []
-    for src in AutoImportResource.objects.filter(type_res='twitter', in_edit=False):
+    for src in AutoImportResource.objects.filter(type_res='twitter',
+                                                 in_edit=False):
 
         resource = src.resource
         excl = [s for s in (src.excl or '').split(',') if s]
@@ -54,7 +54,8 @@ def import_tweets(**kwargs):
 
 
 def import_rss(**kwargs):
-    for src in AutoImportResource.objects.filter(type_res='rss', in_edit=False):
+    for src in AutoImportResource.objects.filter(type_res='rss',
+                                                 in_edit=False):
 
         rssnews = feedparser.parse(src.link)
         today = datetime.date.today()
@@ -82,7 +83,7 @@ def import_rss(**kwargs):
                 'link': n.link,
                 'http_code': http_code,
                 'content': content,
-                'description': re.sub("<.*?>", "", n.summary),
+                'description': re.sub('<.*?>', '', n.summary),
                 'resource': src.resource,
                 'language': src.language,
             }
@@ -98,16 +99,17 @@ def parsing(func):
     :param func:
     :return:
     """
-    data = {'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
-            'query_sections': Section.objects.all(),
-            'query_tags': Tag.objects.all(),
-            'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
-            }
+    data = {
+        'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
+        'query_sections': Section.objects.all(),
+        'query_tags': Tag.objects.all(),
+        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
+    }
     func(**data)
 
 
 class Command(BaseCommand):
-    
+
     args = 'no arguments!'
     help = u'News import from external resources'
 

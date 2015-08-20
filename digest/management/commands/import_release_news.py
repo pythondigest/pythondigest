@@ -12,25 +12,19 @@ from digest.management.commands import save_item
 from digest.models import Package, Section, Resource
 
 
-def _generate_release_item(package_name: str,
-                           package_version: str,
-                           link: str,
-                           resource: Resource,
-                           section: Section,
+def _generate_release_item(package_name: str, package_version: str, link: str,
+                           resource: Resource, section: Section,
                            package_data: dict):
-    name = u"{} - {}".format(
-        package_data.get('name'),
-        package_version
-    )
+    name = u"{} - {}".format(package_data.get('name'), package_version)
     description = u"{2}." \
                   u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
                   u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
-        package_data.get('name'),
-        package_version,
-        package_data.get('description'),
-        link,
-        package_data.get('url')
-    )
+                      package_data.get('name'),
+                      package_version,
+                      package_data.get('description'),
+                      link,
+                      package_data.get('url')
+                  )
 
     return {
         'title': name,
@@ -42,14 +36,17 @@ def _generate_release_item(package_name: str,
         'description': description,
     }
 
+
 def parse_rss():
 
     url = 'https://allmychanges.com/rss/03afbe621916b2f2145f111075db0759/'
 
     try:
-        packages = {x.get('name').strip(): x for x in
-                    list(Package.objects.all()
-                         .values('name', 'description', 'url'))}
+        packages = {
+            x.get('name').strip(): x
+            for x in list(Package.objects.all()
+                          .values('name', 'description', 'url'))
+        }
         section = Section.objects.get(title=u'Релизы')
         resource = Resource.objects.get(link='http://allmychanges.com/')
     except Exception:
@@ -75,17 +72,13 @@ def parse_rss():
                 continue
 
         try:
-            if not (package_name in packages.keys()) or package_name in saved_packages:
+            if not (package_name in
+                    packages.keys()) or package_name in saved_packages:
                 continue
 
-            item_data = _generate_release_item(
-                package_name,
-                package_version,
-                n.link,
-                resource,
-                section,
-                packages.get(package_name)
-            )
+            item_data = _generate_release_item(package_name, package_version,
+                                               n.link, resource, section,
+                                               packages.get(package_name))
             saved_packages.append(package_name)
             save_item(item_data)
         except Exception as e:

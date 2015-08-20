@@ -8,3 +8,5 @@ logs/*
 env/
 /conf/*.cfg
 *.cfg
+
+clean.bash

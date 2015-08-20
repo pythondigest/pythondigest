@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+
 from digest.models import Item
 
 EMPTY_VALUES = (None, '')
@@ -48,10 +49,24 @@ class AddNewsForm(forms.ModelForm):
         fields = ('link', 'section', 'title', 'description')
 
     def __init__(self, *args, **kwargs):
-        kwargs['initial'] = {'section': 6}  # На форме 6й section будет помечен как selected
+        kwargs['initial'] = {
+            'section': 6
+        }  # На форме 6й section будет помечен как selected
         super(AddNewsForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs = {'class': 'form-control small', 'style': 'width:40%'}
+        self.fields['title'].widget.attrs = {
+            'class': 'form-control small',
+            'style': 'width:40%'
+        }
         self.fields['title'].required = False
-        self.fields['link'].widget.attrs = {'class': 'form-control small', 'style': 'width:40%'}
-        self.fields['description'].widget.attrs = {'class': 'form-control', 'style': 'width:40%'}
-        self.fields['section'].widget.attrs = {'class': 'form-control', 'style': 'width:40%'}
+        self.fields['link'].widget.attrs = {
+            'class': 'form-control small',
+            'style': 'width:40%'
+        }
+        self.fields['description'].widget.attrs = {
+            'class': 'form-control',
+            'style': 'width:40%'
+        }
+        self.fields['section'].widget.attrs = {
+            'class': 'form-control',
+            'style': 'width:40%'
+        }

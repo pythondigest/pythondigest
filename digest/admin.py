@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
 
-from django.contrib import admin
-from django.db import models
 from django import forms
-from django.core.urlresolvers import reverse
+from django.contrib import admin
 from django.contrib.sites.models import Site
+from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.html import escape
 
 from digest.forms import ItemStatusForm
-from digest.models import Issue, Section, Item, Resource, AutoImportResource, \
-    ParsingRules, Tag, Package, get_start_end_of_week
+from digest.models import AutoImportResource, Issue, Item, Package, \
+    ParsingRules, Resource, Section, Tag, get_start_end_of_week
 
 admin.site.unregister(Site)
 
@@ -30,22 +30,11 @@ def _external_link(obj):
 
 class IssueAdmin(admin.ModelAdmin):
 
-    list_display = (
-        'title',
-        'news_count',
-        'issue_date',
-        'frontend_link',
-    )
+    list_display = ('title', 'news_count', 'issue_date', 'frontend_link', )
 
-    list_filter = (
-        'date_from',
-        'date_to',
-    )
+    list_filter = ('date_from', 'date_to', )
 
-    exclude = (
-        'last_item',
-        'version',
-    )
+    exclude = ('last_item', 'version', )
 
     def issue_date(self, obj):
         return u"С %s по %s" % (obj.date_from, obj.date_to)
@@ -61,58 +50,46 @@ class IssueAdmin(admin.ModelAdmin):
     def frontend_link(self, obj):
         lnk = reverse('frontend:issue_view', kwargs={'pk': obj.pk})
         return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
+
     frontend_link.allow_tags = True
     frontend_link.short_description = u"Просмотр"
+
 
 admin.site.register(Issue, IssueAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):
     pass
+
+
 admin.site.register(Section, SectionAdmin)
 
 
 class ParsingRulesAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'is_activated',
-        'weight',
-        'if_element',
-        '_get_if_action',
-        'then_element',
-        '_get_then_action',
-    )
+    list_display = ('name', 'is_activated', 'weight', 'if_element',
+                    '_get_if_action', 'then_element', '_get_then_action', )
 
-    list_filter = (
-        'is_activated',
-        'if_element',
-        'if_action',
-        'then_element',
-        'then_action',
-    )
+    list_filter = ('is_activated', 'if_element', 'if_action', 'then_element',
+                   'then_action', )
 
-    list_editable = (
-        'is_activated',
-    )
+    list_editable = ('is_activated', )
 
-    search_fields = (
-        'is_activated',
-        'name',
-        'if_value',
-        'then_value',
-    )
+    search_fields = ('is_activated', 'name', 'if_value', 'then_value', )
 
     def _get_if_action(self, obj):
-        return u"{}: <i>{}</i>".format(obj.get_if_action_display(), obj.if_value)
+        return u"{}: <i>{}</i>".format(obj.get_if_action_display(),
+                                       obj.if_value)
 
     _get_if_action.allow_tags = True
     _get_if_action.short_description = u"Условие"
 
     def _get_then_action(self, obj):
-        return u"{}: <i>{}</i>".format(obj.get_then_action_display(), obj.then_value)
+        return u"{}: <i>{}</i>".format(obj.get_then_action_display(),
+                                       obj.then_value)
 
     _get_then_action.allow_tags = True
     _get_then_action.short_description = u"Действие"
+
 
 admin.site.register(ParsingRules, ParsingRulesAdmin)
 
@@ -120,21 +97,17 @@ admin.site.register(ParsingRules, ParsingRulesAdmin)
 class TagAdmin(admin.ModelAdmin):
     search_fields = ('name', )
 
-    list_display = (
-        'name',
-        'news_count',
-        'news_count_last_week',
-        'news_count_last_month',
-    )
+    list_display = ('name', 'news_count', 'news_count_last_week',
+                    'news_count_last_month', )
 
     def _get_text(self, active_cnt, all_cnt):
         return "<font color='green'><b>{}</b></font> / " \
                "<font color='gray'>{}</font>".format(active_cnt, all_cnt)
 
     def news_count(self, obj):
-        return self._get_text(
-            Item.objects.filter(status='active', tags__name=obj.name).count(),
-            Item.objects.filter(tags__name=obj.name).count())
+        return self._get_text(Item.objects.filter(status='active',
+                                                  tags__name=obj.name).count(),
+                              Item.objects.filter(tags__name=obj.name).count())
 
     def news_count_last_week(self, obj):
         now = datetime.now().date()
@@ -142,12 +115,10 @@ class TagAdmin(admin.ModelAdmin):
         return self._get_text(
             Item.objects.filter(status='active',
                                 tags__name=obj.name,
-                                created_at__range=(week_before, now)
-                                ).count(),
-            Item.objects.filter(tags__name=obj.name,
-                                created_at__range=(week_before, now)
-                                ).count(),
-        )
+                                created_at__range=(week_before, now)).count(),
+            Item.objects.filter(
+                tags__name=obj.name,
+                created_at__range=(week_before, now)).count(), )
 
     def news_count_last_month(self, obj):
         now = datetime.now().date()
@@ -155,12 +126,10 @@ class TagAdmin(admin.ModelAdmin):
         return self._get_text(
             Item.objects.filter(status='active',
                                 tags__name=obj.name,
-                                created_at__range=(week_before, now)
-                                ).count(),
-            Item.objects.filter(tags__name=obj.name,
-                                created_at__range=(week_before, now)
-                                ).count(),
-        )
+                                created_at__range=(week_before, now)).count(),
+            Item.objects.filter(
+                tags__name=obj.name,
+                created_at__range=(week_before, now)).count(), )
 
     news_count.short_description = u"Активных/всего новостей"
     news_count.allow_tags = True
@@ -178,41 +147,18 @@ admin.site.register(Tag, TagAdmin)
 class ItemAdmin(admin.ModelAdmin):
 
     form = ItemStatusForm
-    fields = (
-        'section',
-        'title',
-        'is_editors_choice',
-        'description',
-        'link',
-        'status',
-        'language',
-        'tags',
-    )
-    filter_horizontal = ('tags',)
-    list_filter = (
-        'status',
-        'issue',
-        'section',
-        'is_editors_choice',
-        'user',
-        'related_to_date',
-        'resource',
-    )
+    fields = ('section', 'title', 'is_editors_choice', 'description', 'link',
+              'status', 'language', 'tags', )
+    filter_horizontal = ('tags', )
+    list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
+                   'related_to_date', 'resource', )
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = (
-        'title',
-        'status',
-        'external_link',
-        'related_to_date',
-        'is_editors_choice',
-    )
+    list_display = ('title', 'status', 'external_link', 'related_to_date',
+                    'is_editors_choice', )
 
-    list_editable = ('is_editors_choice',)
-    exclude = ('modified_at',),
-    radio_fields = {
-        'language': admin.HORIZONTAL,
-        'status': admin.HORIZONTAL,
-    }
+    list_editable = ('is_editors_choice', )
+    exclude = ('modified_at', ),
+    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
@@ -245,6 +191,8 @@ class ItemAdmin(admin.ModelAdmin):
             obj.modified_at = datetime.now()
 
         super(ItemAdmin, self).save_model(request, obj, form, change)
+
+
 admin.site.register(Item, ItemAdmin)
 
 
@@ -254,13 +202,19 @@ class ResourceAdmin(admin.ModelAdmin):
     link_html = lambda s, obj: _link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
+
+
 admin.site.register(Resource, ResourceAdmin)
 
 
 class AutoImportResourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl', 'excl', 'in_edit', 'language')
+    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl',
+                    'excl', 'in_edit', 'language')
     formfield_overrides = {
-        models.TextField: {'widget': forms.Textarea(attrs={'cols': 45, 'rows': 1})},
+        models.TextField: {
+            'widget': forms.Textarea(attrs={'cols': 45,
+                                            'rows': 1})
+        },
     }
 
     link_html = lambda s, obj: _link_html(obj)
@@ -273,10 +227,13 @@ admin.site.register(AutoImportResource, AutoImportResourceAdmin)
 
 class PackageAdmin(admin.ModelAdmin):
     pass
+
+
 admin.site.register(Package, PackageAdmin)
 
 
 class ItemModerator(Item):
+
     class Meta:
         proxy = True
         verbose_name_plural = 'Новости (эксперимент)'
@@ -284,53 +241,31 @@ class ItemModerator(Item):
 
 class ItemModeratorAdmin(admin.ModelAdmin):
     form = ItemStatusForm
-    fields = (
-        'section',
-        'title',
-        'is_editors_choice',
-        'description',
-        'external_link_edit',
-        'status',
-        'language',
-    )
+    fields = ('section', 'title', 'is_editors_choice', 'description',
+              'external_link_edit', 'status', 'language', )
 
-    readonly_fields = (
-        'external_link_edit',
-    )
+    readonly_fields = ('external_link_edit', )
 
-    filter_horizontal = ('tags',)
-    list_filter = (
-        'status',
-        'issue',
-        'section',
-        'is_editors_choice',
-        'user',
-        'related_to_date',
-        'resource',
-    )
+    filter_horizontal = ('tags', )
+    list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
+                   'related_to_date', 'resource', )
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = (
-        'title',
-        'status',
-        'external_link',
-        'related_to_date',
-        'is_editors_choice',
-    )
+    list_display = ('title', 'status', 'external_link', 'related_to_date',
+                    'is_editors_choice', )
 
-    list_editable = ('is_editors_choice',)
-    exclude = ('modified_at',),
-    radio_fields = {
-        'language': admin.HORIZONTAL,
-        'status': admin.HORIZONTAL,
-    }
+    list_editable = ('is_editors_choice', )
+    exclude = ('modified_at', ),
+    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
 
     actions = ['make_moderated']
 
     def make_moderated(self, request, queryset):
         try:
             item = queryset.latest('pk')
-            _start_week, _end_week = get_start_end_of_week(item.related_to_date)
-            issue = Issue.objects.filter(date_from=_start_week, date_to=_end_week)
+            _start_week, _end_week = get_start_end_of_week(
+                item.related_to_date)
+            issue = Issue.objects.filter(date_from=_start_week,
+                                         date_to=_end_week)
             assert len(issue) == 1
             issue.update(last_item=item.pk)
         except Exception:
@@ -354,10 +289,12 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         # если нет, то все новости показываем
         try:
             start_week, end_week = get_start_end_of_week(datetime.now().date())
-            before_issue = Issue.objects.filter(date_to=end_week - timedelta(days=7))
+            before_issue = Issue.objects.filter(
+                date_to=end_week - timedelta(days=7))
             assert len(before_issue) == 1
             if before_issue[0].status == 'active':
-                current_issue = Issue.objects.filter(date_to=end_week, date_from=start_week)
+                current_issue = Issue.objects.filter(date_to=end_week,
+                                                     date_from=start_week)
                 assert len(current_issue) == 1
                 current_issue = current_issue[0]
             else:
@@ -365,13 +302,11 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
             result = self.model.objects.filter(
                 status__in=['pending', 'moderated', 'active', 'autoimport'],
-                related_to_date__range=[current_issue.date_from, current_issue.date_to]
-            )
+                related_to_date__range=[current_issue.date_from,
+                                        current_issue.date_to])
 
             if current_issue.last_item is not None:
-                result = result.filter(
-                    pk__gt=current_issue.last_item,
-                )
+                result = result.filter(pk__gt=current_issue.last_item, )
         except AssertionError:
             result = super(ItemModeratorAdmin, self).get_queryset(request)
         return result

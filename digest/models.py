@@ -3,15 +3,13 @@ import datetime
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from concurrency.fields import IntegerVersionField
 from django.db import models
 from django.utils.translation import ugettext as _
+
+from concurrency.fields import IntegerVersionField
 from frontend.models import Tip
 
-ISSUE_STATUS_CHOICES = (
-    ('active', u'Активный'),
-    ('draft', u'Черновик'),
-)
+ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'), )
 
 
 def get_start_end_of_week(dt):
@@ -22,12 +20,9 @@ def get_start_end_of_week(dt):
 
 class Tag(models.Model):
 
-    name = models.CharField(
-        max_length=255,
-        verbose_name=u'Название тэга',
-        unique=True,
-
-    )
+    name = models.CharField(max_length=255,
+                            verbose_name=u'Название тэга',
+                            unique=True, )
 
     def __str__(self):
         return self.name
@@ -38,54 +33,37 @@ class Tag(models.Model):
 
 
 class Issue(models.Model):
-    '''
-    Выпуск дайджеста
-    '''
-    title = models.CharField(
-        max_length=255,
-        verbose_name=u'Заголовок',
-    )
-    description = models.TextField(
-        verbose_name=u'Описание',
-        null=True, blank=True,
-    )
-    image = models.ImageField(
-        verbose_name=u'Постер',
-        upload_to='issues',
-        null=True, blank=True,
-    )
-    date_from = models.DateField(
-        verbose_name=u'Начало освещаемого периода',
-        null=True, blank=True,
-    )
-    date_to = models.DateField(
-        verbose_name=u'Завершение освещаемого периода',
-        null=True, blank=True,
-    )
-    published_at = models.DateField(
-        verbose_name=u'Дата публикации',
-        null=True, blank=True,
-    )
-    status = models.CharField(
-        verbose_name=u'Статус',
-        max_length=10,
-        choices=ISSUE_STATUS_CHOICES,
-        default='draft',
-    )
-    version = IntegerVersionField(
-        verbose_name=u'Версия'
-    )
 
-    tip = models.ForeignKey(Tip,
-                            null=True,
-                            blank=True,
-                            verbose_name=u'Совет')
+    """Выпуск дайджеста."""
+    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
+    description = models.TextField(verbose_name=u'Описание',
+                                   null=True,
+                                   blank=True, )
+    image = models.ImageField(verbose_name=u'Постер',
+                              upload_to='issues',
+                              null=True,
+                              blank=True, )
+    date_from = models.DateField(verbose_name=u'Начало освещаемого периода',
+                                 null=True,
+                                 blank=True, )
+    date_to = models.DateField(verbose_name=u'Завершение освещаемого периода',
+                               null=True,
+                               blank=True, )
+    published_at = models.DateField(verbose_name=u'Дата публикации',
+                                    null=True,
+                                    blank=True, )
+    status = models.CharField(verbose_name=u'Статус',
+                              max_length=10,
+                              choices=ISSUE_STATUS_CHOICES,
+                              default='draft', )
+    version = IntegerVersionField(verbose_name=u'Версия')
+
+    tip = models.ForeignKey(Tip, null=True, blank=True, verbose_name=u'Совет')
 
     last_item = models.IntegerField(
         verbose_name='Последняя модерированая новость',
         blank=True,
-        null=True,
-    )
+        null=True, )
 
     def __str__(self):
         return self.title
@@ -100,38 +78,26 @@ class Issue(models.Model):
         verbose_name_plural = u'Выпуски дайджеста'
 
 
-SECTION_STATUS_CHOICES = (
-    ('pending', u'Ожидает проверки'),
-    ('active', u'Активный'),
-)
+SECTION_STATUS_CHOICES = (('pending', u'Ожидает проверки'),
+                          ('active', u'Активный'), )
 
 
 class Section(models.Model):
-    '''
-    Раздел
-    '''
-    title = models.CharField(
-        max_length=255,
-        verbose_name=u'Заголовок',
-    )
+
+    """Раздел."""
+    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
     priority = models.PositiveIntegerField(
         verbose_name=u'Приоритет при показе',
-        default=0,
-    )
-    status = models.CharField(
-        verbose_name=u'Статус',
-        max_length=10,
-        choices=SECTION_STATUS_CHOICES,
-        default='active',
-    )
-    version = IntegerVersionField(
-        verbose_name=u'Версия'
-    )
-    habr_icon = models.CharField(
-        max_length=255,
-        verbose_name=u'Иконка для хабры',
-        null=True, blank=True
-    )
+        default=0, )
+    status = models.CharField(verbose_name=u'Статус',
+                              max_length=10,
+                              choices=SECTION_STATUS_CHOICES,
+                              default='active', )
+    version = IntegerVersionField(verbose_name=u'Версия')
+    habr_icon = models.CharField(max_length=255,
+                                 verbose_name=u'Иконка для хабры',
+                                 null=True,
+                                 blank=True)
 
     def __str__(self):
         return self.title
@@ -143,24 +109,14 @@ class Section(models.Model):
 
 
 class Resource(models.Model):
-    '''
-    Источник получения информации
-    '''
-    title = models.CharField(
-        max_length=255,
-        verbose_name=u'Заголовок',
-    )
-    description = models.TextField(
-        verbose_name=u'Описание',
-        null=True, blank=True,
-    )
-    link = models.URLField(
-        max_length=255,
-        verbose_name=u'Ссылка',
-    )
-    version = IntegerVersionField(
-        verbose_name=u'Версия'
-    )
+
+    """Источник получения информации."""
+    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
+    description = models.TextField(verbose_name=u'Описание',
+                                   null=True,
+                                   blank=True, )
+    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
+    version = IntegerVersionField(verbose_name=u'Версия')
 
     def __str__(self):
         return self.title
@@ -170,125 +126,87 @@ class Resource(models.Model):
         verbose_name_plural = u'Источники'
 
 
-ITEM_STATUS_CHOICES = (
-    ('pending', u'На рассмотрении'),
-    ('active', u'Активная'),
-    ('draft', u'Черновик'),
-    ('moderated', u'Рассмотрена'),
-    ('autoimport', u'Автоимпорт'),
-)
+ITEM_STATUS_CHOICES = (('pending', u'На рассмотрении'),
+                       ('active', u'Активная'), ('draft', u'Черновик'),
+                       ('moderated', u'Рассмотрена'),
+                       ('autoimport', u'Автоимпорт'), )
 
-ITEM_LANGUAGE_CHOICES = (
-    ('ru', u'Русский'),
-    ('en', u'Английский'),
-)
+ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'), )
 
 
 class Item(models.Model):
-    '''
-    Новость
-    '''
-    section = models.ForeignKey(
-        Section,
-        verbose_name=u'Раздел',
-        null=True, blank=True,
-    )
-    title = models.CharField(
-        max_length=255,
-        verbose_name=u'Заголовок',
-    )
-    is_editors_choice = models.BooleanField(
-        verbose_name=u'Выбор редакции',
-        default=False,
-    )
-    description = models.TextField(
-        verbose_name=u'Описание',
-        null=True, blank=True,
-    )
-    issue = models.ForeignKey(
-        Issue,
-        verbose_name=u'Выпуск дайджеста',
-        null=True, blank=True,
-    )
-    resource = models.ForeignKey(
-        Resource,
-        verbose_name=u'Источник',
-        null=True, blank=True,
-    )
-    link = models.URLField(
-        max_length=255,
-        verbose_name=u'Ссылка',
-    )
+
+    """Новость."""
+    section = models.ForeignKey(Section,
+                                verbose_name=u'Раздел',
+                                null=True,
+                                blank=True, )
+    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
+    is_editors_choice = models.BooleanField(verbose_name=u'Выбор редакции',
+                                            default=False, )
+    description = models.TextField(verbose_name=u'Описание',
+                                   null=True,
+                                   blank=True, )
+    issue = models.ForeignKey(Issue,
+                              verbose_name=u'Выпуск дайджеста',
+                              null=True,
+                              blank=True, )
+    resource = models.ForeignKey(Resource,
+                                 verbose_name=u'Источник',
+                                 null=True,
+                                 blank=True, )
+    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
     related_to_date = models.DateField(
         verbose_name=u'Дата',
         help_text=u'Например, дата публикации новости на источнике',
-        default=datetime.datetime.today,
-    )
-    status = models.CharField(
-        verbose_name=u'Статус',
-        max_length=10,
-        choices=ITEM_STATUS_CHOICES,
-        default='pending',
-    )
-    language = models.CharField(
-        verbose_name=u'Язык новости',
-        max_length=2,
-        choices=ITEM_LANGUAGE_CHOICES,
-        default='en',
-    )
-    created_at = models.DateField(
-        verbose_name=u'Дата публикации',
-        auto_now_add=True,
-    )
-    modified_at = models.DateTimeField(
-        verbose_name=u'Дата изменения',
-        null=True, blank=True,
-    )
+        default=datetime.datetime.today, )
+    status = models.CharField(verbose_name=u'Статус',
+                              max_length=10,
+                              choices=ITEM_STATUS_CHOICES,
+                              default='pending', )
+    language = models.CharField(verbose_name=u'Язык новости',
+                                max_length=2,
+                                choices=ITEM_LANGUAGE_CHOICES,
+                                default='en', )
+    created_at = models.DateField(verbose_name=u'Дата публикации',
+                                  auto_now_add=True, )
+    modified_at = models.DateTimeField(verbose_name=u'Дата изменения',
+                                       null=True,
+                                       blank=True, )
     priority = models.PositiveIntegerField(
         verbose_name=u'Приоритет при показе',
-        default=0,
-    )
-    user = models.ForeignKey(
-        User,
-        verbose_name=u'Кто добавил новость',
-        editable=False,
-        null=True, blank=True,
-    )
-    version = IntegerVersionField(
-        verbose_name=u'Версия'
-    )
+        default=0, )
+    user = models.ForeignKey(User,
+                             verbose_name=u'Кто добавил новость',
+                             editable=False,
+                             null=True,
+                             blank=True, )
+    version = IntegerVersionField(verbose_name=u'Версия')
 
-    tags = models.ManyToManyField(
-        Tag,
-        verbose_name=u'Тэги',
-        blank=True,
-    )
+    tags = models.ManyToManyField(Tag, verbose_name=u'Тэги', blank=True, )
 
-    to_update = models.BooleanField(
-        verbose_name=u'Обновить новость',
-        default=False,
-    )
+    to_update = models.BooleanField(verbose_name=u'Обновить новость',
+                                    default=False, )
 
     def save(self, *args, **kwargs):
         try:
             if self.issue is None and self.created_at is not None:
                 date_from, date_to = get_start_end_of_week(self.created_at)
-                issue = Issue.objects.filter(date_from=date_from, date_to=date_to)
+                issue = Issue.objects.filter(date_from=date_from,
+                                             date_to=date_to)
                 if issue.count() == 0:
                     # если нет выпуска, то создадим
                     old_issue = Issue.objects.latest('date_to')
                     cnt_issue = int(old_issue.title.replace('Выпуск ', '')) + 1
-                    new_issue = Issue(
-                        title='Выпуск %s' % cnt_issue,
-                        date_from=date_from,
-                        date_to=date_to,
-                    )
+                    new_issue = Issue(title='Выпуск %s' % cnt_issue,
+                                      date_from=date_from,
+                                      date_to=date_to, )
                     new_issue.save()
                     self.issue = new_issue
                 elif issue.count() == 1:
                     self.issue = issue[0]
                 else:
-                    raise Exception("Несколько выпусков на неделе")
+                    raise Exception('Несколько выпусков на неделе')
 
         except Exception as e:
             pass
@@ -315,60 +233,41 @@ class Item(models.Model):
 
 
 class AutoImportResource(models.Model):
-    '''
-    Источники импорта новостей
-    '''
-    TYPE_RESOURCE = (
-        ('twitter', u'Сообщения аккаунтов в твиттере'),
-        ('rss', u'RSS фид'),
-    )
-    
-    name = models.CharField(
-        max_length=255,
-        verbose_name=u'Название источника',
-    )
-    link = models.URLField(
-        max_length=255,
-        verbose_name=u'Ссылка',
-    )
-    type_res = models.CharField(
-        max_length=255,
-        verbose_name=u'Тип источника',
-        choices=TYPE_RESOURCE,
-        default='twitter',
-    )
-    resource = models.ForeignKey(
-        Resource,
-        verbose_name=u'Источник',
-        null=True, 
-        blank=True,
-    )
-    incl = models.CharField(
-        max_length=255,
-        verbose_name=u'Обязательное содержание',
-        help_text='Условие отбора новостей <br /> \
+
+    """Источники импорта новостей."""
+    TYPE_RESOURCE = (('twitter', u'Сообщения аккаунтов в твиттере'),
+                     ('rss', u'RSS фид'), )
+
+    name = models.CharField(max_length=255,
+                            verbose_name=u'Название источника', )
+    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
+    type_res = models.CharField(max_length=255,
+                                verbose_name=u'Тип источника',
+                                choices=TYPE_RESOURCE,
+                                default='twitter', )
+    resource = models.ForeignKey(Resource,
+                                 verbose_name=u'Источник',
+                                 null=True,
+                                 blank=True, )
+    incl = models.CharField(max_length=255,
+                            verbose_name=u'Обязательное содержание',
+                            help_text='Условие отбора новостей <br /> \
                    Включение вида [text] <br /> \
                    Включение при выводе будет удалено',
-        null=True,
-        blank=True,
-    )
+                            null=True,
+                            blank=True, )
     excl = models.TextField(
         verbose_name=u'Список исключений',
         help_text='Список источников подлежащих исключению через ", "',
         null=True,
-        blank=True,
-    )
-    in_edit = models.BooleanField(
-        verbose_name=u'На тестировании',
-        default=False,
-    )
+        blank=True, )
+    in_edit = models.BooleanField(verbose_name=u'На тестировании',
+                                  default=False, )
 
-    language = models.CharField(
-        verbose_name=u'Язык источника',
-        max_length=2,
-        choices=ITEM_LANGUAGE_CHOICES,
-        default='en',
-    )
+    language = models.CharField(verbose_name=u'Язык источника',
+                                max_length=2,
+                                choices=ITEM_LANGUAGE_CHOICES,
+                                default='en', )
 
     def __str__(self):
         return self.name
@@ -380,20 +279,13 @@ class AutoImportResource(models.Model):
 
 class Package(models.Model):
 
-    name = models.CharField(
-        max_length=255,
-        verbose_name=u'Название',
-    )
+    name = models.CharField(max_length=255, verbose_name=u'Название', )
 
-    description = models.TextField(
-        verbose_name=u'Описание',
-        null=True, blank=True,
-    )
+    description = models.TextField(verbose_name=u'Описание',
+                                   null=True,
+                                   blank=True, )
 
-    url = models.CharField(
-        max_length=255,
-        verbose_name=u'Ссылка',
-    )
+    url = models.CharField(max_length=255, verbose_name=u'Ссылка', )
 
     def __str__(self):
         return self.name
@@ -405,87 +297,52 @@ class Package(models.Model):
 
 class ParsingRules(models.Model):
 
-    IF_ELEMENTS = (
-        ('title', u'Заголовок новости'),
-        ('link', u'Url новости'),
-        ('content', u'Текст новости'),
-        ('description', u'Описание новости'),
-        ('http_code', u'HTTP Code'),
-    )
+    IF_ELEMENTS = (('title', u'Заголовок новости'), ('link', u'Url новости'),
+                   ('content', u'Текст новости'),
+                   ('description', u'Описание новости'),
+                   ('http_code', u'HTTP Code'), )
 
-    IF_ACTIONS = (
-        ('equal', u'Равен'),
-        ('contains', u'Содержит'),
-        ('not_equal', u'Не равен'),
-        ('regex', u'Regex match'),
-    )
+    IF_ACTIONS = (('equal', u'Равен'), ('contains', u'Содержит'),
+                  ('not_equal', u'Не равен'), ('regex', u'Regex match'), )
 
-    THEN_ELEMENT = (
-        ('title', u'Заголовок новости'),
-        ('description', u'Описание новости'),
-        ('section', u'Раздел'),
-        ('status', u'Статус'),
-        ('tags', u'Тэг новости'),
-    )
+    THEN_ELEMENT = (('title', u'Заголовок новости'),
+                    ('description', u'Описание новости'),
+                    ('section', u'Раздел'), ('status', u'Статус'),
+                    ('tags', u'Тэг новости'), )
 
-    THEN_ACTION = (
-        ('set', u'Установить'),
-        ('add', u'Добавить'),
-        ('remove', u'Удалить часть строки'),
-    )
+    THEN_ACTION = (('set', u'Установить'), ('add', u'Добавить'),
+                   ('remove', u'Удалить часть строки'), )
 
-    name = models.CharField(
-        max_length=255,
-        verbose_name=u'Название правила',
-    )
+    name = models.CharField(max_length=255, verbose_name=u'Название правила', )
 
-    is_activated = models.BooleanField(
-        verbose_name=u'Включено',
-        default=True,
-    )
+    is_activated = models.BooleanField(verbose_name=u'Включено',
+                                       default=True, )
 
-    if_element = models.CharField(
-        max_length=255,
-        verbose_name=u'Элемент условия',
-        choices=IF_ELEMENTS,
-        default='item_title',
-    )
+    if_element = models.CharField(max_length=255,
+                                  verbose_name=u'Элемент условия',
+                                  choices=IF_ELEMENTS,
+                                  default='item_title', )
 
-    if_action = models.CharField(
-        max_length=255,
-        verbose_name=u'Условие',
-        choices=IF_ACTIONS,
-        default='consist',
-    )
+    if_action = models.CharField(max_length=255,
+                                 verbose_name=u'Условие',
+                                 choices=IF_ACTIONS,
+                                 default='consist', )
 
-    if_value = models.CharField(
-        max_length=255,
-        verbose_name=u'Значение',
-    )
+    if_value = models.CharField(max_length=255, verbose_name=u'Значение', )
 
-    then_element = models.CharField(
-        max_length=255,
-        verbose_name=u'Элемент действия',
-        choices=THEN_ELEMENT,
-        default='item_title',
-    )
+    then_element = models.CharField(max_length=255,
+                                    verbose_name=u'Элемент действия',
+                                    choices=THEN_ELEMENT,
+                                    default='item_title', )
 
-    then_action = models.CharField(
-        max_length=255,
-        verbose_name=u'Действие',
-        choices=THEN_ACTION,
-        default='item_title',
-    )
+    then_action = models.CharField(max_length=255,
+                                   verbose_name=u'Действие',
+                                   choices=THEN_ACTION,
+                                   default='item_title', )
 
-    then_value = models.CharField(
-        max_length=255,
-        verbose_name=u'Значение',
-    )
+    then_value = models.CharField(max_length=255, verbose_name=u'Значение', )
 
-    weight = models.PositiveIntegerField(
-        default=100,
-        verbose_name=_("Weight")
-    )
+    weight = models.PositiveIntegerField(default=100, verbose_name=_('Weight'))
 
     def __str__(self):
         return self.name

@@ -1,10 +1,11 @@
-from django.test import TestCase
-from django.db.utils import IntegrityError
 from django.contrib.auth import get_user_model
+from django.db.utils import IntegrityError
+from django.test import TestCase
 from django.utils import timezone
-User = get_user_model()
 
 from frontend.models import EditorMaterial, Tip
+
+User = get_user_model()
 
 
 class EditorMaterialTest(TestCase):
@@ -15,19 +16,28 @@ class EditorMaterialTest(TestCase):
         cls.user = User.objects.create_user(username='haxor', password='1337')
 
         cls.em1 = EditorMaterial.objects.create(title='Заголовок 1',
-            slug='slug1', section='news', status='draft', announce='Анонс 1',
-            contents='Текст 1', user=cls.user
-        )
+                                                slug='slug1',
+                                                section='news',
+                                                status='draft',
+                                                announce='Анонс 1',
+                                                contents='Текст 1',
+                                                user=cls.user)
 
         cls.em2 = EditorMaterial.objects.create(title='Заголовок 2',
-            slug='slug2', section='news', status='draft', announce='Анонс 2',
-            contents='Текст 2', user=cls.user
-        )
+                                                slug='slug2',
+                                                section='news',
+                                                status='draft',
+                                                announce='Анонс 2',
+                                                contents='Текст 2',
+                                                user=cls.user)
 
         cls.em3 = EditorMaterial.objects.create(title='Заголовок 3',
-            slug='slug3', section='landing', status='draft', announce='Анонс 3',
-            contents='Текст 3', user=cls.user
-        )
+                                                slug='slug3',
+                                                section='landing',
+                                                status='draft',
+                                                announce='Анонс 3',
+                                                contents='Текст 3',
+                                                user=cls.user)
 
     def test_str(self):
 
@@ -44,9 +54,12 @@ class EditorMaterialTest(TestCase):
     def test_created_at_field_is_auto_now_add(self):
         past = timezone.now()
         em = EditorMaterial.objects.create(title='Заголовок',
-            slug='slug', section='landing', status='draft', announce='Анонс',
-            contents='Текст', user=self.user
-        )
+                                           slug='slug',
+                                           section='landing',
+                                           status='draft',
+                                           announce='Анонс',
+                                           contents='Текст',
+                                           user=self.user)
 
         self.assertGreater(em.created_at, past)
 

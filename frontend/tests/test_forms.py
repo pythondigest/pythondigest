@@ -1,10 +1,11 @@
-from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.forms import ValidationError
-User = get_user_model()
+from django.test import TestCase
 
 from digest.models import Section
-from frontend.forms import HoneypotWidget, HoneypotField, AddNewsForm
+from frontend.forms import AddNewsForm, HoneypotField, HoneypotWidget
+
+User = get_user_model()
 
 
 class HoneypotWidgetTest(TestCase):
@@ -79,7 +80,8 @@ class HoneypotFieldTest(TestCase):
 
         self.assertEqual(output, 'foobar')
 
-    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self):
+    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self
+                                                                           ):
 
         field = HoneypotField(initial='foobar')
 
@@ -151,6 +153,8 @@ class AddNewsFormTest(TestCase):
 
         form = AddNewsForm()
 
-        self.assertIn('<option value="6" selected="selected">some section</option>\n', form.as_p())
+        self.assertIn(
+            '<option value="6" selected="selected">some section</option>\n',
+            form.as_p())
         self.assertIn('Another title 1', form.as_p())
         self.assertIn('Another title 2', form.as_p())

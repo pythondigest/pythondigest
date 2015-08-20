@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from random import shuffle
 
 from django.core.management.base import BaseCommand
 
 from digest.management.commands import _get_http_data_of_url, \
-    _get_tags_for_item, \
-    load_pickle_file, save_pickle_file
+    _get_tags_for_item, load_pickle_file, save_pickle_file
 from digest.models import Item, Tag
 
 
@@ -27,12 +27,12 @@ def update_news():
     list_tags = list(Tag.objects.values_list('name', flat=True))
 
     while pk_list:
-        print("Parse: (left - %s)" % len(pk_list))
+        print('Parse: (left - %s)' % len(pk_list))
         success_pks = []
         for item in Item.objects.filter(pk__in=pk_list[:items_on_once]):
             try:
                 http_code, content = _get_http_data_of_url(item.link)
-                assert http_code == '404', "Not found page"
+                assert http_code == '404', 'Not found page'
                 item_data = {
                     'title': item.title,
                     'content': content,

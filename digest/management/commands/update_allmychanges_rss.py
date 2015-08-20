@@ -2,14 +2,17 @@
 
 from __future__ import unicode_literals
 
-from django.core.management.base import BaseCommand
-from allmychanges.api import search_category, track_changelog, get_changelogs
-from allmychanges.config import read_config
 import os
+
+from django.core.management.base import BaseCommand
+
+from allmychanges.api import get_changelogs, search_category, track_changelog
+from allmychanges.config import read_config
 
 
 def subscribe_all_python():
-    config = read_config(os.path.join(os.path.dirname(__file__), 'allmychanges.cfg'))
+    config = read_config(os.path.join(os.path.dirname(__file__),
+                                      'allmychanges.cfg'))
 
     section = 'python'
 
@@ -23,10 +26,10 @@ def subscribe_all_python():
 
     for i, x in enumerate(python_libraries):
         if i % 10 == 0:
-            print("Process: %s of %s" % (i, all_cnt))
+            print('Process: %s of %s' % (i, all_cnt))
 
         if not (x.get('name') in subscribed_packages):
-            print("Track: ", x.get('name'))
+            print('Track: ', x.get('name'))
             track_changelog(config, x)
 
 
