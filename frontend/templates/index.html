@@ -26,48 +26,7 @@
         <div class="col-md-12">
         <div class="col-md-4 pull-right visible-lg" style="margin-left:20px;width:349px;">
             <div class="row">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><center><h4>НАШИ ДРУЗЬЯ</h4></center></div>
-                        <div class="panel-body">
-                        <center>
-                            <p>
-                              <a href="http://python.su">
-                              <img src="/static/img/friends/pythonsu.gif" alt="python.su">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="http://pythonworld.ru">
-                              <img src="/static/img/friends/pythonworld.gif" alt="pythonworld.ru">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="http://djbook.ru">
-                              <img src="/static/img/friends/djangobook.gif" alt="djbook.ru">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="http://pep8.ru">
-                              <img src="/static/img/friends/pep8.gif" alt="pep8.ru">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="http://vk.com/python_programing">
-                              <img src="/static/img/friends/vk.gif" alt="vk.com/python_programing">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="http://vk.com/pynsk">
-                              <img src="/static/img/friends/pynsk.png" alt="vk.com/pynsk">
-                              </a>
-                            </p>
-                            <p>
-                              <a href="https://vk.com/vk_python">
-                              <img src="/static/img/friends/vk_python_banner.png" alt="vk.com/vk_python">
-                              </a>
-                            </p>
-                        </center>
-                        </div>
-                    </div>
+                {% include "blocks/_friends.html" %}
             </div>
         </div>
 
@@ -78,40 +37,9 @@
                     <h2>{{ data.grouper.title }}</h2>
                     {% for item in data.list%}
                         <div class="item-container">
-                            <noindex>
-                            <div class="issue-item">
-                                      <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
-                                        {% if item.language == 'en' %}
-                                            en
-                                        {% elif item.language == 'ru'%}
-                                            ru
-                                        {% endif %}
-                                      ">
-                                      &nbsp;
-                                      </span>
-                                <a class="issue-item-title"
-                                   onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
-                                   rel="nofollow"
-                                   href="{{ item.link }}"
-                                   target="_blank">
-                                    {{ item.title }}
-                                </a>
-                                <span class="issue-item-bages">
-                                    {% if item.resource %}
-                                    <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge issue-item-resource" target="_blank">
-                                        {{ item.resource }}
-                                    </a>
-                                    {% endif %}
-
-                                    {% if item.is_editors_choice %}
-                                    <span class="badge issue-item-resource">
-                                      <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
-                                    </span>
-                                    {% endif %}
-                                </span>
-                                <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
-                            </div>
-                            </noindex>
+                            {% with item=item %}
+                                {% include "blocks/_item.html" %}
+                            {% endwith %}
                         </div>
                     {% endfor %}
                 </div>
@@ -131,10 +59,8 @@
             <div class="pluso" data-background="none;" data-options="small,square,line,horizontal,nocounter,sepcounter=1,theme=14" data-services="vkontakte,facebook,twitter,google"></div>
 
 
-
-
             {% with issue.pk|lower as id %}
-            {% include "disqus.html" with identifier='issue_'|add:id %}
+                {% include "blocks/_disqus.html" with identifier='issue_'|add:id %}
             {% endwith %}
         </div>
     </div>

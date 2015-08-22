@@ -161,7 +161,7 @@ class AddNews(FormView):
 
 
 class ViewEditorMaterial(TemplateView):
-    template_name = 'editor_material_view.html'
+    template_name = 'old/editor_material_view.html'
 
     def get_context_data(self, **kwargs):
         section = kwargs.get('section', 'landing')

@@ -39,7 +39,7 @@
     <div class="site-body">
         <div class="content-body container">
             {% if messages %}
-                {% include "_messages.html" %}
+                {% include "blocks/_messages.html" %}
             {% endif %}
 
             {% block nav_bar %}
@@ -47,7 +47,7 @@
             {% endblock nav_bar %}
 
             {% block top_menu %}
-                {% include "top_menu.html" %}
+                {% include "blocks/_menu.html" %}
             {% endblock %}
 
 
