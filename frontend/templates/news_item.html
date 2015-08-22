@@ -6,9 +6,6 @@
 <div class="container news-list">
     {% with item=object %}
         <div class="item-container">
-            {%  with item=item  %}
-                {% include "blocks/_item.html" %}
-            {% endwith %}
             <div class="news-line-dates">
                 <small>
                     {{ item.created_at|date:"d.m.Y" }}
