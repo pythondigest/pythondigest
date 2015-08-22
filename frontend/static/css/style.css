@@ -53,8 +53,8 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 
 .search-form {
     margin-top:30px;
-    height:36px;
-    width:240px;
+    height:35px;
+    width:239px;
     border:1px solid #AAA;
 }
 
@@ -62,7 +62,7 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 .search-input {
     padding-left:1px;
     border:0;
-    width:196px;
+    width:195px;
 }
 
 .search-btn {
