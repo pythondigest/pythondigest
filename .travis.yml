@@ -3,17 +3,10 @@ language: python
 python:
   - 3.4
 
-env:
-  - DJANGO=1.8.4
-
-before_install:
-  - export DJANGO_SETTINGS_MODULE=conf.settings
-  - export PYTHONPATH=$HOME/builds/pythondigest/pythondigest
-  - export PIP_USE_MIRRORS=true
+cache: pip
 
 install:
   - pip install -r requirements.txt
-  - pip install django==$DJANGO --quiet --use-mirrors
   - pip install coverage
 
 branches:
