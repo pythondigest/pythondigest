@@ -6,10 +6,10 @@ import re
 from time import mktime
 
 from django.core.management.base import BaseCommand
-
 import feedparser
+
 from digest.management.commands import _get_http_data_of_url, \
-    apply_parsing_rules, fresh_google_check, get_tweets_by_url, save_item
+    apply_parsing_rules, get_tweets_by_url, save_item
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section, Tag
 
