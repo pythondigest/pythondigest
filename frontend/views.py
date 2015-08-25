@@ -7,12 +7,10 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, FormView, ListView, TemplateView
+from digg_paginator import DiggPaginator
 
 from digest.models import Issue, Item
-from digg_paginator import DiggPaginator
 from frontend.models import EditorMaterial
-from social.backends.utils import load_backends
-
 from .forms import AddNewsForm
 
 
@@ -34,7 +32,8 @@ class Sitemap(TemplateView):
         for issue in Issue.objects.filter(status='active'):
             items.append({'loc': issue.link, 'changefreq': 'weekly', })
 
-        for item in Item.objects.filter(status='active'):
+        for item in Item.objects.filter(status='active',
+                                        activated_at__lte=datetime.datetime.now()):
             items.append(
                 {'loc': '/view/%s' % item.pk,
                  'changefreq': 'never', })
@@ -115,7 +114,9 @@ class NewsList(ListView):
     model = Item
 
     def get_queryset(self):
-        items = super(NewsList, self).get_queryset().filter(status='active')
+        items = super(NewsList, self).get_queryset() \
+            .filter(status='active',
+                    activated_at__lte=datetime.datetime.now())
         lang = self.request.GET.get('lang')
         if lang in ['ru', 'en']:
             items = items.filter(language=lang)

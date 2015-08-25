@@ -5,6 +5,7 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
 from django.conf import settings
 import pytils
+
 from digest.models import Issue, Item, Section
 
 
@@ -30,10 +31,12 @@ class ItemDigestFeed(DigestFeed):
 
     """Лента РСС для новостей."""
 
-
     @staticmethod
     def items():
-        return Item.objects.filter(status='active').order_by(
+        return Item.objects.filter(
+            status='active',
+            activated_at__lte=datetime.datetime.now(),
+        ).order_by(
             '-related_to_date')[:10]
 
 
@@ -60,7 +63,9 @@ class RussianEntriesFeed(ItemDigestFeed):
     @staticmethod
     def items():
         return Item.objects.filter(status='active',
-                                   language='ru').order_by('-modified_at')[:10]
+                                   language='ru',
+                                   activated_at__lte=datetime.datetime.now()).order_by(
+            '-modified_at')[:10]
 
 
 class CustomFeedGenerator(Rss201rev2Feed):
@@ -70,8 +75,6 @@ class CustomFeedGenerator(Rss201rev2Feed):
 
 
 class IssuesFeed(ItemDigestFeed):
-
-
     """Лента РСС для выпусков новостей."""
     title = u"Дайджест новостей о python - все выпуски"
     link = '/issues/'
@@ -114,11 +117,14 @@ class SectionFeed(DigestFeed):
     def items(self):
         section = Section.objects.filter(title=self.section)
         if self.section == 'all' or len(section) != 1:
-            result = Item.objects.filter(status='active') \
+            result = Item.objects.filter(status='active',
+                                         activated_at__lte=datetime.datetime.now()) \
                          .order_by('-related_to_date')[:10]
         else:
             result = Item.objects.filter(status='active',
-                                         section=section[0]).order_by(
+                                         section=section[0],
+                                         activated_at__lte=datetime.datetime.now()
+                                         ).order_by(
                                              '-related_to_date')[:10]
         return result
 
