@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load micawber_tags %}
 {% load pytils_dt %}
 {% load common %}
 
@@ -24,6 +25,11 @@
             <div class="news-line-item">
                 <h3>{{ item.title }}</h3>
                 <p class="text-muted">{{ item.description|default:''|safe }}</p>
+                {% if  item.link|oembed_no_urlize != item.link  %}
+                    {{ item.link|oembed}}
+                {% endif %}
+
+
                 <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ item.link }}" target="_blank">Читать >></a>
             </div>
             </noindex>
