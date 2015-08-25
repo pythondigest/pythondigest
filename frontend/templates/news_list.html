@@ -16,6 +16,30 @@
     </div>
     {% for item in items %}
         <div class="item-container">
+            <noindex>
+            <div class="news-line-item-bages">
+                      <span title="Язык новости" class="badge news-line-item-resource
+                        {% if item.language == 'en' %}
+                            en
+                        {% elif item.language == 'ru'%}
+                            ru
+                        {% endif %}
+                      ">
+                      &nbsp;
+                      </span>
+                      {% if item.resource %}
+                      <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge news-line-item-resource" target="_blank">
+                            {{ item.resource }}
+                      </a>
+                      {% endif %}
+
+                      {% if item.is_editors_choice %}
+                      <span class="badge news-line-item-resource">
+                          <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
+                      </span>
+                      {% endif %}
+            </div>
+            </noindex>
             <div class="news-line-dates">
                 <small>
                     {{ item.created_at|date:"d.m.Y" }}
