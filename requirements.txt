@@ -19,3 +19,4 @@ django-rosetta==0.7.6
 django-bootstrap-form==3.2
 python-social-auth==0.2.12
 allmychanges==0.7.0
+micawber==0.3.3

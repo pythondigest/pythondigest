@@ -13,28 +13,43 @@ THUMBNAIL_DEBUG = False
 
 ALLOWED_HOSTS = ['pythondigest.ru']
 
-INSTALLED_APPS = ('django.contrib.auth', 'django.contrib.contenttypes',
-                  'django.contrib.sessions', 'django.contrib.sites',
-                  'django.contrib.messages', 'django.contrib.staticfiles',
-                  'bootstrap_admin', 'django.contrib.admin', 'bootstrapform',
-                  'sorl.thumbnail', 'pytils', 'concurrency', 'digest',
-                  'frontend', 'account', 'rosetta',
-                  'social.apps.django_app.default', )
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'bootstrap_admin',
+    'django.contrib.admin',
+    'bootstrapform',
+    'sorl.thumbnail',
+    'pytils',
+    'concurrency',
+    'digest',
+    'frontend',
+    'account',
+    'rosetta',
+    'social.apps.django_app.default',
+    'micawber.contrib.mcdjango',
+)
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-MIDDLEWARE_CLASSES = ('django.middleware.cache.UpdateCacheMiddleware',
-                      'django.middleware.common.CommonMiddleware',
-                      'concurrency.middleware.ConcurrencyMiddleware',
-                      'django.middleware.locale.LocaleMiddleware',
-                      'django.contrib.sessions.middleware.SessionMiddleware',
-                      'django.middleware.csrf.CsrfViewMiddleware',
-                      'django.contrib.auth.middleware.AuthenticationMiddleware',
-                      'django.contrib.messages.middleware.MessageMiddleware',
-                      'django.middleware.cache.FetchFromCacheMiddleware',
-                      'account.middleware.LocaleMiddleware',
-                      'account.middleware.TimezoneMiddleware', )
+MIDDLEWARE_CLASSES = (
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'concurrency.middleware.ConcurrencyMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'account.middleware.LocaleMiddleware',
+    'account.middleware.TimezoneMiddleware',
+)
 
 ROOT_URLCONF = 'conf.urls'
 
@@ -185,6 +200,12 @@ SOCIAL_AUTH_TWITTER_SECRET = ''
 
 SOCIAL_AUTH_GOOGLE_OAUTH_KEY = ''
 SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = ''
+
+MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_basic'
+# MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_embedly'
+MICAWBER_TEMPLATE_EXTENSIONS = [
+    ('oembed_no_urlize', {'urlize_all': False}),
+]
 
 try:
     from .local_settings import *
