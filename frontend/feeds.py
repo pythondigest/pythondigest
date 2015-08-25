@@ -2,7 +2,8 @@
 import datetime
 
 from django.contrib.syndication.views import Feed
-
+from django.utils.feedgenerator import Rss201rev2Feed
+from django.conf import settings
 import pytils
 from digest.models import Issue, Item, Section
 
@@ -61,12 +62,21 @@ class RussianEntriesFeed(ItemDigestFeed):
                                    language='ru').order_by('-modified_at')[:10]
 
 
+class CustomFeedGenerator(Rss201rev2Feed):
+    def add_item_elements(self, handler, item):
+        super(CustomFeedGenerator, self).add_item_elements(handler, item)
+        handler.addQuickElement(u"image", item['image'])
+
+
 class IssuesFeed(ItemDigestFeed):
+
 
     """Лента РСС для выпусков новостей."""
     title = u"Дайджест новостей о python - все выпуски"
     link = '/issues/'
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
+
+    feed_type = CustomFeedGenerator
 
     @staticmethod
     def items():
@@ -85,6 +95,14 @@ class IssuesFeed(ItemDigestFeed):
                                              datetime.time(0, 0, 0))
         else:
             return item.published_at
+
+    def item_extra_kwargs(self, obj):
+        """
+        Returns an extra keyword arguments dictionary that is used with
+        the `add_item` call of the feed generator.
+        Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
+        """
+        return { 'image': 'http://' + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
 
 
 class SectionFeed(DigestFeed):
