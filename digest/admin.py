@@ -241,25 +241,45 @@ class ItemModerator(Item):
 
 class ItemModeratorAdmin(admin.ModelAdmin):
     form = ItemStatusForm
-    fields = ('section', 'title', 'is_editors_choice', 'description',
-              'external_link_edit', 'status', 'language', )
+    fields = (
+        'section',
+        'title',
+        'is_editors_choice',
+        'description',
+        'external_link_edit',
+        'status',
+        'language',
+        'activated_at',
+    )
 
     readonly_fields = ('external_link_edit', )
 
     filter_horizontal = ('tags', )
-    list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
-                   'related_to_date', 'resource', )
+    list_filter = (
+        'status',
+        'issue',
+        'section',
+        'is_editors_choice',
+        'user',
+        'related_to_date',
+        'resource',
+    )
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'external_link', 'related_to_date',
-                    'is_editors_choice', )
+                    'is_editors_choice', 'activated_at')
 
     list_editable = ('is_editors_choice', )
     exclude = ('modified_at', ),
     radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
 
-    actions = ['make_moderated']
+    actions = [
+        '_action_make_moderated',
+        '_action_set_queue',
+        '_action_active_now',
+        '_action_active_queue',
+    ]
 
-    def make_moderated(self, request, queryset):
+    def _action_make_moderated(self, request, queryset):
         try:
             item = queryset.latest('pk')
             _start_week, _end_week = get_start_end_of_week(
@@ -271,7 +291,38 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         except Exception:
             raise
 
-    make_moderated.short_description = 'Отмодерирован'
+    _action_make_moderated.short_description = 'Отмодерирован'
+
+    def _action_active_now(self, request, queryset):
+        queryset.update(
+            activated_at=datetime.now(),
+            status='active',
+        )
+
+    _action_active_now.short_description = 'Активировать сейчас'
+
+    def _action_active_queue(self, request, queryset):
+        try:
+            period_len = 6
+            items = queryset.filter(status='queue')
+            assert items.count() > 0
+            _interval = int(period_len / items.count() * 60)  # in minutes
+
+            _time = datetime.now()
+            for x in items:
+                x.activated_at = _time
+                x.status = 'active'
+                x.save()
+                _time += timedelta(minutes=_interval)
+        except Exception:
+            pass
+
+    _action_active_queue.short_description = 'Активировать по очереди'
+
+    def _action_set_queue(self, request, queryset):
+        queryset.update(status='queue')
+
+    _action_set_queue.short_description = 'В очередь'
 
     def get_queryset(self, request):
 
@@ -301,7 +352,6 @@ class ItemModeratorAdmin(admin.ModelAdmin):
                 current_issue = before_issue[0]
 
             result = self.model.objects.filter(
-                status__in=['pending', 'moderated', 'active', 'autoimport'],
                 related_to_date__range=[current_issue.date_from,
                                         current_issue.date_to])
 

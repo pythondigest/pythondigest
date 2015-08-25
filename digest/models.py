@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
-
 from concurrency.fields import IntegerVersionField
+
 from frontend.models import Tip
 
 ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'), )
@@ -126,10 +126,14 @@ class Resource(models.Model):
         verbose_name_plural = u'Источники'
 
 
-ITEM_STATUS_CHOICES = (('pending', u'На рассмотрении'),
-                       ('active', u'Активная'), ('draft', u'Черновик'),
-                       ('moderated', u'Рассмотрена'),
-                       ('autoimport', u'Автоимпорт'), )
+ITEM_STATUS_CHOICES = (
+    ('pending', u'На рассмотрении'),
+    ('active', u'Активная'),
+    ('draft', u'Черновик'),
+    ('moderated', u'Рассмотрена'),
+    ('autoimport', u'Автоимпорт'),
+    ('queue', u'В очереди'),
+)
 
 ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'), )
 
@@ -173,6 +177,11 @@ class Item(models.Model):
     modified_at = models.DateTimeField(verbose_name=u'Дата изменения',
                                        null=True,
                                        blank=True, )
+
+    activated_at = models.DateTimeField(
+        verbose_name=u'Дата активации',
+        default=datetime.datetime.now,
+    )
     priority = models.PositiveIntegerField(
         verbose_name=u'Приоритет при показе',
         default=0, )

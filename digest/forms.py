@@ -6,7 +6,7 @@ from django.forms import ChoiceField, ModelForm
 
 from .models import Item
 
-ITEM_STATUS_CHOICES = (('active', u'Активная'),
+ITEM_STATUS_CHOICES = (('queue', u'В очередь'),
                        ('moderated', u'Отмодерировано'), )
 
 
