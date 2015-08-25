@@ -265,10 +265,9 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'resource',
     )
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'status', 'external_link', 'related_to_date',
-                    'is_editors_choice', 'activated_at')
+    list_display = ('title', 'status', 'external_link',
+                    'activated_at')
 
-    list_editable = ('is_editors_choice', )
     exclude = ('modified_at', ),
     radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
 
