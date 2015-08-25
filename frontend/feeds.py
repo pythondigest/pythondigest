@@ -30,10 +30,11 @@ class ItemDigestFeed(DigestFeed):
 
     """Лента РСС для новостей."""
 
+
     @staticmethod
     def items():
         return Item.objects.filter(status='active').order_by(
-            '-modified_at')[:10]
+            '-related_to_date')[:10]
 
 
 class AllEntriesFeed(ItemDigestFeed):
@@ -114,11 +115,11 @@ class SectionFeed(DigestFeed):
         section = Section.objects.filter(title=self.section)
         if self.section == 'all' or len(section) != 1:
             result = Item.objects.filter(status='active') \
-                         .order_by('-modified_at')[:10]
+                         .order_by('-related_to_date')[:10]
         else:
             result = Item.objects.filter(status='active',
                                          section=section[0]).order_by(
-                                             '-modified_at')[:10]
+                                             '-related_to_date')[:10]
         return result
 
 
