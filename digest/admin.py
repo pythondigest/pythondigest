@@ -146,7 +146,7 @@ admin.site.register(Tag, TagAdmin)
 
 class ItemAdmin(admin.ModelAdmin):
 
-    form = ItemStatusForm
+    # form = ItemStatusForm
     fields = ('section', 'title', 'is_editors_choice', 'description', 'link',
               'status', 'language', 'tags', 'issue' )
     filter_horizontal = ('tags', )
