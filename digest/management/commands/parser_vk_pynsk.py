@@ -49,7 +49,7 @@ def main():
     today = datetime.date.today()
     week_before = today - datetime.timedelta(weeks=1)
     rssnews = feedparser.parse(url)
-    for n in rssnews.entries[:5]:
+    for n in reversed(rssnews.entries):
         if len(Item.objects.filter(link=n.link)[0:1]):
             continue
 
@@ -84,7 +84,6 @@ def main():
                 'section': section,
                 'status': 'active',
             }
-
             save_item(_)
 
 
