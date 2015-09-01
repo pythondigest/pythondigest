@@ -6,7 +6,7 @@ from frontend.views import AddNews, Index, IssuesList, \
 from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
-    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed
+    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed
 
 urlpatterns = patterns(
     '',
@@ -25,6 +25,7 @@ urlpatterns = patterns(
     url(r'^rss/bookdoc/$', ItemBookDocFeed(), name='book_doc_rss'),
     url(r'^rss/event/$', ItemEventFeed(), name='event_rss'),
     url(r'^rss/article/$', ItemArticleFeed(), name='article_rss'),
+    url(r'^rss/authors/$', ItemAuthorsFeed(), name='authors_rss'),
     url(r'^rss/release/$', ItemReleaseFeed(), name='release_rss'),
     url(r'^rss/packages/$', ItemPackagesFeed(), name='packages_rss'),
     url(r'^issues/$', IssuesList.as_view(), name='issues'),

@@ -159,3 +159,6 @@ class ItemReleaseFeed(SectionFeed):
 
 class ItemPackagesFeed(SectionFeed):
     section = 'Интересные проекты, инструменты, библиотеки'
+
+class ItemAuthorsFeed(SectionFeed):
+    section = 'Колонка автора'
