@@ -51,8 +51,8 @@ def main():
     week_before = today - datetime.timedelta(weeks=1)
     rssnews = feedparser.parse(url)
     for n in reversed(rssnews.entries):
-        # if len(Item.objects.filter(link=n.link)[0:1]):
-        #     continue
+        if len(Item.objects.filter(link=n.link)[0:1]):
+            continue
 
         # print("Parse: %s" % n.link)
         title = None
