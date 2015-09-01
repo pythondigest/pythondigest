@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 import datetime
 import re
+import textwrap
 from time import mktime
 
 from django.core.management.base import BaseCommand
@@ -50,8 +51,8 @@ def main():
     week_before = today - datetime.timedelta(weeks=1)
     rssnews = feedparser.parse(url)
     for n in reversed(rssnews.entries):
-        if len(Item.objects.filter(link=n.link)[0:1]):
-            continue
+        # if len(Item.objects.filter(link=n.link)[0:1]):
+        #     continue
 
         # print("Parse: %s" % n.link)
         title = None
@@ -75,6 +76,9 @@ def main():
                 break
 
         if title is not None and content is not None:
+            content_link = "<a href='%s'>[Продолжение]</a>" % n.link
+            content = textwrap.shorten(content, width=300, placeholder="...%s" % content_link)\
+                .replace('<a...', '...')
             _ = {
                 'link': n.link,
                 'description': content,
