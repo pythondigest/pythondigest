@@ -160,6 +160,10 @@ class Item(models.Model):
                                  null=True,
                                  blank=True, )
     link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
+    additionally = models.CharField(max_length=255,
+                                    verbose_name=u'Дополнительно',
+                                    null=True,
+                                    blank=True)
     related_to_date = models.DateField(
         verbose_name=u'Дата',
         help_text=u'Например, дата публикации новости на источнике',

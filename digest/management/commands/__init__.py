@@ -13,7 +13,7 @@ except ImportError:
 
 from bs4 import BeautifulSoup
 
-from digest.models import Item
+from digest.models import Item, Section
 from django.conf import settings
 from pygoogle import pygoogle
 from pygoogle.pygoogle import PyGoogleHttpException
@@ -21,6 +21,59 @@ import datetime
 from time import sleep
 from stem import control, Signal, stem
 
+
+def _clojure_get_youtube_urls_from_page():
+    """
+    Замыкание
+    Возвращает функцию, которая по коду страницы (requests.text)
+        возвращает youtube ссылку
+        Применяется для раздела Видео
+    :return:
+    """
+    reg_list = '((https?://)?(www\.)?(youtube|youtu|youtube-nocookie)\.(com|be)/(watch\?.*?(?=v=)v=|embed/|v/|.+\?v=)?([^&=%\?]{11}))'
+
+    youtube_links = ['youtu.be', 'youtube.com', 'youtube-nocookie.com']
+
+    def form_url(url):
+        result = url
+        _ = re.findall(reg_list, url)
+        if _ and len(_) == 1 and len(_[0]) == 7:
+            result = "https://www.youtube.com/watch?v=%s" % _[0][6]
+        return result
+
+    def clean_urls(url):
+        result = None
+        url = re.sub(r'<[^<]+?>', '', url)
+        if any(x in url for x in youtube_links):
+            result = url.replace(r'//', '') if url.startswith('//') else url
+        return result
+
+    def parse_page(content):
+
+        result = None
+        try:
+            a = filter(lambda x: "youtu" in x, content.split('\n'))
+            urls = []
+            for x in a:
+                _ = re.findall(reg_list, x)
+                if _:
+                    urls.extend([x[0] for x in filter(lambda x: x and len(x) > 1 and x[0], _)])
+                    break
+
+            result = list(
+                     set(
+                     map(form_url,
+                     map(clean_urls,
+                     filter(lambda x: '%2F' not in x, urls)))))[0]
+        except Exception:
+            raise
+        finally:
+            return result
+
+    return parse_page
+
+
+get_youtube_url_from_page = _clojure_get_youtube_urls_from_page()
 
 def _date_to_julian_day(my_date):
     """
@@ -55,10 +108,10 @@ def _get_http_data_of_url(url: str):
         r = requests.get(url)
         readable_article = Document(r.content).summary()
         status_code = str(r.status_code)
-        result = status_code, readable_article
+        result = status_code, readable_article, r.text
 
     except (requests.ConnectionError, AssertionError) as e:
-        result = str(404), None
+        result = str(404), None, None
     return result
 
 
@@ -220,6 +273,24 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
 
     return functions.get(then_action)
 
+def apply_video_rules(item_data:dict):
+    """
+    Применяем правила (захардкоженые) для раздела Видео
+    В данном случае если раздел видео, то пытаемся выдрать ссылку на видео
+    :param item_data:
+    :return:
+    """
+    youtube_links = ['youtu.be', 'youtube.com', 'youtube-nocookie.com']
+
+    result = item_data
+    if item_data.get('section') == Section.objects.get(title='Видео') \
+            and all(x not in item_data.get('link') for x in youtube_links) \
+            and 'raw_content' in item_data:
+        url = get_youtube_url_from_page(item_data.get('raw_content'))
+        if url is not None:
+            item_data['additionally'] = url
+    return result
+
 
 def apply_parsing_rules(item_data: dict, query_rules, query_sections,
                         query_statuses, query_tags):
@@ -303,6 +374,7 @@ def save_item(item):
             status=item.get('status', 'autoimport'),
             user_id=settings.BOT_USER_ID,
             section=item.get('section', None),
+            additionally=item.get('additionally', None),
             language=item.get('language') if item.get('language') else 'en')
 
         _a.save()

@@ -75,7 +75,7 @@ def get_rss(**kwargs):
                 n.title,
                 debug=True) else n.title
 
-            http_code, content = _get_http_data_of_url(n.link)
+            http_code, content, _ = _get_http_data_of_url(n.link)
 
             item_data = {
                 'title': title,

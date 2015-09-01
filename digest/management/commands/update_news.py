@@ -31,7 +31,7 @@ def update_news():
         success_pks = []
         for item in Item.objects.filter(pk__in=pk_list[:items_on_once]):
             try:
-                http_code, content = _get_http_data_of_url(item.link)
+                http_code, content, _ = _get_http_data_of_url(item.link)
                 assert http_code == '404', 'Not found page'
                 item_data = {
                     'title': item.title,
@@ -54,7 +54,7 @@ def update_news():
 
             except Exception:
                 pass
-            print(item)
+            # print(item)
             success_pks.append(item.pk)
 
         Item.objects.filter(pk__in=success_pks).update(to_update=False)

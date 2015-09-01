@@ -25,6 +25,10 @@
             <div class="news-line-item">
                 <h3>{{ item.title }}</h3>
                 <p class="text-muted">{{ item.description|default:''|safe }}</p>
+
+                {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
+                    {{ item.additionally|oembed}}
+                {% endif %}
                 {% if  item.link|oembed_no_urlize != item.link  %}
                     {{ item.link|oembed}}
                 {% endif %}

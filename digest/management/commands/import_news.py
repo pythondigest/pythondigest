@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 import datetime
+import pprint
 import re
 from time import mktime
 
@@ -9,7 +10,7 @@ from django.core.management.base import BaseCommand
 import feedparser
 
 from digest.management.commands import _get_http_data_of_url, \
-    apply_parsing_rules, get_tweets_by_url, save_item
+    apply_parsing_rules, get_tweets_by_url, save_item, apply_video_rules
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section, Tag
 
@@ -76,20 +77,22 @@ def import_rss(**kwargs):
             # title = u'[!] %s' % n.title if fresh_google_check(
             #    n.title) else n.title
 
-            http_code, content = _get_http_data_of_url(n.link)
+            http_code, content, raw_content = _get_http_data_of_url(n.link)
 
             item_data = {
                 'title': title,
                 'link': n.link,
+                'raw_content': raw_content,
                 'http_code': http_code,
                 'content': content,
                 'description': re.sub('<.*?>', '', n.summary),
                 'resource': src.resource,
                 'language': src.language,
             }
-            data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
-                'query_rules') else {}
-            item_data.update(data)
+            item_data.update(
+                apply_parsing_rules(item_data, **kwargs)
+                if kwargs.get('query_rules') else {})
+            item_data = apply_video_rules(item_data.copy())
             save_item(item_data)
 
 

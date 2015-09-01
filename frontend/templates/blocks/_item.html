@@ -37,9 +37,14 @@
         {% endif %}
     </span>
         <p class="text-muted issue-item-description">{{ item.description|default:''|safe}}</p>
+
+        {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
+            {{ item.additionally|oembed}}
+        {% endif %}
         {% if  item.link|oembed_no_urlize != item.link  %}
             {{ item.link|oembed}}
         {% endif %}
+
 
     </div>
 </noindex>
