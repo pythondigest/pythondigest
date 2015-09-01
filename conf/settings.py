@@ -26,8 +26,12 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'pytils',
     'concurrency',
+
     'digest',
     'frontend',
+    'jobs',
+
+
     'account',
     'rosetta',
     'social.apps.django_app.default',
