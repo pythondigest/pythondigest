@@ -35,7 +35,7 @@ def main():
     url = 'http://feed.exileed.com/vk/feed/pynsk'
 
     _section_title = 'Колонка автора'
-    _res_title = 'PyNSK - группа сообщества'
+    _res_title = 'Александр Сапронов (PyNSK)'
 
     resource = Resource.objects.filter(title=_res_title)
     assert resource.count() == 1, "Not found resoure: %s" % _res_title
