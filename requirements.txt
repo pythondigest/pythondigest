@@ -20,3 +20,4 @@ django-bootstrap-form==3.2
 python-social-auth==0.2.12
 allmychanges==0.7.1
 micawber==0.3.3
+funcy
