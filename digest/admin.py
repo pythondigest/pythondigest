@@ -332,11 +332,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     _action_active_queue_24.short_description = 'Активировать по очереди(24 часа)'
 
     def _action_active_queue_8(self, request, queryset):
-<<<<<<< HEAD
-        self._action_active_queue_n_hourn(24, queryset)
-=======
         self._action_active_queue_n_hourn(8, queryset)
->>>>>>> c28a580ea035ec5eba425163ca4ca6680e99143e
 
     _action_active_queue_8.short_description = 'Активировать по очереди(8 часов)'
 
