@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load pytils_dt %}
+{% load common %}
+{% load micawber_tags %}
+
+{% block content %}
+    <div class="container news-list">
+        <div class="alert alert-warning">
+            <strong>Внимание!</strong> ссылки в этот раздел попадают без
+            модерации.
+
+            <p>Если вы заметили плохую ссылку сообщите нам:</p>
+
+            <p></p>
+            <ul>
+                <li>в <a
+                        href="https://gitter.im/pythondigest/pythondigest">Чат</a>
+                </li>
+                <li>по <a
+                        href="mailto:pydigest@gmail.com?Subject=Раздел%20вакансий:%20плохая%20ссылка">E-mail</a>
+                </li>
+            </ul>
+        </div>
+        <h4>Вакансии: </h4>
+        {% for job in jobs %}
+            <div class="item-container">
+                <noindex>
+                    <div class="news-line-item">
+                        <a rel="nofollow" href="{{ job.link }}"
+                           target="_blank">{{ job.title }}</a>
+
+                        <p class="text-muted">{{ job.description|default:''|safe }}</p>
+                    </div>
+                </noindex>
+            </div>
+        {% empty %}
+            <div class="alert alert-warning pull-left">
+                <strong>Печально но факт!</strong> В этой ленте нет вакансий.
+            </div>
+        {% endfor %}
+    </div>
+
+    {% include "blocks/_pagination.html" %}
+{% endblock %}

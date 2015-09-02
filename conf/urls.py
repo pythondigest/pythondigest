@@ -12,6 +12,7 @@ urlpatterns = patterns(
         {'document_root': settings.MEDIA_ROOT}),
     url(r'', include('frontend.urls', namespace='frontend')),
     url(r'', include('digest.urls', namespace='digest')),
+    url(r'', include('jobs.urls', namespace='jobs')),
     url(r"^account/", include('account.urls')),
     url(r'', include('social.apps.django_app.urls', namespace='social'))
 
