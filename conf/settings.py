@@ -22,12 +22,18 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
+
+    'admin_reorder',
     'bootstrapform',
     'sorl.thumbnail',
     'pytils',
     'concurrency',
+
     'digest',
     'frontend',
+    'jobs',
+
+
     'account',
     'rosetta',
     'social.apps.django_app.default',
@@ -49,6 +55,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.cache.FetchFromCacheMiddleware',
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
+    'admin_reorder.middleware.ModelAdminReorder',
 )
 
 ROOT_URLCONF = 'conf.urls'
@@ -206,6 +213,17 @@ MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_basic'
 MICAWBER_TEMPLATE_EXTENSIONS = [
     ('oembed_no_urlize', {'urlize_all': False}),
 ]
+
+
+ADMIN_REORDER = (
+    'digest',
+    'jobs',
+    'frontend',
+    'sites',
+    'auth',
+    'account',
+    'default',
+)
 
 try:
     from .local_settings import *
