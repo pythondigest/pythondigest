@@ -27,7 +27,7 @@
 - model: digest.section
   pk: null
   fields:
-    title: 'Книги и документация'
+    title: 'Учебные материалы'
     priority: 700
     status: 'active'
     habr_icon: '<img src="//habrastorage.org/files/5d6/c9f/54c/5d6c9f54c77b4973b4c8d9e5eefa7d08.jpg"/>'
@@ -41,7 +41,7 @@
 - model: digest.section
   pk: null
   fields:
-    title: 'Статьи и интервью'
+    title: 'Статьи'
     priority: 900
     status: 'active'
     habr_icon: '<img src="http://habr.habrastorage.org/post_images/301/8fe/686/3018fe686f81ab666cb51e214da2d8e4.jpg">'

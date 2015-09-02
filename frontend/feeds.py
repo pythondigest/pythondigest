@@ -142,7 +142,7 @@ class ItemNewsFeed(SectionFeed):
 
 
 class ItemBookDocFeed(SectionFeed):
-    section = 'Книги и документация'
+    section = 'Учебные материалы'
 
 
 class ItemEventFeed(SectionFeed):
@@ -150,7 +150,7 @@ class ItemEventFeed(SectionFeed):
 
 
 class ItemArticleFeed(SectionFeed):
-    section = 'Статьи и интервью'
+    section = 'Статьи'
 
 
 class ItemReleaseFeed(SectionFeed):
