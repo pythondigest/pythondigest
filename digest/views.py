@@ -2,26 +2,16 @@
 
 import datetime
 
-from django.db.models import Q
-from django.views.generic import DetailView, ListView
-from digg_paginator import DiggPaginator
+from django.views.generic import DetailView
 from django.template import loader
 from django.template.context import RequestContext
 from concurrency.views import ConflictResponse
-import datetime
-
-from django.conf import settings
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.db.models import Q
-from django.shortcuts import get_object_or_404
-from django.views.generic import FormView, ListView, TemplateView
+from django.views.generic import FormView, ListView
 from digg_paginator import DiggPaginator
 
-from digest.models import Issue, Item
-from frontend.models import EditorMaterial
 from .forms import AddNewsForm
-
 from digest.models import Issue, Item
 
 

@@ -3,7 +3,7 @@ from django.forms import ValidationError
 from django.test import TestCase
 
 from digest.models import Section
-from frontend.forms import AddNewsForm, HoneypotField, HoneypotWidget
+from digest.forms import AddNewsForm, HoneypotField, HoneypotWidget
 
 User = get_user_model()
 
