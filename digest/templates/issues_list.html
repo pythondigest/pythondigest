@@ -9,7 +9,7 @@
     {% thumbnail item.image "x200" as im %}
         <div class="thumb col-sm-4 col-lg-4 col-md-4">
         
-            <a href="{% url 'frontend:issue_view' pk=item.pk %}" 
+            <a href="{% url 'digest:issue_view' pk=item.pk %}"
                title="Дайджест python, {{ item.title }}  {{ item.description|striptags }}">
                 <div class="thumbnail">
 

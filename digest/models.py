@@ -70,7 +70,7 @@ class Issue(models.Model):
 
     @property
     def link(self):
-        return reverse('frontend:issue_view', kwargs={'pk': self.pk})
+        return reverse('digest:issue_view', kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['-pk']
@@ -227,7 +227,7 @@ class Item(models.Model):
 
     @property
     def internal_link(self):
-        return reverse('frontend:item', kwargs={'pk': self.pk})
+        return reverse('digest:item', kwargs={'pk': self.pk})
 
     @property
     def get_tags_str(self):

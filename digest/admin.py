@@ -48,7 +48,7 @@ class IssueAdmin(admin.ModelAdmin):
     news_count.short_description = u"Количество новостей"
 
     def frontend_link(self, obj):
-        lnk = reverse('frontend:issue_view', kwargs={'pk': obj.pk})
+        lnk = reverse('digest:issue_view', kwargs={'pk': obj.pk})
         return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
 
     frontend_link.allow_tags = True

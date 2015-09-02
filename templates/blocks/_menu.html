@@ -12,7 +12,7 @@
             </div>
             <div class="top-search col-md-3" align="center">
                 <div class="search-form">
-                    <form action="{% url 'frontend:feed' %}" class="form-inline" role="form">
+                    <form action="{% url 'digest:feed' %}" class="form-inline" role="form">
                         <div class="form-group">
                             <input type="text" name="q" type="text" class="search-input" value="{{ request.GET.q|default:'' }}" placeholder=" ПОИСК...">
                             <button type="submit" class="search-btn btn btn-warning"><i class="fa fa-search fa-lg"></i></button>
@@ -54,10 +54,10 @@
                     <a href="{% url 'frontend:home' %}"><i class='fa fa-home fa-lg'></i></a>
                 </li>
                 <li {% if active_menu_item == 'issues_list' %}class="active"{% endif %}>
-                    <a href="{% url 'frontend:issues' %}">ВЫПУСКИ</a>
+                    <a href="{% url 'digest:issues' %}">ВЫПУСКИ</a>
                 </li>
                 <li {% if active_menu_item == 'feed' %}class="active"{% endif %}>
-                    <a href="{% url 'frontend:feed' %}">ЛЕНТА</a>
+                    <a href="{% url 'digest:feed' %}">ЛЕНТА</a>
                 </li>
 {##}
 {#                {% if request.user.is_authenticated %}#}
@@ -111,7 +111,7 @@
             интересную новость, статью, интервью или проект о python.
         </div>
         <div class="jump-btn col-md-3" align="center">
-            <a class="btn btn-lg btn-success" href="{% url 'frontend:addnews' %}">Добавить
+            <a class="btn btn-lg btn-success" href="{% url 'digest:addnews' %}">Добавить
                 новость</a>
         </div>
         <div class="jumb-text col-md-12 pull-left">
