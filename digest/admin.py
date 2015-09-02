@@ -15,7 +15,7 @@ from digest.models import AutoImportResource, Issue, Item, Package, \
 admin.site.unregister(Site)
 
 
-def _link_html(obj):
+def link_html(obj):
     link = escape(obj.link)
     return u'<a target="_blank" href="%s">%s</a>' % (link, link)
 
@@ -209,7 +209,7 @@ admin.site.register(Item, ItemAdmin)
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ('title', 'link_html')
 
-    link_html = lambda s, obj: _link_html(obj)
+    link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 
@@ -227,7 +227,7 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
         },
     }
 
-    link_html = lambda s, obj: _link_html(obj)
+    link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 
@@ -332,7 +332,11 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     _action_active_queue_24.short_description = 'Активировать по очереди(24 часа)'
 
     def _action_active_queue_8(self, request, queryset):
+<<<<<<< HEAD
         self._action_active_queue_n_hourn(24, queryset)
+=======
+        self._action_active_queue_n_hourn(8, queryset)
+>>>>>>> c28a580ea035ec5eba425163ca4ca6680e99143e
 
     _action_active_queue_8.short_description = 'Активировать по очереди(8 часов)'
 
@@ -382,7 +386,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
 
-    external_link_edit = lambda s, obj: _link_html(obj)
+    external_link_edit = lambda s, obj: link_html(obj)
     external_link_edit.allow_tags = True
     external_link_edit.short_description = u"Ссылка"
 
