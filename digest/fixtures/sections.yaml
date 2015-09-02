@@ -1,0 +1,61 @@
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Колонка автора'
+    priority: 650
+    status: 'active'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Советуем'
+    priority: 701
+    status: 'active'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Видео'
+    priority: 750
+    status: 'active'
+    habr_icon: '<img src="//habrastorage.org/files/336/073/3f2/3360733f2c814c3492f7ef980f1f9bfb.jpg"/>'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Новости'
+    priority: 1000
+    status: 'active'
+    habr_icon: '<img src="http://habrastorage.org/getpro/habr/post_images/3f8/1eb/4e9/3f81eb4e963f2446f0730155657d0e55.jpg">'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Книги и документация'
+    priority: 700
+    status: 'active'
+    habr_icon: '<img src="//habrastorage.org/files/5d6/c9f/54c/5d6c9f54c77b4973b4c8d9e5eefa7d08.jpg"/>'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Конференции, события, встречи разработчиков'
+    priority: 300
+    status: 'active'
+    habr_icon: '<img src="//habrastorage.org/files/6c1/4bf/740/6c14bf740ea1431db9862d0bf926325a.jpg"/>'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Статьи и интервью'
+    priority: 900
+    status: 'active'
+    habr_icon: '<img src="http://habr.habrastorage.org/post_images/301/8fe/686/3018fe686f81ab666cb51e214da2d8e4.jpg">'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Интересные проекты, инструменты, библиотеки'
+    priority: 600
+    status: 'active'
+    habr_icon: '<img src="http://habr.habrastorage.org/post_images/a52/345/858/a52345858270ba4aa67124d1405312c8.jpg">'
+- model: digest.section
+  pk: null
+  fields:
+    title: 'Релизы'
+    priority: 500
+    status: 'active'
+    habr_icon: '<img src="http://habr.habrastorage.org/post_images/476/564/9ee/4765649ee4ecea3a1ca97b609db326b7.jpg">'

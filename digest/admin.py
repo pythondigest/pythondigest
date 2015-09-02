@@ -59,7 +59,7 @@ admin.site.register(Issue, IssueAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):
-    pass
+    ordering = ('-priority', )
 
 
 admin.site.register(Section, SectionAdmin)
