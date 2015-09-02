@@ -36,8 +36,7 @@ def get_tweets():
 def import_tweets(**kwargs):
     for i in get_tweets():
         # это помогает не парсить лишний раз ссылку, которая есть
-        ct = len(Item.objects.filter(link=i[1])[0:1])
-        if ct:
+        if Item.objects.filter(link=i[1]).exists():
             continue
 
         # title = u'[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
@@ -117,8 +116,8 @@ class Command(BaseCommand):
     help = u'News import from external resources'
 
     def handle(self, *args, **options):
-        '''
+        """
         Основной метод - точка входа
-        '''
+        """
         parsing(import_tweets)
         parsing(import_rss)
