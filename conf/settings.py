@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from os import path
+import os
 
 BASE_DIR = path.abspath(path.join(path.dirname(__file__), '..'))
 
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'conf.urls'
 
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
-    'DIRS': [],
+    'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
     'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': [
