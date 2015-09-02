@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import datetime
+from functools import partial
+import pprint
 from time import mktime
 
 from django.core.management.base import BaseCommand
@@ -10,58 +12,12 @@ from funcy import join
 from jobs.models import JobFeed, JobItem, RejectedList, AcceptedList
 
 
-def parse_feed(feed_url):
-    print(feed_url)
-    # rssnews = feedparser.parse(feed_url)
-    # today = datetime.date.today()
-    # week_before = today - datetime.timedelta(weeks=1)
-    # for n in rssnews.entries:
-    #     ct = len(Item.objects.filter(link=n.link)[0:1])
-    #     if ct:
-    #         continue
-    #
-    #     time_struct = getattr(n, 'published_parsed', None)
-    #     if time_struct:
-    #         _timestamp = mktime(time_struct)
-    #         dt = datetime.datetime.fromtimestamp(_timestamp)
-    #         if dt.date() < week_before:
-    #             continue
-    #
-    #     title = n.title
-    #     # title = u'[!] %s' % n.title if fresh_google_check(
-    #     #    n.title) else n.title
-    #
-    #     http_code, content, raw_content = _get_http_data_of_url(n.link)
-    #
-    #     item_data = {
-    #         'title': title,
-    #         'link': n.link,
-    #         'raw_content': raw_content,
-    #         'http_code': http_code,
-    #         'content': content,
-    #         'description': re.sub('<.*?>', '', n.summary),
-    #         'resource': src.resource,
-    #         'language': src.language,
-    #     }
-    #     item_data.update(
-    #         apply_parsing_rules(item_data, **kwargs)
-    #         if kwargs.get('query_rules') else {})
-    #     item_data = apply_video_rules(item_data.copy())
-    #     save_item(item_data)
-
-def filter_excl(item_data):
-    excl = [s for s in (src.excl or '').split(',') if s]
-
-    tweets_data = get_tweets_by_url(src.link)
-
-    for text, link, http_code in tweets_data:
-        excl_link = bool([i for i in excl if i in link])
-        if not excl_link and src.incl in text:
-            tw_txt = text.replace(src.incl, '')
-            dsp.append([tw_txt, link, resource, http_code])
-
-
-def get_link_title_desc(item):
+def get_link_title_desc(item: feedparser.FeedParserDict) -> tuple:
+    """
+    Для RSS Item возвращает ссылку, заголовок и описание
+    :param item:
+    :return:
+    """
     result = None, None, None
     if item:
         assert item.title, "Not found title in item"
@@ -76,7 +32,14 @@ def get_link_title_desc(item):
         result = link, title, item.summary
     return result
 
-def get_rss_items(feed_url):
+
+def get_rss_items(feed_url: str) -> list:
+    """
+    Возвращает список новостей из RSS
+        проверяет что такой новости еще не сохранено
+    :param feed_url:
+    :return:
+    """
     items = feedparser.parse(feed_url)
     result = []
     for n in items.entries:
@@ -86,7 +49,12 @@ def get_rss_items(feed_url):
     return result
 
 
-def is_new_job(item):
+def is_new_job(item: feedparser.FeedParserDict) -> bool:
+    """
+    Возвращает True, если новость не старше недели
+    :param item:
+    :return:
+    """
     result = True
     today = datetime.date.today()
     week_before = today - datetime.timedelta(weeks=1)
@@ -99,25 +67,49 @@ def is_new_job(item):
     return result
 
 
+def is_not_excl(words: list, item: tuple) -> bool:
+    """
+    Возвращает True если ни один из элементов item
+    не содержит слов из списка на исключения
+    :param words:
+    :param item:
+    :return:
+    """
+    return not bool([i for x in item for i in words if i in x])
+
+
+def is_incl(words: list, item: tuple) -> bool:
+    """
+    Возвращает True если хотя бы один элемент item
+    :param words:
+    :param item:
+    :return:
+    """
+    for elem in item:
+        for word in words:
+            if word in elem:
+                return True
+    return False
+
 def import_jobs():
     _job_feeds_obj = JobFeed.objects.filter(in_edit=False)
     job_feeds = list(_job_feeds_obj.values_list('link', flat=True))
-    items = map(get_link_title_desc,
-        join(
-        filter(is_new_job,
-        map(get_rss_items, job_feeds))))
-
     excl = list(RejectedList.objects.values_list('title', flat=True))
-    # todo
-    # примнеять список разрешения
-    # incl = list(AcceptedList.objects.values_list('title', flat=True))
+    incl = list(AcceptedList.objects.values_list('title', flat=True))
 
-    for link, title, description in items:
-        excl_link = bool([i for i in excl if i in link])
-        if not excl_link:
-            print(description)
+    excl_filter = partial(is_not_excl, excl)
+    incl_filter = partial(is_incl, incl)
 
-    # print(list(a))
+    items = \
+        filter(incl_filter,
+               filter(excl_filter,
+                      map(get_link_title_desc,
+                          filter(is_new_job,
+                                 join(
+                                     map(get_rss_items, job_feeds))))))
+
+    pprint.pprint(list(items))
+
 
 
 class Command(BaseCommand):

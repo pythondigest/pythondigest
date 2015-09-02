@@ -9,8 +9,13 @@ class JobFeedAdmin(admin.ModelAdmin):
     list_display = (
         'name',
         'link_html',
+        'is_activated',
         'in_edit',
     )
+
+    list_editable = [
+        'is_activated',
+    ]
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True

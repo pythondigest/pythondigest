@@ -18,6 +18,8 @@ class JobFeed(models.Model):
         default=False,
     )
 
+    is_activated = models.BooleanField(verbose_name=u'Включено',
+                                       default=True, )
     def __str__(self):
         return self.name
 
@@ -28,12 +30,18 @@ class JobFeed(models.Model):
 class RejectedList(models.Model):
     title = models.CharField('Строка', max_length=255)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Слисок исключения'
         verbose_name_plural = 'Строки для исключения'
 
 class AcceptedList(models.Model):
     title = models.CharField('Строка', max_length=255)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'Слисок одобрения'
