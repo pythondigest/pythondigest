@@ -285,7 +285,8 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         '_action_make_moderated',
         '_action_set_queue',
         '_action_active_now',
-        '_action_active_queue',
+        '_action_active_queue_8',
+        '_action_active_queue_24',
     ]
 
     def _action_make_moderated(self, request, queryset):
@@ -310,9 +311,8 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
     _action_active_now.short_description = 'Активировать сейчас'
 
-    def _action_active_queue(self, request, queryset):
+    def _action_active_queue_n_hourn(self, period_len, queryset):
         try:
-            period_len = 6
             items = queryset.filter(status='queue')
             assert items.count() > 0
             _interval = int(period_len / items.count() * 60)  # in minutes
@@ -326,7 +326,15 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         except Exception:
             pass
 
-    _action_active_queue.short_description = 'Активировать по очереди'
+    def _action_active_queue_24(self, request, queryset):
+        self._action_active_queue_n_hourn(24, queryset)
+
+    _action_active_queue_24.short_description = 'Активировать по очереди(24 часа)'
+
+    def _action_active_queue_8(self, request, queryset):
+        self._action_active_queue_n_hourn(24, queryset)
+
+    _action_active_queue_8.short_description = 'Активировать по очереди(8 часов)'
 
     def _action_set_queue(self, request, queryset):
         queryset.update(status='queue')
