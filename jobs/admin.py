@@ -32,6 +32,8 @@ class JobItemAdmin(admin.ModelAdmin):
         'title',
         'link',
         'description',
+        'created_at',
+        'updated_at',
     )
 
     link_html = lambda s, obj: link_html(obj)
