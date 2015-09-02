@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
+
 from django.db import models
 
 
@@ -20,6 +22,8 @@ class JobFeed(models.Model):
 
     is_activated = models.BooleanField(verbose_name=u'Включено',
                                        default=True, )
+
+    @property
     def __str__(self):
         return self.name
 
@@ -49,18 +53,14 @@ class AcceptedList(models.Model):
 
 class JobItem(models.Model):
     title = models.CharField('Название', max_length=255)
-    employer_name = models.CharField('Работодатель', max_length=255)
-    place = models.CharField('Место', max_length=255)
     link = models.URLField('Ссылка')
+    description = models.TextField(
+        'Описание вакансии',
+        null=True,
+        blank=True)
 
-    salary_from = models.PositiveIntegerField('Заработная плата', null=True,
-                                              blank=True)
-    salary_till = models.PositiveIntegerField('З/п до', null=True, blank=True)
-    salary_currency = models.CharField('Валюта', max_length=255, null=True,
-                                       blank=True)
-
-    url_api = models.URLField('URL API', null=True, blank=True)
-    url_logo = models.URLField('URL логотипа', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
     class Meta:
         verbose_name = 'Вакансия'

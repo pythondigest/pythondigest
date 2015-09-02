@@ -31,12 +31,7 @@ class JobItemAdmin(admin.ModelAdmin):
     list_display = (
         'title',
         'link',
-        'url_api',
-        'url_logo',
-        'place',
-        'salary_from',
-        'employer_name',
-        'salary_currency',
+        'description',
     )
 
     link_html = lambda s, obj: link_html(obj)

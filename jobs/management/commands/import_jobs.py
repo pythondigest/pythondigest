@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 import datetime
 from functools import partial
-import pprint
 from time import mktime
 
 from django.core.management.base import BaseCommand
@@ -91,6 +90,21 @@ def is_incl(words: list, item: tuple) -> bool:
                 return True
     return False
 
+
+def save_job(item: tuple) -> None:
+    """
+    Функция для сохранения
+    :param item:
+    :return:
+    """
+    link, title, description = item
+    if not JobItem.objects.filter(link=link).exists():
+        JobItem(
+            link=link,
+            title=title,
+            description=description,
+        ).save()
+
 def import_jobs():
     _job_feeds_obj = JobFeed.objects.filter(in_edit=False)
     job_feeds = list(_job_feeds_obj.values_list('link', flat=True))
@@ -108,8 +122,8 @@ def import_jobs():
                                  join(
                                      map(get_rss_items, job_feeds))))))
 
-    pprint.pprint(list(items))
-
+    for x in items:
+        save_job(x)
 
 
 class Command(BaseCommand):
