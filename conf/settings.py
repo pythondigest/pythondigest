@@ -11,7 +11,7 @@ DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 THUMBNAIL_DEBUG = False
-
+VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru']
 
 INSTALLED_APPS = (
