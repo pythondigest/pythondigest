@@ -106,7 +106,7 @@ def save_job(item: tuple) -> None:
         ).save()
 
 def import_jobs():
-    _job_feeds_obj = JobFeed.objects.filter(in_edit=False)
+    _job_feeds_obj = JobFeed.objects.filter(in_edit=False, is_activated=True)
     job_feeds = list(_job_feeds_obj.values_list('link', flat=True))
     excl = list(RejectedList.objects.values_list('title', flat=True))
     incl = list(AcceptedList.objects.values_list('title', flat=True))
