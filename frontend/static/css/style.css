@@ -112,7 +112,20 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 }
 
 
-
+.media-right,
+.media > .pull-right {
+  padding-left: 10px;
+}
+.media-left,
+.media > .pull-left {
+  padding-right: 10px;
+}
+.media-left,
+.media-right,
+.media-body {
+  display: table-cell;
+  vertical-align: top;
+}
 .nav > li  > a {
     color:#ccc;
     padding:20px 35px 10px 35px;
@@ -483,3 +496,40 @@ html, body{min-height:100%;height:auto;margin:0;padding:0;}
 /*              end Pygments syntax hilight         */
 /* ================================================ */
 
+
+
+.block {
+  display: inline-block;
+}
+
+.of__hidden {
+  overflow: hidden;
+}
+
+
+.cl__gray {
+  color: #888;
+}
+
+
+.marg__b_min {
+  margin-bottom: 10px;
+}
+
+
+
+.marg__l_min {
+  margin-left: 10px;
+}
+
+.marg__l_mid {
+  margin-left: 20px;
+}
+
+.marg__r_min {
+  margin-right: 10px;
+}
+
+.marg__r_mid {
+  margin-right: 20px;
+}

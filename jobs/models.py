@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from jobs.utils import format_currency
 
 
 class JobFeed(models.Model):
@@ -81,6 +82,15 @@ class JobItem(models.Model):
     salary_till = models.PositiveIntegerField('З/п до', null=True, blank=True)
     salary_currency = models.CharField('Валюта', max_length=255, null=True,
                                        blank=True)
+
+    def get_salary_str(self):
+        result = ''
+        result += ' от %s' % format_currency(self.salary_from) if self.salary_from else ''
+        result += ' до %s' % format_currency(self.salary_till) if self.salary_till else ''
+        result += ' ' + self.salary_currency if self.salary_currency else ''
+        return result
+
+    get_salary_str.short_description = u"Зарплата"
 
     def __str__(self):
         return self.title

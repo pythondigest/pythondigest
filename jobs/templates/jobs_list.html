@@ -22,17 +22,50 @@
             </ul>
         </div>
         <h4>Вакансии: </h4>
-        {% for job in jobs %}
-            <div class="item-container">
-                <noindex>
-                    <div class="news-line-item">
-                        <a rel="nofollow" href="{{ job.link }}"
-                           target="_blank">{{ job.title }}</a>
+        {% for vacancy in jobs %}
 
-                        <p class="text-muted">{{ job.description|default:''|safe }}</p>
+                <noindex>
+
+                    <div class="media-body">
+                        <h4>
+                            <a href="{{ vacancy.link }}">{{ vacancy.title }}</a>
+                        </h4>
+
+                        <p class="text-muted">{{ job.description|default:'' }}</p>
+
+                        <div class="cl__gray marg__b_min">
+
+                            {% if vacancy.employer_name %}
+                                <span class="marg__r_mid"><strong>{{ vacancy.employer_name }}</strong></span>
+                            {% endif %}
+
+                            {% if vacancy.src_place_name %}
+                                <p>{{ vacancy.src_place_name }}</p>
+                            {% endif %}
+
+                        </div>
+
+                        {% if vacancy.salary_from or vacancy.salary_till %}
+                            <span class="label label-info marg__r_mid">{{ vacancy.get_salary_str }}</span>
+                        {% endif %}
+
+                        <small class="cl__gray">
+                            <small>{{ vacancy.published_at|date:"d E H:i" }}</small>
+                        </small>
                     </div>
+
+                    {% if vacancy.url_logo %}
+                        <div class="media-right">
+
+                            <img src="{{ vacancy.url_logo }}" class="img-thumbnail media-object">
+                        </div>
+
+                    {% endif %}
+                    <hr>
+
                 </noindex>
-            </div>
+
+
         {% empty %}
             <div class="alert alert-warning pull-left">
                 <strong>Печально но факт!</strong> В этой ленте нет вакансий.
