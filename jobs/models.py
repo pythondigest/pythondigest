@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
 
 from django.db import models
 
@@ -20,10 +19,11 @@ class JobFeed(models.Model):
         default=False,
     )
 
-    is_activated = models.BooleanField(verbose_name=u'Включено',
-                                       default=True, )
+    is_activated = models.BooleanField(
+        verbose_name=u'Включено',
+        default=True,
+    )
 
-    @property
     def __str__(self):
         return self.name
 
@@ -61,6 +61,9 @@ class JobItem(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'Вакансия'
