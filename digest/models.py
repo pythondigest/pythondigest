@@ -363,3 +363,4 @@ class ParsingRules(models.Model):
     class Meta:
         verbose_name = u'Правило обработки'
         verbose_name_plural = u'Правила обработки'
+        ordering = ['-weight']
