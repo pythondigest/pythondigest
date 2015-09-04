@@ -7,11 +7,9 @@ import textwrap
 from time import mktime
 
 from django.core.management.base import BaseCommand
-
 import feedparser
 
 from digest.management.commands import save_item
-
 from digest.models import Item, Resource, Section
 
 l = [
@@ -28,6 +26,8 @@ l = [
     'Функциональный Python',
     'Пишем web-проекты',
     'Интересные концепции',
+    'Python проекты',
+    'Учебные материалы',
 ]
 
 
