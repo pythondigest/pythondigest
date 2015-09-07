@@ -313,7 +313,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
     def _action_active_queue_n_hourn(self, period_len, queryset):
         try:
-            items = queryset.filter(status='queue')
+            items = queryset.filter(status='queue').order_by('pk')
             assert items.count() > 0
             _interval = int(period_len / items.count() * 60)  # in minutes
 
