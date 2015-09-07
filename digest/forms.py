@@ -1,16 +1,50 @@
 # -*- encoding: utf-8 -*-
-from ckeditor.widgets import CKEditorWidget
+from ckeditor.widgets import CKEditorWidget, json_encode
 
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
+
 from django import forms
+from django.template.loader import render_to_string
+from django.utils.encoding import force_text
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
+
+try:
+    # Django >=1.7
+    from django.forms.utils import flatatt
+except ImportError:
+    # Django <1.7
+    from django.forms.util import flatatt
+
 
 from digest.models import Item
 
 ITEM_STATUS_CHOICES = (('queue', u'В очередь'),
                        ('moderated', u'Отмодерировано'), )
+
+
+class GlavRedWidget(CKEditorWidget):
+    def render(self, name, value, attrs=None):
+        if value is None:
+            value = ''
+        final_attrs = self.build_attrs(attrs, name=name)
+        self._set_config()
+        external_plugin_resources = [
+            [force_text(a), force_text(b), force_text(c)]
+            for a, b, c in self.external_plugin_resources]
+
+        return mark_safe(
+            render_to_string('custom_widget/ckeditor_widget.html', {
+                'final_attrs': flatatt(final_attrs),
+                'value': conditional_escape(force_text(value)),
+                'id': final_attrs['id'],
+                'config': json_encode(self.config),
+                'external_plugin_resources': json_encode(
+                    external_plugin_resources)
+            }))
 
 
 class ItemStatusForm(ModelForm):
@@ -23,7 +57,7 @@ class ItemStatusForm(ModelForm):
         model = Item
         fields = '__all__'
         widgets = {
-            'description': CKEditorWidget,
+            'description': GlavRedWidget,
         }
 
 
