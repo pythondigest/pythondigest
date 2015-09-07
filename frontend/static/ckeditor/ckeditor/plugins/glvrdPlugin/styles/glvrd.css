@@ -1,0 +1,13 @@
+.glvrd-underline {
+    color: #dA570f;
+    font-style: normal;
+    border-radius: .2em;
+    padding: 3px 2px;
+    margin: 0 -2px;
+}
+
+.glvrd-underline-active {
+    -webkit-transition: background-color 0s, color 0s;
+    background: #DA570F;
+    color: #fff;
+}

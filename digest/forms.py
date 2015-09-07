@@ -1,10 +1,13 @@
 # -*- encoding: utf-8 -*-
+from ckeditor.widgets import CKEditorWidget
+
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
+from django import forms
 
-from .models import Item
+from digest.models import Item
 
 ITEM_STATUS_CHOICES = (('queue', u'В очередь'),
                        ('moderated', u'Отмодерировано'), )
@@ -19,10 +22,10 @@ class ItemStatusForm(ModelForm):
     class Meta:
         model = Item
         fields = '__all__'
+        widgets = {
+            'description': CKEditorWidget,
+        }
 
-from django import forms
-
-from digest.models import Item
 
 EMPTY_VALUES = (None, '')
 

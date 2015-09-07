@@ -250,6 +250,7 @@ class ItemModerator(Item):
 
 
 class ItemModeratorAdmin(admin.ModelAdmin):
+
     form = ItemStatusForm
     fields = (
         'section',

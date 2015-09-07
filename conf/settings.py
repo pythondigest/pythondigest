@@ -30,6 +30,8 @@ INSTALLED_APPS = (
     'pytils',
     'concurrency',
 
+    'ckeditor',
+
     'digest',
     'frontend',
     'jobs',
@@ -216,6 +218,34 @@ MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_basic'
 MICAWBER_TEMPLATE_EXTENSIONS = [
     ('oembed_no_urlize', {'urlize_all': False}),
 ]
+
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': [
+            ['Undo', 'Redo',
+             '-', 'Bold', 'Italic', 'Underline',
+             '-', 'Link', 'Unlink', 'Anchor',
+             '-', 'Format',
+             '-', 'SpellChecker', 'Scayt',
+             '-', 'Maximize',
+             ],
+            ['HorizontalRule',
+             '-', 'Table',
+             '-', 'BulletedList', 'NumberedList',
+             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
+             '-', 'SpecialChar',
+             '-', 'Source',
+             '-', 'About', 'glvrdPlugin',
+             ]
+        ],
+        'extraPlugins': 'glvrdPlugin'
+
+    },
+
+}
+
 
 
 ADMIN_REORDER = (
