@@ -225,19 +225,9 @@ CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': [
             ['Undo', 'Redo',
-             '-', 'Bold', 'Italic', 'Underline',
-             '-', 'Link', 'Unlink', 'Anchor',
-             '-', 'Format',
-             '-', 'SpellChecker', 'Scayt',
-             '-', 'Maximize',
-             ],
-            ['HorizontalRule',
-             '-', 'Table',
-             '-', 'BulletedList', 'NumberedList',
-             '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord',
-             '-', 'SpecialChar',
-             '-', 'Source',
-             '-', 'About', 'glvrdPlugin',
+             '-', 'Link', 'Unlink', 'HorizontalRule',
+             '-', 'BulletedList', 'NumberedList', 'PasteText',
+             '-', 'Source', 'glvrdPlugin',
              ]
         ],
         'extraPlugins': 'glvrdPlugin'
