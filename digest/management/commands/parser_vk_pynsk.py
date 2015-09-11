@@ -76,7 +76,7 @@ def main():
                 break
 
         if title is not None and content is not None:
-            content_link = "<a href='%s'>[Продолжение]</a>" % n.link
+            content_link = "<a href='%s' target='_blank'>[Продолжение]</a>" % n.link
             content = textwrap.shorten(content, width=300, placeholder="...%s" % content_link)\
                 .replace('<a...', '...')
             _ = {
