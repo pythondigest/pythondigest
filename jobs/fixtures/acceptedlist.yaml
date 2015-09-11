@@ -1,0 +1,88 @@
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'bx-cert.ru'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'craigslist.ca'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'http://career.ru'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'ngs.ru'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'hh.ru'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'joby.su'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'brainstorage.me/jobs/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'djangojobs.net/jobs/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'freelansim.ru'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'noida.timesjobs.com/jobs/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'dice.com/job/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'fl.ru/projects/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'freelancer.com/projects/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'jobandtalent.com/uk/jobs/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'jobsearch.naukri.com'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'totaljobs.com'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'seek.com.au/job/'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'pretoria.olx.co.za'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'careerbuilder.com'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'hasjob.co'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: 'work.ua/jobs'
+- model: jobs.acceptedlist
+  pk: null
+  fields:
+    title: '/jobs/'

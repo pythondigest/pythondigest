@@ -128,9 +128,10 @@ def save_job(item: dict) -> None:
     :return:
     """
     if not JobItem.objects.filter(link=item.get('link')).exists():
-        JobItem(
-            **item
-        ).save()
+        if len(item.get('link')) < 200:
+            JobItem(
+                **item
+            ).save()
 
 
 def import_jobs_hh():
@@ -178,4 +179,4 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         import_jobs_rss()
-        import_jobs_hh()
+        # import_jobs_hh()
