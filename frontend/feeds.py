@@ -28,16 +28,23 @@ class DigestFeed(Feed):
 
 
 class ItemDigestFeed(DigestFeed):
-
     """Лента РСС для новостей."""
 
     @staticmethod
     def items():
-        return Item.objects.filter(
+        _ = Item.objects.filter(
             status='active',
             activated_at__lte=datetime.datetime.now(),
         ).order_by(
             '-related_to_date')[:10]
+
+        video_section = Section.objects.get(title="Видео")
+
+        for x in _:
+            if x.section == video_section:
+                x.title = "[Видео] %s" % x.title
+
+        return _
 
 
 class AllEntriesFeed(ItemDigestFeed):
@@ -45,7 +52,6 @@ class AllEntriesFeed(ItemDigestFeed):
 
 
 class TwitterEntriesFeed(ItemDigestFeed):
-
     """Лента РСС для twitter."""
 
     def item_link(self, item):
@@ -53,7 +59,6 @@ class TwitterEntriesFeed(ItemDigestFeed):
 
 
 class RussianEntriesFeed(ItemDigestFeed):
-
     """Лента РСС для русскоязычных новостей."""
     description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."""
 
@@ -106,11 +111,10 @@ class IssuesFeed(ItemDigestFeed):
         the `add_item` call of the feed generator.
         Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
         """
-        return { 'image': 'http://' + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
+        return {'image': 'http://' + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
 
 
 class SectionFeed(DigestFeed):
-
     """Лента с категориями новостей."""
     section = 'all'
 
@@ -125,7 +129,7 @@ class SectionFeed(DigestFeed):
                                          section=section[0],
                                          activated_at__lte=datetime.datetime.now()
                                          ).order_by(
-                                             '-related_to_date')[:10]
+                '-related_to_date')[:10]
         return result
 
 
@@ -159,6 +163,7 @@ class ItemReleaseFeed(SectionFeed):
 
 class ItemPackagesFeed(SectionFeed):
     section = 'Интересные проекты, инструменты, библиотеки'
+
 
 class ItemAuthorsFeed(SectionFeed):
     section = 'Колонка автора'
