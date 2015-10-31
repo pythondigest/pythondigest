@@ -9,10 +9,10 @@ from digest.management.commands import apply_parsing_rules, apply_video_rules, s
 from digest.models import ParsingRules, Section, Tag, ITEM_STATUS_CHOICES, Resource
 
 
-def import_python_weekly(**kwargs):
+def import_python_weekly(issue_url, **kwargs):
     resource = Resource.objects.get(title='PythonWeekly')
 
-    page = html.parse(kwargs.get('url'))
+    page = html.parse(issue_url)
 
     # a = requests.get(url).content
     blocks = page.getroot().find_class('bodyTable')[0].xpath('//span[@style="font-size:14px"]')
@@ -50,7 +50,7 @@ def main():
         'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
         'url': url
     }
-    import_python_weekly(**data)
+    import_python_weekly(url, **data)
 
 
 class Command(BaseCommand):
