@@ -48,7 +48,6 @@ def main():
         'query_sections': Section.objects.all(),
         'query_tags': Tag.objects.all(),
         'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
-        'url': url
     }
     import_python_weekly(url, **data)
 
