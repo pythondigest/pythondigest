@@ -21,6 +21,9 @@ def import_python_weekly(issue_url, **kwargs):
         link = x.cssselect('a')[0]
         url = link.attrib['href']
         title = link.text
+        _text = x.getnext()
+        if _text is None:
+            continue
         text = etree.tostring(x.getnext()).decode('utf-8').replace('<br/>', '').strip()
 
         item_data = {
@@ -41,7 +44,7 @@ def import_python_weekly(issue_url, **kwargs):
 
 
 def main():
-    url = 'http://us2.campaign-archive.com/?u=e2e180baf855ac797ef407fc7&id=14f4381681'
+    url = 'http://us2.campaign-archive.com/?u=e2e180baf855ac797ef407fc7&id=f0452c372b'
 
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
