@@ -24,7 +24,7 @@ class DigestFeed(Feed):
         return item.link
 
     def item_pubdate(self, item):
-        return item.modified_at
+        return item.modified_at or item.activated_at
 
 
 class ItemDigestFeed(DigestFeed):
