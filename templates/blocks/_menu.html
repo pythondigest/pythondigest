@@ -6,16 +6,21 @@
     <div class="container">
         <div class="row">
             <div class="top-logo col-md-5">
-                <div class="top-img pull-left"><a href="http://pythondigest.ru/"><img src="/static/img/logo.png" ></a></div>
+                <div class="top-img pull-left"><a href="http://pythondigest.ru/"><img src="/static/img/logo.png"></a>
+                </div>
                 <div class="top-name hidden-xs hidden-sm pull-left">PYTHON ДАЙДЖЕСТ</div>
-                <div class="top-slogan hidden-xs hidden-sm pull-left text-muted">Всё самое интересное прямо здесь и сейчас!</div>
+                <div class="top-slogan hidden-xs hidden-sm pull-left text-muted">Всё самое интересное прямо здесь и
+                    сейчас!
+                </div>
             </div>
             <div class="top-search col-md-3" align="center">
                 <div class="search-form">
                     <form action="{% url 'digest:feed' %}" class="form-inline" role="form">
                         <div class="form-group">
-                            <input type="text" name="q" type="text" class="search-input" value="{{ request.GET.q|default:'' }}" placeholder=" ПОИСК...">
-                            <button type="submit" class="search-btn btn btn-warning"><i class="fa fa-search fa-lg"></i></button>
+                            <input type="text" name="q" type="text" class="search-input"
+                                   value="{{ request.GET.q|default:'' }}" placeholder=" ПОИСК...">
+                            <button type="submit" class="search-btn btn btn-warning"><i class="fa fa-search fa-lg"></i>
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -39,7 +44,8 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -59,30 +65,37 @@
                 <li {% if active_menu_item == 'feed' %}class="active"{% endif %}>
                     <a href="{% url 'digest:feed' %}">ЛЕНТА</a>
                 </li>
-{##}
-{#                {% if request.user.is_authenticated %}#}
-{#                    <li class="dropdown">#}
-{#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
-{#                            {% user_display request.user %}#}
-{#                            <b class="caret"></b>#}
-{#                        </a>#}
-{#                        <ul class="dropdown-menu">#}
-{#                            <li><a href="{% url "account_settings" %}"><i class="fa fa-user"></i> {% trans "Settings" %}</a></li>#}
-{#                            {% if request.user.is_staff %}#}
-{#                                <li><a href="{% url THEME_ADMIN_URL|default:"admin:index" %}"><i class="fa fa-cog"></i> {% trans "Admin" %}</a></li>#}
-{#                            {% endif %}#}
-{#                            <li class="divider"></li>#}
-{#                            <li>#}
-{#                                <a id="account_logout" href="{% url "account_logout" %}"><i class="fa fa-power-off"></i> {% trans "Log out" %}</a>#}
-{#                            </li>#}
-{#                        </ul>#}
-{#                    </li>#}
-{#                {% else %}#}
-{#                    <li><a href="{% url "account_login" %}">{% trans "Log in"|upper %}</a></li>#}
-{#                    {% if ACCOUNT_OPEN_SIGNUP %}#}
-{#                        <li><a href="{% url "account_signup" %}">{% trans "Sign up"|upper %}</a></li>#}
-{#                    {% endif %}#}
-{#                {% endif %}#}
+                <li>
+                    <iframe frameborder="0" allowtransparency="true" scrolling="no"
+                            src="https://money.yandex.ru/embed/small.xml?account=41001222156458&quickpay=small&any-card-payment-type=on&button-text=04&button-size=l&button-color=orange&targets=%D0%94%D0%B0%D1%80+Python+%D0%94%D0%B0%D0%B9%D0%B4%D0%B6%D0%B5%D1%81%D1%82'%D1%83&default-sum=100&successURL=http%3A%2F%2Fpythondigest.ru%2F"
+                            width="284" height="54"></iframe>
+                </li>
+
+                {##}
+
+                {#                {% if request.user.is_authenticated %}#}
+                {#                    <li class="dropdown">#}
+                {#                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">#}
+                {#                            {% user_display request.user %}#}
+                {#                            <b class="caret"></b>#}
+                {#                        </a>#}
+                {#                        <ul class="dropdown-menu">#}
+                {#                            <li><a href="{% url "account_settings" %}"><i class="fa fa-user"></i> {% trans "Settings" %}</a></li>#}
+                {#                            {% if request.user.is_staff %}#}
+                {#                                <li><a href="{% url THEME_ADMIN_URL|default:"admin:index" %}"><i class="fa fa-cog"></i> {% trans "Admin" %}</a></li>#}
+                {#                            {% endif %}#}
+                {#                            <li class="divider"></li>#}
+                {#                            <li>#}
+                {#                                <a id="account_logout" href="{% url "account_logout" %}"><i class="fa fa-power-off"></i> {% trans "Log out" %}</a>#}
+                {#                            </li>#}
+                {#                        </ul>#}
+                {#                    </li>#}
+                {#                {% else %}#}
+                {#                    <li><a href="{% url "account_login" %}">{% trans "Log in"|upper %}</a></li>#}
+                {#                    {% if ACCOUNT_OPEN_SIGNUP %}#}
+                {#                        <li><a href="{% url "account_signup" %}">{% trans "Sign up"|upper %}</a></li>#}
+                {#                    {% endif %}#}
+                {#                {% endif %}#}
 
             </ul>
         </div>
@@ -95,7 +108,6 @@
 <form id="accountLogOutForm" style="display: none;" action="{% url "account_logout" %}" method="POST">
     {% csrf_token %}
 </form>
-
 
 
 <!-- Jumbotron -->
