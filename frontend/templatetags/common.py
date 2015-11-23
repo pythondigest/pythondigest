@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
+import random
 import re
 
 from django import template
@@ -8,7 +8,6 @@ from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_text
 from django.utils.six import text_type
-
 from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
 from urlobject import URLObject
@@ -72,6 +71,22 @@ def modify_url_(url, operation, *args):
         return text_type(op(*args))
     raise Exception('%s is incorrect function name for urlobject.URLObject' %
                     operation)
+
+
+@register.simple_tag(name='money_block_title')
+def money_block_title():
+    texts = [
+        'Покормить редактора',
+        'Помочь проекты',
+        'Поблагодарить проект',
+        'Покормить команду',
+        'Помочь оплатить домен',
+        'Скинуться на пиво',
+        'Скинуться на хостинг',
+        'Скинуться на торт',
+    ]
+    print(random.choice(texts))
+    return random.choice(texts)
 
 
 @register.simple_tag(takes_context=True)

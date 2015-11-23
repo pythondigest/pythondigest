@@ -6,7 +6,7 @@ BASE_DIR = path.abspath(path.join(path.dirname(__file__), '..'))
 
 SECRET_KEY = 'TBD IN LOCAL SETTINGS'
 
-DEBUG = False
+DEBUG = True
 
 TEMPLATE_DEBUG = DEBUG
 
