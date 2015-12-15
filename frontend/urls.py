@@ -4,11 +4,12 @@ from frontend.views import Index, Sitemap
 from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
-    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed
+    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, RawEntriesFeed
 
 urlpatterns = patterns(
     '',
     url(r'^rss/$', AllEntriesFeed(), name='rss'),
+    url(r'^rss/raw$', RawEntriesFeed(), name='rss_raw'),
     url(r'^rss/direct/$', AllEntriesFeed(), name='rss_direct'),
     url(r'^rss/twitter/$', TwitterEntriesFeed(), name='rss_twitter'),
     url(r'^rss/ru/$', RussianEntriesFeed(), name='russian_rss'),

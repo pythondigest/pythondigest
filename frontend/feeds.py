@@ -5,7 +5,6 @@ from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
 from django.conf import settings
 import pytils
-
 from digest.models import Issue, Item, Section
 
 
@@ -25,6 +24,22 @@ class DigestFeed(Feed):
 
     def item_pubdate(self, item):
         return item.modified_at or item.activated_at
+
+
+class RawEntriesFeed(DigestFeed):
+    @staticmethod
+    def items():
+        _ = Item.objects.filter(
+            activated_at__lte=datetime.datetime.now(),
+        ).order_by('-related_to_date')[:10]
+
+        video_section = Section.objects.get(title="Видео")
+
+        for x in _:
+            if x.section == video_section:
+                x.title = "[Видео] %s" % x.title
+
+        return _
 
 
 class ItemDigestFeed(DigestFeed):
