@@ -97,7 +97,7 @@ def get_items_json(request, year, month, day):
         keys = [
             'title',
             'description',
-            'section',
+            'section__title',
             'link',
             'language',
         ]
