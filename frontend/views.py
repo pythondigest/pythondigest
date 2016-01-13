@@ -88,9 +88,9 @@ def get_items_json(request, year, month, day):
     items = Item.objects.filter(
             status='active',
             is_editors_choice=True,
-            activated_at__year=int(year),
-            activated_at__month=int(month),
-            activated_at__day=int(day),
+            related_to_date__year=int(year),
+            related_to_date__month=int(month),
+            related_to_date__day=int(day),
     )
     result['ok'] = bool(items)
     if items:
