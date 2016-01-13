@@ -3,6 +3,7 @@ import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
@@ -18,30 +19,29 @@ class Sitemap(TemplateView):
         ctx = super(Sitemap, self).get_context_data(**kwargs)
         items = [
             {'loc': '',
-             'changefreq': 'weekly', },
+             'changefreq': 'weekly',},
             {'loc': reverse('digest:issues'),
-             'changefreq': 'weekly', },
+             'changefreq': 'weekly',},
             {'loc': reverse('digest:feed'),
-             'changefreq': 'daily', },
+             'changefreq': 'daily',},
         ]
 
         for issue in Issue.objects.filter(status='active'):
-            items.append({'loc': issue.link, 'changefreq': 'weekly', })
+            items.append({'loc': issue.link, 'changefreq': 'weekly',})
 
         for item in Item.objects.filter(status='active',
                                         activated_at__lte=datetime.datetime.now()):
             items.append(
-                {'loc': '/view/%s' % item.pk,
-                 'changefreq': 'never', })
+                    {'loc': '/view/%s' % item.pk,
+                     'changefreq': 'never',})
 
         ctx.update(
-            {'records': items,
-             'domain': 'http://%s' % settings.BASE_DOMAIN})
+                {'records': items,
+                 'domain': 'http://%s' % settings.BASE_DOMAIN})
         return ctx
 
 
 class Index(TemplateView):
-
     """Главная страница."""
     template_name = 'index.html'
     model = Issue
@@ -52,7 +52,7 @@ class Index(TemplateView):
         issue = False
         try:
             issue = self.model.objects.filter(status='active').latest(
-                'published_at')
+                    'published_at')
         except Issue.DoesNotExist:
             pass
 
@@ -62,11 +62,10 @@ class Index(TemplateView):
             items = qs.order_by('-section__priority', '-priority')
 
         context.update(
-            {'issue': issue,
-             'items': items,
-             'active_menu_item': 'home', })
+                {'issue': issue,
+                 'items': items,
+                 'active_menu_item': 'home',})
         return context
-
 
 
 class ViewEditorMaterial(TemplateView):
@@ -82,3 +81,25 @@ class ViewEditorMaterial(TemplateView):
                                      status='active')
 
         return {'material': material}
+
+
+def get_items_json(request, year, month, day):
+    result = {}
+    items = Item.objects.filter(
+            status='active',
+            is_editors_choice=True,
+            activated_at__year=int(year),
+            activated_at__month=int(month),
+            activated_at__day=int(day),
+    )
+    result['ok'] = bool(items)
+    if items:
+        keys = [
+            'title',
+            'description',
+            'section',
+            'link',
+            'language',
+        ]
+        result['items'] = list(items.values(*keys))
+    return JsonResponse(result)
