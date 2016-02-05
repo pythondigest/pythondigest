@@ -158,13 +158,14 @@ class ItemAdmin(admin.ModelAdmin):
         'language',
         'tags',
         'additionally',
+
     )
     filter_horizontal = ('tags', )
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
                    'related_to_date', 'resource', )
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'external_link', 'related_to_date',
-                    'is_editors_choice')
+                    'is_editors_choice', 'resource', )
 
     list_editable = ('is_editors_choice', )
     exclude = ('modified_at', ),
