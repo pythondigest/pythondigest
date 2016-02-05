@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-import re
-import pickle
 
-from readability import Document
+import pickle
+import re
+
 import requests
+from readability import Document
 
 try:
     from urllib.request import urlopen
@@ -20,6 +21,19 @@ from pygoogle.pygoogle import PyGoogleHttpException
 import datetime
 from time import sleep
 from stem import control, Signal, stem
+from django.core.management import call_command
+
+
+def parse_weekly_digest(item_data):
+    if 'Python Weekly' in item_data.get('title'):
+        call_command('import_python_weekly', item_data.get('link'))
+
+
+def is_weekly_digest(item_data):
+    title = item_data.get('title')
+    return bool(
+        'Python Weekly' in title
+    )
 
 
 def _clojure_get_youtube_urls_from_page():
@@ -61,10 +75,10 @@ def _clojure_get_youtube_urls_from_page():
                     break
 
             result = list(
-                     set(
-                     map(form_url,
-                     map(clean_urls,
-                     filter(lambda x: '%2F' not in x, urls)))))[0]
+                set(
+                    map(form_url,
+                        map(clean_urls,
+                            filter(lambda x: '%2F' not in x, urls)))))[0]
         except Exception:
             raise
         finally:
@@ -74,6 +88,7 @@ def _clojure_get_youtube_urls_from_page():
 
 
 get_youtube_url_from_page = _clojure_get_youtube_urls_from_page()
+
 
 def _date_to_julian_day(my_date):
     """
@@ -86,12 +101,12 @@ def _date_to_julian_day(my_date):
     y = my_date.year + 4800 - a
     m = my_date.month + 12 * a - 3
     return my_date.day + \
-        ((153 * m + 2) // 5) + \
-        365 * y + \
-        y // 4 - \
-        y // 100 + \
-        y // 400 - \
-        32045
+           ((153 * m + 2) // 5) + \
+           365 * y + \
+           y // 4 - \
+           y // 100 + \
+           y // 400 - \
+           32045
 
 
 def _get_http_data_of_url(url: str):
@@ -167,7 +182,7 @@ def fresh_google_check(link: str, attempt=5, debug=False):
         today = datetime.date.today()
         date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
         date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
-        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e, )
+        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
 
         result = False
         for i in range(0, attempt):
@@ -203,6 +218,7 @@ def get_tweets_by_url(base_url: str):
         except:
             pass
     return result
+
 
 # -------------------
 # -------------------
@@ -273,7 +289,8 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
 
     return functions.get(then_action)
 
-def apply_video_rules(item_data:dict):
+
+def apply_video_rules(item_data: dict):
     """
     Применяем правила (захардкоженые) для раздела Видео
     В данном случае если раздел видео, то пытаемся выдрать ссылку на видео
@@ -304,7 +321,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
     for rule in query_rules.order_by('-weight'):
         if rule.then_element == 'status' and \
                 (data.get('status') == 'moderated' or
-                 data.get('status') == 'active'):
+                         data.get('status') == 'active'):
             continue
         if rule.then_element == 'section' and 'section' in data:
             continue
@@ -351,6 +368,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
                 pass
         data['tags'] = _tags
     return data
+
 
 # -------------------
 # -------------------

@@ -2,15 +2,14 @@
 from __future__ import unicode_literals
 
 import datetime
-import pprint
 import re
 from time import mktime
 
-from django.core.management.base import BaseCommand
 import feedparser
+from django.core.management.base import BaseCommand
 
 from digest.management.commands import _get_http_data_of_url, \
-    apply_parsing_rules, get_tweets_by_url, save_item, apply_video_rules
+    apply_parsing_rules, get_tweets_by_url, save_item, apply_video_rules, is_weekly_digest, parse_weekly_digest
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section, Tag
 
@@ -47,9 +46,12 @@ def import_tweets(**kwargs):
             'http_code': i[3],
             'resource': i[2]
         }
-        data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
-            'query_rules') else {}
-        item_data.update(data)
+        if is_weekly_digest(item_data):
+            parse_weekly_digest(item_data)
+        else:
+            data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
+                'query_rules') else {}
+            item_data.update(data)
         save_item(item_data)
 
 
@@ -88,10 +90,14 @@ def import_rss(**kwargs):
                 'resource': src.resource,
                 'language': src.language,
             }
-            item_data.update(
-                apply_parsing_rules(item_data, **kwargs)
-                if kwargs.get('query_rules') else {})
-            item_data = apply_video_rules(item_data.copy())
+
+            if is_weekly_digest(item_data):
+                parse_weekly_digest(item_data)
+            else:
+                item_data.update(
+                    apply_parsing_rules(item_data, **kwargs)
+                    if kwargs.get('query_rules') else {})
+                item_data = apply_video_rules(item_data.copy())
             save_item(item_data)
 
 
@@ -111,7 +117,6 @@ def parsing(func):
 
 
 class Command(BaseCommand):
-
     args = 'no arguments!'
     help = u'News import from external resources'
 

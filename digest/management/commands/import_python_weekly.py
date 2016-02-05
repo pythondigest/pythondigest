@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.core.management.base import BaseCommand
 import lxml.html as html
+from django.core.management.base import BaseCommand
 from lxml import etree
 
 from digest.management.commands import apply_parsing_rules, apply_video_rules, save_item
@@ -43,9 +43,7 @@ def import_python_weekly(issue_url, **kwargs):
         save_item(item_data)
 
 
-def main():
-    url = 'http://us2.campaign-archive.com/?u=e2e180baf855ac797ef407fc7&id=f0452c372b'
-
+def main(url):
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),
@@ -59,5 +57,11 @@ class Command(BaseCommand):
     args = 'no arguments!'
     help = u''
 
+    def add_arguments(self, parser):
+        parser.add_argument('url', type=str)
+
     def handle(self, *args, **options):
-        main()
+        if 'url' in options:
+            main(options['url'])
+        else:
+            print('Not found folder path')
