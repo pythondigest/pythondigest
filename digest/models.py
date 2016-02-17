@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 import datetime
 
+from concurrency.fields import IntegerVersionField
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
-from concurrency.fields import IntegerVersionField
 
 from frontend.models import Tip
 
-ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'), )
+ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'),)
 
 
 def get_start_end_of_week(dt):
@@ -19,7 +19,6 @@ def get_start_end_of_week(dt):
 
 
 class Tag(models.Model):
-
     name = models.CharField(max_length=255,
                             verbose_name=u'Название тэга',
                             unique=True, )
@@ -33,12 +32,14 @@ class Tag(models.Model):
 
 
 class Issue(models.Model):
-
     """Выпуск дайджеста."""
     title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
     description = models.TextField(verbose_name=u'Описание',
                                    null=True,
                                    blank=True, )
+    announcement = models.TextField(verbose_name=u'Анонс',
+                                    null=True,
+                                    blank=True, )
     image = models.ImageField(verbose_name=u'Постер',
                               upload_to='issues',
                               null=True,
@@ -79,11 +80,10 @@ class Issue(models.Model):
 
 
 SECTION_STATUS_CHOICES = (('pending', u'Ожидает проверки'),
-                          ('active', u'Активный'), )
+                          ('active', u'Активный'),)
 
 
 class Section(models.Model):
-
     """Раздел."""
     title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
     priority = models.PositiveIntegerField(
@@ -109,7 +109,6 @@ class Section(models.Model):
 
 
 class Resource(models.Model):
-
     """Источник получения информации."""
     title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
     description = models.TextField(verbose_name=u'Описание',
@@ -135,11 +134,10 @@ ITEM_STATUS_CHOICES = (
     ('queue', u'В очереди'),
 )
 
-ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'), )
+ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'),)
 
 
 class Item(models.Model):
-
     """Новость."""
     section = models.ForeignKey(Section,
                                 verbose_name=u'Раздел',
@@ -246,10 +244,9 @@ class Item(models.Model):
 
 
 class AutoImportResource(models.Model):
-
     """Источники импорта новостей."""
     TYPE_RESOURCE = (('twitter', u'Сообщения аккаунтов в твиттере'),
-                     ('rss', u'RSS фид'), )
+                     ('rss', u'RSS фид'),)
 
     name = models.CharField(max_length=255,
                             verbose_name=u'Название источника', )
@@ -291,7 +288,6 @@ class AutoImportResource(models.Model):
 
 
 class Package(models.Model):
-
     name = models.CharField(max_length=255, verbose_name=u'Название', )
 
     description = models.TextField(verbose_name=u'Описание',
@@ -309,22 +305,21 @@ class Package(models.Model):
 
 
 class ParsingRules(models.Model):
-
     IF_ELEMENTS = (('title', u'Заголовок новости'), ('link', u'Url новости'),
                    ('content', u'Текст новости'),
                    ('description', u'Описание новости'),
-                   ('http_code', u'HTTP Code'), )
+                   ('http_code', u'HTTP Code'),)
 
     IF_ACTIONS = (('equal', u'Равен'), ('contains', u'Содержит'),
-                  ('not_equal', u'Не равен'), ('regex', u'Regex match'), )
+                  ('not_equal', u'Не равен'), ('regex', u'Regex match'),)
 
     THEN_ELEMENT = (('title', u'Заголовок новости'),
                     ('description', u'Описание новости'),
                     ('section', u'Раздел'), ('status', u'Статус'),
-                    ('tags', u'Тэг новости'), )
+                    ('tags', u'Тэг новости'),)
 
     THEN_ACTION = (('set', u'Установить'), ('add', u'Добавить'),
-                   ('remove', u'Удалить часть строки'), )
+                   ('remove', u'Удалить часть строки'),)
 
     name = models.CharField(max_length=255, verbose_name=u'Название правила', )
 
