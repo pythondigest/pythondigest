@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from os import path
 import os
+from os import path
 
 BASE_DIR = path.abspath(path.join(path.dirname(__file__), '..'))
 
@@ -35,7 +35,6 @@ INSTALLED_APPS = (
     'digest',
     'frontend',
     'jobs',
-
 
     'account',
     'rosetta',
@@ -93,7 +92,7 @@ AUTHENTICATION_BACKENDS = (
     # 'social.backends.linkedin.LinkedinOAuth2',
     # 'social.backends.open_id.OpenIdAuth',
     'social.backends.email.EmailAuth', 'social.backends.username.UsernameAuth',
-    'django.contrib.auth.backends.ModelBackend', )
+    'django.contrib.auth.backends.ModelBackend',)
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
@@ -118,7 +117,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 SITE_ID = 1
-LOCALE_PATHS = (path.join(BASE_DIR, 'locale'), )
+LOCALE_PATHS = (path.join(BASE_DIR, 'locale'),)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
@@ -130,11 +129,11 @@ MEDIA_ROOT = path.join(BASE_DIR, 'media')
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder', )
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
-                    'django.template.loaders.app_directories.Loader', )
+                    'django.template.loaders.app_directories.Loader',)
 
 CONCURRENCY_HANDLER409 = 'digest.views.conflict'
 CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
@@ -154,9 +153,9 @@ LOGGING = {
     },
     'loggers': {
         'django.request':
-        {'handlers': ['mail_admins'],
-         'level': 'ERROR',
-         'propagate': True, },
+            {'handlers': ['mail_admins'],
+             'level': 'ERROR',
+             'propagate': True,},
     }
 }
 
@@ -236,7 +235,17 @@ CKEDITOR_CONFIGS = {
 
 }
 
-
+GITTER_TOKEN = ''
+TWITTER_CONSUMER_KEY = ''
+TWITTER_CONSUMER_SECRET = ''
+TWITTER_TOKEN = ''
+TWITTER_TOKEN_SECRET = ''
+TGM_BOT_ACCESS_TOKEN = ''
+TGM_CHANNEL = ''
+IFTTT_MAKER_KEY = ''
+VK_APP_ID = 0
+VK_LOGIN = ''
+VK_PASSWORD = ''
 
 ADMIN_REORDER = (
     'digest',

@@ -11,6 +11,7 @@ from django.utils.html import escape
 from digest.forms import ItemStatusForm
 from digest.models import AutoImportResource, Issue, Item, Package, \
     ParsingRules, Resource, Section, Tag, get_start_end_of_week
+from digest.pub_digest import pub_to_all
 
 admin.site.unregister(Site)
 
@@ -29,12 +30,12 @@ def _external_link(obj):
 
 
 class IssueAdmin(admin.ModelAdmin):
+    list_display = ('title', 'news_count', 'issue_date', 'frontend_link',)
 
-    list_display = ('title', 'news_count', 'issue_date', 'frontend_link', )
+    list_filter = ('date_from', 'date_to',)
 
-    list_filter = ('date_from', 'date_to', )
-
-    exclude = ('last_item', 'version', )
+    exclude = ('last_item', 'version',)
+    actions = ['make_published']
 
     def issue_date(self, obj):
         return u"С %s по %s" % (obj.date_from, obj.date_to)
@@ -54,12 +55,24 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.allow_tags = True
     frontend_link.short_description = u"Просмотр"
 
+    def make_published(self, request, queryset):
+        if len(queryset) == 1:
+            issue = queryset[0]
+            site = 'http://pythondigest.ru'
+            pub_to_all(
+                issue.announcement,
+                '{}{}'.format(site, issue.link),
+                '{}{}'.format(site, issue.image.url),
+            )
+
+    make_published.short_description = "Опубликовать анонс в социальные сети"
+
 
 admin.site.register(Issue, IssueAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):
-    ordering = ('-priority', )
+    ordering = ('-priority',)
 
 
 admin.site.register(Section, SectionAdmin)
@@ -67,14 +80,14 @@ admin.site.register(Section, SectionAdmin)
 
 class ParsingRulesAdmin(admin.ModelAdmin):
     list_display = ('name', 'is_activated', 'weight', 'if_element',
-                    '_get_if_action', 'then_element', '_get_then_action', )
+                    '_get_if_action', 'then_element', '_get_then_action',)
 
     list_filter = ('is_activated', 'if_element', 'if_action', 'then_element',
-                   'then_action', )
+                   'then_action',)
 
-    list_editable = ('is_activated', )
+    list_editable = ('is_activated',)
 
-    search_fields = ('is_activated', 'name', 'if_value', 'then_value', )
+    search_fields = ('is_activated', 'name', 'if_value', 'then_value',)
 
     def _get_if_action(self, obj):
         return u"{}: <i>{}</i>".format(obj.get_if_action_display(),
@@ -95,10 +108,10 @@ admin.site.register(ParsingRules, ParsingRulesAdmin)
 
 
 class TagAdmin(admin.ModelAdmin):
-    search_fields = ('name', )
+    search_fields = ('name',)
 
     list_display = ('name', 'news_count', 'news_count_last_week',
-                    'news_count_last_month', )
+                    'news_count_last_month',)
 
     def _get_text(self, active_cnt, all_cnt):
         return "<font color='green'><b>{}</b></font> / " \
@@ -145,7 +158,6 @@ admin.site.register(Tag, TagAdmin)
 
 
 class ItemAdmin(admin.ModelAdmin):
-
     # form = ItemStatusForm
     fields = (
         'section',
@@ -160,16 +172,16 @@ class ItemAdmin(admin.ModelAdmin):
         'additionally',
 
     )
-    filter_horizontal = ('tags', )
+    filter_horizontal = ('tags',)
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
-                   'related_to_date', 'resource', )
+                   'related_to_date', 'resource',)
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'external_link', 'related_to_date',
-                    'is_editors_choice', 'resource', )
+                    'is_editors_choice', 'resource',)
 
-    list_editable = ('is_editors_choice', )
-    exclude = ('modified_at', ),
-    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
+    list_editable = ('is_editors_choice',)
+    exclude = ('modified_at',),
+    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL,}
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
@@ -244,14 +256,12 @@ admin.site.register(Package, PackageAdmin)
 
 
 class ItemModerator(Item):
-
     class Meta:
         proxy = True
         verbose_name_plural = 'Новости (эксперимент)'
 
 
 class ItemModeratorAdmin(admin.ModelAdmin):
-
     form = ItemStatusForm
     fields = (
         'section',
@@ -264,9 +274,9 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'activated_at',
     )
 
-    readonly_fields = ('external_link_edit', )
+    readonly_fields = ('external_link_edit',)
 
-    filter_horizontal = ('tags', )
+    filter_horizontal = ('tags',)
     list_filter = (
         'status',
         'issue',
@@ -280,8 +290,8 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     list_display = ('title', 'status', 'external_link',
                     'activated_at')
 
-    exclude = ('modified_at', ),
-    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
+    exclude = ('modified_at',),
+    radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL,}
 
     actions = [
         '_action_make_moderated',

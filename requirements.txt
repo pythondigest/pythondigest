@@ -23,3 +23,9 @@ micawber==0.3.3
 funcy==1.5
 django-modeladmin-reorder==0.1.2
 django-ckeditor==4.5.3
+
+# bot
+twx.botapi
+google-api-python-client
+tweepy
+vk
