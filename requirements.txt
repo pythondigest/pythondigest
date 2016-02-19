@@ -25,7 +25,7 @@ django-modeladmin-reorder==0.1.2
 django-ckeditor==4.5.3
 
 # bot
-twx.botapi
-google-api-python-client
-tweepy
-vk
+twx.botapi==2.0.1
+google-api-python-client==1.4.2
+tweepy==3.5.0
+vk==2.0.2
