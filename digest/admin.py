@@ -427,6 +427,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
         'related_to_date',
         'resource',
     )
+    list_editable = ('is_editors_choice',)
     search_fields = ('title', 'description', 'link')
     list_display = ('title', 'status', 'external_link',
                     'activated_at')
@@ -443,7 +444,8 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
             result = self.model.objects.filter(
                 related_to_date__range=[yeasterday,
-                                        today])
+                                        today],
+                status='active').order_by('pk')
         except AssertionError:
             result = super(ItemDailyModeratorAdmin, self).get_queryset(request)
         return result
