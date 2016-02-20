@@ -440,7 +440,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
         try:
 
             today = datetime.utcnow().date()
-            yeasterday = today - timedelta(days=1)
+            yeasterday = today - timedelta(days=2)
 
             result = self.model.objects.filter(
                 related_to_date__range=[yeasterday,
