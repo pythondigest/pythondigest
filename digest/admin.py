@@ -429,7 +429,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
     )
     list_editable = ('is_editors_choice',)
     search_fields = ('title', 'description', 'link')
-    list_display = ('title', 'status', 'external_link',
+    list_display = ('title', 'status', 'is_editors_choice', 'external_link',
                     'activated_at')
 
     external_link = lambda s, obj: _external_link(obj)
@@ -440,12 +440,12 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
         try:
 
             today = datetime.utcnow().date()
-            yeasterday = today - timedelta(days=2)
+            yeasterday = today - timedelta(days=1)
 
             result = self.model.objects.filter(
                 related_to_date__range=[yeasterday,
                                         today],
-                status='active').order_by('pk')
+                status='active').order_by('-pk')
         except AssertionError:
             result = super(ItemDailyModeratorAdmin, self).get_queryset(request)
         return result
