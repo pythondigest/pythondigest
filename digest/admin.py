@@ -21,6 +21,33 @@ def link_html(obj):
     return u'<a target="_blank" href="%s">%s</a>' % (link, link)
 
 
+def _save_item_model(request, obj, form, change):
+    prev_status = False
+    if not obj.pk:
+        obj.user = request.user
+        if not obj.issue:
+            la = lna = False
+            qs = Issue.objects
+            try:
+                # последний активный
+                la = qs.filter(status='active').order_by('-pk')[0:1].get()
+                # последний неактивный
+                lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
+            except Issue.DoesNotExist:
+                pass
+
+            if la or lna:
+                obj.issue = lna or la
+    else:
+        old_obj = Item.objects.get(pk=obj.pk)
+        prev_status = old_obj.status
+
+    # Обновление времени модификации при смене статуса на активный
+    new_status = form.cleaned_data.get('status')
+    if not prev_status == 'active' and new_status == 'active':
+        obj.modified_at = datetime.now()
+
+
 def _external_link(obj):
     lnk = escape(obj.link)
     ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
@@ -188,31 +215,7 @@ class ItemAdmin(admin.ModelAdmin):
     external_link.short_description = u"Ссылка"
 
     def save_model(self, request, obj, form, change):
-        prev_status = False
-        if not obj.pk:
-            obj.user = request.user
-            if not obj.issue:
-                la = lna = False
-                qs = Issue.objects
-                try:
-                    # последний активный
-                    la = qs.filter(status='active').order_by('-pk')[0:1].get()
-                    # последний неактивный
-                    lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
-                except Issue.DoesNotExist:
-                    pass
-
-                if la or lna:
-                    obj.issue = lna or la
-        else:
-            old_obj = Item.objects.get(pk=obj.pk)
-            prev_status = old_obj.status
-
-        # Обновление времени модификации при смене статуса на активный
-        new_status = form.cleaned_data.get('status')
-        if not prev_status == 'active' and new_status == 'active':
-            obj.modified_at = datetime.now()
-
+        _save_item_model(request, obj, form, change)
         super(ItemAdmin, self).save_model(request, obj, form, change)
 
 
@@ -399,32 +402,55 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     external_link_edit.short_description = u"Ссылка"
 
     def save_model(self, request, obj, form, change):
-        prev_status = False
-        if not obj.pk:
-            obj.user = request.user
-            if not obj.issue:
-                la = lna = False
-                qs = Issue.objects
-                try:
-                    # последний активный
-                    la = qs.filter(status='active').order_by('-pk')[0:1].get()
-                    # последний неактивный
-                    lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
-                except Issue.DoesNotExist:
-                    pass
-
-                if la or lna:
-                    obj.issue = lna or la
-        else:
-            old_obj = Item.objects.get(pk=obj.pk)
-            prev_status = old_obj.status
-
-        # Обновление времени модификации при смене статуса на активный
-        new_status = form.cleaned_data.get('status')
-        if not prev_status == 'active' and new_status == 'active':
-            obj.modified_at = datetime.now()
+        _save_item_model(request, obj, form, change)
 
         super(ItemModeratorAdmin, self).save_model(request, obj, form, change)
 
 
 admin.site.register(ItemModerator, ItemModeratorAdmin)
+
+
+class ItemDailyModerator(Item):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Новости (разметка дневного дайджеста)'
+
+
+class ItemDailyModeratorAdmin(admin.ModelAdmin):
+    filter_horizontal = ('tags',)
+    list_filter = (
+        'status',
+        'issue',
+        'section',
+        'is_editors_choice',
+        'user',
+        'related_to_date',
+        'resource',
+    )
+    search_fields = ('title', 'description', 'link')
+    list_display = ('title', 'status', 'external_link',
+                    'activated_at')
+
+    external_link = lambda s, obj: _external_link(obj)
+    external_link.allow_tags = True
+    external_link.short_description = u"Ссылка"
+
+    def get_queryset(self, request):
+        try:
+
+            today = datetime.utcnow().date()
+            yeasterday = today - timedelta(days=2)
+
+            result = self.model.objects.filter(
+                related_to_date__range=[yeasterday,
+                                        today])
+        except AssertionError:
+            result = super(ItemDailyModeratorAdmin, self).get_queryset(request)
+        return result
+
+    def save_model(self, request, obj, form, change):
+        _save_item_model(request, obj, form, change)
+        super(ItemDailyModeratorAdmin, self).save_model(request, obj, form, change)
+
+
+admin.site.register(ItemDailyModerator, ItemDailyModeratorAdmin)
