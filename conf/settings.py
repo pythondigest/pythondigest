@@ -40,6 +40,8 @@ INSTALLED_APPS = (
     'rosetta',
     'social.apps.django_app.default',
     'micawber.contrib.mcdjango',
+
+    'django_q',
 )
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
@@ -254,8 +256,20 @@ ADMIN_REORDER = (
     'sites',
     'auth',
     'account',
+    'django_q',
     'default',
 )
+
+
+Q_CLUSTER = {
+    'name': 'DjangORM',
+    'workers': 1,
+    'timeout': 90,
+    'retry': 120,
+    'queue_limit': 10,
+    'bulk': 5,
+    'orm': 'default'
+}
 
 try:
     from .local_settings import *

@@ -83,13 +83,16 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.short_description = u"Просмотр"
 
     def make_published(self, request, queryset):
+        from django_q.tasks import async
+
         if len(queryset) == 1:
             issue = queryset[0]
             site = 'http://pythondigest.ru'
-            pub_to_all(
+            async(
+                pub_to_all,
                 issue.announcement,
                 '{}{}'.format(site, issue.link),
-                '{}{}'.format(site, issue.image.url),
+                '{}{}'.format(site, issue.image.url if issue.image else '')
             )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"
