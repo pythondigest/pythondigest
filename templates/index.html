@@ -11,18 +11,9 @@
                     <small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small>
                 </h1>
                 <div class="index-description row">
-                    {% if object.description %}
-                        <div class="col-md-8 pull-left">
-                            <div class="index-description-content text-muted">
-                                {{ object.description|safe }}
-                            </div>
-                        </div>
-                    {% endif %}
-                    {% if object.image %}
-                        <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-                            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
-                        </div>
-                    {% endif %}
+                    {% with object=object %}
+                        {% include 'blocks/_issue_anonce.html' %}
+                    {% endwith %}
                 </div>
             {% endwith %}
         {% endif %}

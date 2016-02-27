@@ -1,0 +1,26 @@
+<div class="col-md-8 pull-left">
+
+    {% if object.trend %}
+
+        <h1>
+            <small>Тенденция недели:</small>
+            <small>
+                <mark>{{ object.trend|safe }}</mark>
+            </small>
+        </h1>
+
+    {% endif %}
+
+    {% if object.description %}
+        <div class="index-description-content text-muted">
+            {{ object.description|safe }}
+        </div>
+    {% endif %}
+</div>
+
+
+<div class="col-md-4 {% if object.description %}pull-right{% endif %}">
+    {% if object.image %}
+        <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
+    {% endif %}
+</div>

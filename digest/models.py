@@ -61,6 +61,11 @@ class Issue(models.Model):
 
     tip = models.ForeignKey(Tip, null=True, blank=True, verbose_name=u'Совет')
 
+    trend = models.CharField(verbose_name='Тенденция недели',
+                             blank=True,
+                             null=True,
+                             max_length=255, )
+
     last_item = models.IntegerField(
         verbose_name='Последняя модерированая новость',
         blank=True,
