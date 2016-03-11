@@ -439,11 +439,17 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
     list_editable = ('is_editors_choice',)
     search_fields = ('title', 'description', 'link')
     list_display = ('title', 'status', 'is_editors_choice', 'external_link',
-                    'activated_at')
+                    'activated_at', 'cls_ok')
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
     external_link.short_description = u"Ссылка"
+
+    def cls_ok(self, obj):
+        return bool(obj.cls_check())
+
+    cls_ok.boolean = True
+    cls_ok.short_description = 'Оценка (авто)'
 
     def get_queryset(self, request):
         try:
