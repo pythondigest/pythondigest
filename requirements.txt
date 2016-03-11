@@ -30,4 +30,5 @@ google-api-python-client==1.4.2
 tweepy==3.5.0
 vk==2.0.2
 
+python-memcached==1.5
 django-q==0.7.15

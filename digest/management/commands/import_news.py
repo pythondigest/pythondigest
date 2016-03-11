@@ -80,13 +80,18 @@ def import_rss(**kwargs):
 
             http_code, content, raw_content = _get_http_data_of_url(n.link)
 
+            try:
+                summary = re.sub('<.*?>', '', n.summary)
+            except (AttributeError, KeyError):
+                summary = ''
+
             item_data = {
                 'title': title,
                 'link': n.link,
                 'raw_content': raw_content,
                 'http_code': http_code,
                 'content': content,
-                'description': re.sub('<.*?>', '', n.summary),
+                'description': summary,
                 'resource': src.resource,
                 'language': src.language,
             }

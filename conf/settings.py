@@ -140,6 +140,12 @@ TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
 CONCURRENCY_HANDLER409 = 'digest.views.conflict'
 CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -236,6 +242,8 @@ CKEDITOR_CONFIGS = {
     },
 
 }
+
+CLS_URL_BASE = ''
 
 GITTER_TOKEN = ''
 TWITTER_CONSUMER_KEY = ''

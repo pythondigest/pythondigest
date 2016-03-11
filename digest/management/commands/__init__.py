@@ -403,6 +403,8 @@ def save_item(item):
         elif item.get('status') == 'active':
             _a.save()
 
+        _a.cls_check()
+
 
 def save_pickle_file(filepath, data):
     with open(filepath, 'wb') as fio:

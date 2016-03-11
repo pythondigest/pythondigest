@@ -1,11 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
+import json
 
+import requests
+import requests.exceptions
 from concurrency.fields import IntegerVersionField
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
+from readability.readability import Document
 
 from frontend.models import Tip
 
@@ -227,6 +233,54 @@ class Item(models.Model):
         except Exception as e:
             pass
         super(Item, self).save(*args, **kwargs)
+
+    def cls_check(self):
+        key = 'link_cls_check_{}'.format(self.pk)
+        data = cache.get(key, None)
+        if data is None:
+            try:
+
+                url = "{}/{}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+                resp = requests.post(url,
+                                     data=json.dumps({'links': [
+                                         self.data4cls
+                                     ]}))
+                print(resp.json())
+                result = resp.json()[0].get(self.link, False)
+
+            except (requests.exceptions.RequestException,
+                    requests.exceptions.Timeout,
+                    requests.exceptions.TooManyRedirects) as e:
+                result = None
+            cache.set(key, result)
+        else:
+            result = data
+        return bool(result)
+
+    @property
+    def text(self):
+        try:
+            resp = requests.get(self.link)
+            result = Document(resp.text).summary()
+
+        except (KeyError,
+                requests.exceptions.RequestException,
+                requests.exceptions.Timeout,
+                requests.exceptions.TooManyRedirects) as e:
+            result = ''
+        return result
+
+    @property
+    def data4cls(self):
+        return {
+            'link': self.link,
+            'data': {
+                'language': self.language,
+                'title': self.title,
+                'description': self.description,
+                'article': self.text
+            }
+        }
 
     @property
     def internal_link(self):

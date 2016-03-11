@@ -293,7 +293,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'resource',
     )
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'status', 'external_link',
+    list_display = ('title', 'status', 'external_link', 'cls_ok',
                     'activated_at')
 
     exclude = ('modified_at',),
@@ -306,6 +306,12 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         '_action_active_queue_8',
         '_action_active_queue_24',
     ]
+
+    def cls_ok(self, obj):
+        return bool(obj.cls_check())
+
+    cls_ok.boolean = True
+    cls_ok.short_description = 'Оценка (авто)'
 
     def _action_make_moderated(self, request, queryset):
         try:
