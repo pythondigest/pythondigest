@@ -245,7 +245,6 @@ class Item(models.Model):
                                      data=json.dumps({'links': [
                                          self.data4cls
                                      ]}))
-                print(resp.json())
                 result = resp.json()[0].get(self.link, False)
 
             except (requests.exceptions.RequestException,
