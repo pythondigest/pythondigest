@@ -5,6 +5,7 @@ import json
 import os
 from datetime import datetime, timedelta, date
 
+import grequests
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -32,15 +33,23 @@ def create_dataset(start_date, end_date, name):
     else:
         data = {'links': []}
 
-    items = Item.objects.filter(
-        related_to_date__range=[start_date,
-                                end_date])
+    items = {x.link: x for x in Item.objects.filter(
+        related_to_date__range=[
+            start_date,
+            end_date
+        ])[:5] if not check_exist_link(data, x)}
 
-    for item in items:
-        if not check_exist_link(data, item):
-            data['links'].append(item.get_data4cls(status=True))
-            with open(out_filepath, 'w') as fio:
-                json.dump(data, fio)
+    rs = (grequests.get(u) for u in items.keys())
+    resps = grequests.map(rs)
+
+    for res in resps:
+        data['links'].append(items[res.url].get_data4cls(status=True, text=items[res.url].get_text(res.text)))
+
+    if not os.path.exists(out_filepath):
+        os.makedirs(os.path.dirname(out_filepath))
+
+    with open(out_filepath, 'w') as fio:
+        json.dump(data, fio)
 
 
 class Command(BaseCommand):

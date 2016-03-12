@@ -32,3 +32,5 @@ vk==2.0.2
 
 python-memcached==1.57
 django-q==0.7.15
+
+grequests==0.3.0

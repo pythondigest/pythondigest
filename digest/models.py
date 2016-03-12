@@ -11,7 +11,7 @@ from django.core.cache import cache
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext as _
-from readability.readability import Document
+from readability.readability import Document, Unparseable
 
 from frontend.models import Tip
 
@@ -265,11 +265,17 @@ class Item(models.Model):
         else:
             return 'article'
 
-    @property
-    def text(self):
+    def get_text(self, text=None):
         try:
-            resp = requests.get(self.link)
-            result = Document(resp.text).summary()
+            if text is None:
+                resp = requests.get(self.link)
+                text = resp.text
+
+            try:
+                result = Document(text).summary()
+            except Unparseable:
+                result = text
+
 
         except (KeyError,
                 requests.exceptions.RequestException,
@@ -278,14 +284,16 @@ class Item(models.Model):
             result = ''
         return result
 
-    def get_data4cls(self, status=False):
+    text = property(get_text)
+
+    def get_data4cls(self, status=False, text=None):
         result = {
             'link': self.link,
             'data': {
                 'language': self.language,
                 'title': self.title,
                 'description': self.description,
-                'article': self.text,
+                'article': self.get_text(text),
                 'type': self.type,
             }
         }
