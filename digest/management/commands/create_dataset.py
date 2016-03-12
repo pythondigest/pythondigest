@@ -24,20 +24,22 @@ def create_dataset(start_date, end_date, name):
 
     if os.path.exists(out_filepath):
         with open(out_filepath, 'r') as fio:
-            data = json.load(fio)
+            try:
+                data = json.load(fio)
+            except ValueError as e:
+                print(e)
+                data = {'links': []}
     else:
-        data = {
-            'links': []
-        }
+        data = {'links': []}
 
     items = Item.objects.filter(
         related_to_date__range=[start_date,
                                 end_date])
 
-    with open(out_filepath, 'w') as fio:
-        for item in items:
-            if not check_exist_link(data, item):
-                data['links'].append(item.data4cls)
+    for item in items:
+        if not check_exist_link(data, item):
+            data['links'].append(item.get_data4cls(status=True))
+            with open(out_filepath, 'w') as fio:
                 json.dump(data, fio)
 
 

@@ -257,6 +257,15 @@ class Item(models.Model):
         return bool(result)
 
     @property
+    def type(self):
+        if self.section is not None and any(
+                [self.section.title == 'Интересные проекты, инструменты, библиотеки',
+                 self.section.title == 'Релизы']):
+            return 'library'
+        else:
+            return 'article'
+
+    @property
     def text(self):
         try:
             resp = requests.get(self.link)
@@ -269,17 +278,22 @@ class Item(models.Model):
             result = ''
         return result
 
-    @property
-    def data4cls(self):
-        return {
+    def get_data4cls(self, status=False):
+        result = {
             'link': self.link,
             'data': {
                 'language': self.language,
                 'title': self.title,
                 'description': self.description,
-                'article': self.text
+                'article': self.text,
+                'type': self.type,
             }
         }
+        if status:
+            result['data']['label'] = self.status == 'active'
+        return result
+
+    data4cls = property(get_data4cls)
 
     @property
     def internal_link(self):
