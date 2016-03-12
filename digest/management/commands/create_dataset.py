@@ -45,7 +45,7 @@ def create_dataset(start_date, end_date, name):
     for res in resps:
         data['links'].append(items[res.url].get_data4cls(status=True, text=items[res.url].get_text(res.text)))
 
-    if not os.path.exists(out_filepath):
+    if not os.path.exists(os.path.dirname(out_filepath)):
         os.makedirs(os.path.dirname(out_filepath))
 
     with open(out_filepath, 'w') as fio:
