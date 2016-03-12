@@ -251,7 +251,7 @@ class Item(models.Model):
                     requests.exceptions.Timeout,
                     requests.exceptions.TooManyRedirects) as e:
                 result = None
-            cache.set(key, result)
+            cache.set(key, result, None)
         else:
             result = data
         return bool(result)
