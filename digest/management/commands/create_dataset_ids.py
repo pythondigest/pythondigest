@@ -20,6 +20,8 @@ def check_exist_link(data, item):
 
 
 def create_dataset(queryset_items, name):
+    if not queryset_items:
+        return
     out_filepath = os.path.join(settings.DATASET_FOLDER, name)
 
     if os.path.exists(out_filepath):
