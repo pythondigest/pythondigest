@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load common %}
 
 {% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
 {% block page_description %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o
@@ -24,20 +25,31 @@
 
 {% block content %}
     <div class="container cards-list">
-        <h1>{{ object.title }}&nbsp;
-            <small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small>
-        </h1>
+
+        {% if issue %}
+            {% with object=issue %}
+                <h1>
+                    {% block cur_issue_text %}
+
+                    {% endblock cur_issue_text %}
+                    {{ object.title }}&nbsp;
+                    <small>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</small>
+                </h1>
+                <div class="index-description row">
+                    {% with object=object %}
+                        {% include 'blocks/_issue_anonce.html' %}
+                    {% endwith %}
 
 
-        <div class="index-description row">
-            {% with object=object %}
-                {% include 'blocks/_issue_anonce.html' %}
+                </div>
             {% endwith %}
-        </div>
+        {% endif %}
 
 
         <div class="col-md-4 pull-right visible-lg" style="margin-left:20px;width:349px;">
             <div class="row">
+
+                {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
                 {% include "blocks/_adv.html" %}
                 {% include "blocks/_friends.html" %}
             </div>
@@ -49,6 +61,9 @@
             <div class="items-group-container">
                 <h2>{{ data.grouper.title }}</h2>
 
+                {% with "before_section_"|add:data.grouper.title|unidecode|slugify as ads_section %}
+                    {% include 'advertising/blocks/ads.html' with ads=ads type=ads_section %}
+                {% endwith %}
 
                 <blockquote>
                     <div class="bg-warning">
@@ -65,6 +80,8 @@
                 {% endfor %}
             </div>
         {% endfor %}
+
+        {% include 'advertising/blocks/ads.html' with ads=ads type='after_issue' %}
 
         {% with object.pk|lower as id %}
             {% include "blocks/_disqus.html" with identifier='issue_'|add:id %}

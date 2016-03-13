@@ -2,17 +2,18 @@
 
 import datetime
 
-from django.views.generic import DetailView
-from django.template import loader
-from django.template.context import RequestContext
 from concurrency.views import ConflictResponse
+from digg_paginator import DiggPaginator
 from django.contrib import messages
 from django.db.models import Q
+from django.template import loader
+from django.template.context import RequestContext
+from django.views.generic import DetailView
 from django.views.generic import FormView, ListView
-from digg_paginator import DiggPaginator
 
-from .forms import AddNewsForm
+from advertising.models import get_ads
 from digest.models import Issue, Item
+from .forms import AddNewsForm
 
 
 def conflict(request, target=None, template_name='409.html'):
@@ -49,9 +50,13 @@ class IssueView(DetailView):
         items = self.object.item_set.filter(status='active').order_by(
             '-section__priority', '-priority')
 
-        context.update({'items': items, 'active_menu_item': 'issue_view'})
+        context.update({
+            'items': items,
+            'active_menu_item': 'issue_view',
+            'ads': get_ads()})
 
         return context
+
 
 class ItemView(DetailView):
     """Просмотр отдельной новости."""
@@ -94,7 +99,6 @@ class NewsList(ListView):
         context = super(NewsList, self).get_context_data(**kwargs)
         context['active_menu_item'] = 'feed'
         return context
-
 
 
 class AddNews(FormView):

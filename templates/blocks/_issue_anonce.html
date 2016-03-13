@@ -15,6 +15,9 @@
         <div class="index-description-content text-muted">
             {{ object.description|safe }}
         </div>
+
+        {% include 'advertising/blocks/ads.html' with ads=ads type='after_anounce' %}
+
     {% endif %}
 </div>
 

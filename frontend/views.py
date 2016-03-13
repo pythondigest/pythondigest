@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
+from advertising.models import get_ads
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
 
@@ -32,12 +33,12 @@ class Sitemap(TemplateView):
         for item in Item.objects.filter(status='active',
                                         activated_at__lte=datetime.datetime.now()):
             items.append(
-                    {'loc': '/view/%s' % item.pk,
-                     'changefreq': 'never',})
+                {'loc': '/view/%s' % item.pk,
+                 'changefreq': 'never',})
 
         ctx.update(
-                {'records': items,
-                 'domain': 'http://%s' % settings.BASE_DOMAIN})
+            {'records': items,
+             'domain': 'http://%s' % settings.BASE_DOMAIN})
         return ctx
 
 
@@ -52,7 +53,7 @@ class Index(TemplateView):
         issue = False
         try:
             issue = self.model.objects.filter(status='active').latest(
-                    'published_at')
+                'published_at')
         except Issue.DoesNotExist:
             pass
 
@@ -61,10 +62,12 @@ class Index(TemplateView):
             qs = issue.item_set.filter(status='active')
             items = qs.order_by('-section__priority', '-priority')
 
-        context.update(
-                {'issue': issue,
-                 'items': items,
-                 'active_menu_item': 'home',})
+        context.update({
+            'issue': issue,
+            'items': items,
+            'active_menu_item': 'home',
+            'ads': get_ads()
+        })
         return context
 
 
@@ -86,11 +89,11 @@ class ViewEditorMaterial(TemplateView):
 def get_items_json(request, year, month, day):
     result = {}
     items = Item.objects.filter(
-            status='active',
-            is_editors_choice=True,
-            related_to_date__year=int(year),
-            related_to_date__month=int(month),
-            related_to_date__day=int(day),
+        status='active',
+        is_editors_choice=True,
+        related_to_date__year=int(year),
+        related_to_date__month=int(month),
+        related_to_date__day=int(day),
     )
     result['ok'] = bool(items)
     if items:

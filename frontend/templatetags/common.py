@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import random
 import re
 
@@ -16,6 +17,14 @@ name_re = re.compile(r'([^O])Auth')
 LEVEL_TAGS = get_level_tags()
 
 register = template.Library()
+
+from unidecode import unidecode as _unidecode
+
+
+@register.filter
+def unidecode(string):
+    return _unidecode(string.lower().replace(" ", "_")).replace("'",
+                                                                "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
 
 
 @register.simple_tag()

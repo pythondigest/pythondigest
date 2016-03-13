@@ -1,0 +1,70 @@
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Сверху'
+    align: 'top'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Нижнее меню (footer)'
+    align: 'footer'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'После выпуска'
+    align: 'after_issue'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Справа'
+    align: 'right'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'После анонса'
+    align: 'after_anounce'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Новости"'
+    align: 'before_section_novosti'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Конференции, события, встречи разработчиков"'
+    align: 'before_section_konferentsii_sobytiia_vstrechi_razrabotchikov'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Статьи"'
+    align: 'before_section_stati'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Видео"'
+    align: 'before_section_video'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Советуем"'
+    align: 'before_section_sovetuem'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Учебые материалы"'
+    align: 'before_section_uchebnye_materialy'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Колонка автора"'
+    align: 'before_section_kolonka_avtora'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Интересные проекты, инструменты, библиотеки"'
+    align: 'before_section_interesnye_proekty_instrumenty_biblioteki'
+- model: advertising.adalign
+  pk: null
+  fields:
+    title: 'Перед разделом "Релизы"'
+    align: 'before_section_relizy'

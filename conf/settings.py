@@ -35,6 +35,7 @@ INSTALLED_APPS = (
     'digest',
     'frontend',
     'jobs',
+    'advertising',
 
     'account',
     'rosetta',
@@ -260,6 +261,7 @@ VK_PASSWORD = ''
 
 ADMIN_REORDER = (
     'digest',
+    'advertising',
     'jobs',
     'frontend',
     'sites',

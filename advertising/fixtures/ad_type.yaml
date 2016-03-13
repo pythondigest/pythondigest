@@ -1,0 +1,24 @@
+- model: advertising.adtype
+  pk: null
+  fields:
+    title: 'Bootstrap panel'
+    name: 'btp_panel'
+    template: 'advertising/ads/btn_panel.html'
+- model: advertising.adtype
+  pk: null
+  fields:
+    title: 'Заголовок'
+    name: 'title'
+    template: 'advertising/ads/title.html'
+- model: advertising.adtype
+  pk: null
+  fields:
+    title: 'Заголовок + описание'
+    name: 'title_description'
+    template: 'advertising/ads/title_description.html'
+- model: advertising.adtype
+  pk: null
+  fields:
+    title: 'Описание (сырой html)'
+    name: 'description'
+    template: 'advertising/ads/description.html'

@@ -5,15 +5,14 @@ from django.db import models
 
 EDITOR_MATERIAL_SECTION_CHOICES = (('news', u'Новости'),
                                    ('articles', u'Статьи'),
-                                   ('landing', u'Посадочные страницы'), )
+                                   ('landing', u'Посадочные страницы'),)
 
 EDITOR_MATERIAL_STATUS_CHOICES = (('draft', u'Черновик'),
                                   ('active', u'Активная'),
-                                  ('trash', u'Удалена'), )
+                                  ('trash', u'Удалена'),)
 
 
 class EditorMaterial(models.Model):
-
     """Редкационные материалы (новости, статьи, просто страницы сайта)"""
     title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
     slug = models.SlugField(verbose_name=u'Идентификатор для URL', )
@@ -49,13 +48,12 @@ class EditorMaterial(models.Model):
         return self.title
 
     class Meta:
-        unique_together = ('slug', 'section', )
+        unique_together = ('slug', 'section',)
         verbose_name = u'Материал редакции'
         verbose_name_plural = u'Материалы редакции'
 
 
 class Tip(models.Model):
-
     text = models.TextField(verbose_name=u'Совет')
 
     active = models.BooleanField(verbose_name=u'Активен', default=True, )
