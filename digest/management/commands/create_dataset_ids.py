@@ -40,7 +40,10 @@ def create_dataset(queryset_items, name):
     resps = grequests.map(rs)
 
     for res in resps:
-        data['links'].append(items[res.url].get_data4cls(status=True, text=items[res.url].get_text(res.text)))
+        try:
+            data['links'].append(items[res.url].get_data4cls(status=True, text=items[res.url].get_text(res.text)))
+        except KeyError as e:
+            print("Not found key '{}'".format(res.url))
 
     if not os.path.exists(os.path.dirname(out_filepath)):
         os.makedirs(os.path.dirname(out_filepath))
