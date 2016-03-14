@@ -141,6 +141,7 @@ def get_pydigest_groups():
         (-37392018, 1),  # python_for_fun
         (-75836319, 0),  # https://vk.com/flask_community
         (-76525381, 0),  # https://vk.com/iteapro
+        (-110767, 1),  # https://vk.com/django_framework
     ]
     # return [
     #     (-105509411, 1),  # тестовая группа
