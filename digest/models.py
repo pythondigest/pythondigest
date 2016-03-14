@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import json
+import os
 
 import requests
 import requests.exceptions
@@ -263,37 +264,42 @@ class Item(models.Model):
         else:
             return 'article'
 
-    def get_text(self, text=None):
-        try:
-            if text is None:
+    @property
+    def text(self):
+        if self.article_path is not None and self.article_path and os.path.isfile(self.article_path):
+            with open(self.article_path, 'r') as fio:
+                result = fio.read()
+        else:
+            try:
                 resp = requests.get(self.link)
                 text = resp.text
-
-            try:
-                result = Document(text,
-                                  min_text_length=50,
-                                  positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
-                                  negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
-                                  ).summary()
-            except Unparseable:
-                result = text
-        except (KeyError,
-                requests.exceptions.RequestException,
-                requests.exceptions.Timeout,
-                requests.exceptions.TooManyRedirects) as e:
-            result = ''
+                try:
+                    result = Document(text,
+                                      min_text_length=50,
+                                      positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
+                                      negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
+                                      ).summary()
+                except Unparseable:
+                    result = text
+            except (KeyError,
+                    requests.exceptions.RequestException,
+                    requests.exceptions.Timeout,
+                    requests.exceptions.TooManyRedirects) as e:
+                result = ''
+            self.article_path = os.path.join(settings.DATASET_ROOT, '{}.html'.format(self.id))
+            with open(self.article_path, 'w') as fio:
+                fio.write(result)
+            self.save()
         return result
 
-    text = property(get_text)
-
-    def get_data4cls(self, status=False, text=None):
+    def get_data4cls(self, status=False):
         result = {
             'link': self.link,
             'data': {
                 'language': self.language,
                 'title': self.title,
                 'description': self.description,
-                'article': self.get_text(text),
+                'article': self.text,
                 'type': self.type,
             }
         }
