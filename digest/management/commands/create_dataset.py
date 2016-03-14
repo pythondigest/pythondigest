@@ -32,5 +32,6 @@ class Command(BaseCommand):
             os.makedirs(settings.DATASET_ROOT)
 
         for item in Item.objects.all():
-            if item.article_path is None or not item.article_path:
+            if item.article_path is None or not item.article_path or not os.path.isfile(item.article_path):
                 async(get_article, item)
+                # get_article(item)

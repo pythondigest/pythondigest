@@ -270,11 +270,13 @@ class Item(models.Model):
                 text = resp.text
 
             try:
-                result = Document(text).summary()
+                result = Document(text,
+                                  min_text_length=50,
+                                  positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
+                                  negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
+                                  ).summary()
             except Unparseable:
                 result = text
-
-
         except (KeyError,
                 requests.exceptions.RequestException,
                 requests.exceptions.Timeout,

@@ -247,6 +247,70 @@ CKEDITOR_CONFIGS = {
 }
 
 DATASET_FOLDER = ''
+DATASET_POSITIVE_KEYWORDS = list({
+    'blog',
+    'article',
+    'news-item',
+    'section',
+    'content',
+    'body-content',
+    'hentry',
+    'entry-content',
+    'page-content',
+    'readme',
+    'markdown-body entry-content',
+    'maia-col-6',
+    'maia-col-10',
+    'col-md-9',
+    'col-md-12',
+    'maia-article',
+    'col-md-6',
+    'post_show',
+    'content html_format',
+    'watch-description-content',
+    'watch-description',
+    'watch-description-text',
+    'article-content',
+    'post',
+    'container',
+    'summary',
+    'articleBody',
+    'article hentry',
+    'article-content',
+    'entry-content',
+    'viewitem-content',
+    'main',
+    'post',
+    'post-content',
+    'section-content',
+    'articleBody',
+    'section',
+    'document',
+    'rst-content',
+    'markdown-content',
+    'wy-nav-content',
+    'toc',
+    'book',
+    'col-md-12',
+
+})
+
+DATASET_NEGATIVE_KEYWORDS = list({
+    "mysidebar",
+    "related",
+    "ads",
+    'footer',
+    'menu',
+    'navigation',
+    'navbar',
+    '404',
+    'error 404',
+    'error: 404',
+    'page not found',
+    'file-wrap',
+    'navbar',
+})
+
 CLS_URL_BASE = ''
 
 GITTER_TOKEN = ''
@@ -273,14 +337,13 @@ ADMIN_REORDER = (
     'default',
 )
 
-
 Q_CLUSTER = {
     'name': 'DjangORM',
     'workers': 4,
     'timeout': 90,
     'retry': 120,
     'queue_limit': 10,
-    'bulk': 5,
+    'bulk': 20,
     'orm': 'default'
 }
 
