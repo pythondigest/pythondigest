@@ -204,11 +204,9 @@ class Item(models.Model):
                              null=True,
                              blank=True, )
     version = IntegerVersionField(verbose_name=u'Версия')
-
     tags = models.ManyToManyField(Tag, verbose_name=u'Тэги', blank=True, )
-
-    to_update = models.BooleanField(verbose_name=u'Обновить новость',
-                                    default=False, )
+    to_update = models.BooleanField(verbose_name=u'Обновить новость', default=False, )
+    article_path = models.FilePathField(verbose_name='Путь до статьи', blank=True, null=True)
 
     def save(self, *args, **kwargs):
         try:

@@ -128,6 +128,8 @@ STATIC_ROOT = path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = path.join(BASE_DIR, 'media')
 
+DATASET_ROOT = path.join(BASE_DIR, 'dataset')
+
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
@@ -274,7 +276,7 @@ ADMIN_REORDER = (
 
 Q_CLUSTER = {
     'name': 'DjangORM',
-    'workers': 1,
+    'workers': 4,
     'timeout': 90,
     'retry': 120,
     'queue_limit': 10,
