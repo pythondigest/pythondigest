@@ -156,10 +156,8 @@ def pub_to_gitter(text, token):
         time.sleep(1)
 
 
-def pub_to_twitter(text, attachments, api):
-    number = attachments.split('/')[-2]
-    image = 'http://pythondigest.ru/media/issues/pydigest_{}.jpg'.format(number)
-    send_tweet_with_media(api, text, image)
+def pub_to_twitter(text, image_path, api):
+    send_tweet_with_media(api, text, image_path)
 
 
 def pub_to_vk_users(text, api):
@@ -229,4 +227,4 @@ def pub_to_all(text, digest_url, digest_image_url):
     pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
     pub_to_vk_users(text, api)
     pub_to_gitter('\n'.join(text.split('\n')[1::]), settings.GITTER_TOKEN)
-    pub_to_twitter(twitter_text, digest_url, twitter_api)
+    pub_to_twitter(twitter_text, digest_image_url, twitter_api)
