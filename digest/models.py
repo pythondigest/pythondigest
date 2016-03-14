@@ -266,10 +266,11 @@ class Item(models.Model):
 
     @property
     def text(self):
-        if self.article_path is not None and self.article_path and os.path.isfile(self.article_path):
+        if self.article_path is not None and self.article_path and os.path.exists(self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:
+            print("Not found text for: {}".format(self.id))
             try:
                 resp = requests.get(self.link)
                 text = resp.text
