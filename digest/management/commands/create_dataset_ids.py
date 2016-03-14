@@ -50,4 +50,3 @@ class Command(BaseCommand):
             name = 'data_{}_{}.json'.format(count, part)
             items = Item.objects.all().order_by('id')[part * count: (part + 1) * count]
             create_dataset(items, name)
-            break
