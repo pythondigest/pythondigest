@@ -266,6 +266,7 @@ class Item(models.Model):
 
     @property
     def text(self):
+        print(self.article_path is not None, self.article_path, os.path.exists(self.article_path))
         if self.article_path is not None and self.article_path and os.path.exists(self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
