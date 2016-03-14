@@ -13,11 +13,14 @@ from digest.models import Item
 def get_article(item):
     path = os.path.join(settings.DATASET_ROOT, '{}.html'.format(item.id))
     with open(path, 'w') as fio:
-        text = item.text
-        if text:
-            fio.write(text)
-            item.article_path = path
-            item.save()
+        try:
+            text = item.text
+        except Exception as e:
+            text = ''
+        
+        fio.write(text)
+        item.article_path = path
+        item.save()
     return item.link
 
 
@@ -32,6 +35,6 @@ class Command(BaseCommand):
             os.makedirs(settings.DATASET_ROOT)
 
         for item in Item.objects.all():
-            if item.article_path is None or not item.article_path or not os.path.isfile(item.article_path):
+            if item.article_path is None or not item.article_path or not os.path.exists(item.article_path):
                 async(get_article, item)
                 # get_article(item)
