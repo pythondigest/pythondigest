@@ -239,10 +239,11 @@ class Item(models.Model):
     def cls_check(self):
         try:
             item = ItemClsCheck.objects.get(item=self)
+            item.check_cls()
         except ObjectDoesNotExist:
             item = ItemClsCheck(item=self)
             item.save()
-        item.check_cls()
+            item.check_cls(force=True)
         return item.status
 
     @property
@@ -325,7 +326,9 @@ class ItemClsCheck(models.Model):
     status = models.BooleanField(default=False, verbose_name='Оценка')
 
     def check_cls(self, force=False):
+        # print("Run check: {}".format(self.pk))
         if force or self.last_check <= datetime.datetime.now() - datetime.timedelta(days=10):
+
             try:
                 url = "{}/{}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
                 resp = requests.post(url,
@@ -337,6 +340,7 @@ class ItemClsCheck(models.Model):
                     requests.exceptions.Timeout,
                     requests.exceptions.TooManyRedirects) as e:
                 self.status = False
+            # print("Real run check: {}".format(self.pk))
             self.save()
 
     def __str__(self):
@@ -469,6 +473,8 @@ class ParsingRules(models.Model):
 def update_cls_score(instance, **kwargs):
     try:
         item = ItemClsCheck.objects.get(item=instance)
+        item.check_cls()
     except ObjectDoesNotExist:
         item = ItemClsCheck(item=instance)
-    item.check_cls()
+        item.save()
+        item.check_cls(force=True)
