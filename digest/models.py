@@ -8,9 +8,11 @@ import requests.exceptions
 from concurrency.fields import IntegerVersionField
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.cache import cache
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.utils.translation import ugettext as _
 from readability.readability import Document, Unparseable
 
@@ -233,27 +235,15 @@ class Item(models.Model):
             pass
         super(Item, self).save(*args, **kwargs)
 
+    @property
     def cls_check(self):
-        key = 'link_cls_check_{}'.format(self.pk)
-        data = cache.get(key, None)
-        if data is None:
-            try:
-
-                url = "{}/{}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
-                resp = requests.post(url,
-                                     data=json.dumps({'links': [
-                                         self.data4cls
-                                     ]}))
-                result = resp.json()['links'][0].get(self.link, False)
-
-            except (requests.exceptions.RequestException,
-                    requests.exceptions.Timeout,
-                    requests.exceptions.TooManyRedirects) as e:
-                result = None
-            cache.set(key, result, None)
-        else:
-            result = data
-        return bool(result)
+        try:
+            item = ItemClsCheck.objects.get(item=self)
+        except ObjectDoesNotExist:
+            item = ItemClsCheck(item=self)
+            item.save()
+        item.check_cls()
+        return item.status
 
     @property
     def type(self):
@@ -266,12 +256,10 @@ class Item(models.Model):
 
     @property
     def text(self):
-        # print(self.article_path is not None, self.article_path, os.path.exists(self.article_path), self.article_path is not None and self.article_path and os.path.exists(self.article_path))
         if self.article_path is not None and self.article_path and os.path.exists(self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:
-            # print("Not found text for: {}".format(self.id))
             try:
                 resp = requests.get(self.link)
                 text = resp.text
@@ -327,8 +315,36 @@ class Item(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = u'Новость'
-        verbose_name_plural = u'Новости'
+        verbose_name = 'Новость'
+        verbose_name_plural = 'Новости'
+
+
+class ItemClsCheck(models.Model):
+    item = models.OneToOneField(Item, verbose_name='Новость')
+    last_check = models.DateTimeField(verbose_name='Время последней проверки', auto_now=True)
+    status = models.BooleanField(default=False, verbose_name='Оценка')
+
+    def check_cls(self, force=False):
+        if force or self.last_check <= datetime.datetime.now() - datetime.timedelta(days=10):
+            try:
+                url = "{}/{}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+                resp = requests.post(url,
+                                     data=json.dumps({'links': [
+                                         self.item.data4cls
+                                     ]}))
+                self.status = resp.json()['links'][0].get(self.item.link, False)
+            except (requests.exceptions.RequestException,
+                    requests.exceptions.Timeout,
+                    requests.exceptions.TooManyRedirects) as e:
+                self.status = False
+            self.save()
+
+    def __str__(self):
+        return "{} - {} ({})".format(str(self.item), self.status, self.last_check)
+
+    class Meta:
+        verbose_name = 'Проверка классификатором'
+        verbose_name_plural = 'Проверка классификатором'
 
 
 class AutoImportResource(models.Model):
@@ -447,3 +463,12 @@ class ParsingRules(models.Model):
         verbose_name = u'Правило обработки'
         verbose_name_plural = u'Правила обработки'
         ordering = ['-weight']
+
+
+@receiver(post_save, sender=Item)
+def update_cls_score(instance, **kwargs):
+    try:
+        item = ItemClsCheck.objects.get(item=instance)
+    except ObjectDoesNotExist:
+        item = ItemClsCheck(item=instance)
+    item.check_cls()

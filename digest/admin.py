@@ -10,7 +10,7 @@ from django.utils.html import escape
 
 from digest.forms import ItemStatusForm
 from digest.models import AutoImportResource, Issue, Item, Package, \
-    ParsingRules, Resource, Section, Tag, get_start_end_of_week
+    ParsingRules, Resource, Section, Tag, get_start_end_of_week, ItemClsCheck
 from digest.pub_digest import pub_to_all
 
 admin.site.unregister(Site)
@@ -308,7 +308,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     ]
 
     def cls_ok(self, obj):
-        return bool(obj.cls_check())
+        return bool(obj.cls_check)
 
     cls_ok.boolean = True
     cls_ok.short_description = 'Оценка (авто)'
@@ -446,7 +446,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
     external_link.short_description = u"Ссылка"
 
     def cls_ok(self, obj):
-        return bool(obj.cls_check())
+        return obj.cls_check
 
     cls_ok.boolean = True
     cls_ok.short_description = 'Оценка (авто)'
@@ -471,3 +471,37 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ItemDailyModerator, ItemDailyModeratorAdmin)
+
+
+class ItemClsCheckAdmin(admin.ModelAdmin):
+    fields = (
+        'item',
+        'status',
+        'last_check',
+    )
+    readonly_fields = (
+        'last_check',
+    )
+    list_display = (
+        'item',
+        'last_check',
+        'status',
+    )
+
+    list_filter = (
+        'status',
+        'last_check',
+    )
+
+    actions = [
+        'update_check',
+    ]
+
+    def update_check(self, request, queryset):
+        for obj in queryset.all():
+            obj.check_cls(force=True)
+
+    update_check.short_description = 'Перепроверить классификатором'
+
+
+admin.site.register(ItemClsCheck, ItemClsCheckAdmin)
