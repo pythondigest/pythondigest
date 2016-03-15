@@ -339,11 +339,11 @@ ADMIN_REORDER = (
 
 Q_CLUSTER = {
     'name': 'DjangORM',
-    'workers': 4,
+    'workers': 2,
     'timeout': 90,
     'retry': 120,
     'queue_limit': 10,
-    'bulk': 20,
+    'bulk': 5,
     'orm': 'default'
 }
 
