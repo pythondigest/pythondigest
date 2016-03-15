@@ -2,7 +2,7 @@
 import datetime
 import json
 import os
-
+import simplejson.scanner
 import requests
 import requests.exceptions
 from concurrency.fields import IntegerVersionField
@@ -338,7 +338,8 @@ class ItemClsCheck(models.Model):
                 self.status = resp.json()['links'][0].get(self.item.link, False)
             except (requests.exceptions.RequestException,
                     requests.exceptions.Timeout,
-                    requests.exceptions.TooManyRedirects) as e:
+                    requests.exceptions.TooManyRedirects,
+                    simplejson.scanner.JSONDecodeError) as e:
                 self.status = False
             # print("Real run check: {}".format(self.pk))
             self.save()
