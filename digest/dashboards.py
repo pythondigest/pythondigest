@@ -3,6 +3,7 @@ import datetime
 from collections import defaultdict
 
 from controlcenter import Dashboard, widgets
+from django.conf import settings
 from django.db.models import Count
 from django.utils import timezone
 
@@ -50,9 +51,10 @@ class ItemSectionLineChart(widgets.LineChart):
     def values(self):
         limit_to = self.limit_to * len(self.legend)
         queryset = self.get_queryset()
+        date_field = 'related_to_date' if settings.DEPLOY else 'DATE(related_to_date)'
         queryset = (queryset.filter(status='active')
                     .extra({'baked':
-                                'DATE(related_to_date)'})
+                                date_field})
                     .select_related('section')
                     .values_list('section__title', 'baked')
                     .order_by('-baked')
@@ -89,8 +91,8 @@ class ItemSingleBarChart(widgets.SingleBarChart):
     def values(self):
         queryset = self.get_queryset()
 
-        return (queryset.extra({'baked':
-                                    'DATE(related_to_date)'})
+        date_field = 'related_to_date' if settings.DEPLOY else 'DATE(related_to_date)'
+        return (queryset.extra({'baked':date_field})
                 .values_list('baked')
                 .order_by('-baked')
                 .annotate(ocount=Count('pk'))[:self.limit_to])
