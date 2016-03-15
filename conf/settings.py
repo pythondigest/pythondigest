@@ -23,6 +23,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
+    'controlcenter',
 
     'admin_reorder',
     'bootstrapform',
@@ -328,13 +329,15 @@ VK_PASSWORD = ''
 ADMIN_REORDER = (
     'digest',
     'advertising',
-    'jobs',
-    'frontend',
-    'sites',
+    'controlcenter',
+    # 'jobs',
+    # 'frontend',
+    # 'sites',
     'auth',
-    'account',
+    # 'account',
     'django_q',
-    'default',
+    # 'default',
+
 )
 
 Q_CLUSTER = {
@@ -347,11 +350,15 @@ Q_CLUSTER = {
     'orm': 'default'
 }
 
+
+CONTROLCENTER_DASHBOARDS = (
+    'digest.dashboards.MyDashboard',
+)
+
 try:
     from .local_settings import *
 except ImportError:
     pass
-
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

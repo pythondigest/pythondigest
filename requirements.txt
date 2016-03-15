@@ -35,3 +35,6 @@ django-q==0.7.15
 
 grequests==0.3.0
 unidecode==0.4.19
+
+# django-controlcenter
+git+https://github.com/byashimov/django-controlcenter.git
