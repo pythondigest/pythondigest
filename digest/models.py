@@ -240,7 +240,7 @@ class Item(models.Model):
         try:
             item = ItemClsCheck.objects.get(item=self)
             item.check_cls()
-        except ObjectDoesNotExist:
+        except (ObjectDoesNotExist, ItemClsCheck.DoestNotExists):
             item = ItemClsCheck(item=self)
             item.save()
             item.check_cls(force=True)
@@ -475,7 +475,7 @@ def update_cls_score(instance, **kwargs):
     try:
         item = ItemClsCheck.objects.get(item=instance)
         item.check_cls()
-    except ObjectDoesNotExist:
+    except (ObjectDoesNotExist, ItemClsCheck.DoestNotExists):
         item = ItemClsCheck(item=instance)
         item.save()
         item.check_cls(force=True)
