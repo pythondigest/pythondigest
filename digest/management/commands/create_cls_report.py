@@ -14,13 +14,20 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('out_path', type=str)
+        parser.add_argument('input_path', type=str)
 
     def handle(self, *args, **options):
         """
         Основной метод - точка входа
         """
         data = []
-        for x in ItemClsCheck.objects.all():
+        ids = []
+
+        if os.path.isfile(options['input_path']):
+            with open(options['input_path'], 'r') as fio:
+                ids = [int(x.strip()) for x in fio.readlines()]
+
+        for x in ItemClsCheck.objects.filter(item__id__in=ids):
             data.append(
                 {
                     'link': x.item.link,
@@ -28,7 +35,6 @@ class Command(BaseCommand):
                     'classificator': x.status
                 }
             )
-
         out_path = os.path.abspath(os.path.normpath(options['out_path']))
         if not os.path.isdir(os.path.dirname(out_path)):
             os.makedirs(os.path.dirname(out_path))

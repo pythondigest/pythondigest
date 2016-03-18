@@ -39,14 +39,29 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('cnt_parts', type=int)  # сколько частей
+        parser.add_argument('percent', type=int)  # сколько частей
 
     def handle(self, *args, **options):
         """
         Основной метод - точка входа
         """
 
-        count = math.ceil(Item.objects.all().count() / options['cnt_parts'])
-        for part in range(options['cnt_parts'] + 1):
-            name = 'data_{}_{}.json'.format(count, part)
-            items = Item.objects.all().order_by('id')[part * count: (part + 1) * count]
-            create_dataset(items, name)
+        items_cnt = Item.objects.all().count()
+
+        train_size = math.ceil(items_cnt * (options['percent'] / 100))
+        # test_size = items_cnt - train_size
+
+        train_part_size = math.ceil(train_size / options['cnt_parts'])
+
+        items = Item.objects.all().order_by('?')
+
+        train_set = items[:train_size]
+        test_set = items[train_size:]
+
+        for part in range(options['cnt_parts']):
+            name = 'data_{}_{}.json'.format(train_part_size, part)
+            queryset = train_set[part * train_part_size: (part + 1) * train_part_size]
+            create_dataset(queryset, name)
+
+        with open(os.path.join(settings.DATASET_FOLDER, 'test_set_ids.txt'), 'w') as fio:
+            fio.writelines(["%s\n" % x for x in test_set.values_list('id', flat=True)])
