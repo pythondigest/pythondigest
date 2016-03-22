@@ -43,6 +43,8 @@ INSTALLED_APPS = (
     'social.apps.django_app.default',
     'micawber.contrib.mcdjango',
 
+    'compressor',
+
     'django_q',
 )
 
@@ -135,7 +137,10 @@ DATASET_ROOT = path.join(BASE_DIR, 'dataset')
 # various locations.
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',)
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+
+)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
@@ -349,7 +354,6 @@ Q_CLUSTER = {
     'bulk': 5,
     'orm': 'default'
 }
-
 
 CONTROLCENTER_DASHBOARDS = (
     'digest.dashboards.MyDashboard',

@@ -11,6 +11,7 @@ sorl-thumbnail==12.3
 stem==1.4.0
 URLObject==2.4.0
 requests==2.7.0
+lxml==3.6.0
 readability-lxml==0.6.0.5
 PyYAML==3.11
 django-user-accounts==1.2.0
@@ -38,3 +39,5 @@ unidecode==0.4.19
 
 # django-controlcenter
 git+https://github.com/byashimov/django-controlcenter.git
+
+django_compressor==2.0
