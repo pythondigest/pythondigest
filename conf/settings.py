@@ -53,6 +53,7 @@ SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.cache.UpdateCacheMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -61,9 +62,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     'admin_reorder.middleware.ModelAdminReorder',
+
 )
 
 ROOT_URLCONF = 'conf.urls'
@@ -357,6 +360,12 @@ Q_CLUSTER = {
 
 CONTROLCENTER_DASHBOARDS = (
     'digest.dashboards.MyDashboard',
+)
+
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = (
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter',
 )
 
 try:

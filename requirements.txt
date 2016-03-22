@@ -41,3 +41,4 @@ unidecode==0.4.19
 git+https://github.com/byashimov/django-controlcenter.git
 
 django_compressor==2.0
+django-htmlmin==0.9.1
