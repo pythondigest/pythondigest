@@ -1,6 +1,7 @@
+
 beautifulsoup4==4.4.0
 bootstrap-admin-legacy==0.1.4
-Django==1.8.4
+Django<1.9
 django-concurrency==0.9
 django-digg-paginator==0.1.3
 feedparser==5.2.1
@@ -42,3 +43,8 @@ git+https://github.com/byashimov/django-controlcenter.git
 
 django_compressor==2.0
 django-htmlmin==0.9.1
+
+# django-secretballot==0.5
+# django-likes==0.2
+git+https://github.com/WarmongeR1/django-likes
+git+https://github.com/WarmongeR1/django-secretballot.git

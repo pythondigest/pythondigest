@@ -1,7 +1,11 @@
 {% load micawber_tags %}
+{% load likes_inclusion_tags %}
+
 
 <noindex>
     <div class="issue-item">
+
+
     <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
     {% if item.language == 'en' %}
         en
@@ -18,31 +22,37 @@
            target="_blank">
             {{ item.title }}
         </a>
-    <span class="issue-item-bages">
-        {% if item.resource %}
-            <a title="Источник новости"
-               rel="nofollow"
-               href="{{ item.resource.link }}"
-               class="badge issue-item-resource"
-               target="_blank">
-                {{ item.resource }}
-            </a>
-        {% endif %}
 
-        {% if item.is_editors_choice %}
-            <span class="badge issue-item-resource">
-              <i title="Выбор редакции"
-                 class="goodnews fa fa-thumbs-o-up"></i>
-            </span>
-        {% endif %}
-    </span>
-        <p class="text-muted issue-item-description">{{ item.description|default:''|safe}}</p>
+        <div class="issue-item-description">
+            {% likes item 'likes/inclusion_tags/likes_item.html' %}
+        </div>
+        {#    <span class="issue-item-bages">#}
+        {#        {% if item.resource %}#}
+        {#            <a title="Источник новости"#}
+        {#               rel="nofollow"#}
+        {#               href="{{ item.resource.link }}"#}
+        {#               class="badge issue-item-resource"#}
+        {#               target="_blank">#}
+        {#                {{ item.resource }}#}
+        {#            </a>#}
+        {#        {% endif %}#}
+        {##}
+        {#        {% if item.is_editors_choice %}#}
+        {#            <span class="badge issue-item-resource">#}
+        {#              <i title="Выбор редакции"#}
+        {#                 class="goodnews fa fa-thumbs-o-up"></i>#}
+        {#            </span>#}
+        {#        {% endif %}#}
+        {##}
+        {#    </span>#}
+
+        <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
 
         {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
-            {{ item.additionally|oembed}}
+            {{ item.additionally|oembed }}
         {% endif %}
-        {% if  item.link|oembed_no_urlize != item.link  %}
-            {{ item.link|oembed}}
+        {% if  item.link|oembed_no_urlize != item.link %}
+            {{ item.link|oembed }}
         {% endif %}
 
 

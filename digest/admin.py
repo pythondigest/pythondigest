@@ -7,6 +7,7 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.html import escape
+from secretballot.models import Vote
 
 from digest.forms import ItemStatusForm
 from digest.models import AutoImportResource, Issue, Item, Package, \
@@ -505,3 +506,5 @@ class ItemClsCheckAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ItemClsCheck, ItemClsCheckAdmin)
+
+admin.site.register(Vote)

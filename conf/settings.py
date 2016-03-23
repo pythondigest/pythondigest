@@ -44,7 +44,8 @@ INSTALLED_APPS = (
     'micawber.contrib.mcdjango',
 
     'compressor',
-
+    'secretballot',
+    'likes',
     'django_q',
 )
 
@@ -66,6 +67,8 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     'admin_reorder.middleware.ModelAdminReorder',
+    'secretballot.middleware.SecretBallotIpUseragentMiddleware',
+    "likes.middleware.SecretBallotUserIpUseragentMiddleware",
 
 )
 

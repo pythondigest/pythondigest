@@ -2,9 +2,11 @@
 import datetime
 import json
 import os
-import simplejson.scanner
+
 import requests
 import requests.exceptions
+import secretballot
+import simplejson.scanner
 from concurrency.fields import IntegerVersionField
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -479,3 +481,6 @@ def update_cls_score(instance, **kwargs):
         item = ItemClsCheck(item=instance)
         item.save()
         item.check_cls(force=True)
+
+
+secretballot.enable_voting_on(Item)
