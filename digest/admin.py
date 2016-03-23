@@ -207,10 +207,10 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
                    'related_to_date', 'resource',)
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'status', 'external_link', 'related_to_date',
+    list_display = ('title', 'section', 'status', 'external_link', 'related_to_date',
                     'is_editors_choice', 'resource',)
 
-    list_editable = ('is_editors_choice',)
+    list_editable = ('is_editors_choice', 'section')
     exclude = ('modified_at',),
     radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL,}
 
