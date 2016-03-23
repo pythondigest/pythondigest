@@ -6,6 +6,7 @@
     <div class="issue-item">
 
 
+    {% likes item 'likes/inclusion_tags/likes_item.html' %}
     <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
     {% if item.language == 'en' %}
         en
@@ -22,10 +23,7 @@
            target="_blank">
             {{ item.title }}
         </a>
-
-        <div class="issue-item-description">
-            {% likes item 'likes/inclusion_tags/likes_item.html' %}
-        </div>
+    
         {#    <span class="issue-item-bages">#}
         {#        {% if item.resource %}#}
         {#            <a title="Источник новости"#}

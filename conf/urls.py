@@ -16,6 +16,7 @@ urlpatterns = patterns(
     url(r'', include('digest.urls', namespace='digest')),
     url(r'', include('jobs.urls', namespace='jobs')),
     url(r'^likes/', include('likes.urls')),
+    url(r'experiments/', include('experiments.urls')),
     # url(r"^account/", include('account.urls')),
     # url(r'', include('social.apps.django_app.urls', namespace='social'))
 

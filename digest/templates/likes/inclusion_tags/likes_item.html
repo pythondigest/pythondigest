@@ -1,43 +1,38 @@
 {% load i18n %}
 {% load staticfiles %}
+{% load experiments %}
 {% if import_js %}
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script type="text/javascript" src="{% static 'likes/includes/likes.js' %}"></script>
 {% endif %}
 
+
 {% if likes_enabled %}
 
-    <div class="likes">
-        {% if can_vote %}
-            <a class="liker btn btn-xs" type="button"
-               href="{% url "like" content_type content_obj.id 1 %}" rel="nofollow">
+    <span class="likes liker text-primary">
+    {% if can_vote %}
+        <a class="liker btn btn-xs" type="button"
+           href="{% url "like" content_type content_obj.id 1 %}" rel="nofollow">
+            <big>
                 <i title="Одобряю"
                    class="fa fa-thumbs-o-up">
-
                 </i>
-                <big>Нравится!</big>
-            </a>
+            </big>
+        </a>
 
-            <a class="liker btn btn-xs" type="button"
-               href="{% url "like" content_type content_obj.id -1 %}" rel="nofollow">
+        <a class="liker btn btn-xs" type="button"
+           href="{% url "like" content_type content_obj.id -1 %}" rel="nofollow">
+            <big>
                 <i title="Не одобряю"
                    class="fa fa-thumbs-o-down">
-
                 </i>
-                <big>Не нравится!</big>
-            </a>
-        {% else %}
-
-            <span class="liker btn-xs text-primary">
-            <i title="Рейтинг"
-               class="fa fa-star">
-            </i>
-
-                <big>Рейтинг: {{ content_obj.vote_total }}</big>
-
-        </span>
-        {% endif %}
-    </div>
-
+            </big>
+        </a>
+    {% else %}
+        <span class="liker text-primary">
+                 {{ content_obj.vote_total }} <i class="fa fa-star"></i>
+            </span>
+    {% endif %}
+    </span>
 
 {% endif %}
