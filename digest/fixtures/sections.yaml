@@ -62,7 +62,7 @@
 - model: digest.section
   pk: null
   fields:
-    title: 'Вопросы'
-    priority: 120
+    title: 'Вопросы и обсуждения'
+    priority: 770
     status: 'active'
     habr_icon: '<img src="http://habr.habrastorage.org/post_images/476/564/9ee/4765649ee4ecea3a1ca97b609db326b7.jpg">'
