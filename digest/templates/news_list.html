@@ -16,58 +16,10 @@
         {% endwith %}
     </div>
     {% for item in items %}
-        <div class="item-container">
-            <noindex>
-            <div class="news-line-item-bages">
-                      <span title="Язык новости" class="badge news-line-item-resource
-                        {% if item.language == 'en' %}
-                            en
-                        {% elif item.language == 'ru'%}
-                            ru
-                        {% endif %}
-                      ">
-                      &nbsp;
-                      </span>
-                      {% if item.resource %}
-                      <a title="Источник новости" rel="nofollow" href="{{ item.resource.link }}" class="badge news-line-item-resource" target="_blank">
-                            {{ item.resource }}
-                      </a>
-                      {% endif %}
+        {% with object=item %}
+            {% include 'blocks/_feed_item.html' %}
+        {% endwith %}
 
-                      {% if item.is_editors_choice %}
-                      <span class="badge news-line-item-resource">
-                          <i title="Выбор редакции" class="goodnews fa fa-thumbs-o-up"></i>
-                      </span>
-                      {% endif %}
-            </div>
-            </noindex>
-            <div class="news-line-dates">
-                <small>
-                    {{ item.created_at|date:"d.m.Y" }}
-                    {% if item.issue.status == 'active' %}
-                    &nbsp;&nbsp;<i class="fa fa-long-arrow-right fa-lg"></i>&nbsp;&nbsp;
-                    <a href="{{ item.issue.link }}" class="section-link">{{ item.issue.title }}</a> 
-                    ({{ item.issue.date_from|date:"d.m.Y" }} - {{ item.issue.date_to|date:"d.m.Y" }})
-                    {% endif %}
-                    {% if item.section %}
-                    &nbsp;&nbsp;<i class="fa fa-long-arrow-right fa-lg"></i>&nbsp;&nbsp;
-                    <a href="{% modify_url 'set_query_param_np' 'section' item.section.pk %}">{{ item.section.title }}</a>
-                    {% endif %}
-                </small>
-            </div>
-            <noindex>
-            <div class="news-line-item">
-                <a rel="nofollow" href="{{ item.link }}" target="_blank">{{ item.title }}</a>
-                <p class="text-muted">{{ item.description|default:''|safe }}</p>
-                {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
-                    {{ item.additionally|oembed}}
-                {% endif %}
-                {% if  item.link|oembed_no_urlize != item.link  %}
-                    {{ item.link|oembed}}
-                {% endif %}
-            </div>
-            </noindex>
-        </div>
     {% empty %}
     <div class="alert alert-warning pull-left">
         <strong>Печально но факт!</strong> В этой ленте нет новостей.
