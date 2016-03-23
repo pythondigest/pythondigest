@@ -23,9 +23,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap_admin',
     'django.contrib.admin',
-    'django.contrib.humanize',
-    'experiments',
-
     'controlcenter',
 
     'admin_reorder',
@@ -50,7 +47,6 @@ INSTALLED_APPS = (
     'secretballot',
     'likes',
     'django_q',
-
 )
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
@@ -73,7 +69,6 @@ MIDDLEWARE_CLASSES = (
     'admin_reorder.middleware.ModelAdminReorder',
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
-    'experiments.middleware.ExperimentsRetentionMiddleware',
 
 )
 
@@ -345,7 +340,6 @@ VK_PASSWORD = ''
 ADMIN_REORDER = (
     'digest',
     'advertising',
-    'experiments',
     'controlcenter',
     # 'jobs',
     # 'frontend',
@@ -353,7 +347,6 @@ ADMIN_REORDER = (
     'auth',
     # 'account',
     'django_q',
-
     # 'default',
 
 )
@@ -377,22 +370,6 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
 )
-
-
-# Experiments Settings
-EXPERIMENTS_GOALS = (
-    'like_text',
-)
-
-EXPERIMENTS_AUTO_CREATE = True
-
-EXPERIMENTS_VERIFY_HUMAN = True #Careful with this setting, if it is toggled then participant counters will not increment accordingly
-
-# Redis Settings
-EXPERIMENTS_REDIS_HOST = 'localhost'
-EXPERIMENTS_REDIS_PORT = 6379
-EXPERIMENTS_REDIS_DB = 0
-
 
 try:
     from .local_settings import *
