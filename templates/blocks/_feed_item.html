@@ -43,13 +43,15 @@
                 {% if read_link %}
                     {{ object.title }}
                 {% else %}
-                    <a rel="nofollow" href="{{ item.link }}" target="_blank">
+                    <a rel="nofollow"
+                       href="{{ item.link }}"
+                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
+                       target="_blank">
                         {{ object.title }}
                     </a>
                 {% endif %}
                 {% likes object 'likes/inclusion_tags/likes_item.html' %}
             </h4>
-
 
             <p class="text-muted">{{ object.description|default:''|safe }}</p>
 
@@ -62,8 +64,10 @@
 
 
             {% if read_link %}
-                <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ object.link }}" target="_blank">Читать
-                    >></a>
+                <a rel="nofollow" class="btn btn-primary btn-sm"
+                   href="{{ object.link }}"
+                   onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
+                   target="_blank">Читать>></a>
             {% endif %}
 
         </div>
