@@ -54,7 +54,7 @@
 
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav ">
                 <li {% if active_menu_item == 'home' %}class="active"{% endif %}>
                     <a href="{% url 'frontend:home' %}"><i class='fa fa-home fa-lg'></i></a>
                 </li>
@@ -64,8 +64,11 @@
                 <li {% if active_menu_item == 'feed' %}class="active"{% endif %}>
                     <a href="{% url 'digest:feed' %}">ЛЕНТА</a>
                 </li>
+                <li {% if active_menu_item == 'friends' %}class="active"{% endif %}>
+                    <a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>
+                </li>
                 <li>
-                    <a href="http://yasobe.ru/na/pydigest" class="btn btn-warning">ПОМОЧЬ ПРОЕКТУ</a>
+                    <a href="http://yasobe.ru/na/pydigest"><ins>ПОМОЧЬ ПРОЕКТУ</ins></a>
                 </li>
 
                 {##}

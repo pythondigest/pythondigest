@@ -62,12 +62,27 @@ class Index(TemplateView):
             qs = issue.item_set.filter(status='active')
             items = qs.order_by('-section__priority', '-priority')
 
+        feed_items = Item.objects.filter(status='active',
+                                         activated_at__lte=datetime.datetime.now()) \
+            .prefetch_related('issue',
+                              'section').order_by('-created_at', '-related_to_date')[:10]
+
         context.update({
             'issue': issue,
             'items': items,
             'active_menu_item': 'home',
-            'ads': get_ads()
+            'ads': get_ads(),
+            'feed_items': feed_items
         })
+        return context
+
+
+class FriendsView(TemplateView):
+    template_name = 'pages/friends.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(FriendsView, self).get_context_data(**kwargs)
+        context['active_menu_item'] = 'friends'
         return context
 
 

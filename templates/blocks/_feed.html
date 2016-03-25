@@ -1,0 +1,17 @@
+<hr>
+<h3 class="text-center">Свежие новости</h3>
+<hr>
+{% for object in items %}
+
+    <p><b><a rel="nofollow"
+             href="{{ object.link }}"
+             onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.get_tags_str }}');"
+             target="_blank">
+        {{ object.title }}
+    </a>
+    </b>
+    </p>
+{% endfor %}
+
+<hr>
+<h4 class="text-center"><a href="{% url 'digest:feed' %}">Просмотреть все</a></h4>

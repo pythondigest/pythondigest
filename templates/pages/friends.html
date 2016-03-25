@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}Наши друзья{% endblock %}
+
+
+{% block content %}
+
+    <h1 class="text-center text-capitalize">Наши друзья</h1>
+    <hr>
+
+
+    <div class="col-md-3">
+        <a href="https://www.python.org/psf/">
+            <img src="{% static 'img/friends/psf-logo.png' %}" style="max-width: 250px"
+                 alt="Python Software Foundation">
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a href="http://python.su">
+            <img src="{% static 'img/friends/pythonsu.gif' %}" alt="python.su">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="http://pythonworld.ru">
+            <img src="{% static 'img/friends/pythonworld.gif' %}"
+                 alt="pythonworld.ru">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="http://djbook.ru">
+            <img src="{% static 'img/friends/djangobook.gif' %}"
+                 alt="djbook.ru">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="http://pep8.ru">
+            <img src="{% static 'img/friends/pep8.gif' %}" alt="pep8.ru">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="http://vk.com/python_programing">
+            <img src="{% static 'img/friends/vk.gif' %}"
+                 alt="vk.com/python_programing">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="http://vk.com/pynsk">
+            <img src="{% static 'img/friends/pynsk.png' %}" alt="vk.com/pynsk">
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="https://vk.com/vk_python">
+            <img src="{% static 'img/friends/vk_python_banner.png' %}"
+                 alt="vk.com/vk_python">
+        </a></div>
+
+    <div class="col-md-3">
+        <a href="https://vk.com/django_framework">
+            <img src="{% static 'img/friends/django_framework.png' %}"
+                 alt="https://vk.com/django_framework">
+        </a></div>
+
+
+
+{% endblock %}

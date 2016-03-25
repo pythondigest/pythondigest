@@ -65,6 +65,7 @@ class ItemView(DetailView):
     model = Item
 
 
+
 class NewsList(ListView):
     """Лента новостей."""
     template_name = 'news_list.html'
