@@ -511,7 +511,7 @@ class ItemClsAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
-            return super(ItemClsAdmin, self).get_queryset(request).filter(pk__lt=Issue.objects.latest().last_item)
+            return super(ItemClsAdmin, self).get_queryset(request).filter(pk__lt=Issue.objects.all('pk').last().last_item)
         except ValueError as e:
             print(e)
             return super(ItemClsAdmin, self).get_queryset(request)
