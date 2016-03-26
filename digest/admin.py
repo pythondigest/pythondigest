@@ -474,6 +474,51 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 admin.site.register(ItemDailyModerator, ItemDailyModeratorAdmin)
 
 
+class ItemCls(Item):
+    class Meta:
+        proxy = True
+        verbose_name_plural = 'Новости (классификатор)'
+
+
+class ItemClsAdmin(admin.ModelAdmin):
+    filter_horizontal = ('tags',)
+    list_filter = (
+        'status',
+        'issue',
+        'section',
+
+        'resource',
+    )
+    search_fields = ('title', 'description', 'link')
+    list_display = ('title', 'external_link', 'status_ok',
+                    'cls_ok')
+
+    external_link = lambda s, obj: _external_link(obj)
+    external_link.allow_tags = True
+    external_link.short_description = u"Ссылка"
+
+    def status_ok(self, obj):
+        return obj.status == 'active'
+
+    status_ok.boolean = True
+    status_ok.short_description = 'Модератор'
+
+    def cls_ok(self, obj):
+        return obj.cls_check
+
+    cls_ok.boolean = True
+    cls_ok.short_description = 'Классификатор'
+
+    def get_queryset(self, request):
+        try:
+            return super(ItemClsAdmin, self).get_queryset(request).filter(pk__lt=Issue.objects.last().last_item)
+        except ValueError:
+            return super(ItemClsAdmin, self).get_queryset(request)
+
+
+admin.site.register(ItemCls, ItemClsAdmin)
+
+
 class ItemClsCheckAdmin(admin.ModelAdmin):
     fields = (
         'item',
