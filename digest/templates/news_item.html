@@ -5,6 +5,21 @@
 {% load likes_inclusion_tags %}
 
 
+{% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
+{% block page_description %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o
+    Python{% endblock %}
+
+{% block extra_head %}
+    <meta name="twitter:site" content="@pydigest"/>
+    <meta name="twitter:title" content="{{ object.title }}"/>
+    <meta name="twitter:description"
+          content="Еженедельная подборка свежих и самых значимых новостей o Python"/>
+    <meta name="twitter:url" content="http://pythondigest.ru{{ object.internal_link }}"/>
+
+    <meta name="description" content='{{ object.description|striptags|truncatechars:500 }}'>
+    <meta name="og:description" content='{{ object.description|striptags|truncatechars:500 }}'>
+{% endblock %}
+
 
 {% block content %}
     <div class="container news-list">
