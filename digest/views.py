@@ -50,10 +50,17 @@ class IssueView(DetailView):
         items = self.object.item_set.filter(status='active').order_by(
             '-section__priority', '-priority')
 
+        feed_items = Item.objects.filter(status='active',
+                                         activated_at__lte=datetime.datetime.now()) \
+                         .prefetch_related('issue',
+                                           'section').order_by('-created_at', '-related_to_date')[:10]
+
         context.update({
             'items': items,
             'active_menu_item': 'issue_view',
-            'ads': get_ads()})
+            'ads': get_ads(),
+            'feed_items': feed_items
+        })
 
         return context
 
@@ -63,7 +70,6 @@ class ItemView(DetailView):
     template_name = 'news_item.html'
     context_object_name = 'item'
     model = Item
-
 
 
 class NewsList(ListView):
