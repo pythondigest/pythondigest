@@ -10,3 +10,4 @@ env/
 *.cfg
 
 clean.bash
+fabfile/fabfile.py

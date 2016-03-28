@@ -47,10 +47,14 @@ INSTALLED_APPS = (
     'django_q',
 )
 
+if DEBUG:
+    INSTALLED_APPS += ('debug_toolbar', )
+
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     'admin_reorder.middleware.ModelAdminReorder',
+
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
 
@@ -367,6 +372,8 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
 )
+
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 try:
     from .local_settings import *

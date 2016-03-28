@@ -5,15 +5,17 @@ import datetime
 from concurrency.views import ConflictResponse
 from digg_paginator import DiggPaginator
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import DetailView
 from django.views.generic import FormView, ListView
 
-from advertising.models import get_ads
-from digest.models import Issue, Item
+from advertising.mixins import AdsMixin
 from .forms import AddNewsForm
+from .mixins import FeedItemsMixin, CacheMixin
+from .models import Issue, Item
 
 
 def conflict(request, target=None, template_name='409.html'):
@@ -25,13 +27,14 @@ def conflict(request, target=None, template_name='409.html'):
     return ConflictResponse(template.render(ctx))
 
 
-class IssuesList(ListView):
+class IssuesList(CacheMixin, ListView):
     """Список выпусков."""
     template_name = 'issues_list.html'
     queryset = Issue.objects.filter(status='active').order_by('-published_at')
     context_object_name = 'items'
     paginate_by = 9
     paginator_class = DiggPaginator
+    cache_timeout = 300
 
     def get_context_data(self, **kwargs):
         context = super(IssuesList, self).get_context_data(**kwargs)
@@ -39,10 +42,11 @@ class IssuesList(ListView):
         return context
 
 
-class IssueView(DetailView):
+class IssueView(CacheMixin, FeedItemsMixin, AdsMixin, DetailView):
     """Просмотр выпуска."""
     template_name = 'issue.html'
     model = Issue
+    cache_timeout = 300
 
     def get_context_data(self, **kwargs):
         context = super(IssueView, self).get_context_data(**kwargs)
@@ -50,35 +54,30 @@ class IssueView(DetailView):
         items = self.object.item_set.filter(status='active').order_by(
             '-section__priority', '-priority')
 
-        feed_items = Item.objects.filter(status='active',
-                                         activated_at__lte=datetime.datetime.now()) \
-                         .prefetch_related('issue',
-                                           'section').order_by('-created_at', '-related_to_date')[:10]
-
         context.update({
             'items': items,
             'active_menu_item': 'issue_view',
-            'ads': get_ads(),
-            'feed_items': feed_items
         })
 
         return context
 
 
-class ItemView(DetailView):
+class ItemView(CacheMixin, DetailView):
     """Просмотр отдельной новости."""
     template_name = 'news_item.html'
     context_object_name = 'item'
     model = Item
+    cache_timeout = 300
 
 
-class NewsList(ListView):
+class NewsList(CacheMixin, ListView):
     """Лента новостей."""
     template_name = 'news_list.html'
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
     model = Item
+    cache_timeout = 300
 
     def get_queryset(self):
         items = super(NewsList, self).get_queryset() \
@@ -125,4 +124,26 @@ class AddNews(FormView):
                             section_id=section)
         messages.info(self.request,
                       u'Ваша ссылка успешно добавлена на рассмотрение')
-        return '/'
+        return reverse('frontend:index')
+
+
+def get_items_json(request, year, month, day):
+    result = {}
+    items = Item.objects.filter(
+        status='active',
+        is_editors_choice=True,
+        related_to_date__year=int(year),
+        related_to_date__month=int(month),
+        related_to_date__day=int(day),
+    )
+    result['ok'] = bool(items)
+    if items:
+        keys = [
+            'title',
+            'description',
+            'section__title',
+            'link',
+            'language',
+        ]
+        result['items'] = list(items.values(*keys))
+    return JsonResponse(result)

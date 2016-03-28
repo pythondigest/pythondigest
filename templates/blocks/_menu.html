@@ -55,8 +55,8 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav ">
-                <li {% if active_menu_item == 'home' %}class="active"{% endif %}>
-                    <a href="{% url 'frontend:home' %}"><i class='fa fa-home fa-lg'></i></a>
+                <li {% if active_menu_item == 'index' %}class="active"{% endif %}>
+                    <a href="{% url 'frontend:index' %}"><i class='fa fa-home fa-lg'></i></a>
                 </li>
                 <li {% if active_menu_item == 'issues_list' %}class="active"{% endif %}>
                     <a href="{% url 'digest:issues' %}">ВЫПУСКИ</a>

@@ -7,7 +7,8 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
-from advertising.models import get_ads
+from advertising.mixins import AdsMixin
+from digest.mixins import FeedItemsMixin
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
 
@@ -42,14 +43,14 @@ class Sitemap(TemplateView):
         return ctx
 
 
-class Index(TemplateView):
+class IndexView(FeedItemsMixin, AdsMixin, TemplateView):
     """Главная страница."""
-    template_name = 'index.html'
+    template_name = 'pages/index.html'
     model = Issue
     context_object_name = 'index'
 
     def get_context_data(self, **kwargs):
-        context = super(Index, self).get_context_data(**kwargs)
+        context = super(IndexView, self).get_context_data(**kwargs)
         issue = False
         try:
             issue = self.model.objects.filter(status='active').latest(
@@ -62,17 +63,10 @@ class Index(TemplateView):
             qs = issue.item_set.filter(status='active')
             items = qs.order_by('-section__priority', '-priority')
 
-        feed_items = Item.objects.filter(status='active',
-                                         activated_at__lte=datetime.datetime.now()) \
-            .prefetch_related('issue',
-                              'section').order_by('-created_at', '-related_to_date')[:10]
-
         context.update({
             'issue': issue,
             'items': items,
-            'active_menu_item': 'home',
-            'ads': get_ads(),
-            'feed_items': feed_items
+            'active_menu_item': 'index',
         })
         return context
 
@@ -101,23 +95,3 @@ class ViewEditorMaterial(TemplateView):
         return {'material': material}
 
 
-def get_items_json(request, year, month, day):
-    result = {}
-    items = Item.objects.filter(
-        status='active',
-        is_editors_choice=True,
-        related_to_date__year=int(year),
-        related_to_date__month=int(month),
-        related_to_date__day=int(day),
-    )
-    result['ok'] = bool(items)
-    if items:
-        keys = [
-            'title',
-            'description',
-            'section__title',
-            'link',
-            'language',
-        ]
-        result['items'] = list(items.values(*keys))
-    return JsonResponse(result)

@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from frontend.views import Index, Sitemap, get_items_json, FriendsView
+from frontend.views import IndexView, Sitemap, get_items_json, FriendsView
 from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
@@ -28,6 +28,6 @@ urlpatterns = [
 
     url(r'^api/items/(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/$', get_items_json),
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
-    url(r'^$', Index.as_view(), name='home'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^friends/$', FriendsView, name='friends'),
 ]
