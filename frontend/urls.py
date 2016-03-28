@@ -27,5 +27,5 @@ urlpatterns = [
 
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^friends/$', FriendsView, name='friends'),
+    url(r'^friends/$', FriendsView.as_view(), name='friends'),
 ]
