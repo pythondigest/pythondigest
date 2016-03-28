@@ -375,7 +375,7 @@ COMPRESS_CSS_FILTERS = (
 )
 
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
+HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError:
