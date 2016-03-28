@@ -7,6 +7,7 @@ from digg_paginator import DiggPaginator
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from django.http import JsonResponse
 from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import DetailView

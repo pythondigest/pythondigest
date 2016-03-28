@@ -1,11 +1,10 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from frontend.views import IndexView, Sitemap, get_items_json, FriendsView
+from frontend.views import IndexView, Sitemap, FriendsView
 from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
     ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, RawEntriesFeed
-
 
 app_name = 'frontend'
 urlpatterns = [
@@ -26,7 +25,6 @@ urlpatterns = [
     url(r'^rss/release/$', ItemReleaseFeed(), name='release_rss'),
     url(r'^rss/packages/$', ItemPackagesFeed(), name='packages_rss'),
 
-    url(r'^api/items/(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/$', get_items_json),
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^friends/$', FriendsView, name='friends'),
