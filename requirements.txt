@@ -50,4 +50,4 @@ django-htmlmin==0.9.1
 # django-likes==0.2
 git+https://github.com/WarmongeR1/django-likes
 git+https://github.com/WarmongeR1/django-secretballot.git
-
+django-debug-toolbar==1.4
