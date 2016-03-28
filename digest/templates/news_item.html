@@ -3,6 +3,7 @@
 {% load pytils_dt %}
 {% load common %}
 {% load likes_inclusion_tags %}
+{% load static %}
 
 
 {% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
@@ -11,13 +12,17 @@
 
 {% block extra_head %}
     <meta name="twitter:site" content="@pydigest"/>
+    <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="{{ object.title }}"/>
-    <meta name="twitter:description"
-          content="Еженедельная подборка свежих и самых значимых новостей o Python"/>
+    <link rel="image_src" href="{% static 'img/logo.png' %}" />
+    <meta name="twitter:description" content="Еженедельная подборка свежих и самых значимых новостей o Python"/>
     <meta name="twitter:url" content="http://pythondigest.ru{{ object.internal_link }}"/>
 
-    <meta name="description" content='{{ object.description|striptags|truncatechars:500 }}'>
-    <meta name="og:description" content='{{ object.description|striptags|truncatechars:500 }}'>
+    <meta property="og:type"        content="article" />
+    <meta property="og:url"         content="http://pythondigest.ru{{ object.internal_link }}" />
+    <meta property="og:title"       content="{{ object.title }}" />
+    <meta name="og:description" content='{{ object.description|default:''|striptags|truncatechars:500 }}'>
+    <meta name="description" content='{{ object.description|default:''|striptags|truncatechars:500 }}'>
 {% endblock %}
 
 
