@@ -37,7 +37,6 @@ vk==2.0.2
 python-memcached==1.57
 django-q==0.7.16
 
-grequests==0.3.0
 unidecode==0.4.19
 
 # django-controlcenter
