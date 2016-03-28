@@ -131,13 +131,13 @@ class IndexViewTest(TestCase):
         response = self.client.get('/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['active_menu_item'], 'home')
+        self.assertEqual(response.context['active_menu_item'], 'index')
 
     def test_template_used(self):
         response = self.client.get('/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'index.html')
+        self.assertTemplateUsed(response, 'pages/index.html')
 
 #
 # class SitemapTest(TestCase):
