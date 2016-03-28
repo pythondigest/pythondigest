@@ -344,7 +344,7 @@ ADMIN_REORDER = (
     'advertising',
     'controlcenter',
     # 'jobs',
-    # 'frontend',
+    'frontend',
     # 'sites',
     'auth',
     # 'account',
