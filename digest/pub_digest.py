@@ -22,7 +22,7 @@ def init_auth(consumer_key, consumer_secret, access_token, access_token_secret):
     return api
 
 
-def download_image(url):
+def download_image(url: str):
     try:
         file_path = os.path.abspath(os.path.split(url)[-1])
         urlretrieve(url, file_path)
@@ -48,7 +48,7 @@ def send_tweet_with_media(api, text, image):
     api.update_with_media(file_path, text)
 
 
-class Gitter:
+class GitterAPI(object):
     """
     Gitter API wrapper
     URL: https://developer.gitter.im/docs/welcome
@@ -130,7 +130,7 @@ def get_gitter_chats():
     ]
 
 
-def get_pydigest_groups():
+def get_pydigest_groups() -> list:
     return [
         (-96469126, 1),  # https://vk.com/pynsk
         (-1540917, 0),  # https://vk.com/python_developers
@@ -149,9 +149,9 @@ def get_pydigest_groups():
     # ]
 
 
-def pub_to_gitter(text, token):
+def pub_to_gitter(text: str, token):
     # gitter
-    gitter = Gitter(token)
+    gitter = GitterAPI(token)
 
     for chat in get_gitter_chats():
         gitter.send_message(chat, text)
@@ -206,9 +206,11 @@ def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
     )
 
 
-def pub_to_all(text, digest_url, digest_image_url):
+def pub_to_all(text: str, digest_url: str, digest_image_url: str):
     """
     digest_url ='http://pythondigest.ru/issue/101/'
+    :param text:
+    :param digest_image_url:
     :param digest_url:
     :return:
     """

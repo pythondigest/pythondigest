@@ -8,8 +8,6 @@ SECRET_KEY = 'TBD IN LOCAL SETTINGS'
 
 DEBUG = True
 
-TEMPLATE_DEBUG = DEBUG
-
 THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru']
@@ -79,7 +77,6 @@ TEMPLATES = [{
     'DIRS': [
         os.path.join(BASE_DIR, 'templates'),
     ],
-    'APP_DIRS': True,
     'OPTIONS': {
         'context_processors': [
             'django.template.context_processors.debug',
@@ -91,6 +88,10 @@ TEMPLATES = [{
             'social.apps.django_app.context_processors.backends',
             'social.apps.django_app.context_processors.login_redirect',
         ],
+        'loaders': (
+            'django.template.loaders.filesystem.Loader',
+            'django.template.loaders.app_directories.Loader',
+        )
     },
 }, ]
 
@@ -147,10 +148,6 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 
 )
-
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = ('django.template.loaders.filesystem.Loader',
-                    'django.template.loaders.app_directories.Loader',)
 
 CONCURRENCY_HANDLER409 = 'digest.views.conflict'
 CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL

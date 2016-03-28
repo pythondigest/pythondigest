@@ -6,8 +6,9 @@ from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
     ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, RawEntriesFeed
 
-urlpatterns = patterns(
-    '',
+
+app_name = 'frontend'
+urlpatterns = [
     url(r'^rss/$', AllEntriesFeed(), name='rss'),
     url(r'^rss/raw$', RawEntriesFeed(), name='rss_raw'),
     url(r'^rss/direct/$', AllEntriesFeed(), name='rss_direct'),
@@ -28,6 +29,5 @@ urlpatterns = patterns(
     url(r'^api/items/(?P<year>[0-9]+)/(?P<month>[0-9]+)/(?P<day>[0-9]+)/$', get_items_json),
     url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
     url(r'^$', Index.as_view(), name='home'),
-    url(r'^friends/$', FriendsView.as_view(), name='friends'),
-
-)
+    url(r'^friends/$', FriendsView, name='friends'),
+]
