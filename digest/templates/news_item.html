@@ -6,7 +6,7 @@
 {% load static %}
 
 
-{% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
+{% block page_title %}{{ object.title }}{% endblock %}
 {% block page_description %}{{ object.description|default:''|striptags|truncatechars:500 }}{% endblock %}
 
 {% block extra_head %}
