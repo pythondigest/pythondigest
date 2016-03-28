@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'secretballot',
     'likes',
     'django_q',
+    'django_remdow',
 )
 
 if DEBUG:

@@ -2,7 +2,7 @@
 import django.views.static
 from controlcenter.views import controlcenter
 from django.conf import settings
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 from django.contrib import admin
 from likes.urls import urlpatterns as like_urls
 
@@ -25,9 +25,9 @@ urlpatterns = [
 ]
 
 if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns += patterns('', url(r'^rosetta/', include('rosetta.urls')), )
+    urlpatterns.append(url(r'^rosetta/', include('rosetta.urls')))
 
 if 'debug_toolbar' in settings.INSTALLED_APPS and settings.DEBUG:
     import debug_toolbar
 
-    urlpatterns += patterns('', url(r'^__debug__/', include(debug_toolbar.urls)), )
+    urlpatterns.append(url(r'^__debug__/', include(debug_toolbar.urls)))

@@ -1,6 +1,6 @@
 {% load micawber_tags %}
 {% load likes_inclusion_tags %}
-
+{% load remdow %}
 
 <noindex>
     <div class="issue-item">
@@ -44,7 +44,7 @@
         {##}
         {#    </span>#}
 
-        <p class="text-muted issue-item-description">{{ item.description|default:''|safe }}</p>
+        <p class="text-muted issue-item-description">{{ item.description|default:''|remdow|safe }}</p>
 
         {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
             {{ item.additionally|oembed }}
