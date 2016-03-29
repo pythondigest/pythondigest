@@ -2,6 +2,8 @@
 import datetime
 import json
 import os
+from urllib.parse import parse_qs
+from urllib.parse import urlparse
 
 import requests
 import requests.exceptions
@@ -27,6 +29,7 @@ def get_start_end_of_week(dt):
     start = dt - datetime.timedelta(days=dt.weekday())
     end = start + datetime.timedelta(days=6)
     return start, end
+
 
 
 class Tag(models.Model):
@@ -301,6 +304,7 @@ class Item(models.Model):
         return result
 
     data4cls = property(get_data4cls)
+
 
     @property
     def internal_link(self):
