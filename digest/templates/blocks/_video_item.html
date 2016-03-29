@@ -3,8 +3,9 @@
 {% load micawber_tags %}
 
 
-{% if link and link|is_youtube and  link|oembed_no_urlize != link %}
+{% if link and link|is_youtube and link|oembed_no_urlize != link %}
     {% filter remdow %}
+        <p>
         <center>
             <a href="{{ link }}">
                 <img class="img-responsive"
@@ -13,7 +14,6 @@
                      src="http://img.youtube.com/vi/{% youtube_id link %}/hqdefault.jpg"/>
             </a>
         </center>
+        </p>
     {% endfilter %}
-{% else %}
-    {{ link|oembed }}
 {% endif %}
