@@ -11,7 +11,7 @@ from secretballot.models import Vote
 
 from digest.forms import ItemStatusForm
 from digest.models import AutoImportResource, Issue, Item, Package, \
-    ParsingRules, Resource, Section, Tag, get_start_end_of_week, ItemClsCheck
+    ParsingRules, Resource, Section, get_start_end_of_week, ItemClsCheck
 from digest.pub_digest import pub_to_all
 
 admin.site.unregister(Site)
@@ -138,56 +138,6 @@ class ParsingRulesAdmin(admin.ModelAdmin):
 admin.site.register(ParsingRules, ParsingRulesAdmin)
 
 
-class TagAdmin(admin.ModelAdmin):
-    search_fields = ('name',)
-
-    list_display = ('name', 'news_count', 'news_count_last_week',
-                    'news_count_last_month',)
-
-    def _get_text(self, active_cnt, all_cnt):
-        return "<font color='green'><b>{}</b></font> / " \
-               "<font color='gray'>{}</font>".format(active_cnt, all_cnt)
-
-    def news_count(self, obj):
-        return self._get_text(Item.objects.filter(status='active',
-                                                  tags__name=obj.name).count(),
-                              Item.objects.filter(tags__name=obj.name).count())
-
-    def news_count_last_week(self, obj):
-        now = datetime.now().date()
-        week_before = datetime.now().date() - timedelta(weeks=1)
-        return self._get_text(
-            Item.objects.filter(status='active',
-                                tags__name=obj.name,
-                                created_at__range=(week_before, now)).count(),
-            Item.objects.filter(
-                tags__name=obj.name,
-                created_at__range=(week_before, now)).count(), )
-
-    def news_count_last_month(self, obj):
-        now = datetime.now().date()
-        week_before = datetime.now().date() - timedelta(weeks=4)
-        return self._get_text(
-            Item.objects.filter(status='active',
-                                tags__name=obj.name,
-                                created_at__range=(week_before, now)).count(),
-            Item.objects.filter(
-                tags__name=obj.name,
-                created_at__range=(week_before, now)).count(), )
-
-    news_count.short_description = u"Активных/всего новостей"
-    news_count.allow_tags = True
-
-    news_count_last_week.short_description = u"Активных/всего за неделю"
-    news_count_last_week.allow_tags = True
-
-    news_count_last_month.short_description = u"Активных/всего за 4 недели"
-    news_count_last_month.allow_tags = True
-
-
-admin.site.register(Tag, TagAdmin)
-
-
 class ItemAdmin(admin.ModelAdmin):
     # form = ItemStatusForm
     fields = (
@@ -200,10 +150,11 @@ class ItemAdmin(admin.ModelAdmin):
         'status',
         'language',
         'tags',
+        'keywords',
         'additionally',
 
     )
-    filter_horizontal = ('tags',)
+    # filter_horizontal = ('tags',)
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
                    'related_to_date', 'resource',)
     search_fields = ('title', 'description', 'link', 'resource__title')
@@ -283,7 +234,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
     readonly_fields = ('external_link_edit',)
 
-    filter_horizontal = ('tags',)
+    # filter_horizontal = ('tags',)
     list_filter = (
         'status',
         'issue',
@@ -427,7 +378,7 @@ class ItemDailyModerator(Item):
 
 
 class ItemDailyModeratorAdmin(admin.ModelAdmin):
-    filter_horizontal = ('tags',)
+    # filter_horizontal = ('tags',)
     list_filter = (
         'status',
         'issue',
@@ -481,7 +432,7 @@ class ItemCls(Item):
 
 
 class ItemClsAdmin(admin.ModelAdmin):
-    filter_horizontal = ('tags',)
+    # filter_horizontal = ('tags',)
     list_filter = (
         'status',
         'issue',

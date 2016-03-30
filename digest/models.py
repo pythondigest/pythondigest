@@ -2,8 +2,6 @@
 import datetime
 import json
 import os
-from urllib.parse import parse_qs
-from urllib.parse import urlparse
 
 import requests
 import requests.exceptions
@@ -18,7 +16,11 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from readability.readability import Document, Unparseable
+from taggit.managers import TaggableManager
+from taggit.models import TagBase, GenericTaggedItemBase
+from taggit_autosuggest.managers import TaggableManager
 
 from frontend.models import Tip
 
@@ -31,18 +33,14 @@ def get_start_end_of_week(dt):
     return start, end
 
 
-
-class Tag(models.Model):
-    name = models.CharField(max_length=255,
-                            verbose_name=u'Название тэга',
-                            unique=True, )
-
-    def __str__(self):
-        return self.name
-
+class Keyword(TagBase):
     class Meta:
-        verbose_name = u'Тэг к новости'
-        verbose_name_plural = u'Тэги к новостям'
+        verbose_name = _("Keyword")
+        verbose_name_plural = _("Keywords")
+
+
+class KeywordGFK(GenericTaggedItemBase):
+    tag = models.ForeignKey(Keyword, related_name="%(app_label)s_%(class)s_items")
 
 
 class Issue(models.Model):
@@ -212,7 +210,8 @@ class Item(models.Model):
                              null=True,
                              blank=True, )
     version = IntegerVersionField(verbose_name=u'Версия')
-    tags = models.ManyToManyField(Tag, verbose_name=u'Тэги', blank=True, )
+    tags = TaggableManager(blank=True)
+    keywords = TaggableManager(through=KeywordGFK, blank=True, verbose_name=_("Keywords"))
     to_update = models.BooleanField(verbose_name=u'Обновить новость', default=False, )
     article_path = models.FilePathField(verbose_name='Путь до статьи', blank=True, null=True)
 
@@ -304,7 +303,6 @@ class Item(models.Model):
         return result
 
     data4cls = property(get_data4cls)
-
 
     @property
     def internal_link(self):

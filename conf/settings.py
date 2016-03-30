@@ -31,6 +31,9 @@ INSTALLED_APPS = (
 
     'ckeditor',
 
+    'taggit',
+    'taggit_autosuggest',
+
     'digest',
     'frontend',
     'jobs',
@@ -46,6 +49,7 @@ INSTALLED_APPS = (
     'likes',
     'django_q',
     'django_remdow',
+
 )
 
 if DEBUG:
@@ -344,6 +348,7 @@ ADMIN_REORDER = (
     'digest',
     'advertising',
     'controlcenter',
+    'taggit',
     # 'jobs',
     'frontend',
     # 'sites',
@@ -368,6 +373,7 @@ CONTROLCENTER_DASHBOARDS = (
     'digest.dashboards.MyDashboard',
 )
 
+ALCHEMY_KEY = ''
 COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
