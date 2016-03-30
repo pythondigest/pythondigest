@@ -47,7 +47,7 @@
 
         <p class="text-muted issue-item-description">{{ item.description|default:''|remdow|responsive|safe }}</p>
 
-        {% if item.additionally %}
+        {% if item.additionally or item.section == 'Видео' %}
             {% include 'blocks/_video_item.html' with link=item.additionally %}
         {% else %}
             {% include 'blocks/_video_item.html' with link=item.link %}

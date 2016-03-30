@@ -8,10 +8,10 @@
         <p>
         <center>
             <a href="{{ link }}">
-                <img class="img-responsive"
-                     width="360"
-                     height="205"
-                     src="http://img.youtube.com/vi/{% youtube_id link %}/hqdefault.jpg"/>
+                {% youtube_id link as yotu_id %}
+                {% with "http://img.youtube.com/vi/"|add:yotu_id|add:"/hqdefault.jpg" as yotu_link %}
+                    {{ '<img src="'|add:yotu_link|add:'"/>'|remdow|responsive|safe }}
+                {% endwith %}
             </a>
         </center>
         </p>
