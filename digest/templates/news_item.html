@@ -8,6 +8,7 @@
 
 {% block page_title %}{{ object.title }}{% endblock %}
 {% block page_description %}{{ object.description|default:''|striptags|truncatechars:500 }}{% endblock %}
+{% block page_keywords %}{{ object.keywords_as_str }} {% endblock %}
 
 {% block extra_head %}
     <link rel="image_src" href="http://pythondigest.ru{% static 'img/logo.png' %}"/>

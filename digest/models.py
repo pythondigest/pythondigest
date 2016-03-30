@@ -316,6 +316,10 @@ class Item(models.Model):
             result = 'Without tag'
         return result
 
+    @property
+    def keywords_as_str(self):
+        return ','.join(set([x.name for x in self.keywords.all()]))
+
     def __str__(self):
         return self.title
 
