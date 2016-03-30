@@ -35,7 +35,7 @@ def strip_tags(html):
 def get_keywords(api, text) -> list:
     response = api.keywords('text', text, {'sentiment': 1})
     result = []
-    if response['status'] == 'OK':
+    if response['status'] == 'OK' and 'keywords' in response:
         result = [x['text'] for x in response['keywords']]
     return result
 
