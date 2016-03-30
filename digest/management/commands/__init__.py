@@ -311,12 +311,13 @@ def apply_video_rules(item_data: dict):
 
 def apply_parsing_rules(item_data: dict, query_rules, query_sections,
                         query_statuses, query_tags):
-    tags_names = list(query_tags.values_list('name', flat=True))
+    # tags_names = list(query_tags.values_list('name', flat=True))
+    tags_names = []
     data = {}
 
-    _tags_of_item = _get_tags_for_item(item_data, tags_names)
-    if _tags_of_item:
-        data['tags'] = list(_tags_of_item)
+    # _tags_of_item = _get_tags_for_item(item_data, tags_names)
+    # if _tags_of_item:
+    #     data['tags'] = list(_tags_of_item)
 
     for rule in query_rules.order_by('-weight'):
         if rule.then_element == 'status' and \

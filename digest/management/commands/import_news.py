@@ -11,7 +11,7 @@ from django.core.management.base import BaseCommand
 from digest.management.commands import _get_http_data_of_url, \
     apply_parsing_rules, get_tweets_by_url, save_item, apply_video_rules, is_weekly_digest, parse_weekly_digest
 from digest.models import ITEM_STATUS_CHOICES, \
-    AutoImportResource, Item, ParsingRules, Section, Tag
+    AutoImportResource, Item, ParsingRules, Section
 
 
 def get_tweets():
@@ -115,7 +115,6 @@ def parsing(func):
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),
-        'query_tags': Tag.objects.all(),
         'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
     }
     func(**data)
