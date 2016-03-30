@@ -36,7 +36,7 @@ def get_keywords(api, text) -> list:
     response = api.keywords('text', text, {'sentiment': 1})
     result = []
     if response['status'] == 'OK' and 'keywords' in response:
-        result = [x['text'] for x in response['keywords']]
+        result = [x['text'] for x in response['keywords'] if len(x['text']) < 30]
     return result
 
 
@@ -59,5 +59,5 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         api = AlchemyAPI(settings.ALCHEMY_KEY)
-        for item in Item.objects.filter(pk__range=(options['start'], options['end'])):
+        for item in Item.objects.filter(pk__range=(options['start'], options['end']), keywords=None):
             create_keywords(api, item)
