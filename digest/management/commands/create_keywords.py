@@ -59,5 +59,5 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         api = AlchemyAPI(settings.ALCHEMY_KEY)
-        for item in Item.objects.all()[options['start']:options['end']]:
+        for item in Item.objects.filter(pk__range=(options['start'], options['end'])):
             create_keywords(api, item)
