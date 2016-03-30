@@ -45,7 +45,7 @@
         {##}
         {#    </span>#}
 
-        <p class="text-muted issue-item-description">{{ item.description|default:''|remdow|safe }}</p>
+        <p class="text-muted issue-item-description">{{ item.description|default:''|remdow|responsive|safe }}</p>
 
         {% if item.additionally %}
             {% include 'blocks/_video_item.html' with link=item.additionally %}
