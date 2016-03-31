@@ -7,6 +7,7 @@ import os
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 
 from digest.models import Item
 
@@ -46,14 +47,22 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
 
-        items_cnt = Item.objects.exclude(link__icontains='allmychanges.com').count()
+        query = Q()
 
+        urls = [
+            'allmychanges.com',
+            'stackoverflow.com',
+        ]
+        for entry in urls:
+            query = query | Q(link__contains=entry)
+
+        items = Item.objects.exclude(query).order_by('?')
+
+        items_cnt = items.count()
         train_size = math.ceil(items_cnt * (options['percent'] / 100))
         # test_size = items_cnt - train_size
 
         train_part_size = math.ceil(train_size / options['cnt_parts'])
-
-        items = Item.objects.exclude(link__icontains='allmychanges.com').order_by('?')
 
         train_set = items[:train_size]
         test_set = items[train_size:]
