@@ -10,7 +10,7 @@
             <a href="{{ link }}">
                 {% youtube_id link as yotu_id %}
                 {% with "http://img.youtube.com/vi/"|add:yotu_id|add:"/hqdefault.jpg" as yotu_link %}
-                    {{ '<img src="'|add:yotu_link|add:'"/>'|remdow|responsive|safe }}
+                    {{ '<img src="'|add:yotu_link|add:'"/>'|img_local|img_responsive|img_lazy }}
                 {% endwith %}
             </a>
         </center>
