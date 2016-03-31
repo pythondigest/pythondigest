@@ -19,7 +19,7 @@ def deploy():
     pull()
     # update_libs()
     # migrate()
-    # static()
+    static()
     restart()
 
 

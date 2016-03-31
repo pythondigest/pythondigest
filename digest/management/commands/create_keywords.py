@@ -6,7 +6,7 @@ from html.parser import HTMLParser
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django_q import async
+from django_q.tasks import async
 
 from digest.alchemyapi import AlchemyAPI
 from digest.models import Item
