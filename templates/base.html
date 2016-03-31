@@ -1,13 +1,16 @@
 {% load staticfiles %}
 {% load ads_tags %}
 {% load compress %}
+{% load remdow %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
     <title>{% block page_title %}Дайджест новостей о python{% endblock %}{% block head_title %}{% endblock %}</title>
-    <meta name="description" content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}">
-    <meta name="keywords" content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
+    <meta name="description"
+          content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}">
+    <meta name="keywords"
+          content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
     <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
 
@@ -34,6 +37,8 @@
                 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
             <![endif]-->
     {% endblock %}
+
+    {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}
 </head>
