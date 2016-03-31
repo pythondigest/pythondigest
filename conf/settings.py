@@ -19,7 +19,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap_admin',
     'django.contrib.admin',
     'controlcenter',
 
