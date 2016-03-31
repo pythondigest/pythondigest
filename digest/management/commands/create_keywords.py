@@ -6,9 +6,15 @@ from html.parser import HTMLParser
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django_q import async
 
 from digest.alchemyapi import AlchemyAPI
 from digest.models import Item
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 class MLStripper(HTMLParser):
@@ -42,6 +48,7 @@ def get_keywords(api, text) -> list:
 
 def create_keywords(api, item):
     if item.article_path and os.path.exists(item.article_path):
+        logger.info("Process: {}".format(item.pk))
         with open(item.article_path) as fio:
             keywords = get_keywords(api, strip_tags(fio.read()))
             item.keywords.add(*keywords)
@@ -60,4 +67,5 @@ class Command(BaseCommand):
         """
         api = AlchemyAPI(settings.ALCHEMY_KEY)
         for item in Item.objects.filter(pk__range=(options['start'], options['end']), keywords=None):
-            create_keywords(api, item)
+            # create_keywords(api, item)
+            async(create_keywords, api, item)
