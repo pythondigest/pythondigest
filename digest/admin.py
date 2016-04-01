@@ -229,6 +229,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         'external_link_edit',
         'status',
         'language',
+        'tags',
         'activated_at',
     )
 
