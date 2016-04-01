@@ -365,9 +365,9 @@ class AutoImportResource(models.Model):
     TYPE_RESOURCE = (('twitter', u'Сообщения аккаунтов в твиттере'),
                      ('rss', u'RSS фид'),)
 
-    name = models.CharField(max_length=255,
+    name = models.CharField(max_length=255, unique=True,
                             verbose_name=u'Название источника', )
-    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
+    link = models.URLField(max_length=255, unique=True, verbose_name=u'Ссылка', )
     type_res = models.CharField(max_length=255,
                                 verbose_name=u'Тип источника',
                                 choices=TYPE_RESOURCE,

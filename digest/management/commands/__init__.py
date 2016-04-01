@@ -202,7 +202,7 @@ def fresh_google_check(link: str, attempt=5, debug=False):
     return result
 
 
-def get_tweets_by_url(base_url: str):
+def get_tweets_by_url(base_url: str) -> list:
     url = urlopen(base_url)
     soup = BeautifulSoup(url, 'lxml')
     http_code = url.getcode()
@@ -403,6 +403,7 @@ def save_item(item):
             _a.save()
         elif item.get('status') == 'active':
             _a.save()
+
 
 def save_pickle_file(filepath, data):
     with open(filepath, 'wb') as fio:
