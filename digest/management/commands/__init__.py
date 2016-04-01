@@ -310,7 +310,7 @@ def apply_video_rules(item_data: dict):
 
 
 def apply_parsing_rules(item_data: dict, query_rules, query_sections,
-                        query_statuses, query_tags):
+                        query_statuses):
     # tags_names = list(query_tags.values_list('name', flat=True))
     tags_names = []
     data = {}
@@ -359,15 +359,15 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
             data['section'] = query_sections.get(title=data.get('section'))
         except Exception:
             pass
-    if 'tags' in data:
-        _tags = []
-        data['tags'] = list(set(data['tags']))
-        for x in data['tags']:
-            try:
-                _tags.append(query_tags.get(name=x))
-            except Exception:
-                pass
-        data['tags'] = _tags
+    # if 'tags' in data:
+    #     _tags = []
+    #     data['tags'] = list(set(data['tags']))
+    #     for x in data['tags']:
+    #         try:
+    #             _tags.append(query_tags.get(name=x))
+    #         except Exception:
+    #             pass
+    #     data['tags'] = _tags
     return data
 
 

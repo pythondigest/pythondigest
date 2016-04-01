@@ -47,7 +47,7 @@ def main(url):
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),
-        'query_tags': Tag.objects.all(),
+        # 'query_tags': Tag.objects.all(),
         'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
     }
     import_python_weekly(url, **data)

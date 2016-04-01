@@ -115,7 +115,7 @@ def parsing(func):
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),
-        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES]
+        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
     }
     func(**data)
 
