@@ -5,6 +5,7 @@ from django.test import TestCase
 from mock import patch
 
 from digest.management.commands import get_tweets_by_url
+from digest.management.commands.import_news import _parse_tweets_data
 from digest.models import AutoImportResource
 
 
@@ -36,7 +37,9 @@ class ImportTweetsTest(TestCase):
     def setUp(self):
         self.res_twitter = AutoImportResource.objects.create(name='Test',
                                                              link='https://twitter.com/pythontrending',
-                                                             type_res='twitter')
+                                                             type_res='twitter',
+                                                             excl='http://consumerfinance.gov',
+                                                             incl='framework')
         self.res_rss = AutoImportResource.objects.create(name='Test2',
                                                          link='http://planetpython.org/rss20.xml',
                                                          type_res='rss')
@@ -57,3 +60,8 @@ class ImportTweetsTest(TestCase):
             self.assertEqual(len(x), 3)
             self.assertEqual(x[2], 200)
             self.assertEqual('http' in x[1], True)
+        return tweets
+
+    def test_exclude(self):
+        dsp = _parse_tweets_data(self.test_get_tweets(), self.res_twitter)
+        self.assertEqual(len(dsp), 3)

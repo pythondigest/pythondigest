@@ -14,21 +14,22 @@ from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section
 
 
+def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
+    result = []
+    excl = [s.strip() for s in (src.excl or '').split(',') if s]
+    for text, link, http_code in data:
+        excl_link = bool([i for i in excl if i in link])
+        if not excl_link and src.incl in text:
+            tw_txt = text.replace(src.incl, '')
+            result.append([tw_txt, link, src.resource, http_code])
+    return result
+
+
 def get_tweets():
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter',
                                                  in_edit=False):
-
-        resource = src.resource
-        excl = [s for s in (src.excl or '').split(',') if s]
-
-        tweets_data = get_tweets_by_url(src.link)
-
-        for text, link, http_code in tweets_data:
-            excl_link = bool([i for i in excl if i in link])
-            if not excl_link and src.incl in text:
-                tw_txt = text.replace(src.incl, '')
-                dsp.append([tw_txt, link, resource, http_code])
+        _parse_tweets_data(get_tweets_by_url(src.link), src)
     return dsp
 
 
