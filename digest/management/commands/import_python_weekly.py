@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from urllib.request import urlopen
+
 import lxml.html as html
 from django.core.management.base import BaseCommand
 from lxml import etree
 
 from digest.management.commands import apply_parsing_rules, apply_video_rules, save_item
-from digest.models import ParsingRules, Section, Tag, ITEM_STATUS_CHOICES, Resource
+from digest.models import ParsingRules, Section, ITEM_STATUS_CHOICES, Resource
+
+
+def _get_blocks(url):
+    response = urlopen(url, timeout=10)
+    page = html.parse(response)
+    return page.getroot().find_class('bodyTable')[0].xpath('//span[@style="font-size:14px"]')
 
 
 def import_python_weekly(issue_url, **kwargs):
     resource = Resource.objects.get(title='PythonWeekly')
 
-    page = html.parse(issue_url)
-
-    # a = requests.get(url).content
-    blocks = page.getroot().find_class('bodyTable')[0].xpath('//span[@style="font-size:14px"]')
-
-    for x in blocks:
+    for x in _get_blocks(issue_url):
         link = x.cssselect('a')[0]
         url = link.attrib['href']
         title = link.text
@@ -47,7 +50,6 @@ def main(url):
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),
-        # 'query_tags': Tag.objects.all(),
         'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
     }
     import_python_weekly(url, **data)
