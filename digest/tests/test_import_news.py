@@ -12,11 +12,6 @@ from digest.utils import read_fixture
 
 class ImportTweetsTest(TestCase):
     def setUp(self):
-        test_name = 'fixture_test_import_news_test_get_tweets.txt'
-        self.patcher = patch('digest.management.commands.urlopen')
-        self.urlopen_mock = self.patcher.start()
-        self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
-
         self.res_twitter = AutoImportResource.objects.create(name='Test',
                                                              link='https://twitter.com/pythontrending',
                                                              type_res='twitter',
@@ -26,11 +21,15 @@ class ImportTweetsTest(TestCase):
                                                          link='http://planetpython.org/rss20.xml',
                                                          type_res='rss')
 
-    def tearDown(self):
-        self.patcher.stop()
-
     def test_get_tweets(self):
+        test_name = 'fixture_test_import_news_test_get_tweets.txt'
+        self.patcher = patch('digest.management.commands.urlopen')
+        self.urlopen_mock = self.patcher.start()
+        self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
+
         tweets = get_tweets_by_url(self.res_twitter.link)
+
+        self.patcher.stop()
         self.assertEqual(len(tweets), 19)
 
         for x in tweets:
