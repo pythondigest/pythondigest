@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
 from advertising.mixins import AdsMixin
-from digest.mixins import FeedItemsMixin
+from digest.mixins import FeedItemsMixin, FavoriteItemsMixin
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
 
@@ -43,7 +43,7 @@ class Sitemap(TemplateView):
         return ctx
 
 
-class IndexView(FeedItemsMixin, AdsMixin, TemplateView):
+class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
     """Главная страница."""
     template_name = 'pages/index.html'
     model = Issue

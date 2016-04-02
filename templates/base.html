@@ -46,56 +46,84 @@
 <body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
 
+
+{% block nav_bar %}
+
+{% endblock nav_bar %}
+
+{% block top_menu %}
+    {% include "blocks/_menu.html" %}
+{% endblock %}
+
 <div class="site-body">
-    <div class="content-body container">
-        {% if messages %}
-            {% include "blocks/_messages.html" %}
-        {% endif %}
+    <div class="container">
 
 
-        {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
+        <div class="row">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% include "blocks/_messages.html" %}
+                {% endif %}
 
+                {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
 
-        {% block nav_bar %}
-
-        {% endblock nav_bar %}
-
-        {% block top_menu %}
-            {% include "blocks/_menu.html" %}
-        {% endblock %}
-
-
-        <div class="cont container">
-            {% block extra_body %}{% endblock %}
-
-            {% block body %}
-            {% endblock %}
-
-            {% block content %}{% endblock %}
-        </div>
-
-
-        {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
-
-        <div class="footer row">
-            <div class="footer-contact col-md-6">
-                Контакты:
-                <a href="https://github.com/pythondigest/pythondigest" title="GitHub"><i
-                        class="fa fa-github-square fa-lg"></i></a>
-                <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a>
-                &nbsp;&nbsp;
-                Фиды:
-                <a href="{% url 'frontend:rss' %}" title="RSS feed"><i class="fa fa-rss-square fa-lg"></i></a>
-                &nbsp;<a href="https://twitter.com/pydigest" title="Twitter feed"><i
-                    class="fa fa-twitter-square fa-lg"></i></a>
             </div>
-            <div class="footer-copyright col-md-6" align="right">
-                &copy; Дайджест новостей о python 2013 — {% now "Y" %}
+
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                {% block extra_body %}{% endblock %}
+
+                {% block body %}
+                {% endblock %}
+
+                {% block content %}{% endblock %}
+            </div>
+
+            <div class="col-md-3">
+                {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
+                {% with items=feed_items %}
+                    {% include "blocks/_feed.html" %}
+                {% endwith %}
+
+                {% include "blocks/_adv.html" %}
+                {% include "blocks/_friends.html" %}
+                {% with items=favorite_items %}
+                    {% include "blocks/_favorite_items.html" %}
+                {% endwith %}
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
+            </div>
+        </div>
+
+
     </div>
 </div>
 <!-- /container -->
+
+<div class="container-fluid">
+
+    <div class="footer row">
+        <div class="footer-contact col-md-6">
+            Контакты:
+            <a href="https://github.com/pythondigest/pythondigest" title="GitHub"><i
+                    class="fa fa-github-square fa-lg"></i></a>
+            <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a>
+            &nbsp;&nbsp;
+            Фиды:
+            <a href="{% url 'frontend:rss' %}" title="RSS feed"><i class="fa fa-rss-square fa-lg"></i></a>
+            &nbsp;<a href="https://twitter.com/pydigest" title="Twitter feed"><i
+                class="fa fa-twitter-square fa-lg"></i></a>
+        </div>
+        <div class="footer-copyright col-md-6" align="right">
+            &copy; Дайджест новостей о python 2013 — {% now "Y" %}
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>

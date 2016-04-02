@@ -11,9 +11,12 @@ from digest.management.commands import apply_parsing_rules, apply_video_rules, s
 from digest.models import ParsingRules, Section, ITEM_STATUS_CHOICES, Resource
 
 
+def _get_content(url):
+    return urlopen(url, timeout=10).read()
+
+
 def _get_blocks(url):
-    response = urlopen(url, timeout=10)
-    page = html.parse(response)
+    page = html.parse(_get_content(url))
     return page.getroot().find_class('bodyTable')[0].xpath('//span[@style="font-size:14px"]')
 
 

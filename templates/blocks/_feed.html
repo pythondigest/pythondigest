@@ -1,23 +1,26 @@
-{% if items %}
-    <hr>
-    <h3 class="text-center">Свежие новости</h3>
-    <hr>
-    {% for object in items %}
+<div class="issue issue-end issue-end">
+    {% if items %}
 
-        <p><b><a rel="nofollow"
-                 href="{{ object.link }}"
-                 onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.get_tags_str }}');"
-                 target="_blank">
-            {{ object.title }}
-        </a>
-        </b>
-        </p>
-    {% endfor %}
+        <h3 class="text-center">Свежие новости</h3>
+        <hr>
+        {% for object in items %}
 
-    <hr>
-    <h4 class="text-center"><a href="{% url 'digest:feed' %}">Просмотреть все</a></h4>
-{% else %}
-    <hr>
-    <h4 class="text-center"><a href="{% url 'digest:feed' %}">Свежие новости</a></h4>
-    <hr>
-{% endif %}
+            <p><b><a rel="nofollow"
+                     href="{{ object.link }}"
+                     onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.get_tags_str }}');"
+                     target="_blank">
+                {{ object.title }}
+            </a>
+            </b>
+            </p>
+        {% endfor %}
+
+        <hr>
+        <h4 class="text-center"><a href="{% url 'digest:feed' %}">Просмотреть все</a></h4>
+    {% else %}
+
+        <h4 class="text-center"><a href="{% url 'digest:feed' %}">Свежие новости</a></h4>
+        <hr>
+
+    {% endif %}
+</div>
