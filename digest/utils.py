@@ -4,12 +4,12 @@ import os
 
 
 def save_fixture(name, data, mode='wb'):
-    with open(os.path.join(os.path.dirname(__file__), name), mode) as fio:
+    with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
         fio.write(data)
 
 
 def read_fixture(name, mode='rb'):
-    with open(os.path.join(os.path.dirname(__file__), name), mode) as fio:
+    with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
         return fio.read()
 
 
@@ -25,3 +25,6 @@ class MockResponse(object):
 
     def getcode(self):
         return self.code
+
+    def close(self):
+        pass

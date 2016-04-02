@@ -203,10 +203,10 @@ def fresh_google_check(link: str, attempt=5, debug=False):
 
 
 def get_tweets_by_url(base_url: str) -> list:
-    url = urlopen(base_url)
-    soup = BeautifulSoup(url, 'lxml')
-    http_code = url.getcode()
-    url.close()
+    response = urlopen(base_url, timeout=10)
+    soup = BeautifulSoup(response.read(), 'lxml')
+    http_code = response.getcode()
+    response.close()
 
     result = []
     for p in soup.findAll('p', 'tweet-text'):
