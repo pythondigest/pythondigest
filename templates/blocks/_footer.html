@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="footer navbar-fixed-bottom">
-        <div class="footer-contact col-md-6">
+        <div class="footer-contact col-md-4">
             Контакты:
             <a href="https://github.com/pythondigest/pythondigest" title="GitHub"><i
                     class="fa fa-github-square fa-lg"></i></a>
@@ -10,8 +10,12 @@
             <a href="{% url 'frontend:rss' %}" title="RSS feed"><i class="fa fa-rss-square fa-lg"></i></a>
             &nbsp;<a href="https://twitter.com/pydigest" title="Twitter feed"><i
                 class="fa fa-twitter-square fa-lg"></i></a>
+
         </div>
-        <div class="footer-copyright col-md-6" align="right">
+        <div class="col-md-4 footer-contact" align="center">
+            <a href="https://firstvds.ru/?from=421453">Мы хостимся на FirstVDS.ru - Дешевый хостинг в России</a>
+        </div>
+        <div class="footer-copyright col-md-4" align="right">
             &copy; Дайджест новостей о python 2013 — {% now "Y" %}
         </div>
     </div>
