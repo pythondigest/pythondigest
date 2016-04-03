@@ -10,7 +10,7 @@
             <p>{% likes item 'likes/inclusion_tags/likes_item.html' %}
                 <b><a rel="nofollow"
                       href="{{ object.link }}"
-                      onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.get_tags_str }}');"
+                      onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.tags_as_str }}');"
                       target="_blank">
                     {{ object.title }}
                 </a>

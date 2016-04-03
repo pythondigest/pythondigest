@@ -28,8 +28,9 @@
             </big>
         </a>
     {% else %}
+        &nbsp;
         <span class="liker text-primary badge issue-item-resource">
-                 <big>{{ content_obj.vote_total }} <i class="fa fa-star"></i></big>
+            {{ content_obj.vote_total }} <i class="fa fa-star"></i>
         </span>
     {% endif %}
     </span>

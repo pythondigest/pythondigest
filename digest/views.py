@@ -71,6 +71,28 @@ class ItemView(FavoriteItemsMixin, CacheMixin, DetailView):
     cache_timeout = 300
 
 
+class ItemsByTagView(AdsMixin, FavoriteItemsMixin, CacheMixin, ListView):
+    """Лента новостей."""
+    template_name = 'news_by_tag.html'
+    context_object_name = 'items'
+    paginate_by = 20
+    paginator_class = DiggPaginator
+    model = Item
+    cache_timeout = 300
+
+    def get_queryset(self):
+        items = super(ItemsByTagView, self).get_queryset() \
+            .filter(status='active',
+                    activated_at__lte=datetime.datetime.now())
+        tag = self.request.GET.get('tag')
+        if tag in ['ru', 'en']:
+            items = items.filter(tags__name__in=tag)
+
+        items = items.prefetch_related('issue', 'section')
+        items = items.order_by('-created_at', '-related_to_date')
+        return items
+
+
 class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
     """Лента новостей."""
     template_name = 'news_list.html'
@@ -93,6 +115,10 @@ class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
             filters = Q(title__icontains=search) | Q(
                 description__icontains=search)
             items = items.filter(filters)
+
+        tag = self.request.GET.get('tag')
+        if tag:
+            items = items.filter(tags__name__in=[tag])
 
         section = self.request.GET.get('section', '')
         if section.isdigit():

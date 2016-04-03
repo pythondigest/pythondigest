@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import IssuesList, \
-    IssueView, ItemView, AddNews, NewsList, get_items_json
+    IssueView, ItemView, AddNews, NewsList, get_items_json, ItemsByTagView
 
 app_name = 'digest'
 urlpatterns = [

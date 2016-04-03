@@ -15,6 +15,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.http import QueryDict
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _
 from readability.readability import Document, Unparseable
@@ -152,6 +153,21 @@ ITEM_STATUS_CHOICES = (
 )
 
 ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'),)
+
+
+def build_url(*args, **kwargs):
+    params = kwargs.pop('params', {})
+    url = reverse(*args, **kwargs)
+    if not params: return url
+
+    qdict = QueryDict('', mutable=True)
+    for k, v in params.items():
+        if type(v) is list:
+            qdict.setlist(k, v)
+        else:
+            qdict[k] = v
+
+    return url + '?' + qdict.urlencode()
 
 
 class Item(models.Model):
@@ -309,7 +325,11 @@ class Item(models.Model):
         return reverse('digest:item', kwargs={'pk': self.pk})
 
     @property
-    def get_tags_str(self):
+    def tags_as_links(self):
+        return [(x.name, build_url('digest:feed', params={'tag': x.name})) for x in self.tags.all()]
+
+    @property
+    def tags_as_str(self):
         if self.tags and self.tags.all():
             result = ','.join([x.name for x in self.tags.all()])
         else:

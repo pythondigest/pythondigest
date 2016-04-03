@@ -18,12 +18,19 @@
     &nbsp;
     </span>
         <a class="issue-item-title"
-           onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
+           onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
            rel="nofollow"
            href="{{ item.link }}"
            target="_blank">
             {{ item.title }}
         </a>
+
+        {% if item.tags_as_links %}
+            {% for tag_name, tag_link in item.tags_as_links %}
+                <span class="badge issue-item-resource"><small><a href="{{ tag_link }}">{{ tag_name }}</a></small>
+                </span>
+            {% endfor %}
+        {% endif %}
 
         {#    <span class="issue-item-bages">#}
         {#        {% if item.resource %}#}
@@ -45,7 +52,7 @@
         {##}
         {#    </span>#}
 
-        <p class="issue-item-description product">{{ item.description|default:''|img_local|img_responsive|img_lazy}}</p>
+        <p class="issue-item-description product">{{ item.description|default:''|img_local|img_responsive|img_lazy }}</p>
 
         {% if item.additionally or item.section == 'Видео' %}
             {% include 'blocks/_video_item.html' with link=item.additionally %}
