@@ -17,6 +17,12 @@
     </a>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
+            <li>
+                <form action="{% url 'digest:feed' %}" role="form">
+                    <input type="text" name="q" type="text" class="search-input"
+                           value="{{ request.GET.q|default:'' }}" placeholder=" Поиск...">
+                </form>
+            </li>
             <li><a href="{% url 'digest:feed' %}">НОВОСТИ</a></li>
             <li><a href="{% url 'digest:issues' %}">ВЫПУСКИ</a></li>
             <li><a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a></li>

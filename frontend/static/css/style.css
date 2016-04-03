@@ -166,6 +166,12 @@ html, body {
     height: 58px;
 }
 
+.nav > li > form {
+    color: #fff !important;
+    padding: 10px 35px 10px 35px;
+    height: 58px;
+}
+
 .nav > .active > a {
     border-left: 0;
 }
