@@ -11,9 +11,9 @@
         <noindex>
 
               <span title="Язык новости" class="badge news-line-item-resource
-                {% if item.language == 'en' %}
+                {% if object.language == 'en' %}
                     en
-                {% elif item.language == 'ru' %}
+                {% elif object.language == 'ru' %}
                     ru
                 {% endif %}
               ">
@@ -46,7 +46,7 @@
                     {{ object.title }}
                 {% else %}
                     <a rel="nofollow"
-                       href="{{ item.link }}"
+                       href="{{ object.link }}"
                        onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
                        target="_blank">
                         {{ object.title }}
@@ -54,7 +54,7 @@
                 {% endif %}
                 {% likes object 'likes/inclusion_tags/likes_item.html' %}
 
-                {% if item.tags_as_links %}
+                {% if object.tags_as_links %}
                     {% for tag_name, tag_link in item.tags_as_links %}
                         <span class="badge issue-item-resource"><small><a href="{{ tag_link }}">{{ tag_name }}</a></small></span>
                     {% endfor %}
