@@ -38,13 +38,7 @@
             <br>
         {% endwith %}
 
-        {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
-
-        {% include "blocks/_adv.html" %}
-        {% include "blocks/_friends.html" %}
-        {% with items=favorite_items %}
-            {% include "blocks/_favorite_items.html" %}
-        {% endwith %}
+        {% include 'blocks/_right_panel.html' %}
     </div>
 
 
