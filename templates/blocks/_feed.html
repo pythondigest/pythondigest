@@ -4,17 +4,21 @@
         <hr>
         {% for object in items %}
 
-            <p><b><a rel="nofollow"
-                     href="{{ object.link }}"
-                     onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.tags_as_str }}');"
-                     target="_blank">
+            <p><a rel="nofollow"
+                  href="{{ object.link }}"
+                  onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.tags_as_str }}');"
+                  target="_blank">
                 {{ object.title }}
             </a>
-            </b>
+
             </p>
         {% endfor %}
 
-        <hr>
-        <h4 class="text-center"><a href="{% url 'digest:feed' %}">Просмотреть все</a></h4>
+        <br>
+        <h4 class="text-center">
+
+            <b><a href="{% url 'digest:feed' %}">Просмотреть все</a></b></h4>
     </div>
+
+    <br>
 {% endif %}
