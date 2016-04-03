@@ -15,7 +15,7 @@ from django.views.generic import FormView, ListView
 
 from advertising.mixins import AdsMixin
 from .forms import AddNewsForm
-from .mixins import FeedItemsMixin, CacheMixin
+from .mixins import FeedItemsMixin, CacheMixin, FavoriteItemsMixin
 from .models import Issue, Item
 
 
@@ -63,7 +63,7 @@ class IssueView(CacheMixin, FeedItemsMixin, AdsMixin, DetailView):
         return context
 
 
-class ItemView(CacheMixin, DetailView):
+class ItemView(FavoriteItemsMixin, CacheMixin, DetailView):
     """Просмотр отдельной новости."""
     template_name = 'news_item.html'
     context_object_name = 'item'
@@ -71,7 +71,7 @@ class ItemView(CacheMixin, DetailView):
     cache_timeout = 300
 
 
-class NewsList(CacheMixin, ListView):
+class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
     """Лента новостей."""
     template_name = 'news_list.html'
     context_object_name = 'items'

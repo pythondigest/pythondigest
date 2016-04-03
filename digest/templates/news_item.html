@@ -49,12 +49,41 @@
 {% endblock %}
 
 
-{% block content %}
-    <div class="container news-list">
-        {% with item=object read_link=True %}
-            {% include 'blocks/_feed_item.html' %}
+
+{% block body %}
+
+    <div class="col-md-9">
+        <div class="container news-list">
+            {% with item=object read_link=True %}
+                {% include 'blocks/_feed_item.html' %}
+            {% endwith %}
+
+            <hr>
+            <div id="relevant_news">
+
+
+            </div>
+
+            {% include "blocks/_disqus.html" %}
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
+        {% with items=feed_items %}
+            {% include "blocks/_feed.html" %}
         {% endwith %}
 
-        {% include "blocks/_disqus.html" %}
+        {% include "blocks/_adv.html" %}
+        {% include "blocks/_friends.html" %}
+        {% with items=favorite_items %}
+            {% include "blocks/_favorite_items.html" %}
+        {% endwith %}
     </div>
+
+
 {% endblock %}
+
+
+
+

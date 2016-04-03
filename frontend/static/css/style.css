@@ -5,9 +5,10 @@
 html, body {
     min-height: 100%;
     height: auto;
-    font-size: 100%;
+
     margin: 0;
     padding: 0;
+    font-size: 100% !important;
 }
 
 .product .img-responsive {
@@ -35,9 +36,19 @@ html, body {
 .navbar-brand {
     position: absolute;
     width: 100%;
-    left: 0;
-    text-align: center;
+    padding-left: 10%;
+    text-align: left;
     margin: auto;
+}
+
+.navbar-default .navbar-brand {
+    color: #b88b58 !important;
+    font-weight: 700;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #d3a262 !important;;
+    font-weight: 700;
 }
 
 .top-logo {
@@ -98,8 +109,8 @@ html, body {
 }
 
 .jumb {
-    background-color: #777;
-    color: #fff;
+    background-color: #ececec;
+
     box-shadow: 10px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
     -moz-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
     -webkit-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
@@ -150,7 +161,7 @@ html, body {
 }
 
 .nav > li > a {
-    color: #ccc;
+    color: #fff !important;
     padding: 20px 35px 10px 35px;
     height: 58px;
 }
@@ -161,6 +172,13 @@ html, body {
 
 .navbar-collapse .navbar-nav.navbar-right:last-child {
     margin-right: 0px;
+}
+
+.navbar-digest {
+    /*background-color: #f8f8f8;*/
+    border-color: #5e5e5e;
+
+    background-color: #262626;
 }
 
 /* pagination */
@@ -536,4 +554,38 @@ html, body {
         width: 1600px;
         max-width: 1700px;
     }
+
 }
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    padding-left: 10%;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+
+
+

@@ -3,29 +3,52 @@
 {% load common %}
 {% load micawber_tags %}
 
-{% block content %}
-<div class="container news-list">
 
-    <div class="col-md-12 nopad" style="text-align: right;">
-        {% with lang=request.GET.lang|default:'any' %}
-        <div class="btn-group">
-            <a class="btn btn-default {% if lang == 'any' %}active{% endif%}" href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
-            <a class="btn btn-default {% if lang == 'ru' %}active{% endif%}" href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только на русском</a>
-            <a class="btn btn-default {% if lang == 'en' %}active{% endif%}" href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только на английском</a>
+
+{% block body %}
+
+    <div class="col-md-9">
+        <div class="news-list">
+            {% for item in items %}
+                {% with object=item %}
+                    {% include 'blocks/_feed_item.html' %}
+                {% endwith %}
+
+            {% empty %}
+                <div class="alert alert-warning pull-left">
+                    <strong>Печально но факт!</strong> В этой ленте нет новостей.
+                </div>
+            {% endfor %}
+
+            {% include "blocks/_pagination.html" %}
         </div>
-        {% endwith %}
     </div>
-    {% for item in items %}
-        {% with object=item %}
-            {% include 'blocks/_feed_item.html' %}
+
+    <div class="col-md-3">
+
+        {% with lang=request.GET.lang|default:'any' %}
+            <div class="btn-group">
+                <a class="btn btn-default {% if lang == 'any' %}active{% endif %}"
+                   href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
+                <a class="btn btn-default {% if lang == 'ru' %}active{% endif %}"
+                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только на русском</a>
+                <a class="btn btn-default {% if lang == 'en' %}active{% endif %}"
+                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только на английском</a>
+            </div>
+            <br>
         {% endwith %}
 
-    {% empty %}
-    <div class="alert alert-warning pull-left">
-        <strong>Печально но факт!</strong> В этой ленте нет новостей.
-    </div>
-    {% endfor %}
-</div>
+        {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
 
-{% include "blocks/_pagination.html" %}
+        {% include "blocks/_adv.html" %}
+        {% include "blocks/_friends.html" %}
+        {% with items=favorite_items %}
+            {% include "blocks/_favorite_items.html" %}
+        {% endwith %}
+    </div>
+
+
 {% endblock %}
+
+
+

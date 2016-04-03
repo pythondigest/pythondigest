@@ -2,9 +2,11 @@
 
 
 {% if ads %}
-    {% with ads|ads_by_page:request.path|ads_by_align:type as object %}
-        {% if object %}
-            {% include object.type.template %}
-        {% endif %}
-    {% endwith %}
+    <div class="row">
+        {% with ads|ads_by_page:request.path|ads_by_align:type as object %}
+            {% if object %}
+                {% include object.type.template %}
+            {% endif %}
+        {% endwith %}
+    </div>
 {% endif %}
