@@ -71,15 +71,15 @@
                 {% include 'advertising/blocks/ads.html' with ads=ads type='after_issue' %}
 
             </div>
+            <div class="row">
+                {% with issue.pk|lower as id %}
+                    {% include "blocks/_disqus.html" with identifier='issue_'|add:id %}
+                {% endwith %}
+
+            </div>
         {% endif %}
 
 
-        <div class="row">
-            {% with object.pk|lower as id %}
-                {% include "blocks/_disqus.html" with identifier='issue_'|add:id %}
-            {% endwith %}
-
-        </div>
     </div>
 
     <div class="col-md-3">
