@@ -33,7 +33,7 @@ class IssuesList(CacheMixin, ListView):
     template_name = 'issues_list.html'
     queryset = Issue.objects.filter(status='active').order_by('-published_at')
     context_object_name = 'items'
-    paginate_by = 9
+    paginate_by = 12
     paginator_class = DiggPaginator
     cache_timeout = 300
 
