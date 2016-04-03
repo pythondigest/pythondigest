@@ -17,10 +17,8 @@
     </a>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'digest:feed' %}">ЛЕНТА</a></li>
+            <li><a href="{% url 'digest:feed' %}">НОВОСТИ</a></li>
             <li><a href="{% url 'digest:issues' %}">ВЫПУСКИ</a></li>
-{#        </ul>#}
-{#        <ul class="nav navbar-nav navbar-right">#}
             <li><a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a></li>
             <li><a href="http://yasobe.ru/na/pydigest">ПОМОЧЬ ПРОЕКТУ</a></li>
         </ul>
@@ -28,147 +26,6 @@
 </nav>
 
 <br>
-
-{##}
-{#<nav class="navbar navbar-inverse navbar-fixed-top">#}
-{#    <div class="container-fluid">#}
-{#        <div class="navbar-header">#}
-{#            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"#}
-{#                    aria-expanded="false" aria-controls="navbar">#}
-{#                <span class="sr-only">Toggle navigation</span>#}
-{#                <span class="icon-bar"></span>#}
-{#                <span class="icon-bar"></span>#}
-{#                <span class="icon-bar"></span>#}
-{#            </button>#}
-{#            <a class="navbar-brand" href="#">#}
-{##}
-{#                <div class="top-img pull-left"><a href="http://pythondigest.ru/"><img src="/static/img/logo.png"></a>#}
-{#                </div>#}
-{#                <div class="top-name hidden-xs hidden-sm pull-left">PYTHON ДАЙДЖЕСТ</div>#}
-{#                <div class="top-slogan hidden-xs hidden-sm pull-left text-muted">Всё самое интересное прямо здесь и сейчас!#}
-{#                </div>#}
-{##}
-{#            </a>#}
-{#        </div>#}
-{#        <div id="navbar" class="navbar-collapse collapse">#}
-{#            <ul class="nav navbar-nav navbar-right">#}
-{#                <li {% if active_menu_item == 'index' %}class="active"{% endif %}>#}
-{#                    <a href="{% url 'frontend:index' %}"><i class='fa fa-home fa-lg'></i></a>#}
-{#                </li>#}
-{#                <li {% if active_menu_item == 'issues_list' %}class="active"{% endif %}>#}
-{#                    <a href="{% url 'digest:issues' %}">ВЫПУСКИ</a>#}
-{#                </li>#}
-{#<li {% if active_menu_item == 'feed' %}class="active"{% endif %}>#}
-{#    <a href="{% url 'digest:feed' %}">ЛЕНТА</a>#}
-{#</li>#}
-{#                <li {% if active_menu_item == 'friends' %}class="active"{% endif %}>#}
-{#                    <a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>#}
-{#                </li>#}
-{#                <li>#}
-{#                    <a href="http://yasobe.ru/na/pydigest">#}
-{#                        <ins>ПОМОЧЬ ПРОЕКТУ</ins>#}
-{#                    </a>#}
-{#                </li>#}
-{#            </ul>#}
-{##}
-{##}
-{#            <form action="{% url 'digest:feed' %}" class="navbar-form navbar-right" role="form">#}
-{#                <div class="form-group">#}
-{#                    <input type="text" name="q" type="text" class="search-input"#}
-{#                           value="{{ request.GET.q|default:'' }}" placeholder=" ПОИСК...">#}
-{#                </div>#}
-{#            </form>#}
-{#        </div>#}
-{#    </div>#}
-{#</nav>#}
-
-{##}
-{#{% spaceless %}#}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#            <div class="top-logo col-md-5">#}
-{#                <div class="top-img pull-left"><a href="http://pythondigest.ru/"><img src="/static/img/logo.png"></a>#}
-{#                </div>#}
-{#                <div class="top-name hidden-xs hidden-sm pull-left">PYTHON ДАЙДЖЕСТ</div>#}
-{#                <div class="top-slogan hidden-xs hidden-sm pull-left text-muted">Всё самое интересное прямо здесь и#}
-{#                    сейчас!#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="top-search col-md-3" align="center">#}
-{#                <div class="search-form">#}
-{#                    <form action="{% url 'digest:feed' %}" class="form-inline" role="form">#}
-{#                        <div class="form-group">#}
-{#                            <input type="text" name="q" type="text" class="search-input"#}
-{#                                   value="{{ request.GET.q|default:'' }}" placeholder=" ПОИСК...">#}
-{#                            <button type="submit" class="search-btn btn btn-warning"><i class="fa fa-search fa-lg"></i>#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </form>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="top-orfo hidden-xs hidden-sm col-md-4">#}
-{#                <a href="http://orphus.ru" id="orphus" target="_blank">#}
-{#                    <img alt="Система Orphus" src="/static/js/vendor/orphus/orphus.gif">#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="top-orfo col-md-12 hidden-md hidden-lg">#}
-{#                <a href="http://orphus.ru" id="orphus" target="_blank">#}
-{#                    Заметили ошибку в тексте? Выделите мышкой и нажмите Ctrl + Enter#}
-{#                </a>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#{% endspaceless %}#}
-{##}
-{#<nav class="navbar navbar-default" role="navigation">#}
-{#    <div class="container-fluid">#}
-{#        <!-- Brand and toggle get grouped for better mobile display -->#}
-{#        <div class="navbar-header">#}
-{#            <button type="button" class="navbar-toggle" data-toggle="collapse"#}
-{#                    data-target="#bs-example-navbar-collapse-1">#}
-{#                <span class="sr-only">Toggle navigation</span>#}
-{#                <span class="icon-bar"></span>#}
-{#                <span class="icon-bar"></span>#}
-{#                <span class="icon-bar"></span>#}
-{#            </button>#}
-{#        </div>#}
-{##}
-{##}
-{#        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
-{#            <ul class="nav navbar-nav ">#}
-{#<li {% if active_menu_item == 'index' %}class="active"{% endif %}>#}
-{#    <a href="{% url 'frontend:index' %}"><i class='fa fa-home fa-lg'></i></a>#}
-{#</li>#}
-{#<li {% if active_menu_item == 'issues_list' %}class="active"{% endif %}>#}
-{#    <a href="{% url 'digest:issues' %}">ВЫПУСКИ</a>#}
-{#</li>#}
-{#<li {% if active_menu_item == 'feed' %}class="active"{% endif %}>#}
-{#    <a href="{% url 'digest:feed' %}">ЛЕНТА</a>#}
-{#</li>#}
-{#<li {% if active_menu_item == 'friends' %}class="active"{% endif %}>#}
-{#    <a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>#}
-{#</li>#}
-{#<li>#}
-{#    <a href="http://yasobe.ru/na/pydigest">#}
-{#        <ins>ПОМОЧЬ ПРОЕКТУ</ins>#}
-{#    </a>#}
-{#</li>#}
-
-{##}
-{#            </ul>#}
-{#        </div>#}
-{#        <!-- /.navbar-collapse -->#}
-{#    </div>#}
-{#    <!-- /.container-fluid -->#}
-{#</nav>#}
-
-{##}
-{#<form id="accountLogOutForm" style="display: none;" action="{% url "account_logout" %}" method="POST">#}
-{#    {% csrf_token %}#}
-{#</form>#}
-
-
-<!-- Jumbotron -->
 
 
 <div class="jumb hidden-xs container-fluid alert alert-dismissable">
