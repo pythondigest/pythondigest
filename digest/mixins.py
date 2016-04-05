@@ -44,9 +44,11 @@ class FavoriteItemsMixin(ContextMixin):
         # Получить по ним сет из Item (без дублей)
         # пройтись по всем и сформировать лист
 
+        date = datetime.datetime.now() - datetime.timedelta(days=12)
         items = Item.objects.filter(
             id__in=set(Vote.objects.filter(content_type=ContentType.objects.get(app_label="digest", model="item"),
-                                           ).values_list('object_id', flat=True)))
+                                           ).values_list('object_id', flat=True)),
+            related_to_date__gt=date)
         items_score = [(item, item.vote_total) for item in items]
         items_score = sorted(items_score, key=lambda item: item[1], reverse=True)
         context['favorite_items'] = [x[0] for x in items_score[:10]]
