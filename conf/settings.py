@@ -258,7 +258,7 @@ CKEDITOR_CONFIGS = {
              '-', 'Source', # 'glvrdPlugin',
              ]
         ],
-        'extraPlugins': 'glvrdPlugin'
+        # 'extraPlugins': 'glvrdPlugin'
 
     },
 
