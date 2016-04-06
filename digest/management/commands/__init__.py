@@ -217,6 +217,7 @@ def get_tweets_by_url(base_url: str) -> list:
             result.append([tw_text, tw_lnk, http_code])
         except:
             pass
+
     return result
 
 

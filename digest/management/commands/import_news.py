@@ -29,7 +29,7 @@ def get_tweets():
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter',
                                                  in_edit=False):
-        _parse_tweets_data(get_tweets_by_url(src.link), src)
+        dsp.extend(_parse_tweets_data(get_tweets_by_url(src.link), src))
     return dsp
 
 
@@ -130,4 +130,4 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         parsing(import_tweets)
-        parsing(import_rss)
+        # parsing(import_rss)
