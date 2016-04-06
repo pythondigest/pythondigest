@@ -255,7 +255,7 @@ CKEDITOR_CONFIGS = {
             ['Undo', 'Redo',
              '-', 'Link', 'Unlink', 'HorizontalRule',
              '-', 'BulletedList', 'NumberedList', 'PasteText',
-             '-', 'Source', 'glvrdPlugin',
+             '-', 'Source', # 'glvrdPlugin',
              ]
         ],
         'extraPlugins': 'glvrdPlugin'
