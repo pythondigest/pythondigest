@@ -16,11 +16,11 @@ from bs4 import BeautifulSoup
 
 from digest.models import Item, Section
 from django.conf import settings
-from pygoogle import pygoogle
-from pygoogle.pygoogle import PyGoogleHttpException
-import datetime
-from time import sleep
-from stem import control, Signal, stem
+# from pygoogle import pygoogle
+# from pygoogle.pygoogle import PyGoogleHttpException
+# import datetime
+# from time import sleep
+# from stem import control, Signal, stem
 from django.core.management import call_command
 
 
@@ -157,49 +157,49 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
     except AssertionError:
         result = []
     return result
-
-
-def renew_connection():
-    with control.Controller.from_port(port=9051) as ctl:
-        ctl.authenticate(settings.TOR_CONTROLLER_PWD)
-        ctl.signal(Signal.NEWNYM)
-        sleep(5)
-
-
-def fresh_google_check(link: str, attempt=5, debug=False):
-    """Проверяет, индексировался ли уже ресурс гуглом раньше.
-
-    чем за 2 недели до сегодня.
-    :param link:
-    :param attempt:
-    :return:
-
-    """
-    if debug:
-        return False
-    try:
-        assert isinstance(link, str)
-        today = datetime.date.today()
-        date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
-        date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
-        query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
-
-        result = False
-        for i in range(0, attempt):
-            g = pygoogle(query.encode('utf-8'),
-                         raise_http_exceptions=True,
-                         proxies=settings.PROXIES_FOR_GOOGLING)
-
-            try:
-                result = bool(g.get_result_count())
-            except PyGoogleHttpException as e:
-                renew_connection()
-                continue
-            break
-    except (AssertionError, PyGoogleHttpException, stem.SocketError):
-        result = False
-
-    return result
+#
+#
+# def renew_connection():
+#     with control.Controller.from_port(port=9051) as ctl:
+#         ctl.authenticate(settings.TOR_CONTROLLER_PWD)
+#         ctl.signal(Signal.NEWNYM)
+#         sleep(5)
+#
+#
+# def fresh_google_check(link: str, attempt=5, debug=False):
+#     """Проверяет, индексировался ли уже ресурс гуглом раньше.
+#
+#     чем за 2 недели до сегодня.
+#     :param link:
+#     :param attempt:
+#     :return:
+#
+#     """
+#     if debug:
+#         return False
+#     try:
+#         assert isinstance(link, str)
+#         today = datetime.date.today()
+#         date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
+#         date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
+#         query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
+#
+#         result = False
+#         for i in range(0, attempt):
+#             g = pygoogle(query.encode('utf-8'),
+#                          raise_http_exceptions=True,
+#                          proxies=settings.PROXIES_FOR_GOOGLING)
+#
+#             try:
+#                 result = bool(g.get_result_count())
+#             except PyGoogleHttpException as e:
+#                 renew_connection()
+#                 continue
+#             break
+#     except (AssertionError, PyGoogleHttpException, stem.SocketError):
+#         result = False
+#
+#     return result
 
 
 def get_tweets_by_url(base_url: str) -> list:

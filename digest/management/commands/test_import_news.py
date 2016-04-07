@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand
 
 import feedparser
 from bs4 import BeautifulSoup
-from digest.management.commands import fresh_google_check
+# from digest.management.commands import fresh_google_check
 from digest.management.commands.import_news import _get_http_data_of_url, \
     apply_parsing_rules, parsing
 from digest.models import AutoImportResource, Item
@@ -71,9 +71,11 @@ def get_rss(**kwargs):
         rssnews = feedparser.parse(src.link)
         for n in rssnews.entries:
 
-            title = u'[!] %s' % n.title if fresh_google_check(
-                n.title,
-                debug=True) else n.title
+            # title = u'[!] %s' % n.title if fresh_google_check(
+            #     n.title,
+            #     debug=True) else n.title
+            #
+            title = n.title
 
             http_code, content, _ = _get_http_data_of_url(n.link)
 
