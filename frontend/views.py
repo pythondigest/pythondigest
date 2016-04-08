@@ -39,7 +39,7 @@ class Sitemap(TemplateView):
 
         ctx.update(
             {'records': items,
-             'domain': 'http://%s' % settings.BASE_DOMAIN})
+             'domain': 'https://%s' % settings.BASE_DOMAIN})
         return ctx
 
 
