@@ -35,7 +35,7 @@ class Sitemap(TemplateView):
                                         activated_at__lte=datetime.datetime.now()):
             items.append(
                 {'loc': '/view/%s' % item.pk,
-                 'changefreq': 'never',})
+                 'changefreq': 'weekly',})
 
         ctx.update(
             {'records': items,
