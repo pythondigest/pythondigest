@@ -130,4 +130,4 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         parsing(import_tweets)
-        # parsing(import_rss)
+        parsing(import_rss)
