@@ -380,17 +380,7 @@ class ItemDailyModerator(Item):
 
 class ItemDailyModeratorAdmin(admin.ModelAdmin):
     # filter_horizontal = ('tags',)
-    list_filter = (
-        'status',
-        'issue',
-        'section',
-        'is_editors_choice',
-        'user',
-        'related_to_date',
-        'resource',
-    )
     list_editable = ('is_editors_choice',)
-    search_fields = ('title', 'description', 'link')
     list_display = ('title', 'status', 'is_editors_choice', 'external_link',
                     'activated_at', 'cls_ok')
 

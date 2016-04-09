@@ -98,7 +98,10 @@ def import_rss(**kwargs):
             }
 
             if is_weekly_digest(item_data):
-                parse_weekly_digest(item_data)
+                try:
+                    parse_weekly_digest(item_data)
+                except Exception:
+                    pass
             else:
                 item_data.update(
                     apply_parsing_rules(item_data, **kwargs)

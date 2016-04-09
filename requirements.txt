@@ -56,3 +56,5 @@ tox==2.3.1
 
 django-taggit==0.18.1
 django-taggit-autosuggest==0.2.8
+
+typing

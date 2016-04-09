@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import datetime
 import pickle
 import re
 
@@ -157,6 +158,8 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
     except AssertionError:
         result = []
     return result
+
+
 #
 #
 # def renew_connection():
@@ -379,13 +382,16 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
 
 
 def save_item(item):
+    if not item:
+        return
+
+    time = datetime.datetime.now() + datetime.timedelta(days=-14)
     assert 'title' in item
     assert 'resource' in item
     assert 'link' in item
 
-    if not Item.objects.filter(title=item.get('title'),
-                               link=item.get('link'),
-                               description=item.get('description')).exists():
+    if not Item.objects.filter(link=item.get('link'),
+                               related_to_date__gt=time).exists():
         _a = Item(
             title=item.get('title'),
             resource=item.get('resource'),

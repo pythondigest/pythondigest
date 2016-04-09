@@ -2,9 +2,8 @@
 {% load thumbnail %}
 {% load common %}
 
-{% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
-{% block page_description %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o
-    Python{% endblock %}
+{% block page_title %}{{ object.title }}{% if object.trend %} - {{ object.trend }}{% endif %} - {{ block.super }}{% endblock %}
+{% block page_description %}{{ object.title }} - {{ block.super }}{% endblock %}
 
 {% block extra_head %}
     {% thumbnail object.image "350" as im %}

@@ -2,18 +2,20 @@
 {% load ads_tags %}
 {% load compress %}
 {% load remdow %}
+{% load common %}
 
 <!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{% locale %}">
 <head>
     <title>{% block page_title %}Дайджест новостей о python{% endblock %}{% block head_title %}{% endblock %}</title>
     <meta name="description"
-          content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}">
+          content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение{% endblock %}">
     <meta name="keywords"
           content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
     <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
 
+    <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
     <link rel="alternate" type="application/rss+xml" title="RSS"
           href="{% block rss_url %}{% url 'frontend:rss' %}{% endblock %}"/>
     {% block viewport %}
@@ -46,7 +48,6 @@
 
 <body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
-
 
 {% block nav_bar %}
 
@@ -162,7 +163,8 @@
         }
     })(document, window, "yandex_metrika_callbacks"); </script>
     <noscript>
-        <div><img src="https://mc.yandex.ru/watch/36284495" style="position:absolute; left:-9999px;" alt=""/></div>
+        <div><img src="https://mc.yandex.ru/watch/36284495" style="position:absolute; left:-9999px;"
+                  alt="Yandex counter"/></div>
     </noscript> <!-- /Yandex.Metrika counter -->
 {% endif %}
 

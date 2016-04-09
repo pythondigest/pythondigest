@@ -92,9 +92,8 @@ html, body {
 }
 
 .search-input {
-    padding-left: 1px;
     border: 0;
-    width: 195px;
+    width: 100%;
 }
 
 .search-btn {

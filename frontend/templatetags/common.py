@@ -9,8 +9,10 @@ from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_text
 from django.utils.six import text_type
+from django.utils.translation import to_locale, get_language
 from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
+from unidecode import unidecode as _unidecode
 from urlobject import URLObject
 
 name_re = re.compile(r'([^O])Auth')
@@ -18,13 +20,19 @@ LEVEL_TAGS = get_level_tags()
 
 register = template.Library()
 
-from unidecode import unidecode as _unidecode
-
 
 @register.filter
 def unidecode(string):
     return _unidecode(string.lower().replace(" ", "_")).replace("'",
                                                                 "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
+
+
+@register.simple_tag()
+def locale():
+    if settings.LANGUAGE_CODE == 'ru-ru':
+        return 'ru'
+    else:
+        return to_locale(get_language())
 
 
 @register.simple_tag()
@@ -94,7 +102,6 @@ def money_block_title():
         'Скинуться на хостинг',
         'Скинуться на торт',
     ]
-    print(random.choice(texts))
     return random.choice(texts)
 
 
