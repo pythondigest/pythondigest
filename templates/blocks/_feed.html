@@ -3,15 +3,7 @@
         <h3 class="text-center">Свежие новости</h3>
         <hr>
         {% for object in items %}
-
-            <p><a rel="nofollow"
-                  href="{{ object.link }}"
-                  onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.tags_as_str }}');"
-                  target="_blank">
-                {{ object.title }}
-            </a>
-
-            </p>
+            <p>{% include 'blocks/_simple_item.html' with item=object comment=False likes=True %}</p>
         {% endfor %}
 
         <br>

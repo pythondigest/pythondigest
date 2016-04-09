@@ -1,0 +1,20 @@
+{% load likes_inclusion_tags %}
+
+{% if item %}
+    {% if likes %}
+        {% likes item 'likes/inclusion_tags/likes_item.html' %}
+    {% endif %}
+    {% if comment %}
+        &nbsp;
+        <span class="likes liker text-primary">
+                <a href="{{ item.internal_link }}" title="Прокомментировать ссылку"><i
+                        class="fa fa-comments-o"></i></a>
+                </span>
+    {% endif %}
+    <a rel="nofollow"
+          href="{{ item.link }}"
+          onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
+          target="_blank">
+        {{ item.title }}
+    </a>
+{% endif %}

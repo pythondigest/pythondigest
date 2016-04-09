@@ -8,6 +8,10 @@
 
 
         {% likes item 'likes/inclusion_tags/likes_item.html' %}
+        &nbsp;
+        <span class="">
+            <a href="{{ item.internal_link }}" title="Прокомментировать ссылку"><i class="fa fa-comments-o"></i></a>
+        </span>
     <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
     {% if item.language == 'en' %}
         en

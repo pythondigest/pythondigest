@@ -5,17 +5,7 @@
         <h3 class="text-center">Выбор пользователей</h3>
         <hr>
         {% for object in items %}
-
-
-            <p>{% likes object 'likes/inclusion_tags/likes_item.html' %}
-                <b><a rel="nofollow"
-                      href="{{ object.link }}"
-                      onclick="trackUrl({{ object.pk }}, '{{ object.section }}', '{{ object.tags_as_str }}');"
-                      target="_blank">
-                    {{ object.title }}
-                </a>
-                </b>
-            </p>
+            <p><b>{% include 'blocks/_simple_item.html' with item=object comment=True likes=True %}</b></p>
         {% endfor %}
 
     </div>
