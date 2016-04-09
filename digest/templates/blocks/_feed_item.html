@@ -61,7 +61,7 @@
                 {% endif %}
             </h4>
 
-            <p>{{ object.description|default:''|img_local|img_responsive|img_lazy }}</p>
+            <p>{{ object.description|default:''|img_local|img_center|img_responsive|img_lazy }}</p>
 
             {% if object.additionally and object.additionally|oembed_no_urlize != object.additionally %}
                 {{ object.additionally|oembed }}
