@@ -591,6 +591,22 @@ body > .container {
     padding: 60px 15px 0;
 }
 
+.item-article-text {
+    border: dashed 1px #634f36; /* Параметры рамки */
+    background: #fffff5; /* Цвет фона */
+    font-family: "Courier New", Courier, monospace; /* Шрифт текста */
+    padding: 7px; /* Поля вокруг текста */
+    margin: 0 0 1em; /* Отступы вокруг */
+}
 
-
-
+.item-article-title {
+    border: 1px solid black; /* Параметры рамки */
+    border-bottom: none; /* Убираем линию снизу */
+    padding: 3px; /* Поля вокруг текста */
+    display: inline; /* Устанавливаем как встроенный элемент */
+    background: #efecdf; /* Цвет фона */
+    font-weight: bold; /* Жирное начертание */
+    font-size: 90%; /* Размер текста */
+    margin: 0; /* Убираем отступы вокруг */
+    white-space: nowrap; /* Отменяем переносы текста */
+}
