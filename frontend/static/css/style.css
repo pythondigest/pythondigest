@@ -594,7 +594,6 @@ body > .container {
 .item-article-text {
     border: dashed 1px #634f36; /* Параметры рамки */
     background: #fffff5; /* Цвет фона */
-    font-family: "Courier New", Courier, monospace; /* Шрифт текста */
     padding: 7px; /* Поля вокруг текста */
     margin: 0 0 1em; /* Отступы вокруг */
 }
