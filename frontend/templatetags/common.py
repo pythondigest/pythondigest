@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import random
 import re
 
+import lxml.html
 from django import template
 from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
@@ -25,6 +26,15 @@ register = template.Library()
 def unidecode(string):
     return _unidecode(string.lower().replace(" ", "_")).replace("'",
                                                                 "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
+
+
+@register.filter
+def remove_classes(text):
+    html = lxml.html.fromstring(text)
+    for tag in html.xpath('//*[@class]'):
+        tag.attrib.pop('class')
+
+    return lxml.html.tostring(html)
 
 
 @register.simple_tag()

@@ -1,0 +1,12 @@
+{% load common %}
+{% load remdow %}
+{% if item and item.text %}
+
+    <hr>
+    <h1>Эксперимент</h1>
+    <br>
+    <div style="border: 4px double black;">
+    {{ item.text|remove_classes|safe|img_local|img_center|img_responsive|img_lazy }}
+        </div>
+    <hr>
+{% endif %}

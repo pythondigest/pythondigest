@@ -55,8 +55,13 @@
     <div class="col-md-9">
         <div class="news-list">
             {% with item=object read_link=True %}
-                {% include 'blocks/_feed_item.html' %}
+                {% include 'digest/blocks/_feed_item.html' %}
+{#                {% include 'digest/blocks/_item_article.html' %}#}
+
             {% endwith %}
+
+
+
 
             <hr>
             <div id="relevant_news">

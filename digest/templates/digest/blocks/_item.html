@@ -7,27 +7,7 @@
 
     <noindex>
         <div class="issue-item">
-            {% likes item 'likes/inclusion_tags/likes_item.html' %}
-            &nbsp;
-        <span class="">
-            <a href="{{ item.internal_link }}" title="Прокомментировать ссылку"><i class="fa fa-comments-o"></i></a>
-        </span>
-    <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
-    {% if item.language == 'en' %}
-        en
-    {% elif item.language == 'ru' %}
-        ru
-    {% endif %}
-    ">
-    &nbsp;
-    </span>
-            <a class="issue-item-title"
-               onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-               rel="nofollow"
-               href="{{ item.link }}"
-               target="_blank">
-                {{ item.title }}
-            </a>
+            {% include 'digest/blocks/_item_as_line.html' with item=item language=True link_class='issue-item-title' comment=True likes=True %}
 
             {% if item.tags_as_links %}
                 {% for tag_name, tag_link in item.tags_as_links %}
@@ -59,9 +39,9 @@
             <p class="issue-item-description">{{ item.description|default:''|img_local|img_center|img_responsive|img_lazy }}</p>
 
             {% if item.additionally or item.section == 'Видео' %}
-                {% include 'blocks/_video_item.html' with link=item.additionally %}
+                {% include 'digest/blocks/_item_video.html' with link=item.additionally %}
             {% else %}
-                {% include 'blocks/_video_item.html' with link=item.link %}
+                {% include 'digest/blocks/_item_video.html' with link=item.link %}
             {% endif %}
 
         </div>

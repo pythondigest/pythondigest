@@ -30,7 +30,7 @@ def conflict(request, target=None, template_name='409.html'):
 
 class IssuesList(CacheMixin, ListView):
     """Список выпусков."""
-    template_name = 'issues_list.html'
+    template_name = 'digest/pages/issues_list.html'
     queryset = Issue.objects.filter(status='active').order_by('-published_at')
     context_object_name = 'items'
     paginate_by = 12
@@ -45,7 +45,7 @@ class IssuesList(CacheMixin, ListView):
 
 class IssueView(CacheMixin, FeedItemsMixin, AdsMixin, DetailView):
     """Просмотр выпуска."""
-    template_name = 'issue.html'
+    template_name = 'digest/pages/issue.html'
     model = Issue
     cache_timeout = 300
 
@@ -65,7 +65,7 @@ class IssueView(CacheMixin, FeedItemsMixin, AdsMixin, DetailView):
 
 class ItemView(FavoriteItemsMixin, CacheMixin, DetailView):
     """Просмотр отдельной новости."""
-    template_name = 'news_item.html'
+    template_name = 'digest/pages/news_item.html'
     context_object_name = 'item'
     model = Item
     cache_timeout = 300
@@ -95,7 +95,7 @@ class ItemsByTagView(AdsMixin, FavoriteItemsMixin, CacheMixin, ListView):
 
 class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
     """Лента новостей."""
-    template_name = 'news_list.html'
+    template_name = 'digest/pages/news_list.html'
     context_object_name = 'items'
     paginate_by = 20
     paginator_class = DiggPaginator
@@ -135,7 +135,7 @@ class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
 
 
 class AddNews(FormView):
-    template_name = 'add_news.html'
+    template_name = 'digest/pages/add_news.html'
     form_class = AddNewsForm
 
     def get_success_url(self):

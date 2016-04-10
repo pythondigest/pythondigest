@@ -31,7 +31,7 @@
                 {% with object=issue %}
 
                     {% with object=object %}
-                        {% include 'blocks/_issue_anonce.html' %}
+                        {% include 'digest/blocks/_issue_anounce.html' %}
                     {% endwith %}
 
                 {% endwith %}
@@ -58,7 +58,7 @@
                                 {% for item in data.list %}
                                     <div class="item-container">
                                         {% with item=item %}
-                                            {% include "blocks/_item.html" %}
+                                            {% include "digest/blocks/_item.html" %}
                                         {% endwith %}
                                     </div>
                                 {% endfor %}

@@ -11,13 +11,13 @@
 
 {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
 {% with items=feed_items %}
-    {% include "blocks/_feed.html" %}
+    {% include "digest/blocks/_feed.html" %}
 {% endwith %}
 
 
 {% include "blocks/_friends.html" %}
 {% with items=favorite_items %}
-    {% include "blocks/_favorite_items.html" %}
+    {% include "digest/blocks/_favorite_items.html" %}
 {% endwith %}
 
 {% include "blocks/_adv.html" %}

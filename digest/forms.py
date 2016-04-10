@@ -1,12 +1,10 @@
 # -*- encoding: utf-8 -*-
 from ckeditor.widgets import CKEditorWidget, json_encode
-
+from django import forms
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
-
-from django import forms
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape
@@ -19,11 +17,10 @@ except ImportError:
     # Django <1.7
     from django.forms.util import flatatt
 
-
 from digest.models import Item
 
 ITEM_STATUS_CHOICES = (('queue', u'В очередь'),
-                       ('moderated', u'Отмодерировано'), )
+                       ('moderated', u'Отмодерировано'),)
 
 
 class GlavRedWidget(CKEditorWidget):
@@ -65,7 +62,6 @@ EMPTY_VALUES = (None, '')
 
 
 class HoneypotWidget(forms.TextInput):
-
     is_hidden = True
 
     def __init__(self, attrs=None, html_comment=False, *args, **kwargs):
@@ -86,11 +82,9 @@ class HoneypotWidget(forms.TextInput):
 
 
 class HoneypotField(forms.Field):
-
     widget = HoneypotWidget
 
     def clean(self, value):
-
         if self.initial in EMPTY_VALUES and value in EMPTY_VALUES or value == self.initial:
             return value
 
@@ -98,12 +92,11 @@ class HoneypotField(forms.Field):
 
 
 class AddNewsForm(forms.ModelForm):
-
     name = HoneypotField()
 
     class Meta:
         model = Item
-        fields = ('link', 'section', 'title', 'description')
+        fields = ('link', 'section', 'title', 'language', 'description',)
 
     def __init__(self, *args, **kwargs):
         kwargs['initial'] = {
@@ -112,18 +105,17 @@ class AddNewsForm(forms.ModelForm):
         super(AddNewsForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget.attrs = {
             'class': 'form-control small',
-            'style': 'width:40%'
         }
         self.fields['title'].required = False
         self.fields['link'].widget.attrs = {
             'class': 'form-control small',
-            'style': 'width:40%'
+        }
+        self.fields['language'].widget.attrs = {
+            'class': 'form-control',
         }
         self.fields['description'].widget.attrs = {
             'class': 'form-control',
-            'style': 'width:40%'
         }
         self.fields['section'].widget.attrs = {
             'class': 'form-control',
-            'style': 'width:40%'
         }
