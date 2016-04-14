@@ -94,8 +94,8 @@ class IssueAdmin(admin.ModelAdmin):
             async(
                 pub_to_all,
                 issue.announcement,
-                '{}{}'.format(site, issue.link),
-                '{}{}'.format(site, issue.image.url if issue.image else '')
+                '{0}{1}'.format(site, issue.link),
+                '{0}{1}'.format(site, issue.image.url if issue.image else '')
             )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"
@@ -123,14 +123,14 @@ class ParsingRulesAdmin(admin.ModelAdmin):
     search_fields = ('is_activated', 'name', 'if_value', 'then_value',)
 
     def _get_if_action(self, obj):
-        return u"{}: <i>{}</i>".format(obj.get_if_action_display(),
+        return u"{0}: <i>{1}</i>".format(obj.get_if_action_display(),
                                        obj.if_value)
 
     _get_if_action.allow_tags = True
     _get_if_action.short_description = u"Условие"
 
     def _get_then_action(self, obj):
-        return u"{}: <i>{}</i>".format(obj.get_then_action_display(),
+        return u"{0}: <i>{1}</i>".format(obj.get_then_action_display(),
                                        obj.then_value)
 
     _get_then_action.allow_tags = True

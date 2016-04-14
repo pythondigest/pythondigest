@@ -68,7 +68,7 @@ class Command(BaseCommand):
         test_set = items[train_size:]
 
         for part in range(options['cnt_parts']):
-            name = 'data_{}_{}.json'.format(train_part_size, part)
+            name = 'data_{0}_{1}.json'.format(train_part_size, part)
             queryset = train_set[part * train_part_size: (part + 1) * train_part_size]
             create_dataset(queryset, name)
 

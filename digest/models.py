@@ -256,7 +256,7 @@ class Item(models.Model):
                     raise Exception('Несколько выпусков на неделе')
 
         except Exception as e:
-            logger.error("Many issues are on one week: {}".format(e))
+            logger.error("Many issues are on one week: {0}".format(e))
         super(Item, self).save(*args, **kwargs)
 
     @property
@@ -301,7 +301,7 @@ class Item(models.Model):
                     requests.exceptions.Timeout,
                     requests.exceptions.TooManyRedirects) as e:
                 result = ''
-            self.article_path = os.path.join(settings.DATASET_ROOT, '{}.html'.format(self.id))
+            self.article_path = os.path.join(settings.DATASET_ROOT, '{0}.html'.format(self.id))
             with open(self.article_path, 'w') as fio:
                 fio.write(result)
             self.save()
@@ -362,7 +362,7 @@ class ItemClsCheck(models.Model):
         if force or self.last_check <= datetime.datetime.now() - datetime.timedelta(days=10):
 
             try:
-                url = "{}/{}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+                url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
                 resp = requests.post(url,
                                      data=json.dumps({'links': [
                                          self.item.data4cls
@@ -377,7 +377,7 @@ class ItemClsCheck(models.Model):
             self.save()
 
     def __str__(self):
-        return "{} - {} ({})".format(str(self.item), self.status, self.last_check)
+        return "{0} - {1} ({2})".format(str(self.item), self.status, self.last_check)
 
     class Meta:
         verbose_name = 'Проверка классификатором'

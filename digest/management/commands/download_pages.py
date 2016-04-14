@@ -11,7 +11,7 @@ from digest.models import Item
 
 
 def get_article(item):
-    path = os.path.join(settings.DATASET_ROOT, '{}.html'.format(item.id))
+    path = os.path.join(settings.DATASET_ROOT, '{0}.html'.format(item.id))
     with open(path, 'w') as fio:
         try:
             text = item.text
