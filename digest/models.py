@@ -24,7 +24,11 @@ from taggit.models import TagBase, GenericTaggedItemBase
 from taggit_autosuggest.managers import TaggableManager
 
 from frontend.models import Tip
+# import the logging library
+import logging
 
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'),)
 
 
@@ -252,7 +256,7 @@ class Item(models.Model):
                     raise Exception('Несколько выпусков на неделе')
 
         except Exception as e:
-            pass
+            logger.error("Many issues are on one week: {}".format(e))
         super(Item, self).save(*args, **kwargs)
 
     @property
@@ -267,7 +271,7 @@ class Item(models.Model):
         return item.status
 
     @property
-    def type(self):
+    def link_type(self):
         if self.section is not None and any(
                 [self.section.title == 'Интересные проекты, инструменты, библиотеки',
                  self.section.title == 'Релизы']):
@@ -311,7 +315,7 @@ class Item(models.Model):
                 'title': self.title,
                 'description': self.description,
                 'article': self.text,
-                'type': self.type,
+                'type': self.link_type,
             }
         }
         if status:

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+import logging
 import random
 import re
 
@@ -16,6 +17,7 @@ from social.backends.utils import load_backends
 from unidecode import unidecode as _unidecode
 from urlobject import URLObject
 
+logger = logging.getLogger(__name__)
 name_re = re.compile(r'([^O])Auth')
 LEVEL_TAGS = get_level_tags()
 
@@ -196,6 +198,6 @@ def associated(context, backend):
         try:
             context['association'] = user.social_auth.filter(
                 provider=backend.name)[0]
-        except IndexError:
-            pass
+        except IndexError as e:
+            logger.warning(e)
     return ''

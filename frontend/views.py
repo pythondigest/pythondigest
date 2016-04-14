@@ -3,7 +3,6 @@ import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 
@@ -11,6 +10,12 @@ from advertising.mixins import AdsMixin
 from digest.mixins import FeedItemsMixin, FavoriteItemsMixin
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
+
+# import the logging library
+import logging
+
+# Get an instance of a logger
+logger = logging.getLogger(__name__)
 
 
 class Sitemap(TemplateView):
@@ -55,8 +60,8 @@ class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
         try:
             issue = self.model.objects.filter(status='active').latest(
                 'published_at')
-        except Issue.DoesNotExist:
-            pass
+        except Issue.DoesNotExist as e:
+            logger.warning("Not found active Issue for index page: %s" % str(e))
 
         items = []
         if issue:
@@ -93,5 +98,3 @@ class ViewEditorMaterial(TemplateView):
                                      status='active')
 
         return {'material': material}
-
-

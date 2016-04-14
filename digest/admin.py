@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import logging
 from datetime import datetime, timedelta
 
 from django import forms
@@ -14,6 +15,7 @@ from digest.models import AutoImportResource, Issue, Item, Package, \
     ParsingRules, Resource, Section, get_start_end_of_week, ItemClsCheck
 from digest.pub_digest import pub_to_all
 
+logger = logging.getLogger(__name__)
 admin.site.unregister(Site)
 
 
@@ -22,11 +24,11 @@ def link_html(obj):
     return u'<a target="_blank" href="%s">%s</a>' % (link, link)
 
 
-def _save_item_model(request, obj, form, change):
+def _save_item_model(request, item: Item, form, change) -> None:
     prev_status = False
-    if not obj.pk:
-        obj.user = request.user
-        if not obj.issue:
+    if not item.pk:
+        item.user = request.user
+        if not item.issue:
             la = lna = False
             qs = Issue.objects
             try:
@@ -34,19 +36,19 @@ def _save_item_model(request, obj, form, change):
                 la = qs.filter(status='active').order_by('-pk')[0:1].get()
                 # последний неактивный
                 lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
-            except Issue.DoesNotExist:
-                pass
+            except Issue.DoesNotExist as e:
+                logger.warning("Not found last or recent issue")
 
             if la or lna:
-                obj.issue = lna or la
+                item.issue = lna or la
     else:
-        old_obj = Item.objects.get(pk=obj.pk)
+        old_obj = Item.objects.get(pk=item.pk)
         prev_status = old_obj.status
 
     # Обновление времени модификации при смене статуса на активный
     new_status = form.cleaned_data.get('status')
     if not prev_status == 'active' and new_status == 'active':
-        obj.modified_at = datetime.now()
+        item.modified_at = datetime.now()
 
 
 def _external_link(obj):
@@ -234,18 +236,6 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ('external_link_edit',)
-
-    # filter_horizontal = ('tags',)
-    list_filter = (
-        'status',
-        'issue',
-        'section',
-        'is_editors_choice',
-        'user',
-        'related_to_date',
-        'resource',
-    )
-    search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'status', 'external_link', 'cls_ok',
                     'activated_at')
 

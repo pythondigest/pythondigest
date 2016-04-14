@@ -2,7 +2,7 @@
 #
 import os
 
-from fabric.api import *
+from fabric.api import cd, run, prefix, sudo
 
 PROJECT_FOLDER = '/home/pythondigest/pythondigest.ru/'
 REPO_FOLDER = os.path.join(PROJECT_FOLDER, 'repo')
@@ -30,6 +30,7 @@ def update_libs():
 
 
 def restart():
+    # sudo('service nginx restart')
     sudo('service uwsgi restart')
 
 

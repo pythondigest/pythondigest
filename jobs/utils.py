@@ -1,15 +1,19 @@
 # -*- encoding: utf-8 -*-
-import pprint
+import logging
 from textwrap import wrap
 
 import requests
 from django.conf import settings
 from django.utils.dateparse import parse_datetime
+from typing import Dict
 
 from jobs.signals import sig_integration_failed
 
+logger = logging.getLogger(__name__)
+
 USER_AGENT = 'pydigest.ru/%s (pydigest@gmail.com)' % '.'.join(
     map(str, settings.VERSION))
+
 
 def format_currency(val):
     """Форматирует значение валюты, разбивая его кратно
@@ -19,7 +23,8 @@ def format_currency(val):
     """
     return ' '.join(wrap(str(int(val))[::-1], 3))[::-1]
 
-def get_from_url(url):
+
+def get_from_url(url: str):
     """Возвращает объект ответа requests с указанного URL.
     :param str url:
     :return:
@@ -31,7 +36,7 @@ def get_from_url(url):
     return requests.get(url, **r_kwargs)
 
 
-def get_json(url):
+def get_json(url: str) -> Dict:
     """Возвращает словарь, созданный из JSON документа, полученного
     с указанного URL.
     :param str url:
@@ -48,8 +53,8 @@ def get_json(url):
     else:
         try:
             result = response.json()
-        except ValueError:
-            pass
+        except ValueError as e:
+            logger.error("Not found JSON with ({}) vacancies: {}".format(url, e))
 
     return result
 

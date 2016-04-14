@@ -52,7 +52,7 @@ INSTALLED_APPS = (
 )
 
 if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar', )
+    INSTALLED_APPS += ('debug_toolbar',)
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -255,7 +255,7 @@ CKEDITOR_CONFIGS = {
             ['Undo', 'Redo',
              '-', 'Link', 'Unlink', 'HorizontalRule',
              '-', 'BulletedList', 'NumberedList', 'PasteText',
-             '-', 'Source', # 'glvrdPlugin',
+             '-', 'Source',  # 'glvrdPlugin',
              ]
         ],
         # 'extraPlugins': 'glvrdPlugin'
@@ -383,7 +383,8 @@ DEBUG_TOOLBAR_PATCH_SETTINGS = False
 HTML_MINIFY = True
 try:
     from .local_settings import *
-except ImportError:
+except ImportError as e:
+    print("Not found local settings: %s" % str(e))
     pass
 
 if not os.path.isdir(DATASET_ROOT):
