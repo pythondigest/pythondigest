@@ -1,0 +1,1494 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+<channel>
+	<title>Planet Python</title>
+	<link>http://planetpython.org/</link>
+	<language>en</language>
+	<description>Planet Python - http://planetpython.org/</description>
+
+<item>
+	<title>Glyph Lefkowitz</title>
+	<guid>https://glyph.twistedmatrix.com/2016/04/microblog-DB65707C-3811-4D50-B93A-CCC6BD685905.html</guid>
+	<link>https://glyph.twistedmatrix.com/2016/04/microblog-DB65707C-3811-4D50-B93A-CCC6BD685905.html</link>
+	<description>&lt;p&gt;I think I’m using GitHub wrong.&lt;/p&gt;
+&lt;p&gt;I use a hodgepodge of &lt;code&gt;https:&lt;/code&gt; and &lt;code&gt;:&lt;/code&gt; (i.e. “ssh”) URL schemes for my local
+clones; sometimes I have a remote called “github” and sometimes I have one
+called “origin”.  Sometimes I clone from a fork I made and sometimes I clone
+from the upstream.&lt;/p&gt;
+&lt;p&gt;I think the &lt;em&gt;right&lt;/em&gt; way to use GitHub would instead be to &lt;em&gt;always&lt;/em&gt; fork first,
+make my remote always be “origin”, and consistently name the upstream remote
+“upstream”.  The problem with this, though, is that forks rapidly fall out of
+date, and I often want to automatically synchronize all the upstream branches.&lt;/p&gt;
+&lt;p&gt;Is there a script or a github option or something to synchronize a fork with
+upstream automatically, including all its branches and tags?  I know there’s no
+comment field, but you can &lt;a href=&quot;mailto:glyph@twistedmatrix.com&quot;&gt;email me&lt;/a&gt; or reply
+on &lt;a href=&quot;https://twitter.com/glyph&quot;&gt;twitter&lt;/a&gt;.&lt;/p&gt;</description>
+	<pubDate>Wed, 13 Apr 2016 21:11:00 +0000</pubDate>
+</item>
+<item>
+	<title>PyCharm: PyCharm Migration Tutorial for Text Editors</title>
+	<guid>http://feedproxy.google.com/~r/Pycharm/~3/fxk_dwDsy9s/</guid>
+	<link>http://feedproxy.google.com/~r/Pycharm/~3/fxk_dwDsy9s/</link>
+	<description>&lt;p&gt;If you’re a Python developer who uses a text editor such as Vim, Emacs, or Sublime Text, you might wonder what it takes to switch to PyCharm as an IDE for your development. We’ve written a helpful &lt;a href=&quot;https://www.jetbrains.com/help/pycharm/2016.1/migrating-from-text-editors.html&quot;&gt;Migrating from Text Editors tutorial&lt;/a&gt; for just this topic.&lt;/p&gt;
+&lt;p&gt;The tutorial starts with the basic question of “What is an IDE?” The line between text editor and IDE can be blurry. PyCharm views the distinction as: a project-level view of your code and coding activities, with project-wide features such as coding assistance and refactoring.&lt;/p&gt;
+&lt;p&gt;This document then goes over some of the important points when migrating: the project-oriented UI, working with projects instead of files, Vim/Emacs specifics, keyboard shortcuts, customizing, and a discussion of facilities important to text editor users (multiple cursors, split windows, etc.) It then closes by discussing areas the IDE can really help, for example, the managed running and debugging of your code.&lt;/p&gt;
+&lt;p&gt;Of course, this document is just an overview. Vim and Emacs in particularly have decades of development and features, and PyCharm itself is now very mature with many features itself, so a complete comparison would break the Internet. If you have a specific question, feel free to comment, and we hope you find the tutorial helpful.&lt;/p&gt;
+&lt;img src=&quot;http://feeds.feedburner.com/~r/Pycharm/~4/fxk_dwDsy9s&quot; height=&quot;1&quot; width=&quot;1&quot; alt=&quot;&quot; /&gt;</description>
+	<pubDate>Wed, 13 Apr 2016 14:47:12 +0000</pubDate>
+</item>
+<item>
+	<title>Kushal Das: Quick way to get throw away VMs using Tunir</title>
+	<guid>https://kushaldas.in/posts/quick-way-to-get-throw-away-vms-using-tunir.html</guid>
+	<link>https://kushaldas.in/posts/quick-way-to-get-throw-away-vms-using-tunir.html</link>
+	<description>&lt;!--
+.. title: Quick way to get throw away VMs using Tunir
+.. slug: quick-way-to-get-throw-away-vms-using-tunir
+.. date: 2016-04-13T16:47:53+05:30
+.. tags: Fedora, Tunir, Cloud, Python
+.. link:
+.. description:
+.. type: text
+--&gt;
+
+&lt;p&gt;The latest Tunir package has a &lt;strong&gt;&amp;ndash;debug&lt;/strong&gt; option which can help us to get some quick vms up, where
+we can do some destructive work, and then just remove them. Below is an example to fire up two vms
+using Fedora Cloud base image using a &lt;em&gt;quickjob.cfg&lt;/em&gt; file.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[general]
+cpu = 1
+ram = 1024
+
+[vm1]
+user = fedora
+image = /home/Fedora-Cloud-Base-20141203-21.x86_64.qcow2
+
+[vm2]
+user = fedora
+image = /home/Fedora-Cloud-Base-20141203-21.x86_64.qcow2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In the &lt;em&gt;quickjob.txt&lt;/em&gt; file we just keep one command to check sanity :)&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vm1 free -m
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After we execute Tunir, we will something like below as output.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# tunir --multi quickjob
+... lots of output ...
+
+Non gating tests status:
+Total:0
+Passed:0
+Failed:0
+DEBUG MODE ON. Destroy from /tmp/tmpiNumV2/destroy.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above mention directory also has the temporary private key to login to the
+instances. The output also contains the IP addresses of the VM(s). We can login
+like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# ssh fedora@192.168.122.28 -i /tmp/tmpiNumV2/private.pem -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The last two parts of the ssh command will make sure that we do not store the
+signature for the throwaway guests in the known_hosts file. To clean up afterwards we
+can do the following.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# sh /tmp/tmpiNumV2/destroy.sh
+&lt;/code&gt;&lt;/pre&gt;</description>
+	<pubDate>Wed, 13 Apr 2016 11:17:00 +0000</pubDate>
+</item>
+<item>
+	<title>Vasudev Ram: A quick console ruler in Python</title>
+	<guid>http://jugad2.blogspot.com/2016/04/a-quick-console-ruler-in-python.html</guid>
+	<link>http://jugad2.blogspot.com/2016/04/a-quick-console-ruler-in-python.html</link>
+	<description>By &lt;a href=&quot;http://jugad2.blogspot.in/p/about-vasudev-ram.html&quot;&gt;Vasudev Ram&lt;/a&gt;&lt;br /&gt;&lt;a href=&quot;http://jugad2.blogspot.co.uk/feeds/posts/default/-/python&quot;&gt;&lt;/a&gt;&lt;br /&gt;I've done this ruler program a few times before, in various languages.&lt;br /&gt;&lt;br /&gt;Here is an earlier version: &lt;a href=&quot;http://jugad2.blogspot.in/2014/05/rule-command-line-with-rulerpy.html&quot;&gt;Rule the command-line with ruler.py!&lt;/a&gt;&lt;br /&gt;&lt;br /&gt;This one is a simplified and also slightly enhanced version of the one above.&lt;br /&gt;&lt;br /&gt;It generates a simple text-based ruler on the console.&lt;br /&gt;&lt;br /&gt;Can be useful for data processing tasks related to fixed-length or variable-length records, CSV files, etc.&lt;br /&gt;&lt;br /&gt;With REPS set to 8, it works just right for a console of 80 columns.&lt;br /&gt;&lt;br /&gt;Here is the code:&lt;br /&gt;&lt;pre&gt;# ruler.py&lt;br /&gt;&quot;&quot;&quot;&lt;br /&gt;Program to display a ruler on the console.&lt;br /&gt;Author: Vasudev Ram&lt;br /&gt;Copyright 2016 Vasudev Ram - http://jugad2.blogspot.com&lt;br /&gt;0123456789, concatenated.&lt;br /&gt;Purpose: By running this program, you can use its output as a ruler,&lt;br /&gt;to find the position of your own program's output on the line, or to &lt;br /&gt;find the positions and lengths of fields in fixed- or variable-length &lt;br /&gt;records in a text file, fields in CSV files, etc.&lt;br /&gt;&quot;&quot;&quot;&lt;br /&gt;&lt;br /&gt;REPS = 8&lt;br /&gt;&lt;br /&gt;def ruler(sep=' ', reps=REPS):&lt;br /&gt;    for i in range(reps):&lt;br /&gt;        print str(i) + ' ' * 4 + sep + ' ' * 3,&lt;br /&gt;    print '0123456789' * reps&lt;br /&gt;&lt;br /&gt;def main():&lt;br /&gt;&lt;br /&gt;    # Without divider.&lt;br /&gt;    ruler()&lt;br /&gt;&lt;br /&gt;    # With various dividers.&lt;br /&gt;    for sep in '|+!':&lt;br /&gt;        ruler(sep)&lt;br /&gt;&lt;br /&gt;if __name__ == '__main__':&lt;br /&gt;    main()&lt;br /&gt;&lt;/pre&gt;And the output:&lt;br /&gt;&lt;pre&gt;$ python ruler.py&lt;br /&gt;0         1         2         3         4         5         6         7         &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;0    |    1    |    2    |    3    |    4    |    5    |    6    |    7    |    &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;0    +    1    +    2    +    3    +    4    +    5    +    6    +    7    +    &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;0    !    1    !    2    !    3    !    4    !    5    !    6    !    7    !    &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;&lt;/pre&gt;You can also import it as a module in your own program:&lt;br /&gt;&lt;pre&gt;# test_ruler.py&lt;br /&gt;from ruler import ruler&lt;br /&gt;ruler()&lt;br /&gt;# Code that outputs the data you want to measure &lt;br /&gt;# lengths or positions of, goes here ...&lt;br /&gt;print 'NAME      AGE  CITY'&lt;br /&gt;ruler()&lt;br /&gt;# ... or here.&lt;br /&gt;print 'SOME ONE   20  LON '&lt;br /&gt;print 'ANOTHER    30  NYC '&lt;br /&gt;&lt;/pre&gt;&lt;pre&gt;$ python test_ruler.py&lt;br /&gt;Output:&lt;br /&gt;0         1         2         3         4         5         6         7         &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;NAME      AGE  CITY&lt;br /&gt;0         1         2         3         4         5         6         7         &lt;br /&gt;01234567890123456789012345678901234567890123456789012345678901234567890123456789&lt;br /&gt;SOME ONE   20  LON &lt;br /&gt;ANOTHER    30  NYC &lt;br /&gt;&lt;/pre&gt;&lt;br /&gt;- Enjoy.&lt;br /&gt;&lt;br /&gt;- &lt;a href=&quot;http://jugad2.blogspot.in/p/about-vasudev-ram.html&quot;&gt;Vasudev Ram - Online Python training and consulting&lt;/a&gt; &lt;p&gt;&lt;/p&gt;&lt;b&gt;&lt;a href=&quot;mailto:vasudevram@gmail.com?subject=Email%20me%20about%20your%20new%20products%20and%20services&quot;&gt;Signup to hear about my new products and services.&lt;/a&gt;&lt;/b&gt; &lt;p&gt;&lt;/p&gt;&lt;a href=&quot;http://jugad2.blogspot.com/search/label/python&quot;&gt;My Python posts&lt;/a&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;https://feedburner.google.com/fb/a/mailverify?uri=Jugad2-VasudevRamOnSoftwareInnovation&amp;loc=en_US&quot;&gt;Subscribe to my blog by email&lt;/a&gt; &lt;p&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;a href=&quot;https://code.activestate.com/recipes/users/4173351/&quot;&gt;My ActiveState recipes&lt;/a&gt; &lt;p&gt;&lt;/p&gt;&lt;!-- AddThis Button BEGIN --&gt; &lt;div class=&quot;addthis_toolbox addthis_default_style&quot;&gt;&lt;a href=&quot;http://www.addthis.com/bookmark.php?v=250&amp;username=vasudevram&quot; class=&quot;addthis_button_compact&quot;&gt;Share&lt;/a&gt; &lt;span class=&quot;addthis_separator&quot;&gt;|&lt;/span&gt; &lt;a class=&quot;addthis_button_preferred_1&quot;&gt;&lt;/a&gt; &lt;a class=&quot;addthis_button_preferred_2&quot;&gt;&lt;/a&gt; &lt;a class=&quot;addthis_button_preferred_3&quot;&gt;&lt;/a&gt; &lt;a class=&quot;addthis_button_preferred_4&quot;&gt;&lt;/a&gt; &lt;/div&gt; &lt;p&gt;&lt;/p&gt; &lt;!-- AddThis Button END --&gt;&lt;br /&gt;&lt;div class=&quot;blogger-post-footer&quot;&gt;&lt;a href=&quot;http://www.dancingbison.com&quot;&gt;Vasudev Ram&lt;/a&gt;
+&lt;br /&gt;&lt;/div&gt;</description>
+	<pubDate>Wed, 13 Apr 2016 03:35:42 +0000</pubDate>
+</item>
+<item>
+	<title>Python Does What?!: Base64 vs UTF-8</title>
+	<guid>http://www.pythondoeswhat.com/2016/04/base64-vs-utf-8.html</guid>
+	<link>http://www.pythondoeswhat.com/2016/04/base64-vs-utf-8.html</link>
+	<description>A common pattern when dealing with JSON data is to base64 encode binary strings. &amp;nbsp;This is not strictly necessary, JSON strings can contain binary data (via UTF-8 escape sequences).&lt;br /&gt;&lt;br /&gt;What is the size relationship for high-entropy (e.g. compressed) binary data?&lt;br /&gt;&lt;br /&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; every_byte = ''.join([chr(i) for i in range(256)])&lt;/span&gt;&lt;br /&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; import json&lt;/span&gt;&lt;br /&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; import base64&lt;/span&gt;&lt;br /&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; len(json.dumps(every_byte.decode('utf-8', 'replace')))&lt;/span&gt;&lt;br /&gt;&lt;span&gt;1045&lt;/span&gt;&lt;br /&gt;&lt;span&gt;&amp;gt;&amp;gt;&amp;gt; len(json.dumps(base64.b64encode(every_byte)))&lt;/span&gt;&lt;br /&gt;&lt;span&gt;346&lt;/span&gt;</description>
+	<pubDate>Tue, 12 Apr 2016 15:17:33 +0000</pubDate>
+</item>
+<item>
+	<title>Continuum Analytics News: Using Anaconda with PySpark for Distributed Language Processing on a Hadoop Cluster</title>
+	<guid>https://www.continuum.io/blog/developer-blog/using-anaconda-pyspark-distributed-language-processing-hadoop-cluster</guid>
+	<link>https://www.continuum.io/blog/developer-blog/using-anaconda-pyspark-distributed-language-processing-hadoop-cluster</link>
+	<description>&lt;h2 class=&quot;article__category&quot;&gt;
+    &lt;a href=&quot;https://www.continuum.io/article-categories/developer-blog&quot;&gt;Developer Blog&lt;/a&gt;  &lt;/h2&gt;
+&lt;div class=&quot;article__posted&quot;&gt;
+      &lt;span class=&quot;article__posted-label&quot;&gt;Posted&lt;/span&gt; &lt;span class=&quot;article__posted-date&quot;&gt;&lt;span class=&quot;date-display-single&quot;&gt;Tuesday, April 12, 2016&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;div class=&quot;article__authors&quot;&gt;
+      &lt;div class=&quot;article__author&quot;&gt;&lt;div class=&quot;profile-teaser&quot;&gt;
+
+  &lt;div class=&quot;profile__photo&quot;&gt;
+      &lt;a href=&quot;https://www.continuum.io/content/kristopher-overholt&quot;&gt;&lt;img src=&quot;https://www.continuum.io/sites/default/files/styles/profile/public/Kristopher_Overholt.jpg?itok=DRUi9zPB&quot; width=&quot;180&quot; height=&quot;180&quot; alt=&quot;Kristopher Overholt&quot; title=&quot;Kristopher Overholt&quot; /&gt;&lt;/a&gt;  &lt;/div&gt;
+
+  &lt;div class=&quot;profile-teaser__details&quot;&gt;
+    &lt;h3 class=&quot;profile-teaser__name&quot;&gt;
+      &lt;a class=&quot;profile-teaser__name-link&quot; href=&quot;https://www.continuum.io/content/kristopher-overholt&quot;&gt;Kristopher Overholt&lt;/a&gt;
+    &lt;/h3&gt;
+          &lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+      &lt;div class=&quot;article__author&quot;&gt;&lt;div class=&quot;profile-teaser&quot;&gt;
+
+  &lt;div class=&quot;profile__photo&quot;&gt;
+      &lt;a href=&quot;https://www.continuum.io/content/daniel-rodriguez&quot;&gt;&lt;img src=&quot;https://www.continuum.io/sites/default/files/styles/profile/public/daniel_rodriguez.jpg?itok=uFKoF8Er&quot; width=&quot;180&quot; height=&quot;180&quot; alt=&quot;Daniel Rodriguez&quot; title=&quot;Daniel Rodriguez&quot; /&gt;&lt;/a&gt;  &lt;/div&gt;
+
+  &lt;div class=&quot;profile-teaser__details&quot;&gt;
+    &lt;h3 class=&quot;profile-teaser__name&quot;&gt;
+      &lt;a class=&quot;profile-teaser__name-link&quot; href=&quot;https://www.continuum.io/content/daniel-rodriguez&quot;&gt;Daniel Rodriguez&lt;/a&gt;
+    &lt;/h3&gt;
+          &lt;/div&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+  &lt;/div&gt;
+&lt;div class=&quot;article__body&quot;&gt;
+      &lt;h3 dir=&quot;ltr&quot;&gt;Overview&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Working with your favorite Python packages along with distributed PySpark jobs across a Hadoop cluster can be difficult due to tedious manual setup and configuration issues, which is a problem that becomes more painful as the number of nodes in your cluster increases.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;a href=&quot;https://www.continuum.io/blog/developer-blog/getting-most-out-anaconda-your-cluster&quot;&gt;Anaconda makes it easy to manage packages&lt;/a&gt; (including Python, R and Scala) and their dependencies on an existing Hadoop cluster with PySpark, including data processing, machine learning, image processing and natural language processing. &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt; &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-466&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/1-pyspark-reddit-languagepng-0&quot;&gt;1-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;561&quot; width=&quot;1000&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/1-pyspark-reddit-language_0.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt; &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In a previous post, we’ve demonstrated how you can use libraries in Anaconda to &lt;a href=&quot;https://www.continuum.io/blog/developer-blog/querying-17-billion-reddit-comments-anaconda-platform&quot;&gt;query and visualize 1.7 billion comments on a Hadoop cluster&lt;/a&gt;.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In this post, we’ll use Anaconda to perform distributed natural language processing with PySpark using a subset of the same data set. We’ll configure different enterprise Hadoop distributions, including Cloudera CDH and Hortonworks HDP,  to work interactively on your Hadoop cluster with PySpark, Anaconda and a Jupyter Notebook.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt; &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-467&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/2-pyspark-reddit-languagepng-0&quot;&gt;2-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;477&quot; width=&quot;1000&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/2-pyspark-reddit-language_0.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In the remainder of this post, we'll:&lt;/p&gt;
+&lt;ol&gt;&lt;li dir=&quot;ltr&quot;&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Install Anaconda and the Jupyter Notebook on an existing Hadoop cluster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li dir=&quot;ltr&quot;&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Load the text/language data into HDFS on the cluster.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li dir=&quot;ltr&quot;&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Configure PySpark to work with Anaconda and the Jupyter Notebook with different enterprise Hadoop distributions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li dir=&quot;ltr&quot;&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Perform distributed natural language processing on the data with the NLTK library from Anaconda.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li dir=&quot;ltr&quot;&gt;
+&lt;p&gt;Work locally with a subset of the data using Pandas and Bokeh for data analysis and interactive visualization.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;&lt;p&gt;&lt;/p&gt;
+&lt;h3&gt;Provisioning Anaconda on a cluster&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Because we’re installing Anaconda on an existing Hadoop cluster, we can follow the &lt;a href=&quot;https://docs.continuum.io/anaconda-cluster/create-bare&quot;&gt;bare-metal cluster setup instructions&lt;/a&gt; in Anaconda for cluster management from a Windows, Mac, or Linux machine. We can install and configure &lt;code&gt;conda&lt;/code&gt; on each node of the existing Hadoop cluster with a single command:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster create cluster-hadoop --profile cluster-hadoop&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;After a few minutes, we’ll have a centrally managed installation of &lt;code&gt;conda&lt;/code&gt; across our Hadoop cluster in the default location of &lt;code&gt;/opt/anaconda&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Installing Anaconda packages on the cluster&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Once we’ve provisioned &lt;code&gt;conda&lt;/code&gt; on the cluster, we can install the packages from Anaconda that we’ll need for this example to perform language processing, data analysis and visualization:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster conda install nltk pandas bokeh&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We’ll need to download the NLTK data on each node of the cluster. For convenience, we can do this using the distributed shell functionality in Anaconda for cluster management:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster cmd 'sudo /opt/anaconda/bin/python -m nltk.downloader -d /usr/share/nltk_data all'&lt;/code&gt;&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Loading the data into HDFS&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In this post, we'll use a subset of the data set that contains comments from the &lt;a href=&quot;https://www.reddit.com/&quot;&gt;reddit website&lt;/a&gt; from January 2015 to August 2015, which is about 242 GB on disk. This data set was made available on July 2015 in a &lt;a href=&quot;https://www.reddit.com/r/datasets/comments/3bxlg7/i_have_every_publicly_available_reddit_comment/&quot;&gt;reddit post&lt;/a&gt;. The data set is in JSON format (one comment per line) and consists of the comment body, author, subreddit, timestamp of creation and other fields.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Note that we could convert the data into different formats or load it into various query engines; however, since the focus of this blog post is using libraries with Anaconda, we will be working with the raw JSON data in PySpark.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We’ll load the reddit comment data into HDFS from the head node. You can SSH into the head node by running the following command from the client machine:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster ssh&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;The remaining commands in this section will be executed on the head node. If it doesn’t already exist, we’ll need to create a user directory in HDFS and assign the appropriate permissions:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ sudo -u hdfs hadoop fs -mkdir /user/ubuntu&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ sudo -u hdfs hadoop fs -chown ubuntu /user/ubuntu&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We can then move the data by running the following command with valid AWS credentials, which will transfer the reddit comment data from the year 2015 (242 GB of JSON data) from a public Amazon S3 bucket into HDFS on the cluster:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ hadoop distcp &lt;/code&gt;&lt;code&gt;s3n://AWS_KEY:AWS_SECRET@blaze-data/reddit/json/2015/*.json /user/ubuntu/&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Replace &lt;code&gt;AWS_KEY&lt;/code&gt; and &lt;code&gt;AWS_SECRET&lt;/code&gt; in the above command with valid Amazon AWS credentials.&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Configuring the spark-submit command with your Hadoop Cluster&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;To use Python from Anaconda along with PySpark, you can set the &lt;code&gt;PYSPARK_PYTHON&lt;/code&gt; environment variable on a per-job basis along with the &lt;code&gt;spark-submit&lt;/code&gt; command. If you’re using the &lt;a href=&quot;https://www.continuum.io/blog/developer-blog/making-python-hadoop-easier-anaconda-and-cloudera&quot;&gt;Anaconda parcel for CDH&lt;/a&gt;, you can run a PySpark script (e.g., &lt;code&gt;spark-job.py&lt;/code&gt;) using the following command:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ PYSPARK_PYTHON=/opt/cloudera/parcels/Anaconda/bin/python spark-submit spark-job.py&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’re using Anaconda for cluster management with Cloudera CDH or Hortonworks HDP, you can run the PySpark script using the following command (note the different path to Python):&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ PYSPARK_PYTHON=/opt/anaconda/bin/python spark-submit spark-job.py&lt;/code&gt;&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Installing and Configuring the Notebook with your Hadoop Cluster&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Using the &lt;code&gt;spark-submit&lt;/code&gt; command is a quick and easy way to verify that our PySpark script works in batch mode. However, it can be tedious to work with our analysis in a non-interactive manner as Java and Python logs scroll by.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-462&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/4-pyspark-reddit-languagepng&quot;&gt;4-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;1080&quot; width=&quot;1445&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/4-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Instead, we can use the Jupyter Notebook on our Hadoop cluster to work interactively with our data via Anaconda and PySpark.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-463&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/3-pyspark-reddit-languagepng&quot;&gt;3-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;1080&quot; width=&quot;1716&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/3-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Using Anaconda for cluster management, we can install Jupyter Notebook on the head node of the cluster with a single command, then open the notebook interface in our local web browser:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster install notebook&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ acluster open notebook&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Once we’ve opened a new notebook, we’ll need to configure some environment variables for PySpark to work with Anaconda. The following sections include details on how to configure the environment variables for Anaconda to work with PySpark on Cloudera CDH and Hortonworks HDP.&lt;/p&gt;
+&lt;h4 dir=&quot;ltr&quot;&gt;Using the Anaconda Parcel with Cloudera CDH&lt;/h4&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’re using the Anaconda parcel with Cloudera CDH, you can configure the following settings at the beginning of your Jupyter notebook. These settings were tested with Cloudera CDH 5.7 running Spark 1.6.0 and the Anaconda 4.0 parcel.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import os&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sys&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;JAVA_HOME&quot;] = &quot;/usr/lib/jvm/java-7-oracle-cloudera/jre&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;SPARK_HOME&quot;] = &quot;/opt/cloudera/parcels/CDH/lib/spark&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYLIB&quot;] = os.environ[&quot;SPARK_HOME&quot;] + &quot;/python/lib&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYSPARK_PYTHON&quot;] = &quot;/opt/cloudera/parcels/Anaconda&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/py4j-0.9-src.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/pyspark.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;h4 dir=&quot;ltr&quot;&gt;Using Anaconda for cluster management with Cloudera CDH&lt;/h4&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’re using Anaconda for cluster management with Cloudera CDH, you can configure the following settings at the beginning of your Jupyter notebook. These settings were tested with Cloudera CDH 5.7 running Spark 1.6.0 and Anaconda for cluster management 1.4.0.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import os&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sys&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;JAVA_HOME&quot;] = &quot;/usr/lib/jvm/java-7-oracle-cloudera/jre&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;SPARK_HOME&quot;] = &quot;/opt/anaconda/parcels/CDH/lib/spark&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYLIB&quot;] = os.environ[&quot;SPARK_HOME&quot;] + &quot;/python/lib&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYSPARK_PYTHON&quot;] = &quot;/opt/anaconda/bin/python&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/py4j-0.9-src.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/pyspark.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;h4 dir=&quot;ltr&quot;&gt;Using Anaconda for cluster management with Hortonworks HDP&lt;/h4&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’re using Anaconda for cluster management with Hortonworks HDP, you can configure the following settings at the beginning of your Jupyter notebook. These settings were tested with Hortonworks HDP running Spark 1.6.0 and Anaconda for cluster management 1.4.0.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import os&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import sys&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;SPARK_HOME&quot;] = &quot;/usr/hdp/current/spark-client&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYLIB&quot;] = os.environ[&quot;SPARK_HOME&quot;] + &quot;/python/lib&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; os.environ[&quot;PYSPARK_PYTHON&quot;] = &quot;/opt/anaconda/bin/python&quot;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/py4j-0.9-src.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sys.path.insert(0, os.environ[&quot;PYLIB&quot;] +&quot;/pyspark.zip&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Initializing the SparkContext&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;After we’ve configured Anaconda to work with PySpark on our Hadoop cluster, we can initialize a SparkContext that we’ll use for distributed computations. In this example, we’ll be using the YARN resource manager in client mode:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; from pyspark import SparkConf&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; from pyspark import SparkContext&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; conf = SparkConf()&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; conf.setMaster('yarn-client')&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; conf.setAppName('anaconda-pyspark-language')&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; sc = SparkContext(conf=conf)&lt;/code&gt;&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Loading the data into memory&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Now that we’ve created a SparkContext, we can load the JSON reddit comment data into a Resilient Distributed Dataset (RDD) from PySpark:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; lines = sc.textFile(&quot;/user/ubuntu/*.json&quot;)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Next, we decode the JSON data and decide that we want to filter comments from the movies subreddit:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import json&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; data = lines.map(json.loads)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies = data.filter(lambda x: x['subreddit'] == 'movies')&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We can then persist the RDD in distributed memory across the cluster so that future computations and queries will be computed quickly from memory. Note that this operation only marks the RDD to be persisted; the data will be persisted in memory after the first computation is triggered:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies.persist()&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We can count the total number of comments in the &lt;code&gt;movies&lt;/code&gt; subreddit (about 2.9 million comments):&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies.count()&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;2905085&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We can inspect the first comment in the dataset, which shows fields for the author, comment body, creation time, subreddit, etc.:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies.take(1)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;CPU times: user 8 ms, sys: 0 ns, total: 8 msWall time: 113 ms&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;[{u'archived': False,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'author': u'kylionsfan',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'author_flair_css_class': None,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'author_flair_text': None,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'body': u'Goonies',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'controversiality': 0,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'created_utc': u'1420070402',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'distinguished': None,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'downs': 0,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'edited': False,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'gilded': 0,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'id': u'cnas90u',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'link_id': u't3_2qyjda',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'name': u't1_cnas90u',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'parent_id': u't3_2qyjda',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'retrieved_on': 1425124282,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'score': 1,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'score_hidden': False,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'subreddit': u'movies',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'subreddit_id': u't5_2qh3s',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt; u'ups': 1}]&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Distributed Natural Language Processing&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Now that we’ve filtered a subset of the data and loaded it into memory across the cluster, we can perform distributed natural language computations using Anaconda with PySpark.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;First, we define a &lt;code&gt;parse()&lt;/code&gt; function that imports the natural language toolkit (NLTK) from Anaconda and tags words in each comment with their corresponding part of speech. Then, we can map the &lt;code&gt;parse()&lt;/code&gt; function to the &lt;code&gt;movies&lt;/code&gt; RDD:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def parse(record):&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    import nltk&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    tokens = nltk.word_tokenize(record[&quot;body&quot;])&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    record[&quot;n_words&quot;] = len(tokens)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    record[&quot;pos&quot;] = nltk.pos_tag(tokens)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    return record&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt; &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies2 = movies.map(parse)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Let’s take a look at the body of one of the comments:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies2.take(10)[6]['body']&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;u'Dawn of the Apes was such an incredible movie, it should be up there in my opinion.'&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;And the same comment with tagged parts of speech (e.g., nouns, verbs, prepositions):&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; movies2.take(10)[6]['pos']&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;[(u'Dawn', 'NN'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'of', 'IN'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'the', 'DT'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'Apes', 'NNP'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'was', 'VBD'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'such', 'JJ'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'an', 'DT'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'incredible', 'JJ'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'movie', 'NN'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u',', ','),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'it', 'PRP'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'should', 'MD'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'be', 'VB'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'up', 'RP'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'there', 'RB'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'in', 'IN'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'my', 'PRP$'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'opinion', 'NN'),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;(u'.', '.')]&lt;/code&gt;&lt;code&gt;&lt;code&gt; &lt;/code&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;We can define a &lt;code&gt;get_NN()&lt;/code&gt; function that extracts nouns from the records, filters stopwords, and removes non-words from the data set:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; def get_NN(record):&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    import re&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    from nltk.corpus import stopwords&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    all_pos = record[&quot;pos&quot;]&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    ret = []&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    for pos in all_pos:&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...        if pos[1] == &quot;NN&quot; \&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...        and pos[0] not in stopwords.words('english') \&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...        and re.search(&quot;^[0-9a-zA-Z]+$&quot;, pos[0]) is not None:&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...            ret.append(pos[0])&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...    return ret&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; nouns = movies2.flatMap(get_NN)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt; We can then generate word counts for the nouns that we extracted from the dataset:&lt;br /&gt;&lt;/p&gt;&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; counts = nouns.map(lambda word: (word, 1))&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;After we’ve done the heavy lifting, processing, filtering and cleaning on the text data using Anaconda and PySpark, we can collect the reduced word count results onto the head node.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; top_nouns = counts.countByKey()&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; top_nouns = dict(top_nouns)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In the next section, we’ll continue our analysis on the head node of the cluster while working with familiar libraries in Anaconda, all in the same interactive Jupyter notebook.&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Local analysis with Pandas and Bokeh&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Now that we’ve done the heavy lifting using Anaconda and PySpark across the cluster, we can work with the results as a dataframe in Pandas, where we can query and inspect the data as usual:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; import pandas as pd&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; df = pd.DataFrame(top_nouns.items(), columns=['Noun', 'Count'])&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Let’s sort the resulting word counts, and view the top 10 nouns by frequency:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; df = df.sort_values('Count', ascending=False)&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; df_top_10 = df.head(10)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; df_top_10&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Noun&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Count&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;movie&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;539698&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;film&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;220366&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;time&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;157595&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;way&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;112752&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;gt&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;105313&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;http&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;92619&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;something&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;87835&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;lot&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;85573&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;scene&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;82229&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;thing&lt;/p&gt;
+&lt;/td&gt;
+&lt;td&gt;
+&lt;p dir=&quot;ltr&quot;&gt;82101&lt;/p&gt;
+&lt;/td&gt;
+&lt;/tr&gt;&lt;/table&gt;&lt;p dir=&quot;ltr&quot;&gt;Let’s generate a bar chart of the top 10 nouns using Pandas:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; %matplotlib inline&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; df_top_10.plot(kind='bar', x=df_top_10['Noun'])&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-464&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/5-pyspark-reddit-languagepng&quot;&gt;5-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;314&quot; width=&quot;391&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/5-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;Finally, we can use Bokeh to generate an interactive plot of the data:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; from bokeh.charts import Bar, show&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; from bokeh.io import output_notebook&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; from bokeh.charts.attributes import cat&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; output_notebook()&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; p = Bar(df_top_10,&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...         label=cat(columns='Noun', sort=False),&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...         values='Count',&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;...         title='Top N nouns in r/movies subreddit')&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&amp;gt;&amp;gt;&amp;gt; show(p)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-465&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/6-pyspark-reddit-languagepng&quot;&gt;6-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img height=&quot;1080&quot; width=&quot;992&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/6-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt; &lt;/h3&gt;
+&lt;h3 dir=&quot;ltr&quot;&gt;Conclusion&lt;/h3&gt;
+&lt;p dir=&quot;ltr&quot;&gt;In this post, we used Anaconda with PySpark to perform distributed natural language processing and computations on data stored in HDFS. We configured Anaconda and the Jupyter Notebook to work with PySpark on various enterprise Hadoop distributions (including Cloudera CDH and Hortonworks HDP), which allowed us to work interactively with Anaconda and the Hadoop cluster. This made it convenient to work with Anaconda for the distributed processing with PySpark, while reducing the data to a size that we could work with on a single machine, all in the same interactive notebook environment. The complete notebook for this example with Anaconda, PySpark, and NLTK can be viewed on &lt;a href=&quot;https://anaconda.org/anaconda-cluster/notebook-pyspark-language/notebook&quot;&gt;Anaconda Cloud&lt;/a&gt;.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;You can get started with &lt;a href=&quot;https://docs.continuum.io/anaconda-cluster/installation&quot;&gt;Anaconda for cluster management&lt;/a&gt; for free on up to 4 cloud-based or bare-metal cluster nodes by logging in with your Anaconda Cloud account:&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ conda install anaconda-client&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ anaconda login&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;code&gt;$ conda install anaconda-cluster -c anaconda-cluster&lt;/code&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’d like to test-drive the &lt;a href=&quot;https://www.continuum.io/anaconda-subscriptions&quot;&gt;on-premises, enterprise features of Anaconda&lt;/a&gt; with additional nodes on a bare-metal, on-premises, or cloud-based cluster, get in touch with us at &lt;a href=&quot;mailto:sales@continuum.io&quot;&gt;sales@continuum.io&lt;/a&gt;. The enterprise features of Anaconda, including the cluster management functionality and on-premises repository, are certified for use with Cloudera CDH 5.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;If you’re running into memory errors, performance issues (related to JVM overhead or Python/Java serialization), problems translating your existing Python code to PySpark, or other limitations with PySpark, stay tuned for a future post about a parallel processing framework in pure Python that works with libraries in Anaconda and your existing Hadoop cluster, including HDFS and YARN.&lt;/p&gt;
+  &lt;/div&gt;</description>
+	<pubDate>Tue, 12 Apr 2016 14:30:43 +0000</pubDate>
+</item>
+<item>
+	<title>PyCon: Registration is open for our Young Coders tutorial!</title>
+	<guid>http://pycon.blogspot.com/2016/04/registration-is-open-for-our-young.html</guid>
+	<link>http://pycon.blogspot.com/2016/04/registration-is-open-for-our-young.html</link>
+	<description>&lt;p&gt;PyCon is excited to once again offer a free full-day tutorial for kids! We invite &lt;b&gt;children 12 and up&lt;/b&gt;to join us for a day of learning how to program using Python. The class is running twice, on each of the two final sprint days:&lt;/p&gt; &lt;ul&gt;&lt;li&gt;&lt;em&gt;Option 1.&lt;/em&gt; Saturday, June 4, 2016 from 9:00 AM to 4:30 PM.&lt;/li&gt;&lt;li&gt;&lt;em&gt;Option 2.&lt;/em&gt; Sunday, June 5, 2016 from 9:00 AM to 4:30 PM.&lt;/li&gt;&lt;/ul&gt; &lt;p&gt;The sign-up page is here:&lt;/p&gt; &lt;p&gt;&lt;a href=&quot;https://www.eventbrite.com/e/pycon-2016-young-coders-tickets-24319019843&quot;&gt;https://www.eventbrite.com/e/pycon-2016-young-coders-tickets-24319019843&lt;/a&gt;&lt;/p&gt; &lt;p&gt;The Young Coders tutorial was first offered at PyCon 2013 in Santa Clara. It was an immediate hit, and has been an important part of every PyCon since — including a French edition for the two years that PyCon was held in Montréal! Whether you and your family are local to Portland, or you are traveling to PyCon and bringing your family along, this class is a great way expose kids to programming.&lt;/p&gt; &lt;p&gt;The Young Coders workshop explores Python programming by making games. It starts with learning Python's simple data types, including numbers, letters, strings, and lists. Next come comparisons, ‘if’ statements, and loops. Finally, all of the new knowledge is combined by creating a game using the PyGame library.&lt;/p&gt; &lt;p&gt;Registration is limited — sign up soon if you know kids who will be interested!&lt;/p&gt;</description>
+	<pubDate>Tue, 12 Apr 2016 10:31:20 +0000</pubDate>
+</item>
+<item>
+	<title>Python Anywhere: System upgrade, 2016-04-12: Python 3.5</title>
+	<guid>http://blog.pythonanywhere.com/131/</guid>
+	<link>http://blog.pythonanywhere.com/131/</link>
+	<description>&lt;p&gt;We upgraded PythonAnywhere today.  The big story for this release is that we now support Python 3.5.1 everywhere :-)   We've put it through extensive testing, but of course it's possible that glitches remain -- please do let us know in the forums or by email if you find any.&lt;/p&gt;
+&lt;p&gt;There were a few other minor changes -- basically, a bunch of system package installs and upgrades:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mysqlclient for Python 3.x (so now Django should work out of the box with Python 3)&lt;/li&gt;
+&lt;li&gt;pyodbc and its lower-level dependencies, so you should be able to connect to Microsoft SQL Servers elsewhere on the Internet.&lt;/li&gt;
+&lt;li&gt;pdftk&lt;/li&gt;
+&lt;li&gt;basemap for Python 3.x.&lt;/li&gt;
+&lt;li&gt;pint&lt;/li&gt;
+&lt;li&gt;uncertainties&lt;/li&gt;
+&lt;li&gt;flask-openid&lt;/li&gt;
+&lt;li&gt;And finally, we've upgraded Twilio so that it works properly from free accounts.&lt;/li&gt;
+&lt;/ul&gt;</description>
+	<pubDate>Tue, 12 Apr 2016 07:30:59 +0000</pubDate>
+</item>
+<item>
+	<title>Montreal Python User Group: MTL NewTech Startup Demos &amp;amp; Networking + PyCon Contest</title>
+	<guid>http://montrealpython.org/2016/04/mtl-newtech-startup-demos-pycon/</guid>
+	<link>http://montrealpython.org/2016/04/mtl-newtech-startup-demos-pycon/</link>
+	<description>&lt;p&gt;PyCon is partnering  again with MTL NewTech and Montréal-Python this year to bring one lucky Montreal startup to PyCon at Portland, Oregon, to present alongside with Google, Facebook, Stripe, Heroku, Microsoft, Mozilla and many other technology companies.&lt;/p&gt;
+&lt;p&gt;If you are a startup that meets the requirements below, apply now by filling this form: &lt;a href=&quot;http://goo.gl/forms/zf9jO8n8vR&quot;&gt;http://goo.gl/forms/zf9jO8n8vR&lt;/a&gt;
+With the following information: a) size of the team, b) age of the startup c) your use of Python. &lt;/p&gt;
+&lt;p&gt;Deadline for applications: April 19nd 23h59. 
+Announcement of the startups selected: Starting on April 21th. 
+MTL NewTech Demo &amp;amp; announcement of the winner: April 26th &lt;strong&gt;Feel free to invite fellow startups&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;For more details about PyCon and the startup row in general, please head to the PyCon website at &lt;a href=&quot;https://us.pycon.org/2016/events/startup_row/&quot;&gt;https://us.pycon.org/2016/events/startup_row/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;==============&lt;br /&gt;
+Eligible companies must meet the following criteria:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Fewer than 15 employees, including founders&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Less than two years old&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use Python somewhere in your startup: backend, front-end, testing, wherever&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If selected, please confirm that you will staff your booth in the Expo Hall on your appointed day. We will try accommodate your 
+preferences: Monday or Tuesday&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No repeats. If you were on startup row in a previous year, please give another a startup a chance this year.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;==============&lt;br /&gt;&lt;/p&gt;</description>
+	<pubDate>Tue, 12 Apr 2016 04:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Continuum Analytics News: Data Science with Python at ODSC East</title>
+	<guid>https://www.continuum.io/blog/company-blog/data-science-python-odsc-east</guid>
+	<link>https://www.continuum.io/blog/company-blog/data-science-python-odsc-east</link>
+	<description>&lt;h2 class=&quot;article__category&quot;&gt;
+    &lt;a href=&quot;https://www.continuum.io/article-categories/company-blog&quot;&gt;Company Blog&lt;/a&gt;  &lt;/h2&gt;
+&lt;div class=&quot;article__posted&quot;&gt;
+      &lt;span class=&quot;article__posted-label&quot;&gt;Posted&lt;/span&gt; &lt;span class=&quot;article__posted-date&quot;&gt;&lt;span class=&quot;date-display-single&quot;&gt;Tuesday, April 12, 2016&lt;/span&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;div class=&quot;article__body&quot;&gt;
+      &lt;p&gt;&lt;strong&gt;By: Sheamus McGovern, Open Data Science Conference Chair&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-468&quot; class=&quot;file file-image file-image-png&quot;&gt;
+
+        &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/hxo7gazzpng&quot;&gt;HxO7gaZZ.png&lt;/a&gt;&lt;/h2&gt;
+    
+  
+  &lt;div class=&quot;content&quot;&gt;
+    &lt;img class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/HxO7gaZZ.png&quot; width=&quot;512&quot; height=&quot;512&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
+
+  
+&lt;/div&gt;
+&lt;/div&gt;At &lt;a href=&quot;http://www.odsc.com/boston/&quot; target=&quot;_blank&quot;&gt;ODSC East&lt;/a&gt;, the most influential minds and institutions in data science will convene at the Boston Convention &amp;amp; Exhibition Center from May 20th to the 22nd to discuss and teach the newest and most exciting developments in data science.&lt;/p&gt;
+&lt;p&gt;As you know, the Python ecosystem is now one of the most important data science development environments available today. This is due, in large part, to the existence of a rich suite of user-facing data analysis libraries.&lt;/p&gt;
+&lt;p&gt;Powerful Python machine learning libraries like &lt;a href=&quot;http://scikit-learn.org/stable/&quot; target=&quot;_blank&quot;&gt;Scikit-learn&lt;/a&gt;, &lt;a href=&quot;http://github.com/dmlc/xgboost&quot; target=&quot;_blank&quot;&gt;XGBoost&lt;/a&gt; and others bring sophisticated predictive analytics to the masses. The &lt;a href=&quot;http://www.nltk.org/&quot; target=&quot;_blank&quot;&gt;NLTK&lt;/a&gt; and &lt;a href=&quot;http://radimrehurek.com/gensim/&quot; target=&quot;_blank&quot;&gt;Gensim&lt;/a&gt; libraries enable deep analysis of textual information in Python and the &lt;a href=&quot;http://topik.readthedocs.org/en/latest/&quot; target=&quot;_blank&quot;&gt;Topik&lt;/a&gt; library provides a high-level interface to these and other, natural language libraries, adding a new layer of usability. The &lt;a href=&quot;http://pandas.pydata.org/&quot; target=&quot;_blank&quot;&gt;Pandas&lt;/a&gt; library has brought data analysis in Python to a new level by providing expressive data structures for quick and intuitive data manipulation and analysis.&lt;/p&gt;
+&lt;p&gt;The notebook ecosystem in Python has also flourished with the development of the &lt;a href=&quot;http://jupyter.org/&quot; target=&quot;_blank&quot;&gt;Jupyter&lt;/a&gt;, &lt;a href=&quot;http://blog.yhat.com/posts/rodeo-native.html&quot; target=&quot;_blank&quot;&gt;Rodeo&lt;/a&gt; and &lt;a href=&quot;http://beakernotebook.com/&quot; target=&quot;_blank&quot;&gt;Beaker&lt;/a&gt; notebooks. The notebook interface is an increasingly popular way for data scientists to perform complex analyses that serve the purpose of conveying and sharing analyses and their results to colleagues and to stakeholders. Python is also host to a number of rich web-development frameworks that are used not only for building data science dash boards, but also for full-scale data science powered web-apps. &lt;a href=&quot;http://flask.pocoo.org/&quot; target=&quot;_blank&quot;&gt;Flask&lt;/a&gt; and &lt;a href=&quot;http://www.djangoproject.com/&quot; target=&quot;_blank&quot;&gt;Django&lt;/a&gt; lead the way in terms of the Python web-app development landscape, but &lt;a href=&quot;http://bottlepy.org/docs/dev/index.html&quot; target=&quot;_blank&quot;&gt;Bottle&lt;/a&gt; and &lt;a href=&quot;http://www.pylonsproject.org/&quot; target=&quot;_blank&quot;&gt;Pyramid&lt;/a&gt; are also quite popular.&lt;/p&gt;
+&lt;p&gt;With &lt;a href=&quot;http://cython.org/&quot; target=&quot;_blank&quot;&gt;Cython&lt;/a&gt;, code can approach speeds akin to that of C or C++ and new developments, like the &lt;a href=&quot;http://dask.pydata.org/en/latest/&quot; target=&quot;_blank&quot;&gt;Dask&lt;/a&gt; package, to make computing on larger-than-memory datasets very easy. Visualization libraries, like &lt;a href=&quot;http://plot.ly/&quot; target=&quot;_blank&quot;&gt;Plot.ly&lt;/a&gt; and &lt;a href=&quot;http://bokeh.pydata.org/en/latest/docs/user_guide.html&quot; target=&quot;_blank&quot;&gt;Bokeh&lt;/a&gt;, have brought rich, interactive and impactful data visualization tools to the fingertips of data analysts everywhere.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.continuum.io/why-anaconda&quot; target=&quot;_blank&quot;&gt;Anaconda&lt;/a&gt; has streamlined the use of many of these wildly popular open source data science packages by providing an easy way to install, manage and use Python libraries. With Anaconda, users no longer need to worry about tedious incompatibilities and library management across their development environments.&lt;/p&gt;
+&lt;p&gt;Several of the most influential Python developers and data scientists will be talking and teaching at &lt;a href=&quot;http://www.odsc.com/boston/&quot; target=&quot;_blank&quot;&gt;ODSC East&lt;/a&gt;. Indeed, Peter Wang will be speaking ODSC East. Peter is the co-founder and CTO at Continuum Analytics, as well as the mastermind behind the popular Bokeh visualization library, the Blaze ecosystem, which simplifies the the analysis of Big Data with Python and Anaconda. At ODSC East, there will be over 100 speakers, 20 workshops and 10 training sessions spanning seven conferences that focused on Open Data Science, Disruptive Data Science, Big Data science, Data Visualization, Data Science for Good, Open Data and a Careers and Training conference. See below for very small sampling of some of the &lt;a href=&quot;http://www.odsc.com/boston/detailed-speaker-page/&quot; target=&quot;_blank&quot;&gt;powerful Python workshops and speakers&lt;/a&gt; we will have at ODSC East.&lt;/p&gt;
+&lt;p&gt;●Bayesian Statistics Made Simple - Allen Downey, Think Python&lt;/p&gt;
+&lt;p&gt;●Intro to Scikit learn for Machine Learning - Andreas Mueller, NYU Center for Data Science&lt;/p&gt;
+&lt;p&gt;●Parallelizing Data Science in Python with Dask - Matthew Rocklin, Continuum Analytics&lt;/p&gt;
+&lt;p&gt;●Interactive Viz of a Billion Points with Bokeh Datashader – Peter Wang, Continuum Analytics&lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+&lt;p&gt; &lt;/p&gt;
+  &lt;/div&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 21:07:05 +0000</pubDate>
+</item>
+<item>
+	<title>Mike Driscoll: Pre-Order Python 201 Paperback</title>
+	<guid>http://www.blog.pythonlibrary.org/2016/04/11/pre-order-python-201-paperback/</guid>
+	<link>http://www.blog.pythonlibrary.org/2016/04/11/pre-order-python-201-paperback/</link>
+	<description>&lt;div class=&quot;pf-content&quot;&gt;&lt;p&gt;I have decided to offer a pre-order of the paperback version of my next book. You will be able to pre-order a signed copy of the book which will ship in &lt;strong&gt;September, 2016&lt;/strong&gt;. I am limiting the number of pre-orders to 100. If you&amp;#8217;re interested in getting the book, you can do so &lt;a href=&quot;https://gumroad.com/l/NclYB&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://www.blog.pythonlibrary.org/wp-content/uploads/2016/03/Python201_cover20160330_sm-791x1024.jpg&quot; alt=&quot;Python 201 Cover&quot; width=&quot;604&quot; height=&quot;782&quot; class=&quot;aligncenter size-large wp-image-5436&quot; /&gt;&lt;/p&gt;
+&lt;/div&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 18:34:28 +0000</pubDate>
+</item>
+<item>
+	<title>Python Engineering at Microsoft: How to deal with the pain of “unable to find vcvarsall.bat”</title>
+	<guid>https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/</guid>
+	<link>https://blogs.msdn.microsoft.com/pythonengineering/2016/04/11/unable-to-find-vcvarsall-bat/</link>
+	<description>&lt;p&gt;Python&amp;#8217;s packaging ecosystem is one of its biggest strengths, but Windows users are often frustrated by packages that do not install properly. One of the most common errors you&amp;#8217;ll see is this one:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://msdnshared.blob.core.windows.net/media/2016/03/vcvarsall.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-474&quot; src=&quot;https://msdnshared.blob.core.windows.net/media/2016/03/vcvarsall.png&quot; alt=&quot;Console window showing the 'Unable to find vcvarsall.bat' error.&quot; width=&quot;621&quot; height=&quot;334&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;As far as errors go, &amp;#8220;unable to find vcvarsall.bat&amp;#8221; is not the most helpful. What is this mythical batch file? Why do I need it? Where can I get it? How do I help Python find it? When will we be freed from this pain? Let&amp;#8217;s look at some answers to these questions.&lt;/p&gt;
+&lt;h1&gt;What is vcvarsall.bat, and why do I need it?&lt;/h1&gt;
+&lt;p&gt;To explain why we need this tool, we need to look at a common pattern in Python packages. One of the benefits of installing a separate package is the ability to do something that you couldn&amp;#8217;t normally do &amp;#8211; in many cases, this is something that would be completely impossible otherwise. Like image processing with &lt;a href=&quot;https://pypi.python.org/pypi/Pillow&quot;&gt;Pillow&lt;/a&gt;, high-performance machine learning with &lt;a href=&quot;https://pypi.python.org/pypi/scikit-learn&quot;&gt;scikit-learn&lt;/a&gt;, or micro-threading with &lt;a href=&quot;https://pypi.python.org/pypi/greenlet&quot;&gt;greenlet&lt;/a&gt;. But how can these packages do things that aren&amp;#8217;t possible in regular Python?&lt;/p&gt;
+&lt;p&gt;The answer is that they include &lt;em&gt;extension modules&lt;/em&gt;, sometimes called &lt;em&gt;native modules&lt;/em&gt;. Unlike Python modules, these are not &lt;tt&gt;.py&lt;/tt&gt; files containing Python source code &amp;#8211; they are &lt;tt&gt;.pyd&lt;/tt&gt; files that contain native, platform-specific code, typically written in C. In many cases the extension module is an internal detail; all the classes and functions you&amp;#8217;re actually using have been written in Python, but the tricky parts or the high-performance parts are in the extension module.&lt;/p&gt;
+&lt;p&gt;When you see &amp;#8220;unable to find vcvarsall.bat&amp;#8221;, it means you&amp;#8217;re installing a package that has an extension module, but only the source code. &amp;#8220;vcvarsall.bat&amp;#8221; is part of the compiler in &lt;a href=&quot;http://www.visualstudio.com/&quot;&gt;Visual Studio&lt;/a&gt; that is necessary to compile the module.&lt;/p&gt;
+&lt;p&gt;As a Windows user, you&amp;#8217;re probably used to downloading programs that are ready to run. This is largely due to the very impressive compatibility that Windows provides &amp;#8211; you can take a program that was compiled twenty years ago and run it on versions of Windows that nobody had imagined at that time. However, Python comes from a very different world where every single machine can be different and incompatible. This makes it impossible to precompile programs and only distribute the build outputs, because many users will not be able to use it. So the culture is one where only source code is distributed, and every machine is set up with a compiler and the tools necessary to build extension modules on install. Because Windows has a different culture, most people do not have (or need) a compiler.&lt;/p&gt;
+&lt;p&gt;The good news is that the culture is changing. For Windows platforms, a package developer can upload &lt;a href=&quot;https://packaging.python.org/en/latest/glossary/#term-wheel&quot;&gt;&lt;em&gt;wheels&lt;/em&gt;&lt;/a&gt; of their packages as well as the source code. Extension modules included in wheels have already been compiled, so you do not need a compiler on the machine you are installing onto.&lt;/p&gt;
+&lt;p&gt;When you use &lt;a href=&quot;https://packaging.python.org/en/latest/projects/#pip&quot;&gt;pip&lt;/a&gt; to install your package, if a wheel is available for your version of Python, it will be downloaded and extracted. For example, running &lt;tt&gt;pip install numpy&lt;/tt&gt; will download their wheel on Python 3.5, 3.4 and 2.7 &amp;#8211; no compilers needed!&lt;/p&gt;
+&lt;h1&gt;I need a package that has no wheel &amp;#8211; what can I do?&lt;/h1&gt;
+&lt;p&gt;Firstly, this is become a more and more rare occurrence. The &lt;a href=&quot;http://pythonwheels.com/&quot;&gt;pythonwheels.com&lt;/a&gt; site tracks the most popular 360 packages, showing which ones have made wheels available (nearly 60% when this blog post was written). But from time to time you will encounter a package who&amp;#8217;s developer has not produced wheels.&lt;/p&gt;
+&lt;p&gt;The first thing you should do is &lt;strong&gt;report an issue&lt;/strong&gt; on the project&amp;#8217;s issue tracker, requesting (politely) that they include wheels with their releases. If the project supports Windows at all, they ought to be testing on Windows, which means they have already handled the compiler setup. (And if a project is not testing on Windows, and you care a lot about that project, maybe you should to volunteer to help them out? Most projects do not have paid staff, and volunteers are always appreciated.)&lt;/p&gt;
+&lt;p&gt;If a project is not willing or able to produce wheels themselves, you can look elsewhere. For many people, using a distribution such as &lt;a href=&quot;https://www.continuum.io/&quot;&gt;Anaconda&lt;/a&gt; or &lt;a href=&quot;https://python-xy.github.io/&quot;&gt;Python(x,y)&lt;/a&gt; is an easy way to get access to a lot of packages.&lt;/p&gt;
+&lt;p&gt;However, if you just need to get one package, it&amp;#8217;s worth seeing if it is available on Christoph Gohlke&amp;#8217;s &lt;a href=&quot;http://www.lfd.uci.edu/~gohlke/pythonlibs/&quot;&gt;Python Extension Packages for Windows&lt;/a&gt; page. On this page there are unofficial wheels (that is, the original projects do not necessarily endorse them) for hundreds of packages. You can download any of them and then use &lt;tt&gt;pip install (full path to the .whl file)&lt;/tt&gt; to install it.&lt;/p&gt;
+&lt;p&gt;If none of these options is available, you will need to consider building the extension yourself. In many cases this is not difficult, though it does require setting up a build environment. (These instructions are adapted from &lt;a href=&quot;https://packaging.python.org/en/latest/extensions/#building-binary-extensions&quot;&gt;Build Environment&lt;/a&gt;.)&lt;/p&gt;
+&lt;p&gt;First you&amp;#8217;ll need to install the compiler toolset. Depending on which version of Python you care about, you will need to choose a different download, but all of them are freely available. The table below lists the downloads for versions of Python as far back as 2.6.&lt;/p&gt;
+&lt;table class=&quot;table-dark&quot;&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;th&gt;Python Version&lt;/th&gt;
+&lt;th&gt;You will need&lt;/th&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3.5 and later&lt;/th&gt;
+&lt;td&gt;&lt;a href=&quot;http://go.microsoft.com/fwlink/?LinkId=691126&quot;&gt;Visual C++ Build Tools 2015&lt;/a&gt; or &lt;a href=&quot;https://visualstudio.com/&quot;&gt;Visual Studio 2015&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;3.3 and 3.4&lt;/th&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.microsoft.com/download/details.aspx?id=8279&quot;&gt;Windows SDK for Windows 7 and .NET 4.0&lt;/a&gt;&lt;br /&gt;
+(Alternatively, Visual Studio 2010 if you have access to it)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;th&gt;2.6 to 3.2&lt;/th&gt;
+&lt;td&gt;&lt;a href=&quot;https://www.microsoft.com/download/details.aspx?id=44266&quot;&gt;Microsoft Visual C++ Compiler for Python 2.7&lt;/a&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;After installing the compiler tools, you should ensure that your version of &lt;a href=&quot;https://pypi.python.org/pypi/setuptools&quot;&gt;setuptools&lt;/a&gt; is up-to-date.&lt;/p&gt;
+&lt;p&gt;For Python 3.5 and later, installing Visual Studio 2015 is sufficient and you can now try to &lt;tt&gt;pip install&lt;/tt&gt; the package again. Python 3.5 resolves a significant compatibility issue on Windows that will make it possible to upgrade the compilers used for extensions, so when a new version of Visual Studio is released, you will be able to use that instead of the current one.&lt;/p&gt;
+&lt;p&gt;For Python 2.6 through 3.2, you also don&amp;#8217;t need to do anything else. The compiler package (though labelled for &amp;#8220;Python 2.7&amp;#8243;, it works for all of these versions) is detected by &lt;tt&gt;setuptools&lt;/tt&gt;, and so &lt;tt&gt;pip install&lt;/tt&gt; will use it when needed.&lt;/p&gt;
+&lt;p&gt;However, if you are targeting Python 3.3 and 3.4 (and did &lt;em&gt;not&lt;/em&gt; have access to Visual Studio 2010), building is slightly more complicated. You will need to open a Visual Studio Command Prompt (selecting the x64 version if using 64-bit Python) and run &lt;tt&gt;set DISTUTILS_USE_SDK=1&lt;/tt&gt; before calling &lt;tt&gt;pip install&lt;/tt&gt;.&lt;/p&gt;
+&lt;p&gt;If you have to install these packages on a lot of machines, I&amp;#8217;d strongly suggest installing the &lt;a href=&quot;https://pypi.python.org/pypi/wheel&quot;&gt;wheel&lt;/a&gt; package first and using &lt;tt&gt;pip wheel (package name)&lt;/tt&gt; to create your own wheels. Then you can install those on other machines without having to install the compilers.&lt;/p&gt;
+&lt;p&gt;And while this sounds simple, there is a downside. Many, many packages that need a compiler also need other dependencies. For example, the &lt;tt&gt;lxml&lt;/tt&gt; example we started with also requires copies of &lt;tt&gt;libxml2&lt;/tt&gt; and &lt;tt&gt;libxslt&lt;/tt&gt; &amp;#8211; more libraries that you will need to find, download, install, build, test and verify. Just because you have a compiler installed does not mean the pain ends.&lt;/p&gt;
+&lt;h1&gt;When will the pain end?&lt;/h1&gt;
+&lt;p&gt;The issues surrounding Python packaging are some of the most complex in our industry right now. Versioning is difficult, dependency resolution is difficult, ABI compatibility is difficult, secure hosting is difficult, and software trust is difficult. But just because these problems are difficult does not mean that they are impossible to solve, that we cannot have a viable ecosystem despite them, or that people are not actively working on better solutions.&lt;/p&gt;
+&lt;p&gt;For example, wheels are a great distribution solution for Windows and Mac OS X, but not so great on Linux due to the range of differences between installs. However, there are people actively working on making it possible to publicly distribute wheels that will work with &lt;em&gt;most&lt;/em&gt; versions of Linux, such that soon all platforms will benefit from faster installation and no longer require a compiler for extension modules.&lt;/p&gt;
+&lt;p&gt;Most of the work solving these issues for Python goes on at the &lt;a href=&quot;https://mail.python.org/mailman/listinfo/distutils-sig&quot;&gt;distutils-sig&lt;/a&gt; mailing list, and you can read the current recommendations at &lt;a href=&quot;https://packaging.python.org/&quot;&gt;packaging.python.org&lt;/a&gt;. We are all volunteers, and so over time the discussion moves from topic to topic as people develop an interest and have time available to work on various problems. More contributors are always welcome.&lt;/p&gt;
+&lt;p&gt;But even if you don&amp;#8217;t want to solve the really big problems, there are ways you can help. Report an issue to package maintainers who do not yet have wheels. If they don&amp;#8217;t currently support Windows, offer to help them with testing, building, and documentation. Consider donating to projects that accept donations &amp;#8211; these are often used to fund the software and hardware (or online services such as &lt;a href=&quot;http://python-packaging-user-guide.readthedocs.org/en/latest/appveyor/&quot;&gt;Appveyor&lt;/a&gt;) needed to support other platforms.&lt;/p&gt;
+&lt;p&gt;And always thank project maintainers who actively support Windows, Mac OS X and Linux. It is not an easy task to build, test, debug and maintain code that runs on such a diverse set of platforms. Those who take on the burden deserve our encouragement.&lt;/p&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 17:00:03 +0000</pubDate>
+</item>
+<item>
+	<title>PyCharm: In-Depth Screencast on Testing</title>
+	<guid>http://feedproxy.google.com/~r/Pycharm/~3/zjRuc-C6z1U/</guid>
+	<link>http://feedproxy.google.com/~r/Pycharm/~3/zjRuc-C6z1U/</link>
+	<description>&lt;p&gt;Earlier this year &lt;a href=&quot;https://blog.jetbrains.com/pycharm/2016/01/introducing-getting-started-with-pycharm-video-tutorials/&quot;&gt;we rolled out&lt;/a&gt; a Getting Started Series of &lt;a href=&quot;https://www.youtube.com/playlist?list=PLQ176FUIyIUZ1mwB-uImQE-gmkwzjNLjP&quot;&gt;screencast videos&lt;/a&gt; on the basics of using PyCharm: setup, the UI, running Python code, debugging, etc. We knew at the time that some topics would need more treatment than a quick screencast, so we planned a follow-on series of “in-depth” screencasts, each on a single topic.&lt;/p&gt;
+&lt;p&gt;Here’s the first: &lt;a href=&quot;https://www.youtube.com/watch?v=nmBbR97Vsv8&quot;&gt;In-Depth: Testing&lt;/a&gt; covers more topics than we went over in the &lt;a href=&quot;https://www.youtube.com/watch?v=-VzJvNLooj4&amp;index=8&amp;list=PLQ176FUIyIUZ1mwB-uImQE-gmkwzjNLjP&quot;&gt;Getting Started: Testing&lt;/a&gt; screencast. Which makes sense, as PyCharm itself has such a wealth of support in each of its features:&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;Here are the topics in this just-over-four-minute video:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://pytest.org/latest/&quot;&gt;pytest&lt;/a&gt;, because, you know&amp;#8230;it’s pytest! PyCharm has &lt;a href=&quot;https://www.jetbrains.com/help/pycharm/2016.1/run-debug-configuration-py-test.html?origin=old_help&quot;&gt;run configuration support&lt;/a&gt; native to pytest, so we introduce that.&lt;/li&gt;
+&lt;li&gt;Multi-Python-version testing with &lt;a href=&quot;https://testrun.org/tox/latest/&quot;&gt;tox&lt;/a&gt;, especially since PyCharm recently added &lt;a href=&quot;https://www.jetbrains.com/help/pycharm/2016.1/tox-support.html&quot;&gt;native support&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Testing with &lt;a href=&quot;https://pymotw.com/2/doctest/&quot;&gt;doctests&lt;/a&gt;, using (again) a &lt;a href=&quot;https://www.jetbrains.com/help/pycharm/2016.1/run-debug-configuration-doctest.html&quot;&gt;native run configuration&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Did I mention PyCharm has a lot of native run configurations for testing? Ditto for BDD, so we cover &lt;a href=&quot;https://www.jetbrains.com/help/pycharm/2016.1/bdd-testing-framework.html&quot;&gt;test configurations&lt;/a&gt; for the &lt;a href=&quot;http://pythonhosted.org/behave/&quot;&gt;behave&lt;/a&gt; package.&lt;/li&gt;
+&lt;li&gt;Skipping tests and re-running a test configuration&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We hope you enjoy this first in the series of In-Depth screencasts. We have more planned, such as version control. And please, if you have any topics that you’d like to see get expanded screencast attention, let us know.&lt;/p&gt;
+&lt;img src=&quot;http://feeds.feedburner.com/~r/Pycharm/~4/zjRuc-C6z1U&quot; height=&quot;1&quot; width=&quot;1&quot; alt=&quot;&quot; /&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 15:00:07 +0000</pubDate>
+</item>
+<item>
+	<title>Doug Hellmann: bz2 — bzip2 Compression — PyMOTW 3</title>
+	<guid>http://feeds.doughellmann.com/~r/doughellmann/python/~3/7BaSSgWzCHM/</guid>
+	<link>http://feeds.doughellmann.com/~r/doughellmann/python/~3/7BaSSgWzCHM/</link>
+	<description>The bz2 module is an interface for the bzip2 library, used to compress data for storage or transmission. Read more&amp;#8230; This post is part of the Python Module of the Week series for Python 3. See PyMOTW.com for more articles from the series.&lt;div class=&quot;feedflare&quot;&gt;
+&lt;a href=&quot;http://feeds.doughellmann.com/~ff/doughellmann/python?a=7BaSSgWzCHM:X9ibfYwajSA:yIl2AUoC8zA&quot;&gt;&lt;img src=&quot;http://feeds.feedburner.com/~ff/doughellmann/python?d=yIl2AUoC8zA&quot; border=&quot;0&quot; /&gt;&lt;/a&gt; &lt;a href=&quot;http://feeds.doughellmann.com/~ff/doughellmann/python?a=7BaSSgWzCHM:X9ibfYwajSA:7Q72WNTAKBA&quot;&gt;&lt;img src=&quot;http://feeds.feedburner.com/~ff/doughellmann/python?d=7Q72WNTAKBA&quot; border=&quot;0&quot; /&gt;&lt;/a&gt; &lt;a href=&quot;http://feeds.doughellmann.com/~ff/doughellmann/python?a=7BaSSgWzCHM:X9ibfYwajSA:V_sGLiPBpWU&quot;&gt;&lt;img src=&quot;http://feeds.feedburner.com/~ff/doughellmann/python?i=7BaSSgWzCHM:X9ibfYwajSA:V_sGLiPBpWU&quot; border=&quot;0&quot; /&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;img src=&quot;http://feeds.feedburner.com/~r/doughellmann/python/~4/7BaSSgWzCHM&quot; height=&quot;1&quot; width=&quot;1&quot; alt=&quot;&quot; /&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 13:00:55 +0000</pubDate>
+</item>
+<item>
+	<title>Mike Driscoll: PyDev of the Week: John Cook</title>
+	<guid>http://www.blog.pythonlibrary.org/2016/04/11/pydev-of-the-week-john-cook/</guid>
+	<link>http://www.blog.pythonlibrary.org/2016/04/11/pydev-of-the-week-john-cook/</link>
+	<description>&lt;div class=&quot;pf-content&quot;&gt;&lt;p&gt;This week we welcome John Cook as our PyDev of the Week! John has a fun &lt;a href=&quot;http://www.johndcook.com/blog/&quot; target=&quot;_blank&quot;&gt;Python blog&lt;/a&gt; that I read from to time and he graciously accepted my offer of interviewing him this week. Let&amp;#8217;s take a few moments to get to know him better.&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;b&gt;Can you tell us a little about yourself (hobbies, education, etc):&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;I&amp;#8217;m a &lt;a href=&quot;http://www.johndcook.com/blog/services-2/&quot; target=&quot;_blank&quot;&gt;consultant&lt;/a&gt; working in the overlap of math, data analysis, and software development. Most projects I do have two of these elements if not all three. I had a variety of jobs before starting my own company, and most of them involved some combination of math and software development.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;im&quot;&gt; &lt;/span&gt;&lt;span id=&quot;more-5295&quot;&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;b&gt;Why did you start using Python?&lt;/b&gt;&lt;/p&gt;
+&lt;div&gt;&lt;em&gt;Several people suggested I try Python. I&amp;#8217;d take a look at it and think &amp;#8220;This doesn&amp;#8217;t look so special. I don&amp;#8217;t see what other people see in it.&amp;#8221;  A few months would go by, then someone else would suggest I try Python, and I&amp;#8217;d have the same reaction.&lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt; &lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt;The thing that broke the cycle was a comment in an article by Bruce Eckel. He said something like &amp;#8220;I teach Java but I can&amp;#8217;t remember how to open a file in Java. But I can remember how to do it in Python.&amp;#8221;  I realized then that when I&amp;#8217;d looked at Python and thought it was kinda dull, that&amp;#8217;s a good thing! Python doesn&amp;#8217;t have flashy syntax. It&amp;#8217;s kinda plain, in a good way.&lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt; &lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt;I noticed later that while fans of other languages might want to show off some clever piece of code, you don&amp;#8217;t see that much in the Python community. Instead you see people showing off what they were able to build with Python.&lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt; &lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt;Even though I now mostly use Python for scientific computing, I didn&amp;#8217;t know about Python&amp;#8217;s scientific libraries when I started using it. I only used Python for the kinds of things I&amp;#8217;d previously done in Perl, things like text munging. I was amazed when I found out later that so much mathematical code was available for Python.&lt;/em&gt;&lt;/div&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;span class=&quot;im&quot;&gt; &lt;/span&gt;&lt;br /&gt;
+&lt;b&gt;What other programming languages do you know and which is your favorite?&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I&amp;#8217;ve written a lot of C++. When Python isn&amp;#8217;t fast enough, I turn to C++, though I don&amp;#8217;t do that often. In the last few years I&amp;#8217;ve used R, C#, and Haskell on different projects.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I really like the consistency and predictability of Mathematica, though I haven&amp;#8217;t used it in a while. I now use Python for the kinds of work I used to do in Mathematica. Even though some things are easier to do Mathematica, it&amp;#8217;s worth some extra effort to keep from having to switch contexts and use two languages and environments. And of course Mathematica is expensive. Even if I decide the price of a Mathematica license is worth it for my own use, I can&amp;#8217;t ask clients to buy Mathematica licenses.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;im&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;b&gt;What projects are you working on now?&lt;/b&gt;&lt;/p&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;em&gt;I just started working on a big project involving signal processing and acoustics.&lt;/em&gt;&lt;/div&gt;
+&lt;p&gt;&lt;span class=&quot;im&quot;&gt; &lt;/span&gt;&lt;/p&gt;
+&lt;p dir=&quot;ltr&quot;&gt;&lt;b&gt;Which Python libraries are your favorite (core or 3rd party)?&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I use SciPy daily. It&amp;#8217;s my favorite in the sense that I depend on it and I&amp;#8217;m grateful for the tremendous effort that has gone into it. I can&amp;#8217;t say it&amp;#8217;s my favorite in terms of API design; I wish it were more consistent and predictable.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;I wish I knew pandas and SymPy better. I use them occasionally, but not often enough to keep their syntax in my head.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Conda is a sort of meta library rather than a library per se, but I really appreciate conda. It&amp;#8217;s made it so much easier to install packages. I go back and forth between Windows and Linux, and it&amp;#8217;s so nice to be able to count on the same libraries in both environments. Before some packages would install smoothly on one OS but not the other.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&quot;im&quot;&gt;&lt;b&gt;Where do you see Python going as a programming language? &lt;/b&gt;&lt;/span&gt;&lt;em&gt;&lt;span&gt;&lt;b&gt;&lt;br /&gt;
+&lt;/b&gt;&lt;/span&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;div&gt;&lt;em&gt;&lt;span&gt;I don&amp;#8217;t know much about where the core Python language is going, but it&amp;#8217;s clear where the scientific computing stack on Python is going. The component libraries have come from independent projects, but a lot of work is going into integrating them into a coherent stack. I wrote a short blog post on this &lt;a href=&quot;http://www.johndcook.com/blog/2015/07/16/scientific-computing-in-python/&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;.&lt;/span&gt;&lt;/em&gt;&lt;/div&gt;
+&lt;div&gt;&lt;/div&gt;
+&lt;div&gt;&lt;strong&gt;Thanks so much!&lt;/strong&gt;&lt;/div&gt;
+&lt;/div&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 12:30:21 +0000</pubDate>
+</item>
+<item>
+	<title>Caktus Consulting Group: Adopting Scrum in a Client-services, Multi-project Organization</title>
+	<guid>https://www.caktusgroup.com/blog/2016/04/11/adopting-scrum-client-services-multi-project-organization/</guid>
+	<link>https://www.caktusgroup.com/blog/2016/04/11/adopting-scrum-client-services-multi-project-organization/</link>
+	<description>&lt;p&gt;Caktus began the process of adopting Scrum mid-November 2015 with two days of onsite Scrum training and fully transitioned to a Scrum environment in January 2016. From our original epiphany of “Yes! We want Scrum!” to the beginning of our first sprint, it took us six weeks to design and execute a process and transition plan. This is how we did it:&lt;/p&gt;
+&lt;h3&gt;Step 1: Form a committee&lt;/h3&gt;
+&lt;p&gt;Caktus is a fairly flat organization and we prefer to involve as many people as possible in decisions that affect the whole team. We formed a committee that included our founders, senior developers, and project managers to think through this change. In order for us to proceed with any of the following steps, all committee members had to be in agreement. When we encountered disagreement, we continued communicating in order to identify and resolve points of contention.&lt;/p&gt;
+&lt;h3&gt;Step 2: Identify an approach&lt;/h3&gt;
+&lt;p&gt;Originally we planned to adopt Scrum on a per-project basis. After all, most of the literature on Scrum is geared towards projects. Once we started planning this approach, however, we realized the overhead and duplication of effort required to adopt Scrum on even four concurrent projects (e.g. requiring team members to attend four discrete sets of sprint activities) was not feasible or realistic. Since Caktus works on more than four projects at a time, we needed another approach.&lt;/p&gt;
+&lt;p&gt;It was then that our CEO &lt;a href=&quot;https://www.caktusgroup.com/about/tobias-mcnulty/&quot;&gt;Tobias McNulty&lt;/a&gt; flipped the original concept, asking “What if instead of focusing our Scrum process around projects, we focused around teams?” After some initial head-scratching, some frantic searches in our Scrum books, and questions to our Scrum trainers, our committee agreed that the Scrum team approach was worth looking into.&lt;/p&gt;
+&lt;h3&gt;Step 3: Identify cross-functional teams with feasible project assignments&lt;/h3&gt;
+&lt;p&gt;Our approach to Scrum generated a lot of questions, including:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How many teams can we have?&lt;/li&gt;
+&lt;li&gt;Who is on which team?&lt;/li&gt;
+&lt;li&gt;What projects would be assigned to which teams?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We broke out into several small groups and brainstormed team ideas, then met back together and presented our options to each other. There was a lot of discussion and moving around of sticky notes. We ended up leaving all the options on one of our whiteboards for several days. During this time, you’d frequently find Caktus team members gazing at the whiteboard or pensively moving sticky notes into new configurations. Eventually, we settled on a team/project configuration that required the least amount of transitions for all stakeholders (developers, clients, project managers), retained the most institutional knowledge, and demonstrated cross-functional skillsets.&lt;/p&gt;
+&lt;h3&gt;Step 4: Role-to-title breakdown&lt;/h3&gt;
+&lt;p&gt;Scrum specifies three roles: Development team member, Scrum Master, and Product Owner. Most organizations, including Caktus, specify job titles instead: Backend developer, UI developer, Project Manager, etc. Once we had our teams, we had to map our team members to Scrum roles.&lt;/p&gt;
+&lt;p&gt;At first, this seemed fairly straightforward. Clearly Development team member = any developers, Scrum Master = Project Manager, and Product Owner = Product Manager. Yet the more we delved into Scrum, the more it became obvious that roles ≠ titles. We stopped focusing on titles and instead focused on responsibilities, skill sets, and attributes. Once we did so, it became obvious that our Project Managers were better suited to be Product Owners. &lt;/p&gt;
+&lt;p&gt;This realization allowed us to make smarter long-term decisions when assigning members to our teams.&lt;/p&gt;
+&lt;h3&gt;Step 5: Create a transition plan&lt;/h3&gt;
+&lt;p&gt;The change from a client-services, multi-project organization to a client-services, multi-project organization divided into Scrum teams was not insignificant. In order to transition to our Scrum teams, we needed to orient developers to new projects, switch out some client contacts, and physically rearrange our office so that we were seated roughly with our teams. We created a plan to make the necessary changes over time so that we were prepared to start our first sprints in January 2016.&lt;/p&gt;
+&lt;p&gt;We identified which developers would need to be onboarded onto which projects, and the key points of knowledge transfer that needed to happen in order for teams to successfully support projects. We started these transitions when it made sense to do so per project per team, e.g., after the call with the client in which the client was introduced to the new developer(s), and before the holder of the institutional knowledge went on holiday vacation.&lt;/p&gt;
+&lt;h3&gt;Step 6: Obtain buy-in from the team&lt;/h3&gt;
+&lt;p&gt;We wanted the whole of Caktus to be on board with the change prior to January. Once we had a plan, we hosted a Q&amp;amp;A lunch with the team in which we introduced the new Scrum teams, sprint activity schedules, and project assignments. We answered the questions we could and wrote down the ones we couldn’t for further consideration.&lt;/p&gt;
+&lt;p&gt;After this initial launch, we had several other team announcements as the process became more defined, as well as kick-off meetings with each team in which everyone had an opportunity to choose team names, provide feedback on schedules, and share any concerns with their new Scrum team. Team name direction was “A type of cactus”, and we landed on Team Robust Hedgehog, Team Discocactus, and Team Scarlet Crown. Concerns were addressed by the teams first, and if necessary, escalated to the Product Owners for further discussion and resolution.&lt;/p&gt;
+&lt;p&gt;On January 4, 2016, Caktus started its first Scrum sprints. After three months, our teams are reliably and successfully completing sprints, and working together to support our varied clients.&lt;/p&gt;
+&lt;p&gt;What we’ve learned by adopting Scrum is that Scrum is not a silver bullet. What Scrum doesn’t cover is a much larger list than what it does. The Caktus team has earnestly identified, confronted, and worked together to resolve issues and questions exposed by our adoption of Scrum, including (but not limited to):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How best to communicate our Scrum process to our clients, so they can understand how it affects their projects?&lt;/li&gt;
+&lt;li&gt;How does the Product Strategist title fit into Scrum?&lt;/li&gt;
+&lt;li&gt;How can we transition from scheduling projects in hours to relative sizing by sprint in story points, while still estimating incoming projects in hours?&lt;/li&gt;
+&lt;li&gt;How do sales efforts get appointed to teams, scheduled into sprints, and still get completed in a satisfactory manner?&lt;/li&gt;
+&lt;li&gt;What parts of Scrum are useful for other, non-development efforts at Caktus (retrospectives, daily check-ins, backlogs, etc)?&lt;/li&gt;
+&lt;li&gt;Is it possible for someone to perform the Scrum Master on one team and Product Owner roles on a different team?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Scrum provides the framework that highlights these issues but intentionally does not offer solutions to all the problems. (In fact, in the Certified ScrumMaster exam, “This is outside the scope of Scrum” is the correct answer to some of the more difficult questions.) Adopting Scrum provides teams with the opportunity to solve these problems together and design a customized process that works for them.&lt;/p&gt;
+&lt;p&gt;Scrum isn’t for every organization or every situation, but it’s working for Caktus. We look forward to seeing how it continues to evolve to help us grow sharper web apps.&lt;/p&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 12:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Doing Math with Python: SymPy 1.0 and Anaconda 4.0 releases</title>
+	<guid>http://doingmathwithpython.github.io/sympy-1.0-anaconda-4.0.html</guid>
+	<link>http://doingmathwithpython.github.io/sympy-1.0-anaconda-4.0.html</link>
+	<description>&lt;p&gt;&lt;a class=&quot;reference external&quot; href=&quot;http://sympy.org&quot;&gt;SymPy 1.0&lt;/a&gt; was released recently and &lt;a class=&quot;reference external&quot; href=&quot;https://www.continuum.io/blog/developer-blog/anaconda-4-release&quot;&gt;Anaconda 4.0&lt;/a&gt;
+was just released. I tried all the &lt;a class=&quot;reference external&quot; href=&quot;http://doingmathwithpython.github.io/trying-out-solutions.html&quot;&gt;sample solutions&lt;/a&gt;
+and everything works as expected. The &lt;a class=&quot;reference external&quot; href=&quot;http://doingmathwithpython.github.io/pages/programs.html&quot;&gt;chapter programs&lt;/a&gt; should
+keep working as well.&lt;/p&gt;
+&lt;p&gt;You can get both the updates when you install Anaconda 4.0 or updated
+your existing Anaconda installation:&lt;/p&gt;
+&lt;pre class=&quot;code literal-block&quot;&gt;
+$ conda update conda
+$ conda update anaconda
+&lt;/pre&gt;
+&lt;p&gt;I have so far verified both on Mac OS X and Linux. If you find any
+issues on Windows, please email me at
+&lt;tt class=&quot;docutils literal&quot;&gt;doingmathwithpython&amp;#64;gmail.com&lt;/tt&gt; or post your query/tip to any of the
+following community forums:&lt;/p&gt;
+&lt;ul class=&quot;simple&quot;&gt;
+&lt;li&gt;&lt;a class=&quot;reference external&quot; href=&quot;https://www.facebook.com/doingmathwithpython&quot;&gt;Facebook page&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&quot;reference external&quot; href=&quot;https://plus.google.com/u/0/communities/113121562865298236232&quot;&gt;G+ Community&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+	<pubDate>Mon, 11 Apr 2016 09:50:00 +0000</pubDate>
+</item>
+<item>
+	<title>Chris Hager: Python Thread Pool</title>
+	<guid>https://www.metachris.com/2016/04/python-threadpool/</guid>
+	<link>https://www.metachris.com/2016/04/python-threadpool/</link>
+	<description>&lt;blockquote&gt;
+  &lt;p&gt;A thread pool is a group of pre-instantiated, idle threads which stand ready to be given work.
+These are often preferred over instantiating new threads for each task when there is a large number of (short) tasks to be done rather than a small number of long ones.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Suppose you want do download 1000s of documents from the internet, but only have resources for downloading 50 at a time. The solution is to utilize is a thread pool, spawning a fixed number of threads to download all the URLs from a queue, 50 at a time.&lt;/p&gt;
+
+&lt;p&gt;In order to use thread pools, Python 3.x includes the &lt;a href=&quot;https://docs.python.org/dev/library/concurrent.futures.html#threadpoolexecutor&quot;&gt;ThreadPoolExecutor&lt;/a&gt; class, and both Python 2.x and 3.x have &lt;code&gt;multiprocessing.dummy.ThreadPool&lt;/code&gt;. &lt;a href=&quot;https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing.dummy&quot;&gt;&lt;code&gt;multiprocessing.dummy&lt;/code&gt;&lt;/a&gt; replicates the API of &lt;a href=&quot;https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing&quot;&gt;multiprocessing&lt;/a&gt; but is no more than a wrapper around the &lt;a href=&quot;https://docs.python.org/3/library/threading.html#module-threading&quot;&gt;threading&lt;/a&gt; module. &lt;/p&gt;
+
+&lt;p&gt;The downside of &lt;code&gt;multiprocessing.dummy.ThreadPool&lt;/code&gt; is that in Python 2.x, it is not possible to exit the program with eg. a KeyboardInterrupt before all tasks from the queue have been finished by the threads.&lt;/p&gt;
+
+&lt;p&gt;In order to achieve an interruptable thread queue in Python 2.x and 3.x (for use in &lt;a href=&quot;https://www.metachris.com/pdfx&quot;&gt;PDFx&lt;/a&gt;), I’ve build this code, inspired by &lt;a href=&quot;http://stackoverflow.com/a/7257510&quot;&gt;stackoverflow.com/a/7257510&lt;/a&gt;. It implements a thread pool which works with Python 2.x and 3.x:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;sys&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;IS_PY2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;version_info&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IS_PY2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;Queue&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Queue&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;queue&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Queue&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;threading&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot; Thread executing tasks from a given tasks queue &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;daemon&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kargs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kargs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;except&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;c&quot;&gt;# An exception happened in this thread&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;finally&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+                &lt;span class=&quot;c&quot;&gt;# Mark this task as done, whether an exception happened or not&lt;/span&gt;
+                &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_done&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ThreadPool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot; Pool of threads consuming tasks from a queue &quot;&quot;&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_threads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Queue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_threads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_threads&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;Worker&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;add_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;kargs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot; Add a task to the queue &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;put&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;kargs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot; Add a list of tasks to the queue &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args_list&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+            &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;add_task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wait_completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot; Wait for completion of all the tasks in the queue &quot;&quot;&quot;&lt;/span&gt;
+        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tasks&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;__name__&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;__main__&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;random&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;randrange&lt;/span&gt;
+    &lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;time&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Function to be executed in a thread&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;wait_delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;sleeping for (&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d)sec&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;sleep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Generate random delays&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;delays&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randrange&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)]&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Instantiate a thread pool with 5 worker threads&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ThreadPool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;# Add the jobs in bulk to the thread pool. Alternatively you could use&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# `pool.add_task` to add single jobs. The code will block here, which&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# makes it possible to cancel the thread pool with an exception when&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;# the currently running batch of workers is finished.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wait_delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delays&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;pool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;wait_completion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The queue size is similar to the number of threads (see &lt;code&gt;self.tasks = Queue(num_threads)&lt;/code&gt;), therefore adding tasks with &lt;code&gt;pool.map(..)&lt;/code&gt; and &lt;code&gt;pool.add_task(..)&lt;/code&gt; blocks until a new slot in the Queue is available.&lt;/p&gt;
+
+&lt;p&gt;When you issue a KeyboardInterrupt by pressing &lt;kbd&gt;Ctrl&lt;/kbd&gt;+&lt;kbd&gt;C&lt;/kbd&gt;, the current batch of workers
+will finish and the program quits with the exception at the &lt;code&gt;pool.map(..)&lt;/code&gt; step.&lt;/p&gt;
+
+&lt;hr class=&quot;spaced&quot; /&gt;
+
+&lt;p&gt;If you have suggestions or feedback, let me know via &lt;a href=&quot;https://twitter.com/@metachris&quot; target=&quot;_blank&quot;&gt;@metachris&lt;/a&gt;&lt;/p&gt;</description>
+	<pubDate>Sun, 10 Apr 2016 22:00:00 +0000</pubDate>
+</item>
+<item>
+	<title>Brett Cannon: (Attempting) practical password management</title>
+	<guid>http://www.snarky.ca/attempting-practical-password-management</guid>
+	<link>http://www.snarky.ca/attempting-practical-password-management</link>
+	<description>&lt;h2 id=&quot;toc_0&quot;&gt;Why the hell do I care about security?&lt;/h2&gt;
+
+&lt;p&gt;Bad people exist out there; it sucks, but there it is. That means you need to take precautionary measures to make sure that bad people can't get at your stuff. In terms of your online stuff, that means passwords. Lots of passwords. Lost of sufficiently complex passwords. Lots and &lt;strong&gt;lots&lt;/strong&gt; of sufficiently complicated passwords (for me personally, I have over 150 accounts online of various levels of usefulness).&lt;/p&gt;
+
+&lt;p&gt;I realized a long time ago that not everyone makes good software. Whether it's out of incompetence, laziness, or by accident, there are plenty of websites out there which are not maintained in such a way to keep bad people out. This is why you need a unique password for each account, because once someone has broken into a website full of email addresses and passwords the first thing they do is try to use that information to log into more interesting websites. And you care about sufficiently complex passwords -- i.e. what makes a password unguessable -- so that if someone decides they want to personally steal your stuff they will have to try really hard to figure out your password instead of simply knowing your  birthdate or cat's name (or simply just trying every combination of letters and numbers for passwords of 8 characters or less which is why passwords can't be short anymore and start aiming for 12 characters or more).&lt;/p&gt;
+
+&lt;p&gt;All of this led me to create &lt;a href=&quot;https://oplop.appspot.com/&quot;&gt;Oplop&lt;/a&gt;. Originally designed so that I could run it on my Symbian s60 phone that I had during my masters degree (so between 2003 and 2005), I came up with a way so that I could create unique passwords easily that (at the time) were sufficiently secure. Oplop has made creating a unique password per account rather easy for me, and so I have been doing so for well over a decade at this point.&lt;/p&gt;
+
+&lt;p&gt;The point is  that I'm quite aware of what it takes to follow proper security practices when it comes to passwords and even I find it to be a pain. But if I find it a pain and barely tolerable, how am I supposed to convince my family to do the right thing and create unique passwords for every account and make sure they are better than &lt;code&gt;12345678&lt;/code&gt;? For me Oplop goes a long way, but trying to explain how it works to my family is hard, so I'm always trying to find some solution that will do the minimum amount to get my family to have unique, sufficient passwords per account while somehow allowing me to have a heightened level of security for when I'm willing to put  up with it. I'm also aware that Oplop has an inherent limitation of making it hard to change how it works to improve security without breaking all of your passwords which means at some point Oplop will either need to change or I will need to move away from it.&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_1&quot;&gt;The scenarios&lt;/h2&gt;
+
+&lt;p&gt;When it comes to security there seems to be an inverse relationship of being secure to being convenient to use.&lt;/p&gt;
+
+&lt;h3 id=&quot;toc_2&quot;&gt;The ideal scenario (that's a total pain to implement)&lt;/h3&gt;
+
+&lt;p&gt;With infinite patience and care for the utmost security, the best option is to create very long, completely random passwords for all of your accounts. Probably the easiest way to do this is using &lt;a href=&quot;https://en.wikipedia.org/wiki/Diceware&quot;&gt;Diceware passwords&lt;/a&gt;. Basically you print out a long list of words that correspond to all combinations 5 six-sided dice can have. When you roll your 5 dice you then look up the word corresponding to the values and that word becomes part of your password. Do that 6 or more times and you have a very secure password (there's a nice &lt;a href=&quot;https://theintercept.com/2015/03/26/passphrases-can-memorize-attackers-cant-guess/&quot;&gt;Diceware intro by The Intercept&lt;/a&gt; if that didn't all make sense). You could then write the password down in an address book so you can look it up later. Oh, and you should turn on &lt;a href=&quot;https://en.wikipedia.org/wiki/Two-factor_authentication&quot;&gt;two-factor authentication&lt;/a&gt; (2FA) for all of your accounts when available no matter what.&lt;/p&gt;
+
+&lt;p&gt;The issue becomes how tedious this is from start to finish. To start, using Diceware is a bit tedious in and of itself. It's so tedious in fact, that &lt;a href=&quot;http://arstechnica.com/business/2015/10/this-11-year-old-is-selling-cryptographically-secure-passwords-for-2-each/&quot;&gt;an 11-year-old has a business of charging $2/password to mail one to you&lt;/a&gt;. To do Diceware passwords properly you have to physically throw some dice around and you have to physically look up the corresponding word in what amounts to a book of words (you could use a computer  to at least look up the words, but you would need to use something like a Raspberry Pi with no internet access and then you would need to destroy the SD card you loaded the OS and software on to in order to prevent the passwords from leaking out of that SD card somehow; this is what you have to do for a secure Bitcoin address, by the way). And then to actually use those passwords you really shouldn't use something that saves your passwords, so you need to enter those six-word passwords manually every time (and to be honest, you should also compile all of your programs from scratch as well, just to be safe). Oh, and don't forget that the book you keep your passwords written down in shouldn't leave your house to make sure you don't lose it, so that means if you can't memorize a password you simply can't log into an account unless you're at home.&lt;/p&gt;
+
+&lt;p&gt;In other words this is a massive  pain that no one would want to do for every password they have online.&lt;/p&gt;
+
+&lt;h3 id=&quot;toc_3&quot;&gt;The less ideal scenario (that's a bit more probable if you're hardcore)&lt;/h3&gt;
+
+&lt;p&gt;Now if you're willing to take things down a notch, one way to make this much more tolerable is to use a password manager you can trust. For most security folk that's &lt;a href=&quot;http://keepass.info/&quot;&gt;KeePass&lt;/a&gt;/&lt;a href=&quot;https://www.keepassx.org/&quot;&gt;KeePassX&lt;/a&gt; (the only real difference between the two is the tech behind the programs). These are open source programs that are designed to manage passwords. Being open source means you can be as careful as you want about making sure the programs are not doing anything you don't want them to. And since there's &lt;a href=&quot;https://play.google.com/store/apps/details?id=keepass2android.keepass2android&quot;&gt;an Android port&lt;/a&gt; (among a couple others), you don't even need to worry about not having access to your computers when you're away from home if you keep your password file synced between computers somehow (whether that's manually or writing it encrypted to a cloud storage provider is up to you and how careful you want to be).&lt;/p&gt;
+
+&lt;p&gt;For generating the passwords you're still best off using Diceware, but  the KeePass apps provide ways to generate passwords as well. Assuming you trust the apps to do a good job then you can even get passwords easily generated for you. And you should still turn on &lt;a href=&quot;https://en.wikipedia.org/wiki/Two-factor_authentication&quot;&gt;two-factor authentication&lt;/a&gt; (2FA), but don't save any password for 2FA accounts on the same device you have your 2FA tokens on (else you're combining the &amp;quot;something you know&amp;quot; with &amp;quot;something you have&amp;quot;, negating a key point of 2FA).&lt;/p&gt;
+
+&lt;h3 id=&quot;toc_4&quot;&gt;The practical scenario (that will work for both me and my family)&lt;/h3&gt;
+
+&lt;p&gt;The problem with the KeePass apps is that they are not the slickest password managers out there. &lt;a href=&quot;https://lastpass.com/&quot;&gt;LastPass&lt;/a&gt;, &lt;a href=&quot;https://www.dashlane.com&quot;&gt;Dashlane&lt;/a&gt;, and &lt;a href=&quot;https://1password.com/&quot;&gt;1Password&lt;/a&gt; all have nicer UIs than KeePass and have made it easier to store your passwords thanks to browser extensions, mobile apps, websites, etc. But they are all closed-source and if you want them to sync between devices you typically have to pay for that. So there's definitely a heightened level of trust required plus a financial cost to having a nicer, easier password management solution to use.&lt;/p&gt;
+
+&lt;p&gt;But you know what? If it gets my family to finally use unique, secure passwords for their accounts online then I'm willing to take the practical solution of trusting these closed-source companies and recommend they use one of these services. Getting my family to have to remember one really secure password for e.g. 1Password to get them to use unique passwords everywhere is better than them using one or two weak passwords all over the place.&lt;/p&gt;
+
+&lt;p&gt;For me, though, I'm willing to go a little above and beyond. For me, there's two types of accounts. One type is where if someone managed to break into the account then I would be frustrated, but I wouldn't exactly be frantically making phone calls or rushing home to try and deal with the fallout; these are what I call &amp;quot;argh&amp;quot; accounts as I will let out a sigh upon learning of the security breach but I'm not going to flip out. On the other hand, there are accounts like with my bank, Google, or GitHub where if someone broke in I would be yelling &amp;quot;oh crap!&amp;quot; and racing home to try and figure out how to deal with the problem. For the former, I'm fine with using a password manager to store my passwords since the convenience/threat tradeoff is such that convenience wins out. For the &amp;quot;oh crap&amp;quot; accounts, though, I want very secure passwords like those created through Diceware which are not stored in any password manager (and somewhat ironically, a password manager is an &amp;quot;oh crap&amp;quot; account even though it only protects &amp;quot;argh&amp;quot; accounts because getting access to nearly all of my &amp;quot;argh&amp;quot; accounts is a much bigger deal than just one of my &amp;quot;argh&amp;quot; accounts). I also use identity providers like Google and Facebook whenever I can so that I don't even have to worry about an &amp;quot;argh&amp;quot; account's password since I just have to be able to log into e.g. Google which I always can securely. And finally, I turn on 2FA for any account that offers it since I worry a lot less about any account that offers it even if it is just an &amp;quot;argh&amp;quot; account.&lt;/p&gt;
+
+&lt;h2 id=&quot;toc_5&quot;&gt;What I'm planning to do&lt;/h2&gt;
+
+&lt;p&gt;To start, I'm going to test out &lt;a href=&quot;https://1password.com/families/&quot;&gt;1Password for Families&lt;/a&gt; with myself and my wife, Andrea. If Andrea ends up liking it then I will offer to pay for the subscription for 1Password to all adult members of my immediate family (it's $5/month for up to 5 family member, $1/month extra for each additional family member). I will also offer to help them set up 2FA on any account -- which will probably be just Google -- and also buy them a U2F security key to act as backup for their 2FA setup (although the security brought by a security key isn't that critical for most of my family as they don't travel enough without their own devices).&lt;/p&gt;
+
+&lt;p&gt;For myself, on top of using 1Password for my &amp;quot;argh&amp;quot; accounts I'm going to create Diceware passwords for my &amp;quot;oh crap&amp;quot; accounts. I will use &lt;a href=&quot;https://www.rempe.us/diceware/&quot;&gt;https://www.rempe.us/diceware/&lt;/a&gt; and the alternative wordlist to make them (I contributed a couple of changes to the project to make it easier to use on mobile and up the security slightly). I'll keep these critical passwords written down in an address book that won't leave my home and which will also contain all 2FA backup codes. I already have 2FA turned on for all of my accounts that already support  it and that won't be changing.&lt;/p&gt;
+
+&lt;p&gt;I think this strikes a good balance for me and my family. It gets my family to start using secure, unique passwords everywhere, even if it is in a closed-source password manager as I would rather place trust in 1Password than my family doing the right thing unassisted. As for me, I think Diceware passwords are plenty secure for accounts that need that kind of security, and if I'm going to ask my family to trust 1Password then I should too for accounts that I'm not totally paranoid about.&lt;/p&gt;</description>
+	<pubDate>Sun, 10 Apr 2016 18:39:26 +0000</pubDate>
+</item>
+<item>
+	<title>Abu Ashraf Masnun: Python: pyenv, pyvenv, virtualenv – What’s the difference?</title>
+	<guid>http://masnun.com/2016/04/10/python-pyenv-pyvenv-virtualenv-whats-the-difference.html</guid>
+	<link>http://masnun.com/2016/04/10/python-pyenv-pyvenv-virtualenv-whats-the-difference.html</link>
+	<description>&lt;p&gt;So I see questions around these terms very often in our growing &lt;a href=&quot;http://fb.pybd.org&quot; target=&quot;_blank&quot;&gt;Python Bangladesh&lt;/a&gt; community. Most of the times beginners are confused about what is what. I hope I can refer to this blog post to explain the similarities and differences. &lt;/p&gt;
+&lt;h3&gt; pyenv &lt;/h3&gt;
+&lt;p&gt;Have you ever wanted to test your code against multiple versions of Python? Or just wanted to install a newer version of Python without affecting your existing version? May be you heard about PyPy a lot and want to install it on your machine? &lt;/p&gt;
+&lt;p&gt;If you did, then &lt;a href=&quot;https://github.com/yyuu/pyenv&quot; target=&quot;_blank&quot;&gt;pyenv&lt;/a&gt; is the perfect tool for you. It allows you to easily install multiple copies and multiple flavors of the Python interpreter. So you can not only install different versions of CPython, you can also install PyPy, Jython, Stackless Python and their different versions. &lt;/p&gt;
+&lt;p&gt;The tool provides a nice command line tool to easily swap out the global python interpreter. It also allows to define per application python version. You can use it&amp;#8217;s &lt;code&gt;local&lt;/code&gt; command or directly mention a python version in a file named &lt;code&gt;.python-version&lt;/code&gt; under a directory and for that directory and it&amp;#8217;s children, the mentioned version will be used. &lt;/p&gt;
+&lt;p&gt;Trust me, this project is awesome. I use it to switch between Python 2 and 3 on my local machine. I also use it often on servers to quickly install any flavor/version of Python. Do check out their docs, you will love it. &lt;/p&gt;
+&lt;h3&gt; pyvenv &amp;#038; virtualenv &lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;pyvenv&lt;/code&gt; and &lt;code&gt;virtualenv&lt;/code&gt; allow you to create virtual environments so we can isolate our project dependencies. Why are they helpful? Say for example, you have one project which uses Django 1.6 still while your newer projects start with 1.9. When you install one version of Django, it replaces the other one, right? Virtual environments can rescue us from such situation. From the &lt;a href=&quot;https://docs.python.org/3/library/venv.html#venv-def&quot; target=&quot;_blank&quot;&gt;official docs&lt;/a&gt;: &lt;/p&gt;
+&lt;blockquote&gt;&lt;p&gt;A virtual environment (also called a &lt;code&gt;venv&lt;/code&gt;) is a Python environment such that the Python interpreter, libraries and scripts installed into it are isolated from those installed in other virtual environments, and (by default) any libraries installed in a “system” Python, i.e. one which is installed as part of your operating system.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;When we create a new virtual environment, it creates an isolated environment with it&amp;#8217;s own local interepreter linked to it&amp;#8217;s own libraries/scripts paths. So when we use this local interpreter, it loads the libraries from the local environment. If it can&amp;#8217;t find one locally, then tries to locate that library in the parent/system environment. &lt;/p&gt;
+&lt;p&gt;Please note, these tools do not compile/install new Python interpreters. They simply create &amp;#8220;virtual environments&amp;#8221; on top of an installed Python version. Say, I have Python 3.5 installed on my machine and created virtual environments for this version. Then these environments would also have local copies of Python 3.5, except their environment paths would point to different locations. It&amp;#8217;s like we&amp;#8217;re copying the main interpreter to a new location and then making it use a different path to load libraries and packages. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;virtualenv&lt;/code&gt; is often the most popular choice for creating the virtual environments. It has been around for a long period of time, it supports Python versions from 2.6 up to the latest 3.5. But it&amp;#8217;s not something built into the standard Python distribution. You have to install it from the PyPi. &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pyvenv&lt;/code&gt; comes with Python standard distribution from version 3.4. There is also a &lt;code&gt;venv&lt;/code&gt; module in the standard library which allows us to access this functionality programmatically. We can find more details here: &lt;a href=&quot;https://docs.python.org/3/library/venv.html&quot; target=&quot;_blank&quot;&gt;https://docs.python.org/3/library/venv.html&lt;/a&gt;. &lt;/p&gt;
+&lt;h3&gt; Summary &lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;pyenv&lt;/strong&gt; &amp;#8211; A Python version manager. Installs different versions and flavors of Python interpreters. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;pyvenv&lt;/strong&gt; &amp;#8211; A tool to create isolated virtual environments from a Python interpreter.  Ships with Python from 3.4.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;virtualenv&lt;/strong&gt; &amp;#8211; Creates virtual environments, available in PyPi.&lt;/p&gt;
+&lt;p&gt;So &lt;code&gt;pyvenv&lt;/code&gt; is comparable to &lt;code&gt;virtualenv&lt;/code&gt; while &lt;code&gt;pyenv&lt;/code&gt; is a totally different kind of tool. &lt;/p&gt;</description>
+	<pubDate>Sun, 10 Apr 2016 17:18:50 +0000</pubDate>
+</item>
+<item>
+	<title>Calvin Spealman: Publishing ES6 Modules on NPM</title>
+	<guid>http://techblog.ironfroggy.com/2016/04/publishing-es6-modules-on-npm.html</guid>
+	<link>http://techblog.ironfroggy.com/2016/04/publishing-es6-modules-on-npm.html</link>
+	<description>Read about &lt;a href=&quot;https://www.ironfroggy.com/technology/2016/publishing-es6-modules-to-npm.html&quot;&gt;Publishing ES6 Modules on NPM&lt;/a&gt; over at my new blog &lt;a href=&quot;http://www.ironfroggy.com/&quot;&gt;www.ironfroggy.com&lt;/a&gt;.&lt;br /&gt;&lt;br /&gt;And &lt;i&gt;please&lt;/i&gt; update your RSS feeds to the new site if you're reading this :-)</description>
+	<pubDate>Sun, 10 Apr 2016 10:16:41 +0000</pubDate>
+</item>
+<item>
+	<title>Investing using Python: Kolmogorov-Smirnov test as regime switcher</title>
+	<guid>http://www.talaikis.com/kolmogorov-smirnov-test-as-regime-switcher/</guid>
+	<link>http://www.talaikis.com/kolmogorov-smirnov-test-as-regime-switcher/</link>
+	<description>Kolmogorov-Smirnov test is a nonparametric test of the equality of continuous distribution that can be used to compare a sample with a reference probability distribution. KS-test is usually referred as goodness of fit test, but also it's test for &quot;normality&quot; (if our reference distribution is normal). Below you'll find same strategy as previous one using Shapiro-Wilk [&amp;#8230;]</description>
+	<pubDate>Sat, 09 Apr 2016 16:48:20 +0000</pubDate>
+</item>
+<item>
+	<title>Automating OSINT: Automated Reverse Image Search Part 2: Vimeo</title>
+	<guid>http://www.automatingosint.com/blog/2016/04/automated-reverse-image-search-part-2-vimeo/</guid>
+	<link>http://www.automatingosint.com/blog/2016/04/automated-reverse-image-search-part-2-vimeo/</link>
+	<description>&lt;p&gt;In a &lt;a href=&quot;http://www.automatingosint.com/blog/2015/11/osint-youtube-tineye-reverse-image-search/&quot; target=&quot;_blank&quot;&gt;previous blog post&lt;/a&gt; I covered how to utilize the YouTube API to find the preview images for videos and then reverse search them using the TinEye API. In this blog post we will cover how to use the same techniques for Vimeo to retrieve the location of the preview image, and then we will use our previous code to submit it to TinEye for reverse searching. This can assist you in determining whether you are looking at a brand new video or something that has been reposted from an earlier point in time. Let&amp;#8217;s get started.&lt;/p&gt;
+&lt;h2&gt;The Vimeo Simple API&lt;/h2&gt;
+&lt;p&gt;Vimeo does have a full featured API that we can use to do all kinds of fancy stuff like searching for videos, users, etc. This is called the Advanced API.  But there is also a handy feature of Vimeo where they automatically provide JSON output for every video they publish, which they call the Simple API. For example if we view an awesome volleyball video:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;https://vimeo.com/71215064&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;We can see that the video ID for that video is: 71215064&lt;/p&gt;
+&lt;p&gt;To retrieve all of the JSON for this video we can use the following URL scheme:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;http://vimeo.com/api/v2/video/{VIDEOID}.json&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;So in our awesome volleyball example this looks like:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;http://vimeo.com/api/v2/video/71215064.json&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The main drawback of using the Simple API is that it is only useful on public videos. If you require your script to work with private videos or to do more advanced querying against Vimeo you will need to get an API key and check out the &lt;a href=&quot;https://developer.vimeo.com/&quot; target=&quot;_blank&quot;&gt;developer docs&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Examining the JSON&lt;/h2&gt;
+&lt;p&gt;So what does this JSON document actually contain? If you just browse to the URL your browser will download a JSON file and you can open it with your favourite text editor or my favourite Python IDE, &lt;a href=&quot;http://www.wingide.com&quot; target=&quot;_blank&quot;&gt;Wing&lt;/a&gt;. Let&amp;#8217;s examine the JSON:&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;[{u&amp;#8217;description&amp;#8217;: u&amp;#8217;Some moments and highlights from the Olympic Games 2012 Volleyball tournament. Music: Jakob &amp;#8211; Malachite&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;duration&amp;#8217;: 303,&lt;br /&gt;
+u&amp;#8217;embed_privacy&amp;#8217;: u&amp;#8217;anywhere&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;height&amp;#8217;: 480,&lt;br /&gt;
+u&amp;#8217;id&amp;#8217;: 71215064,&lt;br /&gt;
+u&amp;#8217;mobile_url&amp;#8217;: u&amp;#8217;https://vimeo.com/71215064&amp;#8242;,&lt;br /&gt;
+u&amp;#8217;stats_number_of_comments&amp;#8217;: 3,&lt;br /&gt;
+u&amp;#8217;stats_number_of_likes&amp;#8217;: 59,&lt;br /&gt;
+u&amp;#8217;stats_number_of_plays&amp;#8217;: 49593,&lt;br /&gt;
+u&amp;#8217;tags&amp;#8217;: u&amp;#8217;volleyball, olympics, olympic games, london 2012, highlights, slow motion, brazil, russia, poland, italy&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;thumbnail_large&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/video/444712440_640.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;thumbnail_medium&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/video/444712440_200x150.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;thumbnail_small&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/video/444712440_100x75.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;title&amp;#8217;: u&amp;#8217;Olympic Games 2012 Volleyball in slow motion&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;upload_date&amp;#8217;: u&amp;#8217;2013-07-28 17:34:09&amp;#8242;,&lt;br /&gt;
+u&amp;#8217;url&amp;#8217;: u&amp;#8217;https://vimeo.com/71215064&amp;#8242;,&lt;br /&gt;
+u&amp;#8217;user_id&amp;#8217;: 2460313,&lt;br /&gt;
+u&amp;#8217;user_name&amp;#8217;: u&amp;#8217;Yngve Sundfjord&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;user_portrait_huge&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/portrait/362408_300x300.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;user_portrait_large&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/portrait/362408_100x100.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;user_portrait_medium&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/portrait/362408_75x75.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;user_portrait_small&amp;#8217;: u&amp;#8217;https://i.vimeocdn.com/portrait/362408_30x30.webp&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;user_url&amp;#8217;: u&amp;#8217;https://vimeo.com/sundfjord&amp;#8217;,&lt;br /&gt;
+u&amp;#8217;width&amp;#8217;: 640}]&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Pretty awesome right? We have a bunch of useful information stored here. In particular we are interested in the &lt;strong&gt;thumbnail_large &lt;/strong&gt;key as this will give us the image that we can use to submit to the TinEye API to see if we have additional results or other sites that contain the image. As well you will notice an &lt;strong&gt;upload_date &lt;/strong&gt;which you can use to verify whether this video went up before other results that you find in your reverse image searching.&lt;/p&gt;
+&lt;p&gt;Now let&amp;#8217;s start coding this up. If you haven&amp;#8217;t already installed the TinEye API then look at the &lt;a href=&quot;http://www.automatingosint.com/blog/2015/11/osint-youtube-tineye-reverse-image-search/&quot; target=&quot;_blank&quot;&gt;previous post&lt;/a&gt; instructions on how to get up and running with it. Let&amp;#8217;s open a new script and call it &lt;em&gt;vimeoreversesearch.py &lt;/em&gt;and punch in the following code:&lt;/p&gt;&lt;pre class=&quot;crayon-plain-tag&quot;&gt;import argparse
+import requests
+
+from pytineye import TinEyeAPIRequest
+
+tineye = TinEyeAPIRequest('http://api.tineye.com/rest/','PUBLICKEY','PRIVATEKEY')
+
+ap = argparse.ArgumentParser()
+ap.add_argument(&quot;-v&quot;,&quot;--videoID&quot;,    required=True,help=&quot;The videoID of the Vimeo video. For example: https://www.vimeo.com/VIDEOID&quot;)
+args = vars(ap.parse_args())
+
+video_id    = args['videoID']&lt;/pre&gt;&lt;p&gt;Ok so nothing too fancy here yet. We are just setting up the TinEye API, adding some argument parsing for the script and extracting the &lt;strong&gt;video_id &lt;/strong&gt;variable from the command line arguments passed in. Let&amp;#8217;s implement our Vimeo JSON retrieval function now:&lt;/p&gt;&lt;pre class=&quot;crayon-plain-tag&quot;&gt;import argparse
+import requests
+
+from pytineye import TinEyeAPIRequest
+
+tineye = TinEyeAPIRequest('http://api.tineye.com/rest/','PUBLICKEY','PRIVATEKEY')
+
+ap = argparse.ArgumentParser()
+ap.add_argument(&quot;-v&quot;,&quot;--videoID&quot;,    required=True,help=&quot;The videoID of the Vimeo video. For example: https://www.vimeo.com/VIDEOID&quot;)
+args = vars(ap.parse_args())
+
+video_id    = args['videoID']
+
+#
+# Retrieve the video JSON from Vimeo
+#
+def get_vimeo_video(video_id):
+    
+    url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
+    
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        
+        video_info = response.json()
+        
+        print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
+        
+        return video_info[0]['thumbnail_large']
+    
+    else:
+        
+        print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
+
+
+#
+# Search TinEye for the image.
+#
+def search_tineye(image_url):
+    
+    try:
+        result = tineye.search_url(image_url)
+    except:
+        pass
+    
+    result_urls = []
+    dates       = {}
+    
+    for match in result.matches:
+        
+        for link in match.backlinks:
+            
+            if link.backlink not in result_urls:
+                
+                result_urls.append(link.backlink)
+                dates[link.crawl_date] = link.backlink
+    
+    if len(result_urls) &amp;gt; 1:
+        print            
+        print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
+        
+        for url in result_urls:
+            
+            print url
+        
+        
+        oldest_date = sorted(dates.keys())
+        
+        print
+        print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
+    
+    else:
+        
+        print &quot;[!!!] No results found on TinEye.&quot;
+
+# grab the Vimeo video details
+image_url = get_vimeo_video(video_id)
+
+# submit the image to TinEye
+search_tineye(image_url)&lt;/pre&gt;&lt;p&gt;Let&amp;#8217;s break this code down a little bit:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Line 17: &lt;/strong&gt;we define our &lt;strong&gt;get_vimeo_video&lt;/strong&gt; function that takes in a &lt;em&gt;video_id &lt;/em&gt;parameter that represents the Vimeo video ID we have covered previously.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 19-21: &lt;/strong&gt;we are building up the URL to retrieve the video JSON (19) and then we send the HTTP request off (21).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 23-29: &lt;/strong&gt;if our request was successful (23) then we store the parsed JSON in the &lt;em&gt;video_info &lt;/em&gt;variable (25). We output the date that the video was uploaded (27) and then return the location of the large preview image for the video (29).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Ok so the code we have developed so far is going to take care of grabbing and parsing the JSON from the Vimeo servers and give us an image location that we can use for reverse searching with the TinEye API. Now let&amp;#8217;s get that image to TinEye by implementing a function to deal with it. Some of this code is reused from the previous post so it might look familiar. Add the following code to your script:&lt;/p&gt;&lt;pre class=&quot;crayon-plain-tag&quot;&gt;import argparse
+import requests
+
+from pytineye import TinEyeAPIRequest
+
+tineye = TinEyeAPIRequest('http://api.tineye.com/rest/','PUBLICKEY','PRIVATEKEY')
+
+ap = argparse.ArgumentParser()
+ap.add_argument(&quot;-v&quot;,&quot;--videoID&quot;,    required=True,help=&quot;The videoID of the Vimeo video. For example: https://www.vimeo.com/VIDEOID&quot;)
+args = vars(ap.parse_args())
+
+video_id    = args['videoID']
+
+#
+# Retrieve the video JSON from Vimeo
+#
+def get_vimeo_video(video_id):
+    
+    url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
+    
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        
+        video_info = response.json()
+        
+        print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
+        
+        return video_info[0]['thumbnail_large']
+    
+    else:
+        
+        print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
+
+
+#
+# Search TinEye for the image.
+#
+def search_tineye(image_url):
+    
+    try:
+        result = tineye.search_url(image_url)
+    except:
+        print &quot;[!!!] TinEye search failed!&quot;
+        pass
+    
+    result_urls = []
+    dates       = {}
+    
+    for match in result.matches:
+        
+        for link in match.backlinks:
+            
+            if link.backlink not in result_urls:
+                
+                result_urls.append(link.backlink)
+                dates[link.crawl_date] = link.backlink
+    
+    if len(result_urls) &amp;gt; 1:
+        print            
+        print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
+        
+        for url in result_urls:
+            
+            print url
+        
+        
+        oldest_date = sorted(dates.keys())
+        
+        print
+        print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
+    
+    else:
+        
+        print &quot;[!!!] No results found on TinEye.&quot;
+
+# grab the Vimeo video details
+image_url = get_vimeo_video(video_id)
+
+# submit the image to TinEye
+search_tineye(image_url)&lt;/pre&gt;&lt;p&gt;This is a bit more code so let&amp;#8217;s step through it together:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Line 39: &lt;/strong&gt;we create our &lt;strong&gt;search_tineye &lt;/strong&gt;function that receives an &lt;em&gt;image_url &lt;/em&gt;parameter that is the location of the Vimeo preview image.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 41-45: &lt;/strong&gt;we send off our request to the TinEye API (42) and if there are any problems with our call (usually because you copy/paste your API keys incorrectly) then we output an error message (44) and return (45).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 50-57: &lt;/strong&gt;we walk through the list of TinEye results (50) and each result can contain links that we also walk through (52). We begin adding new links to our &lt;strong&gt;result_urls &lt;/strong&gt;(56) as well as adding the date of the link to the dates list so that we can find the oldest post later.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now let&amp;#8217;s implement the pieces that will show us the results of our API requests. Add the following code:&lt;/p&gt;&lt;pre class=&quot;crayon-plain-tag&quot;&gt;import argparse
+import requests
+
+from pytineye import TinEyeAPIRequest
+
+tineye = TinEyeAPIRequest('http://api.tineye.com/rest/','PUBLICKEY','PRIVATEKEY')
+
+ap = argparse.ArgumentParser()
+ap.add_argument(&quot;-v&quot;,&quot;--videoID&quot;,    required=True,help=&quot;The videoID of the Vimeo video. For example: https://www.vimeo.com/VIDEOID&quot;)
+args = vars(ap.parse_args())
+
+video_id    = args['videoID']
+
+#
+# Retrieve the video JSON from Vimeo
+#
+def get_vimeo_video(video_id):
+    
+    url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
+    
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        
+        video_info = response.json()
+        
+        print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
+        
+        return video_info[0]['thumbnail_large']
+    
+    else:
+        
+        print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
+
+
+#
+# Search TinEye for the image.
+#
+def search_tineye(image_url):
+    
+    try:
+        result = tineye.search_url(image_url)
+    except:
+        print &quot;[!!!] TinEye search failed!&quot;
+        return None
+    
+    result_urls = []
+    dates       = {}
+    
+    for match in result.matches:
+        
+        for link in match.backlinks:
+            
+            if link.backlink not in result_urls:
+                
+                result_urls.append(link.backlink)
+                dates[link.crawl_date] = link.backlink
+    
+    if len(result_urls) &amp;gt; 1:
+        print            
+        print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
+        
+        for url in result_urls:
+            
+            print url
+        
+        
+        oldest_date = sorted(dates.keys())
+        
+        print
+        print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
+    
+    else:
+        
+        print &quot;[!!!] No results found on TinEye.&quot;
+
+# grab the Vimeo video details
+image_url = get_vimeo_video(video_id)
+
+# submit the image to TinEye
+search_tineye(image_url)&lt;/pre&gt;&lt;p&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Line 59: &lt;/strong&gt;we are testing here if we have items in our &lt;strong&gt;result_urls &lt;/strong&gt;list which indicates that we have hits from our TinEye request.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 60-65: &lt;/strong&gt;we print out the number of hits (61) and then walk through the list of results (63) and print out the URL where the image was found (65).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lines 68-71: &lt;/strong&gt;we sort the list of dates (68) which will put them in chronological order, so that we can print out the oldest date (71).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Alright the bulk of our script is finished so now all we need to do is put the final touch on which is to call the functions that we have setup:&lt;/p&gt;&lt;pre class=&quot;crayon-plain-tag&quot;&gt;import argparse
+import requests
+
+from pytineye import TinEyeAPIRequest
+
+tineye = TinEyeAPIRequest('http://api.tineye.com/rest/','PUBLICKEY','PRIVATEKEY')
+
+ap = argparse.ArgumentParser()
+ap.add_argument(&quot;-v&quot;,&quot;--videoID&quot;,    required=True,help=&quot;The videoID of the Vimeo video. For example: https://www.vimeo.com/VIDEOID&quot;)
+args = vars(ap.parse_args())
+
+video_id    = args['videoID']
+
+#
+# Retrieve the video JSON from Vimeo
+#
+def get_vimeo_video(video_id):
+    
+    url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
+    
+    response = requests.get(url)
+    
+    if response.status_code == 200:
+        
+        video_info = response.json()
+        
+        print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
+        
+        return video_info[0]['thumbnail_large']
+    
+    else:
+        
+        print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
+
+
+#
+# Search TinEye for the image.
+#
+def search_tineye(image_url):
+    
+    try:
+        result = tineye.search_url(image_url)
+    except:
+        print &quot;[!!!] TinEye search failed!&quot;
+        return None
+    
+    result_urls = []
+    dates       = {}
+    
+    for match in result.matches:
+        
+        for link in match.backlinks:
+            
+            if link.backlink not in result_urls:
+                
+                result_urls.append(link.backlink)
+                dates[link.crawl_date] = link.backlink
+    
+    if len(result_urls) &amp;gt; 1:
+        print            
+        print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
+        
+        for url in result_urls:
+            
+            print url
+        
+        
+        oldest_date = sorted(dates.keys())
+        
+        print
+        print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
+    
+    else:
+        
+        print &quot;[!!!] No results found on TinEye.&quot;
+
+# grab the Vimeo video details
+image_url = get_vimeo_video(video_id)
+
+# submit the image to TinEye
+search_tineye(image_url)&lt;/pre&gt;&lt;p&gt;That&amp;#8217;s it! We call our &lt;strong&gt;get_vimeo_video &lt;/strong&gt;function to retrieve the preview image URL and then pass it off to our &lt;strong&gt;search_tineye &lt;/strong&gt;function to do the search on TinEye. Let&amp;#8217;s see what happens when we run it.&lt;/p&gt;
+&lt;h2&gt;Let It Rip!&lt;/h2&gt;
+&lt;p&gt;When you run the script using the ID above it would look like this:&lt;/p&gt;
+&lt;p&gt;# python vimeo_reverse_search.py -v 71215064&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;[*] Video uploaded: 2013-07-28 17:34:09&lt;/p&gt;
+&lt;p&gt;[*] Discovered 2 unique URLs with image matches.&lt;br /&gt;
+http://wn.com/Olympic_Games&lt;br /&gt;
+http://www.volleyball-movies.net/category/84&lt;/p&gt;
+&lt;p&gt;[*] Oldest match was crawled on 2014-02-07 00:00:00 at http://wn.com/Olympic_Games&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&amp;nbsp;&lt;/p&gt;
+&lt;p&gt;Cool so we can see that the video was uploaded on July 28, 2013 and we see that the oldest detected image was from February 7, 2014. This &lt;em&gt;&lt;strong&gt;could &lt;/strong&gt;&lt;/em&gt;be an indicator that the video on Vimeo was put online before it was put on the other sites detected.&lt;/p&gt;</description>
+	<pubDate>Sat, 09 Apr 2016 15:37:10 +0000</pubDate>
+</item>
+<item>
+	<title>Investing using Python: Shapiro-Wilk test for normality as signal for low frequency trading strategy</title>
+	<guid>http://www.talaikis.com/shapiro-wilk-test-for-normality-as-signal-for-low-frequency-trading-strategy/</guid>
+	<link>http://www.talaikis.com/shapiro-wilk-test-for-normality-as-signal-for-low-frequency-trading-strategy/</link>
+	<description>Welcome back, me to my site. I was busy with fully abandoning Windows for the Linux and some LAMP stack for some more MEAN stack. Now happy with more efficient disk space and ability to run any Python neural network platform. The Shapiro-Wilk test utilizes the null hypothesis principle to check whether a sample came from [&amp;#8230;]</description>
+	<pubDate>Sat, 09 Apr 2016 13:45:06 +0000</pubDate>
+</item>
+<item>
+	<title>Stefan Behnel: What's new in Cython 0.24</title>
+	<guid>http://blog.behnel.de/posts/whats-new-in-cython-024.html</guid>
+	<link>http://blog.behnel.de/posts/whats-new-in-cython-024.html</link>
+	<description>&lt;div&gt;&lt;p&gt;&lt;a class=&quot;reference external&quot; href=&quot;http://cython.org/&quot;&gt;Cython 0.24&lt;/a&gt; has been released after about half
+a year of development.  Time for a writeup of the most interesting
+features and improvements that already anticipate some of the new
+language features scheduled for CPython 3.6, at the end of this year.&lt;/p&gt;
+&lt;p&gt;My personal feature favourite is &lt;a class=&quot;reference external&quot; href=&quot;https://www.python.org/dev/peps/pep-0498/&quot;&gt;PEP-498&lt;/a&gt; f-strings, e.g.&lt;/p&gt;
+&lt;pre class=&quot;code pycon&quot;&gt;&lt;a name=&quot;rest_code_9d0c4d7607604fefa199573f3b241883-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;
+&lt;a name=&quot;rest_code_9d0c4d7607604fefa199573f3b241883-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'The value is {value}.'&lt;/span&gt;
+&lt;a name=&quot;rest_code_9d0c4d7607604fefa199573f3b241883-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;go&quot;&gt;'The value is 80.'&lt;/span&gt;
+&lt;a name=&quot;rest_code_9d0c4d7607604fefa199573f3b241883-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;n&quot;&gt;f&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Four times the value is {4*value}.'&lt;/span&gt;
+&lt;a name=&quot;rest_code_9d0c4d7607604fefa199573f3b241883-5&quot;&gt;&lt;/a&gt;&lt;span class=&quot;go&quot;&gt;'Four times the value is 320.'&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;I was initially opposed to making them a part of the Python language,
+but then got convinced by others that they do bring an actual
+improvement by making the &lt;tt class=&quot;docutils literal&quot;&gt;.format()&lt;/tt&gt; string formatting a) the One
+Way To Do It compared to the other, older ways, and b) actually
+avoidable by providing a simpler language syntax for it.  Especially
+the indirection of mapping values to format string names is now gone.
+Compare:&lt;/p&gt;
+&lt;pre class=&quot;code pycon&quot;&gt;&lt;a name=&quot;rest_code_28a985cc88d64b83876f02a6471cb73f-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;gp&quot;&gt;&amp;gt;&amp;gt;&amp;gt; &lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'The value is {value}.'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;format&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;rest_code_28a985cc88d64b83876f02a6471cb73f-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;go&quot;&gt;'The value is 80.'&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Sadly, we cannot use them in Cython itself (and we do a &lt;em&gt;lot&lt;/em&gt; of
+string formatting in Cython), since the Python code of the compiler
+still has to run on Python 2.6.  But at least code written in Cython
+can now make use of them, even if the compiled modules need to run in
+Python 2.6.  The only required underlying Python feature is the
+&lt;tt class=&quot;docutils literal&quot;&gt;__format__()&lt;/tt&gt; protocol, which is available in all Python versions
+that Cython supports.  Now that there is a dedicated syntax for string
+formatting that the compiler can see and explore, work has started for
+optimising it further at compile time.&lt;/p&gt;
+&lt;p&gt;EDIT (2016-04-12): f-string formatting is currently about 2-4 times as
+fast in Cython as in CPython 3.6.&lt;/p&gt;
+&lt;p&gt;Another new feature (also from Python 3.6) is the underscore separator
+in number literals, as defined by &lt;a class=&quot;reference external&quot; href=&quot;https://www.python.org/dev/peps/pep-0515/&quot;&gt;PEP 515&lt;/a&gt;.  Since Cython is used a
+lot for developing numeric, scientific and algorithmic code, it's
+certainly helpful to be able to write&lt;/p&gt;
+&lt;pre class=&quot;code cython&quot;&gt;&lt;a name=&quot;rest_code_e76c8a1d6491416795c9df1d2385b70e-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_000_000&lt;/span&gt;
+&lt;a name=&quot;rest_code_e76c8a1d6491416795c9df1d2385b70e-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.14159&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_26535_89&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;rather than the much less readable &quot;count my digits&quot; forms&lt;/p&gt;
+&lt;pre class=&quot;code cython&quot;&gt;&lt;a name=&quot;rest_code_92a22902139a45a5990c03acd40adf26-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1000000&lt;/span&gt;
+&lt;a name=&quot;rest_code_92a22902139a45a5990c03acd40adf26-2&quot;&gt;&lt;/a&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;3.141592653589&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;IDEs like PyCharm and PyDev will still have to catch up with these
+PEPs, but that will come.  It seems that the PyCharm developers have
+already started working on this.&lt;/p&gt;
+&lt;p&gt;Some people complained about the size of the C files that Cython
+generates, so there is now a compiler option to disable the injection
+of C comments that show the original source code line right before the
+C code that came out of it.  Just start your source file with&lt;/p&gt;
+&lt;pre class=&quot;code cython&quot;&gt;&lt;a name=&quot;rest_code_61ca698a7e7446808f81f3be81efd956-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;c&quot;&gt;# cython: emit_code_comments=False&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;or, rather, pass the option from your setup.py script.  The size
+reduction can be quite large.  There is, however, a drawback: this
+makes source level debugging more difficult and also prevents coverage
+reporting.  But since these are developer features, omitting the code
+comments can still be a good choice for release builds.&lt;/p&gt;
+&lt;p&gt;Pure Python mode (i.e. the optimised compilation of &lt;tt class=&quot;docutils literal&quot;&gt;.py&lt;/tt&gt; files) has
+also seen some improvements.  C-tuples are now supported, i.e. you can
+write code as in the following (contrieved) example, which provides
+efficient access to C values of a tuple:&lt;/p&gt;
+&lt;pre class=&quot;code cython&quot;&gt;&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-1&quot;&gt;&lt;/a&gt;&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cython&lt;/span&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-2&quot;&gt;&lt;/a&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-3&quot;&gt;&lt;/a&gt;&lt;span class=&quot;nd&quot;&gt;@cython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;locals&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cython&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-4&quot;&gt;&lt;/a&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;func&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-5&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;1.0&lt;/span&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-6&quot;&gt;&lt;/a&gt;    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]):&lt;/span&gt;
+&lt;a name=&quot;rest_code_c19a668e036a428fa549e0c6db08371f-7&quot;&gt;&lt;/a&gt;        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;p&gt;Type inference will also automatically turn Python tuples into C
+tuples in some cases, but that already happend in previous releases.&lt;/p&gt;
+&lt;p&gt;Cython enums were adapted to &lt;a class=&quot;reference external&quot; href=&quot;https://www.python.org/dev/peps/pep-0435/&quot;&gt;PEP 435&lt;/a&gt; enums and thus use the
+standard Python Enum type if available.&lt;/p&gt;
+&lt;p&gt;And the &lt;tt class=&quot;docutils literal&quot;&gt;@property&lt;/tt&gt; decorator is finally supported for methods in
+&lt;tt class=&quot;docutils literal&quot;&gt;cdef&lt;/tt&gt; classes.  This removes the need for the old special
+&lt;tt class=&quot;docutils literal&quot;&gt;property name:&lt;/tt&gt; syntax block that Cython inherited from Pyrex.
+This syntax is now officially deprecated.&lt;/p&gt;
+&lt;p&gt;Apart from these, there is &lt;a class=&quot;reference external&quot; href=&quot;https://github.com/cython/cython/blob/0.24.x/CHANGES.rst&quot;&gt;the usual list&lt;/a&gt; of
+optimisations, bug fixes and general improvements that went into this
+release.  I am happy to notice that the number of people contributing
+to the code base has been steadily growing over the last couple of
+years.  Thanks to everyone who helps making Cython better with every
+release!&lt;/p&gt;
+&lt;p&gt;And for those interested in learning Cython from a pro, there are
+still places left for the extensive &lt;a class=&quot;reference external&quot; href=&quot;http://www.python-academy.com/courses/specialtopics/python_course_cython.html&quot;&gt;Cython training&lt;/a&gt;
+that I'll be giving in Leipzig (DE) next June, 16-17th.  It's part of
+a larger series of courses throughout that week on &lt;a class=&quot;reference external&quot; href=&quot;http://www.python-academy.com/courses/python_hpc.html&quot;&gt;High-Performance
+Computing with Python&lt;/a&gt;.&lt;/p&gt;&lt;/div&gt;</description>
+	<pubDate>Sat, 09 Apr 2016 12:12:08 +0000</pubDate>
+</item>
+
+</channel>
+</rss>

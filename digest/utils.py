@@ -2,13 +2,15 @@
 
 import os
 
+from typing import Any
 
-def save_fixture(name, data, mode='wb'):
+
+def write_fixture(name: str, data: Any, mode='wb') -> None:
     with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
         fio.write(data)
 
 
-def read_fixture(name, mode='rb'):
+def read_fixture(name: str, mode='rb'):
     with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
         return fio.read()
 

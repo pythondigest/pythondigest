@@ -7,6 +7,7 @@ import re
 
 import requests
 from readability import Document
+from typing import Dict
 
 try:
     from urllib.request import urlopen
@@ -25,12 +26,12 @@ from django.conf import settings
 from django.core.management import call_command
 
 
-def parse_weekly_digest(item_data):
+def parse_weekly_digest(item_data: Dict):
     if 'Python Weekly' in item_data.get('title'):
         call_command('import_python_weekly', item_data.get('link'))
 
 
-def is_weekly_digest(item_data):
+def is_weekly_digest(item_data: Dict) -> bool:
     title = item_data.get('title')
     return bool(
         'Python Weekly' in title
@@ -294,7 +295,7 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
     return functions.get(then_action)
 
 
-def apply_video_rules(item_data: dict):
+def apply_video_rules(item_data: Dict) -> Dict:
     """
     Применяем правила (захардкоженые) для раздела Видео
     В данном случае если раздел видео, то пытаемся выдрать ссылку на видео
@@ -302,14 +303,13 @@ def apply_video_rules(item_data: dict):
     :return:
     """
     youtube_links = ['youtu.be', 'youtube.com', 'youtube-nocookie.com']
-
-    result = item_data
+    result = {}
     if item_data.get('section') == Section.objects.get(title='Видео') \
             and all(x not in item_data.get('link') for x in youtube_links) \
             and 'raw_content' in item_data:
         url = get_youtube_url_from_page(item_data.get('raw_content'))
         if url is not None:
-            item_data['additionally'] = url
+            result['additionally'] = url
     return result
 
 
