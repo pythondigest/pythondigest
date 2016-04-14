@@ -24,5 +24,5 @@ class Command(BaseCommand):
 
         pub_to_all(
             issue.announcement,
-            '{}{}'.format(site, issue.link),
-            '{}{}'.format(site, issue.image.url if issue.image else ''))
+            '{0}{1}'.format(site, issue.link),
+            '{0}{1}'.format(site, issue.image.url if issue.image else ''))

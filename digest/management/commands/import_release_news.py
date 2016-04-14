@@ -15,7 +15,7 @@ from digest.models import Package, Section, Resource, Issue
 def _generate_release_item(package_version: str, link: str,
                            resource: Resource, section: Section,
                            package_data: dict):
-    name = u"{} - {}".format(package_data.get('name'), package_version)
+    name = u"{0} - {1}".format(package_data.get('name'), package_version)
     description = u"{2}." \
                   u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
                   u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
