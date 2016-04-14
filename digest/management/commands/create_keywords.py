@@ -48,7 +48,7 @@ def get_keywords(api, text) -> list:
 
 def create_keywords(api, item):
     if item.article_path and os.path.exists(item.article_path):
-        logger.info("Process: {}".format(item.pk))
+        logger.info("Process: {0}".format(item.pk))
         with open(item.article_path) as fio:
             keywords = get_keywords(api, strip_tags(fio.read()))
             item.keywords.add(*keywords)

@@ -65,7 +65,7 @@ class GitterAPI(object):
         """
         headers = {
             'Accept': 'application/json',
-            'Authorization': 'Bearer {}'.format(self.token),
+            'Authorization': 'Bearer {0}'.format(self.token),
         }
         r = requests.get('https://api.gitter.im/v1/rooms', headers=headers)
 
@@ -87,7 +87,7 @@ class GitterAPI(object):
         headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/json',
-            'Authorization': 'Bearer {}'.format(self.token),
+            'Authorization': 'Bearer {0}'.format(self.token),
         }
         room_id = self.room_id_dict.get(room)
         url = 'https://api.gitter.im/v1/rooms/{room_id}/chatMessages'.format(room_id=room_id)
@@ -192,7 +192,7 @@ def pub_to_telegram(text, bot_token, tg_channel):
 
 
 def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
-    url = 'https://maker.ifttt.com/trigger/pub_digest/with/key/{}'.format(ifttt_key)
+    url = 'https://maker.ifttt.com/trigger/pub_digest/with/key/{0}'.format(ifttt_key)
 
     data = {
         'value1': text,
@@ -220,7 +220,7 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
                              scope='wall,messages')
     api = vk.API(session)
 
-    twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {}'.format(digest_url)
+    twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(digest_url)
     twitter_api = init_auth(settings.TWITTER_CONSUMER_KEY,
                             settings.TWITTER_CONSUMER_SECRET,
                             settings.TWITTER_TOKEN,
