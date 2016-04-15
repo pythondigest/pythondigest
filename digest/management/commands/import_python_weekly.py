@@ -74,7 +74,8 @@ def _apply_rules_wrap(**kwargs):
         item.update(
             apply_parsing_rules(item, **rules)
             if kwargs.get('query_rules') else {})
-        return apply_video_rules(item.copy())
+        item.update(apply_video_rules(item))
+        return item
 
     return _apply_rules
 
