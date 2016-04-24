@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import datetime
+from functools import partial
 
 from django.test import TestCase
 from mock import patch
@@ -48,12 +49,8 @@ class ImportRSSTest(TestCase):
         Item(title=rss_items[1]['title'], link=rss_items[1]['link'], section=self.section).save()
         Item(title=rss_items[2]['title'], link=rss_items[2]['link'], section=self.section).save()
         Item(title=rss_items[3]['title'], link=rss_items[3]['link'], section=self.section).save()
+        Item(title=rss_items[4]['title'], link=rss_items[4]['link'], related_to_date=datetime.date(2005, 7, 14), section=self.section).save()
+        Item(title=rss_items[5]['title'], link=rss_items[5]['link'], related_to_date=datetime.date(2016, 4, 12), section=self.section).save()
 
-        Item(title=rss_items[4]['title'], link=rss_items[4]['link'],
-             related_to_date=datetime.date(2005, 7, 14),
-             section=self.section).save()
-        Item(title=rss_items[5]['title'], link=rss_items[5]['link'],
-             related_to_date=datetime.date(2016, 4, 12),
-             section=self.section).save()
-
-        self.assertEqual(len(list(filter(is_not_exists_rss_item, rss_items))), 20)
+        fil = partial(is_not_exists_rss_item, minimum_date=datetime.date(2016, 4, 11))
+        self.assertEqual(len(list(filter(fil, rss_items))), 20)
