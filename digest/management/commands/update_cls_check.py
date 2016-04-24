@@ -33,7 +33,9 @@ class Command(BaseCommand):
         url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
 
         items = ItemClsCheck.objects.filter(item__id__in=ids)
-        while part_size * cur_part < items.count():
+        cnt = items.count()
+        while part_size * cur_part < cnt:
+            print(cur_part)
 
             links_items = items._clone()
             links_items = links_items[part_size * cur_part:part_size * (cur_part + 1)]
@@ -61,3 +63,5 @@ class Command(BaseCommand):
                     status = resp_data.get(x.item.link, False)
                 x.status = status
                 x.save()
+
+            cur_part += 1
