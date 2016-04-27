@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import datetime
 import re
 from time import mktime
+from urllib.error import HTTPError
 from urllib.request import urlopen
 
 import feedparser
@@ -68,31 +69,34 @@ def get_items_from_rss(rss_link: str) -> List[Dict]:
     :return: list of dicts, each dict includes link, title, description and news data of rss item
     """
     rss_items = []
-    response = urlopen(rss_link, timeout=10)
-    res_news = feedparser.parse(response.read())
-    response.close()
+    try:
+        response = urlopen(rss_link, timeout=10)
+        res_news = feedparser.parse(response.read())
+        response.close()
 
-    for n in res_news.entries:
+        for n in res_news.entries:
 
-        news_time = getattr(n, 'published_parsed', None)
-        if news_time is not None:
-            _timestamp = mktime(news_time)
-            news_date = datetime.datetime.fromtimestamp(_timestamp).date()
-        else:
-            news_date = datetime.date.today()
+            news_time = getattr(n, 'published_parsed', None)
+            if news_time is not None:
+                _timestamp = mktime(news_time)
+                news_date = datetime.datetime.fromtimestamp(_timestamp).date()
+            else:
+                news_date = datetime.date.today()
 
-        # create data dict
-        try:
-            summary = re.sub('<.*?>', '', n.summary)
-        except (AttributeError, KeyError):
-            summary = ''
+            # create data dict
+            try:
+                summary = re.sub('<.*?>', '', n.summary)
+            except (AttributeError, KeyError):
+                summary = ''
 
-        rss_items.append({
-            'title': n.title,
-            'link': n.link,
-            'description': summary,
-            'related_to_date': news_date,
-        })
+            rss_items.append({
+                'title': n.title,
+                'link': n.link,
+                'description': summary,
+                'related_to_date': news_date,
+            })
+    except HTTPError:
+        rss_items = []
 
     return rss_items
 
