@@ -134,11 +134,12 @@ def import_rss(**kwargs):
                                       get_items_from_rss(src.link))))
 
         # parse weekly digests
-        list(map(parse_weekly_digest, filter(is_weekly_digest, rss_items)))
+        digests_items = list(rss_items)
+        list(map(parse_weekly_digest, filter(is_weekly_digest, digests_items)))
 
         resource = src.resource
         language = src.language
-        for i, rss_item in enumerate(rss_items):
+        for i, rss_item in enumerate(digests_items):
             rss_item.update({
                 'resource': resource,
                 'language': language,
