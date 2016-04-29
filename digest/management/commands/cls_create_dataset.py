@@ -63,7 +63,7 @@ class Command(BaseCommand):
         additional_data = []
         for x in glob.glob('%s/*.json' % options['dataset_folder']):
             with open(x, 'r') as fio:
-                additional_data.append(json.load(fio)['links'])
+                additional_data.extend(json.load(fio)['links'])
 
         query = Q()
 
