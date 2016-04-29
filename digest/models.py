@@ -286,7 +286,7 @@ class Item(models.Model):
         global LIBRARY_SECTIONS
         if LIBRARY_SECTIONS is None:
             load_library_sections()
-        if any([x == self.section_id for x in LIBRARY_SECTIONS]) or self.section is not None:
+        if any([x == self.section_id for x in LIBRARY_SECTIONS]):
             return 'library'
         else:
             return 'article'
