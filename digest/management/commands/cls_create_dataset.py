@@ -74,7 +74,7 @@ class Command(BaseCommand):
         for entry in urls:
             query = query | Q(link__contains=entry)
 
-        items = Item.objects.exclude(query).order_by('?')
+        items = Item.objects.exclude(query).exclude(section=None).order_by('?')
         items_data = [x.get_data4cls(status=True) for x in items]
         items_data.extend(additional_data)
         random.shuffle(items_data)
