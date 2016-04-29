@@ -40,7 +40,10 @@ def load_library_sections():
         'Интересные проекты, инструменты, библиотеки',
         'Релизы'
     ]
-    LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in titles]
+    try:
+        LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in titles]
+    except (ObjectDoesNotExist, Section.DoesNotExist):
+        LIBRARY_SECTIONS = []
 
 
 def get_start_end_of_week(dt):
