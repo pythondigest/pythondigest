@@ -65,6 +65,8 @@ class Command(BaseCommand):
             with open(x, 'r') as fio:
                 additional_data.extend(json.load(fio)['links'])
 
+        additional_data = additional_data
+
         query = Q()
 
         urls = [
@@ -75,6 +77,7 @@ class Command(BaseCommand):
             query = query | Q(link__contains=entry)
 
         items = Item.objects.exclude(query).exclude(section=None).order_by('?')
+
         items_data = [x.get_data4cls(status=True) for x in items]
         items_data.extend(additional_data)
         random.shuffle(items_data)

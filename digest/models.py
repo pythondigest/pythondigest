@@ -31,6 +31,17 @@ import logging
 logger = logging.getLogger(__name__)
 ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'),)
 
+LIBRARY_SECTIONS = None
+
+
+def load_library_sections():
+    global LIBRARY_SECTIONS
+    titles = [
+        'Интересные проекты, инструменты, библиотеки',
+        'Релизы'
+    ]
+    LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in titles]
+
 
 def get_start_end_of_week(dt):
     start = dt - datetime.timedelta(days=dt.weekday())
@@ -272,9 +283,10 @@ class Item(models.Model):
 
     @property
     def link_type(self):
-        if self.section is not None and any(
-                [self.section.title == 'Интересные проекты, инструменты, библиотеки',
-                 self.section.title == 'Релизы']):
+        global LIBRARY_SECTIONS
+        if LIBRARY_SECTIONS is None:
+            load_library_sections()
+        if any([x == self.section_id for x in LIBRARY_SECTIONS]) or self.section is not None:
             return 'library'
         else:
             return 'article'
