@@ -98,8 +98,9 @@ def modify_url_(url, operation, *args):
     op = getattr(url, operation, None)
     if callable(op):
         return text_type(op(*args))
-    raise Exception('%s is incorrect function name for urlobject.URLObject' %
-                    operation)
+    raise Exception(
+        '{} is incorrect function name for urlobject.URLObject'.format(
+            operation))
 
 
 @register.simple_tag(name='money_block_title')

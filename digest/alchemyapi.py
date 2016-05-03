@@ -51,9 +51,8 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1]:
         if len(sys.argv[1]) == 40:
             # write the key to the file
-            f = open('api_key.txt', 'w')
-            f.write(sys.argv[1])
-            f.close()
+            with open('api_key.txt', 'w') as f:
+                f.write(sys.argv[1])
             print('Key: ' + sys.argv[1] + ' was written to api_key.txt')
             print(
                 'You are now ready to start using AlchemyAPI. For an example, run: python example.py')

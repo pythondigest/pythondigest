@@ -15,7 +15,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
-from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _
 from readability.readability import Document, Unparseable
 from taggit.managers import TaggableManager
@@ -109,12 +108,10 @@ class Issue(models.Model):
     """
     title = models.CharField(
         verbose_name=_("Title"), max_length=255)
-    description = models.TextField(
-        verbose_name=_("Description"), null=True, blank=True)
-    announcement = models.TextField(
-        verbose_name=_("Announcement"), null=True, blank=True)
+    description = models.TextField(verbose_name=_("Description"), blank=True)
+    announcement = models.TextField(verbose_name=_("Announcement"), blank=True)
     image = models.ImageField(
-        verbose_name=_("Image"), upload_to='issues', null=True, blank=True)
+        verbose_name=_("Image"), upload_to='issues', blank=True)
     date_from = models.DateField(
         verbose_name=_("Start date"), null=True, blank=True)
     date_to = models.DateField(
@@ -127,7 +124,7 @@ class Issue(models.Model):
         choices=ISSUE_STATUS_CHOICES,
         default=ISSUE_STATUS_DEFAULT)
     trend = models.CharField(
-        verbose_name=_("Trend"), blank=True, null=True, max_length=255)
+        verbose_name=_("Trend"), blank=True, max_length=255)
     last_item = models.IntegerField(
         verbose_name=_("Latest moderated Item"), blank=True, null=True)
 
@@ -156,7 +153,7 @@ class Section(models.Model):
         verbose_name=_("Status"), max_length=10,
         choices=SECTION_STATUS_CHOICES, default=SECTION_STATUS_DEFAULT)
     icon = models.CharField(
-        verbose_name=_("Icon"), max_length=255, null=True, blank=True)
+        verbose_name=_("Icon"), max_length=255, blank=True)
 
     def __str__(self):
         return self.title
@@ -174,7 +171,7 @@ class Resource(models.Model):
     title = models.CharField(
         verbose_name=_("Title"), max_length=255)
     description = models.TextField(
-        verbose_name=_("Description"), null=True, blank=True)
+        verbose_name=_("Description"), blank=True)
     link = models.URLField(
         verbose_name=_("URL"), max_length=255)
 
@@ -198,7 +195,7 @@ class Item(models.Model):
     is_editors_choice = models.BooleanField(
         verbose_name=_("Is editors choice"), default=False)
     description = models.TextField(
-        verbose_name=_("Description"), null=True, blank=True)
+        verbose_name=_("Description"), blank=True)
     issue = models.ForeignKey(
         Issue,
         verbose_name=_("Issue of digest"), null=True, blank=True)
@@ -209,7 +206,7 @@ class Item(models.Model):
         verbose_name=_("URL"), max_length=255)
     additionally = models.CharField(
         verbose_name=_("Additional info"),
-        max_length=255, null=True, blank=True)
+        max_length=255, blank=True)
     related_to_date = models.DateField(
         verbose_name=_("Date"),
         help_text=_("For example, publication date of the news on the source"),
@@ -278,7 +275,7 @@ class Item(models.Model):
         global LIBRARY_SECTIONS
         if LIBRARY_SECTIONS is None:
             load_library_sections()
-        if any([x == self.section_id for x in LIBRARY_SECTIONS]):
+        if any((x == self.section_id for x in LIBRARY_SECTIONS)):
             return 'library'
         else:
             return 'article'
@@ -416,11 +413,11 @@ class AutoImportResource(models.Model):
         max_length=255, help_text='Условие отбора новостей <br /> \
                    Включение вида [text] <br /> \
                    Включение при выводе будет удалено',
-        null=True, blank=True)
+        blank=True)
     excl = models.TextField(
         verbose_name=u'Exceptions',
         help_text='List of exceptions, indicate by ", "',
-        null=True, blank=True)
+        blank=True)
     in_edit = models.BooleanField(
         verbose_name=_("On testing"), default=False)
     language = models.CharField(
@@ -438,7 +435,7 @@ class AutoImportResource(models.Model):
 class Package(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=255)
     description = models.TextField(
-        verbose_name=_("Description"), null=True, blank=True)
+        verbose_name=_("Description"), blank=True)
     link = models.URLField(
         verbose_name=_("URL"), max_length=255, unique=True)
 
