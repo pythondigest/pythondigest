@@ -58,7 +58,7 @@ def parse_rss():
         packages = {
             x.get('name').strip(): x
             for x in list(Package.objects.all()
-                          .values('name', 'description', 'url'))
+                          .values('name', 'description', 'link'))
         }
         _start_week, _end_week = get_start_end_of_week(today)
         _ = Issue.objects.filter(date_from=_start_week, date_to=_end_week)

@@ -354,7 +354,7 @@ ADMIN_REORDER = (
     'auth',
     # 'account',
     'django_q',
-    # 'default',
+    'default',
 
 )
 

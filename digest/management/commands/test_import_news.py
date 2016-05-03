@@ -26,7 +26,7 @@ def get_tweets():
         num = 0
 
         print('\n\n' + '=' * 25)
-        print('  ' + src.name)
+        print('  ' + src.title)
         print('=' * 25 + '\n')
         resource = src.resource
         excl = src.excl.split(', ')
@@ -64,7 +64,7 @@ def get_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss',
                                                  in_edit=False):
         print('\n\n' + '=' * 25)
-        print('  ' + src.name)
+        print('  ' + src.title)
         print('=' * 25 + '\n')
 
         num = 0

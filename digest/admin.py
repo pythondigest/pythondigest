@@ -112,7 +112,7 @@ admin.site.register(Section, SectionAdmin)
 
 
 class ParsingRulesAdmin(admin.ModelAdmin):
-    list_display = ('name', 'is_activated', 'weight', 'if_element',
+    list_display = ('title', 'is_activated', 'weight', 'if_element',
                     '_get_if_action', 'then_element', '_get_then_action',)
 
     list_filter = ('is_activated', 'if_element', 'if_action', 'then_element',
@@ -120,18 +120,19 @@ class ParsingRulesAdmin(admin.ModelAdmin):
 
     list_editable = ('is_activated',)
 
-    search_fields = ('is_activated', 'name', 'if_value', 'then_value',)
+    search_fields = ('is_activated', 'title', 'if_value', 'then_value',)
 
     def _get_if_action(self, obj):
-        return u"{0}: <i>{1}</i>".format(obj.get_if_action_display(),
-                                       obj.if_value)
+        return u"{0}: <i>{1}</i>".format(
+            obj.get_if_action_display(),
+            obj.if_value)
 
     _get_if_action.allow_tags = True
     _get_if_action.short_description = u"Условие"
 
     def _get_then_action(self, obj):
         return u"{0}: <i>{1}</i>".format(obj.get_then_action_display(),
-                                       obj.then_value)
+                                         obj.then_value)
 
     _get_then_action.allow_tags = True
     _get_then_action.short_description = u"Действие"
@@ -160,8 +161,8 @@ class ItemAdmin(admin.ModelAdmin):
     list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
                    'related_to_date', 'resource',)
     search_fields = ('title', 'description', 'link', 'resource__title')
-    list_display = ('title', 'section', 'status', 'external_link', 'related_to_date',
-                    'is_editors_choice', 'resource',)
+    list_display = ('title', 'section', 'status', 'external_link',
+                    'related_to_date', 'is_editors_choice', 'resource',)
 
     list_editable = ('is_editors_choice', 'section')
     exclude = ('modified_at',),
@@ -191,7 +192,7 @@ admin.site.register(Resource, ResourceAdmin)
 
 
 class AutoImportResourceAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link_html', 'type_res', 'resource', 'incl',
+    list_display = ('title', 'link_html', 'type_res', 'resource', 'incl',
                     'excl', 'in_edit', 'language')
     formfield_overrides = {
         models.TextField: {
@@ -400,7 +401,8 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
-        super(ItemDailyModeratorAdmin, self).save_model(request, obj, form, change)
+        super(ItemDailyModeratorAdmin, self).save_model(request, obj, form,
+                                                        change)
 
 
 admin.site.register(ItemDailyModerator, ItemDailyModeratorAdmin)
@@ -418,7 +420,6 @@ class ItemClsAdmin(admin.ModelAdmin):
         'status',
         'issue',
         'section',
-
         'resource',
     )
     search_fields = ('title', 'description', 'link')
@@ -443,7 +444,8 @@ class ItemClsAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
-            return super(ItemClsAdmin, self).get_queryset(request).filter(pk__lte=Issue.objects.all().first().last_item)
+            return super(ItemClsAdmin, self).get_queryset(request).filter(
+                pk__lte=Issue.objects.all().first().last_item)
         except ValueError as e:
             print(e)
             return super(ItemClsAdmin, self).get_queryset(request)
@@ -455,7 +457,7 @@ admin.site.register(ItemCls, ItemClsAdmin)
 class ItemClsCheckAdmin(admin.ModelAdmin):
     fields = (
         'item',
-        'status',
+        'score',
         'last_check',
     )
     readonly_fields = (
@@ -464,11 +466,11 @@ class ItemClsCheckAdmin(admin.ModelAdmin):
     list_display = (
         'item',
         'last_check',
-        'status',
+        'score',
     )
 
     list_filter = (
-        'status',
+        'score',
         'last_check',
     )
 
