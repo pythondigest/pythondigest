@@ -17,7 +17,6 @@ from django.dispatch import receiver
 from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
 from readability.readability import Document, Unparseable
-from taggit.managers import TaggableManager
 from taggit.models import TagBase, GenericTaggedItemBase
 from taggit_autosuggest.managers import TaggableManager
 
