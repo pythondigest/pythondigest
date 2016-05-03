@@ -7,7 +7,6 @@ import requests
 import requests.exceptions
 import secretballot
 import simplejson.scanner
-from concurrency.fields import IntegerVersionField
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -16,7 +15,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
-from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy as _
 from readability.readability import Document, Unparseable
 from taggit.managers import TaggableManager
@@ -29,9 +27,44 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-ISSUE_STATUS_CHOICES = (('active', u'Активный'), ('draft', u'Черновик'),)
+ISSUE_STATUS_CHOICES = (('active', _('Active')), ('draft', _('Draft')),)
+ISSUE_STATUS_DEFAULT = 'draft'
+ITEM_STATUS_DEFAULT = 'pending'
 
+ITEM_STATUS_CHOICES = (
+    ('pending', _("Pending")),
+    ('active', _("Active")),
+    ('draft', _("Draft")),
+    ('moderated', _("Moderated")),
+    ('autoimport', _("Imported")),
+    ('queue', _("In queue")),
+)
+
+SECTION_STATUS_CHOICES = (('pending', _("Pending")),
+                          ('active', _("Active")),)
+SECTION_STATUS_DEFAULT = 'active'
+
+ITEM_LANGUAGE_CHOICES = (('ru', _("Russian")), ('en', _("English")),)
+ITEM_LANGUAGE_DEFAULT = 'en'
 LIBRARY_SECTIONS = None
+TYPE_RESOURCE_DEFAULT = 'twitter'
+TYPE_RESOURCE = (('twitter', _("Twitter feed")),
+                 ('rss', _("RSS feed")),)
+
+
+def build_url(*args, **kwargs):
+    params = kwargs.pop('params', {})
+    url = reverse(*args, **kwargs)
+    if not params: return url
+
+    query_dict = QueryDict('', mutable=True)
+    for k, v in params.items():
+        if type(v) is list:
+            query_dict.setlist(k, v)
+        else:
+            query_dict[k] = v
+
+    return url + '?' + query_dict.urlencode()
 
 
 def load_library_sections():
@@ -41,7 +74,8 @@ def load_library_sections():
         'Релизы'
     ]
     try:
-        LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in titles]
+        LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in
+                            titles]
     except (ObjectDoesNotExist, Section.DoesNotExist):
         LIBRARY_SECTIONS = []
 
@@ -53,54 +87,46 @@ def get_start_end_of_week(dt):
 
 
 class Keyword(TagBase):
+    """
+    Keyword is a word for SEO optimization
+    """
+
     class Meta:
         verbose_name = _("Keyword")
         verbose_name_plural = _("Keywords")
 
 
 class KeywordGFK(GenericTaggedItemBase):
-    tag = models.ForeignKey(Keyword, related_name="%(app_label)s_%(class)s_items")
+    tag = models.ForeignKey(Keyword,
+                            related_name="%(app_label)s_%(class)s_items")
 
 
 class Issue(models.Model):
-    """Выпуск дайджеста."""
-    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
-    description = models.TextField(verbose_name=u'Описание',
-                                   null=True,
-                                   blank=True, )
-    announcement = models.TextField(verbose_name=u'Анонс',
-                                    null=True,
-                                    blank=True, )
-    image = models.ImageField(verbose_name=u'Постер',
-                              upload_to='issues',
-                              null=True,
-                              blank=True, )
-    date_from = models.DateField(verbose_name=u'Начало освещаемого периода',
-                                 null=True,
-                                 blank=True, )
-    date_to = models.DateField(verbose_name=u'Завершение освещаемого периода',
-                               null=True,
-                               blank=True, )
-    published_at = models.DateField(verbose_name=u'Дата публикации',
-                                    null=True,
-                                    blank=True, )
-    status = models.CharField(verbose_name=u'Статус',
-                              max_length=10,
-                              choices=ISSUE_STATUS_CHOICES,
-                              default='draft', )
-    version = IntegerVersionField(verbose_name=u'Версия')
-
-    tip = models.ForeignKey(Tip, null=True, blank=True, verbose_name=u'Совет')
-
-    trend = models.CharField(verbose_name='Тенденция недели',
-                             blank=True,
-                             null=True,
-                             max_length=255, )
-
+    """
+    The issue of the digest.
+    It is collection of `Items`
+    """
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
+    description = models.TextField(verbose_name=_("Description"), blank=True)
+    announcement = models.TextField(verbose_name=_("Announcement"), blank=True)
+    image = models.ImageField(
+        verbose_name=_("Image"), upload_to='issues', blank=True)
+    date_from = models.DateField(
+        verbose_name=_("Start date"), null=True, blank=True)
+    date_to = models.DateField(
+        verbose_name=_("End date"), null=True, blank=True)
+    published_at = models.DateField(
+        verbose_name=_("Publication date"), null=True, blank=True)
+    status = models.CharField(
+        verbose_name=_("Status"),
+        max_length=10,
+        choices=ISSUE_STATUS_CHOICES,
+        default=ISSUE_STATUS_DEFAULT)
+    trend = models.CharField(
+        verbose_name=_("Trend"), blank=True, max_length=255)
     last_item = models.IntegerField(
-        verbose_name='Последняя модерированая новость',
-        blank=True,
-        null=True, )
+        verbose_name=_("Latest moderated Item"), blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -111,143 +137,103 @@ class Issue(models.Model):
 
     class Meta:
         ordering = ['-pk']
-        verbose_name = u'Выпуск дайджеста'
-        verbose_name_plural = u'Выпуски дайджеста'
-
-
-SECTION_STATUS_CHOICES = (('pending', u'Ожидает проверки'),
-                          ('active', u'Активный'),)
+        verbose_name = _("Issue of digest")
+        verbose_name_plural = _("Issues of digest")
 
 
 class Section(models.Model):
-    """Раздел."""
-    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
+    """
+    Section is a category of news-item
+    """
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
     priority = models.PositiveIntegerField(
-        verbose_name=u'Приоритет при показе',
-        default=0, )
-    status = models.CharField(verbose_name=u'Статус',
-                              max_length=10,
-                              choices=SECTION_STATUS_CHOICES,
-                              default='active', )
-    version = IntegerVersionField(verbose_name=u'Версия')
-    habr_icon = models.CharField(max_length=255,
-                                 verbose_name=u'Иконка для хабры',
-                                 null=True,
-                                 blank=True)
+        verbose_name=_("Priority"), default=0)
+    status = models.CharField(
+        verbose_name=_("Status"), max_length=10,
+        choices=SECTION_STATUS_CHOICES, default=SECTION_STATUS_DEFAULT)
+    icon = models.CharField(
+        verbose_name=_("Icon"), max_length=255, blank=True)
 
     def __str__(self):
         return self.title
 
     class Meta:
         ordering = ['-pk']
-        verbose_name = u'Раздел'
-        verbose_name_plural = u'Разделы'
+        verbose_name = _("Section")
+        verbose_name_plural = _("Sections")
 
 
 class Resource(models.Model):
-    """Источник получения информации."""
-    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
-    description = models.TextField(verbose_name=u'Описание',
-                                   null=True,
-                                   blank=True, )
-    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
-    version = IntegerVersionField(verbose_name=u'Версия')
+    """
+    A script extracts news from `Resource`
+    """
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
+    description = models.TextField(
+        verbose_name=_("Description"), blank=True)
+    link = models.URLField(
+        verbose_name=_("URL"), max_length=255)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = u'Источник'
-        verbose_name_plural = u'Источники'
-
-
-ITEM_STATUS_CHOICES = (
-    ('pending', u'На рассмотрении'),
-    ('active', u'Активная'),
-    ('draft', u'Черновик'),
-    ('moderated', u'Рассмотрена'),
-    ('autoimport', u'Автоимпорт'),
-    ('queue', u'В очереди'),
-)
-
-ITEM_LANGUAGE_CHOICES = (('ru', u'Русский'), ('en', u'Английский'),)
-
-
-def build_url(*args, **kwargs):
-    params = kwargs.pop('params', {})
-    url = reverse(*args, **kwargs)
-    if not params: return url
-
-    qdict = QueryDict('', mutable=True)
-    for k, v in params.items():
-        if type(v) is list:
-            qdict.setlist(k, v)
-        else:
-            qdict[k] = v
-
-    return url + '?' + qdict.urlencode()
+        verbose_name = _("Resource")
+        verbose_name_plural = _("Resources")
 
 
 class Item(models.Model):
-    """Новость."""
-    section = models.ForeignKey(Section,
-                                verbose_name=u'Раздел',
-                                null=True,
-                                blank=True, )
-    title = models.CharField(max_length=255, verbose_name=u'Заголовок', )
-    is_editors_choice = models.BooleanField(verbose_name=u'Выбор редакции',
-                                            default=False, )
-    description = models.TextField(verbose_name=u'Описание',
-                                   null=True,
-                                   blank=True, )
-    issue = models.ForeignKey(Issue,
-                              verbose_name=u'Выпуск дайджеста',
-                              null=True,
-                              blank=True, )
-    resource = models.ForeignKey(Resource,
-                                 verbose_name=u'Источник',
-                                 null=True,
-                                 blank=True, )
-    link = models.URLField(max_length=255, verbose_name=u'Ссылка', )
-    additionally = models.CharField(max_length=255,
-                                    verbose_name=u'Дополнительно',
-                                    null=True,
-                                    blank=True)
+    """
+    Item is a content, is a link
+    """
+    section = models.ForeignKey(
+        Section,
+        verbose_name=_("Section"), null=True, blank=True)
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
+    is_editors_choice = models.BooleanField(
+        verbose_name=_("Is editors choice"), default=False)
+    description = models.TextField(
+        verbose_name=_("Description"), blank=True)
+    issue = models.ForeignKey(
+        Issue,
+        verbose_name=_("Issue of digest"), null=True, blank=True)
+    resource = models.ForeignKey(
+        Resource,
+        verbose_name=_("Resource"), null=True, blank=True)
+    link = models.URLField(
+        verbose_name=_("URL"), max_length=255)
+    additionally = models.CharField(
+        verbose_name=_("Additional info"),
+        max_length=255, blank=True)
     related_to_date = models.DateField(
-        verbose_name=u'Дата',
-        help_text=u'Например, дата публикации новости на источнике',
-        default=datetime.datetime.today, )
-    status = models.CharField(verbose_name=u'Статус',
-                              max_length=10,
-                              choices=ITEM_STATUS_CHOICES,
-                              default='pending', )
-    language = models.CharField(verbose_name=u'Язык новости',
-                                max_length=2,
-                                choices=ITEM_LANGUAGE_CHOICES,
-                                default='en', )
-    created_at = models.DateField(verbose_name=u'Дата публикации',
-                                  auto_now_add=True, )
-    modified_at = models.DateTimeField(verbose_name=u'Дата изменения',
-                                       null=True,
-                                       blank=True, )
-
+        verbose_name=_("Date"),
+        help_text=_("For example, publication date of the news on the source"),
+        default=datetime.datetime.today)
+    status = models.CharField(
+        verbose_name=_("Status"), max_length=10,
+        choices=ITEM_STATUS_CHOICES, default=ITEM_STATUS_DEFAULT)
+    language = models.CharField(
+        verbose_name=u'Язык новости', max_length=2,
+        choices=ITEM_LANGUAGE_CHOICES, default=ITEM_LANGUAGE_DEFAULT)
+    created_at = models.DateField(
+        verbose_name=_("Created date"), auto_now_add=True)
+    modified_at = models.DateTimeField(
+        verbose_name=_("modified date"), null=True, blank=True)
     activated_at = models.DateTimeField(
-        verbose_name=u'Дата активации',
-        default=datetime.datetime.now,
-    )
+        verbose_name=_("Activated date"), default=datetime.datetime.now)
     priority = models.PositiveIntegerField(
-        verbose_name=u'Приоритет при показе',
-        default=0, )
-    user = models.ForeignKey(User,
-                             verbose_name=u'Кто добавил новость',
-                             editable=False,
-                             null=True,
-                             blank=True, )
-    version = IntegerVersionField(verbose_name=u'Версия')
+        verbose_name=_("Priority"), default=0)
+    user = models.ForeignKey(
+        User,
+        verbose_name=_('Who added item'), editable=False,
+        null=True, blank=True)
+    article_path = models.FilePathField(
+        verbose_name=_("Article path"), blank=True, null=True)
     tags = TaggableManager(blank=True)
-    keywords = TaggableManager(through=KeywordGFK, blank=True, verbose_name=_("Keywords"))
-    to_update = models.BooleanField(verbose_name=u'Обновить новость', default=False, )
-    article_path = models.FilePathField(verbose_name='Путь до статьи', blank=True, null=True)
+    keywords = TaggableManager(
+        verbose_name=_("Keywords"), through=KeywordGFK, blank=True)
 
     def save(self, *args, **kwargs):
         try:
@@ -267,7 +253,7 @@ class Item(models.Model):
                 elif issue.count() == 1:
                     self.issue = issue[0]
                 else:
-                    raise Exception('Несколько выпусков на неделе')
+                    raise Exception('Many issues are on one week')
 
         except Exception as e:
             logger.error("Many issues are on one week: {0}".format(e))
@@ -282,21 +268,22 @@ class Item(models.Model):
             item = ItemClsCheck(item=self)
             item.save()
             item.check_cls(force=True)
-        return item.status
+        return item.score
 
     @property
     def link_type(self):
         global LIBRARY_SECTIONS
         if LIBRARY_SECTIONS is None:
             load_library_sections()
-        if any([x == self.section_id for x in LIBRARY_SECTIONS]):
+        if any((x == self.section_id for x in LIBRARY_SECTIONS)):
             return 'library'
         else:
             return 'article'
 
     @property
     def text(self):
-        if self.article_path is not None and self.article_path and os.path.exists(self.article_path):
+        if self.article_path is not None and self.article_path and os.path.exists(
+                self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:
@@ -306,8 +293,10 @@ class Item(models.Model):
                 try:
                     result = Document(text,
                                       min_text_length=50,
-                                      positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
-                                      negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
+                                      positive_keywords=','.join(
+                                          settings.DATASET_POSITIVE_KEYWORDS),
+                                      negative_keywords=','.join(
+                                          settings.DATASET_NEGATIVE_KEYWORDS)
                                       ).summary()
                 except Unparseable:
                     result = text
@@ -316,7 +305,8 @@ class Item(models.Model):
                     requests.exceptions.Timeout,
                     requests.exceptions.TooManyRedirects) as e:
                 result = ''
-            self.article_path = os.path.join(settings.DATASET_ROOT, '{0}.html'.format(self.id))
+            self.article_path = os.path.join(settings.DATASET_ROOT,
+                                             '{0}.html'.format(self.id))
             with open(self.article_path, 'w') as fio:
                 fio.write(result)
             self.save()
@@ -345,7 +335,8 @@ class Item(models.Model):
 
     @property
     def tags_as_links(self):
-        return [(x.name, build_url('digest:feed', params={'tag': x.name})) for x in self.tags.all()]
+        return [(x.name, build_url('digest:feed', params={'tag': x.name})) for x
+                in self.tags.all()]
 
     @property
     def tags_as_str(self):
@@ -357,107 +348,103 @@ class Item(models.Model):
 
     @property
     def keywords_as_str(self):
-        return ', '.join(list(set([x.name for x in self.keywords.all()]))[:13])
+        return ', '.join(list({x.name for x in self.keywords.all()})[:13])
 
     def __str__(self):
         return self.title
 
     class Meta:
-        verbose_name = 'Новость'
-        verbose_name_plural = 'Новости'
+        verbose_name = _("News")
+        verbose_name_plural = _("News")
 
 
 class ItemClsCheck(models.Model):
-    item = models.OneToOneField(Item, verbose_name='Новость')
-    last_check = models.DateTimeField(verbose_name='Время последней проверки', auto_now=True)
-    status = models.BooleanField(default=False, verbose_name='Оценка')
+    item = models.OneToOneField(Item, verbose_name=_("News"))
+    last_check = models.DateTimeField(
+        verbose_name=_("Last check time"), auto_now=True)
+    score = models.BooleanField(verbose_name=_("Score"), default=False)
 
     def check_cls(self, force=False):
         # print("Run check: {}".format(self.pk))
-        if force or self.last_check <= datetime.datetime.now() - datetime.timedelta(days=10):
+        prev_data = datetime.datetime.now() - datetime.timedelta(days=10)
+        if force or self.last_check <= prev_data:
 
             try:
-                url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+                url = "{0}/{1}".format(settings.CLS_URL_BASE,
+                                       'api/v1.0/classify/')
                 resp = requests.post(url,
                                      data=json.dumps({'links': [
                                          self.item.data4cls
                                      ]}))
-                self.status = resp.json()['links'][0].get(self.item.link, False)
+                self.score = resp.json()['links'][0].get(self.item.link, False)
             except (requests.exceptions.RequestException,
                     requests.exceptions.Timeout,
                     requests.exceptions.TooManyRedirects,
                     simplejson.scanner.JSONDecodeError) as e:
-                self.status = False
+                self.score = False
             # print("Real run check: {}".format(self.pk))
             self.save()
 
     def __str__(self):
-        return "{0} - {1} ({2})".format(str(self.item), self.status, self.last_check)
+        return "{0} - {1} ({2})".format(
+            str(self.item), self.score, self.last_check)
 
     class Meta:
-        verbose_name = 'Проверка классификатором'
-        verbose_name_plural = 'Проверка классификатором'
+        verbose_name = _("Classifier analysis")
+        verbose_name_plural = _("Classifier analysis")
 
 
 class AutoImportResource(models.Model):
-    """Источники импорта новостей."""
-    TYPE_RESOURCE = (('twitter', u'Сообщения аккаунтов в твиттере'),
-                     ('rss', u'RSS фид'),)
+    """
 
-    name = models.CharField(max_length=255, unique=True,
-                            verbose_name=u'Название источника', )
-    link = models.URLField(max_length=255, unique=True, verbose_name=u'Ссылка', )
-    type_res = models.CharField(max_length=255,
-                                verbose_name=u'Тип источника',
-                                choices=TYPE_RESOURCE,
-                                default='twitter', )
-    resource = models.ForeignKey(Resource,
-                                 verbose_name=u'Источник',
-                                 null=True,
-                                 blank=True, )
-    incl = models.CharField(max_length=255,
-                            verbose_name=u'Обязательное содержание',
-                            help_text='Условие отбора новостей <br /> \
+    """
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
+    link = models.URLField(
+        verbose_name=_("URL"), max_length=255, unique=True)
+    type_res = models.CharField(
+        verbose_name=_("Type"), max_length=255,
+        choices=TYPE_RESOURCE, default=TYPE_RESOURCE_DEFAULT)
+    resource = models.ForeignKey(
+        Resource,
+        verbose_name=_("Source"), null=True, blank=True)
+    incl = models.CharField(
+        verbose_name=_("Required content"),
+        max_length=255, help_text='Условие отбора новостей <br /> \
                    Включение вида [text] <br /> \
                    Включение при выводе будет удалено',
-                            null=True,
-                            blank=True, )
+        blank=True)
     excl = models.TextField(
-        verbose_name=u'Список исключений',
-        help_text='Список источников подлежащих исключению через ", "',
-        null=True,
-        blank=True, )
-    in_edit = models.BooleanField(verbose_name=u'На тестировании',
-                                  default=False, )
-
-    language = models.CharField(verbose_name=u'Язык источника',
-                                max_length=2,
-                                choices=ITEM_LANGUAGE_CHOICES,
-                                default='en', )
+        verbose_name=u'Exceptions',
+        help_text='List of exceptions, indicate by ", "',
+        blank=True)
+    in_edit = models.BooleanField(
+        verbose_name=_("On testing"), default=False)
+    language = models.CharField(
+        verbose_name=_("Language of content"), max_length=2,
+        choices=ITEM_LANGUAGE_CHOICES, default=ITEM_LANGUAGE_DEFAULT)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
-        verbose_name = u'Источник импорта новостей'
-        verbose_name_plural = u'Источники импорта новостей'
+        verbose_name = _("News source")
+        verbose_name_plural = _("News sources")
 
 
 class Package(models.Model):
-    name = models.CharField(max_length=255, verbose_name=u'Название', )
-
-    description = models.TextField(verbose_name=u'Описание',
-                                   null=True,
-                                   blank=True, )
-
-    url = models.CharField(max_length=255, verbose_name=u'Ссылка', )
+    name = models.CharField(verbose_name=_("Name"), max_length=255)
+    description = models.TextField(
+        verbose_name=_("Description"), blank=True)
+    link = models.URLField(
+        verbose_name=_("URL"), max_length=255, unique=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = u'Библиотека'
-        verbose_name_plural = u'Библиотеки'
+        verbose_name = _("Package")
+        verbose_name_plural = _("Packages")
 
 
 class ParsingRules(models.Model):
@@ -477,43 +464,34 @@ class ParsingRules(models.Model):
     THEN_ACTION = (('set', u'Установить'), ('add', u'Добавить'),
                    ('remove', u'Удалить часть строки'),)
 
-    name = models.CharField(max_length=255, verbose_name=u'Название правила', )
-
-    is_activated = models.BooleanField(verbose_name=u'Включено',
-                                       default=True, )
-
-    if_element = models.CharField(max_length=255,
-                                  verbose_name=u'Элемент условия',
-                                  choices=IF_ELEMENTS,
-                                  default='item_title', )
-
-    if_action = models.CharField(max_length=255,
-                                 verbose_name=u'Условие',
-                                 choices=IF_ACTIONS,
-                                 default='consist', )
-
-    if_value = models.CharField(max_length=255, verbose_name=u'Значение', )
-
-    then_element = models.CharField(max_length=255,
-                                    verbose_name=u'Элемент действия',
-                                    choices=THEN_ELEMENT,
-                                    default='item_title', )
-
-    then_action = models.CharField(max_length=255,
-                                   verbose_name=u'Действие',
-                                   choices=THEN_ACTION,
-                                   default='item_title', )
-
-    then_value = models.CharField(max_length=255, verbose_name=u'Значение', )
-
-    weight = models.PositiveIntegerField(default=100, verbose_name=_('Weight'))
+    title = models.CharField(
+        verbose_name=_("Title"), max_length=255)
+    is_activated = models.BooleanField(
+        verbose_name=_("Is active"), default=True)
+    if_element = models.CharField(
+        verbose_name=_("IF element"), max_length=255,
+        choices=IF_ELEMENTS, default='item_title')
+    if_action = models.CharField(
+        verbose_name=_("IF condition"), max_length=255,
+        choices=IF_ACTIONS, default='consist')
+    if_value = models.CharField(verbose_name=_("IF value"), max_length=255)
+    then_element = models.CharField(
+        verbose_name=_("THEN element"), max_length=255,
+        choices=THEN_ELEMENT, default='item_title')
+    then_action = models.CharField(
+        verbose_name=_("THEN action"), max_length=255,
+        choices=THEN_ACTION, default='item_title')
+    then_value = models.CharField(
+        verbose_name=_("THEN value"), max_length=255)
+    weight = models.PositiveIntegerField(
+        verbose_name=_('Weight'), default=100)
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
-        verbose_name = u'Правило обработки'
-        verbose_name_plural = u'Правила обработки'
+        verbose_name = _("Processing rule")
+        verbose_name_plural = _("Processing rules")
         ordering = ['-weight']
 
 

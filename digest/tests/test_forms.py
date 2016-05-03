@@ -97,7 +97,6 @@ class AddNewsFormTest(TestCase):
         self.section_data = {
             'title': 'some section',
             'status': 'active',
-            'version': '1',
         }
 
     def test_name_field_is_HoneypotField(self):

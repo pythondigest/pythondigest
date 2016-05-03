@@ -13,7 +13,7 @@ from digest.utils import read_fixture
 
 class ImportRSSTest(TestCase):
     def setUp(self):
-        self.res_rss = AutoImportResource.objects.create(name='Test2',
+        self.res_rss = AutoImportResource.objects.create(title='Test2',
                                                          link='http://planetpython.org/rss20.xml',
                                                          type_res='rss')
 

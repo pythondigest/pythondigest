@@ -34,11 +34,11 @@ class Command(BaseCommand):
 
         items = ItemClsCheck.objects.filter(item__id__in=ids)
         cnt = items.count()
+        items = list(items)
         while part_size * cur_part < cnt:
             print(cur_part)
 
-            links_items = items._clone()
-            links_items = links_items[part_size * cur_part:part_size * (cur_part + 1)]
+            links_items = items[part_size * cur_part:part_size * (cur_part + 1)]
             data = {
                 'links':
                     [x.item.data4cls for x in links_items]
