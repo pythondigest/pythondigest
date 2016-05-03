@@ -229,7 +229,7 @@ class Item(models.Model):
         verbose_name=_('Who added item'), editable=False,
         null=True, blank=True)
     article_path = models.FilePathField(
-        verbose_name=_("Article path"), blank=True, null=True)
+        verbose_name=_("Article path"), blank=True)
     tags = TaggableManager(blank=True)
     keywords = TaggableManager(
         verbose_name=_("Keywords"), through=KeywordGFK, blank=True)
