@@ -348,7 +348,7 @@ class Item(models.Model):
 
     @property
     def keywords_as_str(self):
-        return ', '.join(list(set([x.name for x in self.keywords.all()]))[:13])
+        return ', '.join(list({x.name for x in self.keywords.all()})[:13])
 
     def __str__(self):
         return self.title
