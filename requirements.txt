@@ -50,7 +50,7 @@ git+https://github.com/WarmongeR1/django-likes
 git+https://github.com/WarmongeR1/django-secretballot.git
 django-debug-toolbar==1.4
 
-git+https://github.com/WarmongeR1/django-remdow.git
+django-remdow==0.0.5
 
 tox==2.3.1
 
