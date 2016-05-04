@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-03 21:08+0300\n"
-"PO-Revision-Date: 2016-05-03 21:17+0230\n"
+"POT-Creation-Date: 2016-05-04 08:39+0300\n"
+"PO-Revision-Date: 2016-05-04 08:43+0230\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -19,266 +19,309 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Translated-Using: django-rosetta 0.7.10\n"
 
-#: advertising/models.py:56
-msgid "Not valid slug for AdPage"
-msgstr "Не валидный URL для рекламной страницы (AdPage)"
-
-#: advertising/models.py:100 digest/models.py:119
-msgid "Start date"
-msgstr "Дата начала"
-
-#: advertising/models.py:101 digest/models.py:121
-msgid "End date"
-msgstr "Дата завершения"
-
-#: digest/models.py:31 digest/models.py:37 digest/models.py:45
-msgid "Active"
-msgstr "Активный"
-
-#: digest/models.py:31 digest/models.py:38
-msgid "Draft"
-msgstr "Черновик"
-
-#: digest/models.py:36 digest/models.py:44
-msgid "Pending"
-msgstr "Ожидает"
-
-#: digest/models.py:39
-msgid "Moderated"
-msgstr "Рассмотрен"
-
-#: digest/models.py:40
-msgid "Imported"
-msgstr "Импортировано"
-
-#: digest/models.py:41
-msgid "In queue"
-msgstr "В очереди"
-
-#: digest/models.py:48
-msgid "Russian"
-msgstr "Русский"
-
-#: digest/models.py:48
-msgid "English"
-msgstr "Английский"
-
-#: digest/models.py:52
-msgid "Twitter feed"
-msgstr "Twitter лента"
-
-#: digest/models.py:53
-msgid "RSS feed"
-msgstr "RSS лента"
-
-#: digest/models.py:96
-msgid "Keyword"
-msgstr "Ключевое слово"
-
-#: digest/models.py:97 digest/models.py:239
-msgid "Keywords"
-msgstr "Ключевые слова"
-
-#: digest/models.py:111 digest/models.py:152 digest/models.py:175
-#: digest/models.py:197 digest/models.py:405 digest/models.py:471
+#: advertising/models.py:10 advertising/models.py:25 advertising/models.py:37
+#: advertising/models.py:92 digest/models.py:109 digest/models.py:148
+#: digest/models.py:171 digest/models.py:193 digest/models.py:401
+#: digest/models.py:467
 msgid "Title"
 msgstr "Название"
 
-#: digest/models.py:113 digest/models.py:177 digest/models.py:201
-#: digest/models.py:441
-msgid "Description"
-msgstr "Описание"
+#: advertising/models.py:11
+msgid "ID"
+msgstr "Идентификатор"
 
-#: digest/models.py:115
-msgid "Announcement"
-msgstr "Анонс"
+#: advertising/models.py:12
+msgid "Template"
+msgstr "Шаблон"
 
-#: digest/models.py:117
-msgid "Image"
-msgstr "Изображение"
+#: advertising/models.py:13
+msgid "Path to template"
+msgstr "Путь до шаблона"
 
-#: digest/models.py:123
-msgid "Publication date"
-msgstr "Дата публикации"
+#: advertising/models.py:17 advertising/models.py:95
+msgid "Ads type"
+msgstr "Тип рекламы"
 
-#: digest/models.py:125 digest/models.py:156 digest/models.py:218
-msgid "Status"
-msgstr "Статус"
+#: advertising/models.py:18
+msgid "Ads types"
+msgstr "Типы рекламы"
 
-#: digest/models.py:130
-msgid "Trend"
-msgstr "Тенденция"
+#: advertising/models.py:26
+msgid "Align"
+msgstr "Расположение"
 
-#: digest/models.py:132
-msgid "Latest moderated Item"
-msgstr "Последняя отмодерированная новость"
+#: advertising/models.py:29 advertising/models.py:30 advertising/models.py:96
+msgid "Ads align"
+msgstr "Расположение рекламы"
 
-#: digest/models.py:143 digest/models.py:204
-msgid "Issue of digest"
-msgstr "Выпуск дайджеста"
+#: advertising/models.py:38
+msgid "Slug"
+msgstr "Slug"
 
-#: digest/models.py:144
-msgid "Issues of digest"
-msgstr "Выпуски дайджеста"
-
-#: digest/models.py:154 digest/models.py:230
-msgid "Priority"
-msgstr "Приоритет"
-
-#: digest/models.py:159
-msgid "Icon"
-msgstr "Иконка"
-
-#: digest/models.py:166 digest/models.py:195
-msgid "Section"
-msgstr "Раздел"
-
-#: digest/models.py:167
-msgid "Sections"
-msgstr "Разделы"
-
-#: digest/models.py:179 digest/models.py:209 digest/models.py:407
-#: digest/models.py:443
-msgid "URL"
-msgstr "URL"
-
-#: digest/models.py:185 digest/models.py:207
-msgid "Resource"
-msgstr "Ресурс"
-
-#: digest/models.py:186
-msgid "Resources"
-msgstr "Источники"
-
-#: digest/models.py:199
-msgid "Is editors choice"
-msgstr "Выбор редакции"
-
-#: digest/models.py:211
+#: advertising/models.py:40 digest/models.py:207
 msgid "Additional info"
 msgstr "Дополнительная информация"
 
-#: digest/models.py:214
-msgid "Date"
-msgstr "Дата"
+#: advertising/models.py:55
+msgid "Not valid slug for AdPage"
+msgstr "Не валидный URL для рекламной страницы (AdPage)"
 
-#: digest/models.py:215
-msgid "For example, publication date of the news on the source"
-msgstr "Например, дата публикации новости в источнике"
+#: advertising/models.py:59
+msgid "Ads page"
+msgstr "Рекламная страница"
 
-#: digest/models.py:224
-msgid "Created date"
-msgstr "Дата создания"
+#: advertising/models.py:60 advertising/models.py:97
+msgid "Ads pages"
+msgstr "Рекламные страницы"
 
-#: digest/models.py:226
-msgid "modified date"
-msgstr "Дата модификации"
-
-#: digest/models.py:228
-msgid "Activated date"
-msgstr "Дата активации"
-
-#: digest/models.py:233
-msgid "Who added item"
-msgstr "Кто добавил новость"
-
-#: digest/models.py:236
-msgid "Article path"
-msgstr "Путь до статьи"
-
-#: digest/models.py:360 digest/models.py:361 digest/models.py:365
-msgid "News"
-msgstr "Новости"
-
-#: digest/models.py:367
-msgid "Last check time"
-msgstr "Время последней проверки"
-
-#: digest/models.py:368
-msgid "Score"
-msgstr "Оценка"
-
-#: digest/models.py:396 digest/models.py:397
-msgid "Classifier analysis"
-msgstr "Анализ классификатора"
-
-#: digest/models.py:409
-msgid "Type"
-msgstr "Тип"
-
-#: digest/models.py:413
-msgid "Source"
-msgstr "Источник"
-
-#: digest/models.py:415
-msgid "Required content"
-msgstr "Обязательный контент"
-
-#: digest/models.py:425
-msgid "On testing"
-msgstr "На тестировании"
-
-#: digest/models.py:427
-msgid "Language of content"
-msgstr "Язык контента"
-
-#: digest/models.py:434
-msgid "News source"
-msgstr "Источник новостей"
-
-#: digest/models.py:435
-msgid "News sources"
-msgstr "Источники новостей"
-
-#: digest/models.py:439
+#: advertising/models.py:91 digest/models.py:435
 msgid "Name"
 msgstr "Название"
 
-#: digest/models.py:449
+#: advertising/models.py:93 digest/models.py:29 digest/models.py:35
+#: digest/models.py:43
+msgid "Active"
+msgstr "Активный"
+
+#: advertising/models.py:94 digest/models.py:110 digest/models.py:173
+#: digest/models.py:197 digest/models.py:437
+msgid "Description"
+msgstr "Описание"
+
+#: advertising/models.py:99 digest/models.py:115
+msgid "Start date"
+msgstr "Дата начала"
+
+#: advertising/models.py:101 digest/models.py:117
+msgid "End date"
+msgstr "Дата завершения"
+
+#: digest/models.py:29 digest/models.py:36
+msgid "Draft"
+msgstr "Черновик"
+
+#: digest/models.py:34 digest/models.py:42
+msgid "Pending"
+msgstr "Ожидает"
+
+#: digest/models.py:37
+msgid "Moderated"
+msgstr "Рассмотрен"
+
+#: digest/models.py:38
+msgid "Imported"
+msgstr "Импортировано"
+
+#: digest/models.py:39
+msgid "In queue"
+msgstr "В очереди"
+
+#: digest/models.py:46
+msgid "Russian"
+msgstr "Русский"
+
+#: digest/models.py:46
+msgid "English"
+msgstr "Английский"
+
+#: digest/models.py:50
+msgid "Twitter feed"
+msgstr "Twitter лента"
+
+#: digest/models.py:51
+msgid "RSS feed"
+msgstr "RSS лента"
+
+#: digest/models.py:94
+msgid "Keyword"
+msgstr "Ключевое слово"
+
+#: digest/models.py:95 digest/models.py:235
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: digest/models.py:111
+msgid "Announcement"
+msgstr "Анонс"
+
+#: digest/models.py:113
+msgid "Image"
+msgstr "Изображение"
+
+#: digest/models.py:119
+msgid "Publication date"
+msgstr "Дата публикации"
+
+#: digest/models.py:121 digest/models.py:152 digest/models.py:214
+msgid "Status"
+msgstr "Статус"
+
+#: digest/models.py:126
+msgid "Trend"
+msgstr "Тенденция"
+
+#: digest/models.py:128
+msgid "Latest moderated Item"
+msgstr "Последняя отмодерированная новость"
+
+#: digest/models.py:139 digest/models.py:200
+msgid "Issue of digest"
+msgstr "Выпуск дайджеста"
+
+#: digest/models.py:140
+msgid "Issues of digest"
+msgstr "Выпуски дайджеста"
+
+#: digest/models.py:150 digest/models.py:226
+msgid "Priority"
+msgstr "Приоритет"
+
+#: digest/models.py:155
+msgid "Icon"
+msgstr "Иконка"
+
+#: digest/models.py:162 digest/models.py:191
+msgid "Section"
+msgstr "Раздел"
+
+#: digest/models.py:163
+msgid "Sections"
+msgstr "Разделы"
+
+#: digest/models.py:175 digest/models.py:205 digest/models.py:403
+#: digest/models.py:439
+msgid "URL"
+msgstr "URL"
+
+#: digest/models.py:181 digest/models.py:203
+msgid "Resource"
+msgstr "Ресурс"
+
+#: digest/models.py:182
+msgid "Resources"
+msgstr "Источники"
+
+#: digest/models.py:195
+msgid "Is editors choice"
+msgstr "Выбор редакции"
+
+#: digest/models.py:210
+msgid "Date"
+msgstr "Дата"
+
+#: digest/models.py:211
+msgid "For example, publication date of the news on the source"
+msgstr "Например, дата публикации новости в источнике"
+
+#: digest/models.py:220
+msgid "Created date"
+msgstr "Дата создания"
+
+#: digest/models.py:222
+msgid "modified date"
+msgstr "Дата модификации"
+
+#: digest/models.py:224
+msgid "Activated date"
+msgstr "Дата активации"
+
+#: digest/models.py:229
+msgid "Who added item"
+msgstr "Кто добавил новость"
+
+#: digest/models.py:232
+msgid "Article path"
+msgstr "Путь до статьи"
+
+#: digest/models.py:356 digest/models.py:357 digest/models.py:361
+msgid "News"
+msgstr "Новости"
+
+#: digest/models.py:363
+msgid "Last check time"
+msgstr "Время последней проверки"
+
+#: digest/models.py:364
+msgid "Score"
+msgstr "Оценка"
+
+#: digest/models.py:392 digest/models.py:393
+msgid "Classifier analysis"
+msgstr "Анализ классификатора"
+
+#: digest/models.py:405
+msgid "Type"
+msgstr "Тип"
+
+#: digest/models.py:409
+msgid "Source"
+msgstr "Источник"
+
+#: digest/models.py:411
+msgid "Required content"
+msgstr "Обязательный контент"
+
+#: digest/models.py:421
+msgid "On testing"
+msgstr "На тестировании"
+
+#: digest/models.py:423
+msgid "Language of content"
+msgstr "Язык контента"
+
+#: digest/models.py:430
+msgid "News source"
+msgstr "Источник новостей"
+
+#: digest/models.py:431
+msgid "News sources"
+msgstr "Источники новостей"
+
+#: digest/models.py:445
 msgid "Package"
 msgstr "Библиотека"
 
-#: digest/models.py:450
+#: digest/models.py:446
 msgid "Packages"
 msgstr "Библиотеки"
 
-#: digest/models.py:473
+#: digest/models.py:469
 msgid "Is active"
 msgstr "Активно"
 
-#: digest/models.py:475
+#: digest/models.py:471
 msgid "IF element"
 msgstr "ЕСЛИ элемент"
 
-#: digest/models.py:478
+#: digest/models.py:474
 msgid "IF condition"
 msgstr "ЕСЛИ условие"
 
-#: digest/models.py:480
+#: digest/models.py:476
 msgid "IF value"
 msgstr "ЕСЛИ значение"
 
-#: digest/models.py:482
+#: digest/models.py:478
 msgid "THEN element"
 msgstr "ТО элемент"
 
-#: digest/models.py:485
+#: digest/models.py:481
 msgid "THEN action"
 msgstr "ТО действие"
 
-#: digest/models.py:488
+#: digest/models.py:484
 msgid "THEN value"
 msgstr "ТО значение"
 
-#: digest/models.py:490
+#: digest/models.py:486
 msgid "Weight"
 msgstr "Вес"
 
-#: digest/models.py:496
+#: digest/models.py:492
 msgid "Processing rule"
 msgstr "Правило обработки"
 
-#: digest/models.py:497
+#: digest/models.py:493
 msgid "Processing rules"
 msgstr "Правила обработки"
 
@@ -392,7 +435,7 @@ msgstr ""
 #: templates/account/email/password_reset_subject.txt:1
 #, python-format
 msgid "[%(site_name)s] Password reset"
-msgstr ""
+msgstr "[%(site_name)s] Восстановление пароля"
 
 #: templates/account/email_confirm.html:5
 #: templates/account/email_confirm.html:11
@@ -402,7 +445,7 @@ msgstr "Подтвердите адрес электронной почты"
 #: templates/account/email_confirm.html:14
 #, python-format
 msgid "Confirm email address <b>%(email)s</b>?"
-msgstr ""
+msgstr "Подтвердить пароль <b>%(email)s</b>?"
 
 #: templates/account/email_confirm.html:15
 msgid "Confirm"
@@ -434,7 +477,7 @@ msgstr "Email подтвержден"
 #: templates/account/email_confirmed.html:9
 #, python-format
 msgid "You have confirmed <b>%(email)s</b>"
-msgstr ""
+msgstr "Вы подтвердили <b>%(email)s</b>"
 
 #: templates/account/login.html:9 templates/account/login.html.py:21
 #: templates/account/signup.html:27
@@ -499,7 +542,7 @@ msgstr ""
 #: templates/account/password_reset_sent.html:6
 #: templates/account/password_reset_sent.html:9
 msgid "Password reset sent"
-msgstr ""
+msgstr "Пароль восстановлен и отправлен"
 
 #: templates/account/password_reset_sent.html:11
 #, python-format
@@ -511,7 +554,7 @@ msgstr ""
 
 #: templates/account/password_reset_sent.html:20
 msgid "Resend"
-msgstr ""
+msgstr "Отправить"
 
 #: templates/account/password_reset_sent.html:25
 #, python-format
@@ -552,7 +595,7 @@ msgstr ""
 
 #: templates/account/signup_closed.html:11
 msgid "Your signup code..."
-msgstr ""
+msgstr "Ваш код регистрации..."
 
 #~ msgid "Admin"
 #~ msgstr "Администрация"

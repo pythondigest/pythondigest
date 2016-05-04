@@ -7,39 +7,38 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class AdType(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Название')
-    name = models.CharField(max_length=255, verbose_name='Идентификатор')
-    template = models.CharField(max_length=255, verbose_name='Путь до шаблона')
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+    name = models.CharField(max_length=255, verbose_name=_("ID"))
+    template = models.CharField(max_length=255, verbose_name=_("Template"),
+                                help_text=_("Path to template"))
 
     class Meta:
-        # (блок, строка title, title + description)
-        # только description
         unique_together = ('name',)
-        verbose_name = 'Тип рекламы'
-        verbose_name_plural = 'Тип рекламы'
+        verbose_name = _("Ads type")
+        verbose_name_plural = _("Ads types")
 
     def __str__(self):
         return self.title
 
 
 class AdAlign(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Название')
-    align = models.CharField(max_length=255, verbose_name='Расположение')
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+    align = models.CharField(max_length=255, verbose_name=_("Align"))
 
     class Meta:
-        # где располагается ( слева, справа, снизу, сверху, в определенном секторе)
-        verbose_name = 'Расположение рекламы'
-        verbose_name_plural = 'Расположение рекламы'
+        verbose_name = _("Ads align")
+        verbose_name_plural = _("Ads align")
 
     def __str__(self):
         return self.title
 
 
 class AdPage(models.Model):
-    # где показывается? (на всех страницах, на конкретном выпуске)
-    title = models.CharField(max_length=255, verbose_name='Название')
-    slug = models.CharField(max_length=255, verbose_name='Ссылка')
-    additional = models.CharField(max_length=255, verbose_name='Дополнительные параметры ссылки', blank=True, null=True)
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+    slug = models.CharField(max_length=255, verbose_name=_("Slug"))
+    additional = models.CharField(max_length=255,
+                                  verbose_name=_("Additional info"),
+                                  blank=True)
 
     @property
     def url(self):
@@ -57,8 +56,8 @@ class AdPage(models.Model):
         super(AdPage, self).clean()
 
     class Meta:
-        verbose_name = 'Страницы рекламы'
-        verbose_name_plural = 'Страницы рекламы'
+        verbose_name = _("Ads page")
+        verbose_name_plural = _("Ads pages")
 
     def __str__(self):
         return self.title
@@ -89,15 +88,16 @@ def get_ads(page_url=None):
 
 
 class Advertising(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название')
-    title = models.CharField(max_length=255, verbose_name='Заголовок')
-    active = models.BooleanField(verbose_name='Активен', default=True)
-    description = models.TextField(verbose_name='Текст рекламы')
-    type = models.ForeignKey(AdType, verbose_name='Тип')
-    align = models.ForeignKey(AdAlign, verbose_name='Расположение')
-    pages = models.ManyToManyField(AdPage, verbose_name='Страницы')
+    name = models.CharField(max_length=255, verbose_name=_("Name"))
+    title = models.CharField(max_length=255, verbose_name=_("Title"))
+    active = models.BooleanField(verbose_name=_("Active"), default=True)
+    description = models.TextField(verbose_name=_("Description"))
+    type = models.ForeignKey(AdType, verbose_name=_("Ads type"))
+    align = models.ForeignKey(AdAlign, verbose_name=_("Ads align"))
+    pages = models.ManyToManyField(AdPage, verbose_name=_("Ads pages"))
 
-    start_date = models.DateField(verbose_name=_('Start date'), default=datetime.datetime.today)
+    start_date = models.DateField(verbose_name=_('Start date'),
+                                  default=datetime.datetime.today)
     end_date = models.DateField(verbose_name=_('End date'),
                                 default=week_delta)
 
