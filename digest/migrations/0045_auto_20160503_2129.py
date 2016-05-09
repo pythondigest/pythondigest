@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='package',
             name='description',
-            field=models.TextField(blank=True, default='', verbose_name='Description'),
+            field=models.TextField(blank=True, default='', unique=True, verbose_name='Description'),
             preserve_default=False,
         ),
         migrations.AlterField(
