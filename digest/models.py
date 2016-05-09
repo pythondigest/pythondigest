@@ -5,7 +5,6 @@ import os
 
 import requests
 import requests.exceptions
-import secretballot
 import simplejson.scanner
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -20,7 +19,9 @@ from readability.readability import Document, Unparseable
 from taggit.models import TagBase, GenericTaggedItemBase
 from taggit_autosuggest.managers import TaggableManager
 
+from conf.utils import likes_enable
 from frontend.models import Tip
+
 # import the logging library
 import logging
 
@@ -505,4 +506,7 @@ def update_cls_score(instance, **kwargs):
         item.check_cls(force=True)
 
 
-secretballot.enable_voting_on(Item)
+if likes_enable():
+    import secretballot
+
+    secretballot.enable_voting_on(Item)

@@ -17,6 +17,8 @@ from social.backends.utils import load_backends
 from unidecode import unidecode as _unidecode
 from urlobject import URLObject
 
+from conf.utils import likes_enable
+
 logger = logging.getLogger(__name__)
 name_re = re.compile(r'([^O])Auth')
 LEVEL_TAGS = get_level_tags()
@@ -28,6 +30,11 @@ register = template.Library()
 def unidecode(string):
     return _unidecode(string.lower().replace(" ", "_")).replace("'",
                                                                 "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
+
+
+@register.simple_tag
+def likes_enable_tag():
+    return likes_enable()
 
 
 @register.filter

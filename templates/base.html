@@ -19,12 +19,13 @@
     <link rel="alternate" type="application/rss+xml" title="RSS"
           href="{% block rss_url %}{% url 'frontend:rss' %}{% endblock %}"/>
     {% block viewport %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     {% endblock %}
 
-    {% block styles %}{% endblock %}
+
 
     {% compress css %}
+        {% block styles %}{% endblock %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
@@ -106,7 +107,9 @@
 
 {% compress js %}
     <script type="text/javascript" src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
-    <script type="text/javascript" src="{% static 'likes/includes/likes.js' %}"></script>
+    {% if likes_enable %}
+        <script type="text/javascript" src="{% static 'likes/includes/likes.js' %}"></script>
+    {% endif %}
 {% endcompress %}
 
 <script>

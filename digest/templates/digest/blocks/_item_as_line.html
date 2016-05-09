@@ -1,7 +1,7 @@
 
 
 {% if item %}
-    {% if likes %}
+    {% if likes == True %}
         {% load likes_inclusion_tags %}
         {% likes item 'likes/inclusion_tags/likes_item.html' %}
         &nbsp;

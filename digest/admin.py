@@ -8,8 +8,8 @@ from django.contrib.sites.models import Site
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.html import escape
-from secretballot.models import Vote
 
+from conf.utils import likes_enable
 from digest.forms import ItemStatusForm
 from digest.models import AutoImportResource, Issue, Item, Package, \
     ParsingRules, Resource, Section, get_start_end_of_week, ItemClsCheck
@@ -487,4 +487,7 @@ class ItemClsCheckAdmin(admin.ModelAdmin):
 
 admin.site.register(ItemClsCheck, ItemClsCheckAdmin)
 
-admin.site.register(Vote)
+if likes_enable():
+    from secretballot.models import Vote
+
+    admin.site.register(Vote)

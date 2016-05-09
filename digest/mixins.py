@@ -9,8 +9,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page, never_cache
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic.base import ContextMixin
-from secretballot.models import Vote
 
+from conf.utils import likes_enable
 from digest.models import Item
 
 
@@ -18,7 +18,8 @@ def get_feed_items(count=10):
     return Item.objects.filter(
         status='active',
         activated_at__lte=datetime.datetime.now()
-    ).prefetch_related('issue', 'section').order_by('-created_at', '-related_to_date')[:count]
+    ).prefetch_related('issue', 'section').order_by('-created_at',
+                                                    '-related_to_date')[:count]
 
 
 class FeedItemsMixin(ContextMixin):
@@ -44,14 +45,20 @@ class FavoriteItemsMixin(ContextMixin):
         # Получить по ним сет из Item (без дублей)
         # пройтись по всем и сформировать лист
 
-        # date = datetime.datetime.now() - datetime.timedelta(days=12)
-        # items = Item.objects.filter(
-        #     id__in=set(Vote.objects.filter(content_type=ContentType.objects.get(app_label="digest", model="item"),
-        #                                    ).values_list('object_id', flat=True)),
-        #     related_to_date__gt=date)
-        # items_score = [(item, item.vote_total) for item in items if item.vote_total > 0]
-        # items_score = sorted(items_score, key=lambda item: item[1], reverse=True)
-        # context['favorite_items'] = [x[0] for x in items_score[:10]]
+        if likes_enable():
+            from secretballot.models import Vote
+            date = datetime.datetime.now() - datetime.timedelta(days=12)
+            items = Item.objects.filter(
+                id__in=set(Vote.objects.filter(
+                    content_type=ContentType.objects.get(app_label="digest",
+                                                         model="item"),
+                ).values_list('object_id', flat=True)),
+                related_to_date__gt=date)
+            items_score = [(item, item.vote_total) for item in items if
+                           item.vote_total > 0]
+            items_score = sorted(items_score, key=lambda item: item[1],
+                                 reverse=True)
+            context['favorite_items'] = [x[0] for x in items_score[:10]]
         return context
 
 
@@ -80,7 +87,8 @@ class CacheMixin(object):
         return self.cache_timeout
 
     def dispatch(self, *args, **kwargs):
-        return cache_page(self.get_cache_timeout())(super(CacheMixin, self).dispatch)(*args, **kwargs)
+        return cache_page(self.get_cache_timeout())(
+            super(CacheMixin, self).dispatch)(*args, **kwargs)
 
 
 class CacheControlMixin(object):
