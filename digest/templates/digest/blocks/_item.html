@@ -7,7 +7,7 @@
 
     <noindex>
         <div class="issue-item">
-            {% include 'digest/blocks/_item_as_line.html' with item=item language=True link_class='issue-item-title' comment=True likes=False %}
+            {% include 'digest/blocks/_item_as_line.html' with item=item language=True link_class='issue-item-title' comment=True likes=True %}
 
             {% if item.tags_as_links %}
                 {% for tag_name, tag_link in item.tags_as_links %}
