@@ -25,26 +25,22 @@ class Sitemap(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super(Sitemap, self).get_context_data(**kwargs)
         items = [
-            {'loc': '',
-             'changefreq': 'weekly',},
-            {'loc': reverse('digest:issues'),
-             'changefreq': 'weekly',},
-            {'loc': reverse('digest:feed'),
-             'changefreq': 'daily',},
+            {'loc': '', 'changefreq': 'weekly'},
+            {'loc': reverse('digest:issues'), 'changefreq': 'weekly'},
+            {'loc': reverse('digest:feed'), 'changefreq': 'daily'},
         ]
 
         for issue in Issue.objects.filter(status='active'):
-            items.append({'loc': issue.link, 'changefreq': 'weekly',})
+            items.append({'loc': issue.link, 'changefreq': 'weekly'})
 
         for item in Item.objects.filter(status='active',
                                         activated_at__lte=datetime.datetime.now()):
             items.append(
-                {'loc': '/view/%s' % item.pk,
-                 'changefreq': 'weekly',})
+                {'loc': '/view/{}'.format(item.pk), 'changefreq': 'weekly'})
 
         ctx.update(
             {'records': items,
-             'domain': 'https://%s' % settings.BASE_DOMAIN})
+             'domain': 'https://{}'.format(settings.BASE_DOMAIN)})
         return ctx
 
 
@@ -61,7 +57,8 @@ class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
             issue = self.model.objects.filter(status='active').latest(
                 'published_at')
         except Issue.DoesNotExist as e:
-            logger.warning("Not found active Issue for index page: %s" % str(e))
+            logger.warning(
+                "Not found active Issue for index page: {}".format(str(e)))
 
         items = []
         if issue:

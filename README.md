@@ -12,3 +12,6 @@ python-news-digest
 Инструмент для создания дайджестов новостей из мира Python
 
 Сайт с текущей версией кода и БД http://pythondigest.ru/
+
+
+# English

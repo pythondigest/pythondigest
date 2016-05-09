@@ -8,116 +8,383 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-18 14:28+0300\n"
-"PO-Revision-Date: 2015-08-18 12:59+0230\n"
+"POT-Creation-Date: 2016-05-04 08:39+0300\n"
+"PO-Revision-Date: 2016-05-04 08:43+0230\n"
 "Last-Translator: b'  <>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Translated-Using: django-rosetta 0.7.6\n"
+"Language: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Translated-Using: django-rosetta 0.7.10\n"
+
+#: advertising/models.py:10 advertising/models.py:25 advertising/models.py:37
+#: advertising/models.py:92 digest/models.py:109 digest/models.py:148
+#: digest/models.py:171 digest/models.py:193 digest/models.py:401
+#: digest/models.py:467
+msgid "Title"
+msgstr "Название"
+
+#: advertising/models.py:11
+msgid "ID"
+msgstr "Идентификатор"
+
+#: advertising/models.py:12
+msgid "Template"
+msgstr "Шаблон"
+
+#: advertising/models.py:13
+msgid "Path to template"
+msgstr "Путь до шаблона"
+
+#: advertising/models.py:17 advertising/models.py:95
+msgid "Ads type"
+msgstr "Тип рекламы"
+
+#: advertising/models.py:18
+msgid "Ads types"
+msgstr "Типы рекламы"
+
+#: advertising/models.py:26
+msgid "Align"
+msgstr "Расположение"
+
+#: advertising/models.py:29 advertising/models.py:30 advertising/models.py:96
+msgid "Ads align"
+msgstr "Расположение рекламы"
+
+#: advertising/models.py:38
+msgid "Slug"
+msgstr "Slug"
+
+#: advertising/models.py:40 digest/models.py:207
+msgid "Additional info"
+msgstr "Дополнительная информация"
+
+#: advertising/models.py:55
+msgid "Not valid slug for AdPage"
+msgstr "Не валидный URL для рекламной страницы (AdPage)"
+
+#: advertising/models.py:59
+msgid "Ads page"
+msgstr "Рекламная страница"
+
+#: advertising/models.py:60 advertising/models.py:97
+msgid "Ads pages"
+msgstr "Рекламные страницы"
+
+#: advertising/models.py:91 digest/models.py:435
+msgid "Name"
+msgstr "Название"
+
+#: advertising/models.py:93 digest/models.py:29 digest/models.py:35
+#: digest/models.py:43
+msgid "Active"
+msgstr "Активный"
+
+#: advertising/models.py:94 digest/models.py:110 digest/models.py:173
+#: digest/models.py:197 digest/models.py:437
+msgid "Description"
+msgstr "Описание"
+
+#: advertising/models.py:99 digest/models.py:115
+msgid "Start date"
+msgstr "Дата начала"
+
+#: advertising/models.py:101 digest/models.py:117
+msgid "End date"
+msgstr "Дата завершения"
+
+#: digest/models.py:29 digest/models.py:36
+msgid "Draft"
+msgstr "Черновик"
+
+#: digest/models.py:34 digest/models.py:42
+msgid "Pending"
+msgstr "Ожидает"
+
+#: digest/models.py:37
+msgid "Moderated"
+msgstr "Рассмотрен"
+
+#: digest/models.py:38
+msgid "Imported"
+msgstr "Импортировано"
+
+#: digest/models.py:39
+msgid "In queue"
+msgstr "В очереди"
+
+#: digest/models.py:46
+msgid "Russian"
+msgstr "Русский"
+
+#: digest/models.py:46
+msgid "English"
+msgstr "Английский"
+
+#: digest/models.py:50
+msgid "Twitter feed"
+msgstr "Twitter лента"
+
+#: digest/models.py:51
+msgid "RSS feed"
+msgstr "RSS лента"
+
+#: digest/models.py:94
+msgid "Keyword"
+msgstr "Ключевое слово"
+
+#: digest/models.py:95 digest/models.py:235
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: digest/models.py:111
+msgid "Announcement"
+msgstr "Анонс"
+
+#: digest/models.py:113
+msgid "Image"
+msgstr "Изображение"
+
+#: digest/models.py:119
+msgid "Publication date"
+msgstr "Дата публикации"
+
+#: digest/models.py:121 digest/models.py:152 digest/models.py:214
+msgid "Status"
+msgstr "Статус"
+
+#: digest/models.py:126
+msgid "Trend"
+msgstr "Тенденция"
+
+#: digest/models.py:128
+msgid "Latest moderated Item"
+msgstr "Последняя отмодерированная новость"
+
+#: digest/models.py:139 digest/models.py:200
+msgid "Issue of digest"
+msgstr "Выпуск дайджеста"
+
+#: digest/models.py:140
+msgid "Issues of digest"
+msgstr "Выпуски дайджеста"
+
+#: digest/models.py:150 digest/models.py:226
+msgid "Priority"
+msgstr "Приоритет"
+
+#: digest/models.py:155
+msgid "Icon"
+msgstr "Иконка"
+
+#: digest/models.py:162 digest/models.py:191
+msgid "Section"
+msgstr "Раздел"
+
+#: digest/models.py:163
+msgid "Sections"
+msgstr "Разделы"
+
+#: digest/models.py:175 digest/models.py:205 digest/models.py:403
+#: digest/models.py:439
+msgid "URL"
+msgstr "URL"
+
+#: digest/models.py:181 digest/models.py:203
+msgid "Resource"
+msgstr "Ресурс"
+
+#: digest/models.py:182
+msgid "Resources"
+msgstr "Источники"
+
+#: digest/models.py:195
+msgid "Is editors choice"
+msgstr "Выбор редакции"
+
+#: digest/models.py:210
+msgid "Date"
+msgstr "Дата"
+
+#: digest/models.py:211
+msgid "For example, publication date of the news on the source"
+msgstr "Например, дата публикации новости в источнике"
+
+#: digest/models.py:220
+msgid "Created date"
+msgstr "Дата создания"
+
+#: digest/models.py:222
+msgid "modified date"
+msgstr "Дата модификации"
+
+#: digest/models.py:224
+msgid "Activated date"
+msgstr "Дата активации"
+
+#: digest/models.py:229
+msgid "Who added item"
+msgstr "Кто добавил новость"
+
+#: digest/models.py:232
+msgid "Article path"
+msgstr "Путь до статьи"
+
+#: digest/models.py:356 digest/models.py:357 digest/models.py:361
+msgid "News"
+msgstr "Новости"
+
+#: digest/models.py:363
+msgid "Last check time"
+msgstr "Время последней проверки"
+
+#: digest/models.py:364
+msgid "Score"
+msgstr "Оценка"
+
+#: digest/models.py:392 digest/models.py:393
+msgid "Classifier analysis"
+msgstr "Анализ классификатора"
+
+#: digest/models.py:405
+msgid "Type"
+msgstr "Тип"
+
+#: digest/models.py:409
+msgid "Source"
+msgstr "Источник"
+
+#: digest/models.py:411
+msgid "Required content"
+msgstr "Обязательный контент"
+
+#: digest/models.py:421
+msgid "On testing"
+msgstr "На тестировании"
+
+#: digest/models.py:423
+msgid "Language of content"
+msgstr "Язык контента"
+
+#: digest/models.py:430
+msgid "News source"
+msgstr "Источник новостей"
+
+#: digest/models.py:431
+msgid "News sources"
+msgstr "Источники новостей"
+
+#: digest/models.py:445
+msgid "Package"
+msgstr "Библиотека"
+
+#: digest/models.py:446
+msgid "Packages"
+msgstr "Библиотеки"
+
+#: digest/models.py:469
+msgid "Is active"
+msgstr "Активно"
+
+#: digest/models.py:471
+msgid "IF element"
+msgstr "ЕСЛИ элемент"
+
+#: digest/models.py:474
+msgid "IF condition"
+msgstr "ЕСЛИ условие"
+
+#: digest/models.py:476
+msgid "IF value"
+msgstr "ЕСЛИ значение"
+
+#: digest/models.py:478
+msgid "THEN element"
+msgstr "ТО элемент"
+
+#: digest/models.py:481
+msgid "THEN action"
+msgstr "ТО действие"
+
+#: digest/models.py:484
+msgid "THEN value"
+msgstr "ТО значение"
 
 #: digest/models.py:486
 msgid "Weight"
-msgstr ""
+msgstr "Вес"
 
-#: frontend/templates/404.html:5
+#: digest/models.py:492
+msgid "Processing rule"
+msgstr "Правило обработки"
+
+#: digest/models.py:493
+msgid "Processing rules"
+msgstr "Правила обработки"
+
+#: templates/404.html:5
 msgid "Not Found"
 msgstr "Не найдена"
 
-#: frontend/templates/404.html:9
+#: templates/404.html:9
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: frontend/templates/404.html:10
+#: templates/404.html:10
 msgid "We're sorry but that page could not be found."
 msgstr ""
 
-#: frontend/templates/500.html:5
+#: templates/500.html:5
 msgid "Server Error"
-msgstr ""
+msgstr "Ошибка сервера"
 
-#: frontend/templates/500.html:9
+#: templates/500.html:9
 msgid "Something went wrong"
 msgstr "Что-то произошло не так"
 
-#: frontend/templates/500.html:10
+#: templates/500.html:10
 msgid ""
 "We're sorry but a server error has occurred. We've been notified and will "
 "look into it as soon as possible."
 msgstr ""
 
-#: frontend/templates/_account_bar.html:12
-#: frontend/templates/account/base.html:9 frontend/templates/top_menu.html:70
+#: templates/account/base.html:9
 msgid "Settings"
 msgstr "Настройки"
 
-#: frontend/templates/_account_bar.html:14 frontend/templates/top_menu.html:72
-msgid "Admin"
-msgstr "Администрация"
-
-#: frontend/templates/_account_bar.html:18
-#: frontend/templates/account/logout.html:5
-#: frontend/templates/account/logout.html:11
-#: frontend/templates/account/logout.html:15
-#: frontend/templates/top_menu.html:76
-msgid "Log out"
-msgstr "Выход"
-
-#: frontend/templates/_account_bar.html:23
-#: frontend/templates/account/login.html:7
-#: frontend/templates/account/login.html:19
-#: frontend/templates/account/signup.html:23
-#: frontend/templates/top_menu.html:81
-msgid "Log in"
-msgstr "Вход"
-
-#: frontend/templates/_account_bar.html:25
-#: frontend/templates/account/login.html:25
-#: frontend/templates/account/signup.html:7
-#: frontend/templates/account/signup.html:13
-#: frontend/templates/account/signup.html:19
-#: frontend/templates/account/signup_closed.html:5
-#: frontend/templates/top_menu.html:83
-msgid "Sign up"
-msgstr "Регистрация"
-
-#: frontend/templates/account/base.html:12
-#: frontend/templates/account/settings.html:8
-#: frontend/templates/account/settings.html:14
+#: templates/account/base.html:12 templates/account/settings.html.py:8
+#: templates/account/settings.html:14
 msgid "Account"
 msgstr "Аккаунт"
 
-#: frontend/templates/account/base.html:15
-#: frontend/templates/account/password_change.html:8
-#: frontend/templates/account/password_change.html:14
+#: templates/account/base.html:15 templates/account/password_change.html:8
+#: templates/account/password_change.html:14
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: frontend/templates/account/base.html:18
+#: templates/account/base.html:18
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
-#: frontend/templates/account/delete.html:7
-#: frontend/templates/account/delete.html:10
+#: templates/account/delete.html:7 templates/account/delete.html.py:10
 msgid "Delete Account"
 msgstr "Удалить аккаунт"
 
-#: frontend/templates/account/delete.html:12
+#: templates/account/delete.html:12
 #, python-format
 msgid ""
 "If you go ahead and delete your account, your information will be "
 "<b>expunged within %(ACCOUNT_DELETION_EXPUNGE_HOURS)s hours</b>."
 msgstr ""
 
-#: frontend/templates/account/delete.html:16
+#: templates/account/delete.html:16
 msgid "Delete My Account"
 msgstr "Удалить мой аккаунт"
 
-#: frontend/templates/account/email/email_confirmation_message.txt:1
+#: templates/account/email/email_confirmation_message.txt:1
 #, python-format
 msgid ""
 "A user on %(site_name)s has created an account using this email address.\n"
@@ -127,12 +394,12 @@ msgid ""
 "If you did not sign up for this site, you can ignore this message.\n"
 msgstr ""
 
-#: frontend/templates/account/email/email_confirmation_subject.txt:1
+#: templates/account/email/email_confirmation_subject.txt:1
 #, python-format
 msgid "Confirm email address for %(site_name)s"
 msgstr ""
 
-#: frontend/templates/account/email/invite_user.txt:1
+#: templates/account/email/invite_user.txt:1
 #, python-format
 msgid ""
 "You have been invited to sign up at %(name)s.\n"
@@ -140,184 +407,198 @@ msgid ""
 "%(signup_url)s\n"
 msgstr ""
 
-#: frontend/templates/account/email/invite_user_subject.txt:1
+#: templates/account/email/invite_user_subject.txt:1
 #, python-format
 msgid "Create an account on %(name)s"
 msgstr ""
 
-#: frontend/templates/account/email/password_change.txt:1
+#: templates/account/email/password_change.txt:1
 #, python-format
 msgid ""
 "This is the email notification to confirm your password has been changed on "
 "%(now)s."
 msgstr ""
 
-#: frontend/templates/account/email/password_change_subject.txt:1
+#: templates/account/email/password_change_subject.txt:1
 msgid "Change password email notification"
 msgstr ""
 
-#: frontend/templates/account/email/password_reset.txt:1
+#: templates/account/email/password_reset.txt:1
 #, python-format
 msgid ""
-"You're receiving this email because you or someone else has requested a "
-"password for your user account at %(site_name)s.\n"
-"It can be safely ignored if you did not request a password reset. Click the "
-"link below to reset your password.\n"
+"You're receiving this email because you or someone else has requested a password for your user account at %(site_name)s.\n"
+"It can be safely ignored if you did not request a password reset. Click the link below to reset your password.\n"
 "\n"
 "%(password_reset_url)s\n"
 msgstr ""
 
-#: frontend/templates/account/email/password_reset_subject.txt:1
+#: templates/account/email/password_reset_subject.txt:1
 #, python-format
 msgid "[%(site_name)s] Password reset"
-msgstr ""
+msgstr "[%(site_name)s] Восстановление пароля"
 
-#: frontend/templates/account/email_confirm.html:5
-#: frontend/templates/account/email_confirm.html:11
+#: templates/account/email_confirm.html:5
+#: templates/account/email_confirm.html:11
 msgid "Confirm Email"
-msgstr ""
+msgstr "Подтвердите адрес электронной почты"
 
-#: frontend/templates/account/email_confirm.html:14
+#: templates/account/email_confirm.html:14
 #, python-format
 msgid "Confirm email address <b>%(email)s</b>?"
-msgstr ""
+msgstr "Подтвердить пароль <b>%(email)s</b>?"
 
-#: frontend/templates/account/email_confirm.html:15
+#: templates/account/email_confirm.html:15
 msgid "Confirm"
-msgstr ""
+msgstr "Подствердить"
 
-#: frontend/templates/account/email_confirmation_sent.html:5
-#: frontend/templates/account/email_confirmation_sent.html:8
+#: templates/account/email_confirmation_sent.html:5
+#: templates/account/email_confirmation_sent.html:8
 msgid "Confirm your email address"
-msgstr ""
+msgstr "Подтвердите свой email "
 
-#: frontend/templates/account/email_confirmation_sent.html:10
+#: templates/account/email_confirmation_sent.html:10
 #, python-format
 msgid ""
 "We have sent you an email to <b>%(email)s</b> for verification. Follow the "
 "link provided to finalize the signup process. If you do not receive it "
-"within a few minutes, contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s"
-"\">%(THEME_CONTACT_EMAIL)s</a>."
+"within a few minutes, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
-#: frontend/templates/account/email_confirmation_sent.html:11
+#: templates/account/email_confirmation_sent.html:11
 msgid "Go back"
-msgstr ""
+msgstr "Вернуться"
 
-#: frontend/templates/account/email_confirmed.html:5
-#: frontend/templates/account/email_confirmed.html:8
+#: templates/account/email_confirmed.html:5
+#: templates/account/email_confirmed.html:8
 msgid "Email confirmed"
-msgstr ""
+msgstr "Email подтвержден"
 
-#: frontend/templates/account/email_confirmed.html:9
+#: templates/account/email_confirmed.html:9
 #, python-format
 msgid "You have confirmed <b>%(email)s</b>"
-msgstr ""
+msgstr "Вы подтвердили <b>%(email)s</b>"
 
-#: frontend/templates/account/login.html:13
+#: templates/account/login.html:9 templates/account/login.html.py:21
+#: templates/account/signup.html:27
+msgid "Log in"
+msgstr "Вход"
+
+#: templates/account/login.html:15
 msgid "Log in to an existing account"
-msgstr ""
+msgstr "Авторизоваться в аккаунт"
 
-#: frontend/templates/account/login.html:20
+#: templates/account/login.html:22
 msgid "Forgot your password?"
-msgstr ""
+msgstr "Забыл пароль?"
 
-#: frontend/templates/account/login.html:25
+#: templates/account/login.html:27
 msgid "Don't have an account?"
-msgstr ""
+msgstr "У вас есть аккаунт?"
 
-#: frontend/templates/account/logout.html:14
+#: templates/account/login.html:27 templates/account/signup.html.py:8
+#: templates/account/signup.html:17 templates/account/signup.html.py:23
+#: templates/account/signup_closed.html:5
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/account/logout.html:5 templates/account/logout.html.py:11
+#: templates/account/logout.html:15
+msgid "Log out"
+msgstr "Выход"
+
+#: templates/account/logout.html:14
 msgid "Are you sure you want to log out?"
-msgstr ""
+msgstr "Вы действительно хотите выйти?"
 
-#: frontend/templates/account/password_change.html:18
-#: frontend/templates/account/password_reset_token.html:16
-#: frontend/templates/account/settings.html:17
+#: templates/account/password_change.html:18
+#: templates/account/password_reset_token.html:16
+#: templates/account/settings.html:17
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
-#: frontend/templates/account/password_reset.html:7
-#: frontend/templates/account/password_reset.html:15
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:15
 msgid "Password reset"
-msgstr ""
+msgstr "Восстановление пароля"
 
-#: frontend/templates/account/password_reset.html:16
+#: templates/account/password_reset.html:16
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll send you "
 "an email allowing you to reset it."
 msgstr ""
 
-#: frontend/templates/account/password_reset.html:22
+#: templates/account/password_reset.html:22
 msgid "Reset my password"
-msgstr ""
+msgstr "Восстановить мой пароль"
 
-#: frontend/templates/account/password_reset.html:29
+#: templates/account/password_reset.html:29
 #, python-format
 msgid ""
-"If you have any trouble resetting your password, contact us at <a href="
-"\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"If you have any trouble resetting your password, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
-#: frontend/templates/account/password_reset_sent.html:6
-#: frontend/templates/account/password_reset_sent.html:9
+#: templates/account/password_reset_sent.html:6
+#: templates/account/password_reset_sent.html:9
 msgid "Password reset sent"
-msgstr ""
+msgstr "Пароль восстановлен и отправлен"
 
-#: frontend/templates/account/password_reset_sent.html:11
+#: templates/account/password_reset_sent.html:11
 #, python-format
 msgid ""
 "We have sent you an email. If you do not receive it within a few minutes, "
-"try resending or contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">"
-"%(THEME_CONTACT_EMAIL)s</a>."
+"try resending or contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
-#: frontend/templates/account/password_reset_sent.html:20
+#: templates/account/password_reset_sent.html:20
 msgid "Resend"
-msgstr ""
+msgstr "Отправить"
 
-#: frontend/templates/account/password_reset_sent.html:25
+#: templates/account/password_reset_sent.html:25
 #, python-format
 msgid ""
 "We have resent the password email. If you do not receive it within a few "
-"minutes, contact us at <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">"
-"%(THEME_CONTACT_EMAIL)s</a>."
+"minutes, contact us at <a "
+"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
 msgstr ""
 
-#: frontend/templates/account/password_reset_token.html:6
-#: frontend/templates/account/password_reset_token.html:12
+#: templates/account/password_reset_token.html:6
+#: templates/account/password_reset_token.html:12
 msgid "Set your new password"
-msgstr ""
+msgstr "Установите новый пароль"
 
-#: frontend/templates/account/password_reset_token_fail.html:5
-#: frontend/templates/account/password_reset_token_fail.html:8
+#: templates/account/password_reset_token_fail.html:5
+#: templates/account/password_reset_token_fail.html:8
 msgid "Bad token"
 msgstr ""
 
-#: frontend/templates/account/password_reset_token_fail.html:10
+#: templates/account/password_reset_token_fail.html:10
 #, python-format
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used.  Please request a <a href=\"%(url)s\">new password reset</a>."
 msgstr ""
 
-#: frontend/templates/account/signup.html:23
+#: templates/account/signup.html:27
 msgid "Already have an account?"
-msgstr ""
+msgstr "Уже есть аккаунт?"
 
-#: frontend/templates/account/signup_closed.html:8
+#: templates/account/signup_closed.html:8
 msgid "This site is in private beta"
 msgstr ""
 
-#: frontend/templates/account/signup_closed.html:9
+#: templates/account/signup_closed.html:9
 msgid "If you have signup code you can enter it below."
 msgstr ""
 
-#: frontend/templates/account/signup_closed.html:11
+#: templates/account/signup_closed.html:11
 msgid "Your signup code..."
-msgstr ""
+msgstr "Ваш код регистрации..."
 
-#~ msgid "English"
-#~ msgstr "Английский"
+#~ msgid "Admin"
+#~ msgstr "Администрация"
 
 #~ msgid "German"
 #~ msgstr "Немецкий"

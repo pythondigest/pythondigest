@@ -354,7 +354,7 @@ ADMIN_REORDER = (
     'auth',
     # 'account',
     'django_q',
-    # 'default',
+    'default',
 
 )
 
@@ -384,8 +384,7 @@ HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError as e:
-    print("Not found local settings: %s" % str(e))
-    pass
+    print("Not found local settings: {}".format(str(e)))
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

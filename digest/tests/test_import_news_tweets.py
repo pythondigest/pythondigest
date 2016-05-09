@@ -12,12 +12,12 @@ from digest.utils import read_fixture
 
 class ImportTweetsTest(TestCase):
     def setUp(self):
-        self.res_twitter = AutoImportResource.objects.create(name='Test',
+        self.res_twitter = AutoImportResource.objects.create(title='Test',
                                                              link='https://twitter.com/pythontrending',
                                                              type_res='twitter',
                                                              excl='http://consumerfinance.gov',
                                                              incl='framework')
-        self.res_rss = AutoImportResource.objects.create(name='Test2',
+        self.res_rss = AutoImportResource.objects.create(title='Test2',
                                                          link='http://planetpython.org/rss20.xml',
                                                          type_res='rss')
 

@@ -51,9 +51,8 @@ if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1]:
         if len(sys.argv[1]) == 40:
             # write the key to the file
-            f = open('api_key.txt', 'w')
-            f.write(sys.argv[1])
-            f.close()
+            with open('api_key.txt', 'w') as f:
+                f.write(sys.argv[1])
             print('Key: ' + sys.argv[1] + ' was written to api_key.txt')
             print(
                 'You are now ready to start using AlchemyAPI. For an example, run: python example.py')
@@ -134,7 +133,7 @@ class AlchemyAPI:
     # The base URL for all endpoints
     BASE_URL = 'http://access.alchemyapi.com/calls'
 
-    s = requests.Session()
+    req_session = requests.Session()
 
     def __init__(self, key):
         """	
@@ -143,7 +142,7 @@ class AlchemyAPI:
         """
         self.apikey = key
 
-    def entities(self, flavor, data, options={}):
+    def entities(self, flavor, data, options=None):
         """
         Extracts the entities for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/entity-extraction/ 
@@ -166,6 +165,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['entities']:
@@ -175,7 +176,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['entities'][flavor], {}, options)
 
-    def keywords(self, flavor, data, options={}):
+    def keywords(self, flavor, data, options=None):
         """
         Extracts the keywords from text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/keyword-extraction/
@@ -195,6 +196,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['keywords']:
@@ -204,7 +207,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['keywords'][flavor], {}, options)
 
-    def concepts(self, flavor, data, options={}):
+    def concepts(self, flavor, data, options=None):
         """
         Tags the concepts for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/concept-tagging/
@@ -218,6 +221,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['concepts']:
@@ -227,7 +232,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['concepts'][flavor], {}, options)
 
-    def sentiment(self, flavor, data, options={}):
+    def sentiment(self, flavor, data, options=None):
         """
         Calculates the sentiment for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/sentiment-analysis/
@@ -244,6 +249,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['sentiment']:
@@ -253,7 +260,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['sentiment'][flavor], {}, options)
 
-    def sentiment_targeted(self, flavor, data, target, options={}):
+    def sentiment_targeted(self, flavor, data, target, options=None):
         """
         Calculates the targeted sentiment for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/sentiment-analysis/
@@ -271,6 +278,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure the target is valid
         if target is None or target == '':
@@ -285,7 +294,7 @@ class AlchemyAPI:
         options['target'] = target
         return self.__analyze(AlchemyAPI.ENDPOINTS['sentiment_targeted'][flavor], {}, options)
 
-    def text(self, flavor, data, options={}):
+    def text(self, flavor, data, options=None):
         """
         Extracts the cleaned text (removes ads, navigation, etc.) for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/text-extraction/
@@ -303,6 +312,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['text']:
@@ -312,7 +323,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['text'][flavor], options)
 
-    def text_raw(self, flavor, data, options={}):
+    def text_raw(self, flavor, data, options=None):
         """
         Extracts the raw text (includes ads, navigation, etc.) for a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/text-extraction/ 
@@ -329,6 +340,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['text_raw']:
@@ -338,7 +351,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['text_raw'][flavor], {}, options)
 
-    def author(self, flavor, data, options={}):
+    def author(self, flavor, data, options=None):
         """
         Extracts the author from a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/author-extraction/
@@ -355,6 +368,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['author']:
@@ -364,7 +379,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['author'][flavor], {}, options)
 
-    def language(self, flavor, data, options={}):
+    def language(self, flavor, data, options=None):
         """
         Detects the language for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/api/language-detection/ 
@@ -381,6 +396,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['language']:
@@ -390,7 +407,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['language'][flavor], {}, options)
 
-    def title(self, flavor, data, options={}):
+    def title(self, flavor, data, options=None):
         """
         Extracts the title for a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/text-extraction/ 
@@ -407,6 +424,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['title']:
@@ -416,7 +435,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['title'][flavor], {}, options)
 
-    def relations(self, flavor, data, options={}):
+    def relations(self, flavor, data, options=None):
         """
         Extracts the relations for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/relation-extraction/ 
@@ -442,6 +461,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['relations']:
@@ -451,7 +472,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['relations'][flavor], {}, options)
 
-    def category(self, flavor, data, options={}):
+    def category(self, flavor, data, options=None):
         """
         Categorizes the text for text, a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/text-categorization/
@@ -468,6 +489,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['category']:
@@ -478,7 +501,7 @@ class AlchemyAPI:
 
         return self.__analyze(AlchemyAPI.ENDPOINTS['category'][flavor], {}, options)
 
-    def feeds(self, flavor, data, options={}):
+    def feeds(self, flavor, data, options=None):
         """
         Detects the RSS/ATOM feeds for a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/feed-detection/ 
@@ -495,6 +518,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['feeds']:
@@ -504,7 +529,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['feeds'][flavor], {}, options)
 
-    def microformats(self, flavor, data, options={}):
+    def microformats(self, flavor, data, options=None):
         """
         Parses the microformats for a URL or HTML.
         For an overview, please refer to: http://www.alchemyapi.com/products/features/microformats-parsing/
@@ -521,6 +546,8 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
 
         # Make sure this request supports this flavor
         if flavor not in AlchemyAPI.ENDPOINTS['microformats']:
@@ -530,7 +557,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['microformats'][flavor], {}, options)
 
-    def imageExtraction(self, flavor, data, options={}):
+    def imageExtraction(self, flavor, data, options=None):
         """
         Extracts main image from a URL
 
@@ -547,12 +574,14 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
         if flavor not in AlchemyAPI.ENDPOINTS['image']:
             return {'status': 'ERROR', 'statusInfo': 'image extraction for ' + flavor + ' not available'}
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['image'][flavor], {}, options)
 
-    def taxonomy(self, flavor, data, options={}):
+    def taxonomy(self, flavor, data, options=None):
         """
         Taxonomy classification operations.
 
@@ -598,12 +627,14 @@ class AlchemyAPI:
         The response, already converted from JSON to a Python object. 
 
         """
+        if options is None:
+            options = {}
         if flavor not in AlchemyAPI.ENDPOINTS['taxonomy']:
             return {'status': 'ERROR', 'statusInfo': 'taxonomy for ' + flavor + ' not available'}
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['taxonomy'][flavor], {}, options)
 
-    def combined(self, flavor, data, options={}):
+    def combined(self, flavor, data, options=None):
         """
         Combined call for page-image, entity, keyword, title, author, taxonomy,  concept.
 
@@ -664,12 +695,14 @@ class AlchemyAPI:
         OUTPUT:
         The response, already converted from JSON to a Python object. 
         """
+        if options is None:
+            options = {}
         if flavor not in AlchemyAPI.ENDPOINTS['combined']:
             return {'status': 'ERROR', 'statusInfo': 'combined for ' + flavor + ' not available'}
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['combined'][flavor], {}, options)
 
-    def imageTagging(self, flavor, data, options={}):
+    def imageTagging(self, flavor, data, options=None):
         """
 
         INPUT:
@@ -677,6 +710,8 @@ class AlchemyAPI:
         data -> the data to analyze, either the the url or path to image.
         options -> various parameters that can be used to adjust how the API works, see below for more info on the available options.
         """
+        if options is None:
+            options = {}
         if flavor not in AlchemyAPI.ENDPOINTS['imagetagging']:
             return {'status': 'ERROR', 'statusInfo': 'imagetagging for ' + flavor + ' not available'}
         elif 'image' == flavor:
@@ -687,7 +722,7 @@ class AlchemyAPI:
         options[flavor] = data
         return self.__analyze(AlchemyAPI.ENDPOINTS['imagetagging'][flavor], {}, options)
 
-    def faceTagging(self, flavor, data, options={}):
+    def faceTagging(self, flavor, data, options=None):
         """
 
         INPUT:
@@ -695,6 +730,8 @@ class AlchemyAPI:
         data -> the data to analyze, either the the url or path to image.
         options -> various parameters that can be used to adjust how the API works, see below for more info on the available options.
         """
+        if options is None:
+            options = {}
         if flavor not in AlchemyAPI.ENDPOINTS['facetagging']:
             return {'status': 'ERROR', 'statusInfo': 'facetagging for ' + flavor + ' not available'}
         elif 'image' == flavor:
@@ -731,7 +768,7 @@ class AlchemyAPI:
 
         results = ""
         try:
-            results = self.s.post(url=post_url, data=post_data)
+            results = self.req_session.post(url=post_url, data=post_data)
         except Exception as e:
             print(e)
             return {'status': 'ERROR', 'statusInfo': 'network-error'}
