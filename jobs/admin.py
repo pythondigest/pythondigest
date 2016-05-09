@@ -19,7 +19,7 @@ class JobFeedAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = u"Ссылка"
+    link_html.short_description = 'Ссылка'
 
 class RejectedListAdmin(admin.ModelAdmin):
     pass
@@ -38,7 +38,7 @@ class JobItemAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = u"Ссылка"
+    link_html.short_description = 'Ссылка'
 
 admin.site.register(JobItem, JobItemAdmin)
 admin.site.register(JobFeed, JobFeedAdmin)
