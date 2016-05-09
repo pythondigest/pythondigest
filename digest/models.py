@@ -206,7 +206,7 @@ class Item(models.Model):
         verbose_name=_('URL'), max_length=255)
     additionally = models.CharField(
         verbose_name=_('Additional info'),
-        max_length=255, blank=True)
+        max_length=255, blank=True, null=True)
     related_to_date = models.DateField(
         verbose_name=_('Date'),
         help_text=_('For example, publication date of the news on the source'),
@@ -437,7 +437,7 @@ class Package(models.Model):
     description = models.TextField(
         verbose_name=_('Description'), blank=True)
     link = models.URLField(
-        verbose_name=_('URL'), max_length=255, unique=True)
+        verbose_name=_('URL'), max_length=255)
 
     def __str__(self):
         return self.name
