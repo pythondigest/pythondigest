@@ -110,8 +110,7 @@ class IssuesFeed(ItemDigestFeed):
     def item_title(self, item):
         df = pytils.dt.ru_strftime('%d %B %Y', item.date_from, inflected=True)
         dt = pytils.dt.ru_strftime('%d %B %Y', item.date_to, inflected=True)
-        return '''Python-digest #%s. Новости, интересные проекты,
-        статьи и интервью [%s — %s]''' % (item.pk, df, dt)
+        return 'Python-digest #%s. Новости, интересные проекты, статьи и интервью [%s — %s]' % (item.pk, df, dt)
 
     def item_pubdate(self, item):
         if item.published_at is not None:
