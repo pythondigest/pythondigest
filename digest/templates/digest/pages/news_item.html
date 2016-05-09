@@ -2,7 +2,6 @@
 {% load micawber_tags %}
 {% load pytils_dt %}
 {% load common %}
-{% load likes_inclusion_tags %}
 {% load static %}
 
 
@@ -55,7 +54,7 @@
     <div class="col-md-9">
         <div class="news-list">
             {% with item=object read_link=True %}
-                {% include 'digest/blocks/_feed_item.html' %}
+                {% include 'digest/blocks/_feed_item.html' with like_link=False %}
                 {% include 'digest/blocks/_item_article.html' %}
 
             {% endwith %}

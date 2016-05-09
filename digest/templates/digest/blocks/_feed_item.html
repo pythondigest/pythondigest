@@ -1,7 +1,7 @@
 {% load pytils_dt %}
 {% load common %}
 {% load micawber_tags %}
-{% load likes_inclusion_tags %}
+
 {% load remdow %}
 
 <div class="item-container">
@@ -56,7 +56,11 @@
                         {{ object.title }}
                     </a>
                 {% endif %}
-                {% likes object 'likes/inclusion_tags/likes_item.html' %}
+
+                {% if like_link %}
+                    {% load likes_inclusion_tags %}
+                    {% likes object 'likes/inclusion_tags/likes_item.html' %}
+                {% endif %}
 
                 {% if object.tags_as_links %}
                     {% for tag_name, tag_link in item.tags_as_links %}
