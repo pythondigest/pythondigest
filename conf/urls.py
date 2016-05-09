@@ -8,8 +8,6 @@ from django.contrib import admin
 from conf.utils import likes_enable
 from digest.urls import urlpatterns as digest_url
 from frontend.urls import urlpatterns as frontend_url
-from jobs.urls import urlpatterns as jobs_url
-from landings.urls import urlpatterns as landings_url
 
 admin.autodiscover()
 
@@ -20,13 +18,21 @@ urlpatterns = [
         {'document_root': settings.MEDIA_ROOT}),
     url(r'', include(frontend_url, namespace='frontend')),
     url(r'', include(digest_url, namespace='digest')),
-    url(r'', include(jobs_url, namespace='jobs')),
-    url(r'', include(landings_url, namespace='landings')),
 
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
     # url(r"^account/", include('account.urls')),
     # url(r'', include('social.apps.django_app.urls', namespace='social'))
 ]
+
+if 'landings' in settings.INSTALLED_APPS:
+    from landings.urls import urlpatterns as landings_url
+
+    urlpatterns.append(url(r'', include(landings_url, namespace='landings')))
+
+if 'jobs' in settings.INSTALLED_APPS:
+    from jobs.urls import urlpatterns as jobs_url
+
+    urlpatterns.append(url(r'', include(jobs_url, namespace='jobs')))
 
 if likes_enable():
     from likes.urls import urlpatterns as like_urls
