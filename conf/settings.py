@@ -75,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     'admin_reorder.middleware.ModelAdminReorder',
 
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
-    "likes.middleware.SecretBallotUserIpUseragentMiddleware",
+    'likes.middleware.SecretBallotUserIpUseragentMiddleware',
 
 )
 
@@ -314,9 +314,9 @@ DATASET_POSITIVE_KEYWORDS = list({
 })
 
 DATASET_NEGATIVE_KEYWORDS = list({
-    "mysidebar",
-    "related",
-    "ads",
+    'mysidebar',
+    'related',
+    'ads',
     'footer',
     'menu',
     'navigation',
@@ -384,7 +384,7 @@ HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError as e:
-    print("Not found local settings: {}".format(str(e)))
+    print('Not found local settings: {}'.format(str(e)))
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

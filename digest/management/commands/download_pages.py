@@ -25,7 +25,7 @@ def get_article(item):
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def handle(self, *args, **options):
         """

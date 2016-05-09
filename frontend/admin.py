@@ -18,7 +18,7 @@ class EditorMaterialAdmin(admin.ModelAdmin):
         return '<a href="%s">читать</a>' % obj.link
 
     link_html.allow_tags = True
-    link_html.short_description = u'Ссылка'
+    link_html.short_description = 'Ссылка'
 
     def save_model(self, request, obj, form, change):
         if not obj.pk:

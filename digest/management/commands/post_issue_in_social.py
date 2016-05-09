@@ -10,7 +10,7 @@ from digest.pub_digest import pub_to_all
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u'News import from external resources'
+    help = 'News import from external resources'
 
     def add_arguments(self, parser):
         parser.add_argument('issue', type=int)

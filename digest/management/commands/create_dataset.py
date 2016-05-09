@@ -36,7 +36,7 @@ def create_dataset(queryset_items, name):
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('cnt_parts', type=int)  # сколько частей
@@ -73,4 +73,4 @@ class Command(BaseCommand):
             create_dataset(queryset, name)
 
         with open(os.path.join(settings.DATASET_FOLDER, 'test_set_ids.txt'), 'w') as fio:
-            fio.writelines(["%s\n" % x for x in test_set.values_list('id', flat=True)])
+            fio.writelines(['%s\n' % x for x in test_set.values_list('id', flat=True)])

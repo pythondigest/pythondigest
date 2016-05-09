@@ -28,8 +28,8 @@ register = template.Library()
 
 @register.filter
 def unidecode(string):
-    return _unidecode(string.lower().replace(" ", "_")).replace("'",
-                                                                "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
+    # last replace is unnecessary, but, for example, in links symbol ' looks awful
+    return _unidecode(string.lower().replace(' ', '_')).replace("'", "")
 
 
 @register.simple_tag
@@ -130,7 +130,7 @@ def modify_url(context, operation, *params):
     request = context.get('request')
     params = list(map(str, params))
     if not request:
-        return u''
+        return ''
 
     current_url = request.get_full_path()
     return modify_url_(current_url, operation, *params)

@@ -120,7 +120,7 @@ def main(url):
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u''
+    help = ''
 
     def add_arguments(self, parser):
         parser.add_argument('url', type=str)

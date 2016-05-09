@@ -22,10 +22,10 @@ def prepare_link_title(
     """
     result = None
     if item:
-        assert item.title, "Not found title in item"
-        assert item.link, "Not found link in item"
+        assert item.title, 'Not found title in item'
+        assert item.link, 'Not found link in item'
 
-        link = item.link.replace(u'https://www.google.com/url?rct=j&sa=t&url=',
+        link = item.link.replace('https://www.google.com/url?rct=j&sa=t&url=',
                                  '')
         ge_ind = link.find('&ct=ga')
         if ge_ind > -1:
@@ -172,7 +172,7 @@ def import_jobs_rss():
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u'News import from external resources'
+    help = 'News import from external resources'
 
     def handle(self, *args, **options):
         """

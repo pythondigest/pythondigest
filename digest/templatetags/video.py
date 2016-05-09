@@ -12,13 +12,13 @@ def youtube_id(value):
     """
     Examples:
 
-    >>> youtube_id("http://youtu.be/SA2iWivDJiE")
+    >>> youtube_id('http://youtu.be/SA2iWivDJiE')
     SA2iWivDJiE
-    >>> youtube_id("http://www.youtube.com/watch?v=_oPAwA_Udwc&feature=feedu")
+    >>> youtube_id('http://www.youtube.com/watch?v=_oPAwA_Udwc&feature=feedu')
     _oPAwA_Udwc
-    >>> youtube_id("http://www.youtube.com/embed/SA2iWivDJiE")
+    >>> youtube_id('http://www.youtube.com/embed/SA2iWivDJiE')
     SA2iWivDJiE
-    >>> youtube_id("http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US")
+    >>> youtube_id('http://www.youtube.com/v/SA2iWivDJiE?version=3&amp;hl=en_US')
     SA2iWivDJiE
     """
     query = urlparse(value)

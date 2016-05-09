@@ -759,14 +759,14 @@ class AlchemyAPI:
         params['outputMode'] = 'json'
         # Insert the base url
 
-        post_url = ""
+        post_url = ''
         try:
             post_url = AlchemyAPI.BASE_URL + endpoint + \
                        '?' + urlencode(params).encode('utf-8')
         except TypeError:
             post_url = AlchemyAPI.BASE_URL + endpoint + '?' + urlencode(params)
 
-        results = ""
+        results = ''
         try:
             results = self.req_session.post(url=post_url, data=post_data)
         except Exception as e:
@@ -775,7 +775,7 @@ class AlchemyAPI:
         try:
             return results.json()
         except Exception as e:
-            if results != "":
+            if results != '':
                 print(results)
             print(e)
             return {'status': 'ERROR', 'statusInfo': 'parse-error'}

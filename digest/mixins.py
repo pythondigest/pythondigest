@@ -50,8 +50,8 @@ class FavoriteItemsMixin(ContextMixin):
             date = datetime.datetime.now() - datetime.timedelta(days=12)
             items = Item.objects.filter(
                 id__in=set(Vote.objects.filter(
-                    content_type=ContentType.objects.get(app_label="digest",
-                                                         model="item"),
+                    content_type=ContentType.objects.get(app_label='digest',
+                                                         model='item'),
                 ).values_list('object_id', flat=True)),
                 related_to_date__gt=date)
             items_score = [(item, item.vote_total) for item in items if

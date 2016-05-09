@@ -9,7 +9,7 @@ from digest.models import Item
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def handle(self, *args, **options):
         """

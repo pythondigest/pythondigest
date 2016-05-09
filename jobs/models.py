@@ -8,20 +8,20 @@ class JobFeed(models.Model):
     """RSS - источники импорта вакансий."""
     name = models.CharField(
         max_length=255,
-        verbose_name=u'Название источника',
+        verbose_name='Название источника',
     )
 
     link = models.URLField(
-        max_length=255, verbose_name=u'Ссылка',
+        max_length=255, verbose_name='Ссылка',
     )
 
     in_edit = models.BooleanField(
-        verbose_name=u'На тестировании',
+        verbose_name='На тестировании',
         default=False,
     )
 
     is_activated = models.BooleanField(
-        verbose_name=u'Включено',
+        verbose_name='Включено',
         default=True,
     )
 
@@ -29,8 +29,8 @@ class JobFeed(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = u'Источник импорта вакансий'
-        verbose_name_plural = u'Источники импорта вакансий'
+        verbose_name = 'Источник импорта вакансий'
+        verbose_name_plural = 'Источники импорта вакансий'
 
 
 class RejectedList(models.Model):
@@ -98,7 +98,7 @@ class JobItem(models.Model):
         result += ' ' + self.salary_currency if self.salary_currency else ''
         return result
 
-    get_salary_str.short_description = u"Зарплата"
+    get_salary_str.short_description = 'Зарплата'
 
     def __str__(self):
         return self.title

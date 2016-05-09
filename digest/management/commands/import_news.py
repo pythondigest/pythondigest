@@ -54,7 +54,7 @@ def import_tweets(**kwargs):
         if Item.objects.filter(link=i[1]).exists():
             continue
 
-        # title = u'[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
+        # title = '[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
         title = i[0]
         item_data = {
             'title': title,
@@ -178,7 +178,7 @@ def parsing(func):
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u'News import from external resources'
+    help = 'News import from external resources'
 
     def handle(self, *args, **options):
         """

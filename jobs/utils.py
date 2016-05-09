@@ -54,7 +54,7 @@ def get_json(url: str) -> Dict:
         try:
             result = response.json()
         except ValueError as e:
-            err_msg = "Not found JSON with ({0}) vacancies: {1}"
+            err_msg = 'Not found JSON with ({0}) vacancies: {1}'
             logger.error(err_msg.format(url, e))
 
     return result

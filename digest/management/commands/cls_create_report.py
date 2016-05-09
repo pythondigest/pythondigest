@@ -14,7 +14,7 @@ from digest.management.commands.cls_split_dataset import load_data_from_folder
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('dataset_test_folder', type=str)
@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
         part_size = 100
         cur_part = 0
-        url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+        url = '{0}/{1}'.format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
 
         cnt = len(items)
         print(cnt)

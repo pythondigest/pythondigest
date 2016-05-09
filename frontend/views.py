@@ -58,7 +58,7 @@ class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
                 'published_at')
         except Issue.DoesNotExist as e:
             logger.warning(
-                "Not found active Issue for index page: {}".format(str(e)))
+                'Not found active Issue for index page: {}'.format(str(e)))
 
         items = []
         if issue:

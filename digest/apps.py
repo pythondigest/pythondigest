@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 class Config(AppConfig):
     name = 'digest'
-    verbose_name = u'Дайджест'
+    verbose_name = 'Дайджест'

@@ -20,7 +20,7 @@ urlpatterns = [
     url(r'', include(digest_url, namespace='digest')),
 
     url(r'^taggit_autosuggest/', include('taggit_autosuggest.urls')),
-    # url(r"^account/", include('account.urls')),
+    # url(r'^account/', include('account.urls')),
     # url(r'', include('social.apps.django_app.urls', namespace='social'))
 ]
 

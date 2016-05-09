@@ -1,17 +1,18 @@
 # coding=utf-8
 import datetime
 
+import pytils
+from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
-from django.conf import settings
-import pytils
+
 from digest.models import Issue, Item, Section
 
 
 class DigestFeed(Feed):
-    title = u"Дайджест новостей о python"
+    title = 'Дайджест новостей о python'
     link = '/'
-    description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
+    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях.'
 
     def item_title(self, item):
         return item.title
@@ -26,19 +27,22 @@ class DigestFeed(Feed):
         return item.modified_at or item.activated_at
 
 
+def mark_videos(query_set):
+    video_section = Section.objects.filter(title="Видео")
+    video_id = video_section.values_list('id', flat=True)[0]
+
+    for x in query_set:
+        if x.section.id == video_id:
+            x.title = "[Видео] %s" % x.title
+
+
 class RawEntriesFeed(DigestFeed):
     @staticmethod
     def items():
         _ = Item.objects.filter(
             activated_at__lte=datetime.datetime.now(),
         ).order_by('-related_to_date')[:10]
-
-        video_section = Section.objects.get(title="Видео")
-
-        for x in _:
-            if x.section == video_section:
-                x.title = "[Видео] %s" % x.title
-
+        mark_videos(_)
         return _
 
 
@@ -52,13 +56,7 @@ class ItemDigestFeed(DigestFeed):
             activated_at__lte=datetime.datetime.now(),
         ).order_by(
             '-related_to_date')[:10]
-
-        video_section = Section.objects.get(title="Видео")
-
-        for x in _:
-            if x.section == video_section:
-                x.title = "[Видео] %s" % x.title
-
+        mark_videos(_)
         return _
 
 
@@ -75,7 +73,7 @@ class TwitterEntriesFeed(ItemDigestFeed):
 
 class RussianEntriesFeed(ItemDigestFeed):
     """Лента РСС для русскоязычных новостей."""
-    description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."""
+    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы).'
 
     def item_link(self, item):
         return item.internal_link
@@ -91,14 +89,14 @@ class RussianEntriesFeed(ItemDigestFeed):
 class CustomFeedGenerator(Rss201rev2Feed):
     def add_item_elements(self, handler, item):
         super(CustomFeedGenerator, self).add_item_elements(handler, item)
-        handler.addQuickElement(u"image", item['image'])
+        handler.addQuickElement('image', item['image'])
 
 
 class IssuesFeed(ItemDigestFeed):
     """Лента РСС для выпусков новостей."""
-    title = u"Дайджест новостей о python - все выпуски"
+    title = 'Дайджест новостей о python - все выпуски'
     link = '/issues/'
-    description = u"""Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."""
+    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях.'
 
     feed_type = CustomFeedGenerator
 
@@ -108,10 +106,9 @@ class IssuesFeed(ItemDigestFeed):
             '-published_at')[:10]
 
     def item_title(self, item):
-        df = pytils.dt.ru_strftime(u'%d %B %Y', item.date_from, inflected=True)
-        dt = pytils.dt.ru_strftime(u'%d %B %Y', item.date_to, inflected=True)
-        return u'''Python-digest #%s. Новости, интересные проекты,
-        статьи и интервью [%s — %s]''' % (item.pk, df, dt)
+        df = pytils.dt.ru_strftime('%d %B %Y', item.date_from, inflected=True)
+        dt = pytils.dt.ru_strftime('%d %B %Y', item.date_to, inflected=True)
+        return 'Python-digest #%s. Новости, интересные проекты, статьи и интервью [%s — %s]' % (item.pk, df, dt)
 
     def item_pubdate(self, item):
         if item.published_at is not None:
@@ -126,7 +123,9 @@ class IssuesFeed(ItemDigestFeed):
         the `add_item` call of the feed generator.
         Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
         """
-        return {'image': 'http://' + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
+        return {
+            'image': 'http://' + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
+
 
 
 class SectionFeed(DigestFeed):
