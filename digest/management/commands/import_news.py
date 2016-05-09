@@ -11,7 +11,8 @@ import feedparser
 from django.core.management.base import BaseCommand
 from typing import List, Dict
 
-from digest.management.commands import apply_parsing_rules, get_tweets_by_url, save_item, is_weekly_digest, \
+from digest.management.commands import apply_parsing_rules, get_tweets_by_url, \
+    save_item, is_weekly_digest, \
     parse_weekly_digest, _get_http_data_of_url, apply_video_rules
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section
@@ -21,7 +22,11 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     result = []
     excl = [s.strip() for s in (src.excl or '').split(',') if s]
     for text, link, http_code in data:
-        excl_link = bool([i for i in excl if i in link])
+
+        if excl is not None:
+            excl_link = bool([i for i in excl if i in link])
+        else:
+            excl_link = False
         if not excl_link and src.incl in text:
             tw_txt = text.replace(src.incl, '')
             result.append([tw_txt, link, src.resource, http_code])
@@ -148,7 +153,9 @@ def import_rss(**kwargs):
                 'resource': resource,
                 'language': language,
             })
-            rss_item.update(apply_parsing_rules(rss_item, **kwargs) if kwargs.get('query_rules') else {})
+            rss_item.update(
+                apply_parsing_rules(rss_item, **kwargs) if kwargs.get(
+                    'query_rules') else {})
             rss_item.update(apply_video_rules(rss_item.copy()))
             save_item(rss_item)
 
