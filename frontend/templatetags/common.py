@@ -28,8 +28,8 @@ register = template.Library()
 
 @register.filter
 def unidecode(string):
-    return _unidecode(string.lower().replace(" ", "_")).replace("'",
-                                                                "")  # last replace is unnecessary, but, for example, in links symbol ' looks awful
+    # last replace is unnecessary, but, for example, in links symbol ' looks awful
+    return _unidecode(string.lower().replace(' ', '_')).replace("'", "")
 
 
 @register.simple_tag
