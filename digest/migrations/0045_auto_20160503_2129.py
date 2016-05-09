@@ -37,18 +37,6 @@ class Migration(migrations.Migration):
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='item',
-            name='additionally',
-            field=models.CharField(blank=True, default='', max_length=255, verbose_name='Additional info'),
-            preserve_default=False,
-        ),
-        migrations.AlterField(
-            model_name='item',
-            name='description',
-            field=models.TextField(blank=True, default='', verbose_name='Description'),
-            preserve_default=False,
-        ),
-        migrations.AlterField(
             model_name='package',
             name='description',
             field=models.TextField(blank=True, default='', verbose_name='Description'),

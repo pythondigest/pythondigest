@@ -73,7 +73,9 @@ def _clojure_get_youtube_urls_from_page():
             for x in a:
                 _ = re.findall(reg_list, x)
                 if _:
-                    urls.extend([x[0] for x in filter(lambda x: x and len(x) > 1 and x[0], _)])
+                    urls.extend([x[0] for x in
+                                 filter(lambda x: x and len(x) > 1 and x[0],
+                                        _)])
                     break
 
             result = list(
@@ -127,7 +129,8 @@ def _get_http_data_of_url(url: str):
         status_code = str(r.status_code)
         result = status_code, readable_article, r.text
 
-    except (requests.ConnectionError, AssertionError) as e:
+    except (requests.ConnectionError, AssertionError,
+            requests.exceptions.MissingSchema) as e:
         result = str(404), None, None
     return result
 
@@ -382,7 +385,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
 
 
 def save_item(item):
-    if not item:
+    if not item or item.get('link') is None:
         return
 
     time = datetime.datetime.now() + datetime.timedelta(days=-14)
@@ -392,6 +395,7 @@ def save_item(item):
 
     if not Item.objects.filter(link=item.get('link'),
                                related_to_date__gt=time).exists():
+
         _a = Item(
             title=item.get('title'),
             resource=item.get('resource'),

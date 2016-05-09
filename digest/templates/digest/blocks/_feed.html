@@ -4,7 +4,7 @@
         <h3 class="text-center">{% trans "Latest news" %}</h3>
         <hr>
         {% for object in items %}
-            <p>{% include 'digest/blocks/_item_as_line.html' with item=object comment=False likes=False %}</p>
+            <p>{% include 'digest/blocks/_item_as_line.html' with item=object comment=False likes=True %}</p>
         {% endfor %}
 
         <br>

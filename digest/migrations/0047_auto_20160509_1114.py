@@ -7,15 +7,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ('digest', '0045_auto_20160503_2129'),
+        ('digest', '0046_auto_20160503_2157'),
     ]
 
     operations = [
+
         migrations.AlterField(
             model_name='item',
-            name='article_path',
-            field=models.FilePathField(blank=True, default='',
-                                       verbose_name='Article path'),
+            name='additionally',
+            field=models.CharField(blank=True, default='', max_length=255,
+                                   verbose_name='Additional info'),
             preserve_default=False,
         ),
 
