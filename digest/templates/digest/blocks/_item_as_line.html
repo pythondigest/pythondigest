@@ -1,7 +1,8 @@
-{% load likes_inclusion_tags %}
+
 
 {% if item %}
     {% if likes %}
+        {% load likes_inclusion_tags %}
         {% likes item 'likes/inclusion_tags/likes_item.html' %}
         &nbsp;
     {% endif %}
@@ -33,5 +34,5 @@
        onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
        target="_blank">
         {{ item.title }}
-    </a>
+    </a> {% if show_description and item.content %} - {{ item.content }}{% endif %}
 {% endif %}
