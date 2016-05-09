@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
         part_size = 100
         cur_part = 0
-        url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+        url = '{0}/{1}'.format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
 
         items = ItemClsCheck.objects.filter(item__id__in=ids)
         cnt = items.count()

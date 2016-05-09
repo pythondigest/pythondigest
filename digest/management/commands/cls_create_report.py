@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
         part_size = 100
         cur_part = 0
-        url = "{0}/{1}".format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
+        url = '{0}/{1}'.format(settings.CLS_URL_BASE, 'api/v1.0/classify/')
 
         cnt = len(items)
         print(cnt)

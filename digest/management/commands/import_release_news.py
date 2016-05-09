@@ -15,10 +15,10 @@ from digest.models import Package, Section, Resource, Issue
 def _generate_release_item(package_version: str, link: str,
                            resource: Resource, section: Section,
                            package_data: dict):
-    name = u"{0} - {1}".format(package_data.get('name'), package_version)
-    description = u"{2}." \
-                  u" Изменения описаны по ссылке <a href='{3}'>{3}</a>. " \
-                  u"Скачать можно по ссылке: <a href='{4}'>{4}</a>".format(
+    name = u'{0} - {1}'.format(package_data.get('name'), package_version)
+    description = u'{2}.' \
+                  u' Изменения описаны по ссылке <a href="{3}">{3}</a>. ' \
+                  u'Скачать можно по ссылке: <a href="{4}">{4}</a>'.format(
                       package_data.get('name'),
                       package_version,
                       package_data.get('description'),
@@ -45,7 +45,7 @@ def off_other_release_news(news, package_data):
 def check_previous_news_of_package(news, package_data):
     items = news.filter(title__startswith=package_data.get('name'),
                         description__contains=package_data.get('url'))
-    assert items.count() <= 1, "Many items for library"
+    assert items.count() <= 1, 'Many items for library'
     return items.count() != 0
 
 def parse_rss():
@@ -63,7 +63,7 @@ def parse_rss():
         _start_week, _end_week = get_start_end_of_week(today)
         _ = Issue.objects.filter(date_from=_start_week, date_to=_end_week)
 
-        assert _.count() <= 1, "Many ISSUE on week"
+        assert _.count() <= 1, 'Many ISSUE on week'
         _ = None if _.count() == 0 else _[0]
         news = Item.objects.filter(issue=_,
                                    status='active') if _ is not None else []

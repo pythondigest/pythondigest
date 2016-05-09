@@ -21,7 +21,7 @@ admin.site.unregister(Site)
 
 def link_html(obj):
     link = escape(obj.link)
-    return u'<a target="_blank" href="%s">%s</a>' % (link, link)
+    return '<a target="_blank" href="%s">%s</a>' % (link, link)
 
 
 def _save_item_model(request, item: Item, form, change) -> None:
@@ -37,7 +37,7 @@ def _save_item_model(request, item: Item, form, change) -> None:
                 # последний неактивный
                 lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
             except Issue.DoesNotExist as e:
-                logger.warning("Not found last or recent issue")
+                logger.warning('Not found last or recent issue')
 
             if la or lna:
                 item.issue = lna or la
@@ -53,9 +53,9 @@ def _save_item_model(request, item: Item, form, change) -> None:
 
 def _external_link(obj):
     lnk = escape(obj.link)
-    ret = u'<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+    ret = '<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
     username = obj.user.username if obj.user else u'Гость'
-    ret = u'%s<br>Добавил: %s' % (ret, username)
+    ret = '%s<br>Добавил: %s' % (ret, username)
     return ret
 
 
@@ -68,22 +68,22 @@ class IssueAdmin(admin.ModelAdmin):
     actions = ['make_published']
 
     def issue_date(self, obj):
-        return u"С %s по %s" % (obj.date_from, obj.date_to)
+        return 'С %s по %s' % (obj.date_from, obj.date_to)
 
-    issue_date.short_description = u"Период"
+    issue_date.short_description = 'Период'
 
     def news_count(self, obj):
-        return u"%s" % Item.objects.filter(issue__pk=obj.pk,
+        return '%s' % Item.objects.filter(issue__pk=obj.pk,
                                            status='active').count()
 
-    news_count.short_description = u"Количество новостей"
+    news_count.short_description = 'Количество новостей'
 
     def frontend_link(self, obj):
         lnk = reverse('digest:issue_view', kwargs={'pk': obj.pk})
-        return u'<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
+        return '<a target="_blank" href="%s">%s</a>' % (lnk, lnk)
 
     frontend_link.allow_tags = True
-    frontend_link.short_description = u"Просмотр"
+    frontend_link.short_description = 'Просмотр'
 
     def make_published(self, request, queryset):
         from django_q.tasks import async
@@ -98,7 +98,7 @@ class IssueAdmin(admin.ModelAdmin):
                 '{0}{1}'.format(site, issue.image.url if issue.image else '')
             )
 
-    make_published.short_description = "Опубликовать анонс в социальные сети"
+    make_published.short_description = 'Опубликовать анонс в социальные сети'
 
 
 admin.site.register(Issue, IssueAdmin)
@@ -123,19 +123,19 @@ class ParsingRulesAdmin(admin.ModelAdmin):
     search_fields = ('is_activated', 'title', 'if_value', 'then_value',)
 
     def _get_if_action(self, obj):
-        return u"{0}: <i>{1}</i>".format(
+        return '{0}: <i>{1}</i>'.format(
             obj.get_if_action_display(),
             obj.if_value)
 
     _get_if_action.allow_tags = True
-    _get_if_action.short_description = u"Условие"
+    _get_if_action.short_description = 'Условие'
 
     def _get_then_action(self, obj):
-        return u"{0}: <i>{1}</i>".format(obj.get_then_action_display(),
+        return '{0}: <i>{1}</i>'.format(obj.get_then_action_display(),
                                          obj.then_value)
 
     _get_then_action.allow_tags = True
-    _get_then_action.short_description = u"Действие"
+    _get_then_action.short_description = 'Действие'
 
 
 admin.site.register(ParsingRules, ParsingRulesAdmin)
@@ -170,7 +170,7 @@ class ItemAdmin(admin.ModelAdmin):
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
-    external_link.short_description = u"Ссылка"
+    external_link.short_description = 'Ссылка'
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
@@ -185,7 +185,7 @@ class ResourceAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = u"Ссылка"
+    link_html.short_description = 'Ссылка'
 
 
 admin.site.register(Resource, ResourceAdmin)
@@ -203,7 +203,7 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = u"Ссылка"
+    link_html.short_description = 'Ссылка'
 
 
 admin.site.register(AutoImportResource, AutoImportResourceAdmin)
@@ -348,11 +348,11 @@ class ItemModeratorAdmin(admin.ModelAdmin):
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
-    external_link.short_description = u"Ссылка"
+    external_link.short_description = 'Ссылка'
 
     external_link_edit = lambda s, obj: link_html(obj)
     external_link_edit.allow_tags = True
-    external_link_edit.short_description = u"Ссылка"
+    external_link_edit.short_description = 'Ссылка'
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
@@ -377,7 +377,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
-    external_link.short_description = u"Ссылка"
+    external_link.short_description = 'Ссылка'
 
     def cls_ok(self, obj):
         return obj.cls_check
@@ -428,7 +428,7 @@ class ItemClsAdmin(admin.ModelAdmin):
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True
-    external_link.short_description = u"Ссылка"
+    external_link.short_description = 'Ссылка'
 
     def status_ok(self, obj):
         return obj.status == 'active'

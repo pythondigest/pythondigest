@@ -44,7 +44,7 @@ def send_tweet_with_media(api, text, image):
         # качаем файл из сети
         file_path = download_image(image)
 
-    assert file_path is not None, "Not found image (for twitter)"
+    assert file_path is not None, 'Not found image (for twitter)'
     api.update_with_media(file_path, text)
 
 
@@ -163,10 +163,10 @@ def pub_to_twitter(text, image_path, api):
 
 
 def pub_to_vk_users(text, api):
-    user_text = "Привет. Вышел новый дайджест. Пример текста\n"
+    user_text = 'Привет. Вышел новый дайджест. Пример текста\n'
     user_text += text
     for user_id in get_pydigest_users():
-        print("User ", user_id)
+        print('User ', user_id)
         res = send_message(api, user_id=user_id, message=user_text)
         time.sleep(1)
         print(res)
@@ -184,7 +184,7 @@ def pub_to_telegram(text, bot_token, tg_channel):
     tgm_bot = TelegramBot(bot_token)
     answer = tgm_bot.send_message(tg_channel, text).wait()
     if isinstance(answer, twx.botapi.Error):
-        print("error code: %s\nerror description: %s\n",
+        print('error code: %s\nerror description: %s\n',
               answer.error_code,
               answer.description)
     else:
@@ -196,8 +196,8 @@ def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
 
     data = {
         'value1': text,
-        "value2": digest_url,
-        "value3": digest_image_url
+        'value2': digest_url,
+        'value3': digest_image_url
     }
 
     requests.post(

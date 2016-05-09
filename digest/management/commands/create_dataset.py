@@ -73,4 +73,4 @@ class Command(BaseCommand):
             create_dataset(queryset, name)
 
         with open(os.path.join(settings.DATASET_FOLDER, 'test_set_ids.txt'), 'w') as fio:
-            fio.writelines(["%s\n" % x for x in test_set.values_list('id', flat=True)])
+            fio.writelines(['%s\n' % x for x in test_set.values_list('id', flat=True)])

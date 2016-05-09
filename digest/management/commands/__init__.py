@@ -54,7 +54,7 @@ def _clojure_get_youtube_urls_from_page():
         result = url
         _ = re.findall(reg_list, url)
         if _ and len(_) == 1 and len(_[0]) == 7:
-            result = "https://www.youtube.com/watch?v=%s" % _[0][6]
+            result = 'https://www.youtube.com/watch?v=%s' % _[0][6]
         return result
 
     def clean_urls(url):
@@ -68,7 +68,7 @@ def _clojure_get_youtube_urls_from_page():
 
         result = None
         try:
-            a = filter(lambda x: "youtu" in x, content.split('\n'))
+            a = filter(lambda x: 'youtu' in x, content.split('\n'))
             urls = []
             for x in a:
                 _ = re.findall(reg_list, x)
