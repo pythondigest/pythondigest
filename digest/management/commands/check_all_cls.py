@@ -7,7 +7,7 @@ from digest.models import ItemClsCheck
 
 
 class Command(BaseCommand):
-    help = u'lala'
+    help = 'lala'
 
     def handle(self, *args, **options):
         for x in ItemClsCheck.objects.all():

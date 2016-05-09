@@ -48,14 +48,14 @@ def get_keywords(api, text) -> list:
 
 def create_keywords(api, item):
     if item.article_path and os.path.exists(item.article_path):
-        logger.info("Process: {0}".format(item.pk))
+        logger.info('Process: {0}'.format(item.pk))
         with open(item.article_path) as fio:
             keywords = get_keywords(api, strip_tags(fio.read()))
             item.keywords.add(*keywords)
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('start', type=int)

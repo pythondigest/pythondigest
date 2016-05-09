@@ -19,8 +19,8 @@ except ImportError:
 
 from digest.models import Item
 
-ITEM_STATUS_CHOICES = (('queue', u'В очередь'),
-                       ('moderated', u'Отмодерировано'),)
+ITEM_STATUS_CHOICES = (('queue', 'В очередь'),
+                       ('moderated', 'Отмодерировано'),)
 
 
 class GlavRedWidget(CKEditorWidget):
@@ -45,7 +45,7 @@ class GlavRedWidget(CKEditorWidget):
 
 
 class ItemStatusForm(ModelForm):
-    status = ChoiceField(label=u"Статус",
+    status = ChoiceField(label='Статус',
                          widget=widgets.AdminRadioSelect(
                              attrs={'class': get_ul_class(admin.HORIZONTAL)}),
                          choices=ITEM_STATUS_CHOICES)

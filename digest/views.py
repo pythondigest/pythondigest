@@ -150,7 +150,7 @@ class AddNews(FormView):
                             related_to_date=datetime.datetime.now(),
                             section_id=section)
         messages.info(self.request,
-                      u'Ваша ссылка успешно добавлена на рассмотрение')
+                      'Ваша ссылка успешно добавлена на рассмотрение')
         return reverse('frontend:index')
 
 

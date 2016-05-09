@@ -54,7 +54,7 @@ def _clojure_get_youtube_urls_from_page():
         result = url
         _ = re.findall(reg_list, url)
         if _ and len(_) == 1 and len(_[0]) == 7:
-            result = "https://www.youtube.com/watch?v=%s" % _[0][6]
+            result = 'https://www.youtube.com/watch?v=%s' % _[0][6]
         return result
 
     def clean_urls(url):
@@ -68,7 +68,7 @@ def _clojure_get_youtube_urls_from_page():
 
         result = None
         try:
-            a = filter(lambda x: "youtu" in x, content.split('\n'))
+            a = filter(lambda x: 'youtu' in x, content.split('\n'))
             urls = []
             for x in a:
                 _ = re.findall(reg_list, x)
@@ -189,7 +189,7 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
 #         today = datetime.date.today()
 #         date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
 #         date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
-#         query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
+#         query = 'site:%s daterange:%s-%s' % (link, date_s, date_e,)
 #
 #         result = False
 #         for i in range(0, attempt):

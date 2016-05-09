@@ -35,7 +35,7 @@ def subscribe_all_python():
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u'News import from external resources'
+    help = 'News import from external resources'
 
     def handle(self, *args, **options):
         """
