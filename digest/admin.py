@@ -54,7 +54,7 @@ def _save_item_model(request, item: Item, form, change) -> None:
 def _external_link(obj):
     lnk = escape(obj.link)
     ret = '<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
-    username = obj.user.username if obj.user else u'Гость'
+    username = obj.user.username if obj.user else 'Гость'
     ret = '%s<br>Добавил: %s' % (ret, username)
     return ret
 

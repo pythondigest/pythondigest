@@ -130,7 +130,7 @@ def modify_url(context, operation, *params):
     request = context.get('request')
     params = list(map(str, params))
     if not request:
-        return u''
+        return ''
 
     current_url = request.get_full_path()
     return modify_url_(current_url, operation, *params)

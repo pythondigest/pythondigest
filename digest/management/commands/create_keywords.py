@@ -55,7 +55,7 @@ def create_keywords(api, item):
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('start', type=int)

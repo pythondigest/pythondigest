@@ -13,7 +13,7 @@ from digest.models import ItemClsCheck
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('input_path', type=str)

@@ -14,7 +14,7 @@ from digest.management.commands.cls_split_dataset import load_data_from_folder
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('dataset_test_folder', type=str)

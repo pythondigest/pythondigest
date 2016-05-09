@@ -186,7 +186,7 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
 #         today = datetime.date.today()
 #         date_s = _date_to_julian_day(today - datetime.timedelta(days=365 * 8))
 #         date_e = _date_to_julian_day(today - datetime.timedelta(days=7 * 2))
-#         query = u'site:%s daterange:%s-%s' % (link, date_s, date_e,)
+#         query = 'site:%s daterange:%s-%s' % (link, date_s, date_e,)
 #
 #         result = False
 #         for i in range(0, attempt):

@@ -36,7 +36,7 @@ def create_dataset(queryset_items, name):
 
 
 class Command(BaseCommand):
-    help = u'Create dataset'
+    help = 'Create dataset'
 
     def add_arguments(self, parser):
         parser.add_argument('cnt_parts', type=int)  # сколько частей

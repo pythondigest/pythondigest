@@ -15,10 +15,10 @@ from digest.models import Package, Section, Resource, Issue
 def _generate_release_item(package_version: str, link: str,
                            resource: Resource, section: Section,
                            package_data: dict):
-    name = u'{0} - {1}'.format(package_data.get('name'), package_version)
-    description = u'{2}.' \
-                  u' Изменения описаны по ссылке <a href="{3}">{3}</a>. ' \
-                  u'Скачать можно по ссылке: <a href="{4}">{4}</a>'.format(
+    name = '{0} - {1}'.format(package_data.get('name'), package_version)
+    description = '{2}.' \
+                  ' Изменения описаны по ссылке <a href="{3}">{3}</a>. ' \
+                  'Скачать можно по ссылке: <a href="{4}">{4}</a>'.format(
                       package_data.get('name'),
                       package_version,
                       package_data.get('description'),
@@ -68,7 +68,7 @@ def parse_rss():
         news = Item.objects.filter(issue=_,
                                    status='active') if _ is not None else []
 
-        section = Section.objects.get(title=u'Релизы')
+        section = Section.objects.get(title='Релизы')
         resource = Resource.objects.get(link='http://allmychanges.com/')
     except Exception as e:
         print(e)
@@ -112,7 +112,7 @@ def parse_rss():
 
 class Command(BaseCommand):
     args = 'no arguments!'
-    help = u'News import from external resources'
+    help = 'News import from external resources'
 
     def handle(self, *args, **options):
         parse_rss()
