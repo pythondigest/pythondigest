@@ -163,9 +163,9 @@ def import_jobs_rss():
                filter(excl_filter,
                       map(make_validate_dict,
                           map(prepare_link_title,
-                          filter(is_new_job,
-                                 join(
-                                     map(get_rss_items, job_feeds)))))))
+                              filter(is_new_job,
+                                     join(
+                                         map(get_rss_items, job_feeds)))))))
     for x in items:
         save_job(x)
 

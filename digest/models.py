@@ -55,7 +55,8 @@ TYPE_RESOURCE = (('twitter', _("Twitter feed")),
 def build_url(*args, **kwargs):
     params = kwargs.pop('params', {})
     url = reverse(*args, **kwargs)
-    if not params: return url
+    if not params:
+        return url
 
     query_dict = QueryDict('', mutable=True)
     for k, v in params.items():
@@ -282,7 +283,8 @@ class Item(models.Model):
 
     @property
     def text(self):
-        if self.article_path is not None and self.article_path and os.path.exists(
+        nonempty_path = self.article_path is not None and self.article_path
+        if nonempty_path and os.path.exists(
                 self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
@@ -335,8 +337,8 @@ class Item(models.Model):
 
     @property
     def tags_as_links(self):
-        return [(x.name, build_url('digest:feed', params={'tag': x.name})) for x
-                in self.tags.all()]
+        return [(x.name, build_url('digest:feed', params={'tag': x.name}))
+                for x in self.tags.all()]
 
     @property
     def tags_as_str(self):

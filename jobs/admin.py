@@ -21,11 +21,14 @@ class JobFeedAdmin(admin.ModelAdmin):
     link_html.allow_tags = True
     link_html.short_description = u"Ссылка"
 
+
 class RejectedListAdmin(admin.ModelAdmin):
     pass
 
+
 class AcceptedListAdmin(admin.ModelAdmin):
     pass
+
 
 class JobItemAdmin(admin.ModelAdmin):
     list_display = (

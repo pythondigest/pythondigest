@@ -24,9 +24,9 @@ def create_dataset(queryset_items, name):
     if not queryset_items:
         return
     out_filepath = os.path.join(settings.DATASET_FOLDER, name)
-    data = {'links': [
-        x.get_data4cls(status=True) for x in queryset_items
-        ]}
+    data = {
+        'links': [x.get_data4cls(status=True) for x in queryset_items]
+    }
 
     if not os.path.exists(os.path.dirname(out_filepath)):
         os.makedirs(os.path.dirname(out_filepath))

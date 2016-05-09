@@ -15,7 +15,10 @@ from django.conf import settings
 from twx.botapi import TelegramBot
 
 
-def init_auth(consumer_key, consumer_secret, access_token, access_token_secret):
+def init_auth(consumer_key,
+              consumer_secret,
+              access_token,
+              access_token_secret):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth)
@@ -90,7 +93,8 @@ class GitterAPI(object):
             'Authorization': 'Bearer {0}'.format(self.token),
         }
         room_id = self.room_id_dict.get(room)
-        url = 'https://api.gitter.im/v1/rooms/{room_id}/chatMessages'.format(room_id=room_id)
+        url = 'https://api.gitter.im/v1/rooms/{room_id}/chatMessages'
+        url = url.format(room_id=room_id)
         payload = {'text': text}
         r = requests.post(url, data=json.dumps(payload), headers=headers)
 
@@ -175,7 +179,9 @@ def pub_to_vk_users(text, api):
 def pub_to_vk_groups(text, attachments, api):
     for groupd_id, from_group in get_pydigest_groups():
         print(groupd_id, from_group)
-        res = post_to_wall(api, groupd_id, text, **{'attachments': attachments, 'from_group': from_group})
+        res = post_to_wall(api, groupd_id, text,
+                           **{'attachments': attachments,
+                              'from_group': from_group})
         print(res)
         time.sleep(1)
 
@@ -192,7 +198,8 @@ def pub_to_telegram(text, bot_token, tg_channel):
 
 
 def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
-    url = 'https://maker.ifttt.com/trigger/pub_digest/with/key/{0}'.format(ifttt_key)
+    url = 'https://maker.ifttt.com/trigger/pub_digest/with/key/{0}'
+    url = url.format(ifttt_key)
 
     data = {
         'value1': text,

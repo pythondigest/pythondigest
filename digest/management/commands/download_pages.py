@@ -17,7 +17,7 @@ def get_article(item):
             text = item.text
         except Exception as e:
             text = ''
-        
+
         fio.write(text)
         item.article_path = path
         item.save()
@@ -35,6 +35,8 @@ class Command(BaseCommand):
             os.makedirs(settings.DATASET_ROOT)
 
         for item in Item.objects.all():
-            if item.article_path is None or not item.article_path or not os.path.exists(item.article_path):
+            path_incorrect = item.article_path is None or not item.article_path
+            path_exists = os.path.exists(item.article_path)
+            if path_incorrect or not path_exists:
                 async(get_article, item)
                 # get_article(item)
