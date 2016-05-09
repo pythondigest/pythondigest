@@ -1,15 +1,16 @@
+{% load i18n %}
 {% if items %}
-    <div class="issue issue-end issue-end">
-        <h3 class="text-center">Свежие новости</h3>
+    <div class="issue issue-end issue-end {{ add_classes|default_if_none:'' }}">
+        <h3 class="text-center">{% trans "Latest news" %}</h3>
         <hr>
         {% for object in items %}
-            <p>{% include 'digest/blocks/_item_as_line.html' with item=object comment=False likes=True %}</p>
+            <p>{% include 'digest/blocks/_item_as_line.html' with item=object comment=False likes=False %}</p>
         {% endfor %}
 
         <br>
         <h4 class="text-center">
-
-            <b><a href="{% url 'digest:feed' %}">Просмотреть все</a></b></h4>
+            <b><a href="{% url 'digest:feed' %}">{% trans "Show all" %}</a></b>
+        </h4>
     </div>
 
     <br>
