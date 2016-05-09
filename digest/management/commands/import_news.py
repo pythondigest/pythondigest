@@ -23,9 +23,10 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     excl = [s.strip() for s in (src.excl or '').split(',') if s]
     for text, link, http_code in data:
 
-        if excl is not None:
+        try:
             excl_link = bool([i for i in excl if i in link])
-        else:
+        except TypeError as e:
+            print("WARNING: (import_news): {}".format(e))
             excl_link = False
         if not excl_link and src.incl in text:
             tw_txt = text.replace(src.incl, '')
