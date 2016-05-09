@@ -17,9 +17,4 @@ class Migration(migrations.Migration):
             name='additionally',
             field=models.CharField(blank=True, default='', max_length=255, verbose_name='Additional info'),
         ),
-        migrations.AlterField(
-            model_name='package',
-            name='link',
-            field=models.URLField(max_length=255, unique=True, verbose_name='URL'),
-        ),
     ]

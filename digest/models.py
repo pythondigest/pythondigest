@@ -437,7 +437,7 @@ class Package(models.Model):
     description = models.TextField(
         verbose_name=_("Description"), blank=True)
     link = models.URLField(
-        verbose_name=_("URL"), max_length=255, unique=True)
+        verbose_name=_("URL"), max_length=255)
 
     def __str__(self):
         return self.name

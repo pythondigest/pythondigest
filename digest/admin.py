@@ -210,7 +210,10 @@ admin.site.register(AutoImportResource, AutoImportResourceAdmin)
 
 
 class PackageAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'name',
+        'link'
+    )
 
 
 admin.site.register(Package, PackageAdmin)
