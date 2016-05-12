@@ -15,6 +15,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
+from django_q.tasks import async
 from readability.readability import Document, Unparseable
 from taggit.models import TagBase, GenericTaggedItemBase
 from taggit_autosuggest.managers import TaggableManager
@@ -501,11 +502,12 @@ class ParsingRules(models.Model):
 def update_cls_score(instance, **kwargs):
     try:
         item = ItemClsCheck.objects.get(item=instance)
+        async(item.check_cls, False)
         item.check_cls()
     except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
         item = ItemClsCheck(item=instance)
         item.save()
-        item.check_cls(force=True)
+        async(item.check_cls, True)
 
 
 if likes_enable():
