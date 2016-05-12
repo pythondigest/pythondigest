@@ -53,8 +53,7 @@ class ItemSectionLineChart(widgets.LineChart):
         queryset = self.get_queryset()
         date_field = 'related_to_date' if settings.DEPLOY else 'DATE(related_to_date)'
         queryset = (queryset.filter(status='active')
-                    .extra({'baked':
-                                date_field})
+                    .extra({'baked': date_field})
                     .select_related('section')
                     .values_list('section__title', 'baked')
                     .order_by('-baked')
@@ -92,7 +91,7 @@ class ItemSingleBarChart(widgets.SingleBarChart):
         queryset = self.get_queryset()
 
         date_field = 'related_to_date' if settings.DEPLOY else 'DATE(related_to_date)'
-        return (queryset.extra({'baked':date_field})
+        return (queryset.extra({'baked': date_field})
                 .values_list('baked')
                 .order_by('-baked')
                 .annotate(ocount=Count('pk'))[:self.limit_to])

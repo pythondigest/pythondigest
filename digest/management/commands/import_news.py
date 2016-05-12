@@ -11,9 +11,15 @@ import feedparser
 from django.core.management.base import BaseCommand
 from typing import List, Dict
 
-from digest.management.commands import apply_parsing_rules, get_tweets_by_url, \
-    save_item, is_weekly_digest, \
-    parse_weekly_digest, _get_http_data_of_url, apply_video_rules
+from digest.management.commands import (
+    apply_parsing_rules,
+    apply_video_rules,
+    get_tweets_by_url,
+    parse_weekly_digest,
+    save_item,
+    is_weekly_digest,
+    _get_http_data_of_url,
+)
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section
 

@@ -48,6 +48,7 @@ def check_previous_news_of_package(news, package_data):
     assert items.count() <= 1, 'Many items for library'
     return items.count() != 0
 
+
 def parse_rss():
 
     url = 'https://allmychanges.com/rss/03afbe621916b2f2145f111075db0759/'

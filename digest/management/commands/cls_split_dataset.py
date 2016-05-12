@@ -7,7 +7,6 @@ import math
 import os
 import random
 
-from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from digest.management.commands.cls_create_dataset import save_dataset
