@@ -48,6 +48,8 @@
             <h4>
                 {% if read_link %}
                     {{ object.title }}
+
+
                 {% else %}
                     <a rel="nofollow"
                        href="{{ object.link }}"
@@ -55,6 +57,7 @@
                        target="_blank">
                         {{ object.title }}
                     </a>
+
                 {% endif %}
 
                 {% if like_link %}
@@ -70,7 +73,7 @@
                 {% endif %}
             </h4>
 
-            <div class="addthis_sharing_toolbox"></div>
+
             <p>{{ object.description|default:''|img_local|img_center|img_responsive|img_lazy }}</p>
 
             {% if object.additionally and object.additionally|oembed_no_urlize != object.additionally %}
@@ -82,12 +85,14 @@
 
 
             {% if read_link %}
-                <a rel="nofollow" class="btn btn-primary btn-sm"
+
+                <a rel="nofollow" class="btn btn-primary btn-sm pull-left"
                    href="{{ object.link }}"
                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
                    target="_blank">Читать>></a>
+                <div class="addthis_sharing_toolbox pull-right"></div>
+                <br><br>
             {% endif %}
-
         </div>
 
     </noindex>
