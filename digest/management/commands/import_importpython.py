@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
+"""
+This module contains command to obtain news from importpython.com
+and save the to database.
+To use it run something like
+python manage.py import_importpython --number 67
+"""
 from __future__ import unicode_literals
 
 from urllib.error import URLError
 from urllib.request import urlopen
 
-from typing import Sequence, Dict, Union, Tuple
+from typing import Dict, Union, Tuple, List
 
 from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
@@ -33,7 +39,8 @@ class ImportPythonParser(object):
     def __init__(self):
         pass
 
-    def _get_url_content(self, url: str) -> str:
+    @staticmethod
+    def _get_url_content(url: str) -> str:
         """Gets text from URL's response"""
         try:
             result = urlopen(url, timeout=10).read()
@@ -42,9 +49,16 @@ class ImportPythonParser(object):
         else:
             return result
 
-    def get_latest_issue_number(self):
+    @classmethod
+    def get_latest_issue_url(cls):
         """Returns latest issue number"""
-        raise NotImplemented
+        archive_url = "/".join([cls.BASE_URL, "newsletter", "archive"])
+        content = cls._get_url_content(archive_url)
+        soup = BeautifulSoup(content, "lxml")
+        el = soup.find_all("div", "info")[0]
+        href = el.find("h2").find("a")["href"]
+        link = cls.BASE_URL + href
+        return link
 
     @classmethod
     def get_issue_url(cls, number: int) -> str:
@@ -60,7 +74,7 @@ class ImportPythonParser(object):
             raise ValueError("Incorre page number: {}".format(number))
 
     def _get_all_news_blocks(self,
-                             soap: BeautifulSoup) -> Sequence[ItemTuple]:
+                             soap: BeautifulSoup) -> List[ItemTuple]:
         """Returns sequence of blocks that present single news"""
         # TODO: add tags parsing
         subtitle_els = soap.find_all("div", "subtitle")
@@ -90,7 +104,7 @@ class ImportPythonParser(object):
             'language': 'en',
         }
 
-    def get_blocks(self, url: str) -> Sequence[ResourceDict]:
+    def get_blocks(self, url: str) -> List[ResourceDict]:
         """Get news dictionaries from the specified URL"""
         content = self._get_url_content(url)
         soup = BeautifulSoup(content, "lxml")
@@ -100,6 +114,8 @@ class ImportPythonParser(object):
 
 
 def _apply_rules_wrap(**kwargs):
+    # TODO: move this function into separate module
+    # as it is used in several parsing modules
     rules = kwargs
 
     def _apply_rules(item: dict) -> dict:
@@ -123,6 +139,8 @@ def main(url: str="", number: int="") -> None:
     parser = ImportPythonParser()
     if number and not url:
         url = parser.get_issue_url(int(number))
+    if not number and not url:
+        url = parser.get_latest_issue_url()
     blocks = parser.get_blocks(url)
     with_rules_applied = map(_apply_rules, blocks)
     for block in with_rules_applied:
@@ -130,9 +148,10 @@ def main(url: str="", number: int="") -> None:
 
 
 class Command(BaseCommand):
-    args = 'no arguments!'
     help = """This command parses importpython.com site\
- and saves posts from it to the database"""
+ and saves posts from it to the database.
+ You may either specify url by using --url argument, or
+ implicitly specify issue number by using --number argument."""
 
     def add_arguments(self, parser):
         parser.add_argument('--url', type=str, help='Url to parse data from')
@@ -146,4 +165,4 @@ class Command(BaseCommand):
         elif 'number' in options and options['number'] is not None:
             main(number=options['number'])
         else:
-            print('No URL or Issue number for parser found')
+            main()

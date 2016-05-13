@@ -40,3 +40,10 @@ class ImportPythonWeeklyTest(TestCase):
         self.assertEqual(block['link'], "https://talkpython.fm/episodes/show/44/project-jupyter-and-ipython")
         self.assertEqual(block['title'], "Project Jupyter and IPython Podcast Interview")
         self.assertEqual(block['content'], "One of the fastest growing areas in Python is scientific computing. In scientific computing with Python, there are a few key packages that make it special. These include NumPy / SciPy / and related packages. The one that brings it all together, visually, is IPython (now known as Project Jupyter). That's the topic on episode 44 of Talk Python To Me. ")
+
+    def test_correctly_gets_latest_url(self):
+        test_latest = 'fixture_test_import_importpython_test_get_latest_url.txt'
+        self._old_return_value = self.urlopen_mock.return_value
+        self.urlopen_mock.return_value = MockResponse(read_fixture(test_latest))
+        latest_url = self.parser.get_latest_issue_url()
+        self.assertEqual(latest_url, "http://importpython.com/newsletter/no/72/")
