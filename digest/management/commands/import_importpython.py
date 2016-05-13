@@ -4,6 +4,7 @@ This module contains command to obtain news from importpython.com
 and save the to database.
 To use it run something like
 python manage.py import_importpython --number 67
+If no args specified parses latest news page.
 """
 from __future__ import unicode_literals
 
@@ -50,8 +51,8 @@ class ImportPythonParser(object):
             return result
 
     @classmethod
-    def get_latest_issue_url(cls):
-        """Returns latest issue number"""
+    def get_latest_issue_url(cls) -> str:
+        """Returns latest issue URL"""
         archive_url = "/".join([cls.BASE_URL, "newsletter", "archive"])
         content = cls._get_url_content(archive_url)
         soup = BeautifulSoup(content, "lxml")
@@ -138,7 +139,7 @@ def main(url: str="", number: int="") -> None:
 
     parser = ImportPythonParser()
     if number and not url:
-        url = parser.get_issue_url(int(number))
+        url = parser.get_issue_url(number)
     if not number and not url:
         url = parser.get_latest_issue_url()
     blocks = parser.get_blocks(url)
@@ -163,6 +164,6 @@ class Command(BaseCommand):
         if 'url' in options and options['url'] is not None:
             main(url=options['url'])
         elif 'number' in options and options['number'] is not None:
-            main(number=options['number'])
+            main(number=int(options['number']))
         else:
             main()
