@@ -9,10 +9,16 @@ from typing import Sequence, Dict, Union, Tuple
 from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
 
+from digest.management.commands import (
+    apply_parsing_rules,
+    apply_video_rules,
+    save_item
+)
+
 from digest.models import (
-    # ITEM_STATUS_CHOICES,
-    # ParsingRules,
-    # Section,
+    ITEM_STATUS_CHOICES,
+    ParsingRules,
+    Section,
     Resource
 )
 
@@ -56,6 +62,7 @@ class ImportPythonParser(object):
     def _get_all_news_blocks(self,
                              soap: BeautifulSoup) -> Sequence[ItemTuple]:
         """Returns sequence of blocks that present single news"""
+        # TODO: add tags parsing
         subtitle_els = soap.find_all("div", "subtitle")
         body_texts = [el.find_next_sibling("div") for el in subtitle_els]
         return list(zip(subtitle_els, body_texts))
@@ -63,14 +70,15 @@ class ImportPythonParser(object):
     def _get_block_dict(self,
                         el: Tuple[BeautifulSoup,
                                   BeautifulSoup]) -> ResourceDict:
-        # resource = Resource.objects.get(title='ImportPython')
+        resource, created = Resource.objects.get_or_create(
+            title='ImportPython',
+            link='http://importpython.com'
+        )
 
         subtitle, body = el
-
         title = subtitle.find("a").text
         url = subtitle.find("a")['href']
         text = body.text
-        resource = ""
         return {
             'title': title,
             'link': url,
@@ -91,11 +99,34 @@ class ImportPythonParser(object):
         return list(items)
 
 
+def _apply_rules_wrap(**kwargs):
+    rules = kwargs
+
+    def _apply_rules(item: dict) -> dict:
+        item.update(
+            apply_parsing_rules(item, **rules)
+            if kwargs.get('query_rules') else {})
+        item.update(apply_video_rules(item))
+        return item
+
+    return _apply_rules
+
+
 def main(url: str="", number: int="") -> None:
+    data = {
+        'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
+        'query_sections': Section.objects.all(),
+        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
+    }
+    _apply_rules = _apply_rules_wrap(**data)
+
     parser = ImportPythonParser()
     if number and not url:
         url = parser.get_issue_url(int(number))
     blocks = parser.get_blocks(url)
+    with_rules_applied = map(_apply_rules, blocks)
+    for block in with_rules_applied:
+        save_item(block)
 
 
 class Command(BaseCommand):
