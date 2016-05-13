@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from urllib.error import URLError
 from urllib.request import urlopen
-from typing import Sequence, Dict, Union
 
 import lxml.html as html
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from django.core.management.base import BaseCommand
 from lxml import etree
+from typing import Sequence, Dict, Union
 
 from digest.management.commands import (
     apply_parsing_rules,
@@ -52,7 +52,10 @@ def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
 
 def _get_block_item(block: Parseble) -> Dict[str, Union[str, int, Resource]]:
     """Extract all data (link, title, description) from block"""
-    resource = Resource.objects.get(title='PythonWeekly')
+    resource, created = Resource.objects.get_or_create(
+        title='PythonWeekly',
+        link='http://www.pythonweekly.com/'
+    )
 
     # Handle BeautifulSoup element
     if isinstance(block, Tag):
