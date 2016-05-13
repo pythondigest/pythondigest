@@ -578,9 +578,8 @@ body {
     position: absolute;
     bottom: 0;
     width: 100%;
-    /* Set the fixed height of the footer here */
     height: 60px;
-    /*padding-left: 10%;*/
+    background-color: #f5f5f5;
 }
 
 /* Custom page CSS

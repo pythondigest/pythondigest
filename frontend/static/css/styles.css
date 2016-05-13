@@ -1,0 +1,43 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    min-height: 100%;
+}
+
+body {
+    position: relative;
+}
+
+.footer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 100px;
+    text-align: center;
+}
+
+.jumbotron-sm {
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.card-img-top {
+    width:100%;
+    height:auto;
+    padding: 5px;
+}
+
+.en {
+    background-image: url('/static/img/gb.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.ru {
+    background-image: url('/static/img/ru.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.item-container > .card-footer > .card-text {
+    margin-bottom: 0;
+}
