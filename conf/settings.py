@@ -97,12 +97,21 @@ TEMPLATES = [{
             'social.apps.django_app.context_processors.backends',
             'social.apps.django_app.context_processors.login_redirect',
         ],
-        'loaders': (
-            'django.template.loaders.filesystem.Loader',
-            'django.template.loaders.app_directories.Loader',
-        )
+        'loaders': [
+            ('django.template.loaders.cached.Loader', [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]),
+        ],
     },
 }, ]
+
+# disable cache templates for debug mode
+if DEBUG:
+    TEMPLATES[0]['OPTIONS']['loaders'] = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',  # ok
