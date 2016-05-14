@@ -8,7 +8,7 @@ SECRET_KEY = 'TBD IN LOCAL SETTINGS'
 
 DEBUG = True
 
-THUMBNAIL_DEBUG = False
+THUMBNAIL_DEBUG = DEBUG
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru']
 
@@ -143,6 +143,9 @@ LOCALE_PATHS = (path.join(BASE_DIR, 'locale'),)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = path.join(BASE_DIR, 'media')
