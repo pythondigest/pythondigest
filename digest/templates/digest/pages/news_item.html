@@ -50,33 +50,19 @@
 
 
 {% block body %}
-
-    <div class="col-md-9">
-        <div class="news-list">
-            {% with item=object read_link=True %}
-                {% include 'digest/blocks/_feed_item.html' with like_link=False %}
-                {% include 'digest/blocks/_item_article.html' %}
-
-            {% endwith %}
-
-
-
-
-            <hr>
-            <div id="relevant_news">
-                <script id="wtHREplY_Ab8W1tb">if (window.relap) window.relap.ar('wtHREplY_Ab8W1tb');</script>
-            </div>
-
-
-            {% include "blocks/_disqus.html" %}
-        </div>
+<div class="news-list">
+    {% with item=object read_link=True %}
+        {% include 'digest/blocks/_feed_item.html' with like_link=False %}
+        {% include 'digest/blocks/_item_article.html' %}
+    {% endwith %}
+    <hr />
+    <div id="relevant_news">
+        <script id="wtHREplY_Ab8W1tb">if (window.relap) window.relap.ar('wtHREplY_Ab8W1tb');</script>
     </div>
-
-    <div class="col-md-3">
-        {% include 'blocks/_right_panel.html' %}
+    <div class="card card-block">
+        {% include "blocks/_disqus.html" %}
     </div>
-
-
+</div>
 {% endblock %}
 
 

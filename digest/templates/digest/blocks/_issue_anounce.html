@@ -1,41 +1,36 @@
-<div class="row">
-    <div class="col-md-4 text-left">
-        <h1>
-            {{ object.title }}
-        </h1>
-        <p>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</p>
-    </div>
-    <div class="col-md-8 text-right">
-        {% if object.trend %}
-            <h3>
-                {{ object.trend|safe }}
-            </h3>
-            <p>Тенденция недели</p>
-        {% endif %}
-    </div>
+<div class="card card-block">
+    <div class="row">
+        <div class="col-md-4">
+            <h1 class="card-title">{{ issue.title }}</h1>
+            <p class="card-text">({{ issue.date_from|date:"d.m.Y" }} - {{ issue.date_to|date:"d.m.Y" }})</p>
+        </div>
 
-</div>
-
-<div class="row">
-
-    <div class="col-md-8 pull-left">
-        {% if object.description %}
-            <div class="index-description-content sidebar-module-inset">
-                {{ object.description|safe }}
-
+        {% if issue.trend %}
+            <div class="col-md-8 text-xs-right">
+                <h3 class="card-text">
+                {{ issue.trend|safe }}
+                </h3>
+                <p class="card-text">Тенденция недели</p>
             </div>
-
-        {% endif %}
-        {% include 'advertising/blocks/ads.html' with ads=ads type='after_anounce' %}
-
-    </div>
-
-
-    <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-        {% if object.image %}
-            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
         {% endif %}
     </div>
-    <hr>
+    <hr />
 
+    <div class="row">
+    {% if issue.description %}
+        <div class="col-md-8">
+            <p class="card-text">
+                {{ issue.description|safe }}
+            </p>
+        </div>
+    {% endif %}
+
+    {% if issue.image %}
+        <div class="col-md-4 hidden-md-down pull-md-right">
+            <img src="{{ issue.image.url }}" alt="pythondigest.ru: {{ issue }}" class="img-fluid">
+        </div>
+    {% endif %}
+    </div>
+
+    {% include 'advertising/blocks/ads.html' with ads=ads type='after_anounce' %}
 </div>

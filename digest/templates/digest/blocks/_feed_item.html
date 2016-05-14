@@ -8,6 +8,18 @@
     <div class="card-block">
     <noindex>
         <h5 class="card-title">
+            {% if like_link %}
+                {% load likes_inclusion_tags %}
+                {% likes object 'likes/inclusion_tags/likes_item.html' %}
+            {% endif %} &nbsp;
+            {% if comment %}
+                <span class="text-primary">
+                    <a href="{{ item.internal_link }}" title="Прокомментировать ссылку">
+                        <i class="fa fa-comments-o"></i>
+                    </a>
+                </span>
+                &nbsp;
+            {% endif %}
             {% if read_link %}
                 {{ object.title }}
             {% else %}
@@ -21,11 +33,6 @@
                 </a>
             {% endif %}
         </h5>
-
-        {% if like_link %}
-            {% load likes_inclusion_tags %}
-            {% likes object 'likes/inclusion_tags/likes_item.html' %}
-        {% endif %}
 
         <div class="addthis_sharing_toolbox"></div>
         {% if object.description %}
