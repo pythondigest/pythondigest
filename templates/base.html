@@ -78,16 +78,26 @@
     </div>
 
     <div class="row">
-        {% block extra_body %}{% endblock %}
-        {% block body %}{% endblock %}
-        {% block content %}{% endblock %}
-    </div>
+        <div class="main-content col-md-9">
+            {% block extra_body %}{% endblock %}
+            {% block body %}{% endblock %}
+            {% block content %}{% endblock %}
+        </div>
 
-    <div class="row">
-        {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
+        <div class="right-panel col-md-3">
+            {% block pre_right_panel %}{% endblock %}
+            {% block right_panel %}
+                {% include 'blocks/_right_panel.html' %}
+            {% endblock %}
+            {% block post_right_panel %}{% endblock %}
+        </div>
     </div>
     <!-- /container-fluid -->
 </main>
+
+<div class="container-fluid">
+    {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
+</div>
 
 <footer class="footer bg-inverse">
     {% include 'blocks/_footer.html' %}
