@@ -3,17 +3,13 @@
 {% load common %}
 {% load micawber_tags %}
 
-
-
 {% block body %}
-
     <div class="col-md-9">
         <div class="news-list">
             {% for item in items %}
                 {% with object=item %}
                     {% include 'digest/blocks/_feed_item.html' with like_link=False %}
                 {% endwith %}
-
             {% empty %}
                 <div class="alert alert-warning pull-left">
                     <strong>Печально но факт!</strong> В этой ленте нет новостей.
@@ -25,18 +21,19 @@
     </div>
 
     <div class="col-md-3">
-
-        {% with lang=request.GET.lang|default:'any' %}
-            <div class="btn-group">
-                <a class="btn btn-default {% if lang == 'any' %}active{% endif %}"
-                   href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
-                <a class="btn btn-default {% if lang == 'ru' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только на русском</a>
-                <a class="btn btn-default {% if lang == 'en' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только на английском</a>
+        <div class="card card-block">
+            <h4 class="card-title">Язык новостей</h4>
+            {% with lang=request.GET.lang|default:'any' %}
+            <div class="text-xs-center">
+                <a class="btn btn-secondary btn-sm {% if lang == 'any' %}active{% endif %}"
+                   href="{% modify_url 'del_query_param' 'lang' %}">Любой</a>
+                <a class="btn btn-secondary btn-sm {% if lang == 'ru' %}active{% endif %}"
+                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Русский</a>
+                <a class="btn btn-secondary btn-sm {% if lang == 'en' %}active{% endif %}"
+                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Английский</a>
             </div>
-            <br>
-        {% endwith %}
+            {% endwith %}
+        </div>
 
         {% include 'blocks/_right_panel.html' %}
     </div>
