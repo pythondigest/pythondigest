@@ -64,9 +64,11 @@
 </header>
 
 <main class="container-fluid">
-    {% block jumb %}
-    {% include "blocks/_jumb.html" %}
-    {% endblock %}
+    <div class="row">
+        {% block jumb %}
+        {% include "blocks/_jumb.html" %}
+        {% endblock %}
+    </div>
 
     <div class="row">
         {% if messages %}
