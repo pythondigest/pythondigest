@@ -4,42 +4,33 @@
 {% load micawber_tags %}
 
 {% block body %}
-    <div class="col-md-9">
-        <div class="news-list">
-            {% for item in items %}
-                {% with object=item %}
-                    {% include 'digest/blocks/_feed_item.html' with like_link=False %}
-                {% endwith %}
-            {% empty %}
-                <div class="alert alert-warning pull-left">
-                    <strong>Печально но факт!</strong> В этой ленте нет новостей.
-                </div>
-            {% endfor %}
-
-            {% include "blocks/_pagination.html" %}
+<div class="news-list">
+    {% for item in items %}
+        {% with object=item %}
+            {% include 'digest/blocks/_feed_item.html' with like_link=False %}
+        {% endwith %}
+    {% empty %}
+        <div class="alert alert-warning pull-left">
+            <strong>Печально но факт!</strong> В этой ленте нет новостей.
         </div>
-    </div>
+    {% endfor %}
 
-    <div class="col-md-3">
-        <div class="card card-block">
-            <h4 class="card-title">Язык новостей</h4>
-            {% with lang=request.GET.lang|default:'any' %}
-            <div class="text-xs-center">
-                <a class="btn btn-secondary btn-sm {% if lang == 'any' %}active{% endif %}"
-                   href="{% modify_url 'del_query_param' 'lang' %}">Любой</a>
-                <a class="btn btn-secondary btn-sm {% if lang == 'ru' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Русский</a>
-                <a class="btn btn-secondary btn-sm {% if lang == 'en' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Английский</a>
-            </div>
-            {% endwith %}
-        </div>
-
-        {% include 'blocks/_right_panel.html' %}
-    </div>
-
-
+    {% include "blocks/_pagination.html" %}
+</div>
 {% endblock %}
 
-
-
+{% block pre_right_panel %}
+    <div class="card">
+        <div class="card-header">Язык новостей</div>
+        {% with lang=request.GET.lang|default:'any' %}
+        <div class="card-block text-xs-center">
+            <a class="btn btn-secondary btn-sm {% if lang == 'any' %}active{% endif %}"
+               href="{% modify_url 'del_query_param' 'lang' %}">Любой</a>
+            <a class="btn btn-secondary btn-sm {% if lang == 'ru' %}active{% endif %}"
+               href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Русский</a>
+            <a class="btn btn-secondary btn-sm {% if lang == 'en' %}active{% endif %}"
+               href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Английский</a>
+        </div>
+        {% endwith %}
+    </div>
+{% endblock %}
