@@ -28,9 +28,12 @@
         {% block styles %}{% endblock %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
         <link rel="stylesheet" href="{% static 'css/vs.css' %}">
     {% endcompress %}
+
+    <script type="text/javascript" src="{% static 'tether/js/tether.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'tether/css/tether.min.css' %}">
 
 
 
@@ -50,7 +53,7 @@
 
 <body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
-
+<header>
 {% block nav_bar %}
 
 {% endblock nav_bar %}
@@ -58,53 +61,40 @@
 {% block top_menu %}
     {% include "blocks/_menu.html" %}
 {% endblock %}
-<br>
+</header>
 
-{% block jumb %}
+<main class="container-fluid">
+    {% block jumb %}
     {% include "blocks/_jumb.html" %}
-{% endblock %}
+    {% endblock %}
 
-<div class="site-body">
-    <div class="container">
-
-
-        <div class="row">
-            <div class="col-md-12">
-                {% if messages %}
-                    {% include "blocks/_messages.html" %}
-                {% endif %}
-
-                {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
-
-            </div>
-
-        </div>
-        <div class="row">
-
-            {% block extra_body %}{% endblock %}
-
-            {% block body %}
-            {% endblock %}
-
-            {% block content %}{% endblock %}
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
-            </div>
-        </div>
-
-
+    <div class="row">
+        {% if messages %}
+            {% include "blocks/_messages.html" %}
+        {% endif %}
+        {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
     </div>
+
+    <div class="row">
+        {% block extra_body %}{% endblock %}
+        {% block body %}{% endblock %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="row">
+        {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
+    </div>
+    <!-- /container-fluid -->
+</main>
+
+<footer class="footer bg-inverse">
     {% include 'blocks/_footer.html' %}
-</div>
-<!-- /container -->
+</footer>
 
 
-
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!--<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 {% compress js %}
     <script type="text/javascript" src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
