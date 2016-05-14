@@ -51,64 +51,60 @@
     <div class="card-footer text-muted">
         <!--TAGS-->
         {% if object.tags_as_links %}
-            <p class="card-text">
-                <small class="text-muted">
-                    <i class="fa fa-tags" aria-hidden="true"></i>
-                    Tags:&nbsp;
-                </small>
+
+            <ul class="item-tags text-muted card-text">
+                <i class="fa fa-tags" aria-hidden="true"></i>Tags:&nbsp;
+
                 {% for tag_name, tag_link in item.tags_as_links %}
-                    <a href="{{ tag_link }}">
-                        <span class="label label-pill label-info">
-                            {{ tag_name }}
-                        </span>
-                    </a>
+                    <li>
+                        <a href="{{ tag_link }}">
+                            <span class="label label-info">
+                                {{ tag_name }}
+                            </span>
+                        </a>
+                    </li>
                 {% endfor %}
-            </p>
+            </ul>
         {% endif %}
         <!--/TAGS-->
 
         <!--CREATE DATE-->
-        <p class="card-text">
-            <small class="text-muted">
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                Create date:&nbsp;
-                {{ object.created_at|date:"d.m.Y" }}
-            </small>
+        <ul class="item-attributes text-muted card-text">
+            <li>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    Create date:&nbsp;
+                    {{ object.created_at|date:"d.m.Y" }}
+            </li>
         <!--/CREATE DATE-->
-        &nbsp;&nbsp;&nbsp;&nbsp;
         <!--ISSUE-->
         {% if object.issue.status == 'active' %}
-            <small class="text-muted">
-                <i class="fa fa-rocket" aria-hidden="true"></i>
-                Issue:&nbsp;
-                <a href="{{ object.issue.link }}" class="section-link">{{ object.issue.title }}</a>
-                ({{ object.issue.date_from|date:"d.m.Y" }} -
-                {{ object.issue.date_to|date:"d.m.Y" }})
-            </small>
+            <li>
+                    <i class="fa fa-rocket" aria-hidden="true"></i>
+                    Issue:&nbsp;
+                    <a href="{{ object.issue.link }}" class="section-link">{{ object.issue.title }}</a>
+                    ({{ object.issue.date_from|date:"d.m.Y" }} -
+                    {{ object.issue.date_to|date:"d.m.Y" }})
+            </li>
         {% endif %}
         <!--/ISSUE-->
-        &nbsp;&nbsp;&nbsp;&nbsp;
         <!--SECTION-->
         {% if object.section %}
-            <small class="text-muted">
-                <i class="fa fa-cubes" aria-hidden="true"></i>
-                Section:&nbsp;
-                <a href="{% modify_url 'set_query_param_np' 'section' object.section.pk %}">{{ object.section.title }}</a>
-            </small>
+            <li>
+                    <i class="fa fa-cubes" aria-hidden="true"></i>
+                    Section:&nbsp;
+                    <a href="{% modify_url 'set_query_param_np' 'section' object.section.pk %}">{{ object.section.title }}</a>
+            </li>
         {% endif %}
         <!--/SECTION-->
-        </p>
-
         <!--LANGUAGE-->
-        <p class="card-text">
-            <small class="text-muted">
-                <i class="fa fa-language" aria-hidden="true"></i>
-                Language:&nbsp;
-            </small>
-            <span title="Язык новости" class="badge news-line-item-resource {{ object.language }}">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            </span>
-        </p>
+            <li>
+                    <i class="fa fa-language" aria-hidden="true"></i>
+                    Language:&nbsp;
+                <span title="Язык новости" class="badge news-line-item-resource {{ object.language }}">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                </span>
+            </li>
+        </ul>
         <!--/LANGUAGE-->
     </div>
 </div>

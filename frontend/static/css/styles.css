@@ -64,16 +64,21 @@ main {
     font-size: 0.9rem;
 }
 
-.item-attributes {
+.item-attributes, .item-tags {
     margin-top: 0;
     margin-bottom: 0;
     padding-left: 0;
+    font-size: 0.8rem;
 }
 
 .item-attributes > li {
     display: inline-block;
-    font-size: 0.8rem;
     padding-right: 15px;
+}
+
+.item-tags > li {
+    display: inline-block;
+    padding-right: 5px;
 }
 
 .form-content {
