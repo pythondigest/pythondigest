@@ -11,6 +11,8 @@ main {
     background: #E8ECEF;
     height: 100%;
     margin: 0 auto;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
 }
 
 .card {
@@ -50,14 +52,32 @@ main {
 }
 
 .item-container {
-    font-size: 14px;
-    border-left: 3px solid #b0c5b0;
+    font-size: 0.9rem;
+    border-left: 3px solid #9fd59f;
 }
 
-.item-container > .card-footer > .card-text {
-    margin-bottom: 0;
+.item-container > .card-footer {
+    padding: 5px 20px;
 }
 
 .item-as-line {
-    font-size: 14px;
+    font-size: 0.9rem;
+}
+
+.item-attributes {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+.item-attributes > li {
+    display: inline-block;
+    font-size: 0.8rem;
+    padding-right: 15px;
+}
+
+.form-content {
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 0;
 }
