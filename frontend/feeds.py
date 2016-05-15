@@ -32,7 +32,7 @@ def mark_videos(query_set):
     video_id = video_section.values_list('id', flat=True)[0]
 
     for x in query_set:
-        if x.section.id == video_id:
+        if x.section is not None and x.section.id == video_id:
             x.title = "[Видео] %s" % x.title
 
 

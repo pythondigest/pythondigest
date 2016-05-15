@@ -6,12 +6,14 @@ from typing import Any
 
 
 def write_fixture(name: str, data: Any, mode='wb') -> None:
-    with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
+    path = os.path.join(os.path.dirname(__file__), 'tests', name)
+    with open(path, mode) as fio:
         fio.write(data)
 
 
 def read_fixture(name: str, mode='rb'):
-    with open(os.path.join(os.path.dirname(__file__), 'tests', name), mode) as fio:
+    path = os.path.join(os.path.dirname(__file__), 'tests', name)
+    with open(path, mode) as fio:
         return fio.read()
 
 

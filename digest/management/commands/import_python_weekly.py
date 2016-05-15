@@ -9,12 +9,20 @@ from bs4 import BeautifulSoup
 from bs4.element import Tag
 from django.core.management.base import BaseCommand
 from lxml import etree
+from typing import Sequence, Dict, Union
 
-from digest.management.commands import apply_parsing_rules, apply_video_rules, save_item
+from digest.management.commands import (
+    apply_parsing_rules,
+    apply_video_rules,
+    save_item
+)
 from digest.models import ParsingRules, Section, ITEM_STATUS_CHOICES, Resource
+
+Parseble = Union[BeautifulSoup, html.HtmlElement]
 
 
 def _get_content(url: str) -> str:
+    """Gets text from URL's response"""
     try:
         result = urlopen(url, timeout=10).read()
     except URLError:
@@ -23,29 +31,44 @@ def _get_content(url: str) -> str:
         return result
 
 
-def _get_blocks(url) -> list:
+def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
+    """
+        Grab all blocks containing news titles and links
+        from URL
+    """
     result = []
     content = _get_content(url)
     if content:
         try:
-            page = html.parse(content)
-            result = page.getroot().find_class('bodyTable')[0].xpath('//span[@style="font-size:14px"]')
+            page = html.fromstring(content)
+            result = page.find_class('bodyTable')[0]
+            result = result.xpath('//span[@style="font-size:14px"]')
         except OSError:
             page = BeautifulSoup(content, 'lxml')
-            result = page.findAll('table', {'class': 'bodyTable'})[0].findAll('span', {'style': "font-size:14px"})
+            result = page.findAll('table', {'class': 'bodyTable'})[0]
+            result = result.findAll('span', {'style': "font-size:14px"})
     return result
 
 
-def _get_block_item(block) -> dict:
-    resource = Resource.objects.get(title='PythonWeekly')
+def _get_block_item(block: Parseble) -> Dict[str, Union[str, int, Resource]]:
+    """Extract all data (link, title, description) from block"""
+    resource, created = Resource.objects.get_or_create(
+        title='PythonWeekly',
+        link='http://www.pythonweekly.com/'
+    )
+
+    # Handle BeautifulSoup element
     if isinstance(block, Tag):
         link = block.findAll('a')[0]
         url = link['href']
         title = link.string
         try:
-            text = str(block.nextSibling.nextSibling).replace('<br/>', '').strip()
+            text = str(block.nextSibling.nextSibling)
+            text = text.replace('<br/>', '').strip()
         except AttributeError:
             return {}
+
+    # Handle BeautifulSoup element
     else:
         link = block.cssselect('a')[0]
         url = link.attrib['href']
@@ -53,7 +76,8 @@ def _get_block_item(block) -> dict:
         _text = block.getnext()
         if _text is None:
             return {}
-        text = etree.tostring(block.getnext()).decode('utf-8').replace('<br/>', '').strip()
+        text = etree.tostring(block.getnext()).decode('utf-8')
+        text = text.replace('<br/>', '').strip()
 
     return {
         'title': title,
@@ -88,7 +112,8 @@ def main(url):
     }
     _apply_rules = _apply_rules_wrap(**data)
 
-    list(map(save_item, map(_apply_rules, map(_get_block_item, _get_blocks(url)))))
+    block_items = map(_get_block_item, _get_blocks(url))
+    list(map(save_item, map(_apply_rules, block_items)))
 
 
 # Написать тест с использованием ссылки

@@ -32,6 +32,7 @@ class JobFeed(models.Model):
         verbose_name = 'Источник импорта вакансий'
         verbose_name_plural = 'Источники импорта вакансий'
 
+
 class RejectedList(models.Model):
     title = models.CharField('Строка', max_length=255)
 
@@ -41,6 +42,7 @@ class RejectedList(models.Model):
     class Meta:
         verbose_name = 'Слисок исключения'
         verbose_name_plural = 'Строки для исключения'
+
 
 class AcceptedList(models.Model):
     title = models.CharField('Строка', max_length=255)
@@ -52,6 +54,7 @@ class AcceptedList(models.Model):
         verbose_name = 'Слисок одобрения'
         verbose_name_plural = 'Строки для одобрения'
 
+
 class JobItem(models.Model):
     title = models.CharField('Название', max_length=255)
     link = models.URLField('Ссылка')
@@ -60,9 +63,12 @@ class JobItem(models.Model):
         null=True,
         blank=True)
 
-    created_at = models.DateTimeField('Дата создания', auto_now_add=True, null=True, blank=True)
-    updated_at = models.DateTimeField('Дата обновления', auto_now=True, null=True, blank=True)
-    published_at = models.DateTimeField('Дата публикации', null=True, editable=False)
+    created_at = models.DateTimeField('Дата создания', auto_now_add=True,
+                                      null=True, blank=True)
+    updated_at = models.DateTimeField('Дата обновления', auto_now=True,
+                                      null=True, blank=True)
+    published_at = models.DateTimeField('Дата публикации', null=True,
+                                        editable=False)
 
     src_id = models.CharField('ID в источнике', max_length=50, null=True,
                               blank=True)
@@ -83,10 +89,12 @@ class JobItem(models.Model):
     salary_currency = models.CharField('Валюта', max_length=255, null=True,
                                        blank=True)
 
-    def get_salary_str(self):
+    def get_salary_str(self) -> str:
         result = ''
-        result += ' от %s' % format_currency(self.salary_from) if self.salary_from else ''
-        result += ' до %s' % format_currency(self.salary_till) if self.salary_till else ''
+        low_limit = format_currency(self.salary_from) if self.salary_from else ''
+        high_limit = format_currency(self.salary_till) if self.salary_till else ''
+        result += ' от {low}'.format(low=low_limit)
+        result += ' до {high}'.format(high=high_limit)
         result += ' ' + self.salary_currency if self.salary_currency else ''
         return result
 

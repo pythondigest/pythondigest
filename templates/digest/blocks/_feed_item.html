@@ -34,7 +34,6 @@
             {% endif %}
         </h5>
 
-        <div class="addthis_sharing_toolbox"></div>
         {% if object.description %}
             <p class="card-text">{{ object.description|default:''|img_local|img_center|img_responsive|img_lazy }}</p>
         {% endif %}
@@ -47,10 +46,11 @@
 
 
         {% if read_link %}
-            <a rel="nofollow" class="btn btn-primary btn-sm"
+            <a rel="nofollow" class="btn btn-primary btn-sm pull-xs-left"
                href="{{ object.link }}"
                onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
                target="_blank">Читать>></a>
+            <div class="addthis_sharing_toolbox pull-xs-right"></div>
         {% endif %}
     </noindex>
     </div>
