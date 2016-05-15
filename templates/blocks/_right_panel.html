@@ -1,21 +1,11 @@
-<div class="panel panel-default ">
-    <div class="panel-body">
-        <form action="{% url 'digest:feed' %}" role="form">
-            <input type="text" name="q" type="text" class="search-input"
-                   value="{{ request.GET.q|default:'' }}" placeholder=" Поиск...">
-        </form>
-
-    </div>
-</div>
-
-
 {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
+
 {% with items=feed_items %}
     {% include "digest/blocks/_feed.html" %}
 {% endwith %}
 
-
 {% include "blocks/_friends.html" %}
+
 {% with items=favorite_items %}
     {% include "digest/blocks/_favorite_items.html" %}
 {% endwith %}

@@ -2,25 +2,38 @@
 {% load account_tags %}
 {% load static %}
 
-<nav class="navbar navbar-default navbar-digest issue-end" role="navigation">
-    <a class="navbar-brand" href="{% url 'frontend:index' %}">
-        <big>Python Дайджест</big>
-    </a>
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-    </div>
-
-    <div class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'digest:feed' %}">НОВОСТИ</a></li>
-            <li><a href="{% url 'digest:issues' %}">ВЫПУСКИ</a></li>
-            <li><a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a></li>
-            <li><a href="http://yasobe.ru/na/pydigest">ПОМОЧЬ ПРОЕКТУ</a></li>
+<nav class="navbar navbar-sticky-top navbar-dark bg-inverse" role="navigation">
+    <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#navbar">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </button>
+    <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#search">
+        <i class="fa fa-search" aria-hidden="true"></i>
+    </button>
+    <a class="navbar-brand" href="{% url 'frontend:index' %}">Python Дайджест</a>
+    <div class="collapse navbar-toggleable-sm" id="navbar">
+        <ul class="nav navbar-nav">
+            <li class="nav-item{% if active_menu_item == 'feed' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'digest:feed' %}">НОВОСТИ</a>
+            </li>
+            <li class="nav-item{% if active_menu_item == 'issues_list' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'digest:issues' %}">ВЫПУСКИ</a>
+            </li>
+            <li class="nav-item{% if active_menu_item == 'friends' %} active{% endif %}">
+                <a class="nav-link" href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="http://yasobe.ru/na/pydigest">ПОМОЧЬ ПРОЕКТУ</a>
+            </li>
         </ul>
     </div>
+    <div class="collapse navbar-toggleable-sm" id="search">
+        <form class="pull-xs-right" action="{% url 'digest:feed' %}" role="form">
+            <div class="input-group">
+            <input class="form-control search-input" type="text" placeholder="Введите запрос..." name="q" value="{{ request.GET.q|default:'' }}">
+            <span class="input-group-btn">
+                <button class="btn btn-secondary" type="submit">Поиск</button>
+            </span>
+            </div>
+        </form>
+    </div>
 </nav>
-

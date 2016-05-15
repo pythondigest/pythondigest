@@ -1,0 +1,610 @@
+/* ===================================================== */
+/*              new design ... by owlman75               */
+/* ===================================================== */
+
+html, body {
+    min-height: 100%;
+    height: auto;
+
+    margin: 0;
+    padding: 0;
+    font-size: 100% !important;
+}
+
+.product .img-responsive {
+    float: left; /* Выравнивание по левому краю */
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+}
+
+.site-body {
+    min-height: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    flex: 0 0 auto;
+}
+
+.content-body {
+    margin-top: -20px;
+    padding: 20px 0 0 0;
+    box-shadow: 10px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+    -moz-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+    -webkit-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+
+}
+
+.navbar-brand {
+    position: absolute;
+    width: 100%;
+    padding-left: 10%;
+    text-align: left;
+    margin: auto;
+}
+
+.navbar-default .navbar-brand {
+    color: #b88b58 !important;
+    font-weight: 700;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #d3a262 !important;;
+    font-weight: 700;
+}
+
+.top-logo {
+    height: 100px;
+    max-width: 480px;
+}
+
+.top-search {
+    height: 100px;
+}
+
+.top-orfo {
+    height: 100px;
+    text-align: right;
+}
+
+.top-orfo > a {
+    color: #ccc;
+    font-size: 100%;
+}
+
+.top-img > a > img {
+    width: 100px;
+}
+
+.top-name {
+    margin-top: 20px;
+    font-size: 100%;
+}
+
+.top-slogan {
+    font-size: 100%;
+
+}
+
+.search-form {
+    margin-top: 30px;
+    height: 35px;
+    width: 239px;
+    border: 1px solid #AAA;
+}
+
+.search-input {
+    border: 0;
+    width: 100%;
+}
+
+.search-btn {
+    border: 0;
+    height: 34px;
+    background-color: #D4AC43;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+}
+
+.jumb {
+    background-color: #ececec;
+
+    box-shadow: 10px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+    -moz-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+    -webkit-box-shadow: 12px 0 10px -10px #ccc, -12px 0 10px -10px #ccc;
+}
+
+.jumb > .container {
+    margin: 0;
+}
+
+.jumb-text {
+    margin: 0;
+    font-size: 90%;
+}
+
+.cont {
+    padding-top: 20px;
+    padding-bottom: 25px;
+}
+
+.navbar {
+    margin: 0;
+    font-size: 150%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.collapse {
+    padding: 0;
+}
+
+.media-right,
+.media > .pull-right {
+    padding-left: 10px;
+}
+
+.media-left,
+.media > .pull-left {
+    padding-right: 10px;
+}
+
+.media-left,
+.media-right,
+.media-body {
+    display: table-cell;
+    vertical-align: top;
+}
+
+.nav > li > a {
+    color: #fff !important;
+    padding: 20px 35px 10px 35px;
+    height: 58px;
+}
+
+.nav > li > form {
+    color: #fff !important;
+    padding: 10px 35px 10px 35px;
+    height: 58px;
+}
+
+.nav > .active > a {
+    border-left: 0;
+}
+
+.navbar-collapse .navbar-nav.navbar-right:last-child {
+    margin-right: 0px;
+}
+
+.navbar-digest {
+    /*background-color: #f8f8f8;*/
+    border-color: #5e5e5e;
+
+    background-color: #262626;
+}
+
+/* pagination */
+
+.pagination > li > a {
+    color: #aaa;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus {
+    background-color: #aaa;
+    border-color: #aaa;
+
+}
+
+.sidebar-module-inset {
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.row {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* footer */
+
+.footer {
+    background-color: #777;
+    color: #ccc;
+    margin: 0px;
+    height: 60px;
+    padding-top: 20px;
+}
+
+.footer-contact > a {
+    color: #ccc;
+}
+
+/* ===================================================== */
+/*            end  new design ... by owlman75            */
+/* ===================================================== */
+
+.icon-en {
+    width: 15px;
+    height: 10px;
+    background: url(../img/flag_uk.gif);
+    display: inline-block;
+}
+
+/* ================================================ */
+/*issue-list thumb, thumbinail, issue-title ... by owlman75 */
+/* ================================================ */
+
+.thumb {
+    opacity: 0.9;
+    padding-bottom: 15px;
+}
+
+.thumb:hover {
+    opacity: 1.0;
+}
+
+.thumb > a:hover, .thumb > a:visited, .thumb > a:active {
+    text-decoration: none;
+}
+
+.thumbnail:hover {
+    -moz-box-shadow: 0 0 20px #0066CC;
+    -webkit-box-shadow: 0 0 20px #0066CC;
+    box-shadow: 0 0 20px #0066CC;
+}
+
+.issue {
+    border-top: .25rem solid #b88b58;
+}
+
+.issue-end {
+    border-bottom: .25rem solid #b88b58;
+}
+
+.issue-title {
+    position: relative;
+    padding: 15px 15px 15px;
+    background-color: #f7f7f9;
+    text-align: center;
+    font: normal 16pt Arial;
+}
+
+.issue-img {
+    padding-top: 10px;
+    padding-bottom: 15px;
+    text-align: center;
+}
+
+.issue-date {
+    color: #999;
+    font-size: 100%;
+}
+
+/* ===================================================== */
+/* end issue-list tumb, tumbinail, title ... by owlman75 */
+/* ===================================================== */
+
+/* Index description */
+.index-description {
+    margin-top: 10px;
+
+}
+
+.index-description-content {
+    padding-top: 10px;
+    /*font: normal 12pt/20pt Arial;*/
+    text-align: justify;
+    text-indent: 15px;
+}
+
+/* End Index description */
+
+/* ===================================================== */
+/*     issue-items news-line-items ... by owlman75       */
+/* ===================================================== */
+.news-line-dates {
+    color: #DBC09A;
+}
+
+.news-line-dates > small > a,
+.news-line-dates > small > a:hover,
+.news-line-dates > small > a:visited,
+.news-line-dates > small > a:active {
+    color: #DBC09A;
+}
+
+.news-line-item {
+    padding: 5px 0 5px 10px;
+    border-bottom: dotted 1px #eee;
+}
+
+.issue-item {
+    padding: 5px 0 5px 0;
+    border-bottom: dotted 1px #eee;
+}
+
+.news-line-item > a,
+.issue-item > a {
+    font-size: 100%;
+    font-weight: bold;
+}
+
+.news-line-item-resource {
+    opacity: 0.4;
+    color: #58A6E2;
+    background-color: #fff;
+    border: solid 1px #58A6E2;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+.issue-item-resource {
+    opacity: 0.4;
+    color: #58A6E2;
+    background-color: #fff;
+    border: solid 1px #58A6E2;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+.en {
+    background-image: url('/static/img/gb.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.ru {
+    background-image: url('/static/img/ru.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.goodnews {
+    color: #58A6E2;
+}
+
+.issue-item-language {
+    font-size: 100%;
+    height: 100%;
+}
+
+.news-line-item-bages > a:hover,
+.issue-item-bages > a:hover {
+    opacity: 1.0;
+    color: #58A6E2;
+}
+
+.issue-item-description {
+    padding-top: 5px;
+    padding-left: 23px;
+}
+
+/* ===================================================== */
+/*  End issue-items news-line-items ... by owlman75      */
+/* ===================================================== */
+
+/* ===================================================== */
+/*                        Adaptive                       */
+/* ===================================================== */
+
+/* wide desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* desktop */
+@media (min-width: 980px) and (max-width: 1200px) {
+
+}
+
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+    .top-logo {
+        height: 100px;
+        max-width: 150px;
+        text-align: center;
+        float: left;
+    }
+
+    .top-search {
+        height: 100px;
+        width: 500px;
+        max-width: 500px;
+        float: left;
+    }
+
+    .top-orfo {
+        width: 100%;
+        float: left;
+        height: auto;
+        text-align: left;
+    }
+
+    .jump-btn {
+        margin: 15px;
+    }
+}
+
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+    .top-logo {
+        height: 100px;
+        max-width: 100px;
+        text-align: center;
+        float: left;
+    }
+
+    .top-search {
+        height: 100px;
+        max-width: 300px;
+        float: left;
+    }
+
+    .top-orfo {
+        width: 100%;
+        float: left;
+        height: auto;
+        text-align: left;
+    }
+
+    .jump-btn {
+        margin: 15px;
+    }
+}
+
+/* Landscape phones and down */
+@media (max-width: 480px) {
+
+    .jump-btn {
+        margin: 15px;
+    }
+}
+
+/* ===================================================== */
+/*                    End adaptive                       */
+/* ===================================================== */
+
+/* ================================================ */
+/*                    News list (feed)              */
+/* ================================================ */
+
+.news-list a.section-link {
+    text-decoration: underline;
+    color: #c09853;
+}
+
+.news-list .item-container {
+    margin-bottom: 15px;
+}
+
+/* ================================================ */
+/*                    end News list (feed)          */
+/* ================================================ */
+
+.block {
+    display: inline-block;
+}
+
+.of__hidden {
+    overflow: hidden;
+}
+
+.cl__gray {
+    color: #888;
+}
+
+.marg__b_min {
+    margin-bottom: 10px;
+}
+
+.marg__l_min {
+    margin-left: 10px;
+}
+
+.marg__l_mid {
+    margin-left: 20px;
+}
+
+.marg__r_min {
+    margin-right: 10px;
+}
+
+.marg__r_mid {
+    margin-right: 20px;
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.container:before, .container:after {
+    content: " ";
+    display: table;
+}
+
+.container:after {
+    clear: both;
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 732px;
+        max-width: 732px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 952px;
+        max-width: 952px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1152px;
+        max-width: 1152px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        width: 1600px;
+        max-width: 1700px;
+    }
+
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #f5f5f5;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+    padding: 60px 15px 0;
+}
+
+.item-article-text {
+    border: dashed 1px #634f36; /* Параметры рамки */
+    background: #fffff5; /* Цвет фона */
+    padding: 7px; /* Поля вокруг текста */
+    margin: 0 0 1em; /* Отступы вокруг */
+}
+
+.item-article-title {
+    border: 1px solid black; /* Параметры рамки */
+    border-bottom: none; /* Убираем линию снизу */
+    padding: 3px; /* Поля вокруг текста */
+    display: inline; /* Устанавливаем как встроенный элемент */
+    background: #efecdf; /* Цвет фона */
+    font-weight: bold; /* Жирное начертание */
+    font-size: 90%; /* Размер текста */
+    margin: 0; /* Убираем отступы вокруг */
+    white-space: nowrap; /* Отменяем переносы текста */
+}

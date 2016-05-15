@@ -8,7 +8,7 @@ SECRET_KEY = 'TBD IN LOCAL SETTINGS'
 
 DEBUG = True
 
-THUMBNAIL_DEBUG = False
+THUMBNAIL_DEBUG = DEBUG
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru']
 
@@ -97,12 +97,21 @@ TEMPLATES = [{
             'social.apps.django_app.context_processors.backends',
             'social.apps.django_app.context_processors.login_redirect',
         ],
-        'loaders': (
-            'django.template.loaders.filesystem.Loader',
-            'django.template.loaders.app_directories.Loader',
-        )
+        'loaders': [
+            ('django.template.loaders.cached.Loader', [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ]),
+        ],
     },
 }, ]
+
+# disable cache templates for debug mode
+if DEBUG:
+    TEMPLATES[0]['OPTIONS']['loaders'] = (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+    )
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.github.GithubOAuth2',  # ok
@@ -143,6 +152,9 @@ LOCALE_PATHS = (path.join(BASE_DIR, 'locale'),)
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets'),
+)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = path.join(BASE_DIR, 'media')
