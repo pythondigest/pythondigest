@@ -18,7 +18,7 @@
             <li class="nav-item{% if active_menu_item == 'issues_list' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'digest:issues' %}">ВЫПУСКИ</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item{% if active_menu_item == 'friends' %} active{% endif %}">
                 <a class="nav-link" href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>
             </li>
             <li class="nav-item">
