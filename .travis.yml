@@ -14,7 +14,7 @@ branches:
  only:
   - master
 
-script: coverage run manage.py test
+script: coverage run --omit=/**env/** manage.py test
 
 after_success:
   - coverage report
