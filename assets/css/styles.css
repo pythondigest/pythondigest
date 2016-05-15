@@ -86,3 +86,13 @@ main {
     padding-right: 3rem;
     padding-top: 0;
 }
+
+.issue-card a {
+    text-decoration: none;
+}
+
+.issue-card .card:hover {
+    -moz-box-shadow: 0 0 20px #06c;
+    -webkit-box-shadow: 0 0 20px #06c;
+    box-shadow: 0 0 20px #06c;
+}
