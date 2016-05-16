@@ -30,6 +30,8 @@ Contributing
 
 In general, we follow the "fork-and-pull" Git workflow.
 
+> We develop in `develop` branch
+
  1. **Fork** the repo on GitHub
  2. **Clone** the project to your own machine
  3. **Commit** changes to your own branch
@@ -38,7 +40,7 @@ In general, we follow the "fork-and-pull" Git workflow.
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
-We recommend to use `git-flow`
+> We recommend to use `git-flow`
 
 
 How to start
@@ -79,7 +81,6 @@ For developers:
 
 ```
 python manage.py loaddata digest/fixtures/dev_issues.yaml
-python manage.py loaddata digest/fixtures/dev_resources.yaml
+python manage.py loaddata digest/fixtures/dev_resource.yaml
 python manage.py loaddata digest/fixtures/dev_items.yaml
-
 ```
