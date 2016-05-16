@@ -69,7 +69,7 @@ python manage.py loaddata digest/fixtures/sections.yaml
 
 Create super user
 ```
-python manage.py superuser
+python manage.py createsuper
 ```
 
 Ok! You are ready for work with Python Digest! (runserver...)
