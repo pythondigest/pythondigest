@@ -65,6 +65,7 @@ Init database and install some fixtures:
 python manage.py migrate
 python manage.py migrate --run-syncdb
 python manage.py loaddata digest/fixtures/sections.yaml
+python manage.py loaddata digest/fixtures/parsing_rules.json
 ```
 
 Create super user
