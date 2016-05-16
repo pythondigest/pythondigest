@@ -1,0 +1,30 @@
+- model: digest.issue
+  pk: 1
+  fields:
+    title: 'Issue 1'
+    description: 'First issue and first description'
+    status: 'active'
+    date_from: '2013-10-14'
+    date_to: '2013-10-28'
+    published_at: '2013-10-28'
+    trend: 'Default trend, Hahaha'
+- model: digest.issue
+  pk: 2
+  fields:
+    title: 'Issue 2'
+    description: 'Second issue and Second description'
+    status: 'active'
+    date_from: '2014-02-08'
+    date_to: '2014-02-16'
+    published_at: '2014-02-16'
+    trend: 'Default trend2, Hahaha'
+- model: digest.issue
+  pk: 3
+  fields:
+    title: 'Issue 3'
+    description: 'Third issue and Third description'
+    status: 'draft'
+    date_from: '2014-07-13'
+    date_to: '2014-07-20'
+    published_at: '2014-07-20'
+    trend: 'Default trend3, Hahaha'

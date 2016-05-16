@@ -1,0 +1,72 @@
+- model: digest.item
+  pk: 1
+  fields:
+    section: 1
+    title: 'Item 1'
+    is_editors_choice: False
+    description: 'Cool description of item 1'
+    issue: 1
+    resource: 1
+    link: 'https://www.python.org/dev/peps/pep-0515/'
+    status: 'active'
+    created_at: '2016-1-1'
+- model: digest.item
+  pk: 2
+  fields:
+    section: 2
+    title: 'Item 2'
+    is_editors_choice: False
+    description: 'Cool description of item 2'
+    issue: 2
+    resource: 2
+    link: 'https://www.python.org/dev/peps/pep-0509/'
+    status: 'active'
+    created_at: '2016-2-1'
+- model: digest.item
+  pk: 3
+  fields:
+    section: 1
+    title: 'Item 3'
+    is_editors_choice: False
+    description: 'Cool description of item 3'
+    issue: 1
+    resource: 2
+    link: 'https://www.python.org/dev/peps/pep-0508/'
+    status: 'draft'
+    created_at: '2016-3-1'
+- model: digest.item
+  pk: 4
+  fields:
+    section: 4
+    title: 'Item 4'
+    is_editors_choice: False
+    description: 'Cool description of item 4'
+    issue: 3
+    resource: 1
+    link: 'http://asvetlov.blogspot.ru/2015/11/uvloop.html?utm_source=feedburner&utm_medium=feed&utm_campaign=Feed:+andrew-svetlov+(%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9+%D0%A1%D0%B2%D0%B5%D1%82%D0%BB%D0%BE%D0%B2+atom)'
+    status: 'active'
+    created_at: '2016-2-2'
+- model: digest.item
+  pk: 5
+  fields:
+    section: 5
+    title: 'Item 4'
+    is_editors_choice: False
+    description: 'Cool description of item 4'
+    issue: 1
+    resource: 2
+    link: 'https://www.python.org/dev/peps/pep-0506/'
+    status: 'active'
+    created_at: '2016-2-4'
+- model: digest.item
+  pk: 6
+  fields:
+    section: 1
+    title: 'Item 7'
+    is_editors_choice: False
+    description: 'Cool description of item 4'
+    issue: 2
+    resource: 2
+    link: 'https://www.python.org/dev/peps/pep-0505/'
+    status: 'active'
+    created_at: '2016-2-7'
