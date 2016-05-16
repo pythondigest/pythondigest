@@ -23,6 +23,7 @@ We aggregator many different links from Python World:
 - etc
 
 PythonDigest is a `Open Source` project!
+We use `Python 3`
 
 Contributing
 ------------
@@ -38,3 +39,38 @@ In general, we follow the "fork-and-pull" Git workflow.
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!
 
 We recommend to use `git-flow`
+
+
+How to start
+------------
+
+Clone project
+
+```
+git clone https://github.com/pythondigest/pythondigest.git
+```
+
+Create `virtualenv` and install dependencies:
+
+```
+virtualenv --python=python3 ./env
+source ./env/bin/activate
+cd pythondigest
+pip install -r requirements.txt
+```
+
+Init database and install some fixtures:
+
+```
+python manage.py migrate
+python manage.py migrate --run-syncdb
+python manage.py loaddata digest/fixtures/sections.yaml
+```
+
+Create super user
+```
+python manage.py superuser
+```
+
+Ok! You are ready for work with Python Digest! (runserver...)
+
