@@ -1,0 +1,133 @@
+{% extends 'landings/base/base.html' %}
+{% load i18n %}
+{% load siteblocks %}
+
+{% load landings %}
+{% block jumb %}
+{% endblock %}
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 well">
+            {% siteblock "django_info" %}
+        </div>
+        <div class="col-md-6 well">
+            {% siteblock "django_version" %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="issue well">
+            <h3 class="text-center">{% trans "Main news" %}</h3>
+            <hr>
+            {% siteblock "django_main_news" %}
+        </div>
+    </div>
+
+
+    <div class="row well">
+        Блок интересных новостей в виде миниатюр изображения
+    </div>
+
+    <div class="row">
+        {% include 'blocks/_adv.html' %}
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="text-center">
+                <div class="issue well">
+                    <h3 class="text-center">{% trans "Videos" %}</h3>
+                    <hr>
+                    {% siteblock "django_recom_videos" %}
+                </div>
+            </div>
+
+            <div>
+                {% siteblock "django_recom_packages" %}
+                <div class="issue well">
+                    <h3 class="text-center">{% trans "Articles" %}</h3>
+                    <hr>
+                    {% siteblock "django_recom_articles" %}
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="col-md-4">
+
+            {% siteblock "django_resources" %}
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-8">
+            {% rss2libraries "https://www.djangopackages.com/feeds/packages/latest/rss/" as rss_libraries %}
+            {% if rss_libraries %}
+                <div class="issue well {{ add_classes|default_if_none:'' }}">
+                    <h3 class="text-center">{% trans "New django packages" %}</h3>
+                    <hr>
+                    {% for link in rss_libraries %}
+                        <p>{% include 'digest/blocks/_item_as_line.html' with item=link comment=False likes=False show_description=True %}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            {% include 'digest/blocks/_feed.html' with items=items %}
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="issue well">
+            <h3 class="text-center">{% trans "Books" %}</h3>
+            <hr>
+
+            <div class="panel panel-default widget">
+                <div class="panel-body">
+                    <div class="text-center">
+                        <h3><a
+                                href="https://docs.djangoproject.com/"
+                                title="{% trans "Documentation" %}">{% trans "Documentation" %}</a>
+                            and
+                            <a href="http://www.djangobook.com/">TheDjango
+                                Book</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                <a href="https://www.twoscoopspress.com/products/two-scoops-of-django-1-8">
+                    <img
+                            style="max-width: 35%; max-height: 250px"
+                            alt="Two Scoops of Django: Best Practices for Django 1.8"
+                            src="//cdn.shopify.com/s/files/1/0304/6901/products/two-scoops-django-1.8-best-practices_abe21353-2734-4208-8566-c95e22759f59_1024x1024.png?v=1432913237">
+                </a>
+
+                <a href="http://agiliq.com/books/djenofdjango/">
+                    <img
+                            style="max-width: 35%; max-height: 250px"
+                            alt="DJEN OF DJANGO"
+                            src="//pythonbooks.revolunet.com/img/djenofdjango.jpg">
+                </a>
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+
+    </div>
+
+{% endblock %}

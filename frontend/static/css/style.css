@@ -259,6 +259,7 @@ html, body {
 
 .issue {
     border-top: .25rem solid #b88b58;
+    margin-bottom: 25px;
 }
 
 .issue-end {

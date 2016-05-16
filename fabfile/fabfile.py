@@ -18,7 +18,7 @@ def pull():
 def deploy():
     pull()
     # update_libs()
-    # migrate()
+    migrate()
     static()
     restart()
 

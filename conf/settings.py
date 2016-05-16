@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'frontend',
     'jobs',
     'advertising',
+    'landings',
 
     'account',
     'rosetta',
@@ -48,6 +49,8 @@ INSTALLED_APPS = (
     'likes',
     'django_q',
     'django_remdow',
+
+    'siteblocks',
 
 )
 
@@ -75,7 +78,7 @@ MIDDLEWARE_CLASSES = (
     'admin_reorder.middleware.ModelAdminReorder',
 
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
-    'likes.middleware.SecretBallotUserIpUseragentMiddleware',
+    "likes.middleware.SecretBallotUserIpUseragentMiddleware",
 
 )
 
@@ -314,9 +317,9 @@ DATASET_POSITIVE_KEYWORDS = list({
 })
 
 DATASET_NEGATIVE_KEYWORDS = list({
-    'mysidebar',
-    'related',
-    'ads',
+    "mysidebar",
+    "related",
+    "ads",
     'footer',
     'menu',
     'navigation',
@@ -347,9 +350,13 @@ ADMIN_REORDER = (
     'digest',
     'advertising',
     'controlcenter',
-    'taggit',
+    'siteblocks',
+    'landings',
+    # 'taggit',
     # 'jobs',
+
     'frontend',
+
     # 'sites',
     'auth',
     # 'account',
@@ -384,7 +391,7 @@ HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError as e:
-    print('Not found local settings: {}'.format(str(e)))
+    print("Not found local settings: {}".format(str(e)))
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

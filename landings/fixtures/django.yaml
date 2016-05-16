@@ -1,0 +1,8 @@
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Используйте raise NotImplemented вместо pass, когда хотите оставить на потом написание функционала'
+- model: frontend.tip
+  pk: null
+  fields:
+    text: 'Уверены, что в функции у аргумента такой-то тип? Заиспользуйте assert и спите спокойно'
