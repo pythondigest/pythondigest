@@ -1,0 +1,37 @@
+- model: digest.resource
+  pk: 1
+  fields:
+    title: 'Habrahabr'
+    description: 'Russian web site'
+    link: 'http://habrahabr.ru'
+- model: digest.resource
+  pk: 2
+  fields:
+    title: 'Python.org'
+    description: 'web site'
+    link: 'http://www.python.org'
+- model: digest.autoimportresource
+  pk: 1
+  fields:
+    title: 'Habrahabr Python'
+    link: 'http://habrahabr.ru/rss/hub/python/'
+    type_res: 'rss'
+    resource: 1
+- model: digest.autoimportresource
+  pk: 2
+  fields:
+    title: 'Habrahabr Djang'
+    link: 'http://habrahabr.ru/rss/hub/django/'
+    type_res: 'rss'
+- model: digest.autoimportresource
+  pk: 3
+  fields:
+    title: 'PythonHub'
+    link: 'https://twitter.com/PythonHub'
+    type_res: 'twitter'
+- model: digest.autoimportresource
+  pk: 4
+  fields:
+    title: 'pythontrending'
+    link: '	https://twitter.com/pythontrending'
+    type_res: 'twitter'

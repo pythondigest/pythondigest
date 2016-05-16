@@ -1,0 +1,647 @@
+[
+  {
+    "model": "digest.parsingrules",
+    "pk": 1,
+    "fields": {
+      "title": "Remove 404 links",
+      "is_activated": true,
+      "if_element": "http_code",
+      "if_action": "equal",
+      "if_value": "404",
+      "then_element": "status",
+      "then_action": "set",
+      "then_value": "moderated",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 2,
+    "fields": {
+      "title": "pypi.python.org is libraries",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pypi.python.org",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0418\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b, \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b, \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 3,
+    "fields": {
+      "title": "PyCon is conference",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "PyCon",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u041a\u043e\u043d\u0444\u0435\u0440\u0435\u043d\u0446\u0438\u0438, \u0441\u043e\u0431\u044b\u0442\u0438\u044f, \u0432\u0441\u0442\u0440\u0435\u0447\u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u043e\u0432",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 4,
+    "fields": {
+      "title": "habrahabr is Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://habrahabr.ru/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 5,
+    "fields": {
+      "title": "stackoverflow.com -> status moderated",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://stackoverflow.com/",
+      "then_element": "status",
+      "then_action": "set",
+      "then_value": "moderated",
+      "weight": 300
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 6,
+    "fields": {
+      "title": "Django -> add Django tag",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "regex",
+      "if_value": "[d,D]jango",
+      "then_element": "tags",
+      "then_action": "add",
+      "then_value": "django",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 7,
+    "fields": {
+      "title": "Reddit is articles",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "[reddit]",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 8,
+    "fields": {
+      "title": "pypi.python.org -> tag package",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pypi.python.org",
+      "then_element": "tags",
+      "then_action": "add",
+      "then_value": "package",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 9,
+    "fields": {
+      "title": "line \"release\" is Release Section",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "release",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0420\u0435\u043b\u0438\u0437\u044b",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 10,
+    "fields": {
+      "title": "Site libraries.io is Release Section",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "libraries.io/pypi",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0420\u0435\u043b\u0438\u0437\u044b",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 11,
+    "fields": {
+      "title": "PyPi -> libraries",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "pypi:",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0418\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b, \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b, \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 12,
+    "fields": {
+      "title": "stackoverflow.com is moderated",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "stackoverflow.com",
+      "then_element": "status",
+      "then_action": "set",
+      "then_value": "moderated",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 13,
+    "fields": {
+      "title": "Pythonz.net/videos -> Video",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://pythonz.net/videos/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 14,
+    "fields": {
+      "title": "pyvideo.org is video section",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://pyvideo.org/video",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 15,
+    "fields": {
+      "title": "pyvideo.ru is video section",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://pyvideo.ru/video",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 16,
+    "fields": {
+      "title": "Clean line [reddit]",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "[reddit]",
+      "then_element": "title",
+      "then_action": "remove",
+      "then_value": "[reddit]",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 17,
+    "fields": {
+      "title": "github.com -> libraries",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "github.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0418\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b, \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b, \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 18,
+    "fields": {
+      "title": "pyvideo.org is video section",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pyvideo.org",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 19,
+    "fields": {
+      "title": "youtube -> videos",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "www.youtube.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 20,
+    "fields": {
+      "title": "youtu.be is Videos",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "youtu.be",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u0438\u0434\u0435\u043e",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 21,
+    "fields": {
+      "title": "meetup.com -> meetups",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "meetup.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u041a\u043e\u043d\u0444\u0435\u0440\u0435\u043d\u0446\u0438\u0438, \u0441\u043e\u0431\u044b\u0442\u0438\u044f, \u0432\u0441\u0442\u0440\u0435\u0447\u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u043e\u0432",
+      "weight": 950
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 22,
+    "fields": {
+      "title": "pythonworld.ru/kursy is education",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://pythonworld.ru/kursy/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0423\u0447\u0435\u0431\u043d\u044b\u0435 \u043c\u0430\u0442\u0435\u0440\u0438\u0430\u043b\u044b",
+      "weight": 500
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 23,
+    "fields": {
+      "title": "bitbucket.org is Libraries",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "//bitbucket.org",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0418\u043d\u0442\u0435\u0440\u0435\u0441\u043d\u044b\u0435 \u043f\u0440\u043e\u0435\u043a\u0442\u044b, \u0438\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b, \u0431\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438",
+      "weight": 950
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 24,
+    "fields": {
+      "title": "pysnap.com",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pysnap.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 25,
+    "fields": {
+      "title": "pynsk.ru/ is Author",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pynsk.ru/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u041a\u043e\u043b\u043e\u043d\u043a\u0430 \u0430\u0432\u0442\u043e\u0440\u0430",
+      "weight": 999
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 26,
+    "fields": {
+      "title": "blog.dominodatalab.com",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://blog.dominodatalab.com/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 27,
+    "fields": {
+      "title": "blog. is articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "blog.",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 999
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 28,
+    "fields": {
+      "title": "Clean pypi:",
+      "is_activated": true,
+      "if_element": "title",
+      "if_action": "contains",
+      "if_value": "pypi:",
+      "then_element": "title",
+      "then_action": "remove",
+      "then_value": "pypi:",
+      "weight": 1
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 29,
+    "fields": {
+      "title": "/blog/ -> Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "/blog/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 900
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 30,
+    "fields": {
+      "title": ".blogspot.com -> articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": ".blogspot.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 998
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 31,
+    "fields": {
+      "title": "python-3.ru",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "python-3.ru",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 32,
+    "fields": {
+      "title": "notebooks is articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://nbviewer.jupyter.org/",
+      "then_element": "status",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 800
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 33,
+    "fields": {
+      "title": "ruslanspivak.com",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "http://ruslanspivak.com/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 999
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 34,
+    "fields": {
+      "title": "Habrahabr is articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "https://habrahabr.ru/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 100
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 35,
+    "fields": {
+      "title": "/posts/ is Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "/posts/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 500
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 36,
+    "fields": {
+      "title": "pyimagesearch.com",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pyimagesearch.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 700
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 37,
+    "fields": {
+      "title": "PEPs is news",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "python.org/dev/peps/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u041d\u043e\u0432\u043e\u0441\u0442\u0438",
+      "weight": 1000
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 38,
+    "fields": {
+      "title": ".wordpress.com Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": ".wordpress.com/",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 888
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 39,
+    "fields": {
+      "title": "pythontips.com",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "pythontips.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 995
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 40,
+    "fields": {
+      "title": ".ipynb is Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": ".ipynb",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 987
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 41,
+    "fields": {
+      "title": "stackoverflow.com is Q/A",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "stackoverflow.com",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0412\u043e\u043f\u0440\u043e\u0441\u044b \u0438 \u043e\u0431\u0441\u0443\u0436\u0434\u0435\u043d\u0438\u044f",
+      "weight": 444
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 42,
+    "fields": {
+      "title": "blog. is articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "blog.",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 900
+    }
+  },
+  {
+    "model": "digest.parsingrules",
+    "pk": 43,
+    "fields": {
+      "title": "blogs. is Articles",
+      "is_activated": true,
+      "if_element": "link",
+      "if_action": "contains",
+      "if_value": "blogs.",
+      "then_element": "section",
+      "then_action": "set",
+      "then_value": "\u0421\u0442\u0430\u0442\u044c\u0438",
+      "weight": 600
+    }
+  }
+]
