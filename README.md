@@ -74,3 +74,11 @@ python manage.py createsuper
 
 Ok! You are ready for work with Python Digest! (runserver...)
 
+For developers:
+
+```
+python manage.py loaddata digest/fixtures/dev_issues.yaml
+python manage.py loaddata digest/fixtures/dev_resources.yaml
+python manage.py loaddata digest/fixtures/dev_items.yaml
+
+```
