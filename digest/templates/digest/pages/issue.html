@@ -95,3 +95,9 @@
 
 
 {% endblock %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    {% include 'blocks/_disqus_script.html' %}
+{% endblock %}
