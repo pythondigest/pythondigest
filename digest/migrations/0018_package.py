@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0017_parsingrules_is_activated'), ]
 
     operations = [migrations.CreateModel(
@@ -25,7 +24,7 @@ class Migration(migrations.Migration):
                                          verbose_name='\u0421\u0441\u044b\u043b\u043a\u0430')), ],
         options={
             'verbose_name':
-            '\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0430',
+                '\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0430',
             'verbose_name_plural':
-            '\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438',
+                '\u0411\u0438\u0431\u043b\u0438\u043e\u0442\u0435\u043a\u0438',
         }, ), ]

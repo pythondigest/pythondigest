@@ -11,7 +11,8 @@
 
             {% if item.tags_as_links %}
                 {% for tag_name, tag_link in item.tags_as_links %}
-                    <span class="badge issue-item-resource"><small><a href="{{ tag_link }}">{{ tag_name }}</a></small>
+                    <span class="badge issue-item-resource"><small><a
+                            href="{{ tag_link }}">{{ tag_name }}</a></small>
                 </span>
                 {% endfor %}
             {% endif %}

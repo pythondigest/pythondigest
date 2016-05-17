@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0016_auto_20150731_1457'), ]
 
     operations = [migrations.AddField(

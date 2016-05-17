@@ -2,7 +2,8 @@
     <div class="panel-body">
         <form action="{% url 'digest:feed' %}" role="form">
             <input type="text" name="q" type="text" class="search-input"
-                   value="{{ request.GET.q|default:'' }}" placeholder=" Поиск...">
+                   value="{{ request.GET.q|default:'' }}"
+                   placeholder=" Поиск...">
         </form>
 
     </div>

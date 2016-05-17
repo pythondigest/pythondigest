@@ -128,7 +128,7 @@ class IndexViewTest(TestCase):
 
     # XXX bug - модель не требует поля image, а шаблон - да
     def test_context_var_issue_if_has_active_issues_with_filled_published_at_field(
-            self):
+        self):
         date = timezone.now().date()
         issue = Issue.objects.create(title='Title 1',
                                      status='active',

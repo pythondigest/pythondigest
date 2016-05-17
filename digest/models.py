@@ -286,7 +286,7 @@ class Item(models.Model):
     def text(self):
         nonempty_path = self.article_path is not None and self.article_path
         if nonempty_path and os.path.exists(
-                self.article_path):
+            self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:

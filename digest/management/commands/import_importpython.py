@@ -11,17 +11,15 @@ from __future__ import unicode_literals
 from urllib.error import URLError
 from urllib.request import urlopen
 
-from typing import Dict, Union, Tuple, List
-
-from django.core.management.base import BaseCommand
 from bs4 import BeautifulSoup
+from django.core.management.base import BaseCommand
+from typing import Dict, Union, Tuple, List
 
 from digest.management.commands import (
     apply_parsing_rules,
     apply_video_rules,
     save_item
 )
-
 from digest.models import (
     ITEM_STATUS_CHOICES,
     ParsingRules,
@@ -70,7 +68,8 @@ class ImportPythonParser(object):
         elif 12 <= number <= 15:
             return "/".join([cls.BASE_URL, "newsletter", "draft", str(number)])
         elif 2 <= number <= 14:
-            return "/".join([cls.BASE_URL, "static", "files", "issue{}.html".format(str(number))])
+            return "/".join([cls.BASE_URL, "static", "files",
+                             "issue{}.html".format(str(number))])
         else:
             raise ValueError("Incorre page number: {}".format(number))
 
@@ -129,7 +128,7 @@ def _apply_rules_wrap(**kwargs):
     return _apply_rules
 
 
-def main(url: str="", number: int="") -> None:
+def main(url: str = "", number: int = "") -> None:
     data = {
         'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
         'query_sections': Section.objects.all(),

@@ -11,20 +11,26 @@
 {% block body %}
     <div class="row">
         <div class="col-md-4">
-            <form method="POST" action="{% url "account_login" %}" autocapitalize="off" {% if form.is_multipart %} enctype="multipart/form-data"{% endif %}>
+            <form method="POST" action="{% url "account_login" %}"
+                  autocapitalize="off" {% if form.is_multipart %}
+                  enctype="multipart/form-data"{% endif %}>
                 <legend>{% trans "Log in to an existing account" %}</legend>
                 {% csrf_token %}
                 {{ form|bootstrap }}
                 {% if redirect_field_value %}
-                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    <input type="hidden" name="{{ redirect_field_name }}"
+                           value="{{ redirect_field_value }}"/>
                 {% endif %}
-                <button type="submit" class="btn btn-primary">{% trans "Log in" %}</button>
-                <a href="{% url "account_password_reset" %}" class="btn btn-link">{% trans "Forgot your password?" %}</a>
+                <button type="submit"
+                        class="btn btn-primary">{% trans "Log in" %}</button>
+                <a href="{% url "account_password_reset" %}"
+                   class="btn btn-link">{% trans "Forgot your password?" %}</a>
             </form>
             {% if ACCOUNT_OPEN_SIGNUP %}
                 <p class="login-signup">
                     <small>
-                        {% trans "Don't have an account?" %}  <strong><a href="{% urlnext 'account_signup' %}">{% trans "Sign up" %}</a></strong>
+                        {% trans "Don't have an account?" %} <strong><a
+                            href="{% urlnext 'account_signup' %}">{% trans "Sign up" %}</a></strong>
                     </small>
                 </p>
             {% endif %}
@@ -51,8 +57,8 @@
                                 </form>
                             {% else %}
                                 <p><a class="col-md-2 btn btn-default"
-                                   name="{{ backend|backend_class }}"
-                                   href="{% url "social:begin" backend=name %}">
+                                      name="{{ backend|backend_class }}"
+                                      href="{% url "social:begin" backend=name %}">
                                     <i class="fa fa-{{ name|icon_name }}"></i>
                                     {{ backend|backend_name }}
                                 </a></p>
@@ -69,7 +75,7 @@
 {% block scripts %}
     {{ block.super }}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#id_username').focus();
         });
     </script>

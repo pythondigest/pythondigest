@@ -16,7 +16,8 @@
 
             {% empty %}
                 <div class="alert alert-warning pull-left">
-                    <strong>Печально но факт!</strong> В этой ленте нет новостей.
+                    <strong>Печально но факт!</strong> В этой ленте нет
+                    новостей.
                 </div>
             {% endfor %}
 
@@ -31,9 +32,11 @@
                 <a class="btn btn-default {% if lang == 'any' %}active{% endif %}"
                    href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
                 <a class="btn btn-default {% if lang == 'ru' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только на русском</a>
+                   href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Только
+                    на русском</a>
                 <a class="btn btn-default {% if lang == 'en' %}active{% endif %}"
-                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только на английском</a>
+                   href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Только
+                    на английском</a>
             </div>
             <br>
         {% endwith %}

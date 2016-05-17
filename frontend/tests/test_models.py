@@ -9,10 +9,8 @@ User = get_user_model()
 
 
 class EditorMaterialTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
-
         cls.user = User.objects.create_user(username='haxor', password='1337')
 
         cls.em1 = EditorMaterial.objects.create(title='Заголовок 1',
@@ -40,11 +38,9 @@ class EditorMaterialTest(TestCase):
                                                 user=cls.user)
 
     def test_str(self):
-
         self.assertEqual(str(self.em1), 'Заголовок 1')
 
     def test_slug_and_section_is_unique_together(self):
-
         self.em2.slug = 'slug1'
         self.em2.section = 'news'
 
@@ -65,13 +61,10 @@ class EditorMaterialTest(TestCase):
 
 
 class TipTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
-
         cls.tip1 = Tip.objects.create(text='advice 1')
         cls.tip2 = Tip.objects.create(text='advice 2', active=False)
 
     def test_str(self):
-
         self.assertEqual(str(self.tip1), 'advice 1')

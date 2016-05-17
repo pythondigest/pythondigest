@@ -2,7 +2,8 @@
 {% load thumbnail %}
 {% load common %}
 
-{% block page_title %}{{ object.title }}{% if object.trend %} - {{ object.trend }}{% endif %} - {{ block.super }}{% endblock %}
+{% block page_title %}{{ object.title }}{% if object.trend %} -
+    {{ object.trend }}{% endif %} - {{ block.super }}{% endblock %}
 {% block page_description %}{{ object.title }} - {{ block.super }}{% endblock %}
 
 {% block extra_head %}
@@ -14,12 +15,16 @@
         <meta name="twitter:title" content="{{ object.title }}"/>
         <meta name="twitter:description"
               content="Новый выпуск еженедельного дайджеста новостей о #python уже в эфире!"/>
-        <meta name="twitter:image" content="http://pythondigest.ru{{ im.url }}"/>
-        <meta name="twitter:url" content="http://pythondigest.ru{{ object.link }}"/>
+        <meta name="twitter:image"
+              content="http://pythondigest.ru{{ im.url }}"/>
+        <meta name="twitter:url"
+              content="http://pythondigest.ru{{ object.link }}"/>
     {% endthumbnail %}
 
-    <meta name="description" content='{{ object.description|striptags|truncatechars:500 }}'>
-    <meta name="og:description" content='{{ object.description|striptags|truncatechars:500 }}'>
+    <meta name="description"
+          content='{{ object.description|striptags|truncatechars:500 }}'>
+    <meta name="og:description"
+          content='{{ object.description|striptags|truncatechars:500 }}'>
 {% endblock %}
 
 {% block body %}
@@ -42,7 +47,8 @@
                     <div class="items-group-container">
 
                         {% with "before_section_"|add:data.grouper.title|unidecode|slugify as ads_section %}
-                            <a type='button' data-toggle="collapse" data-target="#{{ ads_section }}">
+                            <a type='button' data-toggle="collapse"
+                               data-target="#{{ ads_section }}">
                                 <h2>{{ data.grouper.title }}</h2></a>
                             {% include 'advertising/blocks/ads.html' with ads=ads type=ads_section %}
 

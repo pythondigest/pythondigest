@@ -4,7 +4,8 @@
 from django.test import TestCase
 from mock import patch
 
-from digest.management.commands.import_python_weekly import _get_content, _get_blocks
+from digest.management.commands.import_python_weekly import _get_content, \
+    _get_blocks
 from digest.utils import MockResponse
 from digest.utils import read_fixture
 
@@ -20,7 +21,8 @@ class ImportPythonWeeklyTest(TestCase):
         self.url = 'http://us2.campaign-archive1.com/?u=e2e180baf855ac797ef407fc7&id=31658452eb&utm_content=buffera9dc3&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer'
 
         test_name = 'fixture_test_import_python_weekly_test_get_blocks.txt'
-        self.patcher = patch('digest.management.commands.import_python_weekly.urlopen')
+        self.patcher = patch(
+            'digest.management.commands.import_python_weekly.urlopen')
         self.urlopen_mock = self.patcher.start()
         self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
 

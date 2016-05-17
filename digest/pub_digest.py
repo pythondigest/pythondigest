@@ -227,7 +227,8 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
                              scope='wall,messages')
     api = vk.API(session)
 
-    twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(digest_url)
+    twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(
+        digest_url)
     twitter_api = init_auth(settings.TWITTER_CONSUMER_KEY,
                             settings.TWITTER_CONSUMER_SECRET,
                             settings.TWITTER_TOKEN,

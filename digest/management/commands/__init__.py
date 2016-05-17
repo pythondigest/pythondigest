@@ -255,8 +255,8 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
     def _make_then_action_set(then_element: str, then_value: str):
         result = {}
         if (then_element == 'status' and then_value in query_statuses) or \
-                (then_element == 'section' and query_sections.filter(
-                    title=then_value).exists()):
+            (then_element == 'section' and query_sections.filter(
+                title=then_value).exists()):
             result = {then_element: then_value}
 
         if then_element == 'http_code' and then_value == '404':
@@ -308,8 +308,8 @@ def apply_video_rules(item_data: Dict) -> Dict:
     youtube_links = ['youtu.be', 'youtube.com', 'youtube-nocookie.com']
     result = {}
     if item_data.get('section') == Section.objects.get(title='Видео') \
-            and all(x not in item_data.get('link') for x in youtube_links) \
-            and 'raw_content' in item_data:
+        and all(x not in item_data.get('link') for x in youtube_links) \
+        and 'raw_content' in item_data:
         url = get_youtube_url_from_page(item_data.get('raw_content'))
         if url is not None:
             result['additionally'] = url
@@ -328,8 +328,8 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
 
     for rule in query_rules.order_by('-weight'):
         if rule.then_element == 'status' and \
-                (data.get('status') == 'moderated' or
-                         data.get('status') == 'active'):
+            (data.get('status') == 'moderated' or
+                     data.get('status') == 'active'):
             continue
         if rule.then_element == 'section' and 'section' in data:
             continue

@@ -15,14 +15,22 @@ def create_resource(**kwargs):
 class AutoImportResourceTest(TestCase):
     def test_filter(self):
         create_resource()
-        create_resource(title='test2', type_res='rss', link='https://python3.ru')
+        create_resource(title='test2', type_res='rss',
+                        link='https://python3.ru')
         create_resource(title='test3', in_edit=True, link='https://python7.ru')
-        create_resource(title='test4', type_res='rss', in_edit=True, link='https://python4.ru')
+        create_resource(title='test4', type_res='rss', in_edit=True,
+                        link='https://python4.ru')
         self.assertEqual(AutoImportResource.objects.count(), 4)
-        self.assertEqual(AutoImportResource.objects.filter(type_res='twitter').count(), 2)
-        self.assertEqual(AutoImportResource.objects.filter(type_res='twitter', in_edit=False).count(), 1)
-        self.assertEqual(AutoImportResource.objects.filter(type_res='rss').count(), 2)
-        self.assertEqual(AutoImportResource.objects.filter(type_res='rss', in_edit=False).count(), 1)
+        self.assertEqual(
+            AutoImportResource.objects.filter(type_res='twitter').count(), 2)
+        self.assertEqual(AutoImportResource.objects.filter(type_res='twitter',
+                                                           in_edit=False).count(),
+                         1)
+        self.assertEqual(
+            AutoImportResource.objects.filter(type_res='rss').count(), 2)
+        self.assertEqual(AutoImportResource.objects.filter(type_res='rss',
+                                                           in_edit=False).count(),
+                         1)
 
     def test_resource_creation(self):
         resource = create_resource()
@@ -42,7 +50,8 @@ class AutoImportResourceTest(TestCase):
         resource.type_res = 'rss'
         self.assertEqual(resource.type_res, 'rss')
 
-        resource = create_resource(title='Test2', type_res='rss', link='https://python.ru2')
+        resource = create_resource(title='Test2', type_res='rss',
+                                   link='https://python.ru2')
         self.assertEqual(resource.type_res, 'rss')
 
     def test_with_resource(self):

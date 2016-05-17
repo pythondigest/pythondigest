@@ -43,6 +43,7 @@ class JobItemAdmin(admin.ModelAdmin):
     link_html.allow_tags = True
     link_html.short_description = 'Ссылка'
 
+
 admin.site.register(JobItem, JobItemAdmin)
 admin.site.register(JobFeed, JobFeedAdmin)
 admin.site.register(RejectedList, RejectedListAdmin)

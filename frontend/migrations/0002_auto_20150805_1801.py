@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [migrations.swappable_dependency(settings.AUTH_USER_MODEL),
                     ('frontend', '0001_initial'), ]
 
@@ -23,7 +22,8 @@ class Migration(migrations.Migration):
                 ('section', models.CharField(max_length=50,
                                              choices=[('news', 'Новости'), (
                                                  'articles', 'Статьи'
-                                             ), ('landing', 'Посадочные страницы')],
+                                             ), ('landing',
+                                                 'Посадочные страницы')],
                                              verbose_name='Рубрика',
                                              default='landing')),
                 ('status', models.CharField(max_length=50,
@@ -48,5 +48,5 @@ class Migration(migrations.Migration):
             'verbose_name_plural': 'Материалы редакции',
         }, ),
         migrations.AlterUniqueTogether(
-        name='editormaterial',
-        unique_together=set([('slug', 'section')]), ), ]
+            name='editormaterial',
+            unique_together=set([('slug', 'section')]), ), ]

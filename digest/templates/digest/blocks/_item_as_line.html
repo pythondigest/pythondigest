@@ -9,7 +9,8 @@
     {% if comment %}
 
         <span class="likes liker text-primary">
-                <a href="{{ item.internal_link }}" title="Прокомментировать ссылку"><i
+                <a href="{{ item.internal_link }}"
+                   title="Прокомментировать ссылку"><i
                         class="fa fa-comments-o"></i></a>
                 </span>
         &nbsp;
@@ -34,5 +35,6 @@
        onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
        target="_blank">
         {{ item.title }}
-    </a> {% if show_description and item.content %} - {{ item.content }}{% endif %}
+    </a> {% if show_description and item.content %} -
+    {{ item.content }}{% endif %}
 {% endif %}

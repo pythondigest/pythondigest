@@ -74,7 +74,7 @@ class IssueAdmin(admin.ModelAdmin):
 
     def news_count(self, obj):
         return '%s' % Item.objects.filter(issue__pk=obj.pk,
-                                           status='active').count()
+                                          status='active').count()
 
     news_count.short_description = 'Количество новостей'
 
@@ -132,7 +132,7 @@ class ParsingRulesAdmin(admin.ModelAdmin):
 
     def _get_then_action(self, obj):
         return '{0}: <i>{1}</i>'.format(obj.get_then_action_display(),
-                                         obj.then_value)
+                                        obj.then_value)
 
     _get_then_action.allow_tags = True
     _get_then_action.short_description = 'Действие'

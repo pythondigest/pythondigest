@@ -4,10 +4,9 @@ from __future__ import unicode_literals
 
 import os
 
-from django.core.management.base import BaseCommand
-
 from allmychanges.api import get_changelogs, search_category, track_changelog
 from allmychanges.config import read_config
+from django.core.management.base import BaseCommand
 
 
 def subscribe_all_python():

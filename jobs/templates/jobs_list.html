@@ -24,46 +24,47 @@
         <h4>Вакансии: </h4>
         {% for vacancy in jobs %}
 
-                <noindex>
+            <noindex>
 
-                    <div class="media-body">
-                        <h4>
-                            <a href="{{ vacancy.link }}">{{ vacancy.title }}</a>
-                        </h4>
+                <div class="media-body">
+                    <h4>
+                        <a href="{{ vacancy.link }}">{{ vacancy.title }}</a>
+                    </h4>
 
-                        <p class="text-muted">{{ vacancy.description|default:''|safe }}</p>
+                    <p class="text-muted">{{ vacancy.description|default:''|safe }}</p>
 
-                        <div class="cl__gray marg__b_min">
+                    <div class="cl__gray marg__b_min">
 
-                            {% if vacancy.employer_name %}
-                                <span class="marg__r_mid"><strong>{{ vacancy.employer_name }}</strong></span>
-                            {% endif %}
-
-                            {% if vacancy.src_place_name %}
-                                <p>{{ vacancy.src_place_name }}</p>
-                            {% endif %}
-
-                        </div>
-
-                        {% if vacancy.salary_from or vacancy.salary_till %}
-                            <span class="label label-info marg__r_mid">{{ vacancy.get_salary_str }}</span>
+                        {% if vacancy.employer_name %}
+                            <span class="marg__r_mid"><strong>{{ vacancy.employer_name }}</strong></span>
                         {% endif %}
 
-                        <small class="cl__gray">
-                            <small>{{ vacancy.published_at|date:"d E H:i" }}</small>
-                        </small>
+                        {% if vacancy.src_place_name %}
+                            <p>{{ vacancy.src_place_name }}</p>
+                        {% endif %}
+
                     </div>
 
-                    {% if vacancy.url_logo %}
-                        <div class="media-right">
-
-                            <img src="{{ vacancy.url_logo }}" class="img-thumbnail media-object">
-                        </div>
-
+                    {% if vacancy.salary_from or vacancy.salary_till %}
+                        <span class="label label-info marg__r_mid">{{ vacancy.get_salary_str }}</span>
                     {% endif %}
-                    <hr>
 
-                </noindex>
+                    <small class="cl__gray">
+                        <small>{{ vacancy.published_at|date:"d E H:i" }}</small>
+                    </small>
+                </div>
+
+                {% if vacancy.url_logo %}
+                    <div class="media-right">
+
+                        <img src="{{ vacancy.url_logo }}"
+                             class="img-thumbnail media-object">
+                    </div>
+
+                {% endif %}
+                <hr>
+
+            </noindex>
 
 
         {% empty %}

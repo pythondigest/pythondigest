@@ -69,8 +69,11 @@ class Command(BaseCommand):
 
         for part in range(options['cnt_parts']):
             name = 'data_{0}_{1}.json'.format(train_part_size, part)
-            queryset = train_set[part * train_part_size: (part + 1) * train_part_size]
+            queryset = train_set[
+                       part * train_part_size: (part + 1) * train_part_size]
             create_dataset(queryset, name)
 
-        with open(os.path.join(settings.DATASET_FOLDER, 'test_set_ids.txt'), 'w') as fio:
-            fio.writelines(['%s\n' % x for x in test_set.values_list('id', flat=True)])
+        with open(os.path.join(settings.DATASET_FOLDER, 'test_set_ids.txt'),
+                  'w') as fio:
+            fio.writelines(
+                ['%s\n' % x for x in test_set.values_list('id', flat=True)])

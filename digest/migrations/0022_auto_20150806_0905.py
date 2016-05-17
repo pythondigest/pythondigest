@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0021_issue_tip'), ]
 
     operations = [migrations.AlterField(
