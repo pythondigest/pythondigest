@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+
 from jobs.utils import format_currency
 
 
@@ -91,8 +92,10 @@ class JobItem(models.Model):
 
     def get_salary_str(self) -> str:
         result = ''
-        low_limit = format_currency(self.salary_from) if self.salary_from else ''
-        high_limit = format_currency(self.salary_till) if self.salary_till else ''
+        low_limit = format_currency(
+            self.salary_from) if self.salary_from else ''
+        high_limit = format_currency(
+            self.salary_till) if self.salary_till else ''
         result += ' от {low}'.format(low=low_limit)
         result += ' до {high}'.format(high=high_limit)
         result += ' ' + self.salary_currency if self.salary_currency else ''

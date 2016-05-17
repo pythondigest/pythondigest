@@ -5,7 +5,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('jobs', '0004_jobfeed_is_activated'),
     ]
@@ -34,16 +33,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='jobitem',
             name='description',
-            field=models.TextField(null=True, blank=True, verbose_name='Описание вакансии'),
+            field=models.TextField(null=True, blank=True,
+                                   verbose_name='Описание вакансии'),
         ),
         migrations.AlterField(
             model_name='jobitem',
             name='employer_name',
-            field=models.CharField(null=True, max_length=255, blank=True, verbose_name='Работодатель'),
+            field=models.CharField(null=True, max_length=255, blank=True,
+                                   verbose_name='Работодатель'),
         ),
         migrations.AlterField(
             model_name='jobitem',
             name='place',
-            field=models.CharField(null=True, max_length=255, blank=True, verbose_name='Место'),
+            field=models.CharField(null=True, max_length=255, blank=True,
+                                   verbose_name='Место'),
         ),
     ]

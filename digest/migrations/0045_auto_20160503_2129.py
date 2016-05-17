@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0044_auto_20160503_2128'),
     ]
@@ -15,43 +14,53 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='autoimportresource',
             name='excl',
-            field=models.TextField(blank=True, default='', help_text='List of exceptions, indicate by ", "', verbose_name='Exceptions'),
+            field=models.TextField(blank=True, default='',
+                                   help_text='List of exceptions, indicate by ", "',
+                                   verbose_name='Exceptions'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='incl',
-            field=models.CharField(blank=True, default='', help_text='Условие отбора новостей <br />                    Включение вида [text] <br />                    Включение при выводе будет удалено', max_length=255, verbose_name='Required content'),
+            field=models.CharField(blank=True, default='',
+                                   help_text='Условие отбора новостей <br />                    Включение вида [text] <br />                    Включение при выводе будет удалено',
+                                   max_length=255,
+                                   verbose_name='Required content'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='issue',
             name='image',
-            field=models.ImageField(blank=True, default='', upload_to='issues', verbose_name='Image'),
+            field=models.ImageField(blank=True, default='', upload_to='issues',
+                                    verbose_name='Image'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='issue',
             name='trend',
-            field=models.CharField(blank=True, default='', max_length=255, verbose_name='Trend'),
+            field=models.CharField(blank=True, default='', max_length=255,
+                                   verbose_name='Trend'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='package',
             name='description',
-            field=models.TextField(blank=True, default='', verbose_name='Description'),
+            field=models.TextField(blank=True, default='',
+                                   verbose_name='Description'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='resource',
             name='description',
-            field=models.TextField(blank=True, default='', verbose_name='Description'),
+            field=models.TextField(blank=True, default='',
+                                   verbose_name='Description'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='section',
             name='icon',
-            field=models.CharField(blank=True, default='', max_length=255, verbose_name='Icon'),
+            field=models.CharField(blank=True, default='', max_length=255,
+                                   verbose_name='Icon'),
             preserve_default=False,
         ),
     ]

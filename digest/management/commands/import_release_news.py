@@ -7,8 +7,8 @@ from time import mktime
 import feedparser
 from django.core.management.base import BaseCommand
 
-from digest.models import Item, get_start_end_of_week
 from digest.management.commands import save_item
+from digest.models import Item, get_start_end_of_week
 from digest.models import Package, Section, Resource, Issue
 
 
@@ -19,12 +19,12 @@ def _generate_release_item(package_version: str, link: str,
     description = '{2}.' \
                   ' Изменения описаны по ссылке <a href="{3}">{3}</a>. ' \
                   'Скачать можно по ссылке: <a href="{4}">{4}</a>'.format(
-                      package_data.get('name'),
-                      package_version,
-                      package_data.get('description'),
-                      link,
-                      package_data.get('url')
-                  )
+        package_data.get('name'),
+        package_version,
+        package_data.get('description'),
+        link,
+        package_data.get('url')
+    )
     return {
         'title': name,
         'link': link,
@@ -50,7 +50,6 @@ def check_previous_news_of_package(news, package_data):
 
 
 def parse_rss():
-
     url = 'https://allmychanges.com/rss/03afbe621916b2f2145f111075db0759/'
 
     today = datetime.date.today()
@@ -60,7 +59,7 @@ def parse_rss():
             x.get('name').strip(): x
             for x in list(Package.objects.all()
                           .values('name', 'description', 'link'))
-        }
+            }
         _start_week, _end_week = get_start_end_of_week(today)
         _ = Issue.objects.filter(date_from=_start_week, date_to=_end_week)
 
@@ -94,11 +93,11 @@ def parse_rss():
 
         try:
             if not (package_name in
-                    packages.keys()) or package_name in saved_packages:
+                        packages.keys()) or package_name in saved_packages:
                 continue
 
             if news and check_previous_news_of_package(news, packages.get(
-                    package_name)):
+                package_name)):
                 off_other_release_news(news, packages.get(package_name))
 
             item_data = _generate_release_item(package_version,

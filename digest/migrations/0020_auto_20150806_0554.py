@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0019_auto_20150805_1332'), ]
 
     operations = [migrations.AlterField(
@@ -17,4 +16,4 @@ class Migration(migrations.Migration):
                                choices=[('title', 'Заголовок новости'), (
                                    'description', 'Описание новости'
                                ), ('section', 'Раздел'), ('status', 'Статус'),
-                                   ('tags', 'Тэг новости')]), ), ]
+                                        ('tags', 'Тэг новости')]), ), ]

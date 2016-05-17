@@ -3,7 +3,8 @@
         <h1>
             {{ object.title }}
         </h1>
-        <p>({{ object.date_from|date:"d.m.Y" }} - {{ object.date_to|date:"d.m.Y" }})</p>
+        <p>({{ object.date_from|date:"d.m.Y" }}
+            - {{ object.date_to|date:"d.m.Y" }})</p>
     </div>
     <div class="col-md-8 text-right">
         {% if object.trend %}
@@ -33,7 +34,8 @@
 
     <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
         {% if object.image %}
-            <img src="{{ object.image.url }}" alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
+            <img src="{{ object.image.url }}"
+                 alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
         {% endif %}
     </div>
     <hr>

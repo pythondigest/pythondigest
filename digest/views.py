@@ -43,7 +43,8 @@ class IssuesList(CacheMixin, ListView):
         return context
 
 
-class IssueView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin, DetailView):
+class IssueView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin,
+                DetailView):
     """Просмотр выпуска."""
     template_name = 'digest/pages/issue.html'
     model = Issue

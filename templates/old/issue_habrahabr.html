@@ -1,11 +1,18 @@
 {% load thumbnail %}
-{% thumbnail object.image '350x350' as im %}<img src="http://pythondigest.ru{{ im.url }}" align="left" alt="">{% endthumbnail %} {{ object.description|safe }}
+{% thumbnail object.image '350x350' as im %}
+    <img src="http://pythondigest.ru{{ im.url }}" align="left"
+         alt="">{% endthumbnail %} {{ object.description|safe }}
 {% regroup items by section as groups %}
-{% for data in groups %}<br><h2>{% if data.grouper.icon %}{{ data.grouper.icon|safe }}{% endif %} {{ data.grouper.title }}</h2><br>
-<ul>
-{% for item in data.list%}
-<li>{% if item.language == 'ru' %} <img src="http://habr.habrastorage.org/post_images/893/6b3/cdf/8936b3cdf907df5d4a1ff64c9b4aaf29.jpg"/>{% endif %} <a href="{{ item.link }}">{{ item.title }}</a>
-{% if item.description %}<p>{{ item.description|default:''|safe }}</p>{% endif %}</li>
-{% endfor %}
-</ul>
+{% for data in groups %}<br><h2>{% if data.grouper.icon %}
+    {{ data.grouper.icon|safe }}{% endif %} {{ data.grouper.title }}</h2><br>
+    <ul>
+        {% for item in data.list %}
+            <li>{% if item.language == 'ru' %}
+                <img src="http://habr.habrastorage.org/post_images/893/6b3/cdf/8936b3cdf907df5d4a1ff64c9b4aaf29.jpg"/>{% endif %}
+                <a href="{{ item.link }}">{{ item.title }}</a>
+                {% if item.description %}
+                    <p>{{ item.description|default:''|safe }}</p>{% endif %}
+            </li>
+        {% endfor %}
+    </ul>
 {% endfor %}

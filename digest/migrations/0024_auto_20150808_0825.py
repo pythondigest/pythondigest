@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0023_item_to_update'), ]
 
     operations = [migrations.AlterField(
@@ -13,7 +12,8 @@ class Migration(migrations.Migration):
         name='if_element',
         field=models.CharField(choices=[('title', 'Заголовок новости'), (
             'link', 'Url новости'), ('content', 'Текст новости'), (
-                'description', 'Описание новости'), ('http_code', 'HTTP Code')],
-            verbose_name='Элемент условия',
-            max_length=255,
-            default='item_title'), ), ]
+                                            'description', 'Описание новости'),
+                                        ('http_code', 'HTTP Code')],
+                               verbose_name='Элемент условия',
+                               max_length=255,
+                               default='item_title'), ), ]

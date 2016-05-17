@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0043_auto_20160503_2051'),
     ]
@@ -15,28 +14,38 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='autoimportresource',
             name='type_res',
-            field=models.CharField(choices=[('twitter', 'Twitter feed'), ('rss', 'RSS feed')], default='twitter', max_length=255, verbose_name='Type'),
+            field=models.CharField(
+                choices=[('twitter', 'Twitter feed'), ('rss', 'RSS feed')],
+                default='twitter', max_length=255, verbose_name='Type'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='announcement',
-            field=models.TextField(blank=True, default='', verbose_name='Announcement'),
+            field=models.TextField(blank=True, default='',
+                                   verbose_name='Announcement'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='issue',
             name='description',
-            field=models.TextField(blank=True, default='', verbose_name='Description'),
+            field=models.TextField(blank=True, default='',
+                                   verbose_name='Description'),
             preserve_default=False,
         ),
         migrations.AlterField(
             model_name='item',
             name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('active', 'Active'), ('draft', 'Draft'), ('moderated', 'Moderated'), ('autoimport', 'Imported'), ('queue', 'In queue')], default='pending', max_length=10, verbose_name='Status'),
+            field=models.CharField(
+                choices=[('pending', 'Pending'), ('active', 'Active'),
+                         ('draft', 'Draft'), ('moderated', 'Moderated'),
+                         ('autoimport', 'Imported'), ('queue', 'In queue')],
+                default='pending', max_length=10, verbose_name='Status'),
         ),
         migrations.AlterField(
             model_name='section',
             name='status',
-            field=models.CharField(choices=[('pending', 'Pending'), ('active', 'Active')], default='active', max_length=10, verbose_name='Status'),
+            field=models.CharField(
+                choices=[('pending', 'Pending'), ('active', 'Active')],
+                default='active', max_length=10, verbose_name='Status'),
         ),
     ]

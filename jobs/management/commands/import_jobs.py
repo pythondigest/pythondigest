@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
+from datetime import datetime, date, timedelta
 from functools import partial
 from time import mktime
-from datetime import datetime, date, timedelta
 
-from django.core.management.base import BaseCommand
 import feedparser
-
+from django.core.management.base import BaseCommand
 from funcy import join
 
 from jobs.models import JobFeed, JobItem, RejectedList, AcceptedList
@@ -14,7 +14,7 @@ from jobs.utils import HhVacancyManager
 
 
 def prepare_link_title(
-        item: feedparser.FeedParserDict) -> feedparser.FeedParserDict:
+    item: feedparser.FeedParserDict) -> feedparser.FeedParserDict:
     """
     Для RSS Item возвращает ссылку, заголовок и описание
     :param item:

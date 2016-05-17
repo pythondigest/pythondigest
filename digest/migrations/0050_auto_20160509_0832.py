@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0049_auto_20160509_0828'),
     ]
@@ -15,6 +14,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='item',
             name='additionally',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Additional info'),
+            field=models.CharField(blank=True, max_length=255, null=True,
+                                   verbose_name='Additional info'),
         ),
     ]

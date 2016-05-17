@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import migrations
-from django.db import models
-
 import concurrency.fields
+from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0006_auto_20150113_1001'), ]
 
     operations = [migrations.DeleteModel(name='IssueHabr', ),

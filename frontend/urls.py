@@ -4,7 +4,8 @@ from frontend.views import IndexView, Sitemap, FriendsView
 from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
     ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
     ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
-    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, RawEntriesFeed
+    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, \
+    RawEntriesFeed
 
 app_name = 'frontend'
 urlpatterns = [

@@ -6,5 +6,6 @@
 
 {% block body %}
     <h1>{% trans "Email confirmed" %}</h1>
-    <p>{% blocktrans with email=confirmation.email_address.email %}You have confirmed <b>{{ email }}</b>{% endblocktrans %}</p>
+    <p>{% blocktrans with email=confirmation.email_address.email %}You have
+        confirmed <b>{{ email }}</b>{% endblocktrans %}</p>
 {% endblock %}
