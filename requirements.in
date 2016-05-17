@@ -1,0 +1,69 @@
+# django and django misc
+Django
+django-concurrency
+django-rosetta
+django-bootstrap-form
+django-digg-paginator
+django-user-accounts
+django-taggit
+django-taggit-autosuggest
+django-modeladmin-reorder
+django-ckeditor
+django-q
+django-siteblocks
+django-cachalot
+
+# django-controlcenter
+git+https://github.com/byashimov/django-controlcenter.git
+
+django_compressor
+django-htmlmin
+
+# django-secretballot
+# django-likes
+git+https://github.com/WarmongeR1/django-likes
+git+https://github.com/WarmongeR1/django-secretballot.git
+django-debug-toolbar
+django-remdow
+
+
+python-memcached
+
+# common
+requests
+lxml
+PyYAML
+
+
+# news parsing
+beautifulsoup4
+feedparser
+Pillow
+pygoogle-simple
+pytils
+sorl-thumbnail
+stem
+URLObject
+readability-lxml
+allmychanges
+micawber
+unidecode
+
+
+# users
+python-social-auth==0.2.14
+
+# bot
+twx.botapi
+google-api-python-client
+tweepy
+vk
+
+# tests
+tox
+mock
+
+# other
+typing
+funcy
+Fabric

@@ -52,16 +52,19 @@ INSTALLED_APPS = (
 
     'siteblocks',
 
-)
+    'cachalot',
 
-if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar',)
+)
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-MIDDLEWARE_CLASSES = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+if DEBUG:
+    MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+else:
+    MIDDLEWARE_CLASSES = ()
+
+MIDDLEWARE_CLASSES += (
     'django.middleware.cache.UpdateCacheMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,10 +79,8 @@ MIDDLEWARE_CLASSES = (
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     'admin_reorder.middleware.ModelAdminReorder',
-
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
-    "likes.middleware.SecretBallotUserIpUseragentMiddleware",
-
+    'likes.middleware.SecretBallotUserIpUseragentMiddleware',
 )
 
 ROOT_URLCONF = 'conf.urls'
@@ -386,7 +387,6 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
 )
 
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
 HTML_MINIFY = True
 try:
     from .local_settings import *
@@ -395,3 +395,23 @@ except ImportError as e:
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)
+
+if DEBUG:
+    INSTALLED_APPS += ('debug_toolbar',)
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+    DEBUG_TOOLBAR_PANELS = [
+        'cachalot.panels.CachalotPanel',
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+        'debug_toolbar.panels.profiling.ProfilingPanel',
+    ]
