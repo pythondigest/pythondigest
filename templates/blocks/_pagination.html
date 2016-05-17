@@ -1,32 +1,35 @@
 {% load common %}
 {% if is_paginated %}
-<div class="container" align="center">
-    <ul class="pagination pagination-sm">
-    {% if page_obj.has_previous %}
-        <li><a href="{% modify_url 'set_query_param' 'page' page_obj.previous_page_number %}">&larr;</a>
-    {% else %}
-        <li class="disabled"><a>&larr;</a>
-    {% endif %}
+    <div class="container" align="center">
+        <ul class="pagination pagination-sm">
+            {% if page_obj.has_previous %}
+                <li>
+                    <a href="{% modify_url 'set_query_param' 'page' page_obj.previous_page_number %}">&larr;</a>
+                    {% else %}
+                <li class="disabled"><a>&larr;</a>
+            {% endif %}
 
-    {% for num in page_obj.page_range %}
-       <li {% if num == page_obj.number %}class="active"{% endif %}>
-       {% if not num %}<li class="disabled"><a>...</a>
-       {% else %}
-        {% if num == page_obj.number %}
-        <a>{{ num }}</a>
-        {% else %}
-        <a href="{% modify_url 'set_query_param' 'page' num %}">{{ num }}</a>
-        {% endif %}
-       {% endif %}
-       </li>
-    {% endfor %}
+            {% for num in page_obj.page_range %}
+                <li {% if num == page_obj.number %}class="active"{% endif %}>
+                {% if not num %}
+                    <li class="disabled"><a>...</a>
+                {% else %}
+                    {% if num == page_obj.number %}
+                        <a>{{ num }}</a>
+                    {% else %}
+                        <a href="{% modify_url 'set_query_param' 'page' num %}">{{ num }}</a>
+                    {% endif %}
+                {% endif %}
+            </li>
+            {% endfor %}
 
-    {% if page_obj.has_next %}
-        <li><a href="{% modify_url 'set_query_param' 'page' page_obj.next_page_number %}">&rarr;</a>
-    {% else %}
-        <li class="disabled"><a>&rarr;</a>
-    {% endif %}
-    </ul>
+            {% if page_obj.has_next %}
+                <li>
+                    <a href="{% modify_url 'set_query_param' 'page' page_obj.next_page_number %}">&rarr;</a>
+                    {% else %}
+                <li class="disabled"><a>&rarr;</a>
+            {% endif %}
+        </ul>
 
-</div>
+    </div>
 {% endif %}

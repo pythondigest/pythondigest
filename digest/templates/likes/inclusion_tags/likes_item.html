@@ -2,7 +2,8 @@
 {% load staticfiles %}
 {% load compress %}
 {% if import_js %}
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 {% endif %}
 
 
@@ -21,7 +22,8 @@
         </a>
 
         <a class="liker btn btn-xs" type="button"
-           href="{% url "like" content_type content_obj.id -1 %}" rel="nofollow">
+           href="{% url "like" content_type content_obj.id -1 %}"
+           rel="nofollow">
             <big>
                 <i title="Не одобряю"
                    class="fa fa-thumbs-o-down">

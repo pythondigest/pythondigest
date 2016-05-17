@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 import django.dispatch
 
-
 # Сигнализирует о добавлении новой сущности.
 sig_entity_new = django.dispatch.Signal(providing_args=['entity'])
 

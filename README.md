@@ -7,6 +7,8 @@ python-news-digest
 [![Code Health](https://landscape.io/github/pythondigest/pythondigest/master/landscape.svg?style=flat)](https://landscape.io/github/pythondigest/pythondigest/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pythondigest/pythondigest/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pythondigest/pythondigest/?branch=master)
 [![Code Issues](https://www.quantifiedcode.com/api/v1/project/965ef841bdca428492ec06d4f018d360/badge.svg)](https://www.quantifiedcode.com/app/project/965ef841bdca428492ec06d4f018d360)
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
+
 
 What is it?
 -----------
@@ -83,4 +85,11 @@ For developers:
 python manage.py loaddata digest/fixtures/dev_issues.yaml
 python manage.py loaddata digest/fixtures/dev_resource.yaml
 python manage.py loaddata digest/fixtures/dev_items.yaml
+```
+
+Run tests
+---------
+
+```
+python manage.py test
 ```

@@ -15,13 +15,15 @@
 
                                 <div class="issue-title">
                                     {{ item.title }}
-                                    <div class="issue-date">({{ item.date_from|date:"d.m.Y" }}
+                                    <div class="issue-date">
+                                        ({{ item.date_from|date:"d.m.Y" }}
                                         - {{ item.date_to|date:"d.m.Y" }})
                                     </div>
                                 </div>
 
                                 <div class="issue-img">
-                                    <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
+                                    <img src="{{ im.url }}"
+                                         alt="Дайджест python, {{ item.title }}">
                                 </div>
 
                             </div>

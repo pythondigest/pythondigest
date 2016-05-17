@@ -13,6 +13,7 @@ install:
 branches:
  only:
   - master
+  - develop
 
 script: coverage run --omit=/**env/** manage.py test
 

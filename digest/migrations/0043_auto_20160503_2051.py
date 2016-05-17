@@ -3,13 +3,13 @@
 from __future__ import unicode_literals
 
 import datetime
+
+import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0042_auto_20160401_1509'),
     ]
@@ -17,11 +17,13 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='autoimportresource',
-            options={'verbose_name': 'News source', 'verbose_name_plural': 'News sources'},
+            options={'verbose_name': 'News source',
+                     'verbose_name_plural': 'News sources'},
         ),
         migrations.AlterModelOptions(
             name='issue',
-            options={'ordering': ['-pk'], 'verbose_name': 'Issue of digest', 'verbose_name_plural': 'Issues of digest'},
+            options={'ordering': ['-pk'], 'verbose_name': 'Issue of digest',
+                     'verbose_name_plural': 'Issues of digest'},
         ),
         migrations.AlterModelOptions(
             name='item',
@@ -29,23 +31,28 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='itemclscheck',
-            options={'verbose_name': 'Classifier analysis', 'verbose_name_plural': 'Classifier analysis'},
+            options={'verbose_name': 'Classifier analysis',
+                     'verbose_name_plural': 'Classifier analysis'},
         ),
         migrations.AlterModelOptions(
             name='package',
-            options={'verbose_name': 'Package', 'verbose_name_plural': 'Packages'},
+            options={'verbose_name': 'Package',
+                     'verbose_name_plural': 'Packages'},
         ),
         migrations.AlterModelOptions(
             name='parsingrules',
-            options={'ordering': ['-weight'], 'verbose_name': 'Processing rule', 'verbose_name_plural': 'Processing rules'},
+            options={'ordering': ['-weight'], 'verbose_name': 'Processing rule',
+                     'verbose_name_plural': 'Processing rules'},
         ),
         migrations.AlterModelOptions(
             name='resource',
-            options={'verbose_name': 'Resource', 'verbose_name_plural': 'Resources'},
+            options={'verbose_name': 'Resource',
+                     'verbose_name_plural': 'Resources'},
         ),
         migrations.AlterModelOptions(
             name='section',
-            options={'ordering': ['-pk'], 'verbose_name': 'Section', 'verbose_name_plural': 'Sections'},
+            options={'ordering': ['-pk'], 'verbose_name': 'Section',
+                     'verbose_name_plural': 'Sections'},
         ),
         migrations.RemoveField(
             model_name='autoimportresource',
@@ -94,7 +101,8 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='autoimportresource',
             name='title',
-            field=models.CharField(default='example', max_length=255, verbose_name='Title'),
+            field=models.CharField(default='example', max_length=255,
+                                   verbose_name='Title'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -105,24 +113,29 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='package',
             name='link',
-            field=models.URLField(default='google.ru', max_length=255, verbose_name='URL'),
+            field=models.URLField(default='google.ru', max_length=255,
+                                  verbose_name='URL'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='parsingrules',
             name='title',
-            field=models.CharField(default='google.ru', max_length=255, verbose_name='Title'),
+            field=models.CharField(default='google.ru', max_length=255,
+                                   verbose_name='Title'),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='section',
             name='icon',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Icon'),
+            field=models.CharField(blank=True, max_length=255, null=True,
+                                   verbose_name='Icon'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='excl',
-            field=models.TextField(blank=True, help_text='List of exceptions, indicate by ", "', null=True, verbose_name='Exceptions'),
+            field=models.TextField(blank=True,
+                                   help_text='List of exceptions, indicate by ", "',
+                                   null=True, verbose_name='Exceptions'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
@@ -132,67 +145,88 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='autoimportresource',
             name='incl',
-            field=models.CharField(blank=True, help_text='Условие отбора новостей <br />                    Включение вида [text] <br />                    Включение при выводе будет удалено', max_length=255, null=True, verbose_name='Required content'),
+            field=models.CharField(blank=True,
+                                   help_text='Условие отбора новостей <br />                    Включение вида [text] <br />                    Включение при выводе будет удалено',
+                                   max_length=255, null=True,
+                                   verbose_name='Required content'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='language',
-            field=models.CharField(choices=[('ru', 'Russian'), ('en', 'English')], default='en', max_length=2, verbose_name='Language of content'),
+            field=models.CharField(
+                choices=[('ru', 'Russian'), ('en', 'English')], default='en',
+                max_length=2, verbose_name='Language of content'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='link',
-            field=models.URLField(max_length=255, unique=True, verbose_name='URL'),
+            field=models.URLField(max_length=255, unique=True,
+                                  verbose_name='URL'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='resource',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='digest.Resource', verbose_name='Source'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    to='digest.Resource',
+                                    verbose_name='Source'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='type_res',
-            field=models.CharField(choices=[('twitter', 'Сообщения аккаунтов в твиттере'), ('rss', 'RSS фид')], default='twitter', max_length=255, verbose_name='Type'),
+            field=models.CharField(
+                choices=[('twitter', 'Сообщения аккаунтов в твиттере'),
+                         ('rss', 'RSS фид')], default='twitter', max_length=255,
+                verbose_name='Type'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='announcement',
-            field=models.TextField(blank=True, null=True, verbose_name='Announcement'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Announcement'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='date_from',
-            field=models.DateField(blank=True, null=True, verbose_name='Start date'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='Start date'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='date_to',
-            field=models.DateField(blank=True, null=True, verbose_name='End date'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='End date'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Description'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='issues', verbose_name='Image'),
+            field=models.ImageField(blank=True, null=True, upload_to='issues',
+                                    verbose_name='Image'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='last_item',
-            field=models.IntegerField(blank=True, null=True, verbose_name='Latest moderated Item'),
+            field=models.IntegerField(blank=True, null=True,
+                                      verbose_name='Latest moderated Item'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='published_at',
-            field=models.DateField(blank=True, null=True, verbose_name='Publication date'),
+            field=models.DateField(blank=True, null=True,
+                                   verbose_name='Publication date'),
         ),
         migrations.AlterField(
             model_name='issue',
             name='status',
-            field=models.CharField(choices=[('active', 'Active'), ('draft', 'Draft')], default='draft', max_length=10, verbose_name='Status'),
+            field=models.CharField(
+                choices=[('active', 'Active'), ('draft', 'Draft')],
+                default='draft', max_length=10, verbose_name='Status'),
         ),
         migrations.AlterField(
             model_name='issue',
@@ -202,47 +236,59 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='issue',
             name='trend',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Trend'),
+            field=models.CharField(blank=True, max_length=255, null=True,
+                                   verbose_name='Trend'),
         ),
         migrations.AlterField(
             model_name='item',
             name='activated_at',
-            field=models.DateTimeField(default=datetime.datetime.now, verbose_name='Activated date'),
+            field=models.DateTimeField(default=datetime.datetime.now,
+                                       verbose_name='Activated date'),
         ),
         migrations.AlterField(
             model_name='item',
             name='additionally',
-            field=models.CharField(blank=True, max_length=255, null=True, verbose_name='Additional info'),
+            field=models.CharField(blank=True, max_length=255, null=True,
+                                   verbose_name='Additional info'),
         ),
         migrations.AlterField(
             model_name='item',
             name='article_path',
-            field=models.FilePathField(blank=True, null=True, verbose_name='Article path'),
+            field=models.FilePathField(blank=True, null=True,
+                                       verbose_name='Article path'),
         ),
         migrations.AlterField(
             model_name='item',
             name='created_at',
-            field=models.DateField(auto_now_add=True, verbose_name='Created date'),
+            field=models.DateField(auto_now_add=True,
+                                   verbose_name='Created date'),
         ),
         migrations.AlterField(
             model_name='item',
             name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Description'),
         ),
         migrations.AlterField(
             model_name='item',
             name='is_editors_choice',
-            field=models.BooleanField(default=False, verbose_name='Is editors choice'),
+            field=models.BooleanField(default=False,
+                                      verbose_name='Is editors choice'),
         ),
         migrations.AlterField(
             model_name='item',
             name='issue',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='digest.Issue', verbose_name='Issue of digest'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    to='digest.Issue',
+                                    verbose_name='Issue of digest'),
         ),
         migrations.AlterField(
             model_name='item',
             name='language',
-            field=models.CharField(choices=[('ru', 'Russian'), ('en', 'English')], default='en', max_length=2, verbose_name='Язык новости'),
+            field=models.CharField(
+                choices=[('ru', 'Russian'), ('en', 'English')], default='en',
+                max_length=2, verbose_name='Язык новости'),
         ),
         migrations.AlterField(
             model_name='item',
@@ -252,32 +298,46 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='item',
             name='modified_at',
-            field=models.DateTimeField(blank=True, null=True, verbose_name='modified date'),
+            field=models.DateTimeField(blank=True, null=True,
+                                       verbose_name='modified date'),
         ),
         migrations.AlterField(
             model_name='item',
             name='priority',
-            field=models.PositiveIntegerField(default=0, verbose_name='Priority'),
+            field=models.PositiveIntegerField(default=0,
+                                              verbose_name='Priority'),
         ),
         migrations.AlterField(
             model_name='item',
             name='related_to_date',
-            field=models.DateField(default=datetime.datetime.today, help_text='For example, publication date of the news on the source', verbose_name='Date'),
+            field=models.DateField(default=datetime.datetime.today,
+                                   help_text='For example, publication date of the news on the source',
+                                   verbose_name='Date'),
         ),
         migrations.AlterField(
             model_name='item',
             name='resource',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='digest.Resource', verbose_name='Resource'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    to='digest.Resource',
+                                    verbose_name='Resource'),
         ),
         migrations.AlterField(
             model_name='item',
             name='section',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='digest.Section', verbose_name='Section'),
+            field=models.ForeignKey(blank=True, null=True,
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    to='digest.Section',
+                                    verbose_name='Section'),
         ),
         migrations.AlterField(
             model_name='item',
             name='status',
-            field=models.CharField(choices=[('pending', 'На рассмотрении'), ('active', 'Активная'), ('draft', 'Черновик'), ('moderated', 'Рассмотрена'), ('autoimport', 'Автоимпорт'), ('queue', 'В очереди')], default='pending', max_length=10, verbose_name='Status'),
+            field=models.CharField(
+                choices=[('pending', 'На рассмотрении'), ('active', 'Активная'),
+                         ('draft', 'Черновик'), ('moderated', 'Рассмотрена'),
+                         ('autoimport', 'Автоимпорт'), ('queue', 'В очереди')],
+                default='pending', max_length=10, verbose_name='Status'),
         ),
         migrations.AlterField(
             model_name='item',
@@ -287,22 +347,29 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='item',
             name='user',
-            field=models.ForeignKey(blank=True, editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Who added item'),
+            field=models.ForeignKey(blank=True, editable=False, null=True,
+                                    on_delete=django.db.models.deletion.CASCADE,
+                                    to=settings.AUTH_USER_MODEL,
+                                    verbose_name='Who added item'),
         ),
         migrations.AlterField(
             model_name='itemclscheck',
             name='item',
-            field=models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='digest.Item', verbose_name='News'),
+            field=models.OneToOneField(
+                on_delete=django.db.models.deletion.CASCADE, to='digest.Item',
+                verbose_name='News'),
         ),
         migrations.AlterField(
             model_name='itemclscheck',
             name='last_check',
-            field=models.DateTimeField(auto_now=True, verbose_name='Last check time'),
+            field=models.DateTimeField(auto_now=True,
+                                       verbose_name='Last check time'),
         ),
         migrations.AlterField(
             model_name='package',
             name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Description'),
         ),
         migrations.AlterField(
             model_name='package',
@@ -312,12 +379,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='parsingrules',
             name='if_action',
-            field=models.CharField(choices=[('equal', 'Равен'), ('contains', 'Содержит'), ('not_equal', 'Не равен'), ('regex', 'Regex match')], default='consist', max_length=255, verbose_name='IF condition'),
+            field=models.CharField(
+                choices=[('equal', 'Равен'), ('contains', 'Содержит'),
+                         ('not_equal', 'Не равен'), ('regex', 'Regex match')],
+                default='consist', max_length=255, verbose_name='IF condition'),
         ),
         migrations.AlterField(
             model_name='parsingrules',
             name='if_element',
-            field=models.CharField(choices=[('title', 'Заголовок новости'), ('link', 'Url новости'), ('content', 'Текст новости'), ('description', 'Описание новости'), ('http_code', 'HTTP Code')], default='item_title', max_length=255, verbose_name='IF element'),
+            field=models.CharField(choices=[('title', 'Заголовок новости'),
+                                            ('link', 'Url новости'),
+                                            ('content', 'Текст новости'),
+                                            ('description', 'Описание новости'),
+                                            ('http_code', 'HTTP Code')],
+                                   default='item_title', max_length=255,
+                                   verbose_name='IF element'),
         ),
         migrations.AlterField(
             model_name='parsingrules',
@@ -332,12 +408,22 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='parsingrules',
             name='then_action',
-            field=models.CharField(choices=[('set', 'Установить'), ('add', 'Добавить'), ('remove', 'Удалить часть строки')], default='item_title', max_length=255, verbose_name='THEN action'),
+            field=models.CharField(
+                choices=[('set', 'Установить'), ('add', 'Добавить'),
+                         ('remove', 'Удалить часть строки')],
+                default='item_title', max_length=255,
+                verbose_name='THEN action'),
         ),
         migrations.AlterField(
             model_name='parsingrules',
             name='then_element',
-            field=models.CharField(choices=[('title', 'Заголовок новости'), ('description', 'Описание новости'), ('section', 'Раздел'), ('status', 'Статус'), ('tags', 'Тэг новости')], default='item_title', max_length=255, verbose_name='THEN element'),
+            field=models.CharField(choices=[('title', 'Заголовок новости'),
+                                            ('description', 'Описание новости'),
+                                            ('section', 'Раздел'),
+                                            ('status', 'Статус'),
+                                            ('tags', 'Тэг новости')],
+                                   default='item_title', max_length=255,
+                                   verbose_name='THEN element'),
         ),
         migrations.AlterField(
             model_name='parsingrules',
@@ -347,7 +433,8 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='resource',
             name='description',
-            field=models.TextField(blank=True, null=True, verbose_name='Description'),
+            field=models.TextField(blank=True, null=True,
+                                   verbose_name='Description'),
         ),
         migrations.AlterField(
             model_name='resource',
@@ -362,12 +449,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='section',
             name='priority',
-            field=models.PositiveIntegerField(default=0, verbose_name='Priority'),
+            field=models.PositiveIntegerField(default=0,
+                                              verbose_name='Priority'),
         ),
         migrations.AlterField(
             model_name='section',
             name='status',
-            field=models.CharField(choices=[('pending', 'Ожидает проверки'), ('active', 'Активный')], default='active', max_length=10, verbose_name='Status'),
+            field=models.CharField(choices=[('pending', 'Ожидает проверки'),
+                                            ('active', 'Активный')],
+                                   default='active', max_length=10,
+                                   verbose_name='Status'),
         ),
         migrations.AlterField(
             model_name='section',

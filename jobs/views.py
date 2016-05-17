@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from digg_paginator import DiggPaginator
 from django.db.models import Q
 from django.views.generic import ListView
-from digg_paginator import DiggPaginator
 
 from jobs.models import JobItem
 

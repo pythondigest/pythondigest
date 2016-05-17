@@ -41,7 +41,8 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('cnt_parts', type=int)  # сколько частей
         parser.add_argument('percent', type=int)  # сколько частей
-        parser.add_argument('dataset_folder', type=str)  # ссылка на дополнительный датасет для объединения
+        parser.add_argument('dataset_folder',
+                            type=str)  # ссылка на дополнительный датасет для объединения
 
     def handle(self, *args, **options):
 
@@ -80,5 +81,9 @@ class Command(BaseCommand):
         for part in range(options['cnt_parts']):
             train_name = 'train_{0}_{1}.json'.format(train_part_size, part)
             test_name = 'test_{0}_{1}.json'.format(test_part_size, part)
-            save_dataset(train_set[part * train_part_size: (part + 1) * train_part_size], train_name)
-            save_dataset(test_set[part * test_part_size: (part + 1) * test_part_size], test_name)
+            save_dataset(
+                train_set[part * train_part_size: (part + 1) * train_part_size],
+                train_name)
+            save_dataset(
+                test_set[part * test_part_size: (part + 1) * test_part_size],
+                test_name)

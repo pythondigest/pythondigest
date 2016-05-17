@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0011_auto_20150730_0556'), ]
 
     operations = [migrations.AlterField(
@@ -17,5 +16,6 @@ class Migration(migrations.Migration):
             verbose_name='\u0423\u0441\u043b\u043e\u0432\u0438\u0435',
             choices=[(b'equal', '\u0420\u0430\u0432\u0435\u043d'), (
                 b'contains', '\u0421\u043e\u0434\u0435\u0440\u0436\u0438\u0442'
-            ), (b'not_equal', '\u041d\u0435 \u0440\u0430\u0432\u0435\u043d')]), ),
+            ), (b'not_equal',
+                '\u041d\u0435 \u0440\u0430\u0432\u0435\u043d')]), ),
     ]

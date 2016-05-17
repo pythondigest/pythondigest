@@ -7,19 +7,23 @@
 <!DOCTYPE html>
 <html lang="{% locale %}">
 <head>
-    <title>{% block page_title %}Дайджест новостей о python{% endblock %}{% block head_title %}{% endblock %}</title>
+    <title>{% block page_title %}Дайджест новостей о python{% endblock %}
+        {% block head_title %}{% endblock %}</title>
     <meta name="description"
           content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение{% endblock %}">
     <meta name="keywords"
-          content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
+          content="питон, python, django, flask, новости о python,
+                  {% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
-    <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
+    <meta name="google-site-verification"
+          content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
     <link rel="alternate" type="application/rss+xml" title="RSS"
           href="{% block rss_url %}{% url 'frontend:rss' %}{% endblock %}"/>
     {% block viewport %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1">
     {% endblock %}
 
 
@@ -41,14 +45,17 @@
             <![endif]-->
     {% endblock %}
 
-    <script type="text/javascript" async src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" async
+            src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}"
+<body class="{% block body_class %}{% endblock %}"
+      id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
 
 {% block nav_bar %}
@@ -103,13 +110,15 @@
 <!-- /container -->
 
 
-
-<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 {% compress js %}
-    <script type="text/javascript" src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
     {% if likes_enable %}
-        <script type="text/javascript" src="{% static 'likes/includes/likes.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'likes/includes/likes.js' %}"></script>
     {% endif %}
 {% endcompress %}
 
@@ -172,13 +181,15 @@
         }
     })(document, window, "yandex_metrika_callbacks"); </script>
     <noscript>
-        <div><img src="https://mc.yandex.ru/watch/36284495" style="position:absolute; left:-9999px;"
+        <div><img src="https://mc.yandex.ru/watch/36284495"
+                  style="position:absolute; left:-9999px;"
                   alt="Yandex counter"/></div>
     </noscript> <!-- /Yandex.Metrika counter -->
 {% endif %}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"></script>
+<script type="text/javascript"
+        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"></script>
 
 
 {% block scripts %}{% endblock %}

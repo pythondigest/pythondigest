@@ -16,7 +16,8 @@
             <div class="index-description-content sidebar-module-inset">
                 <br>
                 Мы не размещаем новости откровенно рекламного характера<br>
-                Ссылки на платные ресурсы размещаются за деньги, пишите на email: <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a><br>
+                Ссылки на платные ресурсы размещаются за деньги, пишите на
+                email: <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a><br>
                 <br>
             </div>
 
@@ -31,7 +32,9 @@
                 {% for field in form %}
                     <div class="form-group {% if field.errors %}has-error{% endif %}"
                          {% if field.is_hidden %}style="display: none" {% endif %}>
-                        <label class="control-label">{{ field.label }}{% if field.field.required %}*{% endif %}</label>
+                        <label class="control-label">
+                            {{ field.label }}{% if field.field.required %}
+                                *{% endif %}</label>
                         <div class="error">{{ field.errors }}</div>
                         {{ field }}
                     </div>

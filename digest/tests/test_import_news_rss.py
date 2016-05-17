@@ -5,7 +5,8 @@ from functools import partial
 from django.test import TestCase
 from mock import patch
 
-from digest.management.commands.import_news import get_items_from_rss, _is_old_rss_news, is_not_exists_rss_item
+from digest.management.commands.import_news import get_items_from_rss, \
+    _is_old_rss_news, is_not_exists_rss_item
 from digest.models import AutoImportResource, Item, Section
 from digest.utils import MockResponse
 from digest.utils import read_fixture
@@ -45,12 +46,21 @@ class ImportRSSTest(TestCase):
     def test_filter_exists_news(self):
         rss_items = get_items_from_rss(self.res_rss.link)
 
-        Item(title=rss_items[0]['title'], link=rss_items[0]['link'], section=self.section).save()
-        Item(title=rss_items[1]['title'], link=rss_items[1]['link'], section=self.section).save()
-        Item(title=rss_items[2]['title'], link=rss_items[2]['link'], section=self.section).save()
-        Item(title=rss_items[3]['title'], link=rss_items[3]['link'], section=self.section).save()
-        Item(title=rss_items[4]['title'], link=rss_items[4]['link'], related_to_date=datetime.date(2005, 7, 14), section=self.section).save()
-        Item(title=rss_items[5]['title'], link=rss_items[5]['link'], related_to_date=datetime.date(2016, 4, 12), section=self.section).save()
+        Item(title=rss_items[0]['title'], link=rss_items[0]['link'],
+             section=self.section).save()
+        Item(title=rss_items[1]['title'], link=rss_items[1]['link'],
+             section=self.section).save()
+        Item(title=rss_items[2]['title'], link=rss_items[2]['link'],
+             section=self.section).save()
+        Item(title=rss_items[3]['title'], link=rss_items[3]['link'],
+             section=self.section).save()
+        Item(title=rss_items[4]['title'], link=rss_items[4]['link'],
+             related_to_date=datetime.date(2005, 7, 14),
+             section=self.section).save()
+        Item(title=rss_items[5]['title'], link=rss_items[5]['link'],
+             related_to_date=datetime.date(2016, 4, 12),
+             section=self.section).save()
 
-        fil = partial(is_not_exists_rss_item, minimum_date=datetime.date(2016, 4, 11))
+        fil = partial(is_not_exists_rss_item,
+                      minimum_date=datetime.date(2016, 4, 11))
         self.assertEqual(len(list(filter(fil, rss_items))), 20)

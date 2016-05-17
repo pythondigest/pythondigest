@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0041_auto_20160401_1403'),
     ]
@@ -15,11 +14,13 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='autoimportresource',
             name='link',
-            field=models.URLField(max_length=255, unique=True, verbose_name='Ссылка'),
+            field=models.URLField(max_length=255, unique=True,
+                                  verbose_name='Ссылка'),
         ),
         migrations.AlterField(
             model_name='autoimportresource',
             name='name',
-            field=models.CharField(max_length=255, unique=True, verbose_name='Название источника'),
+            field=models.CharField(max_length=255, unique=True,
+                                   verbose_name='Название источника'),
         ),
     ]

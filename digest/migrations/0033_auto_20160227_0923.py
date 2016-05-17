@@ -5,7 +5,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('digest', '0032_issue_announcement'),
     ]
@@ -24,6 +23,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='issue',
             name='trend',
-            field=models.CharField(blank=True, verbose_name='Тенденция недели', null=True, max_length=255),
+            field=models.CharField(blank=True, verbose_name='Тенденция недели',
+                                   null=True, max_length=255),
         ),
     ]

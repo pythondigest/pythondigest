@@ -10,9 +10,9 @@ class EditorMaterialAdmin(admin.ModelAdmin):
                     'created_at')
     search_fields = ('title', 'announce', 'contents')
     list_filter = ('status', 'user', 'section')
-    prepopulated_fields = {'slug': ('title', ), }
+    prepopulated_fields = {'slug': ('title',),}
 
-    radio_fields = {'section': admin.HORIZONTAL, 'status': admin.HORIZONTAL, }
+    radio_fields = {'section': admin.HORIZONTAL, 'status': admin.HORIZONTAL,}
 
     def link_html(self, obj):
         return '<a href="%s">читать</a>' % obj.link
@@ -32,7 +32,7 @@ admin.site.register(EditorMaterial, EditorMaterialAdmin)
 class TipAdmin(admin.ModelAdmin):
     list_display = ('text', 'active')
 
-    list_editable = ('active', )
+    list_editable = ('active',)
 
 
 admin.site.register(Tip, TipAdmin)

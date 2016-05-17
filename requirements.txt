@@ -60,6 +60,7 @@ vk==2.0.2
 
 # tests
 tox==2.3.1
+mock==2.0.0
 
 # other
 typing

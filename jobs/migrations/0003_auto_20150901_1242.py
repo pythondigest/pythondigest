@@ -5,7 +5,6 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('jobs', '0002_jobitem'),
     ]
@@ -14,8 +13,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='AcceptedList',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=255, verbose_name='Строка')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID',
+                                        primary_key=True, serialize=False)),
+                ('title',
+                 models.CharField(max_length=255, verbose_name='Строка')),
             ],
             options={
                 'verbose_name': 'Слисок одобрения',
@@ -25,8 +26,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RejectedList',
             fields=[
-                ('id', models.AutoField(auto_created=True, verbose_name='ID', primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=255, verbose_name='Строка')),
+                ('id', models.AutoField(auto_created=True, verbose_name='ID',
+                                        primary_key=True, serialize=False)),
+                ('title',
+                 models.CharField(max_length=255, verbose_name='Строка')),
             ],
             options={
                 'verbose_name': 'Слисок исключения',

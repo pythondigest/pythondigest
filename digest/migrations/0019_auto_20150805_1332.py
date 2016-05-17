@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [('digest', '0018_package'), ]
 
     operations = [
@@ -75,7 +74,7 @@ class Migration(migrations.Migration):
                 choices=[('pending', 'Ожидает рассмотрения'), (
                     'active', 'Активная'
                 ), ('draft', 'Черновик'), ('moderated', 'Отмодерировано'),
-                    ('autoimport', 'Добавлена автоимпортом')]), ),
+                         ('autoimport', 'Добавлена автоимпортом')]), ),
         migrations.AlterField(
             model_name='parsingrules',
             name='if_action',
@@ -94,8 +93,9 @@ class Migration(migrations.Migration):
                                    choices=[('title', 'Заголовок новости'), (
                                        'url', 'Url новости'
                                    ), ('content', 'Текст новости'), (
-                                       'description', 'Описание новости'
-                                   ), ('http_code', 'HTTP Code')]), ),
+                                                'description',
+                                                'Описание новости'
+                                            ), ('http_code', 'HTTP Code')]), ),
         migrations.AlterField(
             model_name='parsingrules',
             name='then_action',
