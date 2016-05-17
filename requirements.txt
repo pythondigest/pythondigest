@@ -10,6 +10,7 @@ django-taggit-autosuggest==0.2.8
 django-modeladmin-reorder==0.1.2
 django-ckeditor==5.0.3
 django-q==0.7.16
+django-siteblocks==0.5.0
 
 # django-controlcenter
 git+https://github.com/byashimov/django-controlcenter.git
