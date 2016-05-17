@@ -84,3 +84,10 @@ python manage.py loaddata digest/fixtures/dev_issues.yaml
 python manage.py loaddata digest/fixtures/dev_resource.yaml
 python manage.py loaddata digest/fixtures/dev_items.yaml
 ```
+
+Run tests
+---------
+
+```
+python manage.py test
+```
