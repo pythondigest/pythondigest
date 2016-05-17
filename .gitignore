@@ -4,10 +4,10 @@ local_settings.py
 db.sqlite
 logs/*
 .idea/
-.idea/*
 env/
 /conf/*.cfg
 *.cfg
+
 
 clean.bash
 fabfile/fabfile.py
