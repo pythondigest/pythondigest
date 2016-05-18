@@ -11,6 +11,7 @@ django-modeladmin-reorder==0.1.2
 django-ckeditor==5.0.3
 django-q==0.7.16
 django-siteblocks==0.5.0
+django-cachalot==1.2.1
 
 # django-controlcenter
 git+https://github.com/byashimov/django-controlcenter.git
