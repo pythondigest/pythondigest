@@ -16,6 +16,8 @@ from django.dispatch import receiver
 from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
 from django_q.tasks import async
+from django_remdow.templatetags.remdow import remdow_img_local, \
+    remdow_img_center, remdow_img_responsive, remdow_lazy_img
 from readability.readability import Document, Unparseable
 from taggit.models import TagBase, GenericTaggedItemBase
 from taggit_autosuggest.managers import TaggableManager
@@ -237,6 +239,10 @@ class Item(models.Model):
     keywords = TaggableManager(
         verbose_name=_('Keywords'), through=KeywordGFK, blank=True)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._disable_signals = False
+
     def save(self, *args, **kwargs):
         try:
             if self.issue is None and self.created_at is not None:
@@ -260,6 +266,15 @@ class Item(models.Model):
         except Exception as e:
             logger.error('Many issues are on one week: {0}'.format(e))
         super(Item, self).save(*args, **kwargs)
+
+    def save_without_signals(self):
+        """
+        This allows for updating the model from code running inside post_save()
+        signals without going into an infinite loop:
+        """
+        self._disable_signals = True
+        self.save()
+        self._disable_signals = False
 
     @property
     def cls_check(self):
@@ -500,14 +515,29 @@ class ParsingRules(models.Model):
 
 @receiver(post_save, sender=Item)
 def update_cls_score(instance, **kwargs):
-    try:
-        item = ItemClsCheck.objects.get(item=instance)
-        async(item.check_cls, False)
-        item.check_cls()
-    except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
-        item = ItemClsCheck(item=instance)
-        item.save()
-        async(item.check_cls, True)
+    if not instance._disable_signals:
+        try:
+            item = ItemClsCheck.objects.get(item=instance)
+            async(item.check_cls, False)
+            item.check_cls()
+        except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
+            item = ItemClsCheck(item=instance)
+            item.save()
+            async(item.check_cls, True)
+
+
+@receiver(post_save, sender=Item)
+def run_remdow(instance, **kwargs):
+    if not instance._disable_signals:
+        description = instance.description
+        if description is None:
+            description = ''
+        instance.description = \
+            remdow_lazy_img(
+                remdow_img_responsive(
+                    remdow_img_center(
+                        remdow_img_local(description))))
+        instance.save_without_signals()
 
 
 if likes_enable():
