@@ -24,7 +24,7 @@ django-htmlmin==0.9.1
 git+https://github.com/WarmongeR1/django-likes
 git+https://github.com/WarmongeR1/django-secretballot.git
 django-debug-toolbar==1.4
-django-remdow==0.0.5
+django-remdow==0.0.6
 
 
 python-memcached==1.57

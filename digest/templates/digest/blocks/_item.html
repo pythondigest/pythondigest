@@ -37,7 +37,7 @@
             {##}
             {#    </span>#}
 
-            <p class="issue-item-description">{{ item.description|default:''|img_local|img_center|img_responsive|img_lazy }}</p>
+            <p class="issue-item-description">{{ item.description|default:''|safe}}</p>
 
             {% if item.additionally or item.section == 'Видео' %}
                 {% include 'digest/blocks/_item_video.html' with link=item.additionally %}
