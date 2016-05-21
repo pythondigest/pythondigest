@@ -519,7 +519,6 @@ def update_cls_score(instance, **kwargs):
         try:
             item = ItemClsCheck.objects.get(item=instance)
             async(item.check_cls, False)
-            item.check_cls()
         except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
             item = ItemClsCheck(item=instance)
             item.save()
