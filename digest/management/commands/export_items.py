@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
@@ -25,4 +23,15 @@ class Command(BaseCommand):
         for entry in urls:
             query = query | Q(link__contains=entry)
 
-        create_dataset(Item.objects.exclude(query).order_by('?'), 'items.json')
+        # TODO make raw sql
+        active_news = Item.objects.filter(status='active').exclude(query)
+        links = active_news.all().values_list('link', flat=True).distinct()
+        non_active_news = Item.objects.exclude(link__in=links).exclude(query)
+
+        items_ids = list(active_news.values_list('id', flat=True))
+        items_ids.extend(non_active_news.values_list('id', flat=True))
+        items_ids = list(set(items_ids))
+
+        items = Item.objects.filter(id__in=items_ids)
+
+        create_dataset(items, 'items.json')
