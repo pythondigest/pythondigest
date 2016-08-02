@@ -5,8 +5,7 @@ import datetime
 import re
 from time import mktime
 
-from future.backports.urllib.error import URLError
-from urllib.error import HTTPError
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import feedparser
