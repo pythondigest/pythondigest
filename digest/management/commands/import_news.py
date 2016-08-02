@@ -4,13 +4,13 @@ from __future__ import unicode_literals
 import datetime
 import re
 from time import mktime
-
+from typing import List, Dict
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import feedparser
 from django.core.management.base import BaseCommand
-from typing import List, Dict
+from requests import TooManyRedirects
 
 from digest.management.commands import (
     apply_parsing_rules,
@@ -71,7 +71,7 @@ def import_tweets(**kwargs):
                     'query_rules') else {}
                 item_data.update(data)
             save_item(item_data)
-        except URLError:
+        except (URLError, TooManyRedirects):
             print(i)
 
 
@@ -156,7 +156,8 @@ def import_rss(**kwargs):
 
             # parse weekly digests
             digests_items = list(rss_items)
-            list(map(parse_weekly_digest, filter(is_weekly_digest, digests_items)))
+            list(map(parse_weekly_digest,
+                     filter(is_weekly_digest, digests_items)))
 
             resource = src.resource
             language = src.language
@@ -170,8 +171,9 @@ def import_rss(**kwargs):
                         'query_rules') else {})
                 rss_item.update(apply_video_rules(rss_item.copy()))
                 save_item(rss_item)
-        except URLError:
+        except (URLError, TooManyRedirects):
             print(src)
+
 
 def parsing(func):
     data = {
