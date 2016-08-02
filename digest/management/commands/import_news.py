@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import datetime
 import re
+import socket
 from time import mktime
 from typing import List, Dict
 from urllib.error import HTTPError, URLError
@@ -71,7 +72,7 @@ def import_tweets(**kwargs):
                     'query_rules') else {}
                 item_data.update(data)
             save_item(item_data)
-        except (URLError, TooManyRedirects):
+        except (URLError, TooManyRedirects, socket.timeout):
             print(i)
 
 
@@ -171,7 +172,7 @@ def import_rss(**kwargs):
                         'query_rules') else {})
                 rss_item.update(apply_video_rules(rss_item.copy()))
                 save_item(rss_item)
-        except (URLError, TooManyRedirects):
+        except (URLError, TooManyRedirects, socket.timeout):
             print(src)
 
 
