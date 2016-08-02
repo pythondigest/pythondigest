@@ -5,6 +5,9 @@ import datetime
 import re
 import socket
 from time import mktime
+
+from future.backports.urllib.error import URLError
+from urllib.error import HTTPError
 from typing import List, Dict
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
