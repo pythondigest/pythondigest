@@ -1,5 +1,5 @@
 # django and django misc
-Django
+Django<1.10
 django-concurrency
 django-rosetta
 django-bootstrap-form
@@ -14,26 +14,22 @@ django-siteblocks
 django-cachalot
 
 # django-controlcenter
-git+https://github.com/byashimov/django-controlcenter.git
-
+-e git+https://github.com/byashimov/django-controlcenter.git#egg=controlcenter
 django_compressor
 django-htmlmin
 
 # django-secretballot
 # django-likes
-git+https://github.com/WarmongeR1/django-likes
-git+https://github.com/WarmongeR1/django-secretballot.git
+-e git+https://github.com/WarmongeR1/django-likes#egg=likes
+-e git+https://github.com/WarmongeR1/django-secretballot.git#egg=secretballot
 django-debug-toolbar
 django-remdow
-
-
 python-memcached
 
 # common
 requests
 lxml
 PyYAML
-
 
 # news parsing
 beautifulsoup4
@@ -48,7 +44,6 @@ readability-lxml
 allmychanges
 micawber
 unidecode
-
 
 # users
 python-social-auth==0.2.14

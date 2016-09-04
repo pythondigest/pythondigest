@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import datetime
 from time import mktime
 
@@ -16,14 +14,12 @@ def _generate_release_item(package_version: str, link: str,
                            resource: Resource, section: Section,
                            package_data: dict):
     name = '{0} - {1}'.format(package_data.get('name'), package_version)
-    description = '{2}.' \
-                  ' Изменения описаны по ссылке <a href="{3}">{3}</a>. ' \
-                  'Скачать можно по ссылке: <a href="{4}">{4}</a>'.format(
-        package_data.get('name'),
-        package_version,
+    description = '{0}.' \
+                  ' Изменения описаны по ссылке <a href="{1}">{1}</a>. ' \
+                  'Скачать можно по ссылке: <a href="{2}">{2}</a>'.format(
         package_data.get('description'),
         link,
-        package_data.get('url')
+        package_data.get('link')
     )
     return {
         'title': name,
@@ -92,12 +88,13 @@ def parse_rss():
                 continue
 
         try:
-            if not (package_name in
-                        packages.keys()) or package_name in saved_packages:
+            if not (package_name in packages.keys()) \
+                or package_name in saved_packages:
                 continue
 
-            if news and check_previous_news_of_package(news, packages.get(
-                package_name)):
+            if news \
+                and check_previous_news_of_package(
+                    news, packages.get(package_name)):
                 off_other_release_news(news, packages.get(package_name))
 
             item_data = _generate_release_item(package_version,
