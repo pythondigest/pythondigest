@@ -224,7 +224,7 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
     session = vk.AuthSession(app_id=settings.VK_APP_ID,
                              user_login=settings.VK_LOGIN,
                              user_password=settings.VK_PASSWORD,
-                             scope='wall,messages')
+                             scope='wall,messages,offline')
     api = vk.API(session)
 
     twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(
