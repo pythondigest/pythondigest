@@ -142,7 +142,7 @@ def get_pydigest_groups() -> list:
         (-52104930, 0),  # https://vk.com/club52104930
         (-24847633, 1),  # https://vk.com/club24847633     #
         (-69108280, 0),  # https://vk.com/pirsipy
-        (-37392018, 1),  # python_for_fun
+        (-37392018, 1),  # https://vk.com/python_for_fun
         (-75836319, 0),  # https://vk.com/flask_community
         (-76525381, 0),  # https://vk.com/iteapro
         (-110767, 1),  # https://vk.com/django_framework
