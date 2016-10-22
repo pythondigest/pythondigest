@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block jumb %}
+{% endblock %}
+{% block content %}
+
+
+    <div class="row">
+
+        <div class="col-md-1">
+
+        </div>
+
+        <div class="col-md-7">
+            <h1>Добавить новость в Дайджест</h1>
+
+            <div class="index-description-content sidebar-module-inset">
+                <br>
+                Мы не размещаем новости откровенно рекламного характера<br>
+                Ссылки на платные ресурсы размещаются за деньги, пишите на
+                email: <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a><br>
+                <br>
+            </div>
+
+            {% for error in form.non_field_errors %}
+                <div class="alert alert-danger">
+                    <strong>{{ error|escape }}</strong>
+                </div>
+            {% endfor %}
+
+            <form role="form" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group {% if field.errors %}has-error{% endif %}"
+                         {% if field.is_hidden %}style="display: none" {% endif %}>
+                        <label class="control-label">
+                            {{ field.label }}{% if field.field.required %}
+                                *{% endif %}</label>
+                        <div class="error">{{ field.errors }}</div>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <input type="submit" value="Отправить" class="btn btn-default"/>
+            </form>
+        </div>
+
+
+        <div class="col-md-1">
+
+        </div>
+        <div class="col-md-3">
+            {% include 'blocks/_right_panel.html' %}
+        </div>
+    </div>
+{% endblock %}

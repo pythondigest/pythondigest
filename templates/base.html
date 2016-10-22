@@ -7,19 +7,23 @@
 <!DOCTYPE html>
 <html lang="{% locale %}">
 <head>
-    <title>{% block page_title %}Дайджест новостей о python{% endblock %}{% block head_title %}{% endblock %}</title>
+    <title>{% block page_title %}Дайджест новостей о python{% endblock %}
+        {% block head_title %}{% endblock %}</title>
     <meta name="description"
           content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение{% endblock %}">
     <meta name="keywords"
-          content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
+          content="питон, python, django, flask, новости о python,
+                  {% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
-    <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
+    <meta name="google-site-verification"
+          content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
     <link rel="alternate" type="application/rss+xml" title="RSS"
           href="{% block rss_url %}{% url 'frontend:rss' %}{% endblock %}"/>
     {% block viewport %}
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1">
     {% endblock %}
 
 
@@ -28,12 +32,9 @@
         {% block styles %}{% endblock %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/vs.css' %}">
     {% endcompress %}
-
-    <script type="text/javascript" src="{% static 'tether/js/tether.min.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'tether/css/tether.min.css' %}">
 
 
 
@@ -44,16 +45,19 @@
             <![endif]-->
     {% endblock %}
 
-    <script type="text/javascript" async src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script type="text/javascript" async
+            src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}
 </head>
 
-<body class="{% block body_class %}{% endblock %}" id="{% block body_id %}{% endblock %}"
+<body class="{% block body_class %}{% endblock %}"
+      id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
-<header>
+
 {% block nav_bar %}
 
 {% endblock nav_bar %}
@@ -61,75 +65,131 @@
 {% block top_menu %}
     {% include "blocks/_menu.html" %}
 {% endblock %}
-</header>
+<br>
 
-<main class="container-fluid">
-    {% block main %}
-    <div class="row">
-        {% block jumb %}
-        {% include "blocks/_jumb.html" %}
-        {% endblock %}
-    </div>
+{% block jumb %}
+    {% include "blocks/_jumb.html" %}
+{% endblock %}
 
-    <div class="row">
-        {% if messages %}
-            {% include "blocks/_messages.html" %}
-        {% endif %}
-        {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
-    </div>
+<div class="site-body">
+    <div class="container">
 
-    {% block fullwidth %}
-    <div class="row">
-        <div class="main-content col-md-9">
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if messages %}
+                    {% include "blocks/_messages.html" %}
+                {% endif %}
+
+                {% include 'advertising/blocks/ads.html' with ads=ads type='top' %}
+
+            </div>
+
+        </div>
+        <div class="row">
+
             {% block extra_body %}{% endblock %}
-            {% block body %}{% endblock %}
-            {% block content %}{% endblock %}
-        </div>
 
-        <div class="right-panel col-md-3">
-            {% block pre_right_panel %}{% endblock %}
-            {% block right_panel %}
-                {% include 'blocks/_right_panel.html' %}
+            {% block body %}
             {% endblock %}
-            {% block post_right_panel %}{% endblock %}
+
+            {% block content %}{% endblock %}
+
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
+            </div>
+        </div>
+
+
     </div>
-    {% endblock %}
-    {% endblock %}
-    <!-- /container-fluid -->
-</main>
-
-<div class="container-fluid">
-    {% include 'advertising/blocks/ads.html' with ads=ads type='footer' %}
-</div>
-
-<footer class="footer bg-inverse">
     {% include 'blocks/_footer.html' %}
-</footer>
+</div>
+<!-- /container -->
 
 
-<!--<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script type="text/javascript"
+        src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 {% compress js %}
-    <script type="text/javascript" src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
+    <script type="text/javascript"
+            src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
     {% if likes_enable %}
-        <script type="text/javascript" src="{% static 'likes/includes/likes.js' %}"></script>
+        <script type="text/javascript"
+                src="{% static 'likes/includes/likes.js' %}"></script>
     {% endif %}
 {% endcompress %}
 
-<!--Google Analytics-->
-{% include 'blocks/_ga.html' %}
-<!--/Google Analytics-->
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-<!--Yandex Metrika-->
-{% include 'blocks/_yandex_metrika.html' %}
-<!--/Yandex Metrika-->
+    ga('create', 'UA-45532681-1', 'pythondigest.ru');
+    ga('send', 'pageview');
 
+    ga('create', 'UA-45532681-1', 'pythondigest.ru', {'name': 'url_tracker'});
+    var trackUrl = function (id_news, section, tags) {
+
+        ga('url_tracker.send', 'event',
+                {
+                    'eventCategory': section,
+                    'eventAction': 'NewsLinkClick',
+                    'eventLabel': tags,
+                    'eventValue': id_news
+                });
+
+    };
+
+</script>
+
+{% if not perms.admin %}
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript"> (function (d, w, c) {
+        (w[c] = w[c] || []).push(function () {
+            try {
+                w.yaCounter36284495 = new Ya.Metrika({
+                    id: 36284495,
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+            } catch (e) {
+            }
+        });
+        var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
+            n.parentNode.insertBefore(s, n);
+        };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else {
+            f();
+        }
+    })(document, window, "yandex_metrika_callbacks"); </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/36284495"
+                  style="position:absolute; left:-9999px;"
+                  alt="Yandex counter"/></div>
+    </noscript> <!-- /Yandex.Metrika counter -->
+{% endif %}
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"></script>
+<script type="text/javascript"
+        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"></script>
 
 
 {% block scripts %}{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+
+{% block content %}
+    <div class="container cards-list">
+        <div class="row">
+
+            {% for item in items %}
+                {% thumbnail item.image "x200" as im %}
+                    <div class="thumb col-sm-3 col-lg-3 col-md-3">
+
+                        <a href="{% url 'digest:issue_view' pk=item.pk %}"
+                           title="Дайджест python, {{ item.title }}  {{ item.description|striptags }}">
+                            <div class="thumbnail">
+
+                                <div class="issue-title">
+                                    {{ item.title }}
+                                    <div class="issue-date">
+                                        ({{ item.date_from|date:"d.m.Y" }}
+                                        - {{ item.date_to|date:"d.m.Y" }})
+                                    </div>
+                                </div>
+
+                                <div class="issue-img">
+                                    <img src="{{ im.url }}"
+                                         alt="Дайджест python, {{ item.title }}">
+                                </div>
+
+                            </div>
+                        </a>
+
+                    </div>
+                {% endthumbnail %}
+            {% empty %}
+                <p>Пока еще ни одного выпуска</p>
+            {% endfor %}
+
+        </div>
+    </div>
+    {% include "blocks/_pagination.html" %}
+{% endblock %}
+
+{% block rss_url %}{% url 'frontend:issues_rss' %}{% endblock %}

@@ -1,0 +1,13 @@
+{% if items %}
+    <br>
+    <div class="issue issue-end issue-end">
+        <h3 class="text-center">Выбор пользователей</h3>
+        <hr>
+        {% for object in items %}
+            <p>
+                <b>{% include 'digest/blocks/_item_as_line.html' with item=object comment=True likes=True %}</b>
+            </p>
+        {% endfor %}
+
+    </div>
+{% endif %}
