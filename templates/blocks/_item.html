@@ -1,0 +1,56 @@
+{% load micawber_tags %}
+{% load common %}
+
+<noindex>
+    <div class="issue-item">
+    <span title="Язык новости" class="badge issue-item-language issue-item-bages issue-item-resource
+    {% if item.language == 'en' %}
+        en
+    {% elif item.language == 'ru' %}
+        ru
+    {% endif %}
+    ">
+    &nbsp;
+    </span>
+        <a class="issue-item-title"
+           onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.get_tags_str }}');"
+           rel="nofollow"
+           href="{{ item.link }}"
+           target="_blank">
+            {{ item.title }}
+        </a>
+    <span class="issue-item-bages">
+        {% if item.resource %}
+            <a title="Источник новости"
+               rel="nofollow"
+               href="{{ item.resource.link }}"
+               class="badge issue-item-resource"
+               target="_blank">
+                {{ item.resource }}
+            </a>
+        {% endif %}
+
+        {% if item.is_editors_choice %}
+            <span class="badge issue-item-resource">
+              <i title="Выбор редакции"
+                 class="goodnews fa fa-thumbs-o-up"></i>
+            </span>
+        {% endif %}
+    </span>
+        <p class="text-muted issue-item-description">
+{#            <pre class="python">#}
+            {{ item.description|default:''|highlight_code|safe}}
+{#            </pre>#}
+
+        </p>
+
+        {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
+            {{ item.additionally|oembed}}
+        {% endif %}
+        {% if  item.link|oembed_no_urlize != item.link  %}
+            {{ item.link|oembed}}
+        {% endif %}
+
+
+    </div>
+</noindex>
