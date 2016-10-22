@@ -90,7 +90,7 @@ class ItemsByTagView(AdsMixin, FavoriteItemsMixin, CacheMixin, ListView):
             items = items.filter(tags__name__in=tag)
 
         items = items.prefetch_related('issue', 'section')
-        items = items.order_by('-created_at', '-related_to_date')
+        items = items.order_by('-activated_at', '-related_to_date')
         return items
 
 
@@ -126,7 +126,7 @@ class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
             items = items.filter(section__pk=section)
 
         items = items.prefetch_related('issue', 'section')
-        items = items.order_by('-created_at', '-related_to_date')
+        items = items.order_by('-activated_at', '-related_to_date')
         return items
 
     def get_context_data(self, **kwargs):

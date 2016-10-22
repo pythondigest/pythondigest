@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load micawber_tags %}
+{% load pytils_dt %}
+{% load common %}
+
+{% block content %}
+<div class="container news-list">
+    {% with item=object %}
+        <div class="item-container">
+            <div class="news-line-dates">
+                <small>
+                    {{ item.created_at|date:"d.m.Y" }}
+                    {% if item.issue.status == 'active' %}
+                    &nbsp;&nbsp;<i class="fa fa-long-arrow-right fa-lg"></i>&nbsp;&nbsp;
+                    <a href="{{ item.issue.link }}" class="section-link">{{ item.issue.title }}</a>
+                    ({{ item.issue.date_from|date:"d.m.Y" }} - {{ item.issue.date_to|date:"d.m.Y" }})
+                    {% endif %}
+                    {% if item.section %}
+                    &nbsp;&nbsp;<i class="fa fa-long-arrow-right fa-lg"></i>&nbsp;&nbsp;
+                    <a href="{% modify_url 'set_query_param_np' 'section' item.section.pk %}">{{ item.section.title }}</a>
+                    {% endif %}
+                </small>
+            </div>
+            <noindex>
+            <div class="news-line-item">
+                <h3>{{ item.title }}</h3>
+
+
+                <p class="text-muted">{{ item.description|default:''|safe }}</p>
+
+                {% if item.additionally and item.additionally|oembed_no_urlize != item.additionally %}
+                    {{ item.additionally|oembed}}
+                {% endif %}
+                {% if  item.link|oembed_no_urlize != item.link  %}
+                    {{ item.link|oembed}}
+                {% endif %}
+
+
+                <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ item.link }}" target="_blank">Читать >></a>
+            </div>
+            </noindex>
+        </div>
+    {% endwith %}
+
+    {% include "blocks/_disqus.html" %}
+</div>
+{% endblock %}

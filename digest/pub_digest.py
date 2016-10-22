@@ -142,7 +142,7 @@ def get_pydigest_groups() -> list:
         (-52104930, 0),  # https://vk.com/club52104930
         (-24847633, 1),  # https://vk.com/club24847633     #
         (-69108280, 0),  # https://vk.com/pirsipy
-        (-37392018, 1),  # python_for_fun
+        (-37392018, 1),  # https://vk.com/python_for_fun
         (-75836319, 0),  # https://vk.com/flask_community
         (-76525381, 0),  # https://vk.com/iteapro
         (-110767, 1),  # https://vk.com/django_framework
@@ -224,7 +224,7 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
     session = vk.AuthSession(app_id=settings.VK_APP_ID,
                              user_login=settings.VK_LOGIN,
                              user_password=settings.VK_PASSWORD,
-                             scope='wall,messages')
+                             scope='wall,messages,offline')
     api = vk.API(session)
 
     twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(

@@ -30,7 +30,7 @@ def update_libs():
 
 
 def restart():
-    # sudo('service nginx restart')
+    sudo('service nginx restart')
     sudo('service uwsgi restart')
 
 

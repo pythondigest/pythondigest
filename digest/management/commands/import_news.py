@@ -3,13 +3,18 @@ from __future__ import unicode_literals
 
 import datetime
 import re
+import socket
 from time import mktime
+
+from future.backports.urllib.error import URLError
 from urllib.error import HTTPError
+from typing import List, Dict
+from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
 import feedparser
 from django.core.management.base import BaseCommand
-from typing import List, Dict
+from requests import TooManyRedirects
 
 from digest.management.commands import (
     apply_parsing_rules,
@@ -50,25 +55,28 @@ def get_tweets():
 
 def import_tweets(**kwargs):
     for i in get_tweets():
-        # это помогает не парсить лишний раз ссылку, которая есть
-        if Item.objects.filter(link=i[1]).exists():
-            continue
+        try:
+            # это помогает не парсить лишний раз ссылку, которая есть
+            if Item.objects.filter(link=i[1]).exists():
+                continue
 
-        # title = '[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
-        title = i[0]
-        item_data = {
-            'title': title,
-            'link': i[1],
-            'http_code': i[3],
-            'resource': i[2]
-        }
-        if is_weekly_digest(item_data):
-            parse_weekly_digest(item_data)
-        else:
-            data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
-                'query_rules') else {}
-            item_data.update(data)
-        save_item(item_data)
+            # title = '[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
+            title = i[0]
+            item_data = {
+                'title': title,
+                'link': i[1],
+                'http_code': i[3],
+                'resource': i[2]
+            }
+            if is_weekly_digest(item_data):
+                parse_weekly_digest(item_data)
+            else:
+                data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
+                    'query_rules') else {}
+                item_data.update(data)
+            save_item(item_data)
+        except (URLError, TooManyRedirects, socket.timeout):
+            print(i)
 
 
 def get_items_from_rss(rss_link: str) -> List[Dict]:
@@ -144,27 +152,31 @@ def get_data_for_rss_item(rss_item: Dict) -> Dict:
 def import_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss',
                                                  in_edit=False):
-        rss_items = map(get_data_for_rss_item,
-                        filter(is_not_exists_rss_item,
-                               filter(_is_old_rss_news,
-                                      get_items_from_rss(src.link))))
+        try:
+            rss_items = map(get_data_for_rss_item,
+                            filter(is_not_exists_rss_item,
+                                   filter(_is_old_rss_news,
+                                          get_items_from_rss(src.link))))
 
-        # parse weekly digests
-        digests_items = list(rss_items)
-        list(map(parse_weekly_digest, filter(is_weekly_digest, digests_items)))
+            # parse weekly digests
+            digests_items = list(rss_items)
+            list(map(parse_weekly_digest,
+                     filter(is_weekly_digest, digests_items)))
 
-        resource = src.resource
-        language = src.language
-        for i, rss_item in enumerate(digests_items):
-            rss_item.update({
-                'resource': resource,
-                'language': language,
-            })
-            rss_item.update(
-                apply_parsing_rules(rss_item, **kwargs) if kwargs.get(
-                    'query_rules') else {})
-            rss_item.update(apply_video_rules(rss_item.copy()))
-            save_item(rss_item)
+            resource = src.resource
+            language = src.language
+            for i, rss_item in enumerate(digests_items):
+                rss_item.update({
+                    'resource': resource,
+                    'language': language,
+                })
+                rss_item.update(
+                    apply_parsing_rules(rss_item, **kwargs) if kwargs.get(
+                        'query_rules') else {})
+                rss_item.update(apply_video_rules(rss_item.copy()))
+                save_item(rss_item)
+        except (URLError, TooManyRedirects, socket.timeout):
+            print(src)
 
 
 def parsing(func):
