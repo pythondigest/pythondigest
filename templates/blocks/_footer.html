@@ -1,25 +1,22 @@
 <div class="container-fluid">
-    <div class="footer navbar-fixed-bottom">
-        <div class="footer-contact col-md-4">
-            Контакты:
-            <a href="https://github.com/pythondigest/pythondigest"
-               title="GitHub"><i
-                    class="fa fa-github-square fa-lg"></i></a>
-            <a href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a>
-            &nbsp;&nbsp;
-            Фиды:
-            <a href="{% url 'frontend:rss' %}" title="RSS feed"><i
-                    class="fa fa-rss-square fa-lg"></i></a>
-            &nbsp;<a href="https://twitter.com/pydigest" title="Twitter feed"><i
-                class="fa fa-twitter-square fa-lg"></i></a>
-
-        </div>
-        <div class="col-md-4 footer-contact" align="center">
-            <a href="https://firstvds.ru/?from=421453">Мы хостимся на
-                FirstVDS.ru - Дешевый хостинг в России</a>
-        </div>
-        <div class="footer-copyright col-md-4" align="right">
-            &copy; Дайджест новостей о python 2013 — {% now "Y" %}
-        </div>
+    <div class="col-md-2">
+        <a href="mailto:mail@pythondigest.ru">
+            <i class="fa fa-envelope fa-lg"></i>
+        </a>
+        <a href="https://github.com/pythondigest/pythondigest" title="GitHub">
+            <i class="fa fa-github-square fa-lg"></i>
+        </a>
+        <a href="https://twitter.com/pydigest" title="Twitter feed">
+            <i class="fa fa-twitter-square fa-lg"></i>
+        </a>
+        <a href="{% url 'frontend:rss' %}" title="RSS feed">
+            <i class="fa fa-rss-square fa-lg"></i>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a href="https://firstvds.ru/?from=421453">Мы хостимся на FirstVDS.ru - Дешевый хостинг в России</a>
+    </div>
+    <div class="col-md-4">
+        <i class="fa fa-copyright"></i> Дайджест новостей о python 2013 — {% now "Y" %}
     </div>
 </div>
