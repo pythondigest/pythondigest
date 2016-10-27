@@ -82,9 +82,10 @@ class ItemsByTagView(AdsMixin, FavoriteItemsMixin, CacheMixin, ListView):
     cache_timeout = 300
 
     def get_queryset(self):
-        items = super(ItemsByTagView, self).get_queryset() \
-            .filter(status='active',
-                    activated_at__lte=datetime.datetime.now())
+        items = super(ItemsByTagView, self).get_queryset().filter(
+            status='active',
+            activated_at__lte=datetime.datetime.now()
+        )
         tag = self.request.GET.get('tag')
         if tag in ['ru', 'en']:
             items = items.filter(tags__name__in=tag)
@@ -104,18 +105,20 @@ class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
     cache_timeout = 300
 
     def get_queryset(self):
-        items = super(NewsList, self).get_queryset() \
-            .filter(status='active',
-                    activated_at__lte=datetime.datetime.now())
+        items = super(NewsList, self).get_queryset().filter(
+            status='active',
+            activated_at__lte=datetime.datetime.now()
+        )
         lang = self.request.GET.get('lang')
         if lang in ['ru', 'en']:
             items = items.filter(language=lang)
 
         search = self.request.GET.get('q')
         if search:
-            filters = Q(title__icontains=search) | Q(
-                description__icontains=search)
-            items = items.filter(filters)
+            items = items.filter(
+                Q(title__icontains=search) |
+                Q(description__icontains=search)
+            )
 
         tag = self.request.GET.get('tag')
         if tag:
@@ -140,18 +143,18 @@ class AddNews(FormView):
     form_class = AddNewsForm
 
     def get_success_url(self):
-        title = self.request.POST['title'].strip() or 'Без заголовка'
-        link = self.request.POST['link']
-        description = self.request.POST['description']
-        section = self.request.POST['section']
-        Item.objects.create(title=title,
-                            link=link,
-                            description=description,
-                            status='pending',
-                            related_to_date=datetime.datetime.now(),
-                            section_id=section)
-        messages.info(self.request,
-                      'Ваша ссылка успешно добавлена на рассмотрение')
+        Item.objects.create(
+            title=self.request.POST['title'].strip() or 'Без заголовка',
+            link=self.request.POST['link'],
+            description=self.request.POST['description'],
+            status='pending',
+            related_to_date=datetime.datetime.now(),
+            section_id=self.request.POST['section']
+        )
+        messages.info(
+            self.request,
+            'Ваша ссылка успешно добавлена на рассмотрение'
+        )
         return reverse('frontend:index')
 
 
