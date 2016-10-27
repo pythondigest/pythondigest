@@ -19,8 +19,10 @@ except ImportError:
 
 from digest.models import Item
 
-ITEM_STATUS_CHOICES = (('queue', 'В очередь'),
-                       ('moderated', 'Отмодерировано'),)
+ITEM_STATUS_CHOICES = (
+    ('queue', 'В очередь'),
+    ('moderated', 'Отмодерировано'),
+)
 
 
 class GlavRedWidget(CKEditorWidget):
