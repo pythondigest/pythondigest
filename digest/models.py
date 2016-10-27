@@ -30,7 +30,10 @@ import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
-ISSUE_STATUS_CHOICES = (('active', _('Active')), ('draft', _('Draft')),)
+ISSUE_STATUS_CHOICES = (
+    ('active', _('Active')),
+    ('draft', _('Draft')),
+)
 ISSUE_STATUS_DEFAULT = 'draft'
 ITEM_STATUS_DEFAULT = 'pending'
 
@@ -43,16 +46,23 @@ ITEM_STATUS_CHOICES = (
     ('queue', _('In queue')),
 )
 
-SECTION_STATUS_CHOICES = (('pending', _('Pending')),
-                          ('active', _('Active')),)
+SECTION_STATUS_CHOICES = (
+    ('pending', _('Pending')),
+    ('active', _('Active')),
+)
 SECTION_STATUS_DEFAULT = 'active'
 
-ITEM_LANGUAGE_CHOICES = (('ru', _('Russian')), ('en', _('English')),)
+ITEM_LANGUAGE_CHOICES = (
+    ('ru', _('Russian')),
+    ('en', _('English')),
+)
 ITEM_LANGUAGE_DEFAULT = 'en'
 LIBRARY_SECTIONS = None
 TYPE_RESOURCE_DEFAULT = 'twitter'
-TYPE_RESOURCE = (('twitter', _('Twitter feed')),
-                 ('rss', _('RSS feed')),)
+TYPE_RESOURCE = (
+    ('twitter', _('Twitter feed')),
+    ('rss', _('RSS feed')),
+)
 
 
 def build_url(*args, **kwargs):
@@ -101,8 +111,10 @@ class Keyword(TagBase):
 
 
 class KeywordGFK(GenericTaggedItemBase):
-    tag = models.ForeignKey(Keyword,
-                            related_name='%(app_label)s_%(class)s_items')
+    tag = models.ForeignKey(
+        Keyword,
+        related_name='%(app_label)s_%(class)s_items'
+    )
 
 
 class Issue(models.Model):
@@ -111,26 +123,53 @@ class Issue(models.Model):
     It is collection of `Items`
     """
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
-    description = models.TextField(verbose_name=_('Description'), blank=True)
-    announcement = models.TextField(verbose_name=_('Announcement'), blank=True)
+        verbose_name=_('Title'),
+        max_length=255
+    )
+    description = models.TextField(
+        verbose_name=_('Description'),
+        blank=True
+    )
+    announcement = models.TextField(
+        verbose_name=_('Announcement'),
+        blank=True
+    )
     image = models.ImageField(
-        verbose_name=_('Image'), upload_to='issues', blank=True)
+        verbose_name=_('Image'),
+        upload_to='issues',
+        blank=True
+    )
     date_from = models.DateField(
-        verbose_name=_('Start date'), null=True, blank=True)
+        verbose_name=_('Start date'),
+        null=True,
+        blank=True
+    )
     date_to = models.DateField(
-        verbose_name=_('End date'), null=True, blank=True)
+        verbose_name=_('End date'),
+        null=True,
+        blank=True
+    )
     published_at = models.DateField(
-        verbose_name=_('Publication date'), null=True, blank=True)
+        verbose_name=_('Publication date'),
+        null=True,
+        blank=True
+    )
     status = models.CharField(
         verbose_name=_('Status'),
         max_length=10,
         choices=ISSUE_STATUS_CHOICES,
-        default=ISSUE_STATUS_DEFAULT)
+        default=ISSUE_STATUS_DEFAULT
+    )
     trend = models.CharField(
-        verbose_name=_('Trend'), blank=True, max_length=255)
+        verbose_name=_('Trend'),
+        max_length=255,
+        blank=True
+    )
     last_item = models.IntegerField(
-        verbose_name=_('Latest moderated Item'), blank=True, null=True)
+        verbose_name=_('Latest moderated Item'),
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -150,14 +189,24 @@ class Section(models.Model):
     Section is a category of news-item
     """
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
+        verbose_name=_('Title'),
+        max_length=255
+    )
     priority = models.PositiveIntegerField(
-        verbose_name=_('Priority'), default=0)
+        verbose_name=_('Priority'),
+        default=0
+    )
     status = models.CharField(
-        verbose_name=_('Status'), max_length=10,
-        choices=SECTION_STATUS_CHOICES, default=SECTION_STATUS_DEFAULT)
+        verbose_name=_('Status'),
+        max_length=10,
+        choices=SECTION_STATUS_CHOICES,
+        default=SECTION_STATUS_DEFAULT
+    )
     icon = models.CharField(
-        verbose_name=_('Icon'), max_length=255, blank=True)
+        verbose_name=_('Icon'),
+        max_length=255,
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -173,11 +222,17 @@ class Resource(models.Model):
     A script extracts news from `Resource`
     """
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
+        verbose_name=_('Title'),
+        max_length=255
+    )
     description = models.TextField(
-        verbose_name=_('Description'), blank=True)
+        verbose_name=_('Description'),
+        blank=True
+    )
     link = models.URLField(
-        verbose_name=_('URL'), max_length=255)
+        verbose_name=_('URL'),
+        max_length=255
+    )
 
     def __str__(self):
         return self.title
@@ -193,51 +248,95 @@ class Item(models.Model):
     """
     section = models.ForeignKey(
         Section,
-        verbose_name=_('Section'), null=True, blank=True)
+        verbose_name=_('Section'),
+        null=True,
+        blank=True
+    )
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
+        verbose_name=_('Title'),
+        max_length=255
+    )
     is_editors_choice = models.BooleanField(
-        verbose_name=_('Is editors choice'), default=False)
+        verbose_name=_('Is editors choice'),
+        default=False
+    )
     description = models.TextField(
-        verbose_name=_('Description'), blank=True)
+        verbose_name=_('Description'),
+        blank=True
+    )
     issue = models.ForeignKey(
         Issue,
-        verbose_name=_('Issue of digest'), null=True, blank=True)
+        verbose_name=_('Issue of digest'),
+        null=True,
+        blank=True
+    )
     resource = models.ForeignKey(
         Resource,
-        verbose_name=_('Resource'), null=True, blank=True)
+        verbose_name=_('Resource'),
+        null=True,
+        blank=True
+    )
     link = models.URLField(
-        verbose_name=_('URL'), max_length=255)
+        verbose_name=_('URL'),
+        max_length=255
+    )
     additionally = models.CharField(
         verbose_name=_('Additional info'),
-        max_length=255, blank=True, null=True)
+        max_length=255,
+        blank=True,
+        null=True
+    )
     related_to_date = models.DateField(
         verbose_name=_('Date'),
         help_text=_('For example, publication date of the news on the source'),
-        default=datetime.datetime.today)
+        default=datetime.datetime.today
+    )
     status = models.CharField(
-        verbose_name=_('Status'), max_length=10,
-        choices=ITEM_STATUS_CHOICES, default=ITEM_STATUS_DEFAULT)
+        verbose_name=_('Status'),
+        max_length=10,
+        choices=ITEM_STATUS_CHOICES,
+        default=ITEM_STATUS_DEFAULT
+    )
     language = models.CharField(
-        verbose_name='Язык новости', max_length=2,
-        choices=ITEM_LANGUAGE_CHOICES, default=ITEM_LANGUAGE_DEFAULT)
+        verbose_name='Язык новости',
+        max_length=2,
+        choices=ITEM_LANGUAGE_CHOICES,
+        default=ITEM_LANGUAGE_DEFAULT
+    )
     created_at = models.DateField(
-        verbose_name=_('Created date'), auto_now_add=True)
+        verbose_name=_('Created date'),
+        auto_now_add=True
+    )
     modified_at = models.DateTimeField(
-        verbose_name=_('modified date'), null=True, blank=True)
+        verbose_name=_('modified date'),
+        null=True,
+        blank=True
+    )
     activated_at = models.DateTimeField(
-        verbose_name=_('Activated date'), default=datetime.datetime.now)
+        verbose_name=_('Activated date'),
+        default=datetime.datetime.now
+    )
     priority = models.PositiveIntegerField(
-        verbose_name=_('Priority'), default=0)
+        verbose_name=_('Priority'),
+        default=0
+    )
     user = models.ForeignKey(
         User,
-        verbose_name=_('Who added item'), editable=False,
-        null=True, blank=True)
+        verbose_name=_('Who added item'),
+        editable=False,
+        null=True,
+        blank=True
+    )
     article_path = models.FilePathField(
-        verbose_name=_('Article path'), blank=True)
+        verbose_name=_('Article path'),
+        blank=True
+    )
     tags = TaggableManager(blank=True)
     keywords = TaggableManager(
-        verbose_name=_('Keywords'), through=KeywordGFK, blank=True)
+        verbose_name=_('Keywords'),
+        through=KeywordGFK,
+        blank=True
+    )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -300,8 +399,7 @@ class Item(models.Model):
     @property
     def text(self):
         nonempty_path = self.article_path is not None and self.article_path
-        if nonempty_path and os.path.exists(
-            self.article_path):
+        if nonempty_path and os.path.exists(self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:
@@ -309,13 +407,12 @@ class Item(models.Model):
                 resp = requests.get(self.link)
                 text = resp.text
                 try:
-                    result = Document(text,
-                                      min_text_length=50,
-                                      positive_keywords=','.join(
-                                          settings.DATASET_POSITIVE_KEYWORDS),
-                                      negative_keywords=','.join(
-                                          settings.DATASET_NEGATIVE_KEYWORDS)
-                                      ).summary()
+                    result = Document(
+                        text,
+                        min_text_length=50,
+                        positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
+                        negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
+                    ).summary()
                 except Unparseable:
                     result = text
             except (KeyError,
@@ -377,10 +474,18 @@ class Item(models.Model):
 
 
 class ItemClsCheck(models.Model):
-    item = models.OneToOneField(Item, verbose_name=_('News'))
+    item = models.OneToOneField(
+        Item,
+        verbose_name=_('News')
+    )
     last_check = models.DateTimeField(
-        verbose_name=_('Last check time'), auto_now=True)
-    score = models.BooleanField(verbose_name=_('Score'), default=False)
+        verbose_name=_('Last check time'),
+        auto_now=True
+    )
+    score = models.BooleanField(
+        verbose_name=_('Score'),
+        default=False
+    )
 
     def check_cls(self, force=False):
         # print('Run check: {}'.format(self.pk))
@@ -417,30 +522,49 @@ class AutoImportResource(models.Model):
 
     """
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
+        verbose_name=_('Title'),
+        max_length=255
+    )
     link = models.URLField(
-        verbose_name=_('URL'), max_length=255, unique=True)
+        verbose_name=_('URL'),
+        max_length=255,
+        unique=True
+    )
     type_res = models.CharField(
-        verbose_name=_('Type'), max_length=255,
-        choices=TYPE_RESOURCE, default=TYPE_RESOURCE_DEFAULT)
+        verbose_name=_('Type'),
+        max_length=255,
+        choices=TYPE_RESOURCE,
+        default=TYPE_RESOURCE_DEFAULT
+    )
     resource = models.ForeignKey(
         Resource,
-        verbose_name=_('Source'), null=True, blank=True)
+        verbose_name=_('Source'),
+        null=True,
+        blank=True
+    )
     incl = models.CharField(
         verbose_name=_('Required content'),
-        max_length=255, help_text='Условие отбора новостей <br /> \
+        max_length=255,
+        help_text='Условие отбора новостей <br /> \
                    Включение вида [text] <br /> \
                    Включение при выводе будет удалено',
-        blank=True)
+        blank=True
+    )
     excl = models.TextField(
         verbose_name='Exceptions',
         help_text='List of exceptions, indicate by ", "',
-        blank=True)
+        blank=True
+    )
     in_edit = models.BooleanField(
-        verbose_name=_('On testing'), default=False)
+        verbose_name=_('On testing'),
+        default=False
+    )
     language = models.CharField(
-        verbose_name=_('Language of content'), max_length=2,
-        choices=ITEM_LANGUAGE_CHOICES, default=ITEM_LANGUAGE_DEFAULT)
+        verbose_name=_('Language of content'),
+        max_length=2,
+        choices=ITEM_LANGUAGE_CHOICES,
+        default=ITEM_LANGUAGE_DEFAULT
+    )
 
     def __str__(self):
         return self.title
@@ -451,11 +575,18 @@ class AutoImportResource(models.Model):
 
 
 class Package(models.Model):
-    name = models.CharField(verbose_name=_('Name'), max_length=255)
+    name = models.CharField(
+        verbose_name=_('Name'),
+        max_length=255
+    )
     description = models.TextField(
-        verbose_name=_('Description'), blank=True)
+        verbose_name=_('Description'),
+        blank=True
+    )
     link = models.URLField(
-        verbose_name=_('URL'), max_length=255)
+        verbose_name=_('URL'),
+        max_length=255
+    )
 
     def __str__(self):
         return self.name
@@ -466,43 +597,79 @@ class Package(models.Model):
 
 
 class ParsingRules(models.Model):
-    IF_ELEMENTS = (('title', 'Заголовок новости'), ('link', 'Url новости'),
-                   ('content', 'Текст новости'),
-                   ('description', 'Описание новости'),
-                   ('http_code', 'HTTP Code'),)
+    IF_ELEMENTS = (
+        ('title', 'Заголовок новости'),
+        ('link', 'Url новости'),
+        ('content', 'Текст новости'),
+        ('description', 'Описание новости'),
+        ('http_code', 'HTTP Code'),
+    )
 
-    IF_ACTIONS = (('equal', 'Равен'), ('contains', 'Содержит'),
-                  ('not_equal', 'Не равен'), ('regex', 'Regex match'),)
+    IF_ACTIONS = (
+        ('equal', 'Равен'),
+        ('contains', 'Содержит'),
+        ('not_equal', 'Не равен'),
+        ('regex', 'Regex match'),
+    )
 
-    THEN_ELEMENT = (('title', 'Заголовок новости'),
-                    ('description', 'Описание новости'),
-                    ('section', 'Раздел'), ('status', 'Статус'),
-                    ('tags', 'Тэг новости'),)
+    THEN_ELEMENT = (
+        ('title', 'Заголовок новости'),
+        ('description', 'Описание новости'),
+        ('section', 'Раздел'),
+        ('status', 'Статус'),
+        ('tags', 'Тэг новости'),
+    )
 
-    THEN_ACTION = (('set', 'Установить'), ('add', 'Добавить'),
-                   ('remove', 'Удалить часть строки'),)
+    THEN_ACTION = (
+        ('set', 'Установить'),
+        ('add', 'Добавить'),
+        ('remove', 'Удалить часть строки'),
+    )
 
     title = models.CharField(
-        verbose_name=_('Title'), max_length=255)
+        verbose_name=_('Title'),
+        max_length=255
+    )
     is_activated = models.BooleanField(
-        verbose_name=_('Is active'), default=True)
+        verbose_name=_('Is active'),
+        default=True
+    )
     if_element = models.CharField(
-        verbose_name=_('IF element'), max_length=255,
-        choices=IF_ELEMENTS, default='item_title')
+        verbose_name=_('IF element'),
+        max_length=255,
+        choices=IF_ELEMENTS,
+        default='item_title'
+    )
     if_action = models.CharField(
-        verbose_name=_('IF condition'), max_length=255,
-        choices=IF_ACTIONS, default='consist')
-    if_value = models.CharField(verbose_name=_('IF value'), max_length=255)
+        verbose_name=_('IF condition'),
+        max_length=255,
+        choices=IF_ACTIONS,
+        default='consist'
+    )
+    if_value = models.CharField(
+        verbose_name=_('IF value'),
+        max_length=255
+    )
     then_element = models.CharField(
-        verbose_name=_('THEN element'), max_length=255,
-        choices=THEN_ELEMENT, default='item_title')
+        verbose_name=_('THEN element'),
+        max_length=255,
+        choices=THEN_ELEMENT,
+        default='item_title'
+    )
     then_action = models.CharField(
-        verbose_name=_('THEN action'), max_length=255,
-        choices=THEN_ACTION, default='item_title')
+        verbose_name=_('THEN action'),
+        max_length=255,
+        choices=THEN_ACTION,
+        default='item_title'
+    )
     then_value = models.CharField(
-        verbose_name=_('THEN value'), max_length=255)
+        verbose_name=_('THEN value'),
+        max_length=255
+    )
     weight = models.PositiveIntegerField(
-        verbose_name=_('Weight'), default=100)
+        verbose_name=_('Weight'),
+        default=100
+    )
 
     def __str__(self):
         return self.title
