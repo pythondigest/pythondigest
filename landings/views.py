@@ -9,20 +9,25 @@ from digest.models import Item
 
 
 def get_active_items():
-    return Item.objects.filter(status='active',
-                               activated_at__lte=datetime.datetime.now())
+    return Item.objects.filter(
+        status='active',
+        activated_at__lte=datetime.datetime.now()
+    )
 
 
 def items_preset(items, max_cnt=20):
     return items.prefetch_related('issue', 'section').order_by(
-        '-created_at', '-related_to_date')[:max_cnt]
+        '-created_at',
+        '-related_to_date'
+    )[:max_cnt]
 
 
 def get_items_by_name(items, name):
-    filters = Q(title__icontains=name) | \
-              Q(description__icontains=name) | \
-              Q(tags__name__in=[name])
-    return items.filter(filters)
+    return items.filter(
+        Q(title__icontains=name) |
+        Q(description__icontains=name) |
+        Q(tags__name__in=[name])
+    )
 
 
 class DjangoPage(TemplateView):
@@ -32,7 +37,9 @@ class DjangoPage(TemplateView):
         context = super(DjangoPage, self).get_context_data(**kwargs)
         context['active_menu_item'] = 'feed'
         context['items'] = items_preset(
-            get_items_by_name(get_active_items(), 'django'), 10)
+            get_items_by_name(get_active_items(), 'django'),
+            10
+        )
         return context
 
 
