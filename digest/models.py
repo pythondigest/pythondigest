@@ -348,8 +348,13 @@ class Item(models.Model):
                                          date_to=date_to)
             if issue.count() == 0:
                 # если нет выпуска, то создадим
-                old_issue = Issue.objects.latest('date_to')
-                cnt_issue = int(old_issue.title.replace('Выпуск ', '')) + 1
+                try:
+                    old_issue = Issue.objects.latest('date_to')
+                except Issue.DoesNotExist:
+                    cnt_issue = 1
+                else:
+                    cnt_issue = int(old_issue.title.replace('Выпуск ', '')) + 1
+
                 new_issue = Issue(title='Выпуск %s' % cnt_issue,
                                   date_from=date_from,
                                   date_to=date_to, )
