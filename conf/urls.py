@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import django.views.static
-import taggit_autosuggest
+from taggit_autosuggest.urls import urlpatterns as taggit_urls
 
 from controlcenter.views import controlcenter
 from django.conf import settings
@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'', include(frontend_url, namespace='frontend')),
     url(r'', include(digest_url, namespace='digest')),
 
-    url(r'^taggit_autosuggest/', taggit_autosuggest.urls),
+    url(r'^taggit_autosuggest/', include(taggit_urls)),
     # url(r'^account/', include('account.urls')),
     # url(r'', include('social.apps.django_app.urls', namespace='social'))
 ]
