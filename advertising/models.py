@@ -37,9 +37,11 @@ class AdAlign(models.Model):
 class AdPage(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     slug = models.CharField(max_length=255, verbose_name=_('Slug'))
-    additional = models.CharField(max_length=255,
-                                  verbose_name=_('Additional info'),
-                                  blank=True)
+    additional = models.CharField(
+        max_length=255,
+        verbose_name=_('Additional info'),
+        blank=True
+    )
 
     @property
     def url(self):
@@ -77,14 +79,15 @@ def get_ads(page_url=None):
     )
 
     if page_url is not None:
-        to_remove = []
-        for ad in ads:
-            for ad_page in ad.pages.all():
-                if ad_page.url == page_url:
-                    break
-            else:
-                to_remove.append(ad.id)
-        ads = ads.exclude(id__in=to_remove)
+        ads = ads.filter(pages__url=page_url)
+        # to_remove = []
+        # for ad in ads:
+        #     for ad_page in ad.pages.all():
+        #         if ad_page.url == page_url:
+        #             break
+        #     else:
+        #         to_remove.append(ad.id)
+        # ads = ads.exclude(id__in=to_remove)
     return ads
 
 
@@ -97,10 +100,14 @@ class Advertising(models.Model):
     align = models.ForeignKey(AdAlign, verbose_name=_('Ads align'))
     pages = models.ManyToManyField(AdPage, verbose_name=_('Ads pages'))
 
-    start_date = models.DateField(verbose_name=_('Start date'),
-                                  default=datetime.datetime.today)
-    end_date = models.DateField(verbose_name=_('End date'),
-                                default=week_delta)
+    start_date = models.DateField(
+        verbose_name=_('Start date'),
+        default=datetime.datetime.today
+    )
+    end_date = models.DateField(
+        verbose_name=_('End date'),
+        default=week_delta
+    )
 
     class Meta:
         verbose_name = 'Реклама'

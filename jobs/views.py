@@ -19,9 +19,10 @@ class JobList(ListView):
         jobs = super(JobList, self).get_queryset()
         search = self.request.GET.get('q')
         if search:
-            filters = Q(title__icontains=search) | Q(
-                description__icontains=search)
-            jobs = jobs.filter(filters)
+            jobs = jobs.filter(
+                Q(title__icontains=search) |
+                Q(description__icontains=search)
+            )
         jobs = jobs.order_by('-created_at')
         return jobs
 

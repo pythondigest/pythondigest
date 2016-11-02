@@ -48,15 +48,16 @@ def get_json(url: str) -> Dict:
         response = get_from_url(url)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
-        sig_integration_failed.send(None,
-                                    description='URL %s. Error: %s' % (url, e))
+        sig_integration_failed.send(
+            None,
+            description='URL %s. Error: %s' % (url, e)
+        )
     else:
         try:
             result = response.json()
         except ValueError as e:
             err_msg = 'Not found JSON with ({0}) vacancies: {1}'
             logger.error(err_msg.format(url, e))
-
     return result
 
 
@@ -70,10 +71,7 @@ class HhVacancyManager(object):
         :return:
         """
         response = get_json(url)
-        if not response:
-            return
-
-        return response['archived']
+        return response['archived'] if response else None
 
     @classmethod
     def fetch_list(cls):

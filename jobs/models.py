@@ -62,43 +62,87 @@ class JobItem(models.Model):
     description = models.TextField(
         'Описание вакансии',
         null=True,
-        blank=True)
+        blank=True
+    )
+    created_at = models.DateTimeField(
+        'Дата создания',
+        auto_now_add=True,
+        null=True,
+        blank=True
+    )
+    updated_at = models.DateTimeField(
+        'Дата обновления',
+        auto_now=True,
+        null=True,
+        blank=True
+    )
+    published_at = models.DateTimeField(
+        'Дата публикации',
+        null=True,
+        editable=False
+    )
+    src_id = models.CharField(
+        'ID в источнике',
+        max_length=50,
+        null=True,
 
-    created_at = models.DateTimeField('Дата создания', auto_now_add=True,
-                                      null=True, blank=True)
-    updated_at = models.DateTimeField('Дата обновления', auto_now=True,
-                                      null=True, blank=True)
-    published_at = models.DateTimeField('Дата публикации', null=True,
-                                        editable=False)
-
-    src_id = models.CharField('ID в источнике', max_length=50, null=True,
-                              blank=True)
-    src_place_name = models.CharField('Название места в источнике',
-                                      max_length=255, null=True, blank=True)
-    src_place_id = models.CharField('ID места в источнике', max_length=20,
-                                    db_index=True, null=True, blank=True)
-
-    url_api = models.URLField('URL API', null=True, blank=True)
-    url_logo = models.URLField('URL логотипа', null=True, blank=True)
-
-    employer_name = models.CharField('Работодатель', max_length=255, null=True,
-                                     blank=True)
-
-    salary_from = models.PositiveIntegerField('Заработная плата', null=True,
-                                              blank=True)
-    salary_till = models.PositiveIntegerField('З/п до', null=True, blank=True)
-    salary_currency = models.CharField('Валюта', max_length=255, null=True,
-                                       blank=True)
-
+        blank=True
+    )
+    src_place_name = models.CharField(
+        'Название места в источнике',
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    src_place_id = models.CharField(
+        'ID места в источнике',
+        max_length=20,
+        db_index=True,
+        null=True,
+        blank=True
+    )
+    url_api = models.URLField(
+        'URL API',
+        null=True,
+        blank=True
+    )
+    url_logo = models.URLField(
+        'URL логотипа',
+        null=True,
+        blank=True
+    )
+    employer_name = models.CharField(
+        'Работодатель',
+        max_length=255,
+        null=True,
+        blank=True
+    )
+    salary_from = models.PositiveIntegerField(
+        'Заработная плата',
+        null=True,
+        blank=True
+    )
+    salary_till = models.PositiveIntegerField(
+        'З/п до',
+        null=True,
+        blank=True
+    )
+    salary_currency = models.CharField(
+        'Валюта',
+        max_length=255,
+        null=True,
+        blank=True
+    )
     def get_salary_str(self) -> str:
         result = ''
-        low_limit = format_currency(
-            self.salary_from) if self.salary_from else ''
-        high_limit = format_currency(
-            self.salary_till) if self.salary_till else ''
+        low_limit = format_currency(self.salary_from) \
+            if self.salary_from else ''
+        high_limit = format_currency(self.salary_till) \
+            if self.salary_till else ''
         result += ' от {low}'.format(low=low_limit)
         result += ' до {high}'.format(high=high_limit)
-        result += ' ' + self.salary_currency if self.salary_currency else ''
+        result += ' ' + self.salary_currency \
+            if self.salary_currency else ''
         return result
 
     get_salary_str.short_description = 'Зарплата'
