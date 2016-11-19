@@ -6,7 +6,7 @@
         {% for item in object_list %}
             {% thumbnail item.image "x200" as im %}
             <div class="issue-card col-xs-12 col-md-4 col-lg-3 ">
-                <a href="{% url 'digest:issue_view' pk=item.pk %}" title="{% blocktrans title=item.title description=item.description|striptags %}Python digest, {{ title }}  {{ description }}{% endblocktrans %}">
+                <a href="{% url 'digest:issue_view' pk=item.pk %}" title="{% blocktrans with title=item.title description=item.description|striptags %}Python digest, {{ title }}  {{ description }}{% endblocktrans %}">
                     <div class="card text-xs-center">
                         <div class="card-header">
                             <h4 class="card-title">{{ item.title }}</h4>
@@ -17,7 +17,7 @@
                             </p>
                         </div>
                         <div class="card-block">
-                            <img src="{{ im.url }}" data-src="..." alt="{% blocktrans title=item.title %}Python digest, {{ title }}{% endblocktrans %}">
+                            <img src="{{ im.url }}" data-src="..." alt="{% blocktrans with title=item.title %}Python digest, {{ title }}{% endblocktrans %}">
                         </div>
                     </div>
                 </a>

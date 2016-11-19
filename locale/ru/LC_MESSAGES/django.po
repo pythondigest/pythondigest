@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-19 13:54+0300\n"
-"PO-Revision-Date: 2016-11-19 13:55+0230\n"
+"POT-Creation-Date: 2016-11-19 18:12+0300\n"
+"PO-Revision-Date: 2016-11-19 18:12+0230\n"
 "Last-Translator: b'  <admin@admin.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -382,7 +382,8 @@ msgstr "Только на английском"
 #: templates/digest/blocks/_feed_item.html:110
 #: templates/digest/blocks/_item_as_line.html:21
 #: templates/digest/pages/news_list.html:25
-msgid "News language"
+#| msgid "Language of content"
+msgid "Language of the news"
 msgstr "Язык новости"
 
 #: digest/templates/news_list.html:40
@@ -985,9 +986,6 @@ msgstr ""
 "                понять ссылка достойна прочтения или нет"
 
 #: templates/digest/blocks/_item_article.html:12
-#| msgid ""
-#| "Please note that the text under the link may not\n"
-#| "match."
 msgid ""
 "Please note that the text under the link may not\n"
 "match with text here."
@@ -1045,6 +1043,9 @@ msgstr "Еженедельная подборка свежих и самых з�
 #: templates/pages/index.html:9
 msgid "The current release:"
 msgstr "Текущий выпуск:"
+
+#~ msgid "News language"
+#~ msgstr "Язык новости"
 
 #~ msgid "Thank the project"
 #~ msgstr "Помочь проекту"
