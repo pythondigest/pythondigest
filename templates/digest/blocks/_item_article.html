@@ -1,21 +1,20 @@
 {% load common %}
 {% load remdow %}
+{% load i18n %}
 {% if item and item.text %}
 
     <hr>
 
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3>Экспериментальная функция:</h3>
-            <p>Ниже вы видите текст статьи по ссылке. По нему можно быстро
-                понять ссылка достойна прочтения или нет</p>
-            <p>Просим обратить внимание, что текст по ссылке и здесь может не
-                совпадать.</p>
+            <h3>{% trans 'Experimental function:' %}</h3>
+            <p>{% blocktrans %}Below you can see the text of the article you can follow by the link. You can quickly understand the link worth reading or not{% endblocktrans %}</p>
+            <p>{% blocktrans %}Please note that the text under the link may not
+match with text here.{% endblocktrans %}</p>
 
             <button type="button"
                     class="btn btn-default btn-large spoiler-trigger"
-                    data-toggle="collapse">Текст
-                статьи
+                    data-toggle="collapse">{% trans 'Article text' %}
             </button>
         </div>
         <div class="panel-collapse collapse out">

@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="container-fluid">
     <div class="col-md-2">
         <a href="mailto:mail@pythondigest.ru">
@@ -14,9 +16,9 @@
         </a>
     </div>
     <div class="col-md-6">
-        <a href="https://firstvds.ru/?from=421453">Мы хостимся на FirstVDS.ru - Дешевый хостинг в России</a>
+        <a href="https://firstvds.ru/?from=421453">{% trans 'We are hosting at FirstVDS.ru - Cheap hosting in Russia' %}</a>
     </div>
     <div class="col-md-4">
-        <i class="fa fa-copyright"></i> Дайджест новостей о python 2013 — {% now "Y" %}
+        <i class="fa fa-copyright"></i>{% now "Y" as current_time %}{% blocktrans %}Python news digest 2013 — {{ current_time }} {% endblocktrans %}
     </div>
 </div>

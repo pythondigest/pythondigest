@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <div class="card card-block">
     <div class="row">
         <div class="col-md-4">
@@ -10,7 +12,7 @@
                 <h3 class="card-text">
                 {{ issue.trend|safe }}
                 </h3>
-                <p class="card-text">Тенденция недели</p>
+                <p class="card-text">{% trans 'Trend of the week' %}</p>
             </div>
         {% endif %}
     </div>

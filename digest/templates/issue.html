@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load i18n %}
 
-{% block page_title %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
-{% block page_description %}{{ object.title }} - Еженедельная подборка свежих и самых значимых новостей o Python{% endblock %}
+{% blocktrans asvar title %}A weekly selection of the latest and the most important news about Python{% endblocktrans %}
+{% block page_title %}{{ object.title }} - {{ title }}{% endblock %}
+{% block page_description %}{{ object.title }} - {{ title }}{% endblock %}
 
 {% block extra_head %}
 {% thumbnail object.image "350" as im %}
@@ -11,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:site" content="@pydigest" />
 <meta name="twitter:title" content="{{ object.title }}" />
-<meta name="twitter:description" content="Новый выпуск еженедельного дайджеста новостей о #python уже в эфире!" />
+<meta name="twitter:description" content="{% trans 'The new issue of the weekly digest of news about #python is already in the air!' %}" />
 <meta name="twitter:image" content="http://pythondigest.ru{{ im.url }}" />
 <meta name="twitter:url" content="http://pythondigest.ru{{ object.link }}" />
 {% endthumbnail %}

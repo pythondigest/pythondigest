@@ -52,7 +52,7 @@
                                        name="{{ backend|backend_class }}"
                                        href="#">
                                         <i class="fa fa-{{ name|icon_name }}"></i>
-                                        Disconnect {{ backend|backend_name }}
+                                        {% blocktrans with backend=backend|backend_name %}Disconnect {{ backend }}{% endblocktrans %}
                                     </a>
                                 </form>
                             {% else %}

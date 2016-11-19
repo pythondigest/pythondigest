@@ -2,6 +2,7 @@
 {% load micawber_tags %}
 {% load pytils_dt %}
 {% load common %}
+{% load i18n %}
 
 {% block content %}
 <div class="container news-list">
@@ -36,7 +37,7 @@
                 {% endif %}
 
 
-                <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ item.link }}" target="_blank">Читать >></a>
+                <a rel="nofollow" class="btn btn-primary btn-sm" href="{{ item.link }}" target="_blank">{% trans 'Read' %} >></a>
             </div>
             </noindex>
         </div>

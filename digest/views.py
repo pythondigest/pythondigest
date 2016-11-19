@@ -12,6 +12,7 @@ from django.template import loader
 from django.template.context import RequestContext
 from django.views.generic import DetailView
 from django.views.generic import FormView, ListView
+from django.utils.translation import ugettext as _
 
 from advertising.mixins import AdsMixin
 from .forms import AddNewsForm
@@ -21,10 +22,10 @@ from .models import Issue, Item
 
 def conflict(request, target=None, template_name='409.html'):
     template = loader.get_template(template_name)
-    message = 'Вот незадача! Кажется эту новость обновили раньше =( \
-            Нужно обновить новость для того чтобы внести правки.'
+    message = _("That's bad luck! It seems this news was updated earlier =(\
+                You need to update this news in order to make changes")
 
-    ctx = RequestContext(request, {'message': message})
+    ctx = RequestContext(request, {'message': str(message)})
     return ConflictResponse(template.render(ctx))
 
 
@@ -144,7 +145,7 @@ class AddNews(FormView):
 
     def get_success_url(self):
         Item.objects.create(
-            title=self.request.POST['title'].strip() or 'Без заголовка',
+            title=self.request.POST['title'].strip() or str(_('Without title')),
             link=self.request.POST['link'],
             description=self.request.POST['description'],
             status='pending',
@@ -153,7 +154,7 @@ class AddNews(FormView):
         )
         messages.info(
             self.request,
-            'Ваша ссылка успешно добавлена на рассмотрение'
+            str(_('Your link is successfully added for consideration'))
         )
         return reverse('frontend:index')
 

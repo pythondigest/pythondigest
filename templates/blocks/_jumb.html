@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load account_tags %}
 {% load static %}
+{% load i18n %}
 
 <div class="hidden-md-down">
     <div class="col-md-2">
@@ -9,8 +10,8 @@
         </a>
     </div>
     <div class="col-md-8">
-        <h3 class="text-center">Всё самое интересное прямо здесь и сейчас!</h3>
-        <p>Новости собираются с мира по нитке на совершенно безвозмездной основе. <br>
+        <h3 class="text-center">{% trans 'All the most interesting right here and right now!' %}</h3>
+        <p>{% blocktrans %}Новости собираются с мира по нитке на совершенно безвозмездной основе. <br>
             Ты легко можешь посодействовать проекту, добавив ссылку на интересную новость, статью, интервью или
             проект о python.<br>
             А еще можно форкнуть код этого проекта на <a aria-label="Star pythondigest/pythondigest on GitHub"
@@ -18,10 +19,11 @@
                                                          class="github-button">GitHub</a>
             и помочь в развитии его функциональности. <br>
             И еще один вариант - проголосовать <a href="http://yasobe.ru/na/pydigest">рублем</a>
+            {% endblocktrans %}
         </p>
     </div>
    <div class="col-md-2">
-        <a class="btn btn-success" href="{% url 'digest:addnews' %}">Добавить новость</a>
+        <a class="btn btn-success" href="{% url 'digest:addnews' %}">{% trans 'Add news' %}</a>
     </div>
 </div>
 

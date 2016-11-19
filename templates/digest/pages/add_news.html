@@ -2,13 +2,14 @@
 {% block jumb %}
 {% endblock %}
 {% block content %}
+{% load i18n %}
 
 <div class="col-lg-8 col-lg-offset-2">
     <div class="card card-block">
-        <h4 class="card-title">Добавить новость в Дайджест</h4>
+        <h4 class="card-title">{% trans 'Add news to the Digest' %}</h4>
         <div class="alert alert-warning" role="alert">
-            Мы не размещаем новости откровенно рекламного характера.<br />
-            Ссылки на платные ресурсы размещаются за деньги, пишите на email: <a class="alert-link" href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a><br>
+            {% blocktrans %}We don't host news openly advertising.<br />
+            Links to resources hosted on a paid for money, email us on: {% endblocktrans %}<a class="alert-link" href="mailto:mail@pythondigest.ru">mail@pythondigest.ru</a><br>
         </div>
 
         {% for error in form.non_field_errors %}
@@ -29,7 +30,7 @@
                     {% endif %}
                 </div>
             {% endfor %}
-            <button type="submit" value="Отправить" class="btn btn-primary">Отправить</button>
+            <button type="submit" value="{% trans 'Send' %}" class="btn btn-primary">{% trans 'Send' %}</button>
         </form>
     </div>
 </div>

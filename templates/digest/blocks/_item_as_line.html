@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if likes == True %}
     {% load likes_inclusion_tags %}
     {% likes item 'likes/inclusion_tags/likes_item.html' %}
@@ -5,7 +7,7 @@
 {% endif %}
 {% if comment %}
     <span class="text-primary">
-        <a href="{{ item.internal_link }}" title="Прокомментировать ссылку">
+        <a href="{{ item.internal_link }}" title="{% trans 'Comment link' %}">
             <i class="fa fa-comments-o"></i>
         </a>
     </span>
@@ -14,9 +16,9 @@
 {% if language %}
     <small class="text-muted">
         <i class="fa fa-language" aria-hidden="true"></i>
-        Language:&nbsp;
+        {% trans 'Language:' %}&nbsp;
     </small>
-    <span title="Язык новости" class="{{ item.language }}">
+    <span title="{% trans 'News language' %}" class="{{ item.language }}">
     &nbsp;&nbsp;&nbsp;&nbsp;
     </span>
 {% endif %}
