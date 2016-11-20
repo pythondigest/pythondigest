@@ -3,7 +3,7 @@
 {% load pytils_dt %}
 {% load common %}
 {% load static %}
-
+{% load i18n %}
 
 {% block page_title %}{{ object.title }}{% endblock %}
 {% block page_description %}
@@ -26,7 +26,7 @@
     <meta property="og:url"
           content="http://pythondigest.ru{{ object.internal_link }}"/>
     <meta property="og:title" content="{{ object.title }}"/>
-    <meta property="og:site_name" content="Python Дайджест"/>
+    <meta property="og:site_name" content="{% trans 'Python Digesst' %}"/>
     <meta name="og:description"
           content='{{ object.description|default:''|striptags|truncatechars:500 }}'>
     <meta property="og:image"

@@ -2,26 +2,26 @@
 {% load pytils_dt %}
 {% load common %}
 {% load micawber_tags %}
+{% load i18n %}
 
 {% block content %}
     <div class="container news-list">
         <div class="alert alert-warning">
-            <strong>Внимание!</strong> ссылки в этот раздел попадают без
-            модерации.
+            {% blocktrans %}<strong>Attention!</strong> references in this section come without moderation.{% endblocktrans %}
 
-            <p>Если вы заметили плохую ссылку сообщите нам:</p>
+            <p>{% trans 'If you have noticed a bad link let us know:' %}</p>
 
             <p></p>
             <ul>
-                <li>в <a
-                        href="https://gitter.im/pythondigest/pythondigest">Чат</a>
+                <li>{% trans 'in' %} <a
+                        href="https://gitter.im/pythondigest/pythondigest">{% trans 'Chat' %}</a>
                 </li>
-                <li>по <a
-                        href="mailto:pydigest@gmail.com?Subject=Раздел%20вакансий:%20плохая%20ссылка">E-mail</a>
+                <li>{% trans 'by' %} <a
+                        href="mailto:pydigest@gmail.com?Subject=Раздел%20вакансий:%20плохая%20ссылка">{% trans 'E-mail' %}</a>
                 </li>
             </ul>
         </div>
-        <h4>Вакансии: </h4>
+        <h4>{% trans 'Jobs:' %} </h4>
         {% for vacancy in jobs %}
 
             <noindex>
@@ -69,7 +69,7 @@
 
         {% empty %}
             <div class="alert alert-warning pull-left">
-                <strong>Печально но факт!</strong> В этой ленте нет вакансий.
+                {% blocktrans %}<strong>Its sad but true!</strong> There is no news in this feed.{% endblocktrans %}
             </div>
         {% endfor %}
     </div>

@@ -8,322 +8,535 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 08:39+0300\n"
-"PO-Revision-Date: 2016-05-04 08:43+0230\n"
-"Last-Translator: b'  <>'\n"
+"POT-Creation-Date: 2016-11-19 18:12+0300\n"
+"PO-Revision-Date: 2016-11-19 18:12+0230\n"
+"Last-Translator: b'  <admin@admin.com>'\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: \n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Translated-Using: django-rosetta 0.7.10\n"
+"X-Translated-Using: django-rosetta 0.7.12\n"
 
-#: advertising/models.py:10 advertising/models.py:25 advertising/models.py:37
-#: advertising/models.py:92 digest/models.py:109 digest/models.py:148
-#: digest/models.py:171 digest/models.py:193 digest/models.py:401
-#: digest/models.py:467
+#: advertising/models.py:11 advertising/models.py:26 advertising/models.py:38
+#: advertising/models.py:96 digest/models.py:125 digest/models.py:191
+#: digest/models.py:224 digest/models.py:255 digest/models.py:516
+#: digest/models.py:621
 msgid "Title"
 msgstr "Название"
 
-#: advertising/models.py:11
+#: advertising/models.py:12
 msgid "ID"
 msgstr "Идентификатор"
 
-#: advertising/models.py:12
+#: advertising/models.py:13
 msgid "Template"
 msgstr "Шаблон"
 
-#: advertising/models.py:13
+#: advertising/models.py:14
 msgid "Path to template"
 msgstr "Путь до шаблона"
 
-#: advertising/models.py:17 advertising/models.py:95
+#: advertising/models.py:18 advertising/models.py:99
 msgid "Ads type"
 msgstr "Тип рекламы"
 
-#: advertising/models.py:18
+#: advertising/models.py:19
 msgid "Ads types"
 msgstr "Типы рекламы"
 
-#: advertising/models.py:26
+#: advertising/models.py:27
 msgid "Align"
 msgstr "Расположение"
 
-#: advertising/models.py:29 advertising/models.py:30 advertising/models.py:96
+#: advertising/models.py:30 advertising/models.py:31 advertising/models.py:100
 msgid "Ads align"
 msgstr "Расположение рекламы"
 
-#: advertising/models.py:38
+#: advertising/models.py:39
 msgid "Slug"
 msgstr "Slug"
 
-#: advertising/models.py:40 digest/models.py:207
+#: advertising/models.py:42 digest/models.py:283
 msgid "Additional info"
 msgstr "Дополнительная информация"
 
-#: advertising/models.py:55
+#: advertising/models.py:58
 msgid "Not valid slug for AdPage"
 msgstr "Не валидный URL для рекламной страницы (AdPage)"
 
-#: advertising/models.py:59
+#: advertising/models.py:62
 msgid "Ads page"
 msgstr "Рекламная страница"
 
-#: advertising/models.py:60 advertising/models.py:97
+#: advertising/models.py:63 advertising/models.py:101
 msgid "Ads pages"
 msgstr "Рекламные страницы"
 
-#: advertising/models.py:91 digest/models.py:435
+#: advertising/models.py:95 digest/models.py:570
 msgid "Name"
 msgstr "Название"
 
-#: advertising/models.py:93 digest/models.py:29 digest/models.py:35
-#: digest/models.py:43
+#: advertising/models.py:97 digest/models.py:33 digest/models.py:41
+#: digest/models.py:50
 msgid "Active"
 msgstr "Активный"
 
-#: advertising/models.py:94 digest/models.py:110 digest/models.py:173
-#: digest/models.py:197 digest/models.py:437
+#: advertising/models.py:98 digest/models.py:129 digest/models.py:228
+#: digest/models.py:263 digest/models.py:574
 msgid "Description"
 msgstr "Описание"
 
-#: advertising/models.py:99 digest/models.py:115
+#: advertising/models.py:104 digest/models.py:142
 msgid "Start date"
 msgstr "Дата начала"
 
-#: advertising/models.py:101 digest/models.py:117
+#: advertising/models.py:108 digest/models.py:147
 msgid "End date"
 msgstr "Дата завершения"
 
-#: digest/models.py:29 digest/models.py:36
+#: digest/models.py:34 digest/models.py:42
 msgid "Draft"
 msgstr "Черновик"
 
-#: digest/models.py:34 digest/models.py:42
+#: digest/models.py:40 digest/models.py:49
 msgid "Pending"
 msgstr "Ожидает"
 
-#: digest/models.py:37
+#: digest/models.py:43
 msgid "Moderated"
 msgstr "Рассмотрен"
 
-#: digest/models.py:38
+#: digest/models.py:44
 msgid "Imported"
 msgstr "Импортировано"
 
-#: digest/models.py:39
+#: digest/models.py:45
 msgid "In queue"
 msgstr "В очереди"
 
-#: digest/models.py:46
+#: digest/models.py:55 templates/digest/pages/news_list.html:31
 msgid "Russian"
 msgstr "Русский"
 
-#: digest/models.py:46
+#: digest/models.py:56 templates/digest/pages/news_list.html:33
 msgid "English"
 msgstr "Английский"
 
-#: digest/models.py:50
+#: digest/models.py:62
 msgid "Twitter feed"
 msgstr "Twitter лента"
 
-#: digest/models.py:51
+#: digest/models.py:63
 msgid "RSS feed"
 msgstr "RSS лента"
 
-#: digest/models.py:94
+#: digest/models.py:108
 msgid "Keyword"
 msgstr "Ключевое слово"
 
-#: digest/models.py:95 digest/models.py:235
+#: digest/models.py:109 digest/models.py:335
 msgid "Keywords"
 msgstr "Ключевые слова"
 
-#: digest/models.py:111
+#: digest/models.py:133
 msgid "Announcement"
 msgstr "Анонс"
 
-#: digest/models.py:113
+#: digest/models.py:137
 msgid "Image"
 msgstr "Изображение"
 
-#: digest/models.py:119
+#: digest/models.py:152
 msgid "Publication date"
 msgstr "Дата публикации"
 
-#: digest/models.py:121 digest/models.py:152 digest/models.py:214
+#: digest/models.py:157 digest/models.py:199 digest/models.py:294
 msgid "Status"
 msgstr "Статус"
 
-#: digest/models.py:126
+#: digest/models.py:163
 msgid "Trend"
 msgstr "Тенденция"
 
-#: digest/models.py:128
+#: digest/models.py:168
 msgid "Latest moderated Item"
 msgstr "Последняя отмодерированная новость"
 
-#: digest/models.py:139 digest/models.py:200
+#: digest/models.py:182 digest/models.py:268
 msgid "Issue of digest"
 msgstr "Выпуск дайджеста"
 
-#: digest/models.py:140
+#: digest/models.py:183
 msgid "Issues of digest"
 msgstr "Выпуски дайджеста"
 
-#: digest/models.py:150 digest/models.py:226
+#: digest/models.py:195 digest/models.py:319
 msgid "Priority"
 msgstr "Приоритет"
 
-#: digest/models.py:155
+#: digest/models.py:205
 msgid "Icon"
 msgstr "Иконка"
 
-#: digest/models.py:162 digest/models.py:191
+#: digest/models.py:215 digest/models.py:250
 msgid "Section"
 msgstr "Раздел"
 
-#: digest/models.py:163
+#: digest/models.py:216
 msgid "Sections"
 msgstr "Разделы"
 
-#: digest/models.py:175 digest/models.py:205 digest/models.py:403
-#: digest/models.py:439
+#: digest/models.py:232 digest/models.py:279 digest/models.py:520
+#: digest/models.py:578
 msgid "URL"
 msgstr "URL"
 
-#: digest/models.py:181 digest/models.py:203
+#: digest/models.py:240 digest/models.py:274
 msgid "Resource"
 msgstr "Ресурс"
 
-#: digest/models.py:182
+#: digest/models.py:241
 msgid "Resources"
 msgstr "Источники"
 
-#: digest/models.py:195
+#: digest/models.py:259
 msgid "Is editors choice"
 msgstr "Выбор редакции"
 
-#: digest/models.py:210
+#: digest/models.py:289
 msgid "Date"
 msgstr "Дата"
 
-#: digest/models.py:211
+#: digest/models.py:290
 msgid "For example, publication date of the news on the source"
 msgstr "Например, дата публикации новости в источнике"
 
-#: digest/models.py:220
+#: digest/models.py:306
 msgid "Created date"
 msgstr "Дата создания"
 
-#: digest/models.py:222
+#: digest/models.py:310
 msgid "modified date"
 msgstr "Дата модификации"
 
-#: digest/models.py:224
+#: digest/models.py:315
 msgid "Activated date"
 msgstr "Дата активации"
 
-#: digest/models.py:229
+#: digest/models.py:324
 msgid "Who added item"
 msgstr "Кто добавил новость"
 
-#: digest/models.py:232
+#: digest/models.py:330
 msgid "Article path"
 msgstr "Путь до статьи"
 
-#: digest/models.py:356 digest/models.py:357 digest/models.py:361
+#: digest/models.py:466 digest/models.py:467 digest/models.py:473
 msgid "News"
 msgstr "Новости"
 
-#: digest/models.py:363
+#: digest/models.py:476
 msgid "Last check time"
 msgstr "Время последней проверки"
 
-#: digest/models.py:364
+#: digest/models.py:480
 msgid "Score"
 msgstr "Оценка"
 
-#: digest/models.py:392 digest/models.py:393
+#: digest/models.py:507 digest/models.py:508
 msgid "Classifier analysis"
 msgstr "Анализ классификатора"
 
-#: digest/models.py:405
+#: digest/models.py:525
 msgid "Type"
 msgstr "Тип"
 
-#: digest/models.py:409
+#: digest/models.py:532
 msgid "Source"
 msgstr "Источник"
 
-#: digest/models.py:411
+#: digest/models.py:537
 msgid "Required content"
 msgstr "Обязательный контент"
 
-#: digest/models.py:421
+#: digest/models.py:550
 msgid "On testing"
 msgstr "На тестировании"
 
-#: digest/models.py:423
+#: digest/models.py:554
 msgid "Language of content"
 msgstr "Язык контента"
 
-#: digest/models.py:430
+#: digest/models.py:564 digest/templates/news_list.html:33
 msgid "News source"
 msgstr "Источник новостей"
 
-#: digest/models.py:431
+#: digest/models.py:565
 msgid "News sources"
 msgstr "Источники новостей"
 
-#: digest/models.py:445
+#: digest/models.py:586
 msgid "Package"
 msgstr "Библиотека"
 
-#: digest/models.py:446
+#: digest/models.py:587
 msgid "Packages"
 msgstr "Библиотеки"
 
-#: digest/models.py:469
+#: digest/models.py:625
 msgid "Is active"
 msgstr "Активно"
 
-#: digest/models.py:471
+#: digest/models.py:629
 msgid "IF element"
 msgstr "ЕСЛИ элемент"
 
-#: digest/models.py:474
+#: digest/models.py:635
 msgid "IF condition"
 msgstr "ЕСЛИ условие"
 
-#: digest/models.py:476
+#: digest/models.py:641
 msgid "IF value"
 msgstr "ЕСЛИ значение"
 
-#: digest/models.py:478
+#: digest/models.py:645
 msgid "THEN element"
 msgstr "ТО элемент"
 
-#: digest/models.py:481
+#: digest/models.py:651
 msgid "THEN action"
 msgstr "ТО действие"
 
-#: digest/models.py:484
+#: digest/models.py:657
 msgid "THEN value"
 msgstr "ТО значение"
 
-#: digest/models.py:486
+#: digest/models.py:661
 msgid "Weight"
 msgstr "Вес"
 
-#: digest/models.py:492
+#: digest/models.py:669
 msgid "Processing rule"
 msgstr "Правило обработки"
 
-#: digest/models.py:493
+#: digest/models.py:670
 msgid "Processing rules"
 msgstr "Правила обработки"
+
+#: digest/templates/add_news.html:4
+msgid "News adding"
+msgstr "Добавление новости"
+
+#: digest/templates/add_news.html:20 templates/digest/pages/add_news.html:33
+msgid "Send"
+msgstr "Отправить"
+
+#: digest/templates/issue.html:5
+msgid ""
+"A weekly selection of the latest and the most important news about Python"
+msgstr "Еженедельная подборка свежих и самых значимых новостей o Python"
+
+#: digest/templates/issue.html:16
+msgid ""
+"The new issue of the weekly digest of news about #python is already in the "
+"air!"
+msgstr "Новый выпуск еженедельного дайджеста новостей о #python уже в эфире"
+
+#: digest/templates/issues_list.html:14
+#: templates/digest/pages/issues_list.html:9
+#, python-format
+msgid "Python digest, %(title)s  %(description)s"
+msgstr "Дайджест python, %(title)s %(description)s"
+
+#: digest/templates/issues_list.html:23
+#: templates/digest/pages/issues_list.html:20
+#, python-format
+msgid "Python digest, %(title)s"
+msgstr "Дайджест python, %(title)s"
+
+#: digest/templates/issues_list.html:32
+#: templates/digest/pages/issues_list.html:27
+msgid "No releases so far"
+msgstr "Пока еще ни одного выпуска"
+
+#: digest/templates/news_item.html:40
+#: templates/digest/blocks/_feed_item.html:52
+msgid "Read"
+msgstr "Читать"
+
+#: digest/templates/news_list.html:13
+msgid "All"
+msgstr "Все"
+
+#: digest/templates/news_list.html:14
+msgid "Only in Russian"
+msgstr "Только на русском"
+
+#: digest/templates/news_list.html:15
+msgid "Only in English"
+msgstr "Только на английском"
+
+#: digest/templates/news_list.html:23
+#: templates/digest/blocks/_feed_item.html:110
+#: templates/digest/blocks/_item_as_line.html:21
+#: templates/digest/pages/news_list.html:25
+#| msgid "Language of content"
+msgid "Language of the news"
+msgstr "Язык новости"
+
+#: digest/templates/news_list.html:40
+msgid "Editor's choice"
+msgstr "Выбор редакции"
+
+#: digest/templates/news_list.html:74 jobs/templates/jobs_list.html:72
+#: templates/digest/pages/news_list.html:15
+msgid "<strong>Its sad but true!</strong> There is no news in this feed."
+msgstr "<strong>Печально но факт!</strong> В этой ленте нет новостей."
+
+#: digest/views.py:25
+msgid ""
+"That's bad luck! It seems this news was updated earlier =(                "
+"You need to update this news in order to make changes"
+msgstr ""
+"Вот незадача! Кажется эту новость обновили раньше =(  Нужно обновить новость"
+" для того чтобы внести правки."
+
+#: digest/views.py:148
+msgid "Without title"
+msgstr "Без заголовка"
+
+#: digest/views.py:157
+msgid "Your link is successfully added for consideration"
+msgstr "Ваша ссылка успешно добавлена на рассмотрение"
+
+#: frontend/apps.py:7
+msgid "Frontend"
+msgstr "Фронтенд"
+
+#: frontend/feeds.py:16 frontend/feeds.py:77 frontend/feeds.py:100
+msgid ""
+"Announcements in Russian of the latest news about python and surrounding "
+"technologies."
+msgstr ""
+"Рускоязычные анонсы свежих новостей о python и близлежащих технологиях"
+
+#: frontend/feeds.py:98
+msgid "News digest about python - all editions"
+msgstr "Дайджест новостей о python - все выпуски"
+
+#: frontend/feeds.py:112
+#, python-format
+msgid ""
+"Python-digest #%s. News, interesting projects, articles and interviews [%s —"
+" %s]"
+msgstr ""
+"Python-digest #%s. Новости, интересные проекты, статьи и интервью [%s — %s]"
+
+#: frontend/templatetags/common.py:116
+msgid "Feed editor"
+msgstr "Покормить редактора"
+
+#: frontend/templatetags/common.py:117
+msgid "Help project"
+msgstr "Помочь проекту"
+
+#: frontend/templatetags/common.py:118
+msgid "Help the project"
+msgstr "Помочь проекту"
+
+#: frontend/templatetags/common.py:119
+msgid "Feed the team"
+msgstr "Покормить команду"
+
+#: frontend/templatetags/common.py:120
+msgid "Help to pay for the domain"
+msgstr "Помочь оплатить домен"
+
+#: frontend/templatetags/common.py:121
+msgid "Donate on beer"
+msgstr "Скинуться на пиво"
+
+#: frontend/templatetags/common.py:122
+msgid "Donate on hosting"
+msgstr "Скинуться на хостинг"
+
+#: frontend/templatetags/common.py:123
+msgid "Donate on cake"
+msgstr "Скинуться на торт"
+
+#: jobs/admin.py:23 jobs/admin.py:45
+msgid "Link"
+msgstr "Ссылка"
+
+#: jobs/apps.py:8
+msgid "Jobs"
+msgstr "Вакансии"
+
+#: jobs/templates/jobs_list.html:10
+msgid ""
+"<strong>Attention!</strong> references in this section come without "
+"moderation."
+msgstr ""
+"<strong>Внимание!</strong> ссылки в этот раздел попадают без\n"
+"модерации."
+
+#: jobs/templates/jobs_list.html:12
+msgid "If you have noticed a bad link let us know:"
+msgstr " Если вы заметили плохую ссылку сообщите нам"
+
+#: jobs/templates/jobs_list.html:16
+msgid "in"
+msgstr "в"
+
+#: jobs/templates/jobs_list.html:17
+msgid "Chat"
+msgstr "Чат"
+
+#: jobs/templates/jobs_list.html:19
+msgid "by"
+msgstr "по"
+
+#: jobs/templates/jobs_list.html:20
+msgid "E-mail"
+msgstr ""
+
+#: jobs/templates/jobs_list.html:24
+msgid "Jobs:"
+msgstr "Вакансии:"
+
+#: landings/apps.py:8
+msgid "Landings"
+msgstr "Лендинги"
+
+#: landings/templates/landings/pages/django.html:21
+msgid "Main news"
+msgstr "Главные новости"
+
+#: landings/templates/landings/pages/django.html:29
+msgid "Block of interesting news in the form of a thumbnail image"
+msgstr "Блок интересных новостей в виде миниатюр изображения"
+
+#: landings/templates/landings/pages/django.html:41
+msgid "Videos"
+msgstr "Видео"
+
+#: landings/templates/landings/pages/django.html:50
+msgid "Articles"
+msgstr "Статьи"
+
+#: landings/templates/landings/pages/django.html:73
+msgid "New django packages"
+msgstr "Новые джанго пакеты"
+
+#: landings/templates/landings/pages/django.html:90
+msgid "Books"
+msgstr "Книги"
+
+#: landings/templates/landings/pages/django.html:98
+msgid "Documentation"
+msgstr "Документация"
 
 #: templates/404.html:5
 msgid "Not Found"
@@ -355,32 +568,34 @@ msgstr ""
 msgid "Settings"
 msgstr "Настройки"
 
-#: templates/account/base.html:12 templates/account/settings.html.py:8
+#: templates/account/base.html:13 templates/account/settings.html:8
 #: templates/account/settings.html:14
 msgid "Account"
 msgstr "Аккаунт"
 
-#: templates/account/base.html:15 templates/account/password_change.html:8
+#: templates/account/base.html:17 templates/account/password_change.html:8
 #: templates/account/password_change.html:14
 msgid "Change password"
 msgstr "Сменить пароль"
 
-#: templates/account/base.html:18
+#: templates/account/base.html:21
 msgid "Delete account"
 msgstr "Удалить аккаунт"
 
-#: templates/account/delete.html:7 templates/account/delete.html.py:10
+#: templates/account/delete.html:7 templates/account/delete.html:10
 msgid "Delete Account"
 msgstr "Удалить аккаунт"
 
 #: templates/account/delete.html:12
 #, python-format
 msgid ""
-"If you go ahead and delete your account, your information will be "
-"<b>expunged within %(ACCOUNT_DELETION_EXPUNGE_HOURS)s hours</b>."
+"If you go ahead and delete your account, your information\n"
+"        will be\n"
+"        <b>expunged within %(ACCOUNT_DELETION_EXPUNGE_HOURS)s hours</b>\n"
+"        ."
 msgstr ""
 
-#: templates/account/delete.html:16
+#: templates/account/delete.html:21
 msgid "Delete My Account"
 msgstr "Удалить мой аккаунт"
 
@@ -397,7 +612,7 @@ msgstr ""
 #: templates/account/email/email_confirmation_subject.txt:1
 #, python-format
 msgid "Confirm email address for %(site_name)s"
-msgstr ""
+msgstr "Подтвердите почтовый адрес для %(site_name)s"
 
 #: templates/account/email/invite_user.txt:1
 #, python-format
@@ -410,7 +625,7 @@ msgstr ""
 #: templates/account/email/invite_user_subject.txt:1
 #, python-format
 msgid "Create an account on %(name)s"
-msgstr ""
+msgstr "Создать учетную запись для %(name)s"
 
 #: templates/account/email/password_change.txt:1
 #, python-format
@@ -438,16 +653,22 @@ msgid "[%(site_name)s] Password reset"
 msgstr "[%(site_name)s] Восстановление пароля"
 
 #: templates/account/email_confirm.html:5
-#: templates/account/email_confirm.html:11
+#: templates/account/email_confirm.html:12
 msgid "Confirm Email"
 msgstr "Подтвердите адрес электронной почты"
 
-#: templates/account/email_confirm.html:14
+#: templates/account/email_confirm.html:16
 #, python-format
-msgid "Confirm email address <b>%(email)s</b>?"
-msgstr "Подтвердить пароль <b>%(email)s</b>?"
+msgid ""
+"\n"
+"                            Confirm email address <b>%(email)s</b>\n"
+"                            ?"
+msgstr ""
+"\n"
+"Подтвердить почтовый адрес <b>%(email)s</b>\n"
+"?"
 
-#: templates/account/email_confirm.html:15
+#: templates/account/email_confirm.html:20
 msgid "Confirm"
 msgstr "Подствердить"
 
@@ -459,13 +680,14 @@ msgstr "Подтвердите свой email "
 #: templates/account/email_confirmation_sent.html:10
 #, python-format
 msgid ""
-"We have sent you an email to <b>%(email)s</b> for verification. Follow the "
-"link provided to finalize the signup process. If you do not receive it "
-"within a few minutes, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"We have sent you an email to <b>%(email)s</b> for\n"
+"        verification. Follow the link provided to finalize the signup process.\n"
+"        If you do not receive it within a few minutes, contact us at\n"
+"        <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>\n"
+"        ."
 msgstr ""
 
-#: templates/account/email_confirmation_sent.html:11
+#: templates/account/email_confirmation_sent.html:15
 msgid "Go back"
 msgstr "Вернуться"
 
@@ -476,34 +698,41 @@ msgstr "Email подтвержден"
 
 #: templates/account/email_confirmed.html:9
 #, python-format
-msgid "You have confirmed <b>%(email)s</b>"
+msgid ""
+"You have\n"
+"        confirmed <b>%(email)s</b>"
 msgstr "Вы подтвердили <b>%(email)s</b>"
 
-#: templates/account/login.html:9 templates/account/login.html.py:21
-#: templates/account/signup.html:27
+#: templates/account/login.html:9 templates/account/login.html:25
+#: templates/account/signup.html:32
 msgid "Log in"
 msgstr "Вход"
 
-#: templates/account/login.html:15
+#: templates/account/login.html:17
 msgid "Log in to an existing account"
 msgstr "Авторизоваться в аккаунт"
 
-#: templates/account/login.html:22
+#: templates/account/login.html:27
 msgid "Forgot your password?"
 msgstr "Забыл пароль?"
 
-#: templates/account/login.html:27
+#: templates/account/login.html:32
 msgid "Don't have an account?"
 msgstr "У вас есть аккаунт?"
 
-#: templates/account/login.html:27 templates/account/signup.html.py:8
-#: templates/account/signup.html:17 templates/account/signup.html.py:23
+#: templates/account/login.html:33 templates/account/signup.html:8
+#: templates/account/signup.html:19 templates/account/signup.html:27
 #: templates/account/signup_closed.html:5
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: templates/account/logout.html:5 templates/account/logout.html.py:11
-#: templates/account/logout.html:15
+#: templates/account/login.html:55 templates/account/signup.html:55
+#, python-format
+msgid "Disconnect %(backend)s"
+msgstr "Отключить %(backend)s"
+
+#: templates/account/logout.html:5 templates/account/logout.html:11
+#: templates/account/logout.html:16
 msgid "Log out"
 msgstr "Выход"
 
@@ -511,9 +740,9 @@ msgstr "Выход"
 msgid "Are you sure you want to log out?"
 msgstr "Вы действительно хотите выйти?"
 
-#: templates/account/password_change.html:18
-#: templates/account/password_reset_token.html:16
-#: templates/account/settings.html:17
+#: templates/account/password_change.html:19
+#: templates/account/password_reset_token.html:18
+#: templates/account/settings.html:18
 msgid "Save"
 msgstr "Сохранить"
 
@@ -527,6 +756,8 @@ msgid ""
 "Forgotten your password? Enter your email address below, and we'll send you "
 "an email allowing you to reset it."
 msgstr ""
+"Забыли свой пароль? Введите свой почтовый адрес ниже и мы отправим вам "
+"письмо, позволяющее сбросить его."
 
 #: templates/account/password_reset.html:22
 msgid "Reset my password"
@@ -535,8 +766,10 @@ msgstr "Восстановить мой пароль"
 #: templates/account/password_reset.html:29
 #, python-format
 msgid ""
-"If you have any trouble resetting your password, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"If you have any trouble resetting your password, contact\n"
+"        us at\n"
+"        <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>\n"
+"        ."
 msgstr ""
 
 #: templates/account/password_reset_sent.html:6
@@ -547,55 +780,278 @@ msgstr "Пароль восстановлен и отправлен"
 #: templates/account/password_reset_sent.html:11
 #, python-format
 msgid ""
-"We have sent you an email. If you do not receive it within a few minutes, "
-"try resending or contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"We have sent you an email. If you do not receive it\n"
+"            within a few minutes, try resending or contact us at\n"
+"            <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>\n"
+"            ."
 msgstr ""
 
-#: templates/account/password_reset_sent.html:20
+#: templates/account/password_reset_sent.html:24
 msgid "Resend"
 msgstr "Отправить"
 
-#: templates/account/password_reset_sent.html:25
+#: templates/account/password_reset_sent.html:29
 #, python-format
 msgid ""
-"We have resent the password email. If you do not receive it within a few "
-"minutes, contact us at <a "
-"href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>."
+"We have resent the password email. If you do not\n"
+"            receive it within a few minutes, contact us at\n"
+"            <a href=\"mailto:%(THEME_CONTACT_EMAIL)s\">%(THEME_CONTACT_EMAIL)s</a>\n"
+"            ."
 msgstr ""
 
 #: templates/account/password_reset_token.html:6
-#: templates/account/password_reset_token.html:12
+#: templates/account/password_reset_token.html:13
 msgid "Set your new password"
 msgstr "Установите новый пароль"
 
 #: templates/account/password_reset_token_fail.html:5
 #: templates/account/password_reset_token_fail.html:8
 msgid "Bad token"
-msgstr ""
+msgstr "Невалидный токен"
 
 #: templates/account/password_reset_token_fail.html:10
 #, python-format
 msgid ""
-"The password reset link was invalid, possibly because it has already been "
-"used.  Please request a <a href=\"%(url)s\">new password reset</a>."
+"The password reset link was invalid, possibly because it\n"
+"        has already been used.  Please request a\n"
+"        <a href=\"%(url)s\">new password reset</a>."
 msgstr ""
 
-#: templates/account/signup.html:27
+#: templates/account/signup.html:31
 msgid "Already have an account?"
 msgstr "Уже есть аккаунт?"
 
 #: templates/account/signup_closed.html:8
 msgid "This site is in private beta"
-msgstr ""
+msgstr "Этот сайт находится в закрытом бета-тестировании"
 
 #: templates/account/signup_closed.html:9
-msgid "If you have signup code you can enter it below."
+msgid ""
+"If you have signup code you can enter it\n"
+"        below."
 msgstr ""
 
-#: templates/account/signup_closed.html:11
+#: templates/account/signup_closed.html:13
 msgid "Your signup code..."
 msgstr "Ваш код регистрации..."
+
+#: templates/base.html:13
+msgid ""
+"A weekly compilation of the latest and most important news about Python. "
+"Videos, articles, training materials, releases of libraries and projects. A "
+"lot of content about Django, Flask, numpy, and machine learning"
+msgstr ""
+"Еженедельная подборка свежих и самых значимых новостей o Python. Видео, "
+"статьи, обучающие материалы, релизы библиотек и проектов. Много контента про"
+" Django, Flask, numpy и машинное обучение"
+
+#: templates/base.html:15
+msgid "python, django, flask, news about python, "
+msgstr "питон, python, django, flask, новости о python,"
+
+#: templates/blocks/_adv.html:5
+msgid "Place your ads"
+msgstr "Разместим вашу рекламу"
+
+#: templates/blocks/_adv.html:6
+msgid "Write:"
+msgstr "Пиши:"
+
+#: templates/blocks/_footer.html:19
+msgid "We are hosting at FirstVDS.ru - Cheap hosting in Russia"
+msgstr "Мы хостимся на FirstVDS.ru - Дешевый хостинг в России"
+
+#: templates/blocks/_footer.html:22
+#, python-format
+msgid "Python news digest 2013 — %(current_time)s "
+msgstr "Дайджест новостей о python 2013 — %(current_time)s"
+
+#: templates/blocks/_friends.html:4
+msgid "Support us"
+msgstr "Нас поддерживает"
+
+#: templates/blocks/_jumb.html:13
+msgid "All the most interesting right here and right now!"
+msgstr "Всё самое интересное прямо здесь и сейчас!"
+
+#: templates/blocks/_jumb.html:14
+msgid ""
+"Новости собираются с мира по нитке на совершенно безвозмездной основе. <br>\n"
+"            Ты легко можешь посодействовать проекту, добавив ссылку на интересную новость, статью, интервью или\n"
+"            проект о python.<br>\n"
+"            А еще можно форкнуть код этого проекта на <a aria-label=\"Star pythondigest/pythondigest on GitHub\"\n"
+"                                                         href=\"https://github.com/pythondigest/pythondigest\"\n"
+"                                                         class=\"github-button\">GitHub</a>\n"
+"            и помочь в развитии его функциональности. <br>\n"
+"            И еще один вариант - проголосовать <a href=\"http://yasobe.ru/na/pydigest\">рублем</a>\n"
+"            "
+msgstr ""
+
+#: templates/blocks/_jumb.html:26
+msgid "Add news"
+msgstr "Добавить новость"
+
+#: templates/blocks/_menu.html:13
+msgid "Python Digest"
+msgstr "Python Дайджест"
+
+#: templates/blocks/_menu.html:17
+msgid "NEWS"
+msgstr "НОВОСТИ"
+
+#: templates/blocks/_menu.html:20
+msgid "RELEASES"
+msgstr "ВЫПУСКИ"
+
+#: templates/blocks/_menu.html:23
+msgid "OUR FRIENDS"
+msgstr "НАШИ ДРУЗЬЯ"
+
+#: templates/blocks/_menu.html:26
+msgid "HELP PROJECT"
+msgstr "ПОМОЧЬ ПРОЕКТУ"
+
+#: templates/blocks/_menu.html:33
+msgid "Enter the query..."
+msgstr "Введите запрос..."
+
+#: templates/blocks/_menu.html:35
+msgid "Search"
+msgstr "Поиск"
+
+#: templates/blocks/_orphus.html:4
+msgid "Find the typo?"
+msgstr "Нашли опечатку?"
+
+#: templates/blocks/_orphus.html:5
+msgid "Select spelling error with your mouse and press Ctrl+Enter"
+msgstr "Выделите фрагмент и отправьте нажатием Ctrl+Enter."
+
+#: templates/blocks/_orphus.html:6
+msgid "Orphus system"
+msgstr "Система Orphus"
+
+#: templates/digest/blocks/_favorite_items.html:4
+msgid "User's choice"
+msgstr "Выбор пользователей"
+
+#: templates/digest/blocks/_feed.html:4
+msgid "Latest news"
+msgstr "Последние новости"
+
+#: templates/digest/blocks/_feed.html:13
+msgid "Show all"
+msgstr "Показать все"
+
+#: templates/digest/blocks/_feed_item.html:17
+#: templates/digest/blocks/_item_as_line.html:10
+msgid "Comment link"
+msgstr "Прокомментировать ссылку"
+
+#: templates/digest/blocks/_feed_item.html:63
+msgid "Tags:"
+msgstr "Теги:"
+
+#: templates/digest/blocks/_feed_item.html:82
+msgid "Create date:"
+msgstr "Дата создания"
+
+#: templates/digest/blocks/_feed_item.html:90
+msgid "Issue:"
+msgstr ""
+
+#: templates/digest/blocks/_feed_item.html:101
+msgid "Section:"
+msgstr "Раздел"
+
+#: templates/digest/blocks/_feed_item.html:109
+#: templates/digest/blocks/_item_as_line.html:19
+msgid "Language:"
+msgstr "Язык:"
+
+#: templates/digest/blocks/_issue_anounce.html:15
+msgid "Trend of the week"
+msgstr "Тенденция недели"
+
+#: templates/digest/blocks/_item_article.html:10
+msgid "Experimental function:"
+msgstr "Экспериментальная функция:"
+
+#: templates/digest/blocks/_item_article.html:11
+msgid ""
+"Below you can see the text of the article you can follow by the link. You "
+"can quickly understand the link worth reading or not"
+msgstr ""
+"Ниже вы видите текст статьи по ссылке. По нему можно быстро\n"
+"                понять ссылка достойна прочтения или нет"
+
+#: templates/digest/blocks/_item_article.html:12
+msgid ""
+"Please note that the text under the link may not\n"
+"match with text here."
+msgstr ""
+"Просим обратить внимание, что текст по ссылке и здесь может не\n"
+"совпадать."
+
+#: templates/digest/blocks/_item_article.html:17
+msgid "Article text"
+msgstr "Текст статьи"
+
+#: templates/digest/pages/add_news.html:9
+msgid "Add news to the Digest"
+msgstr "Добавить новость в Дайджест"
+
+#: templates/digest/pages/add_news.html:11
+msgid ""
+"We don't host news openly advertising.<br />\n"
+"            Links to resources hosted on a paid for money, email us on: "
+msgstr ""
+"Мы не размещаем новости откровенно рекламного характера.<br />\n"
+"Ссылки на платные ресурсы размещаются за деньги, пишите на email: "
+
+#: templates/digest/pages/issue.html:21
+msgid ""
+"The new release of weekly digest of news about #python is already in the "
+"air!"
+msgstr "Новый выпуск еженедельного дайджеста новостей о #python уже в эфире!"
+
+#: templates/digest/pages/news_item.html:29
+msgid "Python Digesst"
+msgstr "Python Дайджест"
+
+#: templates/digest/pages/news_list.html:29
+msgid "Any"
+msgstr "Любой"
+
+#: templates/old/editor_material_view.html:13
+#, python-format
+msgid ""
+"Author: %(user)s\n"
+"                    Published at: %(created_at)s"
+msgstr ""
+"Автор: %(user)s\n"
+"Опубликовано: %(created_at)s"
+
+#: templates/pages/friends.html:4 templates/pages/friends.html:7
+msgid "Our friends"
+msgstr "Наши друзья"
+
+#: templates/pages/index.html:4 templates/pages/index.html:5
+msgid "Weekly collection of fresh and the most important news about Python"
+msgstr "Еженедельная подборка свежих и самых значимых новостей o Python"
+
+#: templates/pages/index.html:9
+msgid "The current release:"
+msgstr "Текущий выпуск:"
+
+#~ msgid "News language"
+#~ msgstr "Язык новости"
+
+#~ msgid "Thank the project"
+#~ msgstr "Помочь проекту"
+
+#~ msgid "Confirm email address <b>%(email)s</b>?"
+#~ msgstr "Подтвердить пароль <b>%(email)s</b>?"
 
 #~ msgid "Admin"
 #~ msgstr "Администрация"

@@ -1,5 +1,7 @@
+{% load i18n %}
+
 <div class="card card-block">
-    <h4 class="card-title">Нашли опечатку?</h4>
-    <p class="card-text">Выделите фрагмент и отправьте нажатием Ctrl+Enter.</p>
-    <a class="btn btn-primary" href="http://orphus.ru" id="orphus" target="_blank">Система Orphus</a>
+    <h4 class="card-title">{% trans 'Find the typo?' %}</h4>
+    <p class="card-text">{% trans 'Select spelling error with your mouse and press Ctrl+Enter' %}</p>
+    <a class="btn btn-primary" href="http://orphus.ru" id="orphus" target="_blank">{% trans 'Orphus system' %}</a>
 </div>

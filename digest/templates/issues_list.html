@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block content %}
 <div class="container cards-list">
@@ -8,9 +9,9 @@
     {% for item in items %}
     {% thumbnail item.image "x200" as im %}
         <div class="thumb col-sm-4 col-lg-4 col-md-4">
-        
+
             <a href="{% url 'digest:issue_view' pk=item.pk %}"
-               title="Дайджест python, {{ item.title }}  {{ item.description|striptags }}">
+               title="{% blocktrans with title=item.title description=item.description|striptags %}Python digest, {{ title }}  {{ description }}{% endblocktrans %}">
                 <div class="thumbnail">
 
                     <div class="issue-title">
@@ -19,16 +20,16 @@
                     </div>
 
                     <div class="issue-img">
-                        <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
+                        <img src="{{ im.url }}" alt="{% blocktrans with title=item.title %}Python digest, {{ title }}{% endblocktrans %}">
                     </div>
 
                 </div>
             </a>
-        
+
         </div>
     {% endthumbnail %}
     {% empty %}
-           <p>Пока еще ни одного выпуска</p>
+           <p>{% trans 'No releases so far' %}</p>
     {% endfor %}
 
     </div>

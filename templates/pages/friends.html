@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block page_title %}Наши друзья{% endblock %}
-
+{% load i18n %}
+{% block page_title %}{% trans 'Our friends' %}{% endblock %}
 
 {% block content %}
-<h1 class="text-center text-capitalize">Наши друзья</h1>
+<h1 class="text-center text-capitalize">{% trans 'Our friends' %}</h1>
 <hr />
 <div class="card-columns">
     <div class="card card-block text-xs-center">

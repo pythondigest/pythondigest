@@ -1,7 +1,7 @@
 {% load pytils_dt %}
 {% load common %}
 {% load micawber_tags %}
-
+{% load i18n %}
 {% load remdow %}
 
 <div class="item-container card">
@@ -14,7 +14,7 @@
             {% endif %} &nbsp;
             {% if comment %}
                 <span class="text-primary">
-                    <a href="{{ item.internal_link }}" title="Прокомментировать ссылку">
+                    <a href="{{ item.internal_link }}" title="{% trans 'Comment link' %}">
                         <i class="fa fa-comments-o"></i>
                     </a>
                 </span>
@@ -49,7 +49,7 @@
             <a rel="nofollow" class="btn btn-primary btn-sm pull-xs-left"
                href="{{ object.link }}"
                onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-               target="_blank">Читать>></a>
+               target="_blank">{% trans 'Read' %}>></a>
             <div class="addthis_sharing_toolbox pull-xs-right"></div>
         {% endif %}
     </noindex>
@@ -60,7 +60,7 @@
         {% if object.tags_as_links %}
 
             <ul class="item-tags text-muted card-text">
-                <i class="fa fa-tags" aria-hidden="true"></i>Tags:&nbsp;
+                <i class="fa fa-tags" aria-hidden="true"></i>{% trans 'Tags:' %}&nbsp;
 
                 {% for tag_name, tag_link in item.tags_as_links %}
                     <li>
@@ -79,7 +79,7 @@
         <ul class="item-attributes text-muted card-text">
             <li>
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    Create date:&nbsp;
+                    {% trans 'Create date:' %}&nbsp;
                     {{ object.created_at|date:"d.m.Y" }}
             </li>
         <!--/CREATE DATE-->
@@ -87,7 +87,7 @@
         {% if object.issue.status == 'active' %}
             <li>
                     <i class="fa fa-rocket" aria-hidden="true"></i>
-                    Issue:&nbsp;
+                    {% trans 'Issue:' %}&nbsp;
                     <a href="{{ object.issue.link }}" class="section-link">{{ object.issue.title }}</a>
                     ({{ object.issue.date_from|date:"d.m.Y" }} -
                     {{ object.issue.date_to|date:"d.m.Y" }})
@@ -98,7 +98,7 @@
         {% if object.section %}
             <li>
                     <i class="fa fa-cubes" aria-hidden="true"></i>
-                    Section:&nbsp;
+                    {% trans 'Section:' %}&nbsp;
                     <a href="{% modify_url 'set_query_param_np' 'section' object.section.pk %}">{{ object.section.title }}</a>
             </li>
         {% endif %}
@@ -106,8 +106,8 @@
         <!--LANGUAGE-->
             <li>
                     <i class="fa fa-language" aria-hidden="true"></i>
-                    Language:&nbsp;
-                <span title="Язык новости" class="badge news-line-item-resource {{ object.language }}">
+                    {% trans 'Language:' %}&nbsp;
+                <span title="{% trans 'Language of the news' %}" class="badge news-line-item-resource {{ object.language }}">
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 </span>
             </li>

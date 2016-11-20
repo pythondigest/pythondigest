@@ -3,15 +3,16 @@
 {% load compress %}
 {% load remdow %}
 {% load common %}
+{% load i18n %}
 
 <!DOCTYPE html>
 <html lang="{% locale %}">
 <head>
     <title>{% block page_title %}Дайджест новостей о python{% endblock %}{% block head_title %}{% endblock %}</title>
     <meta name="description"
-          content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение{% endblock %}">
+          content="{% block page_description %}{% blocktrans %}A weekly compilation of the latest and most important news about Python. Videos, articles, training materials, releases of libraries and projects. A lot of content about Django, Flask, numpy, and machine learning{% endblocktrans %}{% endblock %}">
     <meta name="keywords"
-          content="питон, python, django, flask, новости о python, {% block page_keywords %}{% endblock %}"/>
+          content="{% blocktrans %}python, django, flask, news about python, {% endblocktrans %}{% block page_keywords %}{% endblock %}"/>
     <meta charset="utf-8">
     <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
 

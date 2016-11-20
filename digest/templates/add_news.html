@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Добавление новости</h1>
+{% load i18n %}
+<h1>{% trans 'News adding' %}</h1>
 {% for error in form.non_field_errors %}
     <div class="alert alert-danger">
         <strong>{{ error|escape }}</strong>
@@ -16,6 +17,6 @@
           {{ field }}
     </div>
     {% endfor %}
-    <input type="submit" value="Отправить" class="btn btn-default"/>
+    <input type="submit" value="{% trans 'Send' %}" class="btn btn-default"/>
 </form>
 {% endblock %}

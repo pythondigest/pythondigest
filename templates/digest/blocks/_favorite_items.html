@@ -1,6 +1,7 @@
+{% load i18n %}
 {% if items %}
     <div class="card hidden-md-down">
-        <div class="card-header">Выбор пользователей</div>
+        <div class="card-header">{% trans "User's choice" %}</div>
         <ul class="list-group list-group-flush">
             {% for object in items %}
                 <li class="list-group-item item-as-line">

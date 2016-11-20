@@ -2,6 +2,7 @@
 {% load thumbnail %}
 {% load common %}
 {% load micawber_tags %}
+{% load i18n %}
 
 {% load remdow %}
 {% load video %}
@@ -17,7 +18,7 @@
         <meta name="twitter:site" content="@pydigest"/>
         <meta name="twitter:title" content="{{ object.title }}"/>
         <meta name="twitter:description"
-              content="Новый выпуск еженедельного дайджеста новостей о #python уже в эфире!"/>
+              content="{% trans 'The new release of weekly digest of news about #python is already in the air!' %}"/>
         <meta name="twitter:image" content="http://pythondigest.ru{{ im.url }}"/>
         <meta name="twitter:url" content="http://pythondigest.ru{{ object.link }}"/>
     {% endthumbnail %}

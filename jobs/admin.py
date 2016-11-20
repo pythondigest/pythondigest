@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
 from digest.admin import link_html
 from jobs.models import JobFeed, JobItem, AcceptedList, RejectedList
@@ -19,7 +20,7 @@ class JobFeedAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = 'Ссылка'
+    link_html.short_description = _('Link')
 
 
 class RejectedListAdmin(admin.ModelAdmin):
@@ -41,7 +42,7 @@ class JobItemAdmin(admin.ModelAdmin):
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = 'Ссылка'
+    link_html.short_description = _('Link')
 
 
 admin.site.register(JobItem, JobItemAdmin)

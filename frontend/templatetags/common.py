@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_text
 from django.utils.six import text_type
-from django.utils.translation import to_locale, get_language
+from django.utils.translation import to_locale, get_language, ugettext as _
 from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
 from unidecode import unidecode as _unidecode
@@ -113,14 +113,14 @@ def modify_url_(url, operation, *args):
 @register.simple_tag(name='money_block_title')
 def money_block_title():
     texts = [
-        'Покормить редактора',
-        'Помочь проекты',
-        'Поблагодарить проект',
-        'Покормить команду',
-        'Помочь оплатить домен',
-        'Скинуться на пиво',
-        'Скинуться на хостинг',
-        'Скинуться на торт',
+        _('Feed editor'),
+        _('Help project'),
+        _('Help the project'),
+        _('Feed the team'),
+        _('Help to pay for the domain'),
+        _('Donate on beer'),
+        _('Donate on hosting'),
+        _('Donate on cake'),
     ]
     return random.choice(texts)
 

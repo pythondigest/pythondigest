@@ -2,6 +2,7 @@
 {% load pytils_dt %}
 {% load common %}
 {% load micawber_tags %}
+{% load i18n %}
 
 {% block body %}
 <div class="news-list">
@@ -11,7 +12,7 @@
         {% endwith %}
     {% empty %}
         <div class="alert alert-warning pull-left">
-            <strong>Печально но факт!</strong> В этой ленте нет новостей.
+            {% blocktrans %}<strong>Its sad but true!</strong> There is no news in this feed.{% endblocktrans %}
         </div>
     {% endfor %}
 
@@ -21,15 +22,15 @@
 
 {% block pre_right_panel %}
     <div class="card">
-        <div class="card-header">Язык новостей</div>
+        <div class="card-header">{% trans 'Language of the news' %}</div>
         {% with lang=request.GET.lang|default:'any' %}
         <div class="card-block text-xs-center">
             <a class="btn btn-secondary btn-sm {% if lang == 'any' %}active{% endif %}"
-               href="{% modify_url 'del_query_param' 'lang' %}">Любой</a>
+               href="{% modify_url 'del_query_param' 'lang' %}">{% trans 'Any' %}</a>
             <a class="btn btn-secondary btn-sm {% if lang == 'ru' %}active{% endif %}"
-               href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">Русский</a>
+               href="{% modify_url 'set_query_param_np' 'lang' 'ru' %}">{% trans 'Russian' %}</a>
             <a class="btn btn-secondary btn-sm {% if lang == 'en' %}active{% endif %}"
-               href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">Английский</a>
+               href="{% modify_url 'set_query_param_np' 'lang' 'en' %}">{% trans 'English' %}</a>
         </div>
         {% endwith %}
     </div>

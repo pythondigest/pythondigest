@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load i18n %}
 
 {% block page_title %}{{ material.title }}{% endblock %}
 
@@ -9,8 +10,8 @@
             <h1>{{ material.title }} </h1>
             {{ material.contents|safe }}
             <div class="material-postscriptum">
-                <small>Автор: {{ material.user }}
-                    Опубликовано: {{ material.created_at|date:'d.m.Y' }}</small>
+                <small>{% blocktrans with user=material.user created_at=material.created_at|date:'d.m.Y' %}Author: {{ user }}
+                    Published at: {{ created_at }}{% endblocktrans %}</small>
             </div>
         </div>
     </div>

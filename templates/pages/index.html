@@ -1,12 +1,11 @@
 {% extends "digest/pages/issue.html" %}
+{% load i18n %}
 
-{% block page_title %}Еженедельная подборка свежих и самых значимых новостей o
-    Python{% endblock %}
-{% block page_description %}Еженедельная подборка свежих и самых значимых
-    новостей o Python{% endblock %}
+{% block page_title %}{% blocktrans %}Weekly collection of fresh and the most important news about Python{% endblocktrans %}{% endblock %}
+{% block page_description %}{% blocktrans %}Weekly collection of fresh and the most important news about Python{% endblocktrans %}{% endblock %}
 
 
 {% block cur_issue_text %}
-    <small>Текущий выпуск:</small>
+    <small>{% trans 'The current release:' %}</small>
 {% endblock cur_issue_text %}
 

@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load account_tags %}
 {% load static %}
+{% load i18n %}
 
 <nav class="navbar navbar-sticky-top navbar-dark bg-inverse" role="navigation">
     <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#navbar">
@@ -9,29 +10,29 @@
     <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#search">
         <i class="fa fa-search" aria-hidden="true"></i>
     </button>
-    <a class="navbar-brand" href="{% url 'frontend:index' %}">Python Дайджест</a>
+    <a class="navbar-brand" href="{% url 'frontend:index' %}">{% trans 'Python Digest' %}</a>
     <div class="collapse navbar-toggleable-sm" id="navbar">
         <ul class="nav navbar-nav">
             <li class="nav-item{% if active_menu_item == 'feed' %} active{% endif %}">
-                <a class="nav-link" href="{% url 'digest:feed' %}">НОВОСТИ</a>
+                <a class="nav-link" href="{% url 'digest:feed' %}">{% trans 'NEWS' %}</a>
             </li>
             <li class="nav-item{% if active_menu_item == 'issues_list' %} active{% endif %}">
-                <a class="nav-link" href="{% url 'digest:issues' %}">ВЫПУСКИ</a>
+                <a class="nav-link" href="{% url 'digest:issues' %}">{% trans 'RELEASES' %}</a>
             </li>
             <li class="nav-item{% if active_menu_item == 'friends' %} active{% endif %}">
-                <a class="nav-link" href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a>
+                <a class="nav-link" href="{% url 'frontend:friends' %}">{% trans 'OUR FRIENDS' %}</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="http://yasobe.ru/na/pydigest">ПОМОЧЬ ПРОЕКТУ</a>
+                <a class="nav-link" href="http://yasobe.ru/na/pydigest">{% trans 'HELP PROJECT' %}</a>
             </li>
         </ul>
     </div>
     <div class="collapse navbar-toggleable-sm" id="search">
         <form class="pull-xs-right" action="{% url 'digest:feed' %}" role="form">
             <div class="input-group">
-            <input class="form-control search-input" type="text" placeholder="Введите запрос..." name="q" value="{{ request.GET.q|default:'' }}">
+            <input class="form-control search-input" type="text" placeholder="{% trans 'Enter the query...' %}" name="q" value="{{ request.GET.q|default:'' }}">
             <span class="input-group-btn">
-                <button class="btn btn-secondary" type="submit">Поиск</button>
+                <button class="btn btn-secondary" type="submit">{% trans 'Search' %}</button>
             </span>
             </div>
         </form>

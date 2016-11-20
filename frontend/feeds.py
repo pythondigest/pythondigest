@@ -5,6 +5,7 @@ import pytils
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
+from django.utils.translation import ugettext_lazy as _
 
 from digest.models import Issue, Item, Section
 
@@ -12,7 +13,7 @@ from digest.models import Issue, Item, Section
 class DigestFeed(Feed):
     title = 'Дайджест новостей о python'
     link = '/'
-    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях.'
+    description = _('Announcements in Russian of the latest news about python and surrounding technologies.')
 
     def item_title(self, item):
         return item.title
@@ -73,7 +74,7 @@ class TwitterEntriesFeed(ItemDigestFeed):
 
 class RussianEntriesFeed(ItemDigestFeed):
     """Лента РСС для русскоязычных новостей."""
-    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы).'
+    description = _('Announcements in Russian of the latest news about python and surrounding technologies.')
 
     def item_link(self, item):
         return item.internal_link
@@ -94,9 +95,9 @@ class CustomFeedGenerator(Rss201rev2Feed):
 
 class IssuesFeed(ItemDigestFeed):
     """Лента РСС для выпусков новостей."""
-    title = 'Дайджест новостей о python - все выпуски'
+    title = _('News digest about python - all editions')
     link = '/issues/'
-    description = 'Рускоязычные анонсы свежих новостей о python и близлежащих технологиях.'
+    description = _('Announcements in Russian of the latest news about python and surrounding technologies.')
 
     feed_type = CustomFeedGenerator
 
@@ -108,7 +109,7 @@ class IssuesFeed(ItemDigestFeed):
     def item_title(self, item):
         df = pytils.dt.ru_strftime('%d %B %Y', item.date_from, inflected=True)
         dt = pytils.dt.ru_strftime('%d %B %Y', item.date_to, inflected=True)
-        return 'Python-digest #%s. Новости, интересные проекты, статьи и интервью [%s — %s]' % (
+        return _('Python-digest #%s. News, interesting projects, articles and interviews [%s — %s]') % (
         item.pk, df, dt)
 
     def item_pubdate(self, item):
@@ -134,6 +135,7 @@ class SectionFeed(DigestFeed):
 
     def items(self):
         section = Section.objects.filter(title=self.section)
+        # TODO: refactor here
         if self.section == 'all' or len(section) != 1:
             result = Item.objects.filter(status='active',
                                          activated_at__lte=datetime.datetime.now()) \
