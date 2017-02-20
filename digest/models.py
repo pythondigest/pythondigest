@@ -197,7 +197,7 @@ class Item(models.Model):
     title = models.CharField(
         verbose_name=_('Title'), max_length=255)
     is_editors_choice = models.BooleanField(
-        verbose_name=_('Is editors choice'), default=False)
+        verbose_name=_('Is editors choice'), default=True)
     description = models.TextField(
         verbose_name=_('Description'), blank=True)
     issue = models.ForeignKey(
