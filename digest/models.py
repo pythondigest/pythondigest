@@ -257,7 +257,7 @@ class Item(models.Model):
     )
     is_editors_choice = models.BooleanField(
         verbose_name=_('Is editors choice'),
-        default=False
+        default=True
     )
     description = models.TextField(
         verbose_name=_('Description'),
