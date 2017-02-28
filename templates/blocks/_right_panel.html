@@ -10,56 +10,56 @@
 </div>
 
 
-
-<div id="mh_subscription_form" class="panel panel-default ">
-
-    <form method="post"
-          action="https://mailhandler.ru/sub/api/subscribe/42fc3086-b7ad-4d36-ba8d-6b4c1a868cd2/"
-          id="mh-embedded-subscribe-form" name="mh-embedded-subscribe-form"><h2
-            id="mh_subscription_form_title">Лучшая Python рассылка</h2>
-
-        <div class="mh-field-group">
-            <input type="email" value=""
-                   name="email"
-                   placeholder="Email..."
-                   class="required email"
-                   id="mh-email"></div>
-        <div id="mh-responses" class="clear">
-            <div class="response" id="mh-error-response"
-                 style="display:none"></div>
-            <div class="response" id="mh-success-response"
-                 style="display:none"></div>
-        </div>
-        <div class="clear">
-            <input type="submit" value="Подписаться" name="subscribe"
-                   id="mh-embedded-subscribe"
-                   class="button">
-        </div>
-    </form>
-
-    <script src="https://mailhandler.ru/static/site/js/lib/jquery/jquery-1.11.1.min.js"></script>
-    <script>
-        $(function () {
-            var MailHandlerSubscribeBtn = $('#mh-embedded-subscribe'),
-                MailHandlerSubscribeForm = $('#mh-embedded-subscribe-form');
-            MailHandlerSubscribeBtn.on('click', function (e) {
-                e.preventDefault();
-                var data = MailHandlerSubscribeForm.serialize();
-                $.post(MailHandlerSubscribeForm.attr('action'), data).done(function (response) {
-                    if (response.errors) {
-                        for (var i in response.errors) {
-                            if (response.errors.hasOwnProperty(i)) {
-                                $('#mh-' + i, MailHandlerSubscribeForm).after('<p class="mh-field-error">' + response.errors[i].join(', ') + '</p>');
-                            }
-                        }
-                    } else {
-                        $('#mh-success-response').text('Спасибо за то, что подписались на наши обновления!').show();
-                    }
-                });
-            });
-        });
-    </script>
-</div>
+{##}
+{#<div id="mh_subscription_form" class="panel panel-default ">#}
+{##}
+{#    <form method="post"#}
+{#          action="https://mailhandler.ru/sub/api/subscribe/42fc3086-b7ad-4d36-ba8d-6b4c1a868cd2/"#}
+{#          id="mh-embedded-subscribe-form" name="mh-embedded-subscribe-form"><h2#}
+{#            id="mh_subscription_form_title">Лучшая Python рассылка</h2>#}
+{##}
+{#        <div class="mh-field-group">#}
+{#            <input type="email" value=""#}
+{#                   name="email"#}
+{#                   placeholder="Email..."#}
+{#                   class="required email"#}
+{#                   id="mh-email"></div>#}
+{#        <div id="mh-responses" class="clear">#}
+{#            <div class="response" id="mh-error-response"#}
+{#                 style="display:none"></div>#}
+{#            <div class="response" id="mh-success-response"#}
+{#                 style="display:none"></div>#}
+{#        </div>#}
+{#        <div class="clear">#}
+{#            <input type="submit" value="Подписаться" name="subscribe"#}
+{#                   id="mh-embedded-subscribe"#}
+{#                   class="button">#}
+{#        </div>#}
+{#    </form>#}
+{##}
+{#    <script src="https://mailhandler.ru/static/site/js/lib/jquery/jquery-1.11.1.min.js"></script>#}
+{#    <script>#}
+{#        $(function () {#}
+{#            var MailHandlerSubscribeBtn = $('#mh-embedded-subscribe'),#}
+{#                MailHandlerSubscribeForm = $('#mh-embedded-subscribe-form');#}
+{#            MailHandlerSubscribeBtn.on('click', function (e) {#}
+{#                e.preventDefault();#}
+{#                var data = MailHandlerSubscribeForm.serialize();#}
+{#                $.post(MailHandlerSubscribeForm.attr('action'), data).done(function (response) {#}
+{#                    if (response.errors) {#}
+{#                        for (var i in response.errors) {#}
+{#                            if (response.errors.hasOwnProperty(i)) {#}
+{#                                $('#mh-' + i, MailHandlerSubscribeForm).after('<p class="mh-field-error">' + response.errors[i].join(', ') + '</p>');#}
+{#                            }#}
+{#                        }#}
+{#                    } else {#}
+{#                        $('#mh-success-response').text('Спасибо за то, что подписались на наши обновления!').show();#}
+{#                    }#}
+{#                });#}
+{#            });#}
+{#        });#}
+{#    </script>#}
+{#</div>#}
 
 
 
