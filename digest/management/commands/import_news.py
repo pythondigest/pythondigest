@@ -21,7 +21,7 @@ from digest.management.commands import (
     save_item,
     is_weekly_digest,
     _get_http_data_of_url,
-)
+    is_django_weekly_digest, parse_django_weekly_digest)
 from digest.models import ITEM_STATUS_CHOICES, \
     AutoImportResource, Item, ParsingRules, Section
 
@@ -159,6 +159,9 @@ def import_rss(**kwargs):
             digests_items = list(rss_items)
             list(map(parse_weekly_digest,
                      filter(is_weekly_digest, digests_items)))
+
+            list(map(parse_django_weekly_digest,
+                     filter(is_django_weekly_digest, digests_items)))
 
             resource = src.resource
             language = src.language

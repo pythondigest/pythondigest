@@ -31,10 +31,22 @@ def parse_weekly_digest(item_data: Dict):
         call_command('import_python_weekly', item_data.get('link'))
 
 
+def parse_django_weekly_digest(item_data: Dict):
+    if 'Django Weekly' in item_data.get('title'):
+        call_command('import_django_weekly', item_data.get('link'))
+
+
 def is_weekly_digest(item_data: Dict) -> bool:
     title = item_data.get('title')
     return bool(
         'Python Weekly' in title
+    )
+
+
+def is_django_weekly_digest(item_data: Dict) -> bool:
+    title = item_data.get('title')
+    return bool(
+        'Django Weekly' in title
     )
 
 
