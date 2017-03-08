@@ -387,6 +387,9 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.cssmin.CSSMinFilter',
 )
 
+MAILHANDLER_RU_KEY = ''
+MAILHANDLER_RU_USER_LIST_ID = 413
+
 HTML_MINIFY = True
 try:
     from .local_settings import *

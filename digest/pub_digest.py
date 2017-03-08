@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 import os
 import time
+from typing import List, Dict
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
@@ -12,7 +13,10 @@ import tweepy
 import twx
 import vk
 from django.conf import settings
+from django.template.loader import render_to_string
 from twx.botapi import TelegramBot
+
+from digest.pub_digest_email import send_email
 
 
 def init_auth(consumer_key,
@@ -213,9 +217,43 @@ def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
     )
 
 
-def pub_to_all(text: str, digest_url: str, digest_image_url: str):
+def pub_to_email(title: str, news):
+
+    description = """
+        Оставляйте свои комментарии к выпуcкам,
+        пишите нам в <a href="https://python-ru.slack.com/messages/pythondigest/">Slack</a> (<a href="https://python.stamplayapp.com/">инвайт</a>),
+        добавляйте свои новости через <a href="http://pythondigest.ru/add/">специальную форму</a>.
+        Вы можете следить за нами с помощью
+        <a href="http://pythondigest.ru/rss/issues/">RSS</a>,
+        <a href="https://twitter.com/pydigest">Twitter</a> или
+        <a href="https://t.me/py_digest">Telegram @py_digest</a>
+        <br><br>
+        Поддержите проект <a href='https://money.yandex.ru/to/41001222156458'>рублем</a> или <a href="https://github.com/pythondigest/pythondigest/issues">руками</a>
+    """
+
+    announcement = {
+        'title': "Python Дайджест: {}".format(title.lower()),
+        'description': description,
+        'header': 'Свежий выпуск Python Дайджест'
+    }
+
+    email_text = render_to_string('email.html', {
+        'announcement': announcement,
+        'digest': news,
+    })
+
+    send_email(announcement['title'], email_text)
+
+
+def pub_to_all(title: str,
+               text: str,
+               digest_url: str,
+               digest_image_url: str,
+               news: List[Dict]):
     """
     digest_url ='http://pythondigest.ru/issue/101/'
+    :param news:
+    :param title:
     :param text:
     :param digest_image_url:
     :param digest_url:
@@ -240,3 +278,5 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
     pub_to_vk_users(text, api)
     pub_to_gitter('\n'.join(text.split('\n')[1::]), settings.GITTER_TOKEN)
     pub_to_twitter(twitter_text, digest_image_url, twitter_api)
+
+    pub_to_email(title, news)
