@@ -71,4 +71,4 @@ def get_user_emails(list_id):
         response = req(response.json()['next'])
         users.extend(response.json()['results'])
 
-    return [x['email'] for x in users if x['is_active']]
+    return [x['email'] for x in users if x]
