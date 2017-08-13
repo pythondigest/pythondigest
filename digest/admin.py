@@ -431,7 +431,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
                 .order_by('-pk')
         except AssertionError:
             result = super().get_queryset(request)
-        return result
+        return result.prefetch_related('resource', 'user', 'section')
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
