@@ -183,7 +183,6 @@ class ItemAdmin(admin.ModelAdmin):
         'is_editors_choice', 'resource',
     )
 
-    list_editable = ('is_editors_choice', 'section')
     exclude = ('modified_at',),
     radio_fields = {
         'language': admin.HORIZONTAL,
@@ -198,6 +197,9 @@ class ItemAdmin(admin.ModelAdmin):
         _save_item_model(request, obj, form, change)
         super(ItemAdmin, self).save_model(request, obj, form, change)
 
+    def get_queryset(self, request):
+        return super().get_queryset(request)\
+            .prefetch_related('resource', 'user', 'section')
 
 admin.site.register(Item, ItemAdmin)
 
@@ -423,18 +425,17 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
         try:
             today = datetime.utcnow().date()
             yesterday = today - timedelta(days=2)
-            result = self.model.objects.filter(
-                related_to_date__range=[yesterday, today],
-                status='active'
-            ).order_by('-pk')
+            result = self.model.objects\
+                .filter(related_to_date__range=[yesterday, today],
+                        status='active')\
+                .order_by('-pk')
         except AssertionError:
-            result = super(ItemDailyModeratorAdmin, self).get_queryset(request)
+            result = super().get_queryset(request)
         return result
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
-        super(ItemDailyModeratorAdmin, self).save_model(request, obj, form,
-                                                        change)
+        super().save_model(request, obj, form, change)
 
 
 admin.site.register(ItemDailyModerator, ItemDailyModeratorAdmin)
