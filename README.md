@@ -74,7 +74,7 @@ python manage.py loaddata digest/fixtures/parsing_rules.json
 
 Create super user
 ```
-python manage.py createsuper
+python manage.py createsuperser
 ```
 
 Ok! You are ready for work with Python Digest! (runserver...)
