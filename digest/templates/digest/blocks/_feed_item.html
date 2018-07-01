@@ -53,8 +53,7 @@
                 {% else %}
                     <a rel="nofollow"
                        href="{{ object.link }}"
-                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-                       target="_blank">
+                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');">
                         {{ object.title }}
                     </a>
 
@@ -89,7 +88,7 @@
                 <a rel="nofollow" class="btn btn-primary btn-sm pull-left"
                    href="{{ object.link }}"
                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-                   target="_blank">Читать>></a>
+                   >Читать>></a>
                 <div class="addthis_sharing_toolbox pull-right"></div>
                 <br><br>
             {% endif %}
