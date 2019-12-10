@@ -22,7 +22,9 @@ urlpatterns = [
     url(r'', include(frontend_url, namespace='frontend')),
     url(r'', include(digest_url, namespace='digest')),
 
+    # admin
     url(r'^taggit_autosuggest/', include(taggit_urls)),
+
     # url(r'^account/', include('account.urls')),
     # url(r'', include('social.apps.django_app.urls', namespace='social'))
 ]
