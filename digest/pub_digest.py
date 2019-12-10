@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import json
 import os
 import time
+from typing import List, Dict
 from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
@@ -12,7 +13,10 @@ import tweepy
 import twx
 import vk
 from django.conf import settings
+from django.template.loader import render_to_string
 from twx.botapi import TelegramBot
+
+from digest.pub_digest_email import send_email
 
 
 def init_auth(consumer_key,
@@ -106,6 +110,7 @@ def post_to_wall(api, owner_id, message, **kwargs):
         'from_group': 1,
         'owner_id': owner_id,
         'message': message,
+        'v': '5.73',
     }
     data_dict.update(**kwargs)
     return api.wall.post(**data_dict)
@@ -115,6 +120,7 @@ def send_message(api, user_id, message, **kwargs):
     data_dict = {
         'user_id': user_id,
         'message': message,
+        'v': '5.73',
     }
     data_dict.update(**kwargs)
     return api.messages.send(**data_dict)
@@ -143,10 +149,10 @@ def get_pydigest_groups() -> list:
         (-24847633, 1),  # https://vk.com/club24847633     #
         (-69108280, 0),  # https://vk.com/pirsipy
         (-37392018, 1),  # https://vk.com/python_for_fun
-        (-75836319, 0),  # https://vk.com/flask_community
-        (-76525381, 0),  # https://vk.com/iteapro
+        #(-75836319, 0),  # https://vk.com/flask_community
+        #(-76525381, 0),  # https://vk.com/iteapro
         (-110767, 1),  # https://vk.com/django_framework
-        (-38080744, 1),  # https://vk.com/python_programing
+        #(-38080744, 1),  # https://vk.com/python_programing
     ]
     # return [
     #     (-105509411, 1),  # тестовая группа
@@ -213,9 +219,46 @@ def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
     )
 
 
-def pub_to_all(text: str, digest_url: str, digest_image_url: str):
+def pub_to_email(title: str, news):
+
+    description = """
+        Оставляйте свои комментарии к выпуcкам,
+        пишите нам в <a href="https://python-ru.slack.com/messages/pythondigest/">Slack</a> (<a href="https://slack.python.ru/">инвайт</a>),
+        добавляйте свои новости через <a href="http://pythondigest.ru/add/">специальную форму</a>.
+        Вы можете следить за нами с помощью
+        <a href="http://pythondigest.ru/rss/issues/">RSS</a>,
+        <a href="https://twitter.com/pydigest">Twitter</a> или
+        <a href="https://t.me/py_digest">Telegram @py_digest</a>
+        <br><br>
+        Поддержите проект <a href='https://money.yandex.ru/to/41001222156458'>рублем</a> или <a href="https://github.com/pythondigest/pythondigest/issues">руками</a>
+    """
+
+    announcement = {
+        'title': "Python Дайджест: {}".format(title.lower()),
+        'description': description,
+        'header': 'Свежий выпуск Python Дайджест'
+    }
+
+    email_text = render_to_string('email.html', {
+        'announcement': announcement,
+        'digest': news,
+    })
+
+    send_email(announcement['title'], email_text)
+
+
+
+
+
+def pub_to_all(title: str,
+               text: str,
+               digest_url: str,
+               digest_image_url: str,
+               news: List[Dict]):
     """
     digest_url ='http://pythondigest.ru/issue/101/'
+    :param news:
+    :param title:
     :param text:
     :param digest_image_url:
     :param digest_url:
@@ -225,8 +268,7 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
                              user_login=settings.VK_LOGIN,
                              user_password=settings.VK_PASSWORD,
                              scope='wall,messages,offline')
-    api = vk.API(session)
-
+    api = vk.API(session, api_version='5.73')
     twitter_text = 'Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {0}'.format(
         digest_url)
     twitter_api = init_auth(settings.TWITTER_CONSUMER_KEY,
@@ -237,6 +279,7 @@ def pub_to_all(text: str, digest_url: str, digest_image_url: str):
     pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
     pub_to_vk_groups(text, digest_url, api)
     pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
-    pub_to_vk_users(text, api)
-    pub_to_gitter('\n'.join(text.split('\n')[1::]), settings.GITTER_TOKEN)
+    ##pub_to_vk_users(text, api)
     pub_to_twitter(twitter_text, digest_image_url, twitter_api)
+
+    pub_to_email(title, news)

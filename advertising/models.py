@@ -79,15 +79,14 @@ def get_ads(page_url=None):
     )
 
     if page_url is not None:
-        ads = ads.filter(pages__url=page_url)
-        # to_remove = []
-        # for ad in ads:
-        #     for ad_page in ad.pages.all():
-        #         if ad_page.url == page_url:
-        #             break
-        #     else:
-        #         to_remove.append(ad.id)
-        # ads = ads.exclude(id__in=to_remove)
+        to_remove = []
+        for ad in ads:
+            for ad_page in ad.pages.all():
+                if ad_page.url == page_url:
+                    break
+            else:
+                to_remove.append(ad.id)
+        ads = ads.exclude(id__in=to_remove)
     return ads
 
 

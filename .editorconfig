@@ -19,3 +19,10 @@ trim_trailing_whitespace = false
 
 [Makefile]
 indent_style = tab
+
+[LICENSE]
+insert_final_newline = false
+
+[*.bat]
+indent_style = tab
+end_of_line = crlf

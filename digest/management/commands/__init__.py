@@ -31,19 +31,23 @@ def parse_weekly_digest(item_data: Dict):
         call_command('import_python_weekly', item_data.get('link'))
 
 
-def parse_importpython(item_data: Dict):
-    if 'Import Python' in item_data.get('title'):
-        call_command('import_importpython', url=item_data.get('link'))
+def parse_django_weekly_digest(item_data: Dict):
+    if 'Django Weekly' in item_data.get('title'):
+        call_command('import_django_weekly', item_data.get('link'))
 
 
 def is_weekly_digest(item_data: Dict) -> bool:
     title = item_data.get('title')
-    return bool('Python Weekly' in title)
+    return bool(
+        'Python Weekly' in title
+    )
 
 
-def is_importpython(item_data: Dict) -> bool:
+def is_django_weekly_digest(item_data: Dict) -> bool:
     title = item_data.get('title')
-    return bool('Import Python' in title)
+    return bool(
+        'Django Weekly' in title
+    )
 
 
 def _clojure_get_youtube_urls_from_page():

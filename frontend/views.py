@@ -21,6 +21,7 @@ logger = logging.getLogger(__name__)
 class Sitemap(TemplateView):
     content_type = 'text/xml'
     template_name = 'sitemap.html'
+    protocol = 'https'
 
     def get_context_data(self, **kwargs):
         ctx = super(Sitemap, self).get_context_data(**kwargs)

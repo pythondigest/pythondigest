@@ -8,7 +8,7 @@ SECRET_KEY = 'TBD IN LOCAL SETTINGS'
 
 DEBUG = True
 
-THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru']
 
@@ -398,6 +398,9 @@ COMPRESS_CSS_FILTERS = (
     'compressor.filters.css_default.CssAbsoluteFilter',
     'compressor.filters.cssmin.CSSMinFilter',
 )
+
+MAILHANDLER_RU_KEY = ''
+MAILHANDLER_RU_USER_LIST_ID = 413
 
 HTML_MINIFY = True
 try:

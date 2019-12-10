@@ -5,6 +5,7 @@ import os
 
 import requests
 import requests.exceptions
+import simplejson.scanner
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -398,22 +399,29 @@ class Item(models.Model):
 
     @property
     def text(self):
-        if self.article_path and os.path.exists(self.article_path):
+        nonempty_path = self.article_path is not None and self.article_path
+        if nonempty_path and os.path.exists(
+            self.article_path):
             with open(self.article_path, 'r') as fio:
                 result = fio.read()
         else:
             try:
                 resp = requests.get(self.link)
                 text = resp.text
-                result = Document(
-                    text,
-                    min_text_length=50,
-                    positive_keywords=','.join(settings.DATASET_POSITIVE_KEYWORDS),
-                    negative_keywords=','.join(settings.DATASET_NEGATIVE_KEYWORDS)
-                ).summary()
-            except Unparseable:
-                result = text
-            except (KeyError, requests.exceptions.RequestException):
+                try:
+                    result = Document(text,
+                                      min_text_length=50,
+                                      positive_keywords=','.join(
+                                          settings.DATASET_POSITIVE_KEYWORDS),
+                                      negative_keywords=','.join(
+                                          settings.DATASET_NEGATIVE_KEYWORDS)
+                                      ).summary()
+                except Unparseable:
+                    result = text
+            except (KeyError,
+                    requests.exceptions.RequestException,
+                    requests.exceptions.Timeout,
+                    requests.exceptions.TooManyRedirects) as e:
                 result = ''
             self.article_path = os.path.join(settings.DATASET_ROOT,
                                              '{0}.html'.format(self.id))
@@ -422,8 +430,7 @@ class Item(models.Model):
             self.save()
         return result
 
-    @property
-    def data4cls(self, status=False):
+    def get_data4cls(self, status=False):
         result = {
             'link': self.link,
             'data': {
@@ -438,6 +445,8 @@ class Item(models.Model):
             result['data']['label'] = self.status == 'active'
         return result
 
+    data4cls = property(get_data4cls)
+
     @property
     def internal_link(self):
         return reverse('digest:item', kwargs={'pk': self.pk})
@@ -449,7 +458,7 @@ class Item(models.Model):
 
     @property
     def tags_as_str(self):
-        if self.tags.all():
+        if self.tags and self.tags.all():
             result = ','.join([x.name for x in self.tags.all()])
         else:
             result = 'Without tag'
@@ -485,6 +494,7 @@ class ItemClsCheck(models.Model):
         # print('Run check: {}'.format(self.pk))
         prev_data = datetime.datetime.now() - datetime.timedelta(days=10)
         if force or self.last_check <= prev_data:
+
             try:
                 url = '{0}/{1}'.format(settings.CLS_URL_BASE,
                                        'api/v1.0/classify/')
@@ -494,7 +504,9 @@ class ItemClsCheck(models.Model):
                                      ]}))
                 self.score = resp.json()['links'][0].get(self.item.link, False)
             except (requests.exceptions.RequestException,
-                    json.JSONDecodeError):
+                    requests.exceptions.Timeout,
+                    requests.exceptions.TooManyRedirects,
+                    simplejson.scanner.JSONDecodeError) as e:
                 self.score = False
             # print('Real run check: {}'.format(self.pk))
             self.save()

@@ -50,6 +50,7 @@ class FavoriteItemsMixin(ContextMixin):
         # пройтись по всем и сформировать лист
 
         if likes_enable():
+            from secretballot.models import Vote
             date = datetime.datetime.now() - datetime.timedelta(days=12)
             votes = Vote.objects.filter(
                 content_type=ContentType.objects.get(

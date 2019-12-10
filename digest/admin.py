@@ -35,10 +35,15 @@ def _save_item_model(request, item: Item, form, change) -> None:
     if not item.pk:
         item.user = request.user
         if not item.issue:
-            # последний активный
-            la = Issue.objects.filter(status='active').order_by('-pk')[0]
-            # последний неактивный
-            lna = Issue.objects.filter(pk__gt=la.pk).order_by('pk')[0]
+            la = lna = False
+            qs = Issue.objects
+            try:
+                # последний активный
+                la = qs.filter(status='active').order_by('-pk')[0:1].get()
+                # последний неактивный
+                lna = qs.filter(pk__gt=la.pk).order_by('pk')[0:1].get()
+            except Issue.DoesNotExist as e:
+                logger.warning('Not found last or recent issue')
 
             if la or lna:
                 item.issue = lna or la
@@ -90,6 +95,8 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.short_description = 'Просмотр'
 
     def make_published(self, request, queryset):
+        from django_q.tasks import async
+
         if len(queryset) == 1:
             issue = queryset[0]
             site = 'http://pythondigest.ru'
@@ -183,6 +190,7 @@ class ItemAdmin(admin.ModelAdmin):
         'is_editors_choice', 'resource',
     )
 
+    list_editable = ('is_editors_choice', 'section')
     exclude = ('modified_at',),
     radio_fields = {
         'language': admin.HORIZONTAL,
@@ -237,7 +245,10 @@ admin.site.register(AutoImportResource, AutoImportResourceAdmin)
 
 
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'link')
+    list_display = (
+        'name',
+        'link'
+    )
 
 
 admin.site.register(Package, PackageAdmin)
@@ -312,16 +323,19 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     _action_active_now.short_description = 'Активировать сейчас'
 
     def _action_active_queue_n_hourn(self, period_len, queryset):
-        items = queryset.filter(status='queue').order_by('pk')
-        count = items.count()
-        if count:
-            _interval = int(period_len / count * 60)  # in minutes
+        try:
+            items = queryset.filter(status='queue').order_by('pk')
+            assert items.count() > 0
+            _interval = int(period_len / items.count() * 60)  # in minutes
+
             _time = datetime.now()
             for x in items:
                 x.activated_at = _time
                 x.status = 'active'
-                x.save(update_fields=['activated_at', 'status'])
+                x.save()
                 _time += timedelta(minutes=_interval)
+        except Exception:
+            pass
 
     def _action_active_queue_24(self, request, queryset):
         self._action_active_queue_n_hourn(24, queryset)
@@ -423,6 +437,7 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
+
             today = datetime.utcnow().date()
             yesterday = today - timedelta(days=2)
             result = self.model.objects\
@@ -485,6 +500,7 @@ class ItemClsAdmin(admin.ModelAdmin):
                 pk__lte=Issue.objects.all().first().last_item
             )
         except ValueError as e:
+            print(e)
             return super(ItemClsAdmin, self).get_queryset(request)
 
 
