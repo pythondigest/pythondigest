@@ -11,15 +11,24 @@
             {% if like_link %}
                 {% load likes_inclusion_tags %}
                 {% likes object 'likes/inclusion_tags/likes_item.html' %}
-            {% endif %} &nbsp;
-            {% if comment %}
-                <span class="text-primary">
-                    <a href="{{ item.internal_link }}" title="{% trans 'Comment link' %}">
-                        <i class="fa fa-comments-o"></i>
-                    </a>
-                </span>
-                &nbsp;
             {% endif %}
+
+            {% comment %}
+              {% if comment %}
+                &nbsp;
+                  <span class="text-primary">
+                      <a href="{{ item.internal_link }}" title="{% trans 'Comment link' %}">
+                          <i class="fa fa-comments-o"></i>
+                      </a>
+                  </span>
+              {% endif %}
+            {% endcomment %}
+
+            &nbsp;
+            <span title="{% trans 'Language of the news' %}" class="badge news-line-item-resource {{ object.language }}">
+              &nbsp;&nbsp;&nbsp;&nbsp;
+            </span>
+
             {% if read_link %}
                 {{ object.title }}
             {% else %}
@@ -55,10 +64,9 @@
     </noindex>
     </div>
 
+    {% if object.tags_as_links %}
     <div class="card-footer text-muted">
         <!--TAGS-->
-        {% if object.tags_as_links %}
-
             <ul class="item-tags text-muted card-text">
                 <i class="fa fa-tags" aria-hidden="true"></i>{% trans 'Tags:' %}&nbsp;
 
@@ -72,46 +80,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        {% endif %}
         <!--/TAGS-->
-
-        <!--CREATE DATE-->
-        <ul class="item-attributes text-muted card-text">
-            <li>
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    {% trans 'Create date:' %}&nbsp;
-                    {{ object.created_at|date:"d.m.Y" }}
-            </li>
-        <!--/CREATE DATE-->
-        <!--ISSUE-->
-        {% if object.issue.status == 'active' %}
-            <li>
-                    <i class="fa fa-rocket" aria-hidden="true"></i>
-                    {% trans 'Issue:' %}&nbsp;
-                    <a href="{{ object.issue.link }}" class="section-link">{{ object.issue.title }}</a>
-                    ({{ object.issue.date_from|date:"d.m.Y" }} -
-                    {{ object.issue.date_to|date:"d.m.Y" }})
-            </li>
-        {% endif %}
-        <!--/ISSUE-->
-        <!--SECTION-->
-        {% if object.section %}
-            <li>
-                    <i class="fa fa-cubes" aria-hidden="true"></i>
-                    {% trans 'Section:' %}&nbsp;
-                    <a href="{% modify_url 'set_query_param_np' 'section' object.section.pk %}">{{ object.section.title }}</a>
-            </li>
-        {% endif %}
-        <!--/SECTION-->
-        <!--LANGUAGE-->
-            <li>
-                    <i class="fa fa-language" aria-hidden="true"></i>
-                    {% trans 'Language:' %}&nbsp;
-                <span title="{% trans 'Language of the news' %}" class="badge news-line-item-resource {{ object.language }}">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                </span>
-            </li>
-        </ul>
-        <!--/LANGUAGE-->
     </div>
+    {% endif %}
 </div>

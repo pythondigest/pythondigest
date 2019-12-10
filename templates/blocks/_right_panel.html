@@ -60,7 +60,9 @@
     {% include "digest/blocks/_feed.html" %}
 {% endwith %}
 
-{% include "blocks/_friends.html" %}
+{% comment %}
+  {% include "blocks/_friends.html" %}
+{% endcomment %}
 
 {% with items=favorite_items %}
     {% include "digest/blocks/_favorite_items.html" %}
