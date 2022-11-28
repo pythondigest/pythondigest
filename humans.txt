@@ -1,11 +1,11 @@
-  _____       _   _                 _____  _                 _   
- |  __ \     | | | |               |  __ \(_)               | |  
- | |__) |   _| |_| |__   ___  _ __ | |  | |_  __ _  ___  ___| |_ 
+  _____       _   _                 _____  _                 _
+ |  __ \     | | | |               |  __ \(_)               | |
+ | |__) |   _| |_| |__   ___  _ __ | |  | |_  __ _  ___  ___| |_
  |  ___/ | | | __| '_ \ / _ \| '_ \| |  | | |/ _` |/ _ \/ __| __|
- | |   | |_| | |_| | | | (_) | | | | |__| | | (_| |  __/\__ \ |_ 
+ | |   | |_| | |_| | | | (_) | | | | |__| | | (_| |  __/\__ \ |_
  |_|    \__, |\__|_| |_|\___/|_| |_|_____/|_|\__, |\___||___/\__|
-         __/ |                                __/ |              
-        |___/                                |___/ 
+         __/ |                                __/ |
+        |___/                                |___/
 
 /* TEAM */
   Idea, Base code: Alexander <alrusdi>
@@ -28,8 +28,8 @@
   Site: http://coderweb.ru
   Habr: http://habrahabr.ru/users/Dead_Angel/
 
-  Programing, Editor: Alexander Sapronov <Warm0ngeR1>
-  Github: https://github.com/WarmongeR1/
-  Twitter: @sapronovalex92
-  Site: http://sapronov.me
-  Habr: http://habrahabr.ru/users/WarmongeR/
+  Programing, Editor: Alexander Sapronov <axsapronov>
+  Github: https://github.com/axsapronov/
+  Twitter: @axsapronov
+  Site: https://sapronov.me
+  Habr: https://habr.ru/users/WarmongeR/
