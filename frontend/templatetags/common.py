@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_text
 from django.utils.six import text_type
-from django.utils.translation import to_locale, get_language
+from django.utils.translation import get_language, to_locale
 from social.backends.oauth import OAuthAuth
 from social.backends.utils import load_backends
 from unidecode import unidecode as _unidecode

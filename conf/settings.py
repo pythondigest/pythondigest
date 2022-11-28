@@ -20,7 +20,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'controlcenter',
+    # 'controlcenter',
 
     'admin_reorder',
     'bootstrapform',
@@ -45,9 +45,11 @@ INSTALLED_APPS = (
     'micawber.contrib.mcdjango',
 
     'compressor',
+
+    # TODO - разобраться в зависимостях
     'secretballot',
     'likes',
-    'django_q',
+
     'django_remdow',
 
     'siteblocks',
@@ -66,7 +68,7 @@ else:
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.cache.UpdateCacheMiddleware',
-    'htmlmin.middleware.HtmlMinifyMiddleware',
+    # 'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -75,7 +77,7 @@ MIDDLEWARE_CLASSES += (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    'htmlmin.middleware.MarkRequestMiddleware',
+    # 'htmlmin.middleware.MarkRequestMiddleware',
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     # 'admin_reorder.middleware.ModelAdminReorder',
@@ -188,7 +190,7 @@ LOGGING = {
         'django.request':
             {'handlers': ['mail_admins'],
              'level': 'ERROR',
-             'propagate': True,},
+             'propagate': True, },
     }
 }
 
@@ -350,7 +352,7 @@ VK_PASSWORD = ''
 ADMIN_REORDER = (
     'digest',
     'advertising',
-    'controlcenter',
+    # 'controlcenter',
     'siteblocks',
     'landings',
     # 'taggit',
@@ -361,7 +363,6 @@ ADMIN_REORDER = (
     # 'sites',
     'auth',
     # 'account',
-    'django_q',
     'default',
 
 )
@@ -394,7 +395,7 @@ HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError as e:
-    print("Not found local settings: {}".format(str(e)))
+    print("Warning. Not found local settings: {}".format(str(e)))
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

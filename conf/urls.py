@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import django.views.static
-from controlcenter.views import controlcenter
+# from controlcenter.views import controlcenter
 from django.conf import settings
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -13,7 +13,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^admin/dashboard/', controlcenter.urls),
+    # url(r'^admin/dashboard/', controlcenter.urls),
     url(r'^media/(?P<path>.*)$', django.views.static.serve,
         {'document_root': settings.MEDIA_ROOT}),
     url(r'', include(frontend_url, namespace='frontend')),

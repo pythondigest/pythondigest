@@ -11,8 +11,9 @@ from django.utils.html import escape
 
 from conf.utils import likes_enable
 from digest.forms import ItemStatusForm
-from digest.models import AutoImportResource, Issue, Item, Package, \
-    ParsingRules, Resource, Section, get_start_end_of_week, ItemClsCheck
+from digest.models import (AutoImportResource, Issue, Item, ItemClsCheck,
+                           Package, ParsingRules, Resource, Section,
+                           get_start_end_of_week)
 from digest.pub_digest import pub_to_all
 
 logger = logging.getLogger(__name__)
@@ -86,13 +87,10 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.short_description = 'Просмотр'
 
     def make_published(self, request, queryset):
-        from django_q.tasks import async
-
         if len(queryset) == 1:
             issue = queryset[0]
             site = 'http://pythondigest.ru'
-            async(
-                pub_to_all,
+            pub_to_all(
                 issue.announcement,
                 '{0}{1}'.format(site, issue.link),
                 '{0}{1}'.format(site, issue.image.url if issue.image else '')

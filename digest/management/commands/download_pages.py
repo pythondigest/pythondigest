@@ -5,7 +5,6 @@ import os
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
-from django_q.tasks import async
 
 from digest.models import Item
 
@@ -38,5 +37,4 @@ class Command(BaseCommand):
             path_incorrect = item.article_path is None or not item.article_path
             path_exists = os.path.exists(item.article_path)
             if path_incorrect or not path_exists:
-                async(get_article, item)
-                # get_article(item)
+                get_article(item)

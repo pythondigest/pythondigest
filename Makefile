@@ -8,8 +8,14 @@ pip-tools:
 		pip install -U pip-tools
 
 requirements: pip-tools
-		pip-compile requirements.in
+		pip-compile --generate-hashes --reuse-hashes --build-isolation --pip-args "--retries 10 --timeout 30" requirements.in
 		pip-sync requirements.txt
 
 test:
 		python manage.py test
+
+run-infra:
+	docker compose -f local.infra.yml up --build
+
+run-docker:
+	docker compose -f local.yml up --build

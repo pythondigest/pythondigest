@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
 import json
+# import the logging library
+import logging
 import os
 
 import requests
@@ -15,18 +17,16 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
 from django.utils.translation import ugettext_lazy as _
-from django_q.tasks import async
-from django_remdow.templatetags.remdow import remdow_img_local, \
-    remdow_img_center, remdow_img_responsive, remdow_lazy_img
+from django_remdow.templatetags.remdow import (remdow_img_center,
+                                               remdow_img_local,
+                                               remdow_img_responsive,
+                                               remdow_lazy_img)
 from readability.readability import Document, Unparseable
-from taggit.models import TagBase, GenericTaggedItemBase
+from taggit.models import GenericTaggedItemBase, TagBase
 from taggit_autosuggest.managers import TaggableManager
 
 from conf.utils import likes_enable
 from frontend.models import Tip
-
-# import the logging library
-import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -518,11 +518,11 @@ def update_cls_score(instance, **kwargs):
     if not instance._disable_signals:
         try:
             item = ItemClsCheck.objects.get(item=instance)
-            async(item.check_cls, False)
+            item.check_cls(False)
         except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
             item = ItemClsCheck(item=instance)
             item.save()
-            async(item.check_cls, True)
+            item.check_cls(True)
 
 
 @receiver(post_save, sender=Item)

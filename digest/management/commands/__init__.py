@@ -4,10 +4,10 @@ from __future__ import unicode_literals
 import datetime
 import pickle
 import re
+from typing import Dict
 
 import requests
 from readability import Document
-from typing import Dict
 
 try:
     from urllib.request import urlopen
@@ -15,15 +15,13 @@ except ImportError:
     from urllib2 import urlopen
 
 from bs4 import BeautifulSoup
-
-from digest.models import Item, Section
 from django.conf import settings
-# from pygoogle import pygoogle
-# from pygoogle.pygoogle import PyGoogleHttpException
 # import datetime
 # from time import sleep
 # from stem import control, Signal, stem
 from django.core.management import call_command
+
+from digest.models import Item, Section
 
 
 def parse_weekly_digest(item_data: Dict):

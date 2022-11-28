@@ -6,8 +6,9 @@ logs/*
 .idea/
 env/
 /conf/*.cfg
-*.cfg
-
+# *.cfg
 
 clean.bash
 fabfile/fabfile.py
+
+local_notes
