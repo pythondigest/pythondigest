@@ -46,7 +46,11 @@ def get_tweets():
     dsp = []
     for src in AutoImportResource.objects.filter(type_res='twitter',
                                                  in_edit=False):
-        dsp.extend(_parse_tweets_data(get_tweets_by_url(src.link), src))
+        print("Process twitter", src)
+        try:
+            dsp.extend(_parse_tweets_data(get_tweets_by_url(src.link), src))
+        except Exception as e:
+            print(e)
     return dsp
 
 
@@ -72,8 +76,8 @@ def import_tweets(**kwargs):
                     'query_rules') else {}
                 item_data.update(data)
             save_item(item_data)
-        except (URLError, TooManyRedirects, socket.timeout):
-            print(i)
+        except (URLError, TooManyRedirects, socket.timeout) as e:
+            print(i, str(e))
 
 
 def get_items_from_rss(rss_link: str) -> List[Dict]:
@@ -112,7 +116,8 @@ def get_items_from_rss(rss_link: str) -> List[Dict]:
                 'description': summary,
                 'related_to_date': news_date,
             })
-    except HTTPError:
+    except Exception as e:
+        print("Exception -> ", str(e))
         rss_items = []
 
     return rss_items
@@ -149,6 +154,7 @@ def get_data_for_rss_item(rss_item: Dict) -> Dict:
 def import_rss(**kwargs):
     for src in AutoImportResource.objects.filter(type_res='rss',
                                                  in_edit=False):
+        print("Process RSS", src)
         try:
             rss_items = map(get_data_for_rss_item,
                             filter(is_not_exists_rss_item,
@@ -175,8 +181,8 @@ def import_rss(**kwargs):
                         'query_rules') else {})
                 rss_item.update(apply_video_rules(rss_item.copy()))
                 save_item(rss_item)
-        except (URLError, TooManyRedirects, socket.timeout):
-            print(src)
+        except (URLError, TooManyRedirects, socket.timeout) as e:
+            print(src, str(e))
 
 
 def parsing(func):

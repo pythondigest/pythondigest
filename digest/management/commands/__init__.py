@@ -234,7 +234,8 @@ def get_tweets_by_url(base_url: str) -> list:
                 'data-expanded-url')
             tw_text = p.contents[0]
             result.append([tw_text, tw_lnk, http_code])
-        except:
+        except Exception as e:
+            print("| ", "tweets by url exception", str(e))
             pass
 
     return result

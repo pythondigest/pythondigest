@@ -7,6 +7,7 @@
 {% block page_description %}{{ object.title }} - {{ block.super }}{% endblock %}
 
 {% block extra_head %}
+
     {% thumbnail object.image "350" as im %}
         <link rel="image_src" href="http://pythondigest.ru{{ im.url }}">
 
@@ -19,12 +20,24 @@
               content="http://pythondigest.ru{{ im.url }}"/>
         <meta name="twitter:url"
               content="http://pythondigest.ru{{ object.link }}"/>
-    {% endthumbnail %}
+    
+        <meta property="og:description"
+              content="{{ object.description|striptags|truncatechars:500 }}" />
+        <meta property="og:type"               content="article" />
+        <meta property="og:url"                content="http://pythondigest.ru{{ object.link }}" />
+        <meta property="og:title"              content="{{ object.title }}" />
+        <meta property="og:image"              content="http://pythondigest.ru{{ im.url }}" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="350" />
+        <meta property="og:image:height" content="350" />
 
-    <meta name="description"
-          content='{{ object.description|striptags|truncatechars:500 }}'>
-    <meta name="og:description"
-          content='{{ object.description|striptags|truncatechars:500 }}'>
+        <meta property="og:locale" content="ru_RU"/>
+        <meta property="og:site_name" content="Python Digest"/>
+        <meta name="description"
+              content='{{ object.description|striptags|truncatechars:500 }}'>
+
+
+    {% endthumbnail %}
 {% endblock %}
 
 {% block body %}

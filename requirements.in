@@ -13,15 +13,15 @@ django-q
 django-siteblocks
 django-cachalot
 
-# django-controlcenter
--e git+https://github.com/byashimov/django-controlcenter.git#egg=controlcenter
+django-controlcenter
+#-e git+https://github.com/byashimov/django-controlcenter.git#egg=controlcenter
 django_compressor
 django-htmlmin
 
-# django-secretballot
-# django-likes
--e git+https://github.com/WarmongeR1/django-likes#egg=likes
--e git+https://github.com/WarmongeR1/django-secretballot.git#egg=secretballot
+django-secretballot
+django-likes
+#-e git+https://github.com/WarmongeR1/django-likes#egg=likes
+#-e git+https://github.com/WarmongeR1/django-secretballot.git#egg=secretballot
 django-debug-toolbar
 django-remdow
 python-memcached
