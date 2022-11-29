@@ -39,9 +39,6 @@ if likes_enable():
 
     urlpatterns.append(path('likes/', include(like_urls)))
 
-if 'rosetta' in settings.INSTALLED_APPS:
-    urlpatterns.append(path('rosetta/', include('rosetta.urls')))
-
 if 'debug_toolbar' in settings.INSTALLED_APPS and settings.DEBUG:
     import debug_toolbar
 

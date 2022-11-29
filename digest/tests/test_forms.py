@@ -118,10 +118,11 @@ class AddNewsFormTest(TestCase):
         Section.objects.create(pk=7, **self.section_data)
 
         form = AddNewsForm()
+        form_html = form.as_p()
 
-        self.assertIn('Another title 1', form.as_p())
-        self.assertIn('Another title 2', form.as_p())
-        # self.assertNotIn('selected', form.as_p())
+        self.assertIn('Another title 1', form_html)
+        self.assertIn('Another title 2', form_html)
+        # self.assertNotIn('selected', form_html)
 
     def test_form_rendering_if_6th_section_exists(self):
         Section.objects.create(pk=6, **self.section_data)
@@ -134,8 +135,10 @@ class AddNewsFormTest(TestCase):
 
         form = AddNewsForm()
 
+        form_html = form.as_p()
         self.assertIn(
-            '<option value="6" selected="selected">some section</option>\n',
-            form.as_p())
-        self.assertIn('Another title 1', form.as_p())
-        self.assertIn('Another title 2', form.as_p())
+            '<option value="6" selected>some section</option>\n',
+            form_html
+        )
+        self.assertIn('Another title 1', form_html)
+        self.assertIn('Another title 2', form_html)

@@ -1,16 +1,7 @@
 [[package]]
 category = "main"
-description = "Python wrapper for loading Jason Hood's ANSICON"
-marker = "platform_system == \"Windows\""
-name = "ansicon"
-optional = false
-python-versions = "*"
-version = "1.89.0"
-
-[[package]]
-category = "main"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "appdirs"
 optional = false
 python-versions = "*"
@@ -59,21 +50,6 @@ tests_no_zope = ["coverage (>=5.0.2)", "hypothesis", "pympler", "pytest (>=4.3.0
 
 [[package]]
 category = "main"
-description = "Modern password hashing for your software and your servers"
-name = "bcrypt"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "3.1.7"
-
-[package.dependencies]
-cffi = ">=1.1"
-six = ">=1.4.1"
-
-[package.extras]
-tests = ["pytest (>=3.2.1,<3.3.0 || >3.3.0)"]
-
-[[package]]
-category = "main"
 description = "Screen-scraping library"
 name = "beautifulsoup4"
 optional = false
@@ -89,20 +65,8 @@ lxml = ["lxml"]
 
 [[package]]
 category = "main"
-description = "Easy, practical library for making terminal apps, by providing an elegant, well-documented interface to Colors, Keyboard input, and screen Positioning capabilities."
-name = "blessed"
-optional = false
-python-versions = ">=2.7"
-version = "1.19.1"
-
-[package.dependencies]
-jinxed = ">=1.1.0"
-six = ">=1.9.0"
-wcwidth = ">=0.1.4"
-
-[[package]]
-category = "main"
 description = "Extensible memoizing collections and decorators"
+marker = "python_version >= \"3\""
 name = "cachetools"
 optional = false
 python-versions = "*"
@@ -183,7 +147,7 @@ version = "0.5.0"
 [[package]]
 category = "main"
 description = "Distribution utilities"
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "distlib"
 optional = false
 python-versions = "*"
@@ -268,14 +232,7 @@ description = "Optimistic lock implementation for Django. Prevents users from do
 name = "django-concurrency"
 optional = false
 python-versions = "*"
-version = "1.4"
-
-[package.dependencies]
-six = "*"
-
-[package.extras]
-dev = ["check-manifest (0.30)", "django-webtest (>=1.9.1)", "mock (>=1.0.1)", "pytest-cov (>=1.6)", "pytest-django (>=3.0.0)", "pytest-echo (>=1.3)", "pytest-pythonpath (>=0.7.1)", "pytest (3.1)", "pdbpp", "readline", "tox (>=2.4.1)", "WebTest (>=2.0.23)", "coverage", "django-extensions", "flake8", "ipython (<6.0)", "pdbpp", "psycopg2", "sphinx"]
-test = ["check-manifest (0.30)", "django-webtest (>=1.9.1)", "mock (>=1.0.1)", "pytest-cov (>=1.6)", "pytest-django (>=3.0.0)", "pytest-echo (>=1.3)", "pytest-pythonpath (>=0.7.1)", "pytest (3.1)", "pdbpp", "readline", "tox (>=2.4.1)", "WebTest (>=2.0.23)"]
+version = "2.0"
 
 [[package]]
 category = "main"
@@ -361,34 +318,11 @@ django = "*"
 
 [[package]]
 category = "main"
-description = "Pickled object field for Django"
-name = "django-picklefield"
-optional = false
-python-versions = "*"
-version = "0.3.2"
-
-[[package]]
-category = "main"
 description = "Yet another application settings helper."
 name = "django-pkgconf"
 optional = false
 python-versions = "*"
 version = "0.4.0"
-
-[[package]]
-category = "main"
-description = "A multiprocessing distributed task queue for Django"
-name = "django-q"
-optional = false
-python-versions = "*"
-version = "0.7.18"
-
-[package.dependencies]
-arrow = "*"
-blessed = "*"
-django = ">=1.7"
-django-picklefield = "*"
-future = "*"
 
 [[package]]
 category = "main"
@@ -401,21 +335,6 @@ version = "0.0.6"
 [package.dependencies]
 beautifulsoup4 = "*"
 django = ">=1.6"
-
-[[package]]
-category = "main"
-description = "A Django application that eases the translation of Django projects"
-name = "django-rosetta"
-optional = false
-python-versions = "*"
-version = "0.7.14"
-
-[package.dependencies]
-Django = ">=1.8"
-microsofttranslator = ">=0.7"
-polib = ">=1.0.6"
-requests = ">=2.1.0"
-six = ">=1.2.0"
 
 [[package]]
 category = "main"
@@ -480,18 +399,6 @@ pytest = ["pytest", "pytest-django"]
 
 [[package]]
 category = "main"
-description = "Fabric is a simple, Pythonic tool for remote execution and deployment."
-name = "fabric"
-optional = false
-python-versions = "*"
-version = "1.15.0"
-
-[package.dependencies]
-paramiko = ">=2.0,<3.0"
-six = ">=1.13.0"
-
-[[package]]
-category = "main"
 description = "Universal feed parser, handles RSS 0.9x, RSS 1.0, RSS 2.0, CDF, Atom 0.3, and Atom 1.0 feeds"
 name = "feedparser"
 optional = false
@@ -501,7 +408,7 @@ version = "5.2.1"
 [[package]]
 category = "main"
 description = "A platform independent file lock."
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "filelock"
 optional = false
 python-versions = "*"
@@ -514,14 +421,6 @@ name = "funcy"
 optional = false
 python-versions = "*"
 version = "1.17"
-
-[[package]]
-category = "main"
-description = "Clean single-source support for Python 3 and 2"
-name = "future"
-optional = false
-python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
-version = "0.18.2"
 
 [[package]]
 category = "main"
@@ -675,7 +574,7 @@ testing = ["packaging", "importlib-resources"]
 [[package]]
 category = "main"
 description = "Read resources from Python packages"
-marker = "python_version != \"3.2\" and python_version < \"3.7\""
+marker = "python_full_version < \"3.2.0\" and python_version < \"3.7\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version < \"3.7\" and python_version != \"3.2\""
 name = "importlib-resources"
 optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
@@ -685,18 +584,6 @@ version = "1.0.2"
 [package.dependencies.typing]
 python = "<3.5"
 version = "*"
-
-[[package]]
-category = "main"
-description = "Jinxed Terminal Library"
-marker = "platform_system == \"Windows\""
-name = "jinxed"
-optional = false
-python-versions = "*"
-version = "1.2.0"
-
-[package.dependencies]
-ansicon = "*"
 
 [[package]]
 category = "main"
@@ -719,18 +606,6 @@ name = "micawber"
 optional = false
 python-versions = "*"
 version = "0.3.8"
-
-[[package]]
-category = "main"
-description = "Microsoft Translator V2 - Python API"
-name = "microsofttranslator"
-optional = false
-python-versions = "*"
-version = "0.8"
-
-[package.dependencies]
-requests = ">=1.2.3"
-six = "*"
 
 [[package]]
 category = "main"
@@ -780,26 +655,6 @@ version = "20.9"
 
 [package.dependencies]
 pyparsing = ">=2.0.2"
-
-[[package]]
-category = "main"
-description = "SSH2 protocol library"
-name = "paramiko"
-optional = false
-python-versions = "*"
-version = "2.12.0"
-
-[package.dependencies]
-bcrypt = ">=3.1.3"
-cryptography = ">=2.5"
-pynacl = ">=1.0.1"
-six = "*"
-
-[package.extras]
-all = ["pyasn1 (>=0.1.7)", "pynacl (>=1.0.1)", "bcrypt (>=3.1.3)", "invoke (>=1.3)", "gssapi (>=1.4.1)", "pywin32 (>=2.1.8)"]
-ed25519 = ["pynacl (>=1.0.1)", "bcrypt (>=3.1.3)"]
-gssapi = ["pyasn1 (>=0.1.7)", "gssapi (>=1.4.1)", "pywin32 (>=2.1.8)"]
-invoke = ["invoke (>=1.3)"]
 
 [[package]]
 category = "main"
@@ -855,14 +710,6 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 category = "main"
-description = "A library to manipulate gettext files (po and mo files)."
-name = "polib"
-optional = false
-python-versions = "*"
-version = "1.1.1"
-
-[[package]]
-category = "main"
 description = "Protocol Buffers"
 marker = "python_version >= \"3\""
 name = "protobuf"
@@ -889,6 +736,7 @@ version = "0.4.8"
 [[package]]
 category = "main"
 description = "A collection of ASN.1-based protocols modules."
+marker = "python_version >= \"3\""
 name = "pyasn1-modules"
 optional = false
 python-versions = "*"
@@ -917,22 +765,6 @@ version = "1.7.1"
 crypto = ["cryptography (>=1.4)"]
 flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
 test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
-
-[[package]]
-category = "main"
-description = "Python binding to the Networking and Cryptography (NaCl) library"
-name = "pynacl"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.4.0"
-
-[package.dependencies]
-cffi = ">=1.4.1"
-six = "*"
-
-[package.extras]
-docs = ["sphinx (>=1.6.5)", "sphinx-rtd-theme"]
-tests = ["pytest (>=3.2.1,<3.3.0 || >3.3.0)", "hypothesis (>=3.27.0)"]
 
 [[package]]
 category = "main"
@@ -1002,17 +834,6 @@ version = "2.8.2"
 
 [package.dependencies]
 six = ">=1.5"
-
-[[package]]
-category = "main"
-description = "Pure python memcached client"
-name = "python-memcached"
-optional = false
-python-versions = "*"
-version = "1.59"
-
-[package.dependencies]
-six = ">=1.4.0"
 
 [[package]]
 category = "main"
@@ -1387,20 +1208,17 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "e2b365e16512082426645ecdc80210699d5b6a7a39f4e0fc984738394b68f14f"
+content-hash = "f5fc895500a97fa4bae53275dfbc80ccf162cf2fd2d201d9edbe88167fedb9aa"
 lock-version = "1.0"
 python-versions = "3.4.10"
 
 [metadata.files]
-ansicon = []
 appdirs = []
 argparse = []
 arrow = []
 atomicwrites = []
 attrs = []
-bcrypt = []
 beautifulsoup4 = []
-blessed = []
 cachetools = []
 certifi = []
 cffi = []
@@ -1425,21 +1243,16 @@ django-htmlmin = []
 django-js-asset = []
 django-likes = []
 django-modeladmin-reorder = []
-django-picklefield = []
 django-pkgconf = []
-django-q = []
 django-remdow = []
-django-rosetta = []
 django-secretballot = []
 django-siteblocks = []
 django-taggit = []
 django-taggit-autosuggest = []
 django-user-accounts = []
-fabric = []
 feedparser = []
 filelock = []
 funcy = []
-future = []
 google-api-core = []
 google-api-python-client = []
 google-auth = []
@@ -1450,33 +1263,27 @@ httplib2 = []
 idna = []
 importlib-metadata = []
 importlib-resources = []
-jinxed = []
 lxml = []
 micawber = []
-microsofttranslator = []
 mock = []
 more-itertools = []
 oauthlib = []
 packaging = []
-paramiko = []
 pathlib2 = []
 pbr = []
 pillow = []
 pluggy = []
-polib = []
 protobuf = []
 py = []
 pyasn1 = []
 pyasn1-modules = []
 pycparser = []
 pyjwt = []
-pynacl = []
 pyparsing = []
 pysocks = []
 pytest = []
 pytest-runner = []
 python-dateutil = []
-python-memcached = []
 python-social-auth = []
 python3-openid = []
 pytils = []

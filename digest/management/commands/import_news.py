@@ -5,7 +5,7 @@ import datetime
 import re
 import socket
 from time import mktime
-from typing import List, Dict
+from typing import Dict, List
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 
@@ -13,17 +13,15 @@ import feedparser
 from django.core.management.base import BaseCommand
 from requests import TooManyRedirects
 
-from digest.management.commands import (
-    apply_parsing_rules,
-    apply_video_rules,
-    get_tweets_by_url,
-    parse_weekly_digest,
-    save_item,
-    is_weekly_digest,
-    _get_http_data_of_url,
-    is_django_weekly_digest, parse_django_weekly_digest)
-from digest.models import ITEM_STATUS_CHOICES, \
-    AutoImportResource, Item, ParsingRules, Section
+from digest.management.commands import (_get_http_data_of_url,
+                                        apply_parsing_rules, apply_video_rules,
+                                        get_tweets_by_url,
+                                        is_django_weekly_digest,
+                                        is_weekly_digest,
+                                        parse_django_weekly_digest,
+                                        parse_weekly_digest, save_item)
+from digest.models import (ITEM_STATUS_CHOICES, AutoImportResource, Item,
+                           ParsingRules, Section)
 
 
 def _parse_tweets_data(data: list, src: AutoImportResource) -> list:

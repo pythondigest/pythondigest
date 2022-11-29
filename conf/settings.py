@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'landings',
 
     'account',
-    'rosetta',
     'social_django',
     'micawber.contrib.mcdjango',
 
@@ -54,9 +53,13 @@ INSTALLED_APPS = (
 
     'siteblocks',
 
-    'cachalot',
-
 )
+
+try:
+    import cachalot
+    INSTALLED_APPS += ('cachalot', )
+except ImportError:
+    pass
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
@@ -372,16 +375,6 @@ ADMIN_REORDER = (
 
 )
 
-Q_CLUSTER = {
-    'name': 'DjangORM',
-    'workers': 2,
-    'timeout': 90,
-    'retry': 120,
-    'queue_limit': 10,
-    'bulk': 5,
-    'orm': 'default'
-}
-
 CONTROLCENTER_DASHBOARDS = (
     'digest.dashboards.MyDashboard',
 )
@@ -409,7 +402,6 @@ if DEBUG:
     INSTALLED_APPS += ('debug_toolbar',)
     DEBUG_TOOLBAR_PATCH_SETTINGS = False
     DEBUG_TOOLBAR_PANELS = [
-        'cachalot.panels.CachalotPanel',
         'debug_toolbar.panels.versions.VersionsPanel',
         'debug_toolbar.panels.timer.TimerPanel',
         'debug_toolbar.panels.settings.SettingsPanel',
@@ -424,3 +416,6 @@ if DEBUG:
         'debug_toolbar.panels.redirects.RedirectsPanel',
         # 'debug_toolbar.panels.profiling.ProfilingPanel',
     ]
+
+    if "cachalot" in INSTALLED_APPS:
+        DEBUG_TOOLBAR_PANELS.append('cachalot.panels.CachalotPanel')
