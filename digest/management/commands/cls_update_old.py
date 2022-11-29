@@ -5,11 +5,10 @@ import datetime
 import json
 
 import requests
-import simplejson
 from django.conf import settings
 from django.core.management import BaseCommand
 
-from digest.models import ItemClsCheck, Item
+from digest.models import Item, ItemClsCheck
 
 
 def update_cls(items, part_size=100):
@@ -34,8 +33,7 @@ def update_cls(items, part_size=100):
                     resp_data[key] = value
         except (requests.exceptions.RequestException,
                 requests.exceptions.Timeout,
-                requests.exceptions.TooManyRedirects,
-                simplejson.scanner.JSONDecodeError) as e:
+                requests.exceptions.TooManyRedirects) as e:
             resp_data = None
 
         for x in links_items:

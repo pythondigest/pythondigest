@@ -7,7 +7,6 @@ import os
 
 import requests
 import requests.exceptions
-import simplejson.scanner
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -397,8 +396,7 @@ class ItemClsCheck(models.Model):
                 self.score = resp.json()['links'][0].get(self.item.link, False)
             except (requests.exceptions.RequestException,
                     requests.exceptions.Timeout,
-                    requests.exceptions.TooManyRedirects,
-                    simplejson.scanner.JSONDecodeError) as e:
+                    requests.exceptions.TooManyRedirects) as e:
                 self.score = False
             # print('Real run check: {}'.format(self.pk))
             self.save()

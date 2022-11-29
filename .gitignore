@@ -12,3 +12,5 @@ clean.bash
 fabfile/fabfile.py
 
 local_notes
+
+cache

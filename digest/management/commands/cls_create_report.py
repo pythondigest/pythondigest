@@ -6,7 +6,6 @@ import json
 import os
 
 import requests
-import simplejson
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -49,8 +48,7 @@ class Command(BaseCommand):
                         resp_data[key] = value
             except (requests.exceptions.RequestException,
                     requests.exceptions.Timeout,
-                    requests.exceptions.TooManyRedirects,
-                    simplejson.scanner.JSONDecodeError) as e:
+                    requests.exceptions.TooManyRedirects) as e:
                 resp_data = None
 
             for x in links_items:

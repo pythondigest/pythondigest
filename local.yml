@@ -8,7 +8,7 @@ services:
   django: &django
     build:
       context: .
-      dockerfile: ./deploy/Dockerfile
+      dockerfile: ./deploy/Dockerfile-poetry
     image: pydigest_django
     container_name: pydigest_django
     platform: linux/x86_64
@@ -18,16 +18,25 @@ services:
     #   - mailhog
     volumes:
       - .:/app:z
+      - ./cache:/root/.cache/
     # env_file:
     #   - ./.envs/.local/.django
     #   - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
-    command: python manage.py test
+    # command: echo "hi"
+    # command: pwd
     # command: pip freeze
-    # command: sleep 45
+    # command: python manage.py test
+    # command: poetry export -f requirements.txt -o requirements.txt
+    # command: pip freeze
+    command: sleep 86400
     # command: pip freeze > requirements_3.4.txt
     # command: cat requirements.txt
+    # command: poetry add "python-social-auth==0.3.6"
+    # command: poetry lock
+    # command: poetry install
+    # command: cat poetry.lock > poetry.lock
 
   # postgres:
   #   build:
