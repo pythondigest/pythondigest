@@ -1,0 +1,1126 @@
+[[package]]
+category = "main"
+description = "Python wrapper for loading Jason Hood's ANSICON"
+marker = "platform_system == \"Windows\""
+name = "ansicon"
+optional = false
+python-versions = "*"
+version = "1.89.0"
+
+[[package]]
+category = "main"
+description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+name = "appdirs"
+optional = false
+python-versions = "*"
+version = "1.4.4"
+
+[[package]]
+category = "main"
+description = "Python command-line parsing library"
+name = "argparse"
+optional = false
+python-versions = "*"
+version = "1.4.0"
+
+[[package]]
+category = "main"
+description = "Better dates and times for Python"
+name = "arrow"
+optional = false
+python-versions = "*"
+version = "0.8.0"
+
+[package.dependencies]
+python-dateutil = "*"
+
+[[package]]
+category = "main"
+description = "Screen-scraping library"
+name = "beautifulsoup4"
+optional = false
+python-versions = "*"
+version = "4.5.1"
+
+[package.extras]
+html5lib = ["html5lib"]
+lxml = ["lxml"]
+
+[[package]]
+category = "main"
+description = "Easy, practical library for making terminal apps, by providing an elegant, well-documented interface to Colors, Keyboard input, and screen Positioning capabilities."
+name = "blessed"
+optional = false
+python-versions = ">=2.7"
+version = "1.19.1"
+
+[package.dependencies]
+jinxed = ">=1.1.0"
+six = ">=1.9.0"
+wcwidth = ">=0.1.4"
+
+[[package]]
+category = "main"
+description = "Universal encoding detector for Python 2 and 3"
+name = "chardet"
+optional = false
+python-versions = "*"
+version = "3.0.4"
+
+[[package]]
+category = "main"
+description = "Cross-platform colored terminal text."
+marker = "sys_platform == \"win32\""
+name = "colorama"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.4.1"
+
+[[package]]
+category = "main"
+description = "cssselect parses CSS3 Selectors and translates them to XPath 1.0"
+name = "cssselect"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.1.0"
+
+[[package]]
+category = "main"
+description = "XML bomb protection for Python stdlib modules"
+marker = "python_version >= \"3\""
+name = "defusedxml"
+optional = false
+python-versions = "*"
+version = "0.5.0"
+
+[[package]]
+category = "main"
+description = "Distribution utilities"
+name = "distlib"
+optional = false
+python-versions = "*"
+version = "0.3.6"
+
+[[package]]
+category = "main"
+description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
+name = "django"
+optional = false
+python-versions = "*"
+version = "1.9.13"
+
+[package.dependencies]
+pytz = "*"
+
+[package.extras]
+argon2 = ["argon2-cffi (>=16.1.0)"]
+bcrypt = ["bcrypt"]
+
+[[package]]
+category = "main"
+description = "A helper class for handling configuration defaults of packaged apps gracefully."
+name = "django-appconf"
+optional = false
+python-versions = "*"
+version = "1.0.4"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+category = "main"
+description = "django-bootstrap-form"
+name = "django-bootstrap-form"
+optional = false
+python-versions = "*"
+version = "3.2.1"
+
+[package.dependencies]
+django = ">=1.5"
+
+[[package]]
+category = "main"
+description = "Caches your Django ORM queries and automatically invalidates them."
+name = "django-cachalot"
+optional = false
+python-versions = "*"
+version = "1.2.1"
+
+[package.dependencies]
+Django = ">=1.7"
+
+[[package]]
+category = "main"
+description = "Django admin CKEditor integration."
+name = "django-ckeditor"
+optional = false
+python-versions = "*"
+version = "5.1.0"
+
+[package.dependencies]
+Django = "*"
+
+[[package]]
+category = "main"
+description = "Compresses linked and inline JavaScript or CSS into single cached files."
+name = "django-compressor"
+optional = false
+python-versions = "*"
+version = "2.1"
+
+[package.dependencies]
+django-appconf = ">=1.0"
+rcssmin = "1.0.6"
+rjsmin = "1.0.12"
+
+[[package]]
+category = "main"
+description = "Optimistic lock implementation for Django. Prevents users from doing concurrent editing."
+name = "django-concurrency"
+optional = false
+python-versions = "*"
+version = "1.3.1"
+
+[[package]]
+category = "main"
+description = "Set of widgets to build dashboards for your Django-project."
+name = "django-controlcenter"
+optional = false
+python-versions = "*"
+version = "0.3.1"
+
+[package.dependencies]
+django-pkgconf = ">=0.4.0,<0.5.0"
+
+[[package]]
+category = "main"
+description = "A configurable set of panels that display various debug information about the current request/response."
+name = "django-debug-toolbar"
+optional = false
+python-versions = "*"
+version = "1.5"
+
+[package.dependencies]
+Django = ">=1.8"
+sqlparse = ">=0.2.0"
+
+[[package]]
+category = "main"
+description = "Digg-like Paginator from Django Snippets"
+name = "django-digg-paginator"
+optional = false
+python-versions = "*"
+version = "0.1.3"
+
+[[package]]
+category = "main"
+description = "Tiny stuff for Django that won't fit into separate apps."
+name = "django-etc"
+optional = false
+python-versions = "*"
+version = "1.4.0"
+
+[[package]]
+category = "main"
+description = "html minify for django"
+name = "django-htmlmin"
+optional = false
+python-versions = "*"
+version = "0.9.1"
+
+[package.dependencies]
+argparse = "*"
+beautifulsoup4 = "*"
+html5lib = "*"
+
+[[package]]
+category = "main"
+description = "Django app providing view interface to django-secretballot."
+name = "django-likes"
+optional = false
+python-versions = "*"
+version = "2.0.1"
+
+[package.dependencies]
+django-secretballot = ">=1.0.0"
+
+[[package]]
+category = "main"
+description = "Custom ordering for the apps and models in the admin app."
+name = "django-modeladmin-reorder"
+optional = false
+python-versions = "*"
+version = "0.3.1"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+category = "main"
+description = "Pickled object field for Django"
+name = "django-picklefield"
+optional = false
+python-versions = "*"
+version = "0.3.2"
+
+[[package]]
+category = "main"
+description = "Yet another application settings helper."
+name = "django-pkgconf"
+optional = false
+python-versions = "*"
+version = "0.4.0"
+
+[[package]]
+category = "main"
+description = "A multiprocessing distributed task queue for Django"
+name = "django-q"
+optional = false
+python-versions = "*"
+version = "0.7.18"
+
+[package.dependencies]
+arrow = "*"
+blessed = "*"
+django = ">=1.7"
+django-picklefield = "*"
+future = "*"
+
+[[package]]
+category = "main"
+description = "Simple Django app for manipulating static files (img files)"
+name = "django-remdow"
+optional = false
+python-versions = "*"
+version = "0.0.6"
+
+[package.dependencies]
+beautifulsoup4 = "*"
+django = ">=1.6"
+
+[[package]]
+category = "main"
+description = "A Django application that eases the translation of Django projects"
+name = "django-rosetta"
+optional = false
+python-versions = "*"
+version = "0.7.12"
+
+[package.dependencies]
+Django = ">=1.7"
+microsofttranslator = ">=0.7"
+polib = ">=1.0.6"
+requests = ">=2.1.0"
+six = ">=1.2.0"
+
+[[package]]
+category = "main"
+description = "Django anonymous voting application."
+name = "django-secretballot"
+optional = false
+python-versions = "*"
+version = "2.0.0"
+
+[package.dependencies]
+django-etc = ">=1.2.0"
+
+[package.extras]
+develop = ["tox", "django", "pytest-django", "pytest"]
+test = ["pytest-django", "pytest-cov", "pytest"]
+
+[[package]]
+category = "main"
+description = "Reusable application for Django introducing URL-dependent static and dynamic data blocks"
+name = "django-siteblocks"
+optional = false
+python-versions = "*"
+version = "0.5.1"
+
+[[package]]
+category = "main"
+description = "django-taggit is a reusable Django application for simple tagging."
+name = "django-taggit"
+optional = false
+python-versions = "*"
+version = "0.21.2"
+
+[[package]]
+category = "main"
+description = "Autosuggestions for django-taggit"
+name = "django-taggit-autosuggest"
+optional = false
+python-versions = "*"
+version = "0.3.0"
+
+[package.dependencies]
+django-taggit = "*"
+
+[[package]]
+category = "main"
+description = "a Django user account app"
+name = "django-user-accounts"
+optional = false
+python-versions = "*"
+version = "1.3.1"
+
+[package.dependencies]
+django-appconf = ">=1.0.1"
+pytz = ">=2015.6"
+
+[[package]]
+category = "main"
+description = "ECDSA cryptographic signature library (pure python)"
+name = "ecdsa"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "0.18.0"
+
+[package.dependencies]
+six = ">=1.9.0"
+
+[package.extras]
+gmpy = ["gmpy"]
+gmpy2 = ["gmpy2"]
+
+[[package]]
+category = "main"
+description = "Fabric is a simple, Pythonic tool for remote execution and deployment."
+name = "fabric"
+optional = false
+python-versions = "*"
+version = "1.12.0"
+
+[package.dependencies]
+paramiko = ">=1.10,<2.0"
+
+[[package]]
+category = "main"
+description = "Universal feed parser, handles RSS 0.9x, RSS 1.0, RSS 2.0, CDF, Atom 0.3, and Atom 1.0 feeds"
+name = "feedparser"
+optional = false
+python-versions = "*"
+version = "5.2.1"
+
+[[package]]
+category = "main"
+description = "A platform independent file lock."
+name = "filelock"
+optional = false
+python-versions = "*"
+version = "3.0.12"
+
+[[package]]
+category = "main"
+description = "A fancy and practical functional tools"
+name = "funcy"
+optional = false
+python-versions = "*"
+version = "1.7.1"
+
+[[package]]
+category = "main"
+description = "Clean single-source support for Python 3 and 2"
+name = "future"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "0.18.2"
+
+[[package]]
+category = "main"
+description = "Google API Client Library for Python"
+name = "google-api-python-client"
+optional = false
+python-versions = "*"
+version = "1.5.3"
+
+[package.dependencies]
+httplib2 = ">=0.8,<1"
+oauth2client = ">=1.5.0,<4.0.0"
+six = ">=1.6.1,<2"
+uritemplate = ">=0.6,<1"
+
+[[package]]
+category = "main"
+description = "HTML parser based on the WHATWG HTML specification"
+name = "html5lib"
+optional = false
+python-versions = "*"
+version = "1.0.1"
+
+[package.dependencies]
+six = ">=1.9"
+webencodings = "*"
+
+[package.extras]
+all = ["genshi", "chardet (>=2.2)", "datrie", "lxml"]
+chardet = ["chardet (>=2.2)"]
+datrie = ["datrie"]
+genshi = ["genshi"]
+lxml = ["lxml"]
+
+[[package]]
+category = "main"
+description = "A comprehensive HTTP client library."
+name = "httplib2"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.21.0"
+
+[package.dependencies]
+[package.dependencies.pyparsing]
+python = ">=3.1"
+version = ">=2.4.2,<3.0.0 || >3.0.0,<3.0.1 || >3.0.1,<3.0.2 || >3.0.2,<3.0.3 || >3.0.3,<4"
+
+[[package]]
+category = "main"
+description = "Read metadata from Python packages"
+marker = "python_version < \"3.8\""
+name = "importlib-metadata"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+version = "1.1.3"
+
+[package.dependencies]
+zipp = ">=0.5"
+
+[package.extras]
+docs = ["sphinx", "rst.linker"]
+testing = ["packaging", "importlib-resources"]
+
+[[package]]
+category = "main"
+description = "Read resources from Python packages"
+marker = "python_version < \"3.7\""
+name = "importlib-resources"
+optional = false
+python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
+version = "1.0.2"
+
+[package.dependencies]
+[package.dependencies.typing]
+python = "<3.5"
+version = "*"
+
+[[package]]
+category = "main"
+description = "Jinxed Terminal Library"
+marker = "platform_system == \"Windows\""
+name = "jinxed"
+optional = false
+python-versions = "*"
+version = "1.2.0"
+
+[package.dependencies]
+ansicon = "*"
+
+[[package]]
+category = "main"
+description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
+name = "lxml"
+optional = false
+python-versions = "*"
+version = "3.6.4"
+
+[package.extras]
+cssselect = ["cssselect (>=0.7)"]
+html5 = ["html5lib"]
+htmlsoup = ["beautifulsoup4"]
+source = ["Cython (>=0.20)"]
+
+[[package]]
+category = "main"
+description = "a small library for extracting rich content from urls"
+name = "micawber"
+optional = false
+python-versions = "*"
+version = "0.3.3"
+
+[[package]]
+category = "main"
+description = "Microsoft Translator V2 - Python API"
+name = "microsofttranslator"
+optional = false
+python-versions = "*"
+version = "0.8"
+
+[package.dependencies]
+requests = ">=1.2.3"
+six = "*"
+
+[[package]]
+category = "main"
+description = "Rolling backport of unittest.mock for all Pythons"
+name = "mock"
+optional = false
+python-versions = "*"
+version = "2.0.0"
+
+[package.dependencies]
+pbr = ">=0.11"
+six = ">=1.9"
+
+[package.extras]
+docs = ["sphinx", "Pygments (<2)", "jinja2 (<2.7)", "sphinx (<1.3)"]
+test = ["unittest2 (>=1.1.0)"]
+
+[[package]]
+category = "main"
+description = "OAuth 2.0 client library"
+name = "oauth2client"
+optional = false
+python-versions = "*"
+version = "3.0.0"
+
+[package.dependencies]
+httplib2 = ">=0.9.1"
+pyasn1 = ">=0.1.7"
+pyasn1-modules = ">=0.0.5"
+rsa = ">=3.1.4"
+six = ">=1.6.1"
+
+[[package]]
+category = "main"
+description = "A generic, spec-compliant, thorough implementation of the OAuth request-signing logic"
+name = "oauthlib"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "3.1.0"
+
+[package.extras]
+rsa = ["cryptography"]
+signals = ["blinker"]
+signedtoken = ["cryptography", "pyjwt (>=1.0.0)"]
+
+[[package]]
+category = "main"
+description = "SSH2 protocol library"
+name = "paramiko"
+optional = false
+python-versions = "*"
+version = "1.18.5"
+
+[package.dependencies]
+ecdsa = ">=0.11,<2.0"
+pycrypto = ">=2.1,<2.4 || >2.4,<3.0"
+
+[[package]]
+category = "main"
+description = "Python Build Reasonableness"
+name = "pbr"
+optional = false
+python-versions = ">=2.6"
+version = "5.11.0"
+
+[[package]]
+category = "main"
+description = "Python Imaging Library (Fork)"
+name = "pillow"
+optional = false
+python-versions = "*"
+version = "3.3.1"
+
+[[package]]
+category = "main"
+description = "plugin and hook calling mechanisms for python"
+name = "pluggy"
+optional = false
+python-versions = "*"
+version = "0.3.1"
+
+[[package]]
+category = "main"
+description = "A library to manipulate gettext files (po and mo files)."
+name = "polib"
+optional = false
+python-versions = "*"
+version = "1.1.1"
+
+[[package]]
+category = "main"
+description = "library with cross-python path, ini-parsing, io, code, log facilities"
+name = "py"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.10.0"
+
+[[package]]
+category = "main"
+description = "ASN.1 types and codecs"
+name = "pyasn1"
+optional = false
+python-versions = "*"
+version = "0.4.8"
+
+[[package]]
+category = "main"
+description = "A collection of ASN.1-based protocols modules."
+name = "pyasn1-modules"
+optional = false
+python-versions = "*"
+version = "0.2.8"
+
+[package.dependencies]
+pyasn1 = ">=0.4.6,<0.5.0"
+
+[[package]]
+category = "main"
+description = "Cryptographic modules for Python."
+name = "pycrypto"
+optional = false
+python-versions = "*"
+version = "2.6.1"
+
+[[package]]
+category = "main"
+description = "JSON Web Token implementation in Python"
+name = "pyjwt"
+optional = false
+python-versions = "*"
+version = "1.7.1"
+
+[package.extras]
+crypto = ["cryptography (>=1.4)"]
+flake8 = ["flake8", "flake8-import-order", "pep8-naming"]
+test = ["pytest (>=4.0.1,<5.0.0)", "pytest-cov (>=2.6.0,<3.0.0)", "pytest-runner (>=4.2,<5.0.0)"]
+
+[[package]]
+category = "main"
+description = "Python parsing module"
+marker = "python_version > \"3.0\""
+name = "pyparsing"
+optional = false
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "2.4.7"
+
+[[package]]
+category = "main"
+description = "pytest: simple powerful testing with Python"
+name = "pytest"
+optional = false
+python-versions = "*"
+version = "3.2.5"
+
+[package.dependencies]
+colorama = "*"
+py = ">=1.4.33"
+setuptools = "*"
+
+[[package]]
+category = "main"
+description = "Invoke py.test as distutils command with dependency resolution"
+name = "pytest-runner"
+optional = false
+python-versions = ">=2.7"
+version = "5.2"
+
+[package.extras]
+docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
+testing = ["pytest (>=3.5,<3.7.3 || >3.7.3)", "pytest-checkdocs", "pytest-flake8", "pytest-black-multipy", "pytest-cov", "pytest-virtualenv"]
+
+[[package]]
+category = "main"
+description = "Extensions to the standard Python datetime module"
+name = "python-dateutil"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+version = "2.8.2"
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
+category = "main"
+description = "Pure python memcached client"
+name = "python-memcached"
+optional = false
+python-versions = "*"
+version = "1.58"
+
+[[package]]
+category = "main"
+description = "Python social authentication made simple."
+name = "python-social-auth"
+optional = false
+python-versions = "*"
+version = "0.2.14"
+
+[package.dependencies]
+PyJWT = ">=1.0.0"
+oauthlib = ">=0.3.8"
+six = ">=1.2.0"
+
+[package.dependencies.python3-openid]
+python = ">=3"
+version = ">=3.0.1"
+
+[package.dependencies.requests]
+python = ">=3"
+version = ">=1.1.0"
+
+[package.dependencies.requests-oauthlib]
+python = ">=3"
+version = ">0.3.2"
+
+[[package]]
+category = "main"
+description = "OpenID support for modern servers and consumers."
+marker = "python_version >= \"3\""
+name = "python3-openid"
+optional = false
+python-versions = "*"
+version = "3.2.0"
+
+[package.dependencies]
+defusedxml = "*"
+
+[package.extras]
+mysql = ["mysql-connector-python"]
+postgresql = ["psycopg2"]
+
+[[package]]
+category = "main"
+description = "Russian-specific string utils"
+name = "pytils"
+optional = false
+python-versions = "*"
+version = "0.3"
+
+[[package]]
+category = "main"
+description = "World timezone definitions, modern and historical"
+name = "pytz"
+optional = false
+python-versions = "*"
+version = "2022.6"
+
+[[package]]
+category = "main"
+description = "YAML parser and emitter for Python"
+name = "pyyaml"
+optional = false
+python-versions = "*"
+version = "3.12"
+
+[[package]]
+category = "main"
+description = "CSS Minifier"
+name = "rcssmin"
+optional = false
+python-versions = "*"
+version = "1.0.6"
+
+[[package]]
+category = "main"
+description = "fast html to text parser (article readability tool) with python3 support"
+name = "readability-lxml"
+optional = false
+python-versions = "*"
+version = "0.6.2"
+
+[package.dependencies]
+chardet = "*"
+cssselect = "*"
+lxml = "*"
+
+[[package]]
+category = "main"
+description = "Python HTTP for Humans."
+name = "requests"
+optional = false
+python-versions = "*"
+version = "2.11.1"
+
+[package.extras]
+security = ["ndg-httpsclient", "pyOpenSSL (>=0.13)", "pyasn1"]
+socks = ["PySocks (>=1.5.6)"]
+
+[[package]]
+category = "main"
+description = "OAuthlib authentication support for Requests."
+name = "requests-oauthlib"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "1.3.1"
+
+[package.dependencies]
+oauthlib = ">=3.0.0"
+requests = ">=2.0.0"
+
+[package.extras]
+rsa = ["oauthlib (>=3.0.0)"]
+
+[[package]]
+category = "main"
+description = "Javascript Minifier"
+name = "rjsmin"
+optional = false
+python-versions = "*"
+version = "1.0.12"
+
+[[package]]
+category = "main"
+description = "Pure-Python RSA implementation"
+name = "rsa"
+optional = false
+python-versions = "*"
+version = "3.4.2"
+
+[package.dependencies]
+pyasn1 = ">=0.1.3"
+
+[[package]]
+category = "main"
+description = "Python 2 and 3 compatibility utilities"
+name = "six"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "1.16.0"
+
+[[package]]
+category = "main"
+description = "Thumbnails for Django"
+name = "sorl-thumbnail"
+optional = false
+python-versions = "*"
+version = "12.3"
+
+[[package]]
+category = "main"
+description = "Non-validating SQL parser"
+name = "sqlparse"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.3.1"
+
+[[package]]
+category = "main"
+description = "Stem is a Python controller library that allows applications to interact with Tor (https://www.torproject.org/)."
+name = "stem"
+optional = false
+python-versions = "*"
+version = "1.4.0"
+
+[[package]]
+category = "main"
+description = "virtualenv-based automation of test activities"
+name = "tox"
+optional = false
+python-versions = "*"
+version = "2.3.1"
+
+[package.dependencies]
+pluggy = ">=0.3.0,<0.4.0"
+py = ">=1.4.17"
+virtualenv = ">=1.11.2"
+
+[[package]]
+category = "main"
+description = "Twitter library for python"
+name = "tweepy"
+optional = false
+python-versions = "*"
+version = "3.5.0"
+
+[package.dependencies]
+requests = ">=2.4.3"
+requests-oauthlib = ">=0.4.1"
+six = ">=1.7.3"
+
+[[package]]
+category = "main"
+description = "Unofficial Telegram Bot API Library and Client"
+name = "twx.botapi"
+optional = false
+python-versions = "*"
+version = "2.1.0"
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
+category = "main"
+description = "Type Hints for Python"
+name = "typing"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, <3.5"
+version = "3.10.0.0"
+
+[[package]]
+category = "main"
+description = "ASCII transliterations of Unicode text"
+name = "unidecode"
+optional = false
+python-versions = "*"
+version = "0.04.19"
+
+[[package]]
+category = "main"
+description = "URI Templates"
+name = "uritemplate"
+optional = false
+python-versions = "*"
+version = "0.6"
+
+[[package]]
+category = "main"
+description = "A utility class for manipulating URLs."
+name = "urlobject"
+optional = false
+python-versions = "*"
+version = "2.4.2"
+
+[[package]]
+category = "main"
+description = "Virtual Python Environment builder"
+name = "virtualenv"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,>=2.7"
+version = "20.4.7"
+
+[package.dependencies]
+appdirs = ">=1.4.3,<2"
+distlib = ">=0.3.1,<1"
+filelock = ">=3.0.0,<4"
+six = ">=1.9.0,<2"
+
+[package.dependencies.importlib-metadata]
+python = "<3.8"
+version = ">=0.12"
+
+[package.dependencies.importlib-resources]
+python = "<3.7"
+version = ">=1.0"
+
+[package.extras]
+docs = ["proselint (>=0.10.2)", "sphinx (>=3)", "sphinx-argparse (>=0.2.5)", "sphinx-rtd-theme (>=0.4.3)", "towncrier (>=19.9.0rc1)"]
+testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", "pytest (>=4)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.1)", "pytest-mock (>=2)", "pytest-randomly (>=1)", "pytest-timeout (>=1)", "packaging (>=20.0)", "xonsh (>=0.9.16)"]
+
+[[package]]
+category = "main"
+description = "Measures the displayed width of unicode strings in a terminal"
+name = "wcwidth"
+optional = false
+python-versions = "*"
+version = "0.2.5"
+
+[[package]]
+category = "main"
+description = "Character encoding aliases for legacy web content"
+name = "webencodings"
+optional = false
+python-versions = "*"
+version = "0.5.1"
+
+[[package]]
+category = "main"
+description = "Backport of pathlib-compatible object wrapper for zip files"
+marker = "python_version < \"3.8\""
+name = "zipp"
+optional = false
+python-versions = ">=2.7"
+version = "1.2.0"
+
+[package.extras]
+docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
+testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
+
+[metadata]
+content-hash = "25b127fde2296de616ac5af2d659f7e2faf3f09d045abc18b7d43e5daf3f944b"
+lock-version = "1.0"
+python-versions = "3.4.10"
+
+[metadata.files]
+ansicon = []
+appdirs = []
+argparse = []
+arrow = []
+beautifulsoup4 = []
+blessed = []
+chardet = []
+colorama = []
+cssselect = []
+defusedxml = []
+distlib = []
+django = []
+django-appconf = []
+django-bootstrap-form = []
+django-cachalot = []
+django-ckeditor = []
+django-compressor = []
+django-concurrency = []
+django-controlcenter = []
+django-debug-toolbar = []
+django-digg-paginator = []
+django-etc = []
+django-htmlmin = []
+django-likes = []
+django-modeladmin-reorder = []
+django-picklefield = []
+django-pkgconf = []
+django-q = []
+django-remdow = []
+django-rosetta = []
+django-secretballot = []
+django-siteblocks = []
+django-taggit = []
+django-taggit-autosuggest = []
+django-user-accounts = []
+ecdsa = []
+fabric = []
+feedparser = []
+filelock = []
+funcy = []
+future = []
+google-api-python-client = []
+html5lib = []
+httplib2 = []
+importlib-metadata = []
+importlib-resources = []
+jinxed = []
+lxml = []
+micawber = []
+microsofttranslator = []
+mock = []
+oauth2client = []
+oauthlib = []
+paramiko = []
+pbr = []
+pillow = []
+pluggy = []
+polib = []
+py = []
+pyasn1 = []
+pyasn1-modules = []
+pycrypto = []
+pyjwt = []
+pyparsing = []
+pytest = []
+pytest-runner = []
+python-dateutil = []
+python-memcached = []
+python-social-auth = []
+python3-openid = []
+pytils = []
+pytz = []
+pyyaml = []
+rcssmin = []
+readability-lxml = []
+requests = []
+requests-oauthlib = []
+rjsmin = []
+rsa = []
+six = []
+sorl-thumbnail = []
+sqlparse = []
+stem = []
+tox = []
+tweepy = []
+"twx.botapi" = []
+typing = []
+unidecode = []
+uritemplate = []
+urlobject = []
+virtualenv = []
+wcwidth = []
+webencodings = []
+zipp = []

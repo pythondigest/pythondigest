@@ -23,7 +23,11 @@ services:
     #   - ./.envs/.local/.postgres
     ports:
       - "8000:8000"
-    command: python3 manage.py test
+    command: python manage.py test
+    # command: pip freeze
+    # command: sleep 45
+    # command: pip freeze > requirements_3.4.txt
+    # command: cat requirements.txt
 
   # postgres:
   #   build:
