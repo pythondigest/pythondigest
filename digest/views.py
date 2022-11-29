@@ -5,17 +5,17 @@ import datetime
 from concurrency.views import ConflictResponse
 from digg_paginator import DiggPaginator
 from django.contrib import messages
-from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import JsonResponse
 from django.template import loader
 from django.template.context import RequestContext
-from django.views.generic import DetailView
-from django.views.generic import FormView, ListView
+from django.urls import reverse
+from django.views.generic import DetailView, FormView, ListView
 
 from advertising.mixins import AdsMixin
+
 from .forms import AddNewsForm
-from .mixins import FeedItemsMixin, CacheMixin, FavoriteItemsMixin
+from .mixins import CacheMixin, FavoriteItemsMixin, FeedItemsMixin
 from .models import Issue, Item
 
 

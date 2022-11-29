@@ -20,7 +20,7 @@ RSS2JSON_URLS = [
 ]
 
 
-@register.assignment_tag
+@register.simple_tag
 def rss2json(url):
     result = {}
     try:
@@ -32,7 +32,7 @@ def rss2json(url):
     return result
 
 
-@register.assignment_tag
+@register.simple_tag
 def rss2libraries(url):
     items = []
     json = rss2json(url)

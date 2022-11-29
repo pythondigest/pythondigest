@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 import datetime
+# import the logging library
+import logging
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.generic import TemplateView
 
 from advertising.mixins import AdsMixin
-from digest.mixins import FeedItemsMixin, FavoriteItemsMixin
+from digest.mixins import FavoriteItemsMixin, FeedItemsMixin
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
-
-# import the logging library
-import logging
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)

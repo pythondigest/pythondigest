@@ -169,7 +169,7 @@ def icon_name(name):
     }.get(name, name)
 
 
-@register.assignment_tag
+@register.simple_tag
 def get_available_backends():
     return load_backends(settings.AUTHENTICATION_BACKENDS)
 
@@ -202,7 +202,7 @@ def oauth_backends(backends):
 def associated(context, backend):
     user = context.get('user')
     context['association'] = None
-    if user and user.is_authenticated():
+    if user and user.is_authenticated:
         try:
             context['association'] = user.social_auth.filter(
                 provider=backend.name)[0]

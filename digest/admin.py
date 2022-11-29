@@ -5,8 +5,8 @@ from datetime import datetime, timedelta
 from django import forms
 from django.contrib import admin
 from django.contrib.sites.models import Site
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 from django.utils.html import escape
 
 from conf.utils import likes_enable

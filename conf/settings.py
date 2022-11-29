@@ -10,7 +10,7 @@ DEBUG = True
 
 THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
-ALLOWED_HOSTS = ['pythondigest.ru']
+ALLOWED_HOSTS = ['pythondigest.ru', "127.0.0.1", "0.0.0.0"]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -62,11 +62,11 @@ DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 if DEBUG:
-    MIDDLEWARE_CLASSES = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    MIDDLEWARE = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 else:
-    MIDDLEWARE_CLASSES = ()
+    MIDDLEWARE = ()
 
-MIDDLEWARE_CLASSES += (
+MIDDLEWARE += (
     'django.middleware.cache.UpdateCacheMiddleware',
     # 'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -76,6 +76,8 @@ MIDDLEWARE_CLASSES += (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     # 'htmlmin.middleware.MarkRequestMiddleware',
     'account.middleware.LocaleMiddleware',
@@ -97,7 +99,7 @@ TEMPLATES = [{
             'django.template.context_processors.debug',
             'django.template.context_processors.request',
             'django.contrib.auth.context_processors.auth',
-            'django.core.context_processors.request',
+            'django.template.context_processors.request',
             'django.contrib.messages.context_processors.messages',
             'account.context_processors.account',
             'social_django.context_processors.backends',

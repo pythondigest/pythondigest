@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.db import models
+from django.urls import reverse
 
 EDITOR_MATERIAL_SECTION_CHOICES = (('news', 'Новости'),
                                    ('articles', 'Статьи'),
@@ -30,7 +30,7 @@ class EditorMaterial(models.Model):
         null=True,
         blank=True)
     contents = models.TextField(verbose_name='Основной текст', )
-    user = models.ForeignKey(User, verbose_name='Автор', editable=False, )
+    user = models.ForeignKey(User, verbose_name='Автор', editable=False, on_delete=models.CASCADE, )
     created_at = models.DateTimeField(verbose_name='Дата добавления',
                                       auto_now_add=True, )
 

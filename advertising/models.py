@@ -2,8 +2,8 @@
 import datetime
 
 from django.core.exceptions import ValidationError
-from django.core.urlresolvers import reverse, NoReverseMatch
 from django.db import models
+from django.urls import NoReverseMatch, reverse
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -93,8 +93,8 @@ class Advertising(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     active = models.BooleanField(verbose_name=_('Active'), default=True)
     description = models.TextField(verbose_name=_('Description'))
-    type = models.ForeignKey(AdType, verbose_name=_('Ads type'))
-    align = models.ForeignKey(AdAlign, verbose_name=_('Ads align'))
+    type = models.ForeignKey(AdType, verbose_name=_('Ads type'), on_delete=models.CASCADE)
+    align = models.ForeignKey(AdAlign, verbose_name=_('Ads align'), on_delete=models.CASCADE)
     pages = models.ManyToManyField(AdPage, verbose_name=_('Ads pages'))
 
     start_date = models.DateField(verbose_name=_('Start date'),

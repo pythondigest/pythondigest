@@ -10,11 +10,11 @@ import requests.exceptions
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django_remdow.templatetags.remdow import (remdow_img_center,
                                                remdow_img_local,
@@ -101,7 +101,8 @@ class Keyword(TagBase):
 
 class KeywordGFK(GenericTaggedItemBase):
     tag = models.ForeignKey(Keyword,
-                            related_name='%(app_label)s_%(class)s_items')
+                            related_name='%(app_label)s_%(class)s_items',
+                            on_delete=models.CASCADE)
 
 
 class Issue(models.Model):
@@ -192,7 +193,8 @@ class Item(models.Model):
     """
     section = models.ForeignKey(
         Section,
-        verbose_name=_('Section'), null=True, blank=True)
+        verbose_name=_('Section'), null=True, blank=True,
+        on_delete=models.CASCADE)
     title = models.CharField(
         verbose_name=_('Title'), max_length=255)
     is_editors_choice = models.BooleanField(
@@ -201,9 +203,11 @@ class Item(models.Model):
         verbose_name=_('Description'), blank=True)
     issue = models.ForeignKey(
         Issue,
+        on_delete=models.CASCADE,
         verbose_name=_('Issue of digest'), null=True, blank=True)
     resource = models.ForeignKey(
         Resource,
+        on_delete=models.CASCADE,
         verbose_name=_('Resource'), null=True, blank=True)
     link = models.URLField(
         verbose_name=_('URL'), max_length=255)
@@ -230,6 +234,7 @@ class Item(models.Model):
         verbose_name=_('Priority'), default=0)
     user = models.ForeignKey(
         User,
+        on_delete=models.CASCADE,
         verbose_name=_('Who added item'), editable=False,
         null=True, blank=True)
     article_path = models.FilePathField(
@@ -376,7 +381,7 @@ class Item(models.Model):
 
 
 class ItemClsCheck(models.Model):
-    item = models.OneToOneField(Item, verbose_name=_('News'))
+    item = models.OneToOneField(Item, on_delete=models.CASCADE, verbose_name=_('News'))
     last_check = models.DateTimeField(
         verbose_name=_('Last check time'), auto_now=True)
     score = models.BooleanField(verbose_name=_('Score'), default=False)
@@ -423,6 +428,7 @@ class AutoImportResource(models.Model):
         choices=TYPE_RESOURCE, default=TYPE_RESOURCE_DEFAULT)
     resource = models.ForeignKey(
         Resource,
+        on_delete=models.CASCADE,
         verbose_name=_('Source'), null=True, blank=True)
     incl = models.CharField(
         verbose_name=_('Required content'),

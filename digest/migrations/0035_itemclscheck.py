@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('status',
                  models.BooleanField(verbose_name='Оценка', default=False)),
                 ('item', models.OneToOneField(to='digest.Item',
+                                              on_delete=models.CASCADE,
                                               verbose_name='Новость')),
             ],
         ),

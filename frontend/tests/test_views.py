@@ -1,10 +1,10 @@
 # -*- encoding: utf-8 -*-
-from django.core.urlresolvers import reverse
-from django.test import RequestFactory
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
+from django.urls import reverse
 from django.utils import timezone
 
 from digest.models import Issue, Item, Section
+
 from ..views import IndexView
 
 
