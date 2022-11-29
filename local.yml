@@ -8,7 +8,7 @@ services:
   django: &django
     build:
       context: .
-      dockerfile: ./deploy/Dockerfile-poetry
+      dockerfile: ./deploy/Dockerfile
     image: pydigest_django
     container_name: pydigest_django
     platform: linux/x86_64
@@ -28,7 +28,7 @@ services:
     # command: pwd
     # command: pip freeze
     # command: python manage.py test
-    # command: poetry export -f requirements.txt -o requirements.txt
+    # command: poetry export -f requirements.txt -o requirements_3.4.txt
     # command: pip freeze
     command: sleep 86400
     # command: pip freeze > requirements_3.4.txt

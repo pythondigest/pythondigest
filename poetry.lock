@@ -10,7 +10,7 @@ version = "1.89.0"
 [[package]]
 category = "main"
 description = "A small Python module for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "appdirs"
 optional = false
 python-versions = "*"
@@ -103,6 +103,7 @@ wcwidth = ">=0.1.4"
 [[package]]
 category = "main"
 description = "Extensible memoizing collections and decorators"
+marker = "python_version >= \"3\""
 name = "cachetools"
 optional = false
 python-versions = "*"
@@ -174,7 +175,7 @@ version = "1.1.0"
 [[package]]
 category = "main"
 description = "XML bomb protection for Python stdlib modules"
-marker = "python_version >= \"3\""
+marker = "python_version >= \"3.0\""
 name = "defusedxml"
 optional = false
 python-versions = "*"
@@ -183,7 +184,7 @@ version = "0.5.0"
 [[package]]
 category = "main"
 description = "Distribution utilities"
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "distlib"
 optional = false
 python-versions = "*"
@@ -490,7 +491,7 @@ version = "5.2.1"
 [[package]]
 category = "main"
 description = "A platform independent file lock."
-marker = "python_version != \"3.2\""
+marker = "python_full_version < \"3.2.0\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version != \"3.2\""
 name = "filelock"
 optional = false
 python-versions = "*"
@@ -664,7 +665,7 @@ testing = ["packaging", "importlib-resources"]
 [[package]]
 category = "main"
 description = "Read resources from Python packages"
-marker = "python_version != \"3.2\" and python_version < \"3.7\""
+marker = "python_full_version < \"3.2.0\" and python_version < \"3.7\" and python_version != \"3.2\" or python_full_version >= \"3.3.0\" and python_version < \"3.7\" and python_version != \"3.2\""
 name = "importlib-resources"
 optional = false
 python-versions = ">=2.7,!=3.0,!=3.1,!=3.2,!=3.3"
@@ -878,6 +879,7 @@ version = "0.4.8"
 [[package]]
 category = "main"
 description = "A collection of ASN.1-based protocols modules."
+marker = "python_version >= \"3\""
 name = "pyasn1-modules"
 optional = false
 python-versions = "*"
@@ -1009,23 +1011,30 @@ description = "Python social authentication made simple."
 name = "python-social-auth"
 optional = false
 python-versions = "*"
-version = "0.2.21"
+version = "0.3.6"
 
 [package.dependencies]
-PyJWT = ">=1.4.0"
-oauthlib = ">=1.0.3"
-requests = ">=2.9.1"
-requests-oauthlib = ">=0.6.1"
-six = ">=1.10.0"
+social-auth-core = "*"
 
-[package.dependencies.python3-openid]
-python = ">=3"
-version = ">=3.0.9"
+[package.dependencies.social-auth-app-django]
+optional = true
+version = "*"
+
+[package.extras]
+cherrypy = ["social-auth-app-cherrypy"]
+django = ["social-auth-app-django"]
+django-mongoengine = ["social-auth-app-django-mongoengine"]
+flask = ["social-auth-app-flask-sqlalchemy", "social-auth-app-flask"]
+flask-mongoengine = ["social-auth-app-flask-mongoengine"]
+flask-peewee = ["social-auth-app-flask-peewee"]
+pyramid = ["social-auth-app-pyramid"]
+tornado = ["social-auth-app-tornado"]
+webpy = ["social-auth-app-webpy"]
 
 [[package]]
 category = "main"
 description = "OpenID support for modern servers and consumers."
-marker = "python_version >= \"3\""
+marker = "python_version >= \"3.0\""
 name = "python3-openid"
 optional = false
 python-versions = "*"
@@ -1151,6 +1160,49 @@ name = "six"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
 version = "1.16.0"
+
+[[package]]
+category = "main"
+description = "Python Social Authentication, Django integration."
+name = "social-auth-app-django"
+optional = false
+python-versions = "*"
+version = "4.0.0"
+
+[package.dependencies]
+six = "*"
+social-auth-core = ">=3.3.0"
+
+[[package]]
+category = "main"
+description = "Python social authentication made simple."
+name = "social-auth-core"
+optional = false
+python-versions = "*"
+version = "4.0.2"
+
+[package.dependencies]
+PyJWT = ">=1.4.0,<2"
+cryptography = ">=1.4"
+oauthlib = ">=1.0.3"
+requests = ">=2.9.1"
+requests-oauthlib = ">=0.6.1"
+six = ">=1.10.0"
+
+[package.dependencies.defusedxml]
+python = ">=3.0"
+version = ">=0.5.0rc1"
+
+[package.dependencies.python3-openid]
+python = ">=3.0"
+version = ">=3.0.10"
+
+[package.extras]
+all = ["python-jose (>=3.0.0)", "pyjwt (>=1.7.1)", "python3-saml (>=1.2.1)", "cryptography (>=2.1.1)"]
+allpy3 = ["python-jose (>=3.0.0)", "pyjwt (>=1.7.1)", "python3-saml (>=1.2.1)", "cryptography (>=2.1.1)", "defusedxml (>=0.5.0rc1)", "python3-openid (>=3.0.10)"]
+azuread = ["cryptography (>=2.1.1)"]
+openidconnect = ["python-jose (>=3.0.0)", "pyjwt (>=1.7.1)"]
+saml = ["python3-saml (>=1.2.1)"]
 
 [[package]]
 category = "main"
@@ -1326,7 +1378,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "42166fadf08054259f11e9db413040558d5d97ece63f42cc260c27ccff1b1f4f"
+content-hash = "79e3d0bbdbc75c7a0d56e536f14977967aef81108d346452bdf7d5771c2426f0"
 lock-version = "1.0"
 python-versions = "3.4.10"
 
@@ -1429,6 +1481,8 @@ rjsmin = []
 rsa = []
 scandir = []
 six = []
+social-auth-app-django = []
+social-auth-core = []
 sorl-thumbnail = []
 soupsieve = []
 sqlparse = []

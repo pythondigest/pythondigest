@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.shortcuts import redirect
-
-from social.pipeline.partial import partial
+from social_core.pipeline.partial import partial
 
 
 @partial

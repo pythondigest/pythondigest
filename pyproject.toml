@@ -42,7 +42,7 @@ URLObject = "^2.4.2"
 readability-lxml = "^0.6.2"
 micawber = "^0.3.3"
 unidecode = "^0.4.19"
-python-social-auth = "<0.3"
+python-social-auth = {extras = ["django"], version = "^0.3.6"}
 rsa = "^3.4.2"
 "twx.botapi" = "^2.1.0"
 google-api-python-client = "^1.5.3"

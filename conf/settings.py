@@ -41,7 +41,7 @@ INSTALLED_APPS = (
 
     'account',
     'rosetta',
-    'social.apps.django_app.default',
+    'social_django',
     'micawber.contrib.mcdjango',
 
     'compressor',
@@ -100,8 +100,8 @@ TEMPLATES = [{
             'django.core.context_processors.request',
             'django.contrib.messages.context_processors.messages',
             'account.context_processors.account',
-            'social.apps.django_app.context_processors.backends',
-            'social.apps.django_app.context_processors.login_redirect',
+            'social_django.context_processors.backends',
+            'social_django.context_processors.login_redirect',
         ],
         'loaders': (
             'django.template.loaders.filesystem.Loader',
@@ -111,15 +111,16 @@ TEMPLATES = [{
 }, ]
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.github.GithubOAuth2',  # ok
-    'social.backends.vk.VKOAuth2',  # ok
-    'social.backends.twitter.TwitterOAuth',  # ok
-    'social.backends.facebook.FacebookOAuth2',  # ok
-    # 'social.backends.bitbucket.BitbucketOAuth',
-    # 'social.backends.google.GoogleOAuth2',
-    # 'social.backends.linkedin.LinkedinOAuth2',
-    # 'social.backends.open_id.OpenIdAuth',
-    'social.backends.email.EmailAuth', 'social.backends.username.UsernameAuth',
+    'social_core.backends.github.GithubOAuth2',  # ok
+    'social_core.backends.vk.VKOAuth2',  # ok
+    'social_core.backends.twitter.TwitterOAuth',  # ok
+    'social_core.backends.facebook.FacebookOAuth2',  # ok
+    # 'social_core.backends.bitbucket.BitbucketOAuth',
+    # 'social_core.backends.google.GoogleOAuth2',
+    # 'social_core.backends.linkedin.LinkedinOAuth2',
+    # 'social_core.backends.open_id.OpenIdAuth',
+    'social_core.backends.email.EmailAuth',
+    'social_core.backends.username.UsernameAuth',
     'django.contrib.auth.backends.ModelBackend',)
 
 WSGI_APPLICATION = 'conf.wsgi.application'
@@ -132,8 +133,9 @@ DATABASES = {
 }
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
-SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
-SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+SOCIAL_AUTH_STRATEGY = 'social_django.strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
 SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
     'https://www.googleapis.com/auth/drive',
     'https://www.googleapis.com/auth/userinfo.profile'
@@ -216,16 +218,17 @@ SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
 SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
 
 SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.social_details',
-    'social.pipeline.social_auth.social_uid',
-    'social.pipeline.social_auth.auth_allowed',
-    'social.pipeline.social_auth.social_user',
-    'social.pipeline.user.get_username',
-    'social.pipeline.mail.mail_validation', 'social.pipeline.user.create_user',
-    'social.pipeline.social_auth.associate_user',
-    # 'social.pipeline.debug.debug',
-    'social.pipeline.social_auth.load_extra_data',
-    'social.pipeline.user.user_details',  # 'social.pipeline.debug.debug'
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.auth_allowed',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.mail.mail_validation',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    # 'social_core.pipeline.debug.debug',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',  # 'social_core.pipeline.debug.debug'
 )
 
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
