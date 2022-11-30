@@ -51,7 +51,7 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install -U pip && pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
 
-RUN pip install poetry
+RUN pip install poetry && apt-get update && apt-get install vim -y
 
 # copy application code to WORKDIR
 COPY . ${APP_HOME}

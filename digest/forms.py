@@ -1,24 +1,20 @@
 # -*- encoding: utf-8 -*-
 from ckeditor.widgets import CKEditorWidget, json_encode
+
 from django import forms
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
+from django.forms.utils import flatatt
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
-try:
-    # Django >=1.7
-    from django.forms.utils import flatatt
-except ImportError:
-    # Django <1.7
-    from django.forms.util import flatatt
-
 from digest.models import Item
 
+ITEM_STATUS_DEFAULT = "queue"
 ITEM_STATUS_CHOICES = (('queue', 'В очередь'),
                        ('moderated', 'Отмодерировано'),)
 
@@ -45,10 +41,12 @@ class GlavRedWidget(CKEditorWidget):
 
 
 class ItemStatusForm(ModelForm):
-    status = ChoiceField(label='Статус',
-                         widget=widgets.AdminRadioSelect(
-                             attrs={'class': get_ul_class(admin.HORIZONTAL)}),
-                         choices=ITEM_STATUS_CHOICES)
+    status = ChoiceField(
+        label='Статус',
+        widget=widgets.AdminRadioSelect(
+            attrs={'class': get_ul_class(admin.HORIZONTAL)}),
+        choices=ITEM_STATUS_CHOICES,
+    )
 
     class Meta:
         model = Item

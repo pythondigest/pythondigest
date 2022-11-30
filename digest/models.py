@@ -7,6 +7,16 @@ import os
 
 import requests
 import requests.exceptions
+from django_remdow.templatetags.remdow import (
+    remdow_img_center,
+    remdow_img_local,
+    remdow_img_responsive,
+    remdow_lazy_img,
+)
+from readability.readability import Document, Unparseable
+from taggit.models import GenericTaggedItemBase, TagBase
+from taggit_autosuggest.managers import TaggableManager
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -16,13 +26,6 @@ from django.dispatch import receiver
 from django.http import QueryDict
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django_remdow.templatetags.remdow import (remdow_img_center,
-                                               remdow_img_local,
-                                               remdow_img_responsive,
-                                               remdow_lazy_img)
-from readability.readability import Document, Unparseable
-from taggit.models import GenericTaggedItemBase, TagBase
-from taggit_autosuggest.managers import TaggableManager
 
 from conf.utils import likes_enable
 from frontend.models import Tip
@@ -238,7 +241,10 @@ class Item(models.Model):
         verbose_name=_('Who added item'), editable=False,
         null=True, blank=True)
     article_path = models.FilePathField(
-        verbose_name=_('Article path'), blank=True)
+        verbose_name=_('Article path'),
+        blank=True,
+        path=settings.DATASET_ROOT,
+    )
     tags = TaggableManager(blank=True)
     keywords = TaggableManager(
         verbose_name=_('Keywords'), through=KeywordGFK, blank=True)

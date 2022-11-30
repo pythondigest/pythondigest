@@ -131,14 +131,15 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "2.0.13"
+version = "2.2.28"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
-python-versions = ">=3.4"
+python-versions = ">=3.5"
 
 [package.dependencies]
 pytz = "*"
+sqlparse = ">=0.2.2"
 
 [package.extras]
 argon2 = ["argon2-cffi (>=16.1.0)"]
@@ -310,7 +311,7 @@ python-versions = "*"
 django-etc = ">=1.2.0"
 
 [package.extras]
-develop = ["django", "pytest", "pytest-django", "tox"]
+develop = ["django", "pytest", "pytest-django",]
 test = ["pytest", "pytest-cov", "pytest-django"]
 
 [[package]]
@@ -599,7 +600,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 importlib-metadata = {version = ">=0.12", markers = "python_version < \"3.8\""}
 
 [package.extras]
-dev = ["pre-commit", "tox"]
+dev = ["pre-commit",]
 
 [[package]]
 name = "protobuf"
@@ -916,24 +917,6 @@ category = "main"
 optional = false
 python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
 
-[[package]]
-name = "tox"
-version = "3.14.0"
-description = "tox is a generic virtualenv management and test command line tool"
-category = "main"
-optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-
-[package.dependencies]
-filelock = ">=3.0.0,<4"
-importlib-metadata = {version = ">=0.12,<1", markers = "python_version < \"3.8\""}
-packaging = ">=14"
-pluggy = ">=0.12.0,<1"
-py = ">=1.4.17,<2"
-six = ">=1.0.0,<2"
-toml = ">=0.9.4"
-virtualenv = ">=14.0.0"
-
 [package.extras]
 docs = ["pygments-github-lexers (>=0.0.5)", "sphinx (>=2.0.0,<3)", "sphinxcontrib-autoprogram (>=0.1.5)", "towncrier (>=18.5.0)"]
 testing = ["flaky (>=3.4.0,<4)", "freezegun (>=0.3.11,<1)", "pathlib2 (>=2.3.3,<3)", "psutil (>=5.6.1,<6)", "pytest (>=4.0.0,<6)", "pytest-cov (>=2.5.1,<3)", "pytest-mock (>=1.10.0,<2)", "pytest-randomly (>=1.2.3,<2)", "pytest-xdist (>=1.22.2,<2)"]
@@ -1147,7 +1130,6 @@ soupsieve = []
 sqlparse = []
 stem = []
 toml = []
-tox = []
 tweepy = []
 "twx.botapi" = []
 unidecode = []
