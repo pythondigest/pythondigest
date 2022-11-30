@@ -19,3 +19,9 @@ run-infra:
 
 run-docker:
 	docker compose -f local.yml up --build
+
+build:
+	docker compose -f local.yml build
+
+run:
+	docker compose -f local.yml up

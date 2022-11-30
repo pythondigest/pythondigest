@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.6.15-slim-bullseye
+ARG PYTHON_VERSION=3.10-slim-bullseye
 
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
@@ -7,12 +7,13 @@ FROM python:${PYTHON_VERSION} as python
 FROM python as python-build-stage
 
 # Install apt packages
-RUN apt-get update && apt-get install --no-install-recommends -y --force-yes \
+RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   # dependencies for building Python packages
   build-essential \
   # psycopg2 dependencies
   libpq-dev \
   libffi-dev \
+  git \
   python3-all-dev && python -m pip install -U pip poetry
 
 # Requirements are installed here to ensure they will be cached.
@@ -34,11 +35,12 @@ ENV PYTHONDONTWRITEBYTECODE 1
 WORKDIR ${APP_HOME}
 
 # Install required system dependencies
-RUN apt-get update && apt-get install --no-install-recommends -y --force-yes\
+RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing\
   # psycopg2 dependencies
   libpq-dev \
   # Translations dependencies
   gettext \
+  git \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
