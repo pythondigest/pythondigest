@@ -71,7 +71,6 @@ else:
 
 MIDDLEWARE += (
     'django.middleware.cache.UpdateCacheMiddleware',
-    # 'htmlmin.middleware.HtmlMinifyMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
     'django.middleware.locale.LocaleMiddleware',
@@ -82,7 +81,6 @@ MIDDLEWARE += (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
-    # 'htmlmin.middleware.MarkRequestMiddleware',
     'account.middleware.LocaleMiddleware',
     'account.middleware.TimezoneMiddleware',
     # 'admin_reorder.middleware.ModelAdminReorder',

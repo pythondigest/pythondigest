@@ -32,6 +32,7 @@ services:
     # command: pip freeze > requirements_3.4.txt
     # command: poetry install
     # command: cat poetry.lock > poetry.lock
+    # command: python manage.py migrate
     command: python manage.py runserver 0.0.0.0:8000
 
   # postgres:
