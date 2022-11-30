@@ -1,4 +1,18 @@
 [[package]]
+name = "asgiref"
+version = "3.4.1"
+description = "ASGI specs, helper code, and adapters"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+typing-extensions = {version = "*", markers = "python_version < \"3.8\""}
+
+[package.extras]
+tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
+
+[[package]]
 name = "atomicwrites"
 version = "1.4.1"
 description = "Atomic file writes."
@@ -126,18 +140,19 @@ python-versions = "*"
 
 [[package]]
 name = "django"
-version = "2.2.28"
+version = "3.2.16"
 description = "A high-level Python Web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [package.dependencies]
+asgiref = ">=3.3.2,<4"
 pytz = "*"
 sqlparse = ">=0.2.2"
 
 [package.extras]
-argon2 = ["argon2-cffi (>=16.1.0)"]
+argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
@@ -284,7 +299,7 @@ python-versions = "*"
 
 [[package]]
 name = "django-remdow"
-version = "0.0.6"
+version = "0.0.7"
 description = "Simple Django app for manipulating static files (img files)"
 category = "main"
 optional = false
@@ -319,14 +334,14 @@ python-versions = "*"
 
 [[package]]
 name = "django-taggit"
-version = "2.1.0"
+version = "3.1.0"
 description = "django-taggit is a reusable Django application for simple tagging."
 category = "main"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-Django = ">=2.2"
+Django = ">=3.2"
 
 [[package]]
 name = "django-taggit-autosuggest"
@@ -910,6 +925,14 @@ attrs = "*"
 requests = "*"
 
 [[package]]
+name = "typing-extensions"
+version = "4.1.1"
+description = "Backported and Experimental Type Hints for Python 3.6+"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "unidecode"
 version = "1.3.6"
 description = "ASCII transliterations of Unicode text"
@@ -960,9 +983,13 @@ testing = ["func-timeout", "jaraco.itertools", "pathlib2", "unittest2"]
 [metadata]
 lock-version = "1.1"
 python-versions = "3.6.15"
-content-hash = "7f9592ea6d2f0f3220637b66fa22b9359f09048b7e87d9923d20d8fd06bfda1d"
+content-hash = "3eb91549ec114a1bb3dbc8b5a6eb8cb52bbd6a01917fecf92e8fc20e7737bf1a"
 
 [metadata.files]
+asgiref = [
+    {file = "asgiref-3.4.1-py3-none-any.whl", hash = "sha256:ffc141aa908e6f175673e7b1b3b7af4fdb0ecb738fc5c8b88f69f055c2415214"},
+    {file = "asgiref-3.4.1.tar.gz", hash = "sha256:4ef1ab46b484e3c706329cedeff284a5d40824200638503f5768edb6de7d58e9"},
+]
 atomicwrites = []
 attrs = []
 beautifulsoup4 = []
@@ -978,7 +1005,10 @@ colorama = []
 cryptography = []
 cssselect = []
 defusedxml = []
-django = []
+django = [
+    {file = "Django-3.2.16-py3-none-any.whl", hash = "sha256:18ba8efa36b69cfcd4b670d0fa187c6fe7506596f0ababe580e16909bcdec121"},
+    {file = "Django-3.2.16.tar.gz", hash = "sha256:3adc285124244724a394fa9b9839cc8cd116faf7d159554c43ecdaa8cdf0b94d"},
+]
 django-appconf = []
 django-bootstrap-form = []
 django-cachalot = [
@@ -1009,8 +1039,8 @@ django-siteblocks = [
     {file = "django_siteblocks-1.2.1-py2.py3-none-any.whl", hash = "sha256:4bfb963affc3ca727f318f5ca9db4297732ca74086be4982f00772946c7e09fd"},
 ]
 django-taggit = [
-    {file = "django-taggit-2.1.0.tar.gz", hash = "sha256:a9f41e4ad58efe4b28d86f274728ee87eb98eeae90c9eb4b4efad39e5068184e"},
-    {file = "django_taggit-2.1.0-py3-none-any.whl", hash = "sha256:61547a23fc99967c9304107414a09e662b459f4163dbbae32e60b8ba40c34d05"},
+    {file = "django-taggit-3.1.0.tar.gz", hash = "sha256:c8f2e4eae387939089b3d75d1d8649e008880970c068ce9d0e82f87fd5e29508"},
+    {file = "django_taggit-3.1.0-py3-none-any.whl", hash = "sha256:543218ac346fbe02a65733e0341c91b57a3e0f7a41568966b26f1cea9edc4805"},
 ]
 django-taggit-autosuggest = []
 django-user-accounts = [
@@ -1122,6 +1152,10 @@ tomli = [
 ]
 tweepy = []
 "twx.botapi" = []
+typing-extensions = [
+    {file = "typing_extensions-4.1.1-py3-none-any.whl", hash = "sha256:21c85e0fe4b9a155d0799430b0ad741cdce7e359660ccbd8b530613e8df88ce2"},
+    {file = "typing_extensions-4.1.1.tar.gz", hash = "sha256:1a9462dcc3347a79b1f1c0271fbe79e844580bb598bafa1ed208b94da3cdcd42"},
+]
 unidecode = []
 uritemplate = []
 urllib3 = []

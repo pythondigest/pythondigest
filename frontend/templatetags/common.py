@@ -6,16 +6,16 @@ import random
 import re
 
 import lxml.html
-from django import template
-from django.conf import settings
-from django.contrib.messages.utils import get_level_tags
-from django.utils.encoding import force_text
-from django.utils.six import text_type
-from django.utils.translation import get_language, to_locale
 from social_core.backends.oauth import OAuthAuth
 from social_core.backends.utils import load_backends
 from unidecode import unidecode as _unidecode
 from urlobject import URLObject
+
+from django import template
+from django.conf import settings
+from django.contrib.messages.utils import get_level_tags
+from django.utils.encoding import force_text
+from django.utils.translation import get_language, to_locale
 
 from conf.utils import likes_enable
 
@@ -104,7 +104,7 @@ def modify_url_(url, operation, *args):
 
     op = getattr(url, operation, None)
     if callable(op):
-        return text_type(op(*args))
+        return str(op(*args))
     raise Exception(
         '{} is incorrect function name for urlobject.URLObject'.format(
             operation))
