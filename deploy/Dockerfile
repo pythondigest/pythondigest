@@ -1,3 +1,4 @@
+# ARG PYTHON_VERSION=3.6.15-slim-bullseye
 ARG PYTHON_VERSION=3.4.10-slim-jessie
 
 # define an alias for the specfic python version used in this file.
@@ -17,7 +18,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y --force-yes \
 
 # Requirements are installed here to ensure they will be cached.
 COPY pyproject.toml poetry.lock ./
-RUN poetry export -f requirements.txt -o requirements.txt
+RUN poetry run pip install --upgrade pip && poetry export -f requirements.txt -o requirements.txt
 
 # Create Python Dependency and Sub-Dependency Wheels.
 RUN pip wheel --wheel-dir /usr/src/app/wheels -r requirements.txt
@@ -48,7 +49,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y --force-yes\
 COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 
 # use wheels to install python dependencies
-RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
+RUN pip install -U pip && pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
 
 RUN pip install poetry

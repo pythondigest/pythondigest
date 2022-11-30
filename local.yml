@@ -25,16 +25,11 @@ services:
     ports:
       - "8000:8000"
     # command: echo "hi"
-    # command: pwd
     # command: pip freeze
     # command: python manage.py test
     # command: poetry export -f requirements.txt -o requirements_3.4.txt
-    # command: pip freeze
     # command: sleep 86400
     # command: pip freeze > requirements_3.4.txt
-    # command: cat requirements.txt
-    # command: poetry add "python-social-auth==0.3.6"
-    # command: poetry lock
     # command: poetry install
     # command: cat poetry.lock > poetry.lock
     command: python manage.py runserver 0.0.0.0:8000
