@@ -27,7 +27,7 @@ services:
     # command: echo "hi"
     # command: pip freeze
     # command: python manage.py test
-    # command: poetry export -f requirements.txt -o requirements_3.4.txt
+    # command: poetry export -f requirements.txt -o requirements_3.6.txt
     # command: sleep 86400
     # command: pip freeze > requirements_3.4.txt
     # command: poetry install
