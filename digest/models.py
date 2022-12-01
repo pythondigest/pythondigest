@@ -27,7 +27,6 @@ from django.http import QueryDict
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from conf.utils import likes_enable
 from frontend.models import Tip
 
 # Get an instance of a logger
@@ -547,9 +546,3 @@ def run_remdow(instance, **kwargs):
                     remdow_img_center(
                         remdow_img_local(description))))
         instance.save_without_signals()
-
-
-if likes_enable():
-    import secretballot
-
-    secretballot.enable_voting_on(Item)
