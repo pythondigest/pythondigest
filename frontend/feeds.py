@@ -2,6 +2,8 @@
 import datetime
 
 import pytils
+from yaturbo import YandexTurboFeed
+
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
@@ -47,7 +49,7 @@ class RawEntriesFeed(DigestFeed):
 
 
 class ItemDigestFeed(DigestFeed):
-    """Лента РСС для новостей."""
+    """Лента RSS для новостей."""
 
     @staticmethod
     def items():
@@ -181,3 +183,11 @@ class ItemPackagesFeed(SectionFeed):
 
 class ItemAuthorsFeed(SectionFeed):
     section = 'Колонка автора'
+
+
+class TurboFeed(YandexTurboFeed, AllEntriesFeed):
+
+    turbo_sanitize = True
+
+    def item_link(self, item):
+        return item.internal_link

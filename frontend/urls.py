@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import path
 
 from frontend.views import FriendsView, IndexView, Sitemap
@@ -16,8 +17,13 @@ from .feeds import (
     ItemVideoFeed,
     RawEntriesFeed,
     RussianEntriesFeed,
+    TurboFeed,
     TwitterEntriesFeed,
 )
+
+feed = TurboFeed()
+feed.configure_analytics_yandex(settings.YANDEX_METRIKA_ID)
+
 
 app_name = 'frontend'
 urlpatterns = [
@@ -39,6 +45,8 @@ urlpatterns = [
     path('rss/authors/', ItemAuthorsFeed(), name='authors_rss'),
     path('rss/release/', ItemReleaseFeed(), name='release_rss'),
     path('rss/packages/', ItemPackagesFeed(), name='packages_rss'),
+
+    path('turbo/', feed),
 
     path('sitemap\.xml', Sitemap.as_view(), name='sitemap'),
 

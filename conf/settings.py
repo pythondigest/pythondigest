@@ -306,6 +306,8 @@ VK_APP_ID = 0
 VK_LOGIN = ''
 VK_PASSWORD = ''
 
+YANDEX_METRIKA_ID = '36284495'
+
 ADMIN_REORDER = (
     'digest',
     'advertising',

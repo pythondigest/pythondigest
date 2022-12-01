@@ -47,6 +47,8 @@ pymemcache = "^4.0.0"
 fontawesomefree = "^6.2.1"
 django-browser-reload = "^1.6.0"
 django-bootstrap3 = "^22.2"
+django-yaturbo = "^1.0.1"
+bleach = "^5.0.1"
 
 [tool.poetry.group.test.dependencies]
 django-stubs = "^1.13.0"
