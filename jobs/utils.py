@@ -1,11 +1,12 @@
 # -*- encoding: utf-8 -*-
 import logging
 from textwrap import wrap
+from typing import Dict
 
 import requests
+
 from django.conf import settings
 from django.utils.dateparse import parse_datetime
-from typing import Dict
 
 from jobs.signals import sig_integration_failed
 

@@ -1,13 +1,23 @@
-from django.conf.urls import url
 from django.urls import path
 
 from frontend.views import FriendsView, IndexView, Sitemap
 
-from .feeds import (AllEntriesFeed, IssuesFeed, ItemArticleFeed,
-                    ItemAuthorsFeed, ItemBookDocFeed, ItemEventFeed,
-                    ItemNewsFeed, ItemPackagesFeed, ItemRecommendFeed,
-                    ItemReleaseFeed, ItemVideoFeed, RawEntriesFeed,
-                    RussianEntriesFeed, TwitterEntriesFeed)
+from .feeds import (
+    AllEntriesFeed,
+    IssuesFeed,
+    ItemArticleFeed,
+    ItemAuthorsFeed,
+    ItemBookDocFeed,
+    ItemEventFeed,
+    ItemNewsFeed,
+    ItemPackagesFeed,
+    ItemRecommendFeed,
+    ItemReleaseFeed,
+    ItemVideoFeed,
+    RawEntriesFeed,
+    RussianEntriesFeed,
+    TwitterEntriesFeed,
+)
 
 app_name = 'frontend'
 urlpatterns = [

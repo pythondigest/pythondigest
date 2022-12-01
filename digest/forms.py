@@ -8,7 +8,7 @@ from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
 from django.forms.utils import flatatt
 from django.template.loader import render_to_string
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
 
@@ -26,13 +26,13 @@ class GlavRedWidget(CKEditorWidget):
         final_attrs = self.build_attrs(attrs, name=name)
         self._set_config()
         external_plugin_resources = [
-            [force_text(a), force_text(b), force_text(c)]
+            [force_str(a), force_str(b), force_str(c)]
             for a, b, c in self.external_plugin_resources]
 
         return mark_safe(
             render_to_string('custom_widget/ckeditor_widget.html', {
                 'final_attrs': flatatt(final_attrs),
-                'value': conditional_escape(force_text(value)),
+                'value': conditional_escape(force_str(value)),
                 'id': final_attrs['id'],
                 'config': json_encode(self.config),
                 'external_plugin_resources': json_encode(

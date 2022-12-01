@@ -1,8 +1,6 @@
-from django.conf.urls import url
 from django.urls import path
 
-from .views import (AddNews, IssuesList, IssueView, ItemView, NewsList,
-                    get_items_json)
+from .views import AddNews, IssuesList, IssueView, ItemView, NewsList, get_items_json
 
 app_name = 'digest'
 urlpatterns = [

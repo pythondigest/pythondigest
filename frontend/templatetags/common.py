@@ -14,7 +14,7 @@ from urlobject import URLObject
 from django import template
 from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.utils.translation import get_language, to_locale
 
 from conf.utils import likes_enable
@@ -62,7 +62,7 @@ def get_message_tags(message):
 
     Messages in Django >= 1.7 have a message.level_tag attr
     """
-    level_tag = force_text(LEVEL_TAGS.get(message.level, ''),
+    level_tag = force_str(LEVEL_TAGS.get(message.level, ''),
                            strings_only=True)
     if level_tag == 'error':
         # Alias the error tag as danger, since .alert-error no longer exists
@@ -74,7 +74,7 @@ def get_message_tags(message):
     else:
         alert_level_tag = None
 
-    extra_tags = force_text(message.extra_tags, strings_only=True)
+    extra_tags = force_str(message.extra_tags, strings_only=True)
 
     if extra_tags and alert_level_tag:
         return ' '.join([extra_tags, alert_level_tag])

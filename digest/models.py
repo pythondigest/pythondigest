@@ -25,7 +25,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.http import QueryDict
 from django.urls import reverse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from conf.utils import likes_enable
 from frontend.models import Tip
