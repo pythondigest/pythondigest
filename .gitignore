@@ -16,3 +16,4 @@ local_notes
 cache
 dataset
 a.bash
+.coverage
