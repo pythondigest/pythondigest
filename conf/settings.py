@@ -12,7 +12,7 @@ THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru', "127.0.0.1", "0.0.0.0"]
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -35,16 +35,15 @@ INSTALLED_APPS = (
 
     'digest',
     'frontend',
-    'jobs',
+    # 'jobs',
     'advertising',
-    'landings',
+    # 'landings',
 
     'account',
     'micawber.contrib.mcdjango',
 
     'compressor',
 
-    # TODO - разобраться в зависимостях
     'secretballot',
     'likes',
 
@@ -52,22 +51,26 @@ INSTALLED_APPS = (
 
     'siteblocks',
 
-)
+    # css
+    "fontawesomefree",
+    "bootstrap3",
+
+]
 
 try:
     import cachalot
-    INSTALLED_APPS += ('cachalot', )
+    INSTALLED_APPS.append('cachalot')
 except ImportError:
     pass
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
 
 if DEBUG:
-    MIDDLEWARE = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware',]
 else:
-    MIDDLEWARE = ()
+    MIDDLEWARE = []
 
-MIDDLEWARE += (
+MIDDLEWARE += [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
@@ -84,7 +87,7 @@ MIDDLEWARE += (
     # 'admin_reorder.middleware.ModelAdminReorder',
     'secretballot.middleware.SecretBallotIpUseragentMiddleware',
     'likes.middleware.SecretBallotUserIpUseragentMiddleware',
-)
+]
 
 ROOT_URLCONF = 'conf.urls'
 
@@ -200,6 +203,12 @@ MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_basic'
 MICAWBER_TEMPLATE_EXTENSIONS = [
     ('oembed_no_urlize', {'urlize_all': False}),
 ]
+
+# django-browser-reload
+# ------------------------------------------------------------------------------
+INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
+MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405
+
 
 CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
 

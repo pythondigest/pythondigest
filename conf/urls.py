@@ -40,6 +40,9 @@ if likes_enable():
 
     urlpatterns.append(path('likes/', include(like_urls)))
 
+if settings.DEBUG:
+    urlpatterns.append(path("__reload__/", include("django_browser_reload.urls")))
+
 if 'debug_toolbar' in settings.INSTALLED_APPS and settings.DEBUG:
     import debug_toolbar
 
