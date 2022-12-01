@@ -30,3 +30,6 @@ clean:
 	docker compose -f local.infra.yml rm postgres
 	docker volume rm pythondigest_pydigest_postgres_data
 	docker volume rm pythondigest_pydigest_postgres_backups
+
+check:
+	pre-commit run --show-diff-on-failure --color=always --all-files
