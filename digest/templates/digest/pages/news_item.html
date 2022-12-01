@@ -61,6 +61,9 @@
 
 {% endblock %}
 
+{% block jumb %}
+    {% include "blocks/_jumb_short.html" %}
+{% endblock %}
 
 
 {% block body %}
@@ -69,7 +72,6 @@
         <div class="news-list">
             {% with item=object read_link=True %}
                 {% include 'digest/blocks/_feed_item.html' with like_link=False %}
-                {% include 'digest/blocks/_item_article.html' %}
 
             {% endwith %}
 

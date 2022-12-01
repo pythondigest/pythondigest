@@ -45,7 +45,7 @@
     <noindex>
         <div class="news-line-item">
 
-            <h4>
+            <h3>
                 {% if read_link %}
                     {{ object.title }}
 
@@ -85,13 +85,18 @@
 
 
             {% if read_link %}
+            <div class="row">
+              <div class="col-md-6">
+                  <a rel="nofollow" class="btn btn-primary btn-regular"
+                    href="{{ object.link }}"
+                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
+                    target="_blank">Читать дальше >></a>
+                  </div>
 
-                <a rel="nofollow" class="btn btn-primary btn-sm pull-left"
-                   href="{{ object.link }}"
-                   onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-                   target="_blank">Читать>></a>
-                <div class="addthis_sharing_toolbox pull-right"></div>
-                <br><br>
+                   <div class="col-md-6">
+                        <div class="addthis_sharing_toolbox pull-right"></div>
+                   </div>
+                  </div>
             {% endif %}
         </div>
 
