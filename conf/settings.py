@@ -1,10 +1,19 @@
-# -*- coding: utf-8 -*-
+"""
+Base settings to build other settings files upon.
+"""
+import logging
 import os
 import sys
 from os import path
 from pathlib import Path
 
 import environ
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
+from django.utils.translation import gettext_lazy as _
 
 env = environ.Env()
 
@@ -81,6 +90,35 @@ if CACHALOT_ENABLED:
     except ImportError:
         print("WARNING. You activate Cachalot, but i don't find package")
 
+
+# PASSWORDS
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#password-hashers
+PASSWORD_HASHERS = [
+    # https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#auth-password-validators
+if DEBUG:
+    AUTH_PASSWORD_VALIDATORS = []
+else:
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        },
+        {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+        {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+        {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    ]
+
+
+# MIDDLEWARE
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -129,6 +167,10 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
+# DATABASES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+
 if env("DATABASE_URL", default=None):
     db_settings = env.db("DATABASE_URL")
 elif env("POSTGRES_DB", default=None):
@@ -155,18 +197,31 @@ if 'test' in sys.argv:
     }
 
 DATABASES = {"default": db_settings}
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ADMIN
+# ------------------------------------------------------------------------------
+# Django Admin URL.
+ADMIN_URL = env("DJANGO_ADMIN_URL", default="admin/")
+# https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMINS = [("""Aleksandr Sapronov""", "a@sapronov.me")]
+# https://docs.djangoproject.com/en/dev/ref/settings/#managers
+MANAGERS = ADMINS
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 TIME_ZONE = 'Europe/Moscow'
 LANGUAGE_CODE = 'ru-ru'
+LANGUAGES = [
+    ("en", _("English")),
+    ("ru", _("Russian")),
+]
 USE_I18N = True
 USE_L10N = True
 USE_TZ = False
 SITE_ID = 1
 LOCALE_PATHS = (path.join(BASE_DIR, 'locale'),)
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
@@ -182,12 +237,10 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
-
 )
 
 CONCURRENCY_HANDLER409 = 'digest.views.conflict'
 CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
-
 
 # CACHES
 # ------------------------------------------------------------------------------
@@ -228,7 +281,6 @@ CACHES["site"] = {
 CACHE_MIDDLEWARE_ALIAS = "site"  # The cache alias to use for storage and 'default' is **local-memory cache**.
 CACHE_MIDDLEWARE_SECONDS = 600  # number of seconds before each page is cached
 CACHE_MIDDLEWARE_KEY_PREFIX = ""
-
 
 REQUEST_PROXY_HTTPS = env("REQUEST_PROXY_HTTPS", default=None)
 REQUEST_PROXY_HTTP = env("REQUEST_PROXY_HTTP", default=None)
@@ -411,7 +463,6 @@ ADMIN_REORDER = (
     'auth',
     # 'account',
     'default',
-
 )
 
 CONTROLCENTER_DASHBOARDS = (
@@ -429,10 +480,28 @@ MAILHANDLER_RU_KEY = ''
 MAILHANDLER_RU_USER_LIST_ID = 413
 
 HTML_MINIFY = True
-try:
-    from .local_settings import *
-except ImportError as e:
-    print(f"Warning. Not found local settings: {e}")
+
+# Sentry
+# ------------------------------------------------------------------------------
+SENTRY_DSN = env("SENTRY_DSN", default=None)
+if SENTRY_DSN:
+    SENTRY_LOG_LEVEL = env.int("DJANGO_SENTRY_LOG_LEVEL", logging.INFO)
+
+    sentry_logging = LoggingIntegration(
+        level=SENTRY_LOG_LEVEL,  # Capture info and above as breadcrumbs
+        event_level=logging.ERROR,  # Send errors as events
+    )
+    integrations = [
+        sentry_logging,
+        DjangoIntegration(),
+        RedisIntegration(),
+    ]
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=integrations,
+        environment=env("SENTRY_ENVIRONMENT", default="default"),
+        traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
+    )
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)
