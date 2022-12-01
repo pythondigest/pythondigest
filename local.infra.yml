@@ -19,8 +19,8 @@ services:
     ports:
       - "5432:5432"
 
-  memcached:
-    container_name: pydigest_memcached
-    image: memcached:latest
+  redis:
+    image: redis:6
+    container_name: pydigest_redis
     ports:
-        - "11211:11211"
+      - "6379:6379"

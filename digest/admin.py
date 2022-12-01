@@ -146,7 +146,7 @@ class ParsingRulesAdmin(admin.ModelAdmin):
 
 admin.site.register(ParsingRules, ParsingRulesAdmin)
 
-
+@admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
     # form = ItemStatusForm
     fields = (
@@ -170,7 +170,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'section', 'status', 'external_link',
                     'related_to_date', 'is_editors_choice', 'resource',)
 
-    list_editable = ('is_editors_choice', 'section')
+    list_editable = ('is_editors_choice',)
     exclude = ('modified_at',),
     radio_fields = {'language': admin.HORIZONTAL, 'status': admin.HORIZONTAL,}
 
@@ -178,12 +178,13 @@ class ItemAdmin(admin.ModelAdmin):
     external_link.allow_tags = True
     external_link.short_description = 'Ссылка'
 
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related("section", "resource", "user")
+
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
         super(ItemAdmin, self).save_model(request, obj, form, change)
 
-
-admin.site.register(Item, ItemAdmin)
 
 
 class ResourceAdmin(admin.ModelAdmin):

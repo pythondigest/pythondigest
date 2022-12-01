@@ -1,16 +1,32 @@
 # -*- coding: utf-8 -*-
 import os
+import sys
 from os import path
+from pathlib import Path
 
-BASE_DIR = path.abspath(path.join(path.dirname(__file__), '..'))
+import environ
 
-SECRET_KEY = 'TBD IN LOCAL SETTINGS'
+env = environ.Env()
 
-DEBUG = True
+BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=True)
+if READ_DOT_ENV_FILE:
+    # OS environment variables take precedence over variables from .env
+    env.read_env(str(BASE_DIR / ".env"))
+
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY",
+    default="^on^)iv65k_8e!!)q3fttt04#3kcy!joqyjon(ti(ij7wlifee",
+)
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = env.bool("DEBUG", False)
 
 THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
 ALLOWED_HOSTS = ['pythondigest.ru', "127.0.0.1", "0.0.0.0"]
+INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
 
 INSTALLED_APPS = [
     'django.contrib.auth',
@@ -57,20 +73,15 @@ INSTALLED_APPS = [
 
 ]
 
-try:
-    import cachalot
-    INSTALLED_APPS.append('cachalot')
-except ImportError:
-    pass
+CACHALOT_ENABLED = env.bool("CACHALOT_ENABLED", False)
+if CACHALOT_ENABLED:
+    try:
+        import cachalot
+        INSTALLED_APPS.append('cachalot')
+    except ImportError:
+        print("WARNING. You activate Cachalot, but i don't find package")
 
-DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
-
-if DEBUG:
-    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware',]
-else:
-    MIDDLEWARE = []
-
-MIDDLEWARE += [
+MIDDLEWARE = [
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'concurrency.middleware.ConcurrencyMiddleware',
@@ -124,6 +135,14 @@ DATABASES = {
         'NAME': path.join(BASE_DIR, 'db.sqlite'),
     }
 }
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ':memory:',
+        'TEST_CHARSET': 'UTF8',
+        'TEST_NAME': ':memory:',
+    }
+
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
@@ -157,19 +176,74 @@ STATICFILES_FINDERS = (
 CONCURRENCY_HANDLER409 = 'digest.views.conflict'
 CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+
+# CACHES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#caches
+if env("REDIS_URL", default=None):
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": env("REDIS_URL"),
+            "OPTIONS": {
+                "CLIENT_CLASS": "django_redis.client.DefaultClient",
+                # Mimicing memcache behavior.
+                # https://github.com/jazzband/django-redis#memcached-exceptions-behavior
+                "IGNORE_EXCEPTIONS": True,
+            },
+        },
     }
+elif env("MEMCACHED_URL", default=None):
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+            'LOCATION': env("MEMCACHED_URL"),
+        },
+    }
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+            "LOCATION": "",
+        }
+    }
+
+CACHES["site"] = {
+    "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    "LOCATION": "unique-snowflake",
 }
 
+CACHE_MIDDLEWARE_ALIAS = "site"  # The cache alias to use for storage and 'default' is **local-memory cache**.
+CACHE_MIDDLEWARE_SECONDS = 600  # number of seconds before each page is cached
+CACHE_MIDDLEWARE_KEY_PREFIX = ""
+
+
+REQUEST_PROXY_HTTPS = env("REQUEST_PROXY_HTTPS", default=None)
+REQUEST_PROXY_HTTP = env("REQUEST_PROXY_HTTP", default=None)
+
+# LOGGING
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#logging
+# See https://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s "
+            "%(process)d %(thread)d %(message)s"
+        }
+    },
     'filters': {
         'require_debug_false': {'()': 'django.utils.log.RequireDebugFalse'}
     },
-    'handlers': {
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
@@ -181,8 +255,10 @@ LOGGING = {
             {'handlers': ['mail_admins'],
              'level': 'ERROR',
              'propagate': True, },
-    }
+    },
+    "root": {"level": "INFO", "handlers": ["console"]},
 }
+
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -344,13 +420,14 @@ HTML_MINIFY = True
 try:
     from .local_settings import *
 except ImportError as e:
-    print("Warning. Not found local settings: {}".format(str(e)))
+    print(f"Warning. Not found local settings: {e}")
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)
 
 if DEBUG:
-    INSTALLED_APPS += ('debug_toolbar',)
+    INSTALLED_APPS += ['debug_toolbar',]
+    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware',]
     DEBUG_TOOLBAR_PATCH_SETTINGS = False
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',

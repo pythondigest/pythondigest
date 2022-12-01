@@ -49,6 +49,8 @@ django-browser-reload = "^1.6.0"
 django-bootstrap3 = "^22.2"
 django-yaturbo = "^1.0.1"
 bleach = "^5.0.1"
+django-environ = "^0.9.0"
+django-redis = "^5.2.0"
 
 [tool.poetry.group.test.dependencies]
 django-stubs = "^1.13.0"

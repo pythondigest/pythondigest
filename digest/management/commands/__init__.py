@@ -1,20 +1,15 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import datetime
+import logging
 import pickle
 import re
 from typing import Dict
+from urllib.request import urlopen
 
 import requests
+from bs4 import BeautifulSoup
 from readability import Document
 
-try:
-    from urllib.request import urlopen
-except ImportError:
-    from urllib2 import urlopen
-
-from bs4 import BeautifulSoup
 from django.conf import settings
 # import datetime
 # from time import sleep
@@ -23,6 +18,7 @@ from django.core.management import call_command
 
 from digest.models import Item, Section
 
+logger = logging.getLogger(__name__)
 
 def parse_weekly_digest(item_data: Dict):
     if 'Python Weekly' in item_data.get('title'):
@@ -130,14 +126,12 @@ def _get_http_data_of_url(url: str):
     :param url:
     :return:
     """
-
     try:
-        assert isinstance(url, str), 'Not valid url: %s, type (%s)' % \
-                                     (url, type(url))
-        r = requests.get(url)
-        readable_article = Document(r.content).summary()
-        status_code = str(r.status_code)
-        result = status_code, readable_article, r.text
+        assert isinstance(url, str), 'Not valid url: %s, type (%s)' % (url, type(url))
+        response = make_get_request(url, timeout=30)
+        readable_article = Document(response.content.decode()).summary()
+        status_code = str(response.status_code)
+        result = status_code, readable_article, response.text
 
     except (requests.ConnectionError, AssertionError,
             requests.exceptions.MissingSchema) as e:
@@ -173,6 +167,21 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
         result = []
     return result
 
+
+def make_get_request(url, timeout=15):
+    requests_kwargs = dict(
+        timeout=timeout,
+    )
+    if settings.REQUEST_PROXY_HTTPS or settings.REQUEST_PROXY_HTTP:
+        requests_kwargs["proxies"] = {}
+        if settings.REQUEST_PROXY_HTTPS:
+            requests_kwargs["proxies"]["https"] = settings.REQUEST_PROXY_HTTPS
+        if settings.REQUEST_PROXY_HTTP:
+            requests_kwargs["proxies"]["http"] = settings.REQUEST_PROXY_HTTP
+
+    proxy_text = "with" if "proxies" in requests_kwargs else "without"
+    logger.info(f"Get data for url {url} {proxy_text} proxy")
+    return requests.get(url, **requests_kwargs)
 
 #
 #
@@ -234,7 +243,6 @@ def get_tweets_by_url(base_url: str) -> list:
             result.append([tw_text, tw_lnk, http_code])
         except Exception as e:
             print("| ", "tweets by url exception", str(e))
-            pass
 
     return result
 

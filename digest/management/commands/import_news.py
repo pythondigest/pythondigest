@@ -1,28 +1,39 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import datetime
+import logging
 import re
 import socket
 from time import mktime
 from typing import Dict, List
 from urllib.error import HTTPError, URLError
-from urllib.request import urlopen
 
 import feedparser
-from django.core.management.base import BaseCommand
+import requests
 from requests import TooManyRedirects
 
-from digest.management.commands import (_get_http_data_of_url,
-                                        apply_parsing_rules, apply_video_rules,
-                                        get_tweets_by_url,
-                                        is_django_weekly_digest,
-                                        is_weekly_digest,
-                                        parse_django_weekly_digest,
-                                        parse_weekly_digest, save_item)
-from digest.models import (ITEM_STATUS_CHOICES, AutoImportResource, Item,
-                           ParsingRules, Section)
+from django.core.management.base import BaseCommand
 
+from digest.management.commands import (
+    _get_http_data_of_url,
+    apply_parsing_rules,
+    apply_video_rules,
+    get_tweets_by_url,
+    is_django_weekly_digest,
+    is_weekly_digest,
+    make_get_request,
+    parse_django_weekly_digest,
+    parse_weekly_digest,
+    save_item,
+)
+from digest.models import (
+    ITEM_STATUS_CHOICES,
+    AutoImportResource,
+    Item,
+    ParsingRules,
+    Section,
+)
+
+logger = logging.getLogger(__name__)
 
 def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     result = []
@@ -78,7 +89,7 @@ def import_tweets(**kwargs):
             print(i, str(e))
 
 
-def get_items_from_rss(rss_link: str) -> List[Dict]:
+def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
     """
     Get rss content from rss source.
 
@@ -87,11 +98,11 @@ def get_items_from_rss(rss_link: str) -> List[Dict]:
     :param rss_link: string, rss link
     :return: list of dicts, each dict includes link, title, description and news data of rss item
     """
+    logger.info(f"Get items from rss: {rss_link}")
     rss_items = []
     try:
-        response = urlopen(rss_link, timeout=10)
-        res_news = feedparser.parse(response.read())
-        response.close()
+        response = make_get_request(rss_link, timeout=15)
+        res_news = feedparser.parse(response.content)
 
         for n in res_news.entries:
 
