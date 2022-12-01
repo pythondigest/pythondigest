@@ -8,24 +8,20 @@ If no args specified parses latest news page.
 """
 from __future__ import unicode_literals
 
+from typing import Dict, List, Tuple, Union
 from urllib.error import URLError
 from urllib.request import urlopen
 
 from bs4 import BeautifulSoup
+
 from django.core.management.base import BaseCommand
-from typing import Dict, Union, Tuple, List
 
 from digest.management.commands import (
     apply_parsing_rules,
     apply_video_rules,
-    save_item
+    save_news_item,
 )
-from digest.models import (
-    ITEM_STATUS_CHOICES,
-    ParsingRules,
-    Section,
-    Resource
-)
+from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
 ResourceDict = Dict[str, Union[str, int, Resource]]
 ItemTuple = Tuple[BeautifulSoup, BeautifulSoup]
@@ -144,7 +140,7 @@ def main(url: str = "", number: int = "") -> None:
     blocks = parser.get_blocks(url)
     with_rules_applied = map(_apply_rules, blocks)
     for block in with_rules_applied:
-        save_item(block)
+        save_news_item(block)
 
 
 class Command(BaseCommand):

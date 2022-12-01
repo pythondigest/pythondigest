@@ -22,11 +22,13 @@ logger = logging.getLogger(__name__)
 
 def parse_weekly_digest(item_data: Dict):
     if 'Python Weekly' in item_data.get('title'):
+        logger.info("Run manage command for parse Python Weekly digest")
         call_command('import_python_weekly', item_data.get('link'))
 
 
 def parse_django_weekly_digest(item_data: Dict):
     if 'Django Weekly' in item_data.get('title'):
+        logger.info("Run manage command for parse Django Weekly digest")
         call_command('import_django_weekly', item_data.get('link'))
 
 
@@ -119,25 +121,9 @@ def _date_to_julian_day(my_date):
            32045
 
 
-def _get_http_data_of_url(url: str):
-    """
-    Возвращает http-статус, текст новости по url
-    В случае не успеха - '404', None
-    :param url:
-    :return:
-    """
-    try:
-        assert isinstance(url, str), 'Not valid url: %s, type (%s)' % (url, type(url))
-        response = make_get_request(url, timeout=30)
-        readable_article = Document(response.content.decode()).summary()
-        status_code = str(response.status_code)
-        result = status_code, readable_article, response.text
 
-    except (requests.ConnectionError, AssertionError,
-            requests.exceptions.MissingSchema) as e:
-        result = str(404), None, None
-    return result
-
+def get_readable_content(content):
+    return Document(content).summary()
 
 def _get_tags_for_item(item_data: dict, tags_names: list):
     """
@@ -403,36 +389,33 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections,
 # -------------------
 
 
-def save_item(item):
+def save_news_item(item: Dict):
     if not item or item.get('link') is None:
         return
 
-    time = datetime.datetime.now() + datetime.timedelta(days=-14)
     assert 'title' in item
     assert 'resource' in item
     assert 'link' in item
 
-    if not Item.objects.filter(link=item.get('link'),
-                               related_to_date__gt=time).exists():
+    instance = Item(
+        title=item.get('title'),
+        resource=item.get('resource'),
+        link=item.get('link'),
+        description=item.get('description', ''),
+        status=item.get('status', 'autoimport'),
+        user_id=settings.BOT_USER_ID,
+        section=item.get('section', None),
+        additionally=item.get('additionally', None),
+        language=item.get('language') if item.get('language') else 'en'
+    )
 
-        _a = Item(
-            title=item.get('title'),
-            resource=item.get('resource'),
-            link=item.get('link'),
-            description=item.get('description', ''),
-            status=item.get('status', 'autoimport'),
-            user_id=settings.BOT_USER_ID,
-            section=item.get('section', None),
-            additionally=item.get('additionally', None),
-            language=item.get('language') if item.get('language') else 'en')
+    instance.save()
 
-        _a.save()
-
-        if item.get('tags'):
-            _a.tags.add(*item.get('tags'))
-            _a.save()
-        elif item.get('status') == 'active':
-            _a.save()
+    if item.get('tags'):
+        instance.tags.add(*item.get('tags'))
+        instance.save()
+    elif item.get('status') == 'active':
+        instance.save()
 
 
 def save_pickle_file(filepath, data):

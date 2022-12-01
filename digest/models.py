@@ -524,25 +524,36 @@ class ParsingRules(models.Model):
 
 @receiver(post_save, sender=Item)
 def update_cls_score(instance, **kwargs):
-    if not instance._disable_signals:
-        try:
-            item = ItemClsCheck.objects.get(item=instance)
-            item.check_cls(False)
-        except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
-            item = ItemClsCheck(item=instance)
-            item.save()
-            item.check_cls(True)
+    if not settings.CLS_ENABLED:
+        return
+
+    if instance._disable_signals:
+        return
+
+    try:
+        item = ItemClsCheck.objects.get(item=instance)
+        item.check_cls(False)
+    except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
+        item = ItemClsCheck(item=instance)
+        item.save()
+        item.check_cls(True)
 
 
 @receiver(post_save, sender=Item)
 def run_remdow(instance, **kwargs):
-    if not instance._disable_signals:
-        description = instance.description
-        if description is None:
-            description = ''
-        instance.description = \
-            remdow_lazy_img(
-                remdow_img_responsive(
-                    remdow_img_center(
-                        remdow_img_local(description))))
-        instance.save_without_signals()
+    if instance._disable_signals:
+        return
+
+    description = instance.description
+    if description is None:
+        description = ''
+
+    if "img" not in description:
+        return
+
+    instance.description = \
+        remdow_lazy_img(
+            remdow_img_responsive(
+                remdow_img_center(
+                    remdow_img_local(description))))
+    instance.save_without_signals()

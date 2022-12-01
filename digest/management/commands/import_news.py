@@ -14,16 +14,16 @@ from requests import TooManyRedirects
 from django.core.management.base import BaseCommand
 
 from digest.management.commands import (
-    _get_http_data_of_url,
     apply_parsing_rules,
     apply_video_rules,
+    get_readable_content,
     get_tweets_by_url,
     is_django_weekly_digest,
     is_weekly_digest,
     make_get_request,
     parse_django_weekly_digest,
     parse_weekly_digest,
-    save_item,
+    save_news_item,
 )
 from digest.models import (
     ITEM_STATUS_CHOICES,
@@ -52,18 +52,19 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
 
 
 def get_tweets():
-    dsp = []
-    for src in AutoImportResource.objects.filter(type_res='twitter',
-                                                 in_edit=False):
-        print("Process twitter", src)
+    result = []
+    news_sources = AutoImportResource.objects.filter(type_res='twitter', in_edit=False)
+    for source in news_sources:
+        print("Process twitter", source)
         try:
-            dsp.extend(_parse_tweets_data(get_tweets_by_url(src.link), src))
+            result.extend(_parse_tweets_data(get_tweets_by_url(source.link), source))
         except Exception as e:
             print(e)
-    return dsp
+    return result
 
 
 def import_tweets(**kwargs):
+    logger.info("Import news from Twitter feeds")
     for i in get_tweets():
         try:
             # это помогает не парсить лишний раз ссылку, которая есть
@@ -84,7 +85,7 @@ def import_tweets(**kwargs):
                 data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
                     'query_rules') else {}
                 item_data.update(data)
-            save_item(item_data)
+            save_news_item(item_data)
         except (URLError, TooManyRedirects, socket.timeout) as e:
             print(i, str(e))
 
@@ -132,66 +133,97 @@ def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
     return rss_items
 
 
-def _is_old_rss_news(rss_item: Dict, minimum_date=None) -> bool:
-    if minimum_date is None:
-        minimum_date = datetime.date.today() - datetime.timedelta(weeks=1)
-    return rss_item['related_to_date'] > minimum_date
-
-
-def is_not_exists_rss_item(rss_item: Dict, minimum_date=None) -> bool:
+def is_skip_news(rss_item: Dict, minimum_date=None) -> bool:
+    """Фильтруем старые новости, а также дубли свежих новостей"""
     if minimum_date is None:
         minimum_date = datetime.date.today() - datetime.timedelta(weeks=1)
 
-    return not Item.objects.filter(
-        link=rss_item['link'],
-        related_to_date__gte=minimum_date
-    ).exists()
+    # skip old news by rss date
+    if rss_item['related_to_date'] < minimum_date:
+        return True
+
+    # skip old duplicated news
+    if Item.objects.filter(link=rss_item['link'], related_to_date__gte=minimum_date).exists():
+        return True
+
+    return False
 
 
 def get_data_for_rss_item(rss_item: Dict) -> Dict:
-    http_code, content, raw_content = _get_http_data_of_url(rss_item['link'])
+    if rss_item["link"].startswith("https://twitter.com") and rss_item.get("description"):
+        raw_content = rss_item["description"]
+        http_code = str(200)
+    else:
+        response = make_get_request(rss_item['link'])
+        raw_content = response.content.decode()
+        http_code = str(200)
+
     rss_item.update(
         {
             'raw_content': raw_content,
             'http_code': http_code,
-            'content': content,
+            'content': get_readable_content(raw_content),
         }
     )
     return rss_item
 
 
 def import_rss(**kwargs):
-    for src in AutoImportResource.objects.filter(type_res='rss',
-                                                 in_edit=False):
-        print("Process RSS", src)
+    logger.info("Import news from RSS feeds")
+    news_sources = AutoImportResource.objects.filter(type_res='rss', in_edit=False).filter(id=19).order_by("?")
+
+    for source in news_sources:
+        logger.info(f"Process RSS {source.title} from {source.link}")
         try:
-            rss_items = map(get_data_for_rss_item,
-                            filter(is_not_exists_rss_item,
-                                   filter(_is_old_rss_news,
-                                          get_items_from_rss(src.link))))
+            logger.info("Extact items from feed")
+            news_items = get_items_from_rss(source.link)
+            logger.info(f"> Found {len(news_items)} raw items")
 
-            # parse weekly digests
-            digests_items = list(rss_items)
-            list(map(parse_weekly_digest,
-                     filter(is_weekly_digest, digests_items)))
+            logger.debug("Skip old news")
+            news_items = [x for x in news_items if not is_skip_news(x)]
 
-            list(map(parse_django_weekly_digest,
-                     filter(is_django_weekly_digest, digests_items)))
+            logger.debug("Extract data for items")
+            news_items = [get_data_for_rss_item(x) for x in news_items]
 
-            resource = src.resource
-            language = src.language
-            for i, rss_item in enumerate(digests_items):
-                rss_item.update({
+            if not news_items:
+                logger.debug(f"> Not found new news in source")
+                continue
+            else:
+                logger.debug(f"> Work with {len(news_items)} items")
+
+            resource = source.resource
+            language = source.language
+
+            logger.debug("Detect digest urls and parse it")
+
+            for item in news_items:
+                logger.debug(f"Work with {item['link']}")
+                # parse weekly digests
+                if is_weekly_digest(item):
+                    parse_weekly_digest(item)
+                    continue
+
+                # parse weekly digests
+                if is_django_weekly_digest(item):
+                    parse_django_weekly_digest(item)
+                    continue
+
+                item.update({
                     'resource': resource,
                     'language': language,
                 })
-                rss_item.update(
-                    apply_parsing_rules(rss_item, **kwargs) if kwargs.get(
-                        'query_rules') else {})
-                rss_item.update(apply_video_rules(rss_item.copy()))
-                save_item(rss_item)
+                logger.debug("> Apply parsing rules for item")
+                item.update(
+                    apply_parsing_rules(item, **kwargs) if kwargs.get('query_rules') else {}
+                )
+                logger.debug("> Apply video rules for item")
+                item.update(apply_video_rules(item.copy()))
+                logger.debug(f"> Save news item - {item['link']}")
+                save_news_item(item)
+                logger.debug(f"> Saved")
+
         except (URLError, TooManyRedirects, socket.timeout) as e:
-            print(src, str(e))
+            print(source, str(e))
 
 
 def parsing(func):
@@ -211,5 +243,7 @@ class Command(BaseCommand):
         """
         Основной метод - точка входа
         """
-        parsing(import_tweets)
-        parsing(import_rss)
+        logger.info("Import news from RSS and Twitter")
+        # parsing(import_tweets)
+        import_rss()
+        # parsing(import_rss)

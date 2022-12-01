@@ -2,17 +2,20 @@
 from __future__ import unicode_literals
 
 import pprint
-from typing import Sequence, Dict, Union
+from typing import Dict, Sequence, Union
 
 import lxml.html as html
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+
 from django.core.management.base import BaseCommand
 
-from digest.management.commands import save_item
-from digest.management.commands.import_python_weekly import _get_content, \
-    _apply_rules_wrap
-from digest.models import ParsingRules, Section, ITEM_STATUS_CHOICES, Resource
+from digest.management.commands import save_news_item
+from digest.management.commands.import_python_weekly import (
+    _apply_rules_wrap,
+    _get_content,
+)
+from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
 Parseble = Union[BeautifulSoup, html.HtmlElement]
 
@@ -89,7 +92,7 @@ def main(url):
     _apply_rules = _apply_rules_wrap(**data)
 
     block_items = map(_get_block_item, _get_blocks(url))
-    list(map(save_item, map(_apply_rules, block_items)))
+    list(map(save_news_item, map(_apply_rules, block_items)))
 
 
 # Написать тест с использованием ссылки

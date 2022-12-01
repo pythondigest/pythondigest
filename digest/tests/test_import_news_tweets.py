@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 
-from django.test import TestCase
 from mock import patch
+
+from django.test import TestCase
 
 from digest.management.commands import get_tweets_by_url
 from digest.management.commands.import_news import _parse_tweets_data
 from digest.models import AutoImportResource
-from digest.utils import MockResponse
-from digest.utils import read_fixture
+from digest.utils import MockResponse, read_fixture
 
 
 class ImportTweetsTest(TestCase):
@@ -17,9 +17,6 @@ class ImportTweetsTest(TestCase):
                                                              type_res='twitter',
                                                              excl='http://consumerfinance.gov',
                                                              incl='framework')
-        self.res_rss = AutoImportResource.objects.create(title='Test2',
-                                                         link='http://planetpython.org/rss20.xml',
-                                                         type_res='rss')
 
     def test_get_tweets(self):
         test_name = 'fixture_test_import_news_test_get_tweets.txt'

@@ -3,11 +3,11 @@ import datetime
 from time import mktime
 
 import feedparser
+
 from django.core.management.base import BaseCommand
 
-from digest.management.commands import save_item
-from digest.models import Item, get_start_end_of_week
-from digest.models import Package, Section, Resource, Issue
+from digest.management.commands import save_news_item
+from digest.models import Issue, Item, Package, Resource, Section, get_start_end_of_week
 
 
 def _generate_release_item(package_version: str, link: str,
@@ -101,7 +101,7 @@ def parse_rss():
                                                n.link, resource, section,
                                                packages.get(package_name))
             saved_packages.append(package_name)
-            save_item(item_data)
+            save_news_item(item_data)
         except Exception as e:
             print(e)
             continue

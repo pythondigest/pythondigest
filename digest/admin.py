@@ -164,8 +164,8 @@ class ItemAdmin(admin.ModelAdmin):
 
     )
     # filter_horizontal = ('tags',)
-    list_filter = ('status', 'issue', 'section', 'is_editors_choice', 'user',
-                   'related_to_date', 'resource',)
+    list_filter = ('status',  'section',
+                   'related_to_date', 'resource', 'issue',)
     search_fields = ('title', 'description', 'link', 'resource__title')
     list_display = ('title', 'section', 'status', 'external_link',
                     'related_to_date', 'is_editors_choice', 'resource',)
