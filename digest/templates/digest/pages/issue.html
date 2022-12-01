@@ -20,7 +20,7 @@
               content="http://pythondigest.ru{{ im.url }}"/>
         <meta name="twitter:url"
               content="http://pythondigest.ru{{ object.link }}"/>
-    
+
         <meta property="og:description"
               content="{{ object.description|striptags|truncatechars:500 }}" />
         <meta property="og:type"               content="article" />
@@ -89,12 +89,6 @@
                 {% include 'advertising/blocks/ads.html' with ads=ads type='after_issue' %}
 
             </div>
-            <div class="row">
-                {% with issue.pk|lower as id %}
-                    {% include "blocks/_disqus.html" with identifier='issue_'|add:id %}
-                {% endwith %}
-
-            </div>
         {% endif %}
 
 
@@ -110,7 +104,3 @@
 {% endblock %}
 
 
-{% block scripts %}
-    {{ block.super }}
-    {% include 'blocks/_disqus_script.html' %}
-{% endblock %}
