@@ -2,12 +2,15 @@
 import datetime
 from functools import partial
 
-from django.test import TestCase
 from mock import patch
 
-from digest.management.commands.import_news import (_is_old_rss_news,
-                                                    get_items_from_rss,
-                                                    is_not_exists_rss_item)
+from django.test import TestCase
+
+from digest.management.commands.import_news import (
+    _is_old_rss_news,
+    get_items_from_rss,
+    is_not_exists_rss_item,
+)
 from digest.models import AutoImportResource, Item, Section
 from digest.utils import MockResponse, read_fixture
 
@@ -22,9 +25,9 @@ class ImportRSSTest(TestCase):
         self.section.save()
         test_name = 'fixture_test_import_news_test_rss.txt'
 
-        self.patcher = patch('digest.management.commands.import_news.urlopen')
-        self.urlopen_mock = self.patcher.start()
-        self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
+        self.patcher = patch('digest.management.commands.import_news.requests.get')
+        self.requests_mock = self.patcher.start()
+        self.requests_mock.return_value = MockResponse(read_fixture(test_name))
 
     def tearDown(self):
         self.patcher.stop()

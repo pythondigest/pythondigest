@@ -129,20 +129,32 @@ AUTHENTICATION_BACKENDS = (
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
-DATABASES = {
-    'default': {
+if env("DATABASE_URL", default=None):
+    db_settings = env.db("DATABASE_URL")
+elif env("POSTGRES_DB", default=None):
+    db_settings = {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": env.int("POSTGRES_PORT"),
+    }
+else:
+    db_settings = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': path.join(BASE_DIR, 'db.sqlite'),
     }
-}
+
 if 'test' in sys.argv:
-    DATABASES['default'] = {
+    db_settings = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': ':memory:',
         'TEST_CHARSET': 'UTF8',
         'TEST_NAME': ':memory:',
     }
 
+DATABASES = {"default": db_settings}
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 

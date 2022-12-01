@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 
 import os
-
 from typing import Any
 
 
@@ -26,6 +25,14 @@ class MockResponse(object):
 
     def read(self):
         return self.resp_data
+
+    @property
+    def content(self):
+        return self.resp_data
+
+    @property
+    def text(self):
+        return self.resp_data.decode()
 
     def getcode(self):
         return self.code
