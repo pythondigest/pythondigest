@@ -7,6 +7,7 @@ logs/*
 env/
 /conf/*.cfg
 # *.cfg
+static/CACHE/
 
 clean.bash
 fabfile/fabfile.py

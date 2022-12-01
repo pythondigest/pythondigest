@@ -12,16 +12,17 @@ from frontend.urls import urlpatterns as frontend_url
 admin.autodiscover()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    # path('admin/dashboard/', controlcenter.urls),
-    path('media/(?P<url>.*)$', django.views.static.serve,
-        {'document_root': settings.MEDIA_ROOT}),
     path('', include((frontend_url, 'frontend'), namespace='frontend')),
     path('', include((digest_url, "digest"), namespace='digest')),
 
+    path('admin/', admin.site.urls),
+    # path('admin/dashboard/', controlcenter.urls),
+    path('media/<str:url>', django.views.static.serve,
+        {'document_root': settings.MEDIA_ROOT}),
+
+
     path('taggit_autosuggest/', include('taggit_autosuggest.urls')),
     # path('account/', include('account.urls')),
-    # path('', include('social_django.urls', namespace='social'))
 ]
 
 if 'landings' in settings.INSTALLED_APPS:

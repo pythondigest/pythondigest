@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'landings',
 
     'account',
-    'social_django',
     'micawber.contrib.mcdjango',
 
     'compressor',
@@ -62,7 +61,6 @@ except ImportError:
     pass
 
 DAB_FIELD_RENDERER = 'django_admin_bootstrapped.renderers.BootstrapFieldRenderer'
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 if DEBUG:
     MIDDLEWARE = ('debug_toolbar.middleware.DebugToolbarMiddleware',)
@@ -103,8 +101,6 @@ TEMPLATES = [{
             'django.template.context_processors.request',
             'django.contrib.messages.context_processors.messages',
             'account.context_processors.account',
-            'social_django.context_processors.backends',
-            'social_django.context_processors.login_redirect',
         ],
         'loaders': (
             'django.template.loaders.filesystem.Loader',
@@ -114,17 +110,8 @@ TEMPLATES = [{
 }, ]
 
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.github.GithubOAuth2',  # ok
-    'social_core.backends.vk.VKOAuth2',  # ok
-    'social_core.backends.twitter.TwitterOAuth',  # ok
-    'social_core.backends.facebook.FacebookOAuth2',  # ok
-    # 'social_core.backends.bitbucket.BitbucketOAuth',
-    # 'social_core.backends.google.GoogleOAuth2',
-    # 'social_core.backends.linkedin.LinkedinOAuth2',
-    # 'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.email.EmailAuth',
-    'social_core.backends.username.UsernameAuth',
-    'django.contrib.auth.backends.ModelBackend',)
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 WSGI_APPLICATION = 'conf.wsgi.application'
 
@@ -137,13 +124,6 @@ DATABASES = {
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-SOCIAL_AUTH_STRATEGY = 'social_django.strategy.DjangoStrategy'
-SOCIAL_AUTH_STORAGE = 'social_django.models.DjangoStorage'
-SOCIAL_AUTH_GOOGLE_OAUTH_SCOPE = [
-    'https://www.googleapis.com/auth/drive',
-    'https://www.googleapis.com/auth/userinfo.profile'
-]
-
 TIME_ZONE = 'Europe/Moscow'
 LANGUAGE_CODE = 'ru-ru'
 USE_I18N = True
@@ -151,6 +131,8 @@ USE_L10N = True
 USE_TZ = False
 SITE_ID = 1
 LOCALE_PATHS = (path.join(BASE_DIR, 'locale'),)
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 STATIC_URL = '/static/'
 STATIC_ROOT = path.join(BASE_DIR, 'static')
@@ -212,46 +194,6 @@ PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ''
 
 BASE_DOMAIN = 'pythondigest.ru'
-
-# SOCIAL_AUTH_EMAIL_FORM_URL = '/signup-email'
-SOCIAL_AUTH_EMAIL_FORM_HTML = 'email_signup.html'
-SOCIAL_AUTH_EMAIL_VALIDATION_FUNCTION = 'conf.mail.send_validation'
-SOCIAL_AUTH_EMAIL_VALIDATION_URL = '/email-sent/'
-# SOCIAL_AUTH_USERNAME_FORM_URL = '/signup-username'
-SOCIAL_AUTH_USERNAME_FORM_HTML = 'username_signup.html'
-
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.mail.mail_validation',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    # 'social_core.pipeline.debug.debug',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',  # 'social_core.pipeline.debug.debug'
-)
-
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-SOCIAL_AUTH_LOGIN_URL = '/'
-
-SOCIAL_AUTH_VK_OAUTH2_KEY = ''
-SOCIAL_AUTH_VK_OAUTH2_SECRET = ''
-
-SOCIAL_AUTH_GITHUB_KEY = ''
-SOCIAL_AUTH_GITHUB_SECRET = ''
-
-SOCIAL_AUTH_FACEBOOK_KEY = ''
-SOCIAL_AUTH_FACEBOOK_SECRET = ''
-SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {'locale': 'ru_RU'}
-
-SOCIAL_AUTH_TWITTER_KEY = ''
-SOCIAL_AUTH_TWITTER_SECRET = ''
-
-SOCIAL_AUTH_GOOGLE_OAUTH_KEY = ''
-SOCIAL_AUTH_GOOGLE_OAUTH_SECRET = ''
 
 MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_basic'
 # MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_embedly'

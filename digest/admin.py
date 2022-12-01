@@ -7,7 +7,7 @@ from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.db import models
 from django.urls import reverse
-from django.utils.html import escape
+from django.utils.html import escape, format_html
 
 from conf.utils import likes_enable
 from digest.forms import ItemStatusForm
@@ -30,7 +30,7 @@ admin.site.unregister(Site)
 
 def link_html(obj):
     link = escape(obj.link)
-    return '<a target="_blank" href="%s">%s</a>' % (link, link)
+    return format_html(f'<a target="_blank" href="{link}">{link}</a>')
 
 
 def _save_item_model(request, item: Item, form, change) -> None:
@@ -65,7 +65,7 @@ def _external_link(obj):
     ret = '<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
     username = obj.user.username if obj.user else 'Гость'
     ret = '%s<br>Добавил: %s' % (ret, username)
-    return ret
+    return format_html(ret)
 
 
 class IssueAdmin(admin.ModelAdmin):

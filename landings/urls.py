@@ -6,5 +6,5 @@ from .views import DjangoPage
 
 urlpatterns = [
 
-    path('django$', DjangoPage.as_view(), name='django'),
+    path('django', DjangoPage.as_view(), name='django'),
 ]

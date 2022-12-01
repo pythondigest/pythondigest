@@ -5,5 +5,5 @@ from jobs.views import JobList
 
 app_name = 'jobs'
 urlpatterns = [
-    path('jobs/$', JobList.as_view(), name='job_feed'),
+    path('jobs/', JobList.as_view(), name='job_feed'),
 ]

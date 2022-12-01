@@ -6,8 +6,6 @@ import random
 import re
 
 import lxml.html
-from social_core.backends.oauth import OAuthAuth
-from social_core.backends.utils import load_backends
 from unidecode import unidecode as _unidecode
 from urlobject import URLObject
 
@@ -168,44 +166,3 @@ def icon_name(name):
         'username': 'user',
     }.get(name, name)
 
-
-@register.simple_tag
-def get_available_backends():
-    return load_backends(settings.AUTHENTICATION_BACKENDS)
-
-
-@register.filter
-def social_backends(backends):
-    backends = [(name, backend) for name, backend in backends.items()
-                if name not in ['username', 'email']]
-    backends.sort(key=lambda b: b[0])
-    return [backends[n:n + 10] for n in range(0, len(backends), 10)]
-
-
-@register.filter
-def legacy_backends(backends):
-    backends = [(name, backend) for name, backend in backends.items()
-                if name in ['username', 'email']]
-    backends.sort(key=lambda b: b[0])
-    return backends
-
-
-@register.filter
-def oauth_backends(backends):
-    backends = [(name, backend) for name, backend in backends.items()
-                if issubclass(backend, OAuthAuth)]
-    backends.sort(key=lambda b: b[0])
-    return backends
-
-
-@register.simple_tag(takes_context=True)
-def associated(context, backend):
-    user = context.get('user')
-    context['association'] = None
-    if user and user.is_authenticated:
-        try:
-            context['association'] = user.social_auth.filter(
-                provider=backend.name)[0]
-        except IndexError as e:
-            logger.warning(e)
-    return ''
