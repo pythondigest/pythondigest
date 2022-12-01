@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 import django.dispatch
 
 # Сигнализирует о добавлении новой сущности.

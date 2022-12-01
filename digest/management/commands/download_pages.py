@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import os
 
 from django.conf import settings
@@ -10,12 +7,12 @@ from digest.models import Item
 
 
 def get_article(item):
-    path = os.path.join(settings.DATASET_ROOT, '{0}.html'.format(item.id))
-    with open(path, 'w') as fio:
+    path = os.path.join(settings.DATASET_ROOT, f"{item.id}.html")
+    with open(path, "w") as fio:
         try:
             text = item.text
-        except Exception as e:
-            text = ''
+        except Exception:
+            text = ""
 
         fio.write(text)
         item.article_path = path
@@ -24,7 +21,7 @@ def get_article(item):
 
 
 class Command(BaseCommand):
-    help = 'Create dataset'
+    help = "Create dataset"
 
     def handle(self, *args, **options):
         """

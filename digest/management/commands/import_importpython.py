@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 This module contains command to obtain news from importpython.com
 and save the to database.
@@ -6,9 +5,8 @@ To use it run something like
 python manage.py import_importpython --number 67
 If no args specified parses latest news page.
 """
-from __future__ import unicode_literals
 
-from typing import Dict, List, Tuple, Union
+from typing import Union
 from urllib.error import URLError
 from urllib.request import urlopen
 
@@ -23,11 +21,11 @@ from digest.management.commands import (
 )
 from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
-ResourceDict = Dict[str, Union[str, int, Resource]]
-ItemTuple = Tuple[BeautifulSoup, BeautifulSoup]
+ResourceDict = dict[str, Union[str, int, Resource]]
+ItemTuple = tuple[BeautifulSoup, BeautifulSoup]
 
 
-class ImportPythonParser(object):
+class ImportPythonParser:
     BASE_URL = "http://importpython.com"
     RESOURCE_NAME = "importpython"
 
@@ -40,7 +38,7 @@ class ImportPythonParser(object):
         try:
             result = urlopen(url, timeout=10).read()
         except URLError:
-            return ''
+            return ""
         else:
             return result
 
@@ -64,43 +62,40 @@ class ImportPythonParser(object):
         elif 12 <= number <= 15:
             return "/".join([cls.BASE_URL, "newsletter", "draft", str(number)])
         elif 2 <= number <= 14:
-            return "/".join([cls.BASE_URL, "static", "files",
-                             "issue{}.html".format(str(number))])
+            return "/".join(
+                [cls.BASE_URL, "static", "files", f"issue{str(number)}.html"]
+            )
         else:
-            raise ValueError("Incorre page number: {}".format(number))
+            raise ValueError(f"Incorre page number: {number}")
 
-    def _get_all_news_blocks(self,
-                             soap: BeautifulSoup) -> List[ItemTuple]:
+    def _get_all_news_blocks(self, soap: BeautifulSoup) -> list[ItemTuple]:
         """Returns sequence of blocks that present single news"""
         # TODO: add tags parsing
         subtitle_els = soap.find_all("div", "subtitle")
         body_texts = [el.find_next_sibling("div") for el in subtitle_els]
         return list(zip(subtitle_els, body_texts))
 
-    def _get_block_dict(self,
-                        el: Tuple[BeautifulSoup,
-                                  BeautifulSoup]) -> ResourceDict:
+    def _get_block_dict(self, el: tuple[BeautifulSoup, BeautifulSoup]) -> ResourceDict:
         resource, created = Resource.objects.get_or_create(
-            title='ImportPython',
-            link='http://importpython.com'
+            title="ImportPython", link="http://importpython.com"
         )
 
         subtitle, body = el
         title = subtitle.find("a").text
-        url = subtitle.find("a")['href']
+        url = subtitle.find("a")["href"]
         text = body.text
         return {
-            'title': title,
-            'link': url,
-            'raw_content': text,
-            'http_code': 200,
-            'content': text,
-            'description': text,
-            'resource': resource,
-            'language': 'en',
+            "title": title,
+            "link": url,
+            "raw_content": text,
+            "http_code": 200,
+            "content": text,
+            "description": text,
+            "resource": resource,
+            "language": "en",
         }
 
-    def get_blocks(self, url: str) -> List[ResourceDict]:
+    def get_blocks(self, url: str) -> list[ResourceDict]:
         """Get news dictionaries from the specified URL"""
         content = self._get_url_content(url)
         soup = BeautifulSoup(content, "lxml")
@@ -116,8 +111,8 @@ def _apply_rules_wrap(**kwargs):
 
     def _apply_rules(item: dict) -> dict:
         item.update(
-            apply_parsing_rules(item, **rules)
-            if kwargs.get('query_rules') else {})
+            apply_parsing_rules(item, **rules) if kwargs.get("query_rules") else {}
+        )
         item.update(apply_video_rules(item))
         return item
 
@@ -126,9 +121,9 @@ def _apply_rules_wrap(**kwargs):
 
 def main(url: str = "", number: int = "") -> None:
     data = {
-        'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
-        'query_sections': Section.objects.all(),
-        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
+        "query_rules": ParsingRules.objects.filter(is_activated=True).all(),
+        "query_sections": Section.objects.all(),
+        "query_statuses": [x[0] for x in ITEM_STATUS_CHOICES],
     }
     _apply_rules = _apply_rules_wrap(**data)
 
@@ -150,15 +145,13 @@ class Command(BaseCommand):
  implicitly specify issue number by using --number argument."""
 
     def add_arguments(self, parser):
-        parser.add_argument('--url', type=str, help='Url to parse data from')
-        parser.add_argument('--number',
-                            type=int,
-                            help='Number of "issue" to parse')
+        parser.add_argument("--url", type=str, help="Url to parse data from")
+        parser.add_argument("--number", type=int, help='Number of "issue" to parse')
 
     def handle(self, *args, **options):
-        if 'url' in options and options['url'] is not None:
-            main(url=options['url'])
-        elif 'number' in options and options['number'] is not None:
-            main(number=int(options['number']))
+        if "url" in options and options["url"] is not None:
+            main(url=options["url"])
+        elif "number" in options and options["number"] is not None:
+            main(number=int(options["number"]))
         else:
             main()

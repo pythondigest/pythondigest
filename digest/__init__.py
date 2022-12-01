@@ -1,1 +1,1 @@
-default_app_config = 'digest.apps.Config'
+default_app_config = "digest.apps.Config"

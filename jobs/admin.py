@@ -1,25 +1,24 @@
-# -*- coding: utf-8 -*-
 from django.contrib import admin
 
 from digest.admin import link_html
-from jobs.models import JobFeed, JobItem, AcceptedList, RejectedList
+from jobs.models import AcceptedList, JobFeed, JobItem, RejectedList
 
 
 class JobFeedAdmin(admin.ModelAdmin):
     list_display = (
-        'name',
-        'link_html',
-        'is_activated',
-        'in_edit',
+        "name",
+        "link_html",
+        "is_activated",
+        "in_edit",
     )
 
     list_editable = [
-        'is_activated',
+        "is_activated",
     ]
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = 'Ссылка'
+    link_html.short_description = "Ссылка"
 
 
 class RejectedListAdmin(admin.ModelAdmin):
@@ -32,16 +31,16 @@ class AcceptedListAdmin(admin.ModelAdmin):
 
 class JobItemAdmin(admin.ModelAdmin):
     list_display = (
-        'title',
-        'link_html',
-        'published_at',
-        'src_place_name',
-        'get_salary_str',
+        "title",
+        "link_html",
+        "published_at",
+        "src_place_name",
+        "get_salary_str",
     )
 
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
-    link_html.short_description = 'Ссылка'
+    link_html.short_description = "Ссылка"
 
 
 admin.site.register(JobItem, JobItemAdmin)

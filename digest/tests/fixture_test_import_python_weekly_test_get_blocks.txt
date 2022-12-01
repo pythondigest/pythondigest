@@ -1,10 +1,10 @@
 <html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraph.org/schema/"> <head>
-        
+
 <meta property="og:title" content="Python Weekly - Issue  237"/>
-<meta property="fb:page_id" content="43929265776" />        
+<meta property="fb:page_id" content="43929265776" />
 		<title>Python Weekly - Issue  237</title>
 	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		
+
 	<style type="text/css">
 		body,.backgroundTable{
 			background-color:#EEEEEE;
@@ -154,7 +154,7 @@
         }
         return vars;
     }
-    
+
     function setupSocialSharingStuffs() {
         var numSocialElems = $('a[rel=socialproxy]').length;
         var numSocialInitialized = 0;
@@ -197,14 +197,14 @@
                       } else if (idElement.length > 0) {
                           element = idElement;
                       }
-         
+
                       if (element) {
                           var offset = element.offset();
                           var height = element.height();
                           //3 is totally arbitrary, but seems to work best.
                           window.parent.scrollTo(offset.left, (offset.top + iframeOffset.top - (height*3)) );
                       }
-         
+
                       return false;
                   });
               }
@@ -347,14 +347,14 @@ When dealing with research data, you have to be careful to protect user privacy.
 									<tr>
 										<td class="footerRow" align="left" valign="top" style="background-color: #F5F1DE;border-top: 0px none #F5F1DE;padding: 20px;">
 											<div class="footerText" style="font-size: 10px;color: #666666;line-height: 100%;font-family: Helvetica;">
-												
+
 												<!--  -->
     											You are receiving our weekly newsletter because you signed up at http://www.PythonWeekly.com.
 												<!--  -->
 												<br>
     											<br>
 		    									<a href="*|DEFAULT:UNSUB|*" style="color: #17488a;text-decoration: underline;font-weight: normal;">Unsubscribe</a>  Test Email Address from this list | <a href="*|DEFAULT:FORWARD|*" style="color: #17488a;text-decoration: underline;font-weight: normal;">Forward to a friend</a> | <a href="*|DEFAULT:UPDATE_PROFILE|*" style="color: #17488a;text-decoration: underline;font-weight: normal;">Update your profile</a>
-												
+
 		    									<br>
 												<!--  -->
 		    									<strong>Our mailing address is:</strong>
@@ -363,10 +363,10 @@ When dealing with research data, you have to be careful to protect user privacy.
 												<br>
 												<!--  -->
 		    									<em>Copyright (C) 2016 Python Weekly All rights reserved.</em>
-												<br>    
-												
+												<br>
+
 											</div>
-											
+
 										</td>
 									</tr>
 								</table>

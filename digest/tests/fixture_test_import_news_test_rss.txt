@@ -160,12 +160,12 @@ can do the following.&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-466&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/1-pyspark-reddit-languagepng-0&quot;&gt;1-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;561&quot; width=&quot;1000&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/1-pyspark-reddit-language_0.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt; &lt;/p&gt;
@@ -175,12 +175,12 @@ can do the following.&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-467&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/2-pyspark-reddit-languagepng-0&quot;&gt;2-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;477&quot; width=&quot;1000&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/2-pyspark-reddit-language_0.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;In the remainder of this post, we'll:&lt;/p&gt;
@@ -230,24 +230,24 @@ can do the following.&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-462&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/4-pyspark-reddit-languagepng&quot;&gt;4-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;1080&quot; width=&quot;1445&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/4-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;Instead, we can use the Jupyter Notebook on our Hadoop cluster to work interactively with our data via Anaconda and PySpark.&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-463&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/3-pyspark-reddit-languagepng&quot;&gt;3-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;1080&quot; width=&quot;1716&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/3-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;Using Anaconda for cluster management, we can install Jupyter Notebook on the head node of the cluster with a single command, then open the notebook interface in our local web browser:&lt;/p&gt;
@@ -460,12 +460,12 @@ can do the following.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-464&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/5-pyspark-reddit-languagepng&quot;&gt;5-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;314&quot; width=&quot;391&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/5-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p dir=&quot;ltr&quot;&gt;Finally, we can use Bokeh to generate an interactive plot of the data:&lt;/p&gt;
@@ -482,12 +482,12 @@ can do the following.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-465&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/6-pyspark-reddit-languagepng&quot;&gt;6-pyspark-reddit-language.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img height=&quot;1080&quot; width=&quot;992&quot; class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/6-pyspark-reddit-language.png&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;&lt;/code&gt;&lt;/p&gt;
 &lt;h3 dir=&quot;ltr&quot;&gt; &lt;/h3&gt;
@@ -534,8 +534,8 @@ can do the following.&lt;/p&gt;
 	<description>&lt;p&gt;PyCon is partnering  again with MTL NewTech and Montréal-Python this year to bring one lucky Montreal startup to PyCon at Portland, Oregon, to present alongside with Google, Facebook, Stripe, Heroku, Microsoft, Mozilla and many other technology companies.&lt;/p&gt;
 &lt;p&gt;If you are a startup that meets the requirements below, apply now by filling this form: &lt;a href=&quot;http://goo.gl/forms/zf9jO8n8vR&quot;&gt;http://goo.gl/forms/zf9jO8n8vR&lt;/a&gt;
 With the following information: a) size of the team, b) age of the startup c) your use of Python. &lt;/p&gt;
-&lt;p&gt;Deadline for applications: April 19nd 23h59. 
-Announcement of the startups selected: Starting on April 21th. 
+&lt;p&gt;Deadline for applications: April 19nd 23h59.
+Announcement of the startups selected: Starting on April 21th.
 MTL NewTech Demo &amp;amp; announcement of the winner: April 26th &lt;strong&gt;Feel free to invite fellow startups&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;For more details about PyCon and the startup row in general, please head to the PyCon website at &lt;a href=&quot;https://us.pycon.org/2016/events/startup_row/&quot;&gt;https://us.pycon.org/2016/events/startup_row/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;==============&lt;br /&gt;
@@ -551,7 +551,7 @@ Eligible companies must meet the following criteria:&lt;/p&gt;
 &lt;p&gt;Use Python somewhere in your startup: backend, front-end, testing, wherever&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;If selected, please confirm that you will staff your booth in the Expo Hall on your appointed day. We will try accommodate your 
+&lt;p&gt;If selected, please confirm that you will staff your booth in the Expo Hall on your appointed day. We will try accommodate your
 preferences: Monday or Tuesday&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -575,12 +575,12 @@ preferences: Monday or Tuesday&lt;/p&gt;
 &lt;p&gt;&lt;div class=&quot;media media-element-container media-default&quot;&gt;&lt;div id=&quot;file-468&quot; class=&quot;file file-image file-image-png&quot;&gt;
 
         &lt;h2 class=&quot;element-invisible&quot;&gt;&lt;a href=&quot;https://www.continuum.io/files/hxo7gazzpng&quot;&gt;HxO7gaZZ.png&lt;/a&gt;&lt;/h2&gt;
-    
-  
+
+
   &lt;div class=&quot;content&quot;&gt;
     &lt;img class=&quot;media-element file-default&quot; src=&quot;https://www.continuum.io/sites/default/files/HxO7gaZZ.png&quot; width=&quot;512&quot; height=&quot;512&quot; alt=&quot;&quot; /&gt;  &lt;/div&gt;
 
-  
+
 &lt;/div&gt;
 &lt;/div&gt;At &lt;a href=&quot;http://www.odsc.com/boston/&quot; target=&quot;_blank&quot;&gt;ODSC East&lt;/a&gt;, the most influential minds and institutions in data science will convene at the Boston Convention &amp;amp; Exhibition Center from May 20th to the 22nd to discuss and teach the newest and most exciting developments in data science.&lt;/p&gt;
 &lt;p&gt;As you know, the Python ecosystem is now one of the most important data science development environments available today. This is due, in large part, to the existence of a rich suite of user-facing data analysis libraries.&lt;/p&gt;
@@ -1058,21 +1058,21 @@ video_id    = args['videoID']
 # Retrieve the video JSON from Vimeo
 #
 def get_vimeo_video(video_id):
-    
+
     url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
-    
+
     response = requests.get(url)
-    
+
     if response.status_code == 200:
-        
+
         video_info = response.json()
-        
+
         print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
-        
+
         return video_info[0]['thumbnail_large']
-    
+
     else:
-        
+
         print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
 
 
@@ -1080,40 +1080,40 @@ def get_vimeo_video(video_id):
 # Search TinEye for the image.
 #
 def search_tineye(image_url):
-    
+
     try:
         result = tineye.search_url(image_url)
     except:
         pass
-    
+
     result_urls = []
     dates       = {}
-    
+
     for match in result.matches:
-        
+
         for link in match.backlinks:
-            
+
             if link.backlink not in result_urls:
-                
+
                 result_urls.append(link.backlink)
                 dates[link.crawl_date] = link.backlink
-    
+
     if len(result_urls) &amp;gt; 1:
-        print            
+        print
         print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
-        
+
         for url in result_urls:
-            
+
             print url
-        
-        
+
+
         oldest_date = sorted(dates.keys())
-        
+
         print
         print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
-    
+
     else:
-        
+
         print &quot;[!!!] No results found on TinEye.&quot;
 
 # grab the Vimeo video details
@@ -1143,21 +1143,21 @@ video_id    = args['videoID']
 # Retrieve the video JSON from Vimeo
 #
 def get_vimeo_video(video_id):
-    
+
     url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
-    
+
     response = requests.get(url)
-    
+
     if response.status_code == 200:
-        
+
         video_info = response.json()
-        
+
         print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
-        
+
         return video_info[0]['thumbnail_large']
-    
+
     else:
-        
+
         print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
 
 
@@ -1165,41 +1165,41 @@ def get_vimeo_video(video_id):
 # Search TinEye for the image.
 #
 def search_tineye(image_url):
-    
+
     try:
         result = tineye.search_url(image_url)
     except:
         print &quot;[!!!] TinEye search failed!&quot;
         pass
-    
+
     result_urls = []
     dates       = {}
-    
+
     for match in result.matches:
-        
+
         for link in match.backlinks:
-            
+
             if link.backlink not in result_urls:
-                
+
                 result_urls.append(link.backlink)
                 dates[link.crawl_date] = link.backlink
-    
+
     if len(result_urls) &amp;gt; 1:
-        print            
+        print
         print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
-        
+
         for url in result_urls:
-            
+
             print url
-        
-        
+
+
         oldest_date = sorted(dates.keys())
-        
+
         print
         print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
-    
+
     else:
-        
+
         print &quot;[!!!] No results found on TinEye.&quot;
 
 # grab the Vimeo video details
@@ -1229,21 +1229,21 @@ video_id    = args['videoID']
 # Retrieve the video JSON from Vimeo
 #
 def get_vimeo_video(video_id):
-    
+
     url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
-    
+
     response = requests.get(url)
-    
+
     if response.status_code == 200:
-        
+
         video_info = response.json()
-        
+
         print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
-        
+
         return video_info[0]['thumbnail_large']
-    
+
     else:
-        
+
         print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
 
 
@@ -1251,41 +1251,41 @@ def get_vimeo_video(video_id):
 # Search TinEye for the image.
 #
 def search_tineye(image_url):
-    
+
     try:
         result = tineye.search_url(image_url)
     except:
         print &quot;[!!!] TinEye search failed!&quot;
         return None
-    
+
     result_urls = []
     dates       = {}
-    
+
     for match in result.matches:
-        
+
         for link in match.backlinks:
-            
+
             if link.backlink not in result_urls:
-                
+
                 result_urls.append(link.backlink)
                 dates[link.crawl_date] = link.backlink
-    
+
     if len(result_urls) &amp;gt; 1:
-        print            
+        print
         print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
-        
+
         for url in result_urls:
-            
+
             print url
-        
-        
+
+
         oldest_date = sorted(dates.keys())
-        
+
         print
         print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
-    
+
     else:
-        
+
         print &quot;[!!!] No results found on TinEye.&quot;
 
 # grab the Vimeo video details
@@ -1315,21 +1315,21 @@ video_id    = args['videoID']
 # Retrieve the video JSON from Vimeo
 #
 def get_vimeo_video(video_id):
-    
+
     url = &quot;http://vimeo.com/api/v2/video/%s.json&quot; % video_id
-    
+
     response = requests.get(url)
-    
+
     if response.status_code == 200:
-        
+
         video_info = response.json()
-        
+
         print &quot;[*] Video uploaded: %s&quot; % video_info[0]['upload_date']
-        
+
         return video_info[0]['thumbnail_large']
-    
+
     else:
-        
+
         print &quot;[!!!] Failed to retrieve the video: %s&quot; % response.content
 
 
@@ -1337,41 +1337,41 @@ def get_vimeo_video(video_id):
 # Search TinEye for the image.
 #
 def search_tineye(image_url):
-    
+
     try:
         result = tineye.search_url(image_url)
     except:
         print &quot;[!!!] TinEye search failed!&quot;
         return None
-    
+
     result_urls = []
     dates       = {}
-    
+
     for match in result.matches:
-        
+
         for link in match.backlinks:
-            
+
             if link.backlink not in result_urls:
-                
+
                 result_urls.append(link.backlink)
                 dates[link.crawl_date] = link.backlink
-    
+
     if len(result_urls) &amp;gt; 1:
-        print            
+        print
         print &quot;[*] Discovered %d unique URLs with image matches.&quot; % len(result_urls)
-        
+
         for url in result_urls:
-            
+
             print url
-        
-        
+
+
         oldest_date = sorted(dates.keys())
-        
+
         print
         print &quot;[*] Oldest match was crawled on %s at %s&quot; % (str(oldest_date[0]),dates[oldest_date[0]])
-    
+
     else:
-        
+
         print &quot;[!!!] No results found on TinEye.&quot;
 
 # grab the Vimeo video details

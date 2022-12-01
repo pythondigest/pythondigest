@@ -1,11 +1,9 @@
-# -*- coding: utf-8 -*-
 import datetime
 import logging
 import re
 import socket
 from time import mktime
-from typing import Dict, List
-from urllib.error import HTTPError, URLError
+from urllib.error import URLError
 
 import feedparser
 import requests
@@ -35,25 +33,26 @@ from digest.models import (
 
 logger = logging.getLogger(__name__)
 
+
 def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     result = []
-    excl = [s.strip() for s in (src.excl or '').split(',') if s]
+    excl = [s.strip() for s in (src.excl or "").split(",") if s]
     for text, link, http_code in data:
 
         try:
             excl_link = bool([i for i in excl if i in link])
         except TypeError as e:
-            print("WARNING: (import_news): {}".format(e))
+            print(f"WARNING: (import_news): {e}")
             excl_link = False
         if not excl_link and src.incl in text:
-            tw_txt = text.replace(src.incl, '')
+            tw_txt = text.replace(src.incl, "")
             result.append([tw_txt, link, src.resource, http_code])
     return result
 
 
 def get_tweets():
     result = []
-    news_sources = AutoImportResource.objects.filter(type_res='twitter', in_edit=False)
+    news_sources = AutoImportResource.objects.filter(type_res="twitter", in_edit=False)
     for source in news_sources:
         print("Process twitter", source)
         try:
@@ -74,23 +73,26 @@ def import_tweets(**kwargs):
             # title = '[!] %s' % i[0] if fresh_google_check(i[1]) else i[0]
             title = i[0]
             item_data = {
-                'title': title,
-                'link': i[1],
-                'http_code': i[3],
-                'resource': i[2]
+                "title": title,
+                "link": i[1],
+                "http_code": i[3],
+                "resource": i[2],
             }
             if is_weekly_digest(item_data):
                 parse_weekly_digest(item_data)
             else:
-                data = apply_parsing_rules(item_data, **kwargs) if kwargs.get(
-                    'query_rules') else {}
+                data = (
+                    apply_parsing_rules(item_data, **kwargs)
+                    if kwargs.get("query_rules")
+                    else {}
+                )
                 item_data.update(data)
             save_news_item(item_data)
         except (URLError, TooManyRedirects, socket.timeout) as e:
             print(i, str(e))
 
 
-def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
+def get_items_from_rss(rss_link: str, timeout=10) -> list[dict]:
     """
     Get rss content from rss source.
 
@@ -107,7 +109,7 @@ def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
 
         for n in res_news.entries:
 
-            news_time = getattr(n, 'published_parsed', None)
+            news_time = getattr(n, "published_parsed", None)
             if news_time is not None:
                 _timestamp = mktime(news_time)
                 news_date = datetime.datetime.fromtimestamp(_timestamp).date()
@@ -116,16 +118,18 @@ def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
 
             # create data dict
             try:
-                summary = re.sub('<.*?>', '', n.summary)
+                summary = re.sub("<.*?>", "", n.summary)
             except (AttributeError, KeyError):
-                summary = ''
+                summary = ""
 
-            rss_items.append({
-                'title': n.title,
-                'link': n.link,
-                'description': summary,
-                'related_to_date': news_date,
-            })
+            rss_items.append(
+                {
+                    "title": n.title,
+                    "link": n.link,
+                    "description": summary,
+                    "related_to_date": news_date,
+                }
+            )
     except Exception as e:
         print("Exception -> ", str(e))
         rss_items = []
@@ -133,36 +137,40 @@ def get_items_from_rss(rss_link: str, timeout=10) -> List[Dict]:
     return rss_items
 
 
-def is_skip_news(rss_item: Dict, minimum_date=None) -> bool:
+def is_skip_news(rss_item: dict, minimum_date=None) -> bool:
     """Фильтруем старые новости, а также дубли свежих новостей"""
     if minimum_date is None:
         minimum_date = datetime.date.today() - datetime.timedelta(weeks=1)
 
     # skip old news by rss date
-    if rss_item['related_to_date'] < minimum_date:
+    if rss_item["related_to_date"] < minimum_date:
         return True
 
     # skip old duplicated news
-    if Item.objects.filter(link=rss_item['link'], related_to_date__gte=minimum_date).exists():
+    if Item.objects.filter(
+        link=rss_item["link"], related_to_date__gte=minimum_date
+    ).exists():
         return True
 
     return False
 
 
-def get_data_for_rss_item(rss_item: Dict) -> Dict:
-    if rss_item["link"].startswith("https://twitter.com") and rss_item.get("description"):
+def get_data_for_rss_item(rss_item: dict) -> dict:
+    if rss_item["link"].startswith("https://twitter.com") and rss_item.get(
+        "description"
+    ):
         raw_content = rss_item["description"]
         http_code = str(200)
     else:
-        response = make_get_request(rss_item['link'])
+        response = make_get_request(rss_item["link"])
         raw_content = response.content.decode()
         http_code = str(200)
 
     rss_item.update(
         {
-            'raw_content': raw_content,
-            'http_code': http_code,
-            'content': get_readable_content(raw_content),
+            "raw_content": raw_content,
+            "http_code": http_code,
+            "content": get_readable_content(raw_content),
         }
     )
     return rss_item
@@ -170,7 +178,11 @@ def get_data_for_rss_item(rss_item: Dict) -> Dict:
 
 def import_rss(**kwargs):
     logger.info("Import news from RSS feeds")
-    news_sources = AutoImportResource.objects.filter(type_res='rss', in_edit=False).filter(id=19).order_by("?")
+    news_sources = (
+        AutoImportResource.objects.filter(type_res="rss", in_edit=False)
+        .filter(id=19)
+        .order_by("?")
+    )
 
     for source in news_sources:
         logger.info(f"Process RSS {source.title} from {source.link}")
@@ -208,13 +220,17 @@ def import_rss(**kwargs):
                     parse_django_weekly_digest(item)
                     continue
 
-                item.update({
-                    'resource': resource,
-                    'language': language,
-                })
+                item.update(
+                    {
+                        "resource": resource,
+                        "language": language,
+                    }
+                )
                 logger.debug("> Apply parsing rules for item")
                 item.update(
-                    apply_parsing_rules(item, **kwargs) if kwargs.get('query_rules') else {}
+                    apply_parsing_rules(item, **kwargs)
+                    if kwargs.get("query_rules")
+                    else {}
                 )
                 logger.debug("> Apply video rules for item")
                 item.update(apply_video_rules(item.copy()))
@@ -228,16 +244,16 @@ def import_rss(**kwargs):
 
 def parsing(func):
     data = {
-        'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
-        'query_sections': Section.objects.all(),
-        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
+        "query_rules": ParsingRules.objects.filter(is_activated=True).all(),
+        "query_sections": Section.objects.all(),
+        "query_statuses": [x[0] for x in ITEM_STATUS_CHOICES],
     }
     func(**data)
 
 
 class Command(BaseCommand):
-    args = 'no arguments!'
-    help = 'News import from external resources'
+    args = "no arguments!"
+    help = "News import from external resources"
 
     def handle(self, *args, **options):
         """

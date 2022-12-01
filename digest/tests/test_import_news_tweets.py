@@ -1,6 +1,4 @@
-# -*- encoding: utf-8 -*-
-
-from mock import patch
+from unittest.mock import patch
 
 from django.test import TestCase
 
@@ -12,15 +10,17 @@ from digest.utils import MockResponse, read_fixture
 
 class ImportTweetsTest(TestCase):
     def setUp(self):
-        self.res_twitter = AutoImportResource.objects.create(title='Test',
-                                                             link='https://twitter.com/pythontrending',
-                                                             type_res='twitter',
-                                                             excl='http://consumerfinance.gov',
-                                                             incl='framework')
+        self.res_twitter = AutoImportResource.objects.create(
+            title="Test",
+            link="https://twitter.com/pythontrending",
+            type_res="twitter",
+            excl="http://consumerfinance.gov",
+            incl="framework",
+        )
 
     def test_get_tweets(self):
-        test_name = 'fixture_test_import_news_test_get_tweets.txt'
-        self.patcher = patch('digest.management.commands.urlopen')
+        test_name = "fixture_test_import_news_test_get_tweets.txt"
+        self.patcher = patch("digest.management.commands.urlopen")
         self.urlopen_mock = self.patcher.start()
         self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
 
@@ -32,7 +32,7 @@ class ImportTweetsTest(TestCase):
         for x in tweets:
             self.assertEqual(len(x), 3)
             self.assertEqual(x[2], 200)
-            self.assertEqual('http' in x[1], True)
+            self.assertEqual("http" in x[1], True)
 
         return tweets
 

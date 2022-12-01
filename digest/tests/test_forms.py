@@ -15,38 +15,38 @@ class HoneypotWidgetTest(TestCase):
         self.assertTrue(widget.is_hidden)
 
     def test_init_if_class_in_attrs(self):
-        widget = HoneypotWidget(attrs={'class': 'titanic'})
+        widget = HoneypotWidget(attrs={"class": "titanic"})
 
-        self.assertNotIn('style', widget.attrs)
-        self.assertEqual(widget.attrs['class'], 'titanic')
+        self.assertNotIn("style", widget.attrs)
+        self.assertEqual(widget.attrs["class"], "titanic")
 
     def test_init_if_class_not_in_attrs(self):
-        widget = HoneypotWidget(attrs={'spam': 1, 'ham': 2})
+        widget = HoneypotWidget(attrs={"spam": 1, "ham": 2})
 
-        self.assertEqual(widget.attrs['style'], 'display:none')
+        self.assertEqual(widget.attrs["style"], "display:none")
 
     def test_init_if_style_in_attrs_and_class_is_no(self):
-        widget = HoneypotWidget(attrs={'style': 'float:none'})
+        widget = HoneypotWidget(attrs={"style": "float:none"})
 
-        self.assertEqual(widget.attrs['style'], 'display:none')
+        self.assertEqual(widget.attrs["style"], "display:none")
 
     def test_render_if_html_comment_is_true(self):
         widget = HoneypotWidget(html_comment=True)
 
-        html = widget.render('field_name', 'Field value')
+        html = widget.render("field_name", "Field value")
 
         # Просто проверяем что содержимое закомментировано
-        self.assertTrue(html.startswith('<!--'))
-        self.assertTrue(html.endswith('-->'))
+        self.assertTrue(html.startswith("<!--"))
+        self.assertTrue(html.endswith("-->"))
 
     def test_render_if_html_comment_is_false(self):
         widget = HoneypotWidget(html_comment=False)
 
-        html = widget.render('field_name', 'Field value')
+        html = widget.render("field_name", "Field value")
 
         # Нет нужды проверять всю разметку. Только наличие данных
-        self.assertIn('field_name', html)
-        self.assertIn('Field value', html)
+        self.assertIn("field_name", html)
+        self.assertIn("Field value", html)
 
 
 class HoneypotFieldTest(TestCase):
@@ -58,47 +58,46 @@ class HoneypotFieldTest(TestCase):
     def test_initial_and_value_in_EMPTY_VALUES(self):
         field = HoneypotField(initial=None)
 
-        output = field.clean('')
+        output = field.clean("")
 
-        self.assertEqual(output, '')
+        self.assertEqual(output, "")
 
     def test_initial_not_in_EMPTY_VALUES_and_value_is_equal_to_initial(self):
-        field = HoneypotField(initial='foobar')
+        field = HoneypotField(initial="foobar")
 
-        output = field.clean('foobar')
+        output = field.clean("foobar")
 
-        self.assertEqual(output, 'foobar')
+        self.assertEqual(output, "foobar")
 
-    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self
-                                                                           ):
-        field = HoneypotField(initial='foobar')
+    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self):
+        field = HoneypotField(initial="foobar")
 
         with self.assertRaises(ValidationError):
-            field.clean('pizza')
+            field.clean("pizza")
 
 
 # Стили виджетов не протестированы, т.к. не влияют на работоспособность формы.
 class AddNewsFormTest(TestCase):
     def setUp(self):
         self.section_data = {
-            'title': 'some section',
-            'status': 'active',
+            "title": "some section",
+            "status": "active",
         }
 
     def test_name_field_is_HoneypotField(self):
         form = AddNewsForm()
 
-        self.assertIsInstance(form.fields['name'], HoneypotField)
+        self.assertIsInstance(form.fields["name"], HoneypotField)
 
     def test_form_save_with_valid_data(self):
         section = Section.objects.create(pk=1, **self.section_data)
 
         data = {
-            'link': 'http://google.com',
-            'title': 'hello',
-            'description': 'hello world',
-            'section': section.pk,
-            'language': 'en',
+            "link": "http://google.com",
+            "title": "hello",
+            "description": "hello world",
+            "section": section.pk,
+            "language": "en",
         }
 
         form = AddNewsForm(data)
@@ -108,37 +107,34 @@ class AddNewsFormTest(TestCase):
     def test_the_title_field_is_not_required(self):
         form = AddNewsForm()
 
-        self.assertEqual(form.fields['title'].required, False)
+        self.assertEqual(form.fields["title"].required, False)
 
     def test_form_rendering_if_no_section_exists(self):
-        self.section_data['title'] = 'Another title 1'
+        self.section_data["title"] = "Another title 1"
         Section.objects.create(pk=3, **self.section_data)
 
-        self.section_data['title'] = 'Another title 2'
+        self.section_data["title"] = "Another title 2"
         Section.objects.create(pk=7, **self.section_data)
 
         form = AddNewsForm()
         form_html = form.as_p()
 
-        self.assertIn('Another title 1', form_html)
-        self.assertIn('Another title 2', form_html)
+        self.assertIn("Another title 1", form_html)
+        self.assertIn("Another title 2", form_html)
         # self.assertNotIn('selected', form_html)
 
     def test_form_rendering_if_6th_section_exists(self):
         Section.objects.create(pk=6, **self.section_data)
 
-        self.section_data['title'] = 'Another title 1'
+        self.section_data["title"] = "Another title 1"
         Section.objects.create(pk=3, **self.section_data)
 
-        self.section_data['title'] = 'Another title 2'
+        self.section_data["title"] = "Another title 2"
         Section.objects.create(pk=7, **self.section_data)
 
         form = AddNewsForm()
 
         form_html = form.as_p()
-        self.assertIn(
-            '<option value="6" selected>some section</option>\n',
-            form_html
-        )
-        self.assertIn('Another title 1', form_html)
-        self.assertIn('Another title 2', form_html)
+        self.assertIn('<option value="6" selected>some section</option>\n', form_html)
+        self.assertIn("Another title 1", form_html)
+        self.assertIn("Another title 2", form_html)

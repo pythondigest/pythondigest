@@ -1,7 +1,5 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from typing import Dict, Sequence, Union
+from collections.abc import Sequence
+from typing import Union
 from urllib.error import URLError
 from urllib.request import urlopen
 
@@ -27,68 +25,67 @@ def _get_content(url: str) -> str:
     try:
         result = urlopen(url, timeout=10).read()
     except URLError:
-        return ''
+        return ""
     else:
         return result
 
 
 def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
     """
-        Grab all blocks containing news titles and links
-        from URL
+    Grab all blocks containing news titles and links
+    from URL
     """
     result = []
     content = _get_content(url)
     if content:
         try:
             page = html.fromstring(content)
-            result = page.find_class('bodyTable')[0]
+            result = page.find_class("bodyTable")[0]
             result = result.xpath('//span[@style="font-size:14px"]')
         except OSError:
-            page = BeautifulSoup(content, 'lxml')
-            result = page.findAll('table', {'class': 'bodyTable'})[0]
-            result = result.findAll('span', {'style': "font-size:14px"})
+            page = BeautifulSoup(content, "lxml")
+            result = page.findAll("table", {"class": "bodyTable"})[0]
+            result = result.findAll("span", {"style": "font-size:14px"})
     return result
 
 
-def _get_block_item(block: Parseble) -> Dict[str, Union[str, int, Resource]]:
+def _get_block_item(block: Parseble) -> dict[str, str | int | Resource]:
     """Extract all data (link, title, description) from block"""
     resource, created = Resource.objects.get_or_create(
-        title='PythonWeekly',
-        link='http://www.pythonweekly.com/'
+        title="PythonWeekly", link="http://www.pythonweekly.com/"
     )
 
     # Handle BeautifulSoup element
     if isinstance(block, Tag):
-        link = block.findAll('a')[0]
-        url = link['href']
+        link = block.findAll("a")[0]
+        url = link["href"]
         title = link.string
         try:
             text = str(block.nextSibling.nextSibling)
-            text = text.replace('<br/>', '').strip()
+            text = text.replace("<br/>", "").strip()
         except AttributeError:
             return {}
 
     # Handle BeautifulSoup element
     else:
-        link = block.cssselect('a')[0]
-        url = link.attrib['href']
+        link = block.cssselect("a")[0]
+        url = link.attrib["href"]
         title = link.text
         _text = block.getnext()
         if _text is None:
             return {}
-        text = etree.tostring(block.getnext()).decode('utf-8')
-        text = text.replace('<br/>', '').strip()
+        text = etree.tostring(block.getnext()).decode("utf-8")
+        text = text.replace("<br/>", "").strip()
 
     return {
-        'title': title,
-        'link': url,
-        'raw_content': text,
-        'http_code': 200,
-        'content': text,
-        'description': text,
-        'resource': resource,
-        'language': 'en',
+        "title": title,
+        "link": url,
+        "raw_content": text,
+        "http_code": 200,
+        "content": text,
+        "description": text,
+        "resource": resource,
+        "language": "en",
     }
 
 
@@ -97,8 +94,8 @@ def _apply_rules_wrap(**kwargs):
 
     def _apply_rules(item: dict) -> dict:
         item.update(
-            apply_parsing_rules(item, **rules)
-            if kwargs.get('query_rules') else {})
+            apply_parsing_rules(item, **rules) if kwargs.get("query_rules") else {}
+        )
         item.update(apply_video_rules(item))
         return item
 
@@ -107,9 +104,9 @@ def _apply_rules_wrap(**kwargs):
 
 def main(url):
     data = {
-        'query_rules': ParsingRules.objects.filter(is_activated=True).all(),
-        'query_sections': Section.objects.all(),
-        'query_statuses': [x[0] for x in ITEM_STATUS_CHOICES],
+        "query_rules": ParsingRules.objects.filter(is_activated=True).all(),
+        "query_sections": Section.objects.all(),
+        "query_statuses": [x[0] for x in ITEM_STATUS_CHOICES],
     }
     _apply_rules = _apply_rules_wrap(**data)
 
@@ -122,15 +119,16 @@ def main(url):
 # http://us2.campaign-archive.com/?u=e2e180baf855ac797ef407fc7&id=0a5d4ce3e5
 # http://us2.campaign-archive.com/?u=e2e180baf855ac797ef407fc7&id=a68acae6d6
 
+
 class Command(BaseCommand):
-    args = 'no arguments!'
-    help = ''
+    args = "no arguments!"
+    help = ""
 
     def add_arguments(self, parser):
-        parser.add_argument('url', type=str)
+        parser.add_argument("url", type=str)
 
     def handle(self, *args, **options):
-        if 'url' in options:
-            main(options['url'])
+        if "url" in options:
+            main(options["url"])
         else:
-            print('Not found folder path')
+            print("Not found folder path")
