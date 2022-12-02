@@ -1,6 +1,9 @@
 version: '3'
 
 services:
-  redis:
-    image: redis:6
-    container_name: pydigest_redis
+  django:
+    image: pythondigest/pythondigest:latest
+    container_name: pydigest_django
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

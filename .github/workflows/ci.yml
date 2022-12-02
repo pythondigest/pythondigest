@@ -112,7 +112,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
@@ -136,6 +135,13 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-            echo ${{ secrets.ENV_PRODUCTION_FILE }} | base64 -d > .env
-            docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
-            docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
+          export DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+          export REDIS_URL=${{ secrets.REDIS_URL }}
+          export POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}
+          export POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}
+          export POSTGRES_DB=${{ secrets.POSTGRES_DB }}
+          export POSTGRES_USER=${{ secrets.POSTGRES_USER }}
+          export POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
+
+          docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
+          docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
