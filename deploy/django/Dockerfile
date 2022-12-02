@@ -56,4 +56,4 @@ RUN pip install -U pip && pip install --no-cache-dir --no-index --find-links=/wh
 RUN pip install poetry && apt-get update && apt-get install vim -y
 
 # copy application code to WORKDIR
-COPY . ${APP_HOME}
+COPY ./ ${APP_HOME}

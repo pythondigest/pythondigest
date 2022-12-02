@@ -477,7 +477,7 @@ class AutoImportResource(models.Model):
     in_edit = models.BooleanField(verbose_name=_("On testing"), default=False)
     language = models.CharField(
         verbose_name=_("Language of content"),
-        max_length=2,
+        max_length=255,
         choices=ITEM_LANGUAGE_CHOICES,
         default=ITEM_LANGUAGE_DEFAULT,
     )

@@ -7,15 +7,15 @@ volumes:
 services:
   postgres:
     build:
-      context: .
+      context: ..
       dockerfile: ./deploy/postgres/Dockerfile
-    image: project_production_postgres
+    image: pydigest_postgres
     container_name: pydigest_postgres
     volumes:
       - pydigest_postgres_data:/var/lib/postgresql/data:Z
       - pydigest_postgres_data_backups:/backups:z
     env_file:
-      - ./.envs/.local/.postgres
+      - ../.envs/.local/.postgres
     ports:
       - "5432:5432"
 

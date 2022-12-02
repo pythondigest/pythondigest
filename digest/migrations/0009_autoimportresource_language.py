@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
         name='language',
         field=models.CharField(
             default=b'en',
-            max_length=2,
+            max_length=255,
             verbose_name='\u042f\u0437\u044b\u043a \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0430',
             choices=[(b'ru', '\u0420\u0443\u0441\u0441\u043a\u0438\u0439'), (
                 b'en',

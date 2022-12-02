@@ -15,13 +15,13 @@ test:
 	python manage.py test
 
 run-infra:
-	docker compose -f local.infra.yml up --build
+	docker compose -f deploy/docker_compose_infra.yml up --build
 
-run-docker:
-	docker compose -f local.yml up --build
+run-compose:
+	docker compose -f deploy/docker_compose.yml up --build
 
 build:
-	docker compose -f local.yml build
+	docker compose -f deploy/docker_compose.yml build
 
 run:
 	python manage.py runserver
