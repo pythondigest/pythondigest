@@ -103,6 +103,8 @@ jobs:
     name: Deploy
     runs-on: ubuntu-22.04
     needs: build
+    environment:
+      name: production
     steps:
       #----------------------------------------------
       # Copy docker compose production config
@@ -133,6 +135,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
-            pwd
-            docker-compose -f pythondigest/compose/docker_compose.prod.yml pull
-            docker-compose -f pythondigest/compose/docker_compose.prod.yml up -d
+            echo $GITHUB_ENV
+            docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
+            docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
