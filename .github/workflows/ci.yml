@@ -26,5 +26,4 @@ jobs:
           push: true
           ulimit: nofile=1048576:1048576
           builder: ${{ steps.buildx.outputs.name }}
-          platforms: ${{ inputs.build_arm && 'linux/amd64,linux/arm64' || 'linux/amd64'}}
-          tags: pythondigest/pythondigest:${{ steps.vars.outputs.tag }},pythondigest/pythondigest:latest
+          tags: pythondigest/pythondigest:latest
