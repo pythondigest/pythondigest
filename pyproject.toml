@@ -17,7 +17,6 @@ django-modeladmin-reorder = ">=0.3.1"
 django-ckeditor = ">=5.9.0"
 django-siteblocks = ">=0.6.1"
 django-cachalot = ">=2.1.0"
-django-controlcenter = ">=0.3.1"
 django-compressor = ">=4.1"
 django-secretballot = ">=2.0.0"
 django-likes = {git = "https://github.com/axsapronov/django-likes.git", rev = "django4-signals"}

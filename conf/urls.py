@@ -1,6 +1,4 @@
 import django.views.static
-
-# from controlcenter.views import controlcenter
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -15,7 +13,6 @@ urlpatterns = [
     path("", include((frontend_url, "frontend"), namespace="frontend")),
     path("", include((digest_url, "digest"), namespace="digest")),
     path("admin/", admin.site.urls),
-    # path('admin/dashboard/', controlcenter.urls),
     path(
         "media/<str:url>",
         django.views.static.serve,

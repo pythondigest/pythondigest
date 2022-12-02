@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.admin",
-    # 'controlcenter',
     "admin_reorder",
     "bootstrapform",
     "sorl.thumbnail",
@@ -446,7 +445,6 @@ YANDEX_METRIKA_ID = "36284495"
 ADMIN_REORDER = (
     "digest",
     "advertising",
-    # 'controlcenter',
     "siteblocks",
     "landings",
     # 'taggit',
@@ -457,8 +455,6 @@ ADMIN_REORDER = (
     # 'account',
     "default",
 )
-
-CONTROLCENTER_DASHBOARDS = ("digest.dashboards.MyDashboard",)
 
 ALCHEMY_KEY = ""
 COMPRESS_ENABLED = True
