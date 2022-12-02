@@ -426,6 +426,18 @@ Django = ">=2.2"
 tests = ["coverage"]
 
 [[package]]
+name = "django-letsencrypt"
+version = "4.1.0"
+description = "A simple Django app to handle Let's Encrypt ACME challenges."
+category = "main"
+optional = false
+python-versions = ">=3.7, <4"
+
+[package.dependencies]
+Django = ">=2.2.25"
+pytz = ">=2021.3"
+
+[[package]]
 name = "django-likes"
 version = "2.0.2"
 description = "Django app providing view interface to django-secretballot."
@@ -1585,7 +1597,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "784d1b62d1623437d2e6e68cdcb5719b56e654e125e7c8b5236cfc396e2fa42b"
+content-hash = "8fcbd5a0a433d7ccb664da721205fa643ee03d90e59a9d5b74618ad69c939a13"
 
 [metadata.files]
 appdirs = [
@@ -1881,6 +1893,10 @@ django-extra-checks = [
 django-js-asset = [
     {file = "django_js_asset-2.0.0-py3-none-any.whl", hash = "sha256:86f9f300d682537ddaf0487dc2ab356581b8f50c069bdba91d334a46e449f923"},
     {file = "django_js_asset-2.0.0.tar.gz", hash = "sha256:adc1ee1efa853fad42054b540c02205344bb406c9bddf87c9e5377a41b7db90f"},
+]
+django-letsencrypt = [
+    {file = "django-letsencrypt-4.1.0.tar.gz", hash = "sha256:101a647abab41c90fe45d6dcbdd835603b8592f5d7736eecfa6ecbeb08ed5b0d"},
+    {file = "django_letsencrypt-4.1.0-py3-none-any.whl", hash = "sha256:c5fbf683670dafd93078b5f6e576645de1f616a44011691e599f534579378f27"},
 ]
 django-likes = []
 django-migration-linter = [

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "admin_reorder",
     "bootstrapform",
     "sorl.thumbnail",
+    "letsencrypt",
     "pytils",
     "ckeditor",
     "taggit",

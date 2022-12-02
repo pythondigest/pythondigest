@@ -1,7 +1,7 @@
 import django.views.static
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from conf.utils import likes_enable
 from digest.urls import urlpatterns as digest_url
@@ -20,6 +20,7 @@ urlpatterns = [
     ),
     path("taggit_autosuggest/", include("taggit_autosuggest.urls")),
     # path('account/', include('account.urls')),
+    re_path(r"^\.well-known/", include("letsencrypt.urls")),
 ]
 
 if "landings" in settings.INSTALLED_APPS:
