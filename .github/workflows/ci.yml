@@ -95,6 +95,9 @@ jobs:
           ulimit: nofile=1048576:1048576
           builder: ${{ steps.buildx.outputs.name }}
           tags: pythondigest/pythondigest:latest
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     name: Deploy
