@@ -112,8 +112,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: Make envfile
-      uses: SpicyPizza/create-envfile@v1.3
 
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
@@ -123,7 +121,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        source: "deploy/docker_compose.prod.yml,/github/workspace/.env"
+        source: "deploy/docker_compose.prod.yml"
         target: "pythondigest/compose/"
 
       #----------------------------------------------
@@ -138,5 +136,6 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
+            echo ${{ secrets.ENV_PRODUCTION_FILE }} | base64 -d > .env
             docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
             docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
