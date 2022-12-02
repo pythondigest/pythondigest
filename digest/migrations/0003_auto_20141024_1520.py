@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import concurrency.fields
 from django.db import migrations, models
 
 
@@ -45,7 +44,7 @@ class Migration(migrations.Migration):
                               '\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439'),
                              (b'draft',
                               '\u0427\u0435\u0440\u043d\u043e\u0432\u0438\u043a')])),
-                ('version', concurrency.fields.IntegerVersionField(
+                ('version', models.BigIntegerField(
                     default=1,
                     help_text='record revision number')), ],
         options={

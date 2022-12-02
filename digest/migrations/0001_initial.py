@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import datetime
 
-import concurrency.fields
+
 from django.conf import settings
 from django.db import migrations, models
 
@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
                                   '\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439'),
                                  (b'draft',
                                   '\u0427\u0435\u0440\u043d\u043e\u0432\u0438\u043a')])),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')), ],
             options={
@@ -164,7 +164,7 @@ class Migration(migrations.Migration):
                         default=0,
                         verbose_name='\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u043f\u0440\u0438 \u043f\u043e\u043a\u0430\u0437\u0435')
                      ),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')),
                     ('issue', models.ForeignKey(
@@ -197,7 +197,7 @@ class Migration(migrations.Migration):
                     ('link', models.URLField(
                         max_length=255,
                         verbose_name='\u0421\u0441\u044b\u043b\u043a\u0430')),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')), ],
             options={
@@ -232,7 +232,7 @@ class Migration(migrations.Migration):
                             b'active',
                             '\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439'
                         )])),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')),
                     ('habr_icon', models.CharField(

@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "bootstrapform",
     "sorl.thumbnail",
     "pytils",
-    "concurrency",
     "ckeditor",
     "taggit",
     "taggit_autosuggest",
@@ -112,7 +111,6 @@ else:
 MIDDLEWARE = [
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "concurrency.middleware.ConcurrencyMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -228,9 +226,6 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
     "compressor.finders.CompressorFinder",
 )
-
-CONCURRENCY_HANDLER409 = "digest.views.conflict"
-CONCURRENCY_POLICY = 2  # CONCURRENCY_LIST_EDITABLE_POLICY_ABORT_ALL
 
 # CACHES
 # ------------------------------------------------------------------------------

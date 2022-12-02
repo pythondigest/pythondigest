@@ -1,6 +1,5 @@
 import datetime
 
-from concurrency.views import ConflictResponse
 from digg_paginator import DiggPaginator
 
 from django.contrib import messages
@@ -16,15 +15,6 @@ from advertising.mixins import AdsMixin
 from .forms import AddNewsForm
 from .mixins import CacheMixin, FavoriteItemsMixin, FeedItemsMixin
 from .models import Issue, Item
-
-
-def conflict(request, target=None, template_name="409.html"):
-    template = loader.get_template(template_name)
-    message = "Вот незадача! Кажется эту новость обновили раньше =( \
-            Нужно обновить новость для того чтобы внести правки."
-
-    ctx = RequestContext(request, {"message": message})
-    return ConflictResponse(template.render(ctx))
 
 
 class IssuesList(CacheMixin, ListView):
