@@ -17,12 +17,12 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   python3-all-dev && python -m pip install -U pip poetry
 
 # Requirements are installed here to ensure they will be cached.
-COPY pyproject.toml poetry.lock ./
-RUN poetry run pip install --upgrade pip && poetry export -f requirements.txt -o requirements.txt --without-hashes
-
 # Create Python Dependency and Sub-Dependency Wheels.
-RUN pip wheel --wheel-dir /usr/src/app/wheels -r requirements.txt
+COPY pyproject.toml poetry.lock ./
 
+RUN poetry run pip install --upgrade pip\
+  && poetry export -f requirements.txt -o requirements.txt --without-hashes\
+  && pip wheel --wheel-dir /usr/src/app/wheels -r requirements.txt
 
 # Python 'run' stage
 FROM python as python-run-stage
@@ -52,8 +52,6 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 # use wheels to install python dependencies
 RUN pip install -U pip && pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
-
-RUN pip install poetry && apt-get update && apt-get install vim -y
 
 # copy application code to WORKDIR
 COPY ./ ${APP_HOME}
