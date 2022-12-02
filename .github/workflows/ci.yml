@@ -1,6 +1,6 @@
 # from https://github.com/marketplace/actions/install-poetry-action
 
-name: ci
+name: build and deploy to server
 
 on: push
 
@@ -104,6 +104,26 @@ jobs:
     runs-on: ubuntu-22.04
     needs: build
     steps:
+      #----------------------------------------------
+      # Copy docker compose production config
+      #----------------------------------------------
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        port: ${{ secrets.SSH_PORT }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        source: "deploy/docker_compose.prod.yml"
+        target: "pythondigest/compose/"
+
+      #----------------------------------------------
+      # Run docker compose
+      #----------------------------------------------
     - name: executing remote ssh commands using password
       uses: appleboy/ssh-action@master
       with:
@@ -112,4 +132,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        script: whoami
+        script: |
+            pwd
+            docker-compose -f pythondigest/compose/docker_compose.prod.yml pull
+            docker-compose -f pythondigest/compose/docker_compose.prod.yml up -d
