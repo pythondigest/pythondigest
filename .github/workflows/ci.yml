@@ -27,4 +27,4 @@ jobs:
           ulimit: nofile=1048576:1048576
           builder: ${{ steps.buildx.outputs.name }}
           platforms: ${{ inputs.build_arm && 'linux/amd64,linux/arm64' || 'linux/amd64'}}
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pythondigest:${{ steps.vars.outputs.tag }} ${{ secrets.DOCKERHUB_USERNAME }}/pythondigest:latest
+          tags: pythondigest/pythondigest:${{ steps.vars.outputs.tag }} pythondigest/pythondigest:latest
