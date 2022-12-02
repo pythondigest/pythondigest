@@ -39,5 +39,5 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_KEY }}
         port: ${{ secrets.SSH_PORT }}
-        fingerprint: ${{ secrets.SSH_FINGERPRINT }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: whoami
