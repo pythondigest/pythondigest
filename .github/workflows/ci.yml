@@ -22,7 +22,6 @@ jobs:
         with:
           context: .
           file: deploy/django/Dockerfile
-          platform: linux/arm64
           push: true
           ulimit: nofile=1048576:1048576
           tags: user/app:latest
