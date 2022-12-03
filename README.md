@@ -1,6 +1,7 @@
 python-news-digest
 ==================
 
+[![build and deploy to server](https://github.com/pythondigest/pythondigest/actions/workflows/ci.yml/badge.svg)](https://github.com/pythondigest/pythondigest/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/pythondigest/pythondigest/badge.svg?branch=master)](https://coveralls.io/github/pythondigest/pythondigest?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pythondigest/pythondigest/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pythondigest/pythondigest/?branch=master)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
