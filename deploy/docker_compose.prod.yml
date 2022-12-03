@@ -2,7 +2,7 @@ version: '3'
 
 services:
   django:
-    image: pythondigest/pythondigest:${COMMIT_SHA}
+    image: pythondigest/pythondigest:${COMMIT_TAG}
     container_name: pydigest_django
     command: python manage.py runserver 0.0.0.0:8000
     ports:

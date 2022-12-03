@@ -79,8 +79,6 @@ jobs:
       #----------------------------------------------
       # Preprae commit info for build
       #----------------------------------------------
-      - id: commit
-        uses: pr-mpt/actions-commit-hash@v2
       - name: Docker meta
         uses: docker/metadata-action@v4
         id: meta
@@ -89,7 +87,6 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=sha
             type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'remdow') }}
       #----------------------------------------------
       # Prepare for building image
@@ -146,7 +143,7 @@ jobs:
         port: ${{ secrets.SSH_PORT }}
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "deploy/docker_compose.prod.yml"
-        target: "pythondigest/compose/"
+        target: "pythondigest/"
 
       #----------------------------------------------
       # Run docker compose
@@ -168,8 +165,8 @@ jobs:
           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-          echo "COMMIT_SHA=${{ secrets.POSTGRES_PASSWORD }}" > commit
-          export COMMIT_SHA="${{ steps.commit.outputs.short }}"
+          echo "COMMIT_TAG=${GITHUB_REF##*/}" > commit
+          export COMMIT_TAG="${GITHUB_REF##*/}"
 
-          docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
-          docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
+          docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
+          docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
