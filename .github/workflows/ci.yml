@@ -131,53 +131,53 @@ jobs:
       #----------------------------------------------
       # Copy docker compose production config
       #----------------------------------------------
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
 
       #----------------------------------------------
       # Prepare commit info for deploy
       #----------------------------------------------
-    - name: Inject slug/short variables
-      uses: rlespinasse/github-slug-action@v4
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
 
       #----------------------------------------------
       # Copy configs to server
       #----------------------------------------------
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        source: "deploy/docker_compose.prod.yml"
-        target: "pythondigest/"
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "deploy/docker_compose.prod.yml"
+          target: "pythondigest/"
 
       #----------------------------------------------
       # Run docker compose
       #----------------------------------------------
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
-        port: ${{ secrets.SSH_PORT }}
-        passphrase: ${{ secrets.SSH_PASSPHRASE }}
-        script: |
-          export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
-          export REDIS_URL="${{ secrets.REDIS_URL }}"
-          export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
-          export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
-          export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
-          export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
-          export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
+            export REDIS_URL="${{ secrets.REDIS_URL }}"
+            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
+            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
+            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-          echo "COMMIT_TAG_REF=${{env.GITHUB_REF_SLUG}}" >> commit
-          echo "COMMIT_TAG_GITHUB=${GITHUB_REF##*/}" >> commit
+            echo "COMMIT_TAG_REF=${{env.GITHUB_REF_SLUG}}" >> commit
+            echo "COMMIT_TAG_GITHUB=${GITHUB_REF##*/}" >> commit
 
-          export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
+            export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
-          docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
-          docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
+            docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
+            docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
