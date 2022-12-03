@@ -168,7 +168,8 @@ jobs:
           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-          export COMMIT_SHA=${{ steps.commit.outputs.short }}
+          echo "COMMIT_SHA=${{ secrets.POSTGRES_PASSWORD }}" > commit
+          export COMMIT_SHA="${{ steps.commit.outputs.short }}"
 
           docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
           docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
