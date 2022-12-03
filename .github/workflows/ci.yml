@@ -77,10 +77,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       #----------------------------------------------
-      # Preprae commit info for build
+      # Extact commit info for build
       #----------------------------------------------
-      - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
       - name: Docker meta
         uses: docker/metadata-action@v4
         id: meta
@@ -136,6 +134,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
+      #----------------------------------------------
+      # Prepare commit info for deploy
+      #----------------------------------------------
+    - name: Inject slug/short variables
+      uses: rlespinasse/github-slug-action@v4
+
+      #----------------------------------------------
+      # Copy configs to server
+      #----------------------------------------------
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
       with:
