@@ -85,7 +85,7 @@ jobs:
         uses: docker/metadata-action@v4
         id: meta
         with:
-          images: name/app
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_USERNAME }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
