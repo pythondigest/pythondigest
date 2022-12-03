@@ -187,5 +187,12 @@ jobs:
             docker compose -f docker_compose.prod.yml pull
             docker compose -f docker_compose.prod.yml up -d
 
-            # reload nginx
+            # prepare static folders for serve
+            cd ~/pythondigest/deploy/
+            sudo usermod -a -G pythondigest www-data
+            sudo chown -R :www-data static
+            sudo chown -R :www-data media
+
+            # validate and reload nginx
+            sudo mkdir -p /var/log/nginx/pythondigest/
             sudo nginx -t && sudo service nginx reload
