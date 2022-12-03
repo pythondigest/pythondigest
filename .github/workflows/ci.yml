@@ -126,73 +126,73 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-22.04
-    needs: build
-    environment:
-      name: production
-    steps:
-      #----------------------------------------------
-      # Copy docker compose production config
-      #----------------------------------------------
-      - name: Checkout
-        uses: actions/checkout@v3
+  # deploy:
+  #   name: Deploy
+  #   runs-on: ubuntu-22.04
+  #   needs: build
+  #   environment:
+  #     name: production
+  #   steps:
+  #     #----------------------------------------------
+  #     # Copy docker compose production config
+  #     #----------------------------------------------
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      #----------------------------------------------
-      # Prepare commit info for deploy
-      #----------------------------------------------
-      - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
+  #     #----------------------------------------------
+  #     # Prepare commit info for deploy
+  #     #----------------------------------------------
+  #     - name: Inject slug/short variables
+  #       uses: rlespinasse/github-slug-action@v4
 
-      #----------------------------------------------
-      # Copy configs to server
-      #----------------------------------------------
-      - name: copy file via ssh password
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf"
-          target: "pythondigest/"
+  #     #----------------------------------------------
+  #     # Copy configs to server
+  #     #----------------------------------------------
+  #     - name: copy file via ssh password
+  #       uses: appleboy/scp-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         passphrase: ${{ secrets.SSH_PASSPHRASE }}
+  #         source: "deploy/docker_compose.prod.yml,deploy/nginx.conf"
+  #         target: "pythondigest/"
 
-      #----------------------------------------------
-      # Run docker compose
-      #----------------------------------------------
-      - name: executing remote ssh commands using password
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
-            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
-            export REDIS_URL="${{ secrets.REDIS_URL }}"
-            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
-            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
-            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
-            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
-            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+  #     #----------------------------------------------
+  #     # Run docker compose
+  #     #----------------------------------------------
+  #     - name: executing remote ssh commands using password
+  #       uses: appleboy/ssh-action@master
+  #       with:
+  #         host: ${{ secrets.SSH_HOST }}
+  #         username: ${{ secrets.SSH_USERNAME }}
+  #         key: ${{ secrets.SSH_KEY }}
+  #         port: ${{ secrets.SSH_PORT }}
+  #         passphrase: ${{ secrets.SSH_PASSPHRASE }}
+  #         script: |
+  #           export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
+  #           export REDIS_URL="${{ secrets.REDIS_URL }}"
+  #           export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
+  #           export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
+  #           export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+  #           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+  #           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-            # image tag
-            export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
+  #           # image tag
+  #           export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
-            # deploy app
-            cd ~/pythondigest/deploy/
-            docker compose -f docker_compose.prod.yml pull
-            docker compose -f docker_compose.prod.yml up -d
+  #           # deploy app
+  #           cd ~/pythondigest/deploy/
+  #           docker compose -f docker_compose.prod.yml pull
+  #           docker compose -f docker_compose.prod.yml up -d
 
-            # prepare static folders for serve
-            cd ~/pythondigest/deploy/
-            sudo usermod -a -G pythondigest www-data
-            sudo chown -R :www-data static
-            sudo chown -R :www-data media
+  #           # prepare static folders for serve
+  #           cd ~/pythondigest/deploy/
+  #           sudo usermod -a -G pythondigest www-data
+  #           sudo chown -R :www-data static
+  #           sudo chown -R :www-data media
 
-            # validate and reload nginx
-            sudo mkdir -p /var/log/nginx/pythondigest/
-            sudo nginx -t && sudo service nginx reload
+  #           # validate and reload nginx
+  #           sudo mkdir -p /var/log/nginx/pythondigest/
+  #           sudo nginx -t && sudo service nginx reload
