@@ -171,14 +171,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
-            export REDIS_URL="${{ secrets.REDIS_URL }}"
-            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
-            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
-            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
-            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
-            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
-
             cd ~/pythondigest/deploy/
             echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
             echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env

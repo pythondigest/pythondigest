@@ -7,6 +7,8 @@ services:
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
+    env_file:
+      - .env
     ports:
       - "8000:8000"
     command: bash -c "
