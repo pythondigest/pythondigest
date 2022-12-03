@@ -156,7 +156,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/docker_compose.prod.yml"
+          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -179,9 +179,7 @@ jobs:
             export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
             export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-            echo "COMMIT_TAG_REF=${{env.GITHUB_REF_SLUG}}" >> commit
-            echo "COMMIT_TAG_GITHUB=${GITHUB_REF##*/}" >> commit
-
+            # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
             docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull

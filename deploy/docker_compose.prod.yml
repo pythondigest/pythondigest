@@ -5,5 +5,10 @@ services:
     image: pythondigest/pythondigest:${COMMIT_TAG}
     container_name: pydigest_django
     command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+       - ./static:/app/static/
+       - ./media:/app/media/
+       - ./robots.txt:/app/robots.txt
+       - ./humans.txt:/app/humans.txt
     ports:
       - "8000:8000"
