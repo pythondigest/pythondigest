@@ -171,21 +171,21 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            cd ~/pythondigest/deploy/
-            echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-            echo "REDIS_URL=${{ secrets.REDIS_URL }}" >> .env
-            echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST }}" >> .env
-            echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}" >> .env
-            echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env
-            echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env
-            echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env
+            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
+            export REDIS_URL="${{ secrets.REDIS_URL }}"
+            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
+            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
+            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
             # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
             # deploy app
-            docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
-            docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
+            cd ~/pythondigest/deploy/
+            docker compose -f docker_compose.prod.yml pull
+            docker compose -f docker_compose.prod.yml up -d
 
             # reload nginx
             sudo nginx -t && sudo service nginx reload

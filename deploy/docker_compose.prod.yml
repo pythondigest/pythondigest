@@ -7,8 +7,14 @@ services:
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
-    env_file:
-      - .env
+    environment:
+      - DJANGO_SECRET_KEY
+      - REDIS_URL
+      - POSTGRES_HOST
+      - POSTGRES_PORT
+      - POSTGRES_DB
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
     ports:
       - "8000:8000"
     command: bash -c "
@@ -16,5 +22,4 @@ services:
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
-      && python manage.py runserver 0.0.0.0:8000
-      "
+      && python manage.py runserver 127.0.0.1:8000"
