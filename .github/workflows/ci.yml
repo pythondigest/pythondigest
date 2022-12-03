@@ -182,5 +182,9 @@ jobs:
             # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
+            # deploy app
             docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
             docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
+
+            # reload nginx
+            sudo nginx -t && sudo service nginx reload

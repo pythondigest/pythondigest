@@ -2,13 +2,16 @@ version: '3'
 
 services:
   django:
-    image: pythondigest/pythondigest:${COMMIT_TAG}
+    image: pythondigest/pythondigest:renew
     container_name: pydigest_django
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-       - ./static:/app/static/
-       - ./media:/app/media/
-       - ./robots.txt:/app/robots.txt
-       - ./humans.txt:/app/humans.txt
+      - ${PWD}/static:/app/static/
+      - ${PWD}/media:/app/media/
     ports:
       - "8000:8000"
+    command: bash -c "
+      python manage.py collectstatic --no-input
+      && cp /app/humans.txt /app/static/
+      && cp /app/robots.txt /app/static/
+      && python manage.py runserver 0.0.0.0:8000
+      "
