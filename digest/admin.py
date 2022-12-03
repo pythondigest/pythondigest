@@ -239,17 +239,23 @@ class ResourceAdmin(admin.ModelAdmin):
 admin.site.register(Resource, ResourceAdmin)
 
 
+@admin.register(AutoImportResource)
 class AutoImportResourceAdmin(admin.ModelAdmin):
     list_display = (
         "title",
         "link_html",
         "type_res",
         "resource",
-        "incl",
-        "excl",
+        # "incl",
+        # "excl",
         "in_edit",
         "language",
     )
+    search_fields = (
+        "title",
+        "link",
+    )
+    list_filter = ("in_edit",)
     formfield_overrides = {
         models.TextField: {"widget": forms.Textarea(attrs={"cols": 45, "rows": 1})},
     }
@@ -257,9 +263,6 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
     link_html = lambda s, obj: link_html(obj)
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"
-
-
-admin.site.register(AutoImportResource, AutoImportResourceAdmin)
 
 
 class PackageAdmin(admin.ModelAdmin):

@@ -1,17 +1,18 @@
 import logging
 import pickle
+import random
 import re
-from urllib.request import urlopen
+import time
+from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
+from cache_memoize import cache_memoize
 from readability import Document
+from requests.exceptions import ProxyError, SSLError
+from urllib3.exceptions import ConnectTimeoutError
 
 from django.conf import settings
-
-# import datetime
-# from time import sleep
-# from stem import control, Signal, stem
 from django.core.management import call_command
 
 from digest.models import Item, Section
@@ -155,20 +156,71 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
     return result
 
 
-def make_get_request(url, timeout=15):
+@cache_memoize(300)  # cache for 5 minutes
+def get_https_proxy() -> Optional[str]:
+    """Get actual http proxy for requests"""
+    proxy_list_url = (
+        "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt"
+    )
+
+    try:
+        response = requests.get(proxy_list_url, timeout=20)
+    except requests.Timeout:
+        return None
+
+    try:
+        response.raise_for_status()
+    except requests.HTTPError:
+        return None
+
+    proxy_content = response.text
+    if not proxy_content:
+        return None
+
+    proxy_list = [x.strip() for x in proxy_content.split("\n") if x]
+    if not proxy_list:
+        return None
+    result = random.choice(proxy_list)
+    logger.info(f"Get https proxy - {result}")
+    return result
+
+
+def make_get_request(url, timeout=29, try_count=0):
+    MAX_RETRIES = 5
+    SOFT_SLEEP = 5
+    if try_count == MAX_RETRIES:
+        logger.info("Too many try for request")
+        return None
+
     requests_kwargs = dict(
         timeout=timeout,
     )
-    if settings.REQUEST_PROXY_HTTPS or settings.REQUEST_PROXY_HTTP:
-        requests_kwargs["proxies"] = {}
-        if settings.REQUEST_PROXY_HTTPS:
-            requests_kwargs["proxies"]["https"] = settings.REQUEST_PROXY_HTTPS
-        if settings.REQUEST_PROXY_HTTP:
-            requests_kwargs["proxies"]["http"] = settings.REQUEST_PROXY_HTTP
+
+    proxy_https = get_https_proxy()
+    if proxy_https and try_count != 0:
+        requests_kwargs["proxies"] = {
+            "http": proxy_https,
+            "https": proxy_https,
+        }
 
     proxy_text = "with" if "proxies" in requests_kwargs else "without"
     logger.info(f"Get data for url {url} {proxy_text} proxy")
-    return requests.get(url, **requests_kwargs)
+
+    try:
+        return requests.get(url, **requests_kwargs)
+    except (requests.ConnectTimeout):
+        # try again
+        logger.info("Timeout error. Try again")
+        return make_get_request(url, timeout + 3, try_count + 1)
+    except ConnectionResetError:
+        if try_count == MAX_RETRIES:
+            return None
+        time.sleep(SOFT_SLEEP)
+        return make_get_request(url, timeout, try_count + 1)
+    except (ProxyError, SSLError, ConnectTimeoutError):
+        logger.info("Proxy error. Try refresh proxy")
+        get_https_proxy.invalidate()
+        return make_get_request(url, timeout + 3, try_count + 1)
 
 
 #
@@ -217,10 +269,9 @@ def make_get_request(url, timeout=15):
 
 
 def get_tweets_by_url(base_url: str) -> list:
-    response = urlopen(base_url, timeout=10)
-    soup = BeautifulSoup(response.read(), "lxml")
-    http_code = response.getcode()
-    response.close()
+    response = requests.get(base_url, timeout=10)
+    soup = BeautifulSoup(response.text, "lxml")
+    http_code = response.status_code
 
     result = []
     for p in soup.findAll("p", "tweet-text"):
@@ -404,7 +455,7 @@ def save_news_item(item: dict):
     assert "link" in item
 
     instance = Item(
-        title=item.get("title"),
+        title=item.get("title")[:144],
         resource=item.get("resource"),
         link=item.get("link"),
         description=item.get("description", ""),

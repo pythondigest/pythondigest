@@ -127,7 +127,7 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",
     "account.middleware.LocaleMiddleware",
     "account.middleware.TimezoneMiddleware",
-    # 'admin_reorder.middleware.ModelAdminReorder',
+    "admin_reorder.middleware.ModelAdminReorder",
     "secretballot.middleware.SecretBallotIpUseragentMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
 ]
@@ -272,9 +272,6 @@ CACHES["site"] = {
 CACHE_MIDDLEWARE_ALIAS = "site"  # The cache alias to use for storage and 'default' is **local-memory cache**.
 CACHE_MIDDLEWARE_SECONDS = 600  # number of seconds before each page is cached
 CACHE_MIDDLEWARE_KEY_PREFIX = ""
-
-REQUEST_PROXY_HTTPS = env("REQUEST_PROXY_HTTPS", default=None)
-REQUEST_PROXY_HTTP = env("REQUEST_PROXY_HTTP", default=None)
 
 # LOGGING
 # ------------------------------------------------------------------------------
@@ -459,7 +456,7 @@ ADMIN_REORDER = (
     "frontend",
     # 'sites',
     "auth",
-    # 'account',
+    "account",
     "default",
 )
 

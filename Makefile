@@ -26,10 +26,19 @@ build:
 run:
 	python manage.py runserver
 
+import:
+	python manage.py import_news
+
 clean:
-	docker compose -f local.infra.yml rm postgres
+	docker compose -f deploy/docker_compose_infra.yml stop
+	docker compose -f deploy/docker_compose_infra.yml rm pydigest_postgres
 	docker volume rm pythondigest_pydigest_postgres_data
-	docker volume rm pythondigest_pydigest_postgres_backups
+	docker volume rm pythondigest_pydigest_postgres_data_backups
+
+restore:
+	docker cp /home/axsapronov/Cloud/Dropbox/Backups/pydigest/postgresql-pythondigest-`date "+%Y-%m-%d"`.sqlc pydigest_postgres:/backups
+	docker compose -f deploy/docker_compose_infra.yml exec postgres backups
+	docker compose -f deploy/docker_compose_infra.yml exec postgres restore postgresql-pythondigest-`date "+%Y-%m-%d"`.sqlc
 
 check:
 	pre-commit run --show-diff-on-failure --color=always --all-files

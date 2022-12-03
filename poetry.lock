@@ -334,6 +334,17 @@ python-versions = "*"
 Django = ">=2.2,<4.2"
 
 [[package]]
+name = "django-cache-memoize"
+version = "0.1.10"
+description = "Django utility for a memoization decorator that uses the Django cache framework."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.extras]
+dev = ["black", "flake8", "therapist", "tox", "twine"]
+
+[[package]]
 name = "django-ckeditor"
 version = "6.5.1"
 description = "Django admin CKEditor integration."
@@ -1597,7 +1608,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "8fcbd5a0a433d7ccb664da721205fa643ee03d90e59a9d5b74618ad69c939a13"
+content-hash = "9906e63721bbcdefcaaaece493454df0f013d4f2e1de0baec1aaa166cab48b2b"
 
 [metadata.files]
 appdirs = [
@@ -1862,6 +1873,10 @@ django-browser-reload = [
 django-cachalot = [
     {file = "django-cachalot-2.5.2.tar.gz", hash = "sha256:bf0420cb8fa5cb4ceebd373a069cf91bb7afb995850cc35e91ccdadfa6cc41b1"},
     {file = "django_cachalot-2.5.2-py3-none-any.whl", hash = "sha256:7db091320ae352e9ad88c22336cff8d64fb928571287f1fae5299a187fc1a17e"},
+]
+django-cache-memoize = [
+    {file = "django-cache-memoize-0.1.10.tar.gz", hash = "sha256:63e8faa245a41c0dbad843807e9f21a6e59eba8e6e50df310fdf6485a6749843"},
+    {file = "django_cache_memoize-0.1.10-py3-none-any.whl", hash = "sha256:676299313079cde9242ae84db0160e80b1d44e8dd6bc9b1f4f1247e11b30c9e0"},
 ]
 django-ckeditor = [
     {file = "django-ckeditor-6.5.1.tar.gz", hash = "sha256:57cd8fb7cd150adca354cd4e5c35a743fadaab7073f957d2b7167f0d9fe1fcaf"},

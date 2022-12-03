@@ -24,7 +24,8 @@ if [[ -z ${1+x} ]]; then
     message_error "Backup filename is not specified yet it is a required parameter. Make sure you provide one and try again."
     exit 1
 fi
-backup_filename="${BACKUP_DIR_PATH}/{1}"
+backup_filename="${BACKUP_DIR_PATH}/${1}"
+
 if [[ ! -f "${backup_filename}" ]]; then
     message_error "No backup with the specified filename found. Check out the 'backups' maintenance script output to see if there is one and try again."
     exit 1
