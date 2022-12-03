@@ -8,13 +8,13 @@ services:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
     environment:
-      - DJANGO_SECRET_KEY
-      - REDIS_URL
-      - POSTGRES_HOST
-      - POSTGRES_PORT
-      - POSTGRES_DB
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - REDIS_URL=${REDIS_URL}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     ports:
       - "8000:8000"
     command: bash -c "
