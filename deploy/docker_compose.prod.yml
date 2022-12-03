@@ -10,7 +10,8 @@ services:
     ports:
       - "8000:8000"
     command: bash -c "
-      python manage.py collectstatic --no-input
+      python manage.py migrate --no-input
+      && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
       && python manage.py runserver 0.0.0.0:8000
