@@ -18,7 +18,7 @@ services:
     ports:
       - "8000:8000"
     command: bash -c "
-      manage.py migrate secretballot 0001 --fake --no-input
+      python manage.py migrate secretballot 0001 --fake --no-input
       && python manage.py migrate --no-input
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
