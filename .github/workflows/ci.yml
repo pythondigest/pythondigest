@@ -79,11 +79,13 @@ jobs:
       #----------------------------------------------
       # Preprae commit info for build
       #----------------------------------------------
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
       - name: Docker meta
         uses: docker/metadata-action@v4
         id: meta
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_USERNAME }}
+          images: ${{ env.GITHUB_REPOSITORY }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
@@ -165,8 +167,10 @@ jobs:
           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-          echo "COMMIT_TAG=${GITHUB_REF##*/}" > commit
-          export COMMIT_TAG="${GITHUB_REF##*/}"
+          echo "COMMIT_TAG_REF=${{env.GITHUB_REF_SLUG}}" >> commit
+          echo "COMMIT_TAG_GITHUB=${GITHUB_REF##*/}" >> commit
+
+          export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
 
           docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml pull
           docker compose -f ~/pythondigest/deploy/docker_compose.prod.yml up -d
