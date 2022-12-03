@@ -18,7 +18,7 @@ services:
     ports:
       - "8000:8000"
     command: bash -c "
-      echo 'Fake exists migration (after restore backup)''
+      echo 'Fake exists migration (after restore backup)'
       && python manage.py migrate secretballot 0001 --fake --no-input
       && python manage.py migrate thumbnail 0001 --fake --no-input
       && python manage.py migrate secretballot 0002 --fake --no-input
