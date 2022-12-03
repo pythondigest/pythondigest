@@ -22,4 +22,4 @@ services:
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
-      && python manage.py runserver 127.0.0.1:8000"
+      && python manage.py runserver 0.0.0.0:8000"
