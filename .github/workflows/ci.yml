@@ -69,35 +69,60 @@ jobs:
   #         file: ./coverage.xml
   #         fail_ci_if_error: true
 
-  # build:
-  #   name: Build
-  #   runs-on: ubuntu-22.04
-  #   needs: test
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #     - name: Set up QEMU
-  #       uses: docker/setup-qemu-action@v2
-  #     - name: Set up Docker Buildx
-  #       uses: docker/setup-buildx-action@v2
-  #       id: buildx
-  #     - name: Login to Docker Hub
-  #       uses: docker/login-action@v2
-  #       with:
-  #         username: ${{ secrets.DOCKERHUB_USERNAME }}
-  #         password: ${{ secrets.DOCKERHUB_TOKEN }}
-  #     - name: Build and push
-  #       uses: docker/build-push-action@v3
-  #       with:
-  #         context: .
-  #         file: deploy/django/Dockerfile
-  #         push: true
-  #         ulimit: nofile=1048576:1048576
-  #         builder: ${{ steps.buildx.outputs.name }}
-  #         tags: pythondigest/pythondigest:latest
-  #         platforms: linux/amd64
-  #         cache-from: type=gha
-  #         cache-to: type=gha,mode=max
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      #----------------------------------------------
+      # Preprae commit info for build
+      #----------------------------------------------
+      - id: commit
+        uses: pr-mpt/actions-commit-hash@v2
+      - name: Docker meta
+        uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: name/app
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=sha
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'remdow') }}
+      #----------------------------------------------
+      # Prepare for building image
+      #----------------------------------------------
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        id: buildx
+      #----------------------------------------------
+      # Auth to docker hub
+      #----------------------------------------------
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #----------------------------------------------
+      # Build and upload image
+      #----------------------------------------------
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: deploy/django/Dockerfile
+          push: true
+          ulimit: nofile=1048576:1048576
+          builder: ${{ steps.buildx.outputs.name }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   deploy:
     name: Deploy
@@ -142,6 +167,8 @@ jobs:
           export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
           export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
           export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+
+          export COMMIT_SHA=${{ steps.commit.outputs.short }}
 
           docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml pull
           docker compose -f ~/pythondigest/compose/deploy/docker_compose.prod.yml up -d
