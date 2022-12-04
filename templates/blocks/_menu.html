@@ -2,9 +2,11 @@
 {% load account_tags %}
 {% load static %}
 
-<nav class="navbar navbar-default navbar-digest issue-end" role="navigation">
+
+<nav class="navbar navbar-default navbar-digest" role="navigation">
+
     <a class="navbar-brand" href="{% url 'frontend:index' %}">
-        <big>Python Дайджест</big>
+        <span><img src="{% static "img/logo.png" %}" style="max-width:40px;"  alt="logo"></span><big>Python Дайджест - новости для Python разработчика</big>
     </a>
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -17,9 +19,9 @@
 
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'digest:feed' %}">НОВОСТИ</a></li>
+            {% comment %} <li><a href="{% url 'digest:feed' %}">НОВОСТИ</a></li> {% endcomment %}
             <li><a href="{% url 'digest:issues' %}">ВЫПУСКИ</a></li>
-            <li><a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a></li>
+            {% comment %} <li><a href="{% url 'frontend:friends' %}">НАШИ ДРУЗЬЯ</a></li> {% endcomment %}
             <li><a href="https://boosty.to/pydigest">ПОМОЧЬ ПРОЕКТУ</a></li>
         </ul>
     </div>

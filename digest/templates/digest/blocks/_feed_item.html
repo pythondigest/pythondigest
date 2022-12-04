@@ -2,8 +2,6 @@
 {% load common %}
 {% load micawber_tags %}
 
-{% load remdow %}
-
 <div class="item-container">
 
 
@@ -53,7 +51,7 @@
                 {% else %}
                     <a rel="nofollow"
                        href="{{ object.link }}"
-                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
+                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
                        target="_blank">
                         {{ object.title }}
                     </a>
@@ -65,8 +63,8 @@
                     {% likes object 'likes/inclusion_tags/likes_item.html' %}
                 {% endif %}
 
-                {% if object.tags_as_links %}
-                    {% for tag_name, tag_link in item.tags_as_links %}
+                {% if object.tags.all|tags_as_links %}
+                    {% for tag_name, tag_link in item.tags.all|tags_as_links %}
                         <span class="badge issue-item-resource"><small><a
                                 href="{{ tag_link }}">{{ tag_name }}</a></small></span>
                     {% endfor %}
@@ -89,7 +87,7 @@
               <div class="col-md-6">
                   <a rel="nofollow" class="btn btn-primary btn-regular"
                     href="{{ object.link }}"
-                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
+                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
                     target="_blank">Читать дальше >></a>
                   </div>
 

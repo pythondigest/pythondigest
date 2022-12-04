@@ -340,6 +340,7 @@ logs/*
 env/
 /conf/*.cfg
 static/CACHE/
+static/remdow/
 
 clean.bash
 fabfile/fabfile.py

@@ -6,7 +6,7 @@
         <div class="row">
 
             {% for item in items %}
-                {% thumbnail item.image "x200" as im %}
+
                     <div class="thumb col-sm-3 col-lg-3 col-md-3">
 
                         <a href="{% url 'digest:issue_view' pk=item.pk %}"
@@ -22,15 +22,20 @@
                                 </div>
 
                                 <div class="issue-img">
-                                    <img src="{{ im.url }}"
-                                         alt="Дайджест python, {{ item.title }}">
+                                  {% if item.image %}
+                                      {% thumbnail item.image "x200" as im %}
+                                        <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
+                                      {% endthumbnail %}
+                                    {% else %}
+                                        <img src="https://via.placeholder.com/200x200/ECECEC/989898/?text={{item.pk}}" alt="Дайджест python, {{ item.title }}">
+                                    {% endif %}
                                 </div>
 
                             </div>
                         </a>
 
                     </div>
-                {% endthumbnail %}
+
             {% empty %}
                 <p>Пока еще ни одного выпуска</p>
             {% endfor %}

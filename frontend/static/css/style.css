@@ -36,7 +36,7 @@ html, body {
 .navbar-brand {
   position: absolute;
   width: 100%;
-  padding-left: 10%;
+  padding-left: 2%;
   text-align: left;
   margin: auto;
 }
@@ -107,6 +107,7 @@ html, body {
 
 }
 
+
 .jumb {
   background-color: #ececec;
 
@@ -120,7 +121,7 @@ html, body {
 }
 
 .jumb-text {
-  margin: 0;
+  padding-left: 30px;
   font-size: 90%;
 }
 
@@ -258,7 +259,7 @@ html, body {
 }
 
 .issue {
-  border-top: .25rem solid #b88b58;
+  /* border-top: .25rem solid #b88b58; */
   margin-bottom: 25px;
 }
 
@@ -283,6 +284,14 @@ html, body {
 .issue-date {
   color: #999;
   font-size: 100%;
+}
+
+.panel-search {
+  margin-top: 25px;
+}
+
+.cards-list {
+  margin-top: 25px;
 }
 
 /* ===================================================== */

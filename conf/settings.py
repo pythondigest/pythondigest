@@ -145,7 +145,10 @@ TEMPLATES = [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
-                "django.template.context_processors.request",
+                "django.template.context_processors.i18n",
+                "django.template.context_processors.media",
+                "django.template.context_processors.static",
+                "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "account.context_processors.account",
             ],
@@ -306,6 +309,11 @@ LOGGING = {
             "level": "ERROR",
             "propagate": True,
         },
+        # display sql requests
+        # 'django.db.backends': {
+        #     'level': 'DEBUG',
+        #     'handlers': ['console'],
+        # }
     },
     "root": {"level": "INFO", "handlers": ["console"]},
 }
@@ -362,72 +370,68 @@ CKEDITOR_CONFIGS = {
 }
 
 DATASET_FOLDER = ""
-DATASET_POSITIVE_KEYWORDS = list(
-    {
-        "blog",
-        "article",
-        "news-item",
-        "section",
-        "content",
-        "body-content",
-        "hentry",
-        "entry-content",
-        "page-content",
-        "readme",
-        "markdown-body entry-content",
-        "maia-col-6",
-        "maia-col-10",
-        "col-md-9",
-        "col-md-12",
-        "maia-article",
-        "col-md-6",
-        "post_show",
-        "content html_format",
-        "watch-description-content",
-        "watch-description",
-        "watch-description-text",
-        "article-content",
-        "post",
-        "container",
-        "summary",
-        "articleBody",
-        "article hentry",
-        "article-content",
-        "entry-content",
-        "viewitem-content",
-        "main",
-        "post",
-        "post-content",
-        "section-content",
-        "articleBody",
-        "section",
-        "document",
-        "rst-content",
-        "markdown-content",
-        "wy-nav-content",
-        "toc",
-        "book",
-        "col-md-12",
-    }
-)
+DATASET_POSITIVE_KEYWORDS = [
+    "blog",
+    "article",
+    "news-item",
+    "section",
+    "content",
+    "body-content",
+    "hentry",
+    "entry-content",
+    "page-content",
+    "readme",
+    "markdown-body entry-content",
+    "maia-col-6",
+    "maia-col-10",
+    "col-md-9",
+    "col-md-12",
+    "maia-article",
+    "col-md-6",
+    "post_show",
+    "content html_format",
+    "watch-description-content",
+    "watch-description",
+    "watch-description-text",
+    "article-content",
+    "post",
+    "container",
+    "summary",
+    "articleBody",
+    "article hentry",
+    "article-content",
+    "entry-content",
+    "viewitem-content",
+    "main",
+    "post",
+    "post-content",
+    "section-content",
+    "articleBody",
+    "section",
+    "document",
+    "rst-content",
+    "markdown-content",
+    "wy-nav-content",
+    "toc",
+    "book",
+    "col-md-12",
+]
 
-DATASET_NEGATIVE_KEYWORDS = list(
-    {
-        "mysidebar",
-        "related",
-        "ads",
-        "footer",
-        "menu",
-        "navigation",
-        "navbar",
-        "404",
-        "error 404",
-        "error: 404",
-        "page not found",
-        "file-wrap",
-        "navbar",
-    }
-)
+DATASET_NEGATIVE_KEYWORDS = [
+    "mysidebar",
+    "related",
+    "ads",
+    "footer",
+    "menu",
+    "navigation",
+    "navbar",
+    "404",
+    "error 404",
+    "error: 404",
+    "page not found",
+    "file-wrap",
+    "navbar",
+]
 
 CLS_URL_BASE = ""
 CLS_ENABLED = env.bool("CLS_ENABLED", False)
@@ -460,8 +464,7 @@ ADMIN_REORDER = (
     "default",
 )
 
-ALCHEMY_KEY = ""
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 COMPRESS_CSS_FILTERS = (
     "compressor.filters.css_default.CssAbsoluteFilter",
     "compressor.filters.cssmin.CSSMinFilter",
@@ -470,7 +473,16 @@ COMPRESS_CSS_FILTERS = (
 MAILHANDLER_RU_KEY = ""
 MAILHANDLER_RU_USER_LIST_ID = 413
 
-HTML_MINIFY = True
+# SECURITY
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
+SESSION_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
+CSRF_COOKIE_HTTPONLY = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
+SECURE_BROWSER_XSS_FILTER = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
+X_FRAME_OPTIONS = "DENY"
 
 # Sentry
 # ------------------------------------------------------------------------------

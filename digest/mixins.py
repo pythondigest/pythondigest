@@ -3,6 +3,7 @@ import random
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.contenttypes.models import ContentType
+from django.db.models import Count, Q, Sum
 from django.utils.cache import patch_response_headers
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page, never_cache
@@ -15,8 +16,13 @@ from digest.models import Item
 
 def get_feed_items(count=10):
     return (
-        Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now())
-        .prefetch_related("issue", "section")
+        Item.objects.filter(
+            status="active",
+            activated_at__lte=datetime.datetime.now(),
+            activated_at__gte=datetime.datetime.now() - datetime.timedelta(days=90),
+        )
+        .exclude(section=None)
+        .prefetch_related("issue", "section", "tags")
         .order_by("-created_at", "-related_to_date")[:count]
     )
 
@@ -48,18 +54,23 @@ class FavoriteItemsMixin(ContextMixin):
             from secretballot.models import Vote
 
             date = datetime.datetime.now() - datetime.timedelta(days=12)
-            items = Item.objects.filter(
-                id__in=set(
-                    Vote.objects.filter(
-                        content_type=ContentType.objects.get(
-                            app_label="digest", model="item"
-                        ),
-                    ).values_list("object_id", flat=True)
-                ),
-                related_to_date__gt=date,
+            items = (
+                Item.objects.filter(
+                    status="active",
+                    related_to_date__gt=date,
+                )
+                .exclude(section=None)
+                .annotate(
+                    q_vote_total=Sum(
+                        "votes__vote",
+                    )
+                )
+                .filter(q_vote_total__gte=0)
+                .prefetch_related("tags", "votes")
             )
+
             items_score = [
-                (item, item.vote_total) for item in items if item.vote_total > 0
+                (item, item.q_vote_total) for item in items if item.q_vote_total >= 0
             ]
             items_score = sorted(items_score, key=lambda item: item[1], reverse=True)
             context["favorite_items"] = [x[0] for x in items_score[:10]]

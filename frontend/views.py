@@ -59,11 +59,28 @@ class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
 
         items = []
         if issue:
-            qs = issue.item_set.filter(status="active")
-            items = qs.order_by("-section__priority", "-priority")
+            items = (
+                issue.item_set.filter(status="active")
+                .exclude(section=None)
+                .only(
+                    "title",
+                    "description",
+                    "tags",
+                    "section",
+                    "link",
+                    "language",
+                    "priority",
+                    "issue",
+                    "additionally",
+                )
+                .select_related("section")
+                .prefetch_related("tags")
+                .order_by("-section__priority", "-priority")
+            )
 
         context.update(
             {
+                "object": issue,
                 "issue": issue,
                 "items": items,
                 "active_menu_item": "index",

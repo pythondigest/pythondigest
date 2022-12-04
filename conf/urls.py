@@ -14,6 +14,11 @@ urlpatterns = [
     path("", include((digest_url, "digest"), namespace="digest")),
     path("admin/", admin.site.urls),
     path(
+        "static/<str:url>",
+        django.views.static.serve,
+        {"document_root": settings.STATIC_ROOT},
+    ),
+    path(
         "media/<str:url>",
         django.views.static.serve,
         {"document_root": settings.MEDIA_ROOT},

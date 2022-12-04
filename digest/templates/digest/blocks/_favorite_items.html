@@ -5,7 +5,7 @@
         <hr>
         {% for object in items %}
             <p>
-                <b>{% include 'digest/blocks/_item_as_line.html' with item=object comment=True likes=True %}</b>
+                <b>{% include 'digest/blocks/_item_as_line.html' with item=object comment=False likes=True %}</b>
             </p>
         {% endfor %}
 

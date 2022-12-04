@@ -27,20 +27,6 @@ def unidecode(string):
     return _unidecode(string.lower().replace(" ", "_")).replace("'", "")
 
 
-@register.simple_tag
-def likes_enable_tag():
-    return likes_enable()
-
-
-@register.filter
-def remove_classes(text):
-    html = lxml.html.fromstring(text)
-    for tag in html.xpath("//*[@class]"):
-        tag.attrib.pop("class")
-
-    return lxml.html.tostring(html)
-
-
 @register.simple_tag()
 def locale():
     if settings.LANGUAGE_CODE == "ru-ru":
@@ -129,33 +115,20 @@ def modify_url(context, operation, *params):
 
 
 @register.filter
-def backend_name(backend):
-    name = backend.__class__.__name__
-    name = name.replace("OAuth", " OAuth")
-    name = name.replace("OpenId", " OpenId")
-    name = name.replace("Sandbox", "")
-    name = name_re.sub(r"\1 Auth", name)
-    return name
+def tags_as_links(tags):
+    from digest.models import build_url
+
+    return [
+        (tag.name, build_url("digest:feed", params={"tag": tag.name})) for tag in tags
+    ]
 
 
 @register.filter
-def backend_class(backend):
-    return backend.name.replace("-", " ")
+def tags_as_str(tags):
+    result = "Without tag"
 
+    tags_names = [tag.name for tag in tags]
+    if not tags_names:
+        return result
 
-@register.filter
-def icon_name(name):
-    return {
-        "stackoverflow": "stack-overflow",
-        "google-oauth": "google",
-        "google-oauth2": "google",
-        "google-openidconnect": "google",
-        "yahoo-oauth": "yahoo",
-        "facebook-app": "facebook",
-        "email": "envelope",
-        "vimeo": "vimeo-square",
-        "linkedin-oauth2": "linkedin",
-        "vk-oauth2": "vk",
-        "live": "windows",
-        "username": "user",
-    }.get(name, name)
+    return ",".join(tags_names)

@@ -250,7 +250,9 @@ class Item(models.Model):
         verbose_name=_("modified date"), null=True, blank=True
     )
     activated_at = models.DateTimeField(
-        verbose_name=_("Activated date"), default=datetime.datetime.now
+        verbose_name=_("Activated date"),
+        default=datetime.datetime.now,
+        db_index=True,
     )
     priority = models.PositiveIntegerField(verbose_name=_("Priority"), default=0)
     user = models.ForeignKey(
@@ -270,6 +272,10 @@ class Item(models.Model):
     keywords = TaggableManager(
         verbose_name=_("Keywords"), through=KeywordGFK, blank=True
     )
+
+    class Meta:
+        verbose_name = _("News")
+        verbose_name_plural = _("News")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -385,17 +391,19 @@ class Item(models.Model):
 
     @property
     def tags_as_links(self):
-        return [
-            (x.name, build_url("digest:feed", params={"tag": x.name}))
-            for x in self.tags.all()
-        ]
+        tags = self.tags.values_list("name")
+        return [(tag, build_url("digest:feed", params={"tag": tag})) for tag in tags]
 
     @property
     def tags_as_str(self):
-        if self.tags and self.tags.all():
-            result = ",".join([x.name for x in self.tags.all()])
-        else:
-            result = "Without tag"
+        result = "Without tag"
+
+        if not self.tags:
+            return result
+
+        tags = self.tags.values_list("name")
+        if tags:
+            result = ",".join(tags)
         return result
 
     @property
@@ -404,10 +412,6 @@ class Item(models.Model):
 
     def __str__(self):
         return self.title
-
-    class Meta:
-        verbose_name = _("News")
-        verbose_name_plural = _("News")
 
 
 class ItemClsCheck(models.Model):

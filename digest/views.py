@@ -3,7 +3,7 @@ import datetime
 from digg_paginator import DiggPaginator
 
 from django.contrib import messages
-from django.db.models import Q
+from django.db.models import Q, Subquery
 from django.http import JsonResponse
 from django.template import loader
 from django.template.context import RequestContext
@@ -40,11 +40,30 @@ class IssueView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin, Detail
     model = Issue
     cache_timeout = 300
 
+    def get_queryset(self):
+        return (
+            super().get_queryset().only("pk", "title", "description", "trend", "image")
+        )
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        items = self.object.item_set.filter(status="active").order_by(
-            "-section__priority", "-priority"
+        items = (
+            self.object.item_set.filter(status="active")
+            .exclude(section=None)
+            .only(
+                "title",
+                "description",
+                "tags",
+                "section",
+                "link",
+                "language",
+                "priority",
+                "issue",
+                "additionally",
+            )
+            .select_related("section")
+            .prefetch_related("tags")
+            .order_by("-section__priority", "-priority")
         )
 
         context.update(
@@ -53,7 +72,6 @@ class IssueView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin, Detail
                 "active_menu_item": "issue_view",
             }
         )
-
         return context
 
 

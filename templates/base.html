@@ -2,8 +2,8 @@
 {% load ads_tags %}
 {% load compress %}
 {% load bootstrap3 %}
-{% load remdow %}
 {% load common %}
+{% load remdow %}
 
 <!DOCTYPE html>
 <html lang="{% locale %}">
@@ -112,8 +112,8 @@
 {% bootstrap_javascript %}
 
 {% compress js %}
-    <script type="text/javascript"
-            src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
+    {% comment %} <script type="text/javascript"
+            src="{% static 'js/vendor/orphus/orphus.js' %}"></script> {% endcomment %}
     {% if likes_enable %}
         <script type="text/javascript"
                 src="{% static 'likes/includes/likes.js' %}"></script>
