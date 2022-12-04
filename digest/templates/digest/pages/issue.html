@@ -64,9 +64,10 @@
                     <div class="items-group-container">
 
                         {% with "before_section_"|add:data.grouper.title|unidecode|slugify as ads_section %}
-                            <a type='button' data-toggle="collapse"
+                            <a type='button'
+                                data-toggle="collapse"
                                 id="issue-section-{{ data.grouper.id }}"
-                               data-target="#{{ ads_section }}">
+                                data-target="#{{ ads_section }}">
                                 <h2>{{ data.grouper.title }}</h2></a>
                             {% include 'advertising/blocks/ads.html' with ads=ads type=ads_section %}
 

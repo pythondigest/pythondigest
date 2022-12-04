@@ -1603,6 +1603,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "uwsgi"
+version = "2.0.21"
+description = "The uWSGI server"
+category = "main"
+optional = false
+python-versions = "*"
+
+[[package]]
 name = "virtualenv"
 version = "20.17.0"
 description = "Virtual Python Environment builder"
@@ -1638,7 +1646,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "e99dcefa2851a147b47a6b0ebf10cb22e5659b2f7c02f50e8058f8a6d130e6d8"
+content-hash = "a389fc007aa3bdc66c6541786f9ae22be48441df4af9158cab8a8bd9dc9e182e"
 
 [metadata.files]
 appdirs = [
@@ -2639,6 +2647,9 @@ urllib3 = [
 ]
 urlobject = [
     {file = "URLObject-2.4.3.tar.gz", hash = "sha256:47b2e20e6ab9c8366b2f4a3566b6ff4053025dad311c4bb71279bbcfa2430caa"},
+]
+uwsgi = [
+    {file = "uwsgi-2.0.21.tar.gz", hash = "sha256:35a30d83791329429bc04fe44183ce4ab512fcf6968070a7bfba42fc5a0552a9"},
 ]
 virtualenv = [
     {file = "virtualenv-20.17.0-py3-none-any.whl", hash = "sha256:40a7e06a98728fd5769e1af6fd1a706005b4bb7e16176a272ed4292473180389"},
