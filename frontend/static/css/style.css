@@ -36,7 +36,8 @@ html, body {
 .navbar-brand {
   position: absolute;
   width: 100%;
-  padding-left: 2%;
+  height: 100%;
+  padding-left: 5%;
   text-align: left;
   margin: auto;
 }
@@ -181,8 +182,7 @@ html, body {
 }
 
 .navbar-digest {
-  /*background-color: #f8f8f8;*/
-  border-color: #5e5e5e;
+  /* border-color: #5e5e5e; */
 
   background-color: #262626;
 }
@@ -618,4 +618,14 @@ body > .container {
   font-size: 90%; /* Размер текста */
   margin: 0; /* Убираем отступы вокруг */
   white-space: nowrap; /* Отменяем переносы текста */
+}
+
+.items-group-container {
+  padding-left: 15px;
+}
+
+.add-button {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  margin-left: 30px
 }

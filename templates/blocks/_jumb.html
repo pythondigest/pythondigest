@@ -8,22 +8,17 @@
 
 
     <div class="row">
-
-        <div class="container">
-
-            <div class="jumb-text col-md-9">
-              <h3>IT-новости и проекты из мира Python, которые стоит знать</h3>
-                <p><big>Анализируем все Python ресурсы и собираем в одном самые важные ссылки<br>
-                    Добавляйте ссылки на
-                    интересные новости, статьи, интервью или
-                    Python проекты.
-                </big></p>
+        <div class="container text-center">
+            <div class="jumb-text col-md-12">
+              <h3>IT-новости про Python, которые стоит знать</h3>
+                <p><big>Собираем в одном месте самые важные ссылки.<br>
+                <a href="https://t.me/axsapronov">консультируем про Python</a></big></p>
             </div>
-
+{% comment %}
             <div class="col-md-3">
-                <a class="btn btn-lg btn-success"  style="margin-top: 30px; margin-left: 30px"
+                <a class="btn btn-lg btn-success add-button"
                    href="{% url 'digest:addnews' %}">Добавить новость</a>
-            </div>
+            </div> {% endcomment %}
 
         </div>
     </div>
