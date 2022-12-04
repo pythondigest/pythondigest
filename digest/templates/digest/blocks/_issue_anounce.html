@@ -1,12 +1,12 @@
 <div class="row">
-    <div class="col-md-4 text-left">
+    <div class="col-md-8 text-left">
         <h1>
           Python Дайджест. Выпуск {{ object.pk }}
         </h1>
         <p>({{ object.date_from|date:"d.m.Y" }}
             - {{ object.date_to|date:"d.m.Y" }})</p>
     </div>
-    <div class="col-md-8 text-right">
+    <div class="col-md-4 text-right">
         {% if object.trend %}
             <h3>
                 {{ object.trend|safe }}
