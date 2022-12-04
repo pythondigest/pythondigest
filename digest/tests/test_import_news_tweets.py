@@ -1,4 +1,4 @@
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from django.test import TestCase
 
@@ -20,14 +20,17 @@ class ImportTweetsTest(TestCase):
 
     def test_get_tweets(self):
         test_name = "fixture_test_import_news_test_get_tweets.txt"
-        self.patcher = patch("digest.management.commands.urlopen")
-        self.urlopen_mock = self.patcher.start()
-        self.urlopen_mock.return_value = MockResponse(read_fixture(test_name))
+
+        patcher = patch("requests.get")
+        requests_mock = patcher.start()
+        response = MockResponse(read_fixture(test_name))
+        response.status_code = 200
+        response.raise_for_status = Mock()
+        requests_mock.return_value = response
 
         tweets = get_tweets_by_url(self.res_twitter.link)
-
-        self.patcher.stop()
         self.assertEqual(len(tweets), 19)
+        patcher.stop()
 
         for x in tweets:
             self.assertEqual(len(x), 3)

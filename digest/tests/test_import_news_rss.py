@@ -1,5 +1,5 @@
 import datetime
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from django.test import TestCase
 
@@ -12,9 +12,12 @@ class ImportRSSTest(TestCase):
     def setUp(self):
         test_name = "fixture_test_import_news_test_rss.txt"
 
-        self.patcher = patch("digest.management.commands.import_news.requests.get")
-        self.requests_mock = self.patcher.start()
-        self.requests_mock.return_value = MockResponse(read_fixture(test_name))
+        self.patcher = patch("requests.get")
+        requests_mock = self.patcher.start()
+        response = MockResponse(read_fixture(test_name))
+        response.status_code = 200
+        response.raise_for_status = Mock()
+        requests_mock.return_value = response
 
         self.res_rss = AutoImportResource.objects.create(
             title="Test2", link="https://planetpython.org/rss20.xml", type_res="rss"
@@ -28,13 +31,11 @@ class ImportRSSTest(TestCase):
 
     def test_get_rss_items(self):
         rss_items = get_items_from_rss(self.res_rss.link)
-        self.assertEqual(self.requests_mock.call_count, 1)
 
         self.assertEqual(len(rss_items), 25)
 
     def test_filter_old_news_rss(self):
         rss_items = get_items_from_rss(self.res_rss.link)
-        self.assertEqual(self.requests_mock.call_count, 1)
 
         old_data = datetime.date(2005, 7, 14)
         rss_items[0]["related_to_date"] = old_data
@@ -54,7 +55,6 @@ class ImportRSSTest(TestCase):
 
     def test_filter_exists_news(self):
         rss_items = get_items_from_rss(self.res_rss.link)
-        self.assertEqual(self.requests_mock.call_count, 1)
 
         Item(
             title=rss_items[0]["title"], link=rss_items[0]["link"], section=self.section

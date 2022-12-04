@@ -17,10 +17,8 @@ from digest.management.commands import (
     apply_video_rules,
     get_readable_content,
     get_tweets_by_url,
-    is_django_weekly_digest,
     is_weekly_digest,
     make_get_request,
-    parse_django_weekly_digest,
     parse_weekly_digest,
     save_news_item,
 )
@@ -229,11 +227,6 @@ def import_rss(**kwargs):
                 # parse weekly digests
                 if is_weekly_digest(item):
                     parse_weekly_digest(item)
-                    continue
-
-                # parse weekly digests
-                if is_django_weekly_digest(item):
-                    parse_django_weekly_digest(item)
                     continue
 
                 item.update(

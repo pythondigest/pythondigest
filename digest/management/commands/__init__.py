@@ -9,7 +9,7 @@ import requests
 from bs4 import BeautifulSoup
 from cache_memoize import cache_memoize
 from readability import Document
-from requests.exceptions import ProxyError, SSLError
+from requests.exceptions import InvalidSchema, ProxyError, SSLError
 from urllib3.exceptions import ConnectTimeoutError
 
 from django.conf import settings
@@ -26,20 +26,9 @@ def parse_weekly_digest(item_data: dict):
         call_command("import_python_weekly", item_data.get("link"))
 
 
-def parse_django_weekly_digest(item_data: dict):
-    if "Django Weekly" in item_data.get("title"):
-        logger.info("Run manage command for parse Django Weekly digest")
-        call_command("import_django_weekly", item_data.get("link"))
-
-
 def is_weekly_digest(item_data: dict) -> bool:
     title = item_data.get("title")
     return bool("Python Weekly" in title)
-
-
-def is_django_weekly_digest(item_data: dict) -> bool:
-    title = item_data.get("title")
-    return bool("Django Weekly" in title)
 
 
 def _clojure_get_youtube_urls_from_page():
@@ -221,6 +210,8 @@ def make_get_request(url, timeout=29, try_count=0):
         logger.info("Proxy error. Try refresh proxy")
         get_https_proxy.invalidate()
         return make_get_request(url, timeout + 3, try_count + 1)
+    except InvalidSchema:
+        return None
 
 
 #

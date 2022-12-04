@@ -1,7 +1,5 @@
 from collections.abc import Sequence
 from typing import Union
-from urllib.error import URLError
-from urllib.request import urlopen
 
 import lxml.html as html
 from bs4 import BeautifulSoup
@@ -13,21 +11,12 @@ from django.core.management.base import BaseCommand
 from digest.management.commands import (
     apply_parsing_rules,
     apply_video_rules,
+    make_get_request,
     save_news_item,
 )
 from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
 Parseble = Union[BeautifulSoup, html.HtmlElement]
-
-
-def _get_content(url: str) -> str:
-    """Gets text from URL's response"""
-    try:
-        result = urlopen(url, timeout=10).read()
-    except URLError:
-        return ""
-    else:
-        return result
 
 
 def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
@@ -36,7 +25,11 @@ def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
     from URL
     """
     result = []
-    content = _get_content(url)
+    response = make_get_request(url)
+    if not response:
+        return result
+
+    content = response.text
     if content:
         try:
             page = html.fromstring(content)
