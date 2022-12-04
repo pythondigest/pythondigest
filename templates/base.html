@@ -31,8 +31,8 @@
     {% compress css %}
         {% block styles %}{% endblock %}
         <link rel="stylesheet" type="text/css" href="{% static 'fontawesomefree/css/all.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/vs.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/vs.css' %}">
     {% endcompress %}
 
 
@@ -48,7 +48,7 @@
     <script type="text/javascript" async
             src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
     <script type="text/javascript"
-            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+            src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}

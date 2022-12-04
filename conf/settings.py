@@ -115,7 +115,9 @@ else:
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
+    "django.middleware.gzip.GZipMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
+    "htmlmin.middleware.HtmlMinifyMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -125,6 +127,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
+    "htmlmin.middleware.MarkRequestMiddleware",
     "account.middleware.LocaleMiddleware",
     "account.middleware.TimezoneMiddleware",
     "admin_reorder.middleware.ModelAdminReorder",
@@ -345,7 +348,7 @@ INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
 MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405
 
 
-CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
 
 CKEDITOR_CONFIGS = {
     "default": {
@@ -464,7 +467,8 @@ ADMIN_REORDER = (
     "default",
 )
 
-COMPRESS_ENABLED = False
+HTML_MINIFY = True
+COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = (
     "compressor.filters.css_default.CssAbsoluteFilter",
     "compressor.filters.cssmin.CSSMinFilter",

@@ -16,7 +16,7 @@
 {% endcomment %}
 
 
-{% include "blocks/_adv_yandex.html" %}
+{% comment %} {% include "blocks/_adv_yandex.html" %} {% endcomment %}
 {% include 'advertising/blocks/ads.html' with ads=ads type='right' %}
 {% with items=feed_items %}
     {% include "digest/blocks/_feed.html" %}
