@@ -24,7 +24,7 @@ services:
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
-      && python manage.py runserver 0.0.0.0:8000"
+      && uwsgi --ini deploy/uwsgi.ini"
 
   # commands after pg_restore
   # echo 'Fake exists migration (after restore backup)'

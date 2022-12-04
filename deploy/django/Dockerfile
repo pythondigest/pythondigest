@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   # psycopg2 dependencies
   libpq-dev \
   libffi-dev \
+  libpcre3 \
+  libpcre3-dev \
   git \
   python3-all-dev && python -m pip install -U pip poetry
 
