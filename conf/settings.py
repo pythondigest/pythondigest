@@ -347,9 +347,6 @@ MICAWBER_TEMPLATE_EXTENSIONS = [
 INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
 MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405
 
-
-CKEDITOR_JQUERY_URL = "//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"
-
 CKEDITOR_CONFIGS = {
     "default": {
         "toolbar": [
