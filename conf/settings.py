@@ -130,7 +130,7 @@ MIDDLEWARE = [
     "htmlmin.middleware.MarkRequestMiddleware",
     "account.middleware.LocaleMiddleware",
     "account.middleware.TimezoneMiddleware",
-    "admin_reorder.middleware.ModelAdminReorder",
+    # "admin_reorder.middleware.ModelAdminReorder",
     "secretballot.middleware.SecretBallotIpUseragentMiddleware",
     "likes.middleware.SecretBallotUserIpUseragentMiddleware",
 ]

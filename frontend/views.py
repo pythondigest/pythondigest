@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.views.generic import TemplateView
 
 from advertising.mixins import AdsMixin
-from digest.mixins import FavoriteItemsMixin, FeedItemsMixin
+from digest.mixins import CacheMixin, FavoriteItemsMixin, FeedItemsMixin
 from digest.models import Issue, Item
 from frontend.models import EditorMaterial
 
@@ -42,7 +42,7 @@ class Sitemap(TemplateView):
         return ctx
 
 
-class IndexView(FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
+class IndexView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin, TemplateView):
     """Главная страница."""
 
     template_name = "pages/index.html"
