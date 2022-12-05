@@ -731,14 +731,6 @@ isort = ">=4.3.5,<6"
 test = ["pytest"]
 
 [[package]]
-name = "fontawesomefree"
-version = "6.2.1"
-description = "Font Awesome Free"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "funcy"
 version = "1.17"
 description = "A fancy and practical functional tools"
@@ -1668,7 +1660,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "f2c7247398378dc7c6b5a2ec8a87fb2a0286793619cf9c46a04ac0a846625c4e"
+content-hash = "dba3675e2004cb931bf8c9a3e2a37c92b7095aaaa6b5b6bc19c834e49c615cfe"
 
 [metadata.files]
 appdirs = [
@@ -2135,9 +2127,6 @@ flake8 = [
 flake8-isort = [
     {file = "flake8-isort-5.0.3.tar.gz", hash = "sha256:0951398c343c67f4933407adbbfb495d4df7c038650c5d05753a006efcfeb390"},
     {file = "flake8_isort-5.0.3-py3-none-any.whl", hash = "sha256:8c4ab431d87780d0c8336e9614e50ef11201bc848ef64ca017532dec39d4bf49"},
-]
-fontawesomefree = [
-    {file = "fontawesomefree-6.2.1-py3-none-any.whl", hash = "sha256:961d015f2f2355b389429d6f18006d304573ab88455ea39cc15975a7a59f048f"},
 ]
 funcy = [
     {file = "funcy-1.17-py2.py3-none-any.whl", hash = "sha256:ba7af5e58bfc69321aaf860a1547f18d35e145706b95d1b3c966abc4f0b60309"},

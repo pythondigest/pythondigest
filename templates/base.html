@@ -29,9 +29,11 @@
     <link rel="preload" href="{% bootstrap_url %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{% bootstrap_url %}"></noscript>
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></noscript>
+
     {% compress css %}
         {% block styles %}{% endblock %}
-        <link rel="stylesheet" type="text/css" href="{% static 'fontawesomefree/css/all.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/vs.css' %}">
     {% endcompress %}
