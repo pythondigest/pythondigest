@@ -272,7 +272,7 @@ html, body {
   padding: 15px 15px 15px;
   background-color: #f7f7f9;
   text-align: center;
-  font: normal 16pt Arial;
+  font: normal 20pt Arial;
 }
 
 .issue-img {
@@ -284,6 +284,7 @@ html, body {
 .issue-date {
   color: #999;
   font-size: 100%;
+  font: normal 14pt Arial;
 }
 
 .panel-search {

@@ -67,6 +67,7 @@ def _external_link(obj):
     return format_html(ret)
 
 
+@admin.register(Issue)
 class IssueAdmin(admin.ModelAdmin):
     list_display = (
         "title",
@@ -98,7 +99,7 @@ class IssueAdmin(admin.ModelAdmin):
 
     def frontend_link(self, obj):
         lnk = reverse("digest:issue_view", kwargs={"pk": obj.pk})
-        return f'<a target="_blank" href="{lnk}">{lnk}</a>'
+        return format_html(f'<a target="_blank" href="{lnk}">{lnk}</a>')
 
     frontend_link.allow_tags = True
     frontend_link.short_description = "Просмотр"
@@ -114,9 +115,6 @@ class IssueAdmin(admin.ModelAdmin):
             )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"
-
-
-admin.site.register(Issue, IssueAdmin)
 
 
 class SectionAdmin(admin.ModelAdmin):

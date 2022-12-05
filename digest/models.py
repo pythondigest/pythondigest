@@ -20,6 +20,7 @@ from taggit_autosuggest.managers import TaggableManager
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.storage import default_storage
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -145,6 +146,12 @@ class Issue(models.Model):
     @property
     def link(self):
         return reverse("digest:issue_view", kwargs={"pk": self.pk})
+
+    @property
+    def image_exists(self):
+        if not self.image:
+            return False
+        return default_storage.exists(self.image.path)
 
     class Meta:
         ordering = ["-pk"]

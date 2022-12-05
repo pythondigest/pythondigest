@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load static %}
 
 {% block content %}
     <div class="container cards-list">
@@ -22,12 +23,12 @@
                                 </div>
 
                                 <div class="issue-img">
-                                  {% if item.image %}
+                                  {% if item.image_exists %}
                                       {% thumbnail item.image "x200" as im %}
                                         <img src="{{ im.url }}" alt="Дайджест python, {{ item.title }}">
                                       {% endthumbnail %}
                                     {% else %}
-                                        <img src="https://via.placeholder.com/200x200/ECECEC/989898/?text={{item.pk}}" alt="Дайджест python, {{ item.title }}">
+                                        <img src="{% static 'img/logo.png' %}" width="200px" height="200px" alt="Дайджест python, {{ item.title }}">
                                     {% endif %}
                                 </div>
 

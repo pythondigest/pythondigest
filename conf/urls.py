@@ -1,5 +1,5 @@
-import django.views.static
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
 
@@ -13,20 +13,13 @@ urlpatterns = [
     path("", include((frontend_url, "frontend"), namespace="frontend")),
     path("", include((digest_url, "digest"), namespace="digest")),
     path("admin/", admin.site.urls),
-    path(
-        "static/<str:url>",
-        django.views.static.serve,
-        {"document_root": settings.STATIC_ROOT},
-    ),
-    path(
-        "media/<str:url>",
-        django.views.static.serve,
-        {"document_root": settings.MEDIA_ROOT},
-    ),
     path("taggit_autosuggest/", include("taggit_autosuggest.urls")),
     # path('account/', include('account.urls')),
     re_path(r"^\.well-known/", include("letsencrypt.urls")),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if "landings" in settings.INSTALLED_APPS:
     from landings.urls import urlpatterns as landings_url

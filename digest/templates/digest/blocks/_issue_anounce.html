@@ -1,3 +1,5 @@
+{% load static %}
+
 <div class="row">
     <div class="col-md-8 text-left">
         <h1>
@@ -34,9 +36,11 @@
 
 
     <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-        {% if object.image %}
+        {% if object.image_exists %}
             <img src="{{ object.image.url }}"
                  alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
+        {% else %}
+          <img src="{% static 'img/logo.png' %}" width="200px" height="200px" alt="Дайджест python, {{ item.title }}">
         {% endif %}
     </div>
     <hr>
