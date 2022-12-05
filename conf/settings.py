@@ -34,9 +34,11 @@ DEBUG = env.bool("DEBUG", False)
 
 THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
+
+BASE_DOMAIN = env("BASE_DOMAIN", default="pythondigest.ru")
+
 ALLOWED_HOSTS = [
-    "pythondigest.ru",
-    "pythondigest.sapronov.me",
+    BASE_DOMAIN,
     "188.120.227.123",
     "127.0.0.1",
     "0.0.0.0",
@@ -332,8 +334,6 @@ BOT_USER_ID = 11
 PROXIES_FOR_GOOGLING = {}
 TOR_CONTROLLER_PWD = ""
 
-BASE_DOMAIN = "pythondigest.ru"
-
 MICAWBER_PROVIDERS = "micawber.contrib.mcdjango.providers.bootstrap_basic"
 # MICAWBER_PROVIDERS = 'micawber.contrib.mcdjango.providers.bootstrap_embedly'
 MICAWBER_TEMPLATE_EXTENSIONS = [
@@ -497,6 +497,10 @@ CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
 X_FRAME_OPTIONS = "DENY"
+
+CSRF_TRUSTED_ORIGINS = [
+    f"https://{BASE_DOMAIN}",
+]
 
 # Sentry
 # ------------------------------------------------------------------------------
