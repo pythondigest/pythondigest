@@ -125,7 +125,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
     "htmlmin.middleware.MarkRequestMiddleware",
     "account.middleware.LocaleMiddleware",
@@ -224,18 +223,11 @@ LOCALE_PATHS = (path.join(BASE_DIR, "locale"),)
 
 # STATIC
 # ------------------------
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = path.join(BASE_DIR, "media")
-
-# WhiteNoise
-# ------------------------------------------------------------------------------
-# http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
-if env("LOCAL", default=False):
-    INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -482,8 +474,6 @@ COMPRESS_ENABLED = env.bool("COMPRESS_ENABLED", default=True)
 COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
 # https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_URL
 COMPRESS_URL = STATIC_URL  # noqa F405
-# https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_OFFLINE
-COMPRESS_OFFLINE = True  # Offline compression is required when using Whitenoise
 LIBSASS_OUTPUT_STYLE = "compressed"
 # https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_FILTERS
 COMPRESS_FILTERS = {
