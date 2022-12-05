@@ -510,6 +510,10 @@ class Package(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def link_rss(self):
+        return f"https://pypi.org/rss/project/{self.name}/releases.xml"
+
     class Meta:
         verbose_name = _("Package")
         verbose_name_plural = _("Packages")

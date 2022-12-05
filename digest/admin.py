@@ -267,11 +267,18 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
     link_html.short_description = "Ссылка"
 
 
+@admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ("name", "link")
+    list_display = ("name", "link", "show_link_rss")
 
+    search_fields = ("name", "link")
 
-admin.site.register(Package, PackageAdmin)
+    def show_link_rss(self, obj):
+        link = obj.link_rss
+        return format_html(f'<a target="_blank" href="{link}">{link}</a>')
+
+    show_link_rss.allow_tags = True
+    show_link_rss.short_description = "Release RSS"
 
 
 class ItemModerator(Item):
