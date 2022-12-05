@@ -156,7 +156,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf,deploy/crontab"
+          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf,deploy/crontab.conf"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -201,4 +201,4 @@ jobs:
             sudo nginx -t && sudo service nginx reload
 
             # update crontab
-            crontab < crontab
+            crontab < crontab.conf
