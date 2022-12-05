@@ -1,0 +1,1 @@
+10 * * * * docker exec -it pydigest_django python manage.py import_news > /dev/null
