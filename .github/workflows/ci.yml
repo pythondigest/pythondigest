@@ -178,6 +178,8 @@ jobs:
             export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
             export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
             export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+            export SENTRY_DSN="${{ secrets.SENTRY_DSN }}"
+            export SENTRY_ENVIRONMENT="${{ secrets.SENTRY_ENVIRONMENT }}"
 
             # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
