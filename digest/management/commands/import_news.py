@@ -51,7 +51,11 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
 
 def get_tweets():
     result = []
-    news_sources = AutoImportResource.objects.filter(type_res="twitter", in_edit=False)
+    news_sources = (
+        AutoImportResource.objects.filter(type_res="twitter")
+        .exclude(in_edit=True)
+        .exclude(is_active=False)
+    )
     for source in news_sources:
         print("Process twitter", source)
         try:
@@ -185,9 +189,12 @@ def get_data_for_rss_item(rss_item: dict) -> dict:
 
 def import_rss(**kwargs):
     logger.info("Import news from RSS feeds")
-    news_sources = AutoImportResource.objects.filter(
-        type_res="rss", in_edit=False
-    ).order_by("?")
+    news_sources = (
+        AutoImportResource.objects.filter(type_res="rss")
+        .exclude(in_edit=True)
+        .exclude(is_active=False)
+        .order_by("?")
+    )
 
     apply_rules = kwargs.get("apply_rules")
     logger.info(f"Apply rules: {apply_rules}")

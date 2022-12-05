@@ -457,6 +457,7 @@ class ItemClsCheck(models.Model):
 class AutoImportResource(models.Model):
     """ """
 
+    is_active = models.BooleanField("Active", default=True)
     title = models.CharField(verbose_name=_("Title"), max_length=255)
     link = models.URLField(verbose_name=_("URL"), max_length=255, unique=True)
     type_res = models.CharField(

@@ -246,6 +246,7 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
         "resource",
         # "incl",
         # "excl",
+        "is_active",
         "in_edit",
         "language",
     )
@@ -253,7 +254,10 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
         "title",
         "link",
     )
-    list_filter = ("in_edit",)
+    list_filter = (
+        "in_edit",
+        "is_active",
+    )
     formfield_overrides = {
         models.TextField: {"widget": forms.Textarea(attrs={"cols": 45, "rows": 1})},
     }
