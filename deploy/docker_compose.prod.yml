@@ -24,6 +24,7 @@ services:
       && echo 'Migrate migrations'
       && python manage.py migrate --no-input
       && python manage.py collectstatic --no-input
+      && python manage.py compress --force
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
       && uwsgi --ini deploy/uwsgi.ini"

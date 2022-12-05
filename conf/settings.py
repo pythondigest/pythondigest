@@ -126,6 +126,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
     "htmlmin.middleware.MarkRequestMiddleware",
     "account.middleware.LocaleMiddleware",
@@ -222,14 +223,20 @@ USE_TZ = False
 SITE_ID = 1
 LOCALE_PATHS = (path.join(BASE_DIR, "locale"),)
 
-
+# STATIC
+# ------------------------
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = path.join(BASE_DIR, "media")
 
-DATASET_ROOT = path.join(BASE_DIR, "dataset")
+# WhiteNoise
+# ------------------------------------------------------------------------------
+# http://whitenoise.evans.io/en/latest/django.html#using-whitenoise-in-development
+if env("LOCAL", default=False):
+    INSTALLED_APPS = ["whitenoise.runserver_nostatic"] + INSTALLED_APPS  # noqa F405
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -369,6 +376,8 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+
+DATASET_ROOT = path.join(BASE_DIR, "dataset")
 DATASET_FOLDER = ""
 DATASET_POSITIVE_KEYWORDS = [
     "blog",
@@ -465,11 +474,26 @@ ADMIN_REORDER = (
 )
 
 HTML_MINIFY = True
-COMPRESS_ENABLED = True
-COMPRESS_CSS_FILTERS = (
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
-)
+
+# django-compressor
+# ------------------------------------------------------------------------------
+# https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
+COMPRESS_ENABLED = env.bool("COMPRESS_ENABLED", default=True)
+# https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_STORAGE
+COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
+# https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_URL
+COMPRESS_URL = STATIC_URL  # noqa F405
+# https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
+COMPRESS_OFFLINE = True  # Offline compression is required when using Whitenoise
+LIBSASS_OUTPUT_STYLE = "compressed"
+# https://django-compressor.readthedocs.io/en/latest/settings/#django.conf.settings.COMPRESS_FILTERS
+COMPRESS_FILTERS = {
+    "css": [
+        "compressor.filters.css_default.CssAbsoluteFilter",
+        "compressor.filters.cssmin.rCSSMinFilter",
+    ],
+    "js": ["compressor.filters.jsmin.JSMinFilter"],
+}
 
 MAILHANDLER_RU_KEY = ""
 MAILHANDLER_RU_USER_LIST_ID = 413
