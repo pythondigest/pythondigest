@@ -17,6 +17,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - SENTRY_DSN=${SENTRY_DSN}
       - SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT}
+      - BASE_DOMAIN=${BASE_DOMAIN}
+      - USE_DOCKER=${USE_DOCKER}
     ports:
       - "127.0.0.1:8000:8000"
     command: bash -c "
