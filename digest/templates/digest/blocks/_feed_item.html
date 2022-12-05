@@ -58,10 +58,10 @@
 
                 {% endif %}
 
-                {% if like_link %}
+                {% comment %} {% if like_link %}
                     {% load likes_inclusion_tags %}
                     {% likes object 'likes/inclusion_tags/likes_item.html' %}
-                {% endif %}
+                {% endif %} {% endcomment %}
 
                 {% if object.tags.all|tags_as_links %}
                     {% for tag_name, tag_link in item.tags.all|tags_as_links %}

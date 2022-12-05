@@ -1,11 +1,11 @@
 {% load common %}
 
 {% if item %}
-    {% if likes == True %}
+    {% comment %} {% if likes == True %}
         {% load likes_inclusion_tags %}
         {% likes item 'likes/inclusion_tags/likes_item.html' %}
         &nbsp;
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% if comment %}
         <span class="likes liker text-primary">
                 <a href="{{ item.internal_link }}"

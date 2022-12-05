@@ -3,6 +3,7 @@ import random
 import re
 
 import lxml.html
+from bootstrap3.templatetags.bootstrap3 import bootstrap_css_url
 from unidecode import unidecode as _unidecode
 from urlobject import URLObject
 
@@ -132,3 +133,11 @@ def tags_as_str(tags):
         return result
 
     return ",".join(tags_names)
+
+
+@register.simple_tag()
+def bootstrap_url():
+    payload = bootstrap_css_url()
+    if isinstance(payload, str):
+        return payload
+    return payload.get("url")

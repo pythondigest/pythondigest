@@ -26,7 +26,9 @@
         <meta name="viewport" content="width=device-width">
     {% endblock %}
 
-    {% bootstrap_css %}
+    <link rel="preload" href="{% bootstrap_url %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{% bootstrap_url %}"></noscript>
+
     {% compress css %}
         {% block styles %}{% endblock %}
         <link rel="stylesheet" type="text/css" href="{% static 'fontawesomefree/css/all.min.css' %}">

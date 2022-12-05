@@ -24,7 +24,7 @@ build:
 	docker compose -f deploy/docker_compose.yml build
 
 run:
-	python manage.py runserver
+	python manage.py compress --force && python manage.py runserver
 
 import:
 	python manage.py import_news
