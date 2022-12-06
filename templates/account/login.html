@@ -26,47 +26,8 @@
                 <a href="{% url "account_password_reset" %}"
                    class="btn btn-link">{% trans "Forgot your password?" %}</a>
             </form>
-            {% if ACCOUNT_OPEN_SIGNUP %}
-                <p class="login-signup">
-                    <small>
-                        {% trans "Don't have an account?" %} <strong><a
-                            href="{% urlnext 'account_signup' %}">{% trans "Sign up" %}</a></strong>
-                    </small>
-                </p>
-            {% endif %}
         </div>
         <div class="col-md-8">
-
-            {% get_available_backends as available_backends %}
-
-            {% if not user.is_authenticated %}
-                <div class="social">
-                    {% for sublist in available_backends|social_backends %}
-                        {% for name, backend in sublist %}
-                            {% associated backend %}
-                            {% if association %}
-                                <form class="disconnect-form col-md-2"
-                                      action="{% url "social:disconnect_individual" backend=association.provider association_id=association.id %}"
-                                      method="post">{% csrf_token %}
-                                    <a class="btn btn-danger"
-                                       name="{{ backend|backend_class }}"
-                                       href="#">
-                                        <i class="fa fa-{{ name|icon_name }}"></i>
-                                        Disconnect {{ backend|backend_name }}
-                                    </a>
-                                </form>
-                            {% else %}
-                                <p><a class="col-md-2 btn btn-default"
-                                      name="{{ backend|backend_class }}"
-                                      href="{% url "social:begin" backend=name %}">
-                                    <i class="fa fa-{{ name|icon_name }}"></i>
-                                    {{ backend|backend_name }}
-                                </a></p>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                </div>
-            {% endif %}
 
         </div>
     </div>

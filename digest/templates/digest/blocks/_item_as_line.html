@@ -1,17 +1,16 @@
-
+{% load common %}
 
 {% if item %}
-    {% if likes == True %}
+    {% comment %} {% if likes == True %}
         {% load likes_inclusion_tags %}
         {% likes item 'likes/inclusion_tags/likes_item.html' %}
         &nbsp;
-    {% endif %}
+    {% endif %} {% endcomment %}
     {% if comment %}
-
         <span class="likes liker text-primary">
                 <a href="{{ item.internal_link }}"
                    title="Прокомментировать ссылку"><i
-                        class="fa fa-comments-o"></i></a>
+                        class="fa-regular fa-comments"></i></a>
                 </span>
         &nbsp;
     {% endif %}
@@ -26,15 +25,9 @@
         &nbsp;
         </span>
     {% endif %}
-
     <a rel="nofollow"
-            {% if link_class %}
-       class="{{ link_class }}"
-            {% endif %}
+       {% if link_class %}class="{{ link_class }}"{% endif %}
        href="{{ item.link }}"
-       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-       target="_blank">
-        {{ item.title }}
-    </a> {% if show_description and item.content %} -
-    {{ item.content }}{% endif %}
+       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
+       target="_blank">{{ item.title }}</a> {% if show_description and item.content %} -{{ item.content }}{% endif %}
 {% endif %}

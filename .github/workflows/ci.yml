@@ -1,0 +1,206 @@
+# from https://github.com/marketplace/actions/install-poetry-action
+
+name: build and deploy to server
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-22.04
+    steps:
+      #----------------------------------------------
+      #       check-out repo and set-up python
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - name: Set up python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      #----------------------------------------------
+      #  -----  install & configure poetry  -----
+      #----------------------------------------------
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+          installer-parallel: true
+
+      #----------------------------------------------
+      #       load cached venv if cache exists
+      #----------------------------------------------
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v3
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
+        run: poetry install --no-interaction --no-root
+      #----------------------------------------------
+      # install your root project, if required
+      #----------------------------------------------
+      - name: Install project
+        run: poetry install --no-interaction
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+      - name: Run tests
+        run: |
+          source .venv/bin/activate
+          coverage run --source='.' manage.py test
+          coverage report
+          coverage xml
+      #----------------------------------------------
+      #             upload coverage stats
+      # (requires CODECOV_TOKEN in repository secrets)
+      #----------------------------------------------
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}  # Only required for private repositories
+          file: ./coverage.xml
+          fail_ci_if_error: true
+
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      #----------------------------------------------
+      # Prepare commit info for deploy
+      #----------------------------------------------
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+      #----------------------------------------------
+      # Extact commit info for build
+      #----------------------------------------------
+      - name: Docker meta
+        uses: docker/metadata-action@v4
+        id: meta
+        with:
+          images: ${{ env.GITHUB_REPOSITORY }}
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'remdow') }}
+      #----------------------------------------------
+      # Prepare for building image
+      #----------------------------------------------
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        id: buildx
+      #----------------------------------------------
+      # Auth to docker hub
+      #----------------------------------------------
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      #----------------------------------------------
+      # Build and upload image
+      #----------------------------------------------
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: deploy/django/Dockerfile
+          push: true
+          ulimit: nofile=1048576:1048576
+          builder: ${{ steps.buildx.outputs.name }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-22.04
+    needs: build
+    environment:
+      name: production
+    steps:
+      #----------------------------------------------
+      # Copy docker compose production config
+      #----------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #----------------------------------------------
+      # Prepare commit info for deploy
+      #----------------------------------------------
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v4
+
+      #----------------------------------------------
+      # Copy configs to server
+      #----------------------------------------------
+      - name: copy configs
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf,deploy/crontab.conf"
+          target: "pythondigest/"
+
+      #----------------------------------------------
+      # Run docker compose
+      #----------------------------------------------
+      - name: executing remote ssh commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
+            export REDIS_URL="${{ secrets.REDIS_URL }}"
+            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
+            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
+            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
+            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
+            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
+            export SENTRY_DSN="${{ secrets.SENTRY_DSN }}"
+            export SENTRY_ENVIRONMENT="${{ secrets.SENTRY_ENVIRONMENT }}"
+            export BASE_DOMAIN="${{ secrets.BASE_DOMAIN }}"
+            export USE_DOCKER="${{ secrets.USE_DOCKER }}"
+
+            # image tag
+            export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
+
+            cd ~/pythondigest/deploy/
+
+            # deploy app
+            docker compose -f docker_compose.prod.yml pull
+            docker compose -f docker_compose.prod.yml up -d
+
+            # prepare static folders for serve
+            cd ~/pythondigest/deploy/
+            sudo usermod -a -G pythondigest www-data
+            sudo chown -R :www-data static
+            sudo chown -R :www-data media
+
+            # validate and reload nginx
+            sudo mkdir -p /var/log/nginx/pythondigest/
+            sudo nginx -t && sudo service nginx reload
+
+            # update crontab
+            crontab < crontab.conf

@@ -42,6 +42,7 @@ class Migration(migrations.Migration):
                                                     verbose_name='Дата добавления')),
                 ('user', models.ForeignKey(verbose_name='Автор',
                                            editable=False,
+                                           on_delete=models.CASCADE,
                                            to=settings.AUTH_USER_MODEL)), ],
         options={
             'verbose_name': 'Материал редакции',

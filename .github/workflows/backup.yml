@@ -1,0 +1,84 @@
+name: backup
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+
+jobs:
+  backup_database:
+    name: Backup PostgreSQL Database
+    runs-on: ubuntu-22.04
+    steps:
+      #----------------------------------------------
+      # Copy backup script to server. Load repo
+      #----------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      #----------------------------------------------
+      # Copy backup script
+      #----------------------------------------------
+      - name: copy backup scripts
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "deploy/postgres/maintenance/backup_on_server.bash,deploy/postgres/maintenance/copy_backup_on_server.bash,deploy/postgres/maintenance/copy_media_on_server.bash"
+          target: "pythondigest/"
+
+      #----------------------------------------------
+      # Make backup
+      #----------------------------------------------
+      - name: make backup
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            # chown page
+            cd ~/pythondigest/deploy/postgres/maintenance/
+
+            # make backup
+            bash backup_on_server.bash
+
+      #----------------------------------------------
+      # Upload backup to drive
+      #----------------------------------------------
+      - name: upload backup to drive
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            # chown page
+            cd ~/pythondigest/deploy/postgres/maintenance/
+
+            # upload backups to drive
+            screen -dmS backup-rsync bash copy_backup_on_server.bash
+
+      #----------------------------------------------
+      # Upload media to drive
+      #----------------------------------------------
+      - name: upload media files to drive
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            # chown page
+            cd ~/pythondigest/deploy/postgres/maintenance/
+
+            # upload media files to drive
+            screen -dmS backup-rsync bash copy_media_on_server.bash

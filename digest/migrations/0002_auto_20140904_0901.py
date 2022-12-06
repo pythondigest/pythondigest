@@ -45,6 +45,7 @@ class Migration(migrations.Migration):
                     verbose_name='\u0417\u043d\u0430\u0447\u0435\u043d\u0438\u0435')),
                 ('resource', models.ForeignKey(
                     verbose_name='\u0420\u0435\u0441\u0443\u0440\u0441',
+                    on_delete=models.CASCADE,
                     to='digest.AutoImportResource')), ],
         options={
             'verbose_name':

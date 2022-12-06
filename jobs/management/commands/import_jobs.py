@@ -1,20 +1,17 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from datetime import datetime, date, timedelta
+from datetime import date, datetime, timedelta
 from functools import partial
 from time import mktime
 
 import feedparser
-from django.core.management.base import BaseCommand
 from funcy import join
 
-from jobs.models import JobFeed, JobItem, RejectedList, AcceptedList
+from django.core.management.base import BaseCommand
+
+from jobs.models import AcceptedList, JobFeed, JobItem, RejectedList
 from jobs.utils import HhVacancyManager
 
 
-def prepare_link_title(
-    item: feedparser.FeedParserDict) -> feedparser.FeedParserDict:
+def prepare_link_title(item: feedparser.FeedParserDict) -> feedparser.FeedParserDict:
     """
     Для RSS Item возвращает ссылку, заголовок и описание
     :param item:
@@ -22,15 +19,14 @@ def prepare_link_title(
     """
     result = None
     if item:
-        assert item.title, 'Not found title in item'
-        assert item.link, 'Not found link in item'
+        assert item.title, "Not found title in item"
+        assert item.link, "Not found link in item"
 
-        link = item.link.replace('https://www.google.com/url?rct=j&sa=t&url=',
-                                 '')
-        ge_ind = link.find('&ct=ga')
+        link = item.link.replace("https://www.google.com/url?rct=j&sa=t&url=", "")
+        ge_ind = link.find("&ct=ga")
         if ge_ind > -1:
             link = link[0:ge_ind]
-        title = item.title.replace('<b>', '').replace('</b>', '')
+        title = item.title.replace("<b>", "").replace("</b>", "")
         item.link = link
         item.title = title
         result = item
@@ -62,7 +58,7 @@ def is_new_job(item: feedparser.FeedParserDict) -> bool:
     result = True
     today = date.today()
     week_before = today - timedelta(weeks=1)
-    time_struct = getattr(item, 'published_parsed', None)
+    time_struct = getattr(item, "published_parsed", None)
     if time_struct:
         _timestamp = mktime(time_struct)
         dt = datetime.fromtimestamp(_timestamp)
@@ -78,7 +74,7 @@ def make_validate_dict(item: feedparser.FeedParserDict) -> dict:
     :param item:
     :return:
     """
-    _ = item.get('published_parsed', None)
+    _ = item.get("published_parsed", None)
     if _:
         published_at = datetime.fromtimestamp(mktime(_))
     else:
@@ -86,10 +82,10 @@ def make_validate_dict(item: feedparser.FeedParserDict) -> dict:
 
     try:
         result = {
-            'title': item.title,
-            'description': item.summary,
-            'link': item.link,
-            'published_at': published_at,
+            "title": item.title,
+            "description": item.summary,
+            "link": item.link,
+            "published_at": published_at,
         }
     except Exception:
         result = {}
@@ -127,11 +123,9 @@ def save_job(item: dict) -> None:
     :param item:
     :return:
     """
-    if not JobItem.objects.filter(link=item.get('link')).exists():
-        if len(item.get('link')) < 200:
-            JobItem(
-                **item
-            ).save()
+    if not JobItem.objects.filter(link=item.get("link")).exists():
+        if len(item.get("link")) < 200:
+            JobItem(**item).save()
 
 
 def import_jobs_hh():
@@ -143,7 +137,7 @@ def import_jobs_hh():
     if not vacancies:
         return
 
-    items = filter(lambda x: not x.pop('__archived', True), vacancies)
+    items = filter(lambda x: not x.pop("__archived", True), vacancies)
 
     for x in items:
         save_job(x)
@@ -151,28 +145,33 @@ def import_jobs_hh():
 
 def import_jobs_rss():
     _job_feeds_obj = JobFeed.objects.filter(in_edit=False, is_activated=True)
-    job_feeds = list(_job_feeds_obj.values_list('link', flat=True))
-    excl = list(RejectedList.objects.values_list('title', flat=True))
-    incl = list(AcceptedList.objects.values_list('title', flat=True))
+    job_feeds = list(_job_feeds_obj.values_list("link", flat=True))
+    excl = list(RejectedList.objects.values_list("title", flat=True))
+    incl = list(AcceptedList.objects.values_list("title", flat=True))
 
     excl_filter = partial(is_not_excl, excl)
     incl_filter = partial(is_incl, incl)
 
-    items = \
-        filter(incl_filter,
-               filter(excl_filter,
-                      map(make_validate_dict,
-                          map(prepare_link_title,
-                              filter(is_new_job,
-                                     join(
-                                         map(get_rss_items, job_feeds)))))))
+    items = filter(
+        incl_filter,
+        filter(
+            excl_filter,
+            map(
+                make_validate_dict,
+                map(
+                    prepare_link_title,
+                    filter(is_new_job, join(map(get_rss_items, job_feeds))),
+                ),
+            ),
+        ),
+    )
     for x in items:
         save_job(x)
 
 
 class Command(BaseCommand):
-    args = 'no arguments!'
-    help = 'News import from external resources'
+    args = "no arguments!"
+    help = "News import from external resources"
 
     def handle(self, *args, **options):
         """

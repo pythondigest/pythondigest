@@ -1,18 +1,21 @@
+{% load static %}
+
 <div class="row">
-    <div class="col-md-4 text-left">
+    <div class="col-md-8 text-left">
         <h1>
-            {{ object.title }}
+          Python Дайджест. Выпуск {{ object.pk }}
         </h1>
         <p>({{ object.date_from|date:"d.m.Y" }}
             - {{ object.date_to|date:"d.m.Y" }})</p>
     </div>
-    <div class="col-md-8 text-right">
+    <div class="col-md-4 text-right">
         {% if object.trend %}
             <h3>
                 {{ object.trend|safe }}
             </h3>
             <p>Тенденция недели</p>
         {% endif %}
+        <div class="addthis_sharing_toolbox pull-right">поделиться выпуском&nbsp;</div>
     </div>
 
 </div>
@@ -33,9 +36,11 @@
 
 
     <div class="col-md-4 {% if object.description %}pull-right{% endif %}">
-        {% if object.image %}
+        {% if object.image_exists %}
             <img src="{{ object.image.url }}"
                  alt="pythondigest.ru: {{ object }}" class="img-thumbnail">
+        {% else %}
+          <img src="{% static 'img/logo.png' %}" width="200px" height="200px" alt="Дайджест python, {{ item.title }}">
         {% endif %}
     </div>
     <hr>

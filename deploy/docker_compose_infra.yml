@@ -1,0 +1,26 @@
+version: '3'
+
+volumes:
+  pydigest_postgres_data:
+  pydigest_postgres_data_backups:
+
+services:
+  postgres:
+    build:
+      context: ..
+      dockerfile: ./deploy/postgres/Dockerfile
+    image: pydigest_postgres
+    container_name: pydigest_postgres
+    volumes:
+      - pydigest_postgres_data:/var/lib/postgresql/data:Z
+      - pydigest_postgres_data_backups:/backups:z
+    env_file:
+      - ../.envs/.local/.postgres
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6
+    container_name: pydigest_redis
+    ports:
+      - "6379:6379"

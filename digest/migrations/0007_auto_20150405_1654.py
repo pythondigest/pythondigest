@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-import concurrency.fields
-from django.db import migrations
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
@@ -12,7 +11,7 @@ class Migration(migrations.Migration):
                   migrations.AlterField(
                       model_name='issue',
                       name='version',
-                      field=concurrency.fields.IntegerVersionField(
+                      field=models.BigIntegerField(
                           default=0,
                           help_text='record revision number',
                           verbose_name='\u0412\u0435\u0440\u0441\u0438\u044f'),
@@ -20,7 +19,7 @@ class Migration(migrations.Migration):
                   migrations.AlterField(
                       model_name='item',
                       name='version',
-                      field=concurrency.fields.IntegerVersionField(
+                      field=models.BigIntegerField(
                           default=0,
                           help_text='record revision number',
                           verbose_name='\u0412\u0435\u0440\u0441\u0438\u044f'),
@@ -28,7 +27,7 @@ class Migration(migrations.Migration):
                   migrations.AlterField(
                       model_name='resource',
                       name='version',
-                      field=concurrency.fields.IntegerVersionField(
+                      field=models.BigIntegerField(
                           default=0,
                           help_text='record revision number',
                           verbose_name='\u0412\u0435\u0440\u0441\u0438\u044f'),
@@ -36,7 +35,7 @@ class Migration(migrations.Migration):
                   migrations.AlterField(
                       model_name='section',
                       name='version',
-                      field=concurrency.fields.IntegerVersionField(
+                      field=models.BigIntegerField(
                           default=0,
                           help_text='record revision number',
                           verbose_name='\u0412\u0435\u0440\u0441\u0438\u044f'),

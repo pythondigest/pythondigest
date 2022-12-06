@@ -2,8 +2,6 @@
 {% load common %}
 {% load micawber_tags %}
 
-{% load remdow %}
-
 <div class="item-container">
 
 
@@ -45,7 +43,7 @@
     <noindex>
         <div class="news-line-item">
 
-            <h4>
+            <h3>
                 {% if read_link %}
                     {{ object.title }}
 
@@ -53,20 +51,20 @@
                 {% else %}
                     <a rel="nofollow"
                        href="{{ object.link }}"
-                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
+                       onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
                        target="_blank">
                         {{ object.title }}
                     </a>
 
                 {% endif %}
 
-                {% if like_link %}
+                {% comment %} {% if like_link %}
                     {% load likes_inclusion_tags %}
                     {% likes object 'likes/inclusion_tags/likes_item.html' %}
-                {% endif %}
+                {% endif %} {% endcomment %}
 
-                {% if object.tags_as_links %}
-                    {% for tag_name, tag_link in item.tags_as_links %}
+                {% if object.tags.all|tags_as_links %}
+                    {% for tag_name, tag_link in item.tags.all|tags_as_links %}
                         <span class="badge issue-item-resource"><small><a
                                 href="{{ tag_link }}">{{ tag_name }}</a></small></span>
                     {% endfor %}
@@ -85,13 +83,18 @@
 
 
             {% if read_link %}
+            <div class="row">
+              <div class="col-md-6">
+                  <a rel="nofollow" class="btn btn-primary btn-regular"
+                    href="{{ object.link }}"
+                    onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
+                    target="_blank">Читать дальше >></a>
+                  </div>
 
-                <a rel="nofollow" class="btn btn-primary btn-sm pull-left"
-                   href="{{ object.link }}"
-                   onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags_as_str }}');"
-                   target="_blank">Читать>></a>
-                <div class="addthis_sharing_toolbox pull-right"></div>
-                <br><br>
+                   <div class="col-md-6">
+                        <div class="addthis_sharing_toolbox pull-right"></div>
+                   </div>
+                  </div>
             {% endif %}
         </div>
 

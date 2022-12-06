@@ -1,11 +1,5 @@
 {% load i18n %}
-{% load staticfiles %}
-{% load compress %}
-{% if import_js %}
-    <script type="text/javascript"
-            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-{% endif %}
-
+{% load static %}
 
 {% if likes_enabled %}
 
@@ -16,7 +10,7 @@
            href="{% url "like" content_type content_obj.id 1 %}" rel="nofollow">
             <big>
                 <i title="Одобряю"
-                   class="fa fa-thumbs-o-up">
+                class="fa-regular fa-thumbs-up">
                 </i>
             </big>
         </a>
@@ -26,14 +20,14 @@
            rel="nofollow">
             <big>
                 <i title="Не одобряю"
-                   class="fa fa-thumbs-o-down">
+                   class="fa-regular fa-thumbs-down">
                 </i>
             </big>
         </a>
     {% else %}
         &nbsp;
         <span class="badge issue-item-resource">
-            {{ content_obj.vote_total }} <i class="fa fa-star"></i>
+            {{ content_obj.vote_total }} <i class="fa-solid fa-star"></i>
         </span>
     {% endif %}
     </span>

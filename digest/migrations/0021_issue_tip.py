@@ -13,6 +13,7 @@ class Migration(migrations.Migration):
                             name='tip',
                             field=models.ForeignKey(verbose_name='Совет',
                                                     null=True,
+                                                    on_delete=models.CASCADE,
                                                     blank=True,
                                                     to='frontend.Tip'), ),
     ]

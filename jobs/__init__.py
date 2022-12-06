@@ -1,3 +1,1 @@
-# -*- coding: utf-8 -*-
-
-default_app_config = 'jobs.apps.Config'
+default_app_config = "jobs.apps.Config"

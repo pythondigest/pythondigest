@@ -3,19 +3,19 @@
 <!--[if IE 9]><html class="lt-ie10 ie9" lang="ru" data-scribe-reduced-action-queue="true"><![endif]-->
 <!--[if gt IE 9]><!--><html lang="ru" data-scribe-reduced-action-queue="true"><!--<![endif]-->
   <head>
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     <meta charset="utf-8">
-    
+
     <noscript><meta http-equiv="refresh" content="0; URL=https://mobile.twitter.com/i/nojs_router?path=%2Fpythontrending"></noscript>
-    
-    
-  
+
+
+
   <script id="bouncer_terminate_iframe" nonce="gUB2ygQg0FPXOxjdUihsBQ==">
     if (window.top != window) {
   window.top.postMessage({'bouncer': true, 'event': 'complete'}, '*');
@@ -83,16 +83,16 @@ a.getAttribute("contenteditable")=="true"}var a=(new Date).getTime(),b=1e4,c=/^(
 
       <input type="hidden" id="init-data" class="json-data" value="{&quot;permalinkOverlayEnabled&quot;:false,&quot;hasKenburnEffectOnSingleImage&quot;:false,&quot;maxTweetComposeCharacters&quot;:140,&quot;composeIgnoreAttachmentText&quot;:false,&quot;baseFoucClass&quot;:&quot;swift-loading&quot;,&quot;bodyFoucClassNames&quot;:&quot;swift-loading&quot;,&quot;macawSwift&quot;:true,&quot;assetsBasePath&quot;:&quot;https:\/\/abs.twimg.com\/a\/1459361345\/&quot;,&quot;assetVersionKey&quot;:&quot;94737b&quot;,&quot;environment&quot;:&quot;production&quot;,&quot;formAuthenticityToken&quot;:&quot;696b0b6b34275d277905c6af7a2daa68c35733a6&quot;,&quot;loggedIn&quot;:false,&quot;screenName&quot;:null,&quot;fullName&quot;:null,&quot;userId&quot;:null,&quot;guestId&quot;:&quot;145951202988878002&quot;,&quot;allowAdsPersonalization&quot;:true,&quot;scribeBufferSize&quot;:3,&quot;pageName&quot;:&quot;profile&quot;,&quot;sectionName&quot;:&quot;profile&quot;,&quot;scribeParameters&quot;:{},&quot;recaptchaApiUrl&quot;:&quot;https:\/\/www.google.com\/recaptcha\/api\/js\/recaptcha_ajax.js&quot;,&quot;internalReferer&quot;:null,&quot;geoEnabled&quot;:false,&quot;typeaheadData&quot;:{&quot;accounts&quot;:{&quot;enabled&quot;:true,&quot;localQueriesEnabled&quot;:false,&quot;remoteQueriesEnabled&quot;:true,&quot;limit&quot;:6},&quot;trendLocations&quot;:{&quot;enabled&quot;:true},&quot;dmConversations&quot;:{&quot;enabled&quot;:false},&quot;savedSearches&quot;:{&quot;enabled&quot;:false,&quot;items&quot;:[]},&quot;dmAccounts&quot;:{&quot;enabled&quot;:false,&quot;localQueriesEnabled&quot;:false,&quot;remoteQueriesEnabled&quot;:false,&quot;onlyDMable&quot;:true},&quot;mediaTagAccounts&quot;:{&quot;enabled&quot;:false,&quot;localQueriesEnabled&quot;:true,&quot;remoteQueriesEnabled&quot;:false,&quot;onlyShowUsersWithCanMediaTag&quot;:false,&quot;currentUserId&quot;:-1},&quot;selectedUsers&quot;:{&quot;enabled&quot;:false},&quot;prefillUsers&quot;:{&quot;enabled&quot;:false},&quot;topics&quot;:{&quot;enabled&quot;:true,&quot;localQueriesEnabled&quot;:false,&quot;remoteQueriesEnabled&quot;:true,&quot;prefetchLimit&quot;:500,&quot;limit&quot;:4},&quot;concierge&quot;:{&quot;enabled&quot;:false,&quot;localQueriesEnabled&quot;:false,&quot;remoteQueriesEnabled&quot;:false,&quot;prefetchLimit&quot;:500,&quot;limit&quot;:6},&quot;recentSearches&quot;:{&quot;enabled&quot;:false},&quot;hashtags&quot;:{&quot;enabled&quot;:false,&quot;localQueriesEnabled&quot;:false,&quot;remoteQueriesEnabled&quot;:true,&quot;prefetchLimit&quot;:500},&quot;useIndexedDB&quot;:false,&quot;showSearchAccountSocialContext&quot;:false,&quot;showDebugInfo&quot;:false,&quot;useThrottle&quot;:true,&quot;accountsOnTop&quot;:false,&quot;remoteDebounceInterval&quot;:300,&quot;remoteThrottleInterval&quot;:300,&quot;tweetContextEnabled&quot;:false,&quot;fullNameMatchingInCompose&quot;:true,&quot;topicsWithFiltersEnabled&quot;:false},&quot;dm&quot;:{&quot;notifications&quot;:false,&quot;participant_max&quot;:50,&quot;video_gif_render&quot;:true,&quot;video_gif_upload&quot;:true,&quot;poll_options&quot;:{&quot;foreground_poll_interval&quot;:3000,&quot;burst_poll_interval&quot;:3000,&quot;burst_poll_duration&quot;:300000,&quot;max_poll_interval&quot;:60000}},&quot;whitelistedVideoUser&quot;:false,&quot;autoplayDisabled&quot;:false,&quot;pushStatePageLimit&quot;:500000,&quot;routes&quot;:{&quot;profile&quot;:&quot;\/&quot;},&quot;pushState&quot;:true,&quot;viewContainer&quot;:&quot;#page-container&quot;,&quot;dragAndDropPhotoUpload&quot;:true,&quot;href&quot;:&quot;\/pythontrending&quot;,&quot;searchPathWithQuery&quot;:&quot;\/search?q=query&amp;src=typd&quot;,&quot;timelineCardsGallery&quot;:true,&quot;deciders&quot;:{&quot;bulkUnfollowEnabled&quot;:true,&quot;custom_timeline_curation&quot;:false,&quot;moment_maker_enabled&quot;:false,&quot;disable_profile_popup&quot;:false,&quot;native_notifications&quot;:true,&quot;dm_polling_frequency_in_seconds&quot;:3000,&quot;enable_media_tag_prefetch&quot;:true,&quot;foundMediaTrendingEnabled&quot;:false,&quot;enableMacawNymizerConversionLanding&quot;:false,&quot;hqImageUploads&quot;:false,&quot;largeHeaderImageUpload&quot;:true,&quot;mqImageUploads&quot;:false,&quot;partnerIdSyncEnabled&quot;:true,&quot;sruMediaCategory&quot;:false,&quot;photoSruGifLimitMb&quot;:5,&quot;promoted_video_logging_enabled&quot;:true,&quot;pushState&quot;:true,&quot;scribeReducedActionQueue&quot;:true,&quot;smartInfiniteScroll&quot;:false,&quot;useHtml5Webcam&quot;:true,&quot;web_perftown_stats&quot;:true,&quot;web_perftown_ttft&quot;:true,&quot;web_sru_stats&quot;:false,&quot;web_upload_direct&quot;:true,&quot;web_upload_video&quot;:true,&quot;web_upload_video_advanced&quot;:false,&quot;upload_video_size&quot;:500,&quot;internationalShippingEnabled&quot;:true,&quot;useV2EndpointsEnabled&quot;:true,&quot;useVmapVariants&quot;:false,&quot;autoplayPreviewPreroll&quot;:true,&quot;moments_lohp_enabled&quot;:true,&quot;overlayPermalink&quot;:true,&quot;momentsExperienceEnabled&quot;:false,&quot;enableNativePush&quot;:false,&quot;composeLimits&quot;:{&quot;enabled&quot;:false,&quot;hashtags&quot;:50,&quot;mentions&quot;:50,&quot;links&quot;:10},&quot;dynamic_video_ads_include_long_videos&quot;:true,&quot;push_state_size&quot;:1000},&quot;experiments&quot;:{},&quot;toasts_dm&quot;:false,&quot;toasts_spoonbill&quot;:false,&quot;toasts_timeline&quot;:false,&quot;toasts_dm_poll_scale&quot;:60,&quot;uploadDomain&quot;:&quot;upload.twitter.com&quot;,&quot;promptbirdData&quot;:{&quot;promptbirdEnabled&quot;:false,&quot;immediateTriggers&quot;:[&quot;PullToRefresh&quot;,&quot;Navigate&quot;],&quot;format&quot;:&quot;ProfileOther&quot;},&quot;pageContext&quot;:&quot;profile&quot;,&quot;passwordResetAdvancedLoginForm&quot;:true,&quot;skipAutoSignupDialog&quot;:false,&quot;shouldReplaceSignupWithLogin&quot;:false,&quot;hashflagBaseUrl&quot;:&quot;https:\/\/abs.twimg.com\/hashflags\/&quot;,&quot;activeHashflags&quot;:{&quot;mv25&quot;:&quot;MotoGP2016\/MV25.png&quot;,&quot;discoverclubcheval&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;worldt20heroes&quot;:&quot;CricketWorldCup2016\/WorldT20Heroes.png&quot;,&quot;zim&quot;:&quot;CricketWorldCup2016\/ZIM.png&quot;,&quot;meinestimme&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;اقترعت&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;뮤지엄위크_헤리티지&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;vr46&quot;:&quot;MotoGP2016\/VR46.png&quot;,&quot;meechum&quot;:&quot;HouseOfCards\/Meechum.png&quot;,&quot;wi&quot;:&quot;CricketWorldCup2016\/WI.png&quot;,&quot;discoveralice&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;periscope&quot;:&quot;Periscope\/Periscope.png&quot;,&quot;heritagemw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoveraliceontheroof&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;phvoteduterte&quot;:&quot;PhilippinesElections2016\/PHVoteDuterte.png&quot;,&quot;뮤지엄위크_diy&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;fighthunger&quot;:&quot;Walmart_Emoji-CK-160204\/Walmart_Emoji-CK-160204.png&quot;,&quot;pak&quot;:&quot;CricketWorldCup2016\/PAK.png&quot;,&quot;lovetwitter&quot;:&quot;LoveTwitter\/LoveTwitter.png&quot;,&quot;teamironman&quot;:&quot;DisneyMarvel\/TeamIronman.png&quot;,&quot;pilipinas2016&quot;:&quot;PhilippinesElections2016\/Pilipinas2016.png&quot;,&quot;pilipinasdebate2016&quot;:&quot;PhilippinesElections2016\/Pilipinas2016.png&quot;,&quot;discoverhyphen&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;discoverjain&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;pe44&quot;:&quot;MotoGP2016\/PE44.png&quot;,&quot;yh68&quot;:&quot;MotoGP2016\/YH68.png&quot;,&quot;zoommw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;sweet16&quot;:&quot;MarchMadness2016\/Sweet16.png&quot;,&quot;tr53&quot;:&quot;MotoGP2016\/TR53.png&quot;,&quot;cc35&quot;:&quot;MotoGP2016\/CC35.png&quot;,&quot;뮤지엄위크_미래&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;뮤지엄위크_zoom&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;秘密mw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;hovotato&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;人びとmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;aus&quot;:&quot;CricketWorldCup2016\/AUS.png&quot;,&quot;япроголосовал(а)&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;stamper&quot;:&quot;HouseOfCards\/Stamper.png&quot;,&quot;thenextgalaxyph&quot;:&quot;TheNextGalaxy\/TheNextGalaxy.png&quot;,&quot;ab19&quot;:&quot;MotoGP2016\/AB19.png&quot;,&quot;未来mw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverhyphenhyphen&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;claireunderwood&quot;:&quot;HouseOfCards\/ClaireUnderwood.png&quot;,&quot;marchmadness&quot;:&quot;MarchMadness2016\/MarchMadness.png&quot;,&quot;discoverjoris&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;ban&quot;:&quot;CricketWorldCup2016\/BAN.png&quot;,&quot;peoplemw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;jaivoté&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;golive&quot;:&quot;goLIVE2016\/goLIVE.png&quot;,&quot;जयहिन्द&quot;:&quot;IND_Flag\/IND.png&quot;,&quot;frankunderwood&quot;:&quot;HouseOfCards\/FrankUnderwood.png&quot;,&quot;jokerwashere&quot;:&quot;joker-emoji\/joker.png&quot;,&quot;뮤지엄위크_피플&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;ire&quot;:&quot;CricketWorldCup2016\/IRE.png&quot;,&quot;peterrusso&quot;:&quot;HouseOfCards\/PeterRusso.png&quot;,&quot;我已投票&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;dp9&quot;:&quot;MotoGP2016\/DP9.png&quot;,&quot;bs38&quot;:&quot;MotoGP2016\/BS38.png&quot;,&quot;phvotepoe&quot;:&quot;PhilippinesElections2016\/PHVotePoe.png&quot;,&quot;nouvellestar&quot;:&quot;NouvelleStar2016\/NouvelleStar.png&quot;,&quot;jl99&quot;:&quot;MotoGP2016\/JL99.png&quot;,&quot;fu2016&quot;:&quot;HouseOfCards\/FU2016.png&quot;,&quot;lovemw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;diymw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;letsdance&quot;:&quot;MarchMadness2016\/LetsDance.png&quot;,&quot;discoverdamienlauretta&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;ripcurlpro&quot;:&quot;RipCurlPro_Girl\/RipCurlPro.png&quot;,&quot;뮤지엄위크_게스트&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;teamcap&quot;:&quot;DisneyMarvel\/TeamCap.png&quot;,&quot;discoverbrokenback&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;discoverigit&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;futuremw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;투표했어요&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;cinderella&quot;:&quot;MarchMadness2016\/Cinderella.png&quot;,&quot;discoverjosef&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;phvoteroxas&quot;:&quot;PhilippinesElections2016\/PHVoteRoxas.png&quot;,&quot;discoverfakear&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;dp26&quot;:&quot;MotoGP2016\/DP26.png&quot;,&quot;ゲストmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverfeuchatterton&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;houseofcards&quot;:&quot;HouseOfCards\/HouseofCards.png&quot;,&quot;細かすぎるnw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;secretsmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverfeu&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;discoverlauriedarmon&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;net&quot;:&quot;CricketWorldCup2016\/NET.png&quot;,&quot;뮤지엄위크_시크릿&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;karenatwtter&quot;:&quot;KarenaTwitter\/KarenaTwitter.png&quot;,&quot;museumweek&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;eng&quot;:&quot;CricketWorldCup2016\/ENG.png&quot;,&quot;bettermatters&quot;:&quot;BetterMatters\/BetterMatters.png&quot;,&quot;ivoted&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;discoverlaurie&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;nsvote&quot;:&quot;NouvelleStar2016\/NSvote.png&quot;,&quot;desapega&quot;:&quot;olx\/emoji_olx_final.png&quot;,&quot;nz&quot;:&quot;CricketWorldCup2016\/NZ.png&quot;,&quot;discoverweek&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;hb8&quot;:&quot;MotoGP2016\/HB8.png&quot;,&quot;zoebarnes&quot;:&quot;HouseOfCards\/ZoeBarnes.png&quot;,&quot;nationalchampionship&quot;:&quot;MarchMadness2016\/NationalChampionship.png&quot;,&quot;bumotoako&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;discoveramir&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;뮤지엄위크_추억&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;lb76&quot;:&quot;MotoGP2016\/LB76.png&quot;,&quot;thenextgalaxy&quot;:&quot;TheNextGalaxy\/TheNextGalaxy.png&quot;,&quot;discoverjosefsalvat&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;oma&quot;:&quot;CricketWorldCup2016\/OMA.png&quot;,&quot;askcaptain&quot;:&quot;CricketWorldCup2016\/AskCaptain.png&quot;,&quot;建築mw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverjorisdelacroix&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;guestmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;wt20&quot;:&quot;CricketWorldCup2016\/WT20.png&quot;,&quot;お気に入りmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;el50&quot;:&quot;MotoGP2016\/EL50.png&quot;,&quot;elite8&quot;:&quot;MarchMadness2016\/Elite8.png&quot;,&quot;ai29&quot;:&quot;MotoGP2016\/AI29.png&quot;,&quot;pilipinasdebates2015&quot;:&quot;PhilippinesElections2016\/Pilipinas2016.png&quot;,&quot;bibi&quot;:&quot;TwitterstarBibi\/TwitterstarBibi.png&quot;,&quot;phvotebinay&quot;:&quot;PhilippinesElections2016\/PHVoteBinay.png&quot;,&quot;phvotesantiago&quot;:&quot;PhilippinesElections2016\/PHVoteSantiago.png&quot;,&quot;sco&quot;:&quot;CricketWorldCup2016\/SCO.png&quot;,&quot;yovoté&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;mm93&quot;:&quot;MotoGP2016\/MM93.png&quot;,&quot;capson&quot;:&quot;CapsOn\/CapsOn.png&quot;,&quot;sb6&quot;:&quot;MotoGP2016\/SB6.png&quot;,&quot;discoversynapson&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;hk&quot;:&quot;CricketWorldCup2016\/HK.png&quot;,&quot;sa&quot;:&quot;CricketWorldCup2016\/SA.png&quot;,&quot;お宝mw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;sr45&quot;:&quot;MotoGP2016\/SR45.png&quot;,&quot;ae41&quot;:&quot;MotoGP2016\/AE41.png&quot;,&quot;つくってみたmw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverlefa&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;ind&quot;:&quot;CricketWorldCup2016\/IND.png&quot;,&quot;icaucused&quot;:&quot;USElections2016\/ivoted.png&quot;,&quot;جالكسي_الآن&quot;:&quot;TheNextGalaxy\/TheNextGalaxy.png&quot;,&quot;finalfour&quot;:&quot;MarchMadness2016\/FinalFour.png&quot;,&quot;discoverzayra&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;afg&quot;:&quot;CricketWorldCup2016\/AFG.png&quot;,&quot;leggomyeggo&quot;:&quot;eggoji-waffle\/eggoji-waffle.png&quot;,&quot;jm43&quot;:&quot;MotoGP2016\/JM43.png&quot;,&quot;뮤지엄위크&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;sl&quot;:&quot;CricketWorldCup2016\/SL.png&quot;,&quot;t20power&quot;:&quot;CricketWorldCup2016_T20Power\/T20Power.png&quot;,&quot;discovernavii&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;junos&quot;:&quot;JUNOS\/JUNOS.png&quot;,&quot;뮤지엄위크_건축&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;lucasgoodwin&quot;:&quot;HouseOfCards\/LucasGoodwin.png&quot;,&quot;ミュージアムウィーク&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;architecturemw&quot;:&quot;MuseumWeek\/MuseumWeek.png&quot;,&quot;discoverdamien&quot;:&quot;DiscoverWeek\/DiscoverWeek.png&quot;,&quot;ad04&quot;:&quot;MotoGP2016\/AD04.png&quot;,&quot;bracketbusted&quot;:&quot;MarchMadness2016\/BracketBusted.png&quot;,&quot;pilipinas&quot;:&quot;PhilippinesElections2016\/Pilipinas2016.png&quot;},&quot;profile_user&quot;:{&quot;id&quot;:2445802928,&quot;id_str&quot;:&quot;2445802928&quot;,&quot;name&quot;:&quot;Python Trending&quot;,&quot;screen_name&quot;:&quot;pythontrending&quot;,&quot;location&quot;:&quot;Interwebs&quot;,&quot;url&quot;:&quot;https:\/\/github.com\/pythontrending?tab=activity&quot;,&quot;description&quot;:&quot;tweeting trending Python repositories on GitHub&quot;,&quot;protected&quot;:false,&quot;followers_count&quot;:4336,&quot;friends_count&quot;:4924,&quot;listed_count&quot;:257,&quot;created_at&quot;:&quot;Tue Apr 15 18:21:07 +0000 2014&quot;,&quot;favourites_count&quot;:19411,&quot;utc_offset&quot;:null,&quot;time_zone&quot;:null,&quot;geo_enabled&quot;:false,&quot;verified&quot;:false,&quot;statuses_count&quot;:2489,&quot;lang&quot;:&quot;en&quot;,&quot;contributors_enabled&quot;:false,&quot;is_translator&quot;:false,&quot;is_translation_enabled&quot;:false,&quot;profile_background_color&quot;:&quot;ACDED6&quot;,&quot;profile_background_image_url&quot;:&quot;http:\/\/abs.twimg.com\/images\/themes\/theme18\/bg.gif&quot;,&quot;profile_background_image_url_https&quot;:&quot;https:\/\/abs.twimg.com\/images\/themes\/theme18\/bg.gif&quot;,&quot;profile_background_tile&quot;:false,&quot;profile_image_url&quot;:&quot;http:\/\/pbs.twimg.com\/profile_images\/456490947287605248\/4oklmBWe_normal.png&quot;,&quot;profile_image_url_https&quot;:&quot;https:\/\/pbs.twimg.com\/profile_images\/456490947287605248\/4oklmBWe_normal.png&quot;,&quot;profile_banner_url&quot;:&quot;https:\/\/pbs.twimg.com\/profile_banners\/2445802928\/1397586592&quot;,&quot;profile_link_color&quot;:&quot;038543&quot;,&quot;profile_sidebar_border_color&quot;:&quot;EEEEEE&quot;,&quot;profile_sidebar_fill_color&quot;:&quot;F6F6F6&quot;,&quot;profile_text_color&quot;:&quot;333333&quot;,&quot;profile_use_background_image&quot;:true,&quot;has_extended_profile&quot;:false,&quot;default_profile&quot;:false,&quot;default_profile_image&quot;:false,&quot;following&quot;:null,&quot;follow_request_sent&quot;:null,&quot;notifications&quot;:null,&quot;ext&quot;:{&quot;vine_profile&quot;:{&quot;r&quot;:{&quot;err&quot;:{&quot;code&quot;:202,&quot;message&quot;:&quot;You are not authorized to request this information.&quot;}},&quot;ttl&quot;:0}}},&quot;profileEditingCSSBundle&quot;:&quot;https:\/\/abs.twimg.com\/a\/1459361345\/css\/t1\/twitter_profile_editing.bundle.css&quot;,&quot;profile_id&quot;:2445802928,&quot;businessProfile&quot;:false,&quot;cardsGallery&quot;:true,&quot;injectComposedTweets&quot;:false,&quot;help_pips_decider&quot;:false,&quot;inlineProfileEditing&quot;:false,&quot;forceHTML5FileUploader&quot;:false,&quot;isClusterFollowReplenishEnabled&quot;:false,&quot;autoplayEnabled&quot;:true,&quot;trendsCacheKey&quot;:null,&quot;decider_personalized_trends&quot;:false,&quot;trendsEndpoint&quot;:&quot;\/i\/trends&quot;,&quot;wtfOptions&quot;:{&quot;pc&quot;:true,&quot;connections&quot;:true,&quot;limit&quot;:3,&quot;display_location&quot;:&quot;profile-sidebar&quot;,&quot;dismissable&quot;:true,&quot;similar_to_user_id&quot;:2445802928},&quot;showSensitiveContent&quot;:false,&quot;autoPlayBalloonsAnimation&quot;:false,&quot;isCurrentUser&quot;:false,&quot;timeline_url&quot;:&quot;\/i\/profiles\/show\/pythontrending\/timeline\/tweets&quot;,&quot;initialState&quot;:{&quot;title&quot;:&quot;Python Trending (@pythontrending) | \u0422\u0432\u0438\u0442\u0442\u0435\u0440&quot;,&quot;section&quot;:null,&quot;module&quot;:&quot;app\/pages\/profile\/highline_landing&quot;,&quot;cache_ttl&quot;:300,&quot;body_class_names&quot;:&quot;three-col logged-out user-style-pythontrending western ru enhanced-mini-profile ProfilePage ProfilePage--withBlockedWarning&quot;,&quot;doc_class_names&quot;:&quot;route-profile&quot;,&quot;route_name&quot;:&quot;profile&quot;,&quot;page_container_class_names&quot;:&quot;AppContent&quot;,&quot;ttft_navigation&quot;:false}}">
 
-  
+
 
     <input type="hidden" class="swift-boot-module" value="app/pages/profile/highline_landing">
   <input type="hidden" id="swift-module-path" value="https://abs.twimg.com/c/swift/ru">
 
-  
+
     <script src="https://abs.twimg.com/c/swift/ru/init.072c3e346361b746b8c61a7ea889a3aabf601285.js" async></script>
 
   </head>
-  <body class="three-col logged-out user-style-pythontrending western ru enhanced-mini-profile ProfilePage ProfilePage--withBlockedWarning" 
+  <body class="three-col logged-out user-style-pythontrending western ru enhanced-mini-profile ProfilePage ProfilePage--withBlockedWarning"
 data-fouc-class-names="swift-loading"
  dir="ltr">
       <script id="swift_loading_indicator" nonce="gUB2ygQg0FPXOxjdUihsBQ==">
@@ -106,7 +106,7 @@ data-fouc-class-names="swift-loading"
     <div class="global-nav-inner">
       <div class="container">
 
-        
+
 <ul class="nav js-global-actions" role="navigation" id="global-actions">
   <li id="global-nav-home" class="home" data-global-action="home">
     <a class="js-nav js-tooltip js-dynamic-tooltip" data-placement="bottom" href="/" data-component-context="home_nav" data-nav="home">
@@ -130,7 +130,7 @@ data-fouc-class-names="swift-loading"
         <span class="visuallyhidden">Поиск в Твиттере</span>
       </button>
     </span>
-      
+
 
 
 <div role="listbox" class="dropdown-menu typeahead">
@@ -142,7 +142,7 @@ data-fouc-class-names="swift-loading"
     <div role="presentation" class="typeahead-saved-searches">
   <h3 id="saved-searches-heading" class="typeahead-category-title saved-searches-title">Сохранённые параметры поиска</h3>
   <ul role="presentation" class="typeahead-items saved-searches-list">
-    
+
     <li role="presentation" class="typeahead-item typeahead-saved-search-item">
       <span class="Icon Icon--close" aria-hidden="true"><span class="visuallyhidden">Удалить</span></span>
       <a role="option" aria-describedby="saved-searches-heading" class="js-nav" href="" data-search-query="" data-query-source="" data-ds="saved_search" tabindex="-1"></a>
@@ -151,18 +151,18 @@ data-fouc-class-names="swift-loading"
 </div>
 
     <ul role="presentation" class="typeahead-items typeahead-topics">
-  
+
   <li role="presentation" class="typeahead-item typeahead-topic-item">
     <a role="option" class="js-nav" href="" data-search-query="" data-query-source="typeahead_click" data-ds="topics" tabindex="-1"></a>
   </li>
 </ul>
-    
+
 
 
 <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-  
+
   <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-    
+
     <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
       <img class="avatar size32" alt="">
       <span class="typeahead-user-item-info">
@@ -178,7 +178,7 @@ data-fouc-class-names="swift-loading"
 </ul>
 
     <ul role="presentation" class="typeahead-items typeahead-trend-locations-list">
-  
+
   <li role="presentation" class="typeahead-item typeahead-trend-locations-item"><a role="option" class="js-nav" href="" data-ds="trend_location" data-search-query="" tabindex="-1"></a></li>
 </ul>
     <div role="presentation" class="typeahead-user-select">
@@ -186,9 +186,9 @@ data-fouc-class-names="swift-loading"
     Предлагаемые пользователи
   </div>
   <ul role="presentation" class="typeahead-items typeahead-selected js-typeahead-selected">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-selected-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -206,9 +206,9 @@ data-fouc-class-names="swift-loading"
   </ul>
 
   <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -372,11 +372,11 @@ data-fouc-class-names="swift-loading"
 
         <div id="page-outer">
           <div id="page-container" class="AppContent">
-              
-            
 
 
-      
+
+
+
 <style id="user-style-pythontrending">
 
 
@@ -843,7 +843,7 @@ s,
     <div class="ProfileCanopy-headerBg">
       <img alt=""
         src="https://pbs.twimg.com/profile_banners/2445802928/1397586592/1500x500"
-        
+
       >
     </div>
 
@@ -871,7 +871,7 @@ s,
 
 
     <div class="ProfileCanopy-navBar">
-      
+
       <div class="AppContainer">
         <div class="Grid Grid--withGutter">
           <div class="Grid-cell u-size1of3 u-lg-size1of4">
@@ -904,7 +904,7 @@ s,
 
           <div class="Grid-cell u-size2of3 u-lg-size3of4">
             <div class="ProfileCanopy-nav">
-              
+
   <div class="ProfileNav" role="navigation" data-user-id="2445802928">
     <ul class="ProfileNav-list">
 <li class="ProfileNav-item ProfileNav-item--tweets is-active">
@@ -960,16 +960,16 @@ s,
 
       </span><button class="user-actions-follow-button js-follow-btn follow-button btn" type="button">
   <span class="button-text follow-text">
-     <span class="Icon Icon--follow"></span> Читать 
-    
+     <span class="Icon Icon--follow"></span> Читать
+
   </span>
   <span class="button-text following-text">
-     Читаю 
-    
+     Читаю
+
   </span>
   <span class="button-text unfollow-text">
-     Отмена 
-    
+     Отмена
+
   </span>
   <span class="button-text blocked-text">В чёрном списке</span>
   <span class="button-text unblock-text">Убрать из чёрного списка</span>
@@ -1014,7 +1014,7 @@ s,
   </h2>
 
     <p class="ProfileHeaderCard-bio u-dir"
-      
+
       dir="ltr">tweeting trending Python repositories on GitHub</p>
 
       <div class="ProfileHeaderCard-location">
@@ -1054,7 +1054,7 @@ s,
     <span class="Icon Icon--camera Icon--medium u-alignBottom"></span>
     <span class="PhotoRail-headingText">
             <a href="/pythontrending/media" class="PhotoRail-headingWithCount js-nav">
-                
+
                  0 фото или видео              </a>
           <a href="/pythontrending/media" class="PhotoRail-headingWithoutCount js-nav">
             Фото и видео
@@ -1083,7 +1083,7 @@ s,
               <div class="Grid-cell
                     u-lg-size2of3
               " data-test-selector="ProfileTimeline">
-                  
+
                     <div class="ProfileHeading">
   <div class="ProfileHeading-spacer"></div>
     <div class="ProfileHeading-content
@@ -1091,15 +1091,15 @@ s,
       <h2 id="content-main-heading" class="ProfileHeading-title u-hiddenVisually ">Твиты</h2>
         <ul class="ProfileHeading-toggle">
             <li class="ProfileHeading-toggleItem
-              
+
               is-active
               "
               data-element-term="tweets_toggle">
                 Твиты
             </li>
             <li class="ProfileHeading-toggleItem
-              
-              
+
+
               u-textUserColor"
               data-element-term="tweets_with_replies_toggle">
                 <a class="ProfileHeading-toggleLink js-nav" href="/pythontrending/with_replies" data-nav="tweets_with_replies_toggle">
@@ -1116,7 +1116,7 @@ s,
 
   <button class="btn BlockedWarningTimeline-button">Показать твиты</button>
 </div>
-                  
+
 
 
 
@@ -1135,7 +1135,7 @@ s,
 
       <div class="modal-header">
         <h3 class="modal-title">
-            
+
             Python Trending начал(а) читать
         </h3>
       </div>
@@ -1163,20 +1163,20 @@ s,
 
     <div class="stream">
         <ol class="stream-items js-navigable-stream" id="stream-items-id">
-          
+
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715765773323644929" id="stream-item-tweet-715765773323644929" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715765773323644929"
 data-item-id="715765773323644929"
 data-permalink-path="/pythontrending/status/715765773323644929"
@@ -1225,32 +1225,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715765773323644929" class="tweet-timestamp js-permalink js-nav js-tooltip" title="22:00 - 31 марта 2016 г." ><span class="_timestamp js-short-timestamp js-relative-timestamp"  data-time="1459486833" data-time-ms="1459486833000" data-long-form="true" aria-hidden="true">7 ч</span><span class="u-hiddenVisually" data-aria-label-part="last">7 часов назад</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">cfgov-refresh - In-progress redesign of the <a href="https://t.co/J6oqwEQ0rJ" rel="nofollow" dir="ltr" data-expanded-url="http://consumerfinance.gov" class="twitter-timeline-link" target="_blank" title="http://consumerfinance.gov" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">consumerfinance.gov</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> website. <a href="https://t.co/mI3PLYizvZ" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/cfpb/cfgov-refresh" class="twitter-timeline-link" target="_blank" title="http://github.com/cfpb/cfgov-refresh" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/cfpb/cfgov-ref</span><span class="invisible">resh</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -1258,21 +1258,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715765773323644929">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -1281,12 +1281,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="2">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>2 ретвитов</span>
       </span>
@@ -1311,7 +1311,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -1362,7 +1362,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -1378,14 +1378,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -1396,12 +1396,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -1411,17 +1411,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715765733762924546" id="stream-item-tweet-715765733762924546" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715765733762924546"
 data-item-id="715765733762924546"
 data-permalink-path="/pythontrending/status/715765733762924546"
@@ -1470,32 +1470,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715765733762924546" class="tweet-timestamp js-permalink js-nav js-tooltip" title="22:00 - 31 марта 2016 г." ><span class="_timestamp js-short-timestamp js-relative-timestamp"  data-time="1459486823" data-time-ms="1459486823000" data-long-form="true" aria-hidden="true">7 ч</span><span class="u-hiddenVisually" data-aria-label-part="last">7 часов назад</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">ActivFlow - A generic, light-weight and extensible Workflow Engine for agile automation of Business Process... <a href="https://t.co/Igor4y5Pkm" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/faxad/ActivFlow" class="twitter-timeline-link" target="_blank" title="http://github.com/faxad/ActivFlow" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/faxad/ActivFlow</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a></p>
 </div>
@@ -1503,21 +1503,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715765733762924546">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -1526,12 +1526,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
         <span class="ProfileTweet-actionCountForAria" >0 ретвитов</span>
       </span>
@@ -1556,7 +1556,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -1607,7 +1607,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -1623,14 +1623,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -1641,12 +1641,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -1656,17 +1656,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715744619456294912" id="stream-item-tweet-715744619456294912" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715744619456294912"
 data-item-id="715744619456294912"
 data-permalink-path="/pythontrending/status/715744619456294912"
@@ -1715,32 +1715,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715744619456294912" class="tweet-timestamp js-permalink js-nav js-tooltip" title="20:36 - 31 марта 2016 г." ><span class="_timestamp js-short-timestamp js-relative-timestamp"  data-time="1459481789" data-time-ms="1459481789000" data-long-form="true" aria-hidden="true">8 ч</span><span class="u-hiddenVisually" data-aria-label-part="last">8 часов назад</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">pandas-summary - An extension to pandas dataframes describe function. <a href="https://t.co/G4scZkux4D" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/mouradmourafiq/pandas-summary" class="twitter-timeline-link" target="_blank" title="http://github.com/mouradmourafiq/pandas-summary" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/mouradmourafiq</span><span class="invisible">/pandas-summary</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -1748,21 +1748,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715744619456294912">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -1771,12 +1771,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="4">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>4 ретвитов</span>
       </span>
@@ -1801,7 +1801,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -1852,7 +1852,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -1868,14 +1868,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -1886,12 +1886,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -1901,17 +1901,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715539263106990080" id="stream-item-tweet-715539263106990080" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715539263106990080"
 data-item-id="715539263106990080"
 data-permalink-path="/pythontrending/status/715539263106990080"
@@ -1960,32 +1960,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715539263106990080" class="tweet-timestamp js-permalink js-nav js-tooltip" title="7:00 - 31 марта 2016 г." ><span class="_timestamp js-short-timestamp js-relative-timestamp"  data-time="1459432829" data-time-ms="1459432829000" data-long-form="true" aria-hidden="true">22 ч</span><span class="u-hiddenVisually" data-aria-label-part="last">22 часа назад</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">metapensiero.pj - Javascript for refined palates: a Python 3 to ES6 Javascript translator <a href="https://t.co/WL611BC7hR" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/azazel75/metapensiero.pj" class="twitter-timeline-link" target="_blank" title="http://github.com/azazel75/metapensiero.pj" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/azazel75/metap</span><span class="invisible">ensiero.pj</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/javascript?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>javascript</b></a></p>
 </div>
@@ -1993,21 +1993,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715539263106990080">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -2016,12 +2016,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="5">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>5 ретвитов</span>
       </span>
@@ -2046,7 +2046,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -2097,7 +2097,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -2113,14 +2113,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -2131,12 +2131,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -2146,17 +2146,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715403380953186304" id="stream-item-tweet-715403380953186304" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715403380953186304"
 data-item-id="715403380953186304"
 data-permalink-path="/pythontrending/status/715403380953186304"
@@ -2205,32 +2205,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715403380953186304" class="tweet-timestamp js-permalink js-nav js-tooltip" title="22:00 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459400432" data-time-ms="1459400432000" data-long-form="true">31 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">tmux2html - :cat2: Render full tmux windows or individual panes as HTML <a href="https://t.co/x5uJgMjHlt" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/tweekmonster/tmux2html" class="twitter-timeline-link" target="_blank" title="http://github.com/tweekmonster/tmux2html" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/tweekmonster/t</span><span class="invisible">mux2html</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -2238,21 +2238,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715403380953186304">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -2261,12 +2261,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="8">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>8 ретвитов</span>
       </span>
@@ -2291,7 +2291,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -2342,7 +2342,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -2358,14 +2358,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -2376,12 +2376,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -2391,17 +2391,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715403345586860032" id="stream-item-tweet-715403345586860032" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715403345586860032"
 data-item-id="715403345586860032"
 data-permalink-path="/pythontrending/status/715403345586860032"
@@ -2450,32 +2450,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715403345586860032" class="tweet-timestamp js-permalink js-nav js-tooltip" title="22:00 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459400423" data-time-ms="1459400423000" data-long-form="true">31 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="zh" data-aria-label-part="0">interpy-zh - 《Python进阶》（Intermediate Python 中文版） <a href="https://t.co/M7S0e2FhnY" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/eastlakeside/interpy-zh" class="twitter-timeline-link" target="_blank" title="http://github.com/eastlakeside/interpy-zh" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/eastlakeside/i</span><span class="invisible">nterpy-zh</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -2483,21 +2483,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715403345586860032">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -2506,12 +2506,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="1">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>1 ретвит</span>
       </span>
@@ -2536,7 +2536,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -2587,7 +2587,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -2603,14 +2603,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -2621,12 +2621,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -2636,17 +2636,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715358039088480257" id="stream-item-tweet-715358039088480257" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715358039088480257"
 data-item-id="715358039088480257"
 data-permalink-path="/pythontrending/status/715358039088480257"
@@ -2695,32 +2695,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715358039088480257" class="tweet-timestamp js-permalink js-nav js-tooltip" title="19:00 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459389621" data-time-ms="1459389621000" data-long-form="true">31 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">caravel - Caravel is a data exploration platform designed to be visual, intuitive, and interactive <a href="https://t.co/xRYYWlM3eb" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/airbnb/caravel" class="twitter-timeline-link" target="_blank" title="http://github.com/airbnb/caravel" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/airbnb/caravel</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -2728,21 +2728,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715358039088480257">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -2751,12 +2751,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="11">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>11 ретвитов</span>
       </span>
@@ -2781,7 +2781,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -2832,7 +2832,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -2848,14 +2848,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -2866,12 +2866,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -2881,17 +2881,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715309721410998272" id="stream-item-tweet-715309721410998272" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715309721410998272"
 data-item-id="715309721410998272"
 data-permalink-path="/pythontrending/status/715309721410998272"
@@ -2940,32 +2940,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715309721410998272" class="tweet-timestamp js-permalink js-nav js-tooltip" title="15:48 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459378102" data-time-ms="1459378102000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">zual - Personal Site Flask based skeleton <a href="https://t.co/rbywA6wvO0" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/ninadmhatre/zual" class="twitter-timeline-link" target="_blank" title="http://github.com/ninadmhatre/zual" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/ninadmhatre/zu</span><span class="invisible">al</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/flask?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>flask</b></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -2973,21 +2973,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715309721410998272">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -2996,12 +2996,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="2">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>2 ретвитов</span>
       </span>
@@ -3026,7 +3026,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -3077,7 +3077,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -3093,14 +3093,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -3111,12 +3111,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -3126,17 +3126,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715219127460372481" id="stream-item-tweet-715219127460372481" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715219127460372481"
 data-item-id="715219127460372481"
 data-permalink-path="/pythontrending/status/715219127460372481"
@@ -3185,32 +3185,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715219127460372481" class="tweet-timestamp js-permalink js-nav js-tooltip" title="9:48 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459356502" data-time-ms="1459356502000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">Snake - Toy example of deep reinforcement model playing the game of snake. <a href="https://t.co/YK3IACRkzc" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/bitwise-ben/Snake" class="twitter-timeline-link" target="_blank" title="http://github.com/bitwise-ben/Snake" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/bitwise-ben/Sn</span><span class="invisible">ake</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -3218,21 +3218,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715219127460372481">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -3241,12 +3241,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="7">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>7 ретвитов</span>
       </span>
@@ -3271,7 +3271,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -3322,7 +3322,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -3338,14 +3338,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -3356,12 +3356,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -3375,7 +3375,7 @@ data-disclosure-type=""
     <div class="ScrollBump-title">
       <span class="Icon Icon--follower Icon--small"></span>
       <span>
-          
+
           Python Trending начал(а) читать
           <a class="js-user-profile-link" href="/sumith1896" data-user-id="3581969053">Sumith</a>,
   <a class="js-user-profile-link" href="/piyushg22" data-user-id="2459674394">Piyush Gupta</a>,
@@ -3391,7 +3391,7 @@ data-disclosure-type=""
      data-user-id="3581969053"
      data-feedback-token=""
      data-impression-id=""
-     
+
   >
   <a class="ProfileCard-bg js-nav" href="/sumith1896" tabindex="-1" aria-hidden="true" style="
     background-color: #19CF86;
@@ -3402,7 +3402,7 @@ data-disclosure-type=""
     <a class="ProfileCard-avatarLink js-nav js-tooltip" href="/sumith1896" title="Sumith" tabindex="-1" aria-hidden="true" >
       <img class="ProfileCard-avatarImage js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/708598686821908480/n5n6heoJ_bigger.jpg" alt="">
     </a>
-    
+
       <div class="ProfileCard-actions">
         <div class="ProfileCard-userActions with-rightCaret js-userActions">
           <div class="UserActions   UserActions--small u-textLeft" >
@@ -3417,16 +3417,16 @@ data-disclosure-type=""
 
       </span><button class="user-actions-follow-button js-follow-btn follow-button btn small small-follow-btn" type="button">
   <span class="button-text follow-text">
-     <span class="Icon Icon--follow"></span> Читать 
-    
+     <span class="Icon Icon--follow"></span> Читать
+
   </span>
   <span class="button-text following-text">
-     Читаю 
-    
+     Читаю
+
   </span>
   <span class="button-text unfollow-text">
-     Отмена 
-    
+     Отмена
+
   </span>
   <span class="button-text blocked-text">В чёрном списке</span>
   <span class="button-text unblock-text">Убрать из чёрного списка</span>
@@ -3448,16 +3448,16 @@ data-disclosure-type=""
     </a>
   </div>
 </div>
-      
+
       <span class="ProfileCard-screenname u-dir" dir="ltr">
         <a href="/sumith1896" class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part >
           @<span class="u-linkComplex-target">sumith1896</span>
         </a>
       </span>
       <p class="ProfileCard-bio u-dir js-ellipsis"
-        
+
         dir="ltr" data-aria-label-part>Programming enthusiast, en route to a computer scientist. FOSS lover. Foodie. Cave @ IIT Bombay</p>
-      
+
     </div>
   </div>
 </div>
@@ -3470,7 +3470,7 @@ data-disclosure-type=""
      data-user-id="2459674394"
      data-feedback-token=""
      data-impression-id=""
-     
+
   >
   <a class="ProfileCard-bg js-nav" href="/piyushg22" tabindex="-1" aria-hidden="true" style="
     background-color: #0084B4;
@@ -3481,7 +3481,7 @@ data-disclosure-type=""
     <a class="ProfileCard-avatarLink js-nav js-tooltip" href="/piyushg22" title="Piyush Gupta" tabindex="-1" aria-hidden="true" >
       <img class="ProfileCard-avatarImage js-action-profile-avatar" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_2_bigger.png" alt="">
     </a>
-    
+
       <div class="ProfileCard-actions">
         <div class="ProfileCard-userActions with-rightCaret js-userActions">
           <div class="UserActions   UserActions--small u-textLeft" >
@@ -3496,16 +3496,16 @@ data-disclosure-type=""
 
       </span><button class="user-actions-follow-button js-follow-btn follow-button btn small small-follow-btn" type="button">
   <span class="button-text follow-text">
-     <span class="Icon Icon--follow"></span> Читать 
-    
+     <span class="Icon Icon--follow"></span> Читать
+
   </span>
   <span class="button-text following-text">
-     Читаю 
-    
+     Читаю
+
   </span>
   <span class="button-text unfollow-text">
-     Отмена 
-    
+     Отмена
+
   </span>
   <span class="button-text blocked-text">В чёрном списке</span>
   <span class="button-text unblock-text">Убрать из чёрного списка</span>
@@ -3527,16 +3527,16 @@ data-disclosure-type=""
     </a>
   </div>
 </div>
-      
+
       <span class="ProfileCard-screenname u-dir" dir="ltr">
         <a href="/piyushg22" class="ProfileCard-screennameLink u-linkComplex js-nav" data-aria-label-part >
           @<span class="u-linkComplex-target">piyushg22</span>
         </a>
       </span>
       <p class="ProfileCard-bio u-dir js-ellipsis"
-        
+
         dir="ltr" data-aria-label-part></p>
-      
+
     </div>
   </div>
 </div>
@@ -3547,17 +3547,17 @@ data-disclosure-type=""
 </li>
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715176938298544129" id="stream-item-tweet-715176938298544129" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715176938298544129"
 data-item-id="715176938298544129"
 data-permalink-path="/pythontrending/status/715176938298544129"
@@ -3606,32 +3606,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715176938298544129" class="tweet-timestamp js-permalink js-nav js-tooltip" title="7:00 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459346444" data-time-ms="1459346444000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">flask - A microframework based on Werkzeug, Jinja2 and good intentions <a href="https://t.co/9Taj36RNX2" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/pallets/flask" class="twitter-timeline-link" target="_blank" title="http://github.com/pallets/flask" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/pallets/flask</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> <a href="/hashtag/jinja2?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>jinja2</b></a> <a href="/hashtag/microframework?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>microframework</b></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -3639,21 +3639,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715176938298544129">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -3662,12 +3662,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="6">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>6 ретвитов</span>
       </span>
@@ -3692,7 +3692,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -3743,7 +3743,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -3759,14 +3759,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -3777,12 +3777,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -3792,17 +3792,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715083235332595712" id="stream-item-tweet-715083235332595712" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715083235332595712"
 data-item-id="715083235332595712"
 data-permalink-path="/pythontrending/status/715083235332595712"
@@ -3851,32 +3851,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715083235332595712" class="tweet-timestamp js-permalink js-nav js-tooltip" title="0:48 - 30 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459324103" data-time-ms="1459324103000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">missingno - Missing data visualization module for Python. <a href="https://t.co/yKIhX9rBkc" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/ResidentMario/missingno" class="twitter-timeline-link" target="_blank" title="http://github.com/ResidentMario/missingno" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/ResidentMario/</span><span class="invisible">missingno</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -3884,21 +3884,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715083235332595712">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -3907,12 +3907,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="7">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>7 ретвитов</span>
       </span>
@@ -3937,7 +3937,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -3988,7 +3988,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -4004,14 +4004,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -4022,12 +4022,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -4037,17 +4037,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715037955975462912" id="stream-item-tweet-715037955975462912" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715037955975462912"
 data-item-id="715037955975462912"
 data-permalink-path="/pythontrending/status/715037955975462912"
@@ -4096,32 +4096,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715037955975462912" class="tweet-timestamp js-permalink js-nav js-tooltip" title="21:48 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459313308" data-time-ms="1459313308000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">stylenet - Neural Network with Style Synthesis <a href="https://t.co/VgScX1Wkaj" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/machrisaa/stylenet" class="twitter-timeline-link" target="_blank" title="http://github.com/machrisaa/stylenet" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/machrisaa/styl</span><span class="invisible">enet</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -4129,21 +4129,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715037955975462912">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -4152,12 +4152,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="2">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>2 ретвитов</span>
       </span>
@@ -4182,7 +4182,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -4233,7 +4233,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -4249,14 +4249,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -4267,12 +4267,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -4282,17 +4282,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="715037927617794048" id="stream-item-tweet-715037927617794048" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="715037927617794048"
 data-item-id="715037927617794048"
 data-permalink-path="/pythontrending/status/715037927617794048"
@@ -4341,32 +4341,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/715037927617794048" class="tweet-timestamp js-permalink js-nav js-tooltip" title="21:48 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459313301" data-time-ms="1459313301000" data-long-form="true">30 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">flinck - Sort your movies on filesystem by dates, ratings, etc using symlinks. <a href="https://t.co/9DzAo7YHd6" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/Kraymer/flinck" class="twitter-timeline-link" target="_blank" title="http://github.com/Kraymer/flinck" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/Kraymer/flinck</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -4374,21 +4374,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/715037927617794048">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -4397,12 +4397,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="2">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>2 ретвитов</span>
       </span>
@@ -4427,7 +4427,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -4478,7 +4478,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -4494,14 +4494,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -4512,12 +4512,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -4527,17 +4527,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714947344404496385" id="stream-item-tweet-714947344404496385" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714947344404496385"
 data-item-id="714947344404496385"
 data-permalink-path="/pythontrending/status/714947344404496385"
@@ -4586,32 +4586,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714947344404496385" class="tweet-timestamp js-permalink js-nav js-tooltip" title="15:48 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459291704" data-time-ms="1459291704000" data-long-form="true">29 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">code2pdf - :fax: Converts various source codes into pdf file with custom features <a href="https://t.co/meXulAXesx" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/tushar-rishav/code2pdf" class="twitter-timeline-link" target="_blank" title="http://github.com/tushar-rishav/code2pdf" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/tushar-rishav/</span><span class="invisible">code2pdf</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/pdf?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>pdf</b></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -4619,21 +4619,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714947344404496385">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -4642,12 +4642,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="5">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>5 ретвитов</span>
       </span>
@@ -4672,7 +4672,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -4723,7 +4723,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -4739,14 +4739,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -4757,12 +4757,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -4772,17 +4772,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714902046281973761" id="stream-item-tweet-714902046281973761" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714902046281973761"
 data-item-id="714902046281973761"
 data-permalink-path="/pythontrending/status/714902046281973761"
@@ -4831,32 +4831,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714902046281973761" class="tweet-timestamp js-permalink js-nav js-tooltip" title="12:48 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459280904" data-time-ms="1459280904000" data-long-form="true">29 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">notice-me - A POC to show the flaw in project collaborator notifications on Github <a href="https://t.co/jNOrEaZpV1" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/719Ben/notice-me" class="twitter-timeline-link" target="_blank" title="http://github.com/719Ben/notice-me" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/719Ben/notice-</span><span class="invisible">me</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/github?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>github</b></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -4864,21 +4864,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714902046281973761">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -4887,12 +4887,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="4">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>4 ретвитов</span>
       </span>
@@ -4917,7 +4917,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -4968,7 +4968,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -4984,14 +4984,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -5002,12 +5002,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -5017,17 +5017,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714856750911004673" id="stream-item-tweet-714856750911004673" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714856750911004673"
 data-item-id="714856750911004673"
 data-permalink-path="/pythontrending/status/714856750911004673"
@@ -5076,32 +5076,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714856750911004673" class="tweet-timestamp js-permalink js-nav js-tooltip" title="9:48 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459270105" data-time-ms="1459270105000" data-long-form="true">29 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">vote_against_37 - Vote against <a href="https://t.co/mXv2iZrua5" rel="nofollow" dir="ltr" data-expanded-url="http://zqyj.chinalaw.gov.cn/draftDetail?listType=2&amp;DraftID=1011&amp;PageI" class="twitter-timeline-link" target="_blank" title="http://zqyj.chinalaw.gov.cn/draftDetail?listType=2&amp;DraftID=1011&amp;PageI" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">zqyj.chinalaw.gov.cn/draftDetail?li</span><span class="invisible">stType=2&amp;DraftID=1011&amp;PageI</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a>... <a href="https://t.co/mMqvwUTWjf" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/ericls/vote_against_37" class="twitter-timeline-link" target="_blank" title="http://github.com/ericls/vote_against_37" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/ericls/vote_ag</span><span class="invisible">ainst_37</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a></p>
 </div>
@@ -5109,21 +5109,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714856750911004673">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -5132,12 +5132,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
         <span class="ProfileTweet-actionCountForAria" >0 ретвитов</span>
       </span>
@@ -5162,7 +5162,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -5213,7 +5213,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -5229,14 +5229,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -5247,12 +5247,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -5262,17 +5262,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714808447502516224" id="stream-item-tweet-714808447502516224" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714808447502516224"
 data-item-id="714808447502516224"
 data-permalink-path="/pythontrending/status/714808447502516224"
@@ -5321,32 +5321,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714808447502516224" class="tweet-timestamp js-permalink js-nav js-tooltip" title="6:36 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459258589" data-time-ms="1459258589000" data-long-form="true">29 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">CANToolz - CANToolz - framework for black-box CAN network analysis <a href="https://t.co/7SPGq3PIJq" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/eik00d/CANToolz" class="twitter-timeline-link" target="_blank" title="http://github.com/eik00d/CANToolz" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/eik00d/CANToolz</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -5354,21 +5354,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714808447502516224">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -5377,12 +5377,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="7">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>7 ретвитов</span>
       </span>
@@ -5407,7 +5407,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -5458,7 +5458,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -5474,14 +5474,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -5492,12 +5492,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -5507,17 +5507,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714717852373221376" id="stream-item-tweet-714717852373221376" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714717852373221376"
 data-item-id="714717852373221376"
 data-permalink-path="/pythontrending/status/714717852373221376"
@@ -5566,32 +5566,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714717852373221376" class="tweet-timestamp js-permalink js-nav js-tooltip" title="0:36 - 29 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459236989" data-time-ms="1459236989000" data-long-form="true">29 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--16px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">rnn-benchmarks - Benchmarks for several RNN variations with different deep-learning frameworks <a href="https://t.co/Vsz5fgiC8A" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/glample/rnn-benchmarks" class="twitter-timeline-link" target="_blank" title="http://github.com/glample/rnn-benchmarks" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/glample/rnn-be</span><span class="invisible">nchmarks</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -5599,21 +5599,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714717852373221376">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -5622,12 +5622,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="7">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>7 ретвитов</span>
       </span>
@@ -5652,7 +5652,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -5703,7 +5703,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -5719,14 +5719,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -5737,12 +5737,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -5752,17 +5752,17 @@ data-disclosure-type=""
 
       <li class="js-stream-item stream-item stream-item expanding-stream-item
 " data-item-id="714491357117747200" id="stream-item-tweet-714491357117747200" data-item-type="tweet">
-      
 
 
-  
+
+
 
   <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
        original-tweet js-original-tweet
-      
-       has-cards 
+
+       has-cards
 "
-      
+
 data-tweet-id="714491357117747200"
 data-item-id="714491357117747200"
 data-permalink-path="/pythontrending/status/714491357117747200"
@@ -5811,32 +5811,32 @@ data-disclosure-type=""
 
 
     <div class="context">
-      
-      
+
+
 
     </div>
 
     <div class="content">
-      
 
-      
+
+
       <div class="stream-item-header">
           <a  class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/pythontrending" data-user-id="2445802928">
     <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/456490947287605248/4oklmBWe_bigger.png" alt="">
     <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part>Python Trending</strong>
     <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part><s>@</s><b>pythontrending</b></span>
-    
+
   </a>
 
         <small class="time">
   <a href="/pythontrending/status/714491357117747200" class="tweet-timestamp js-permalink js-nav js-tooltip" title="9:36 - 28 марта 2016 г." ><span class="_timestamp js-short-timestamp " data-aria-label-part="last" data-time="1459182988" data-time-ms="1459182988000" data-long-form="true">28 марта</span></a>
 </small>
 
-          
-          
+
+
       </div>
 
-      
+
         <div class="js-tweet-text-container">
   <p class="TweetTextSize TweetTextSize--26px js-tweet-text tweet-text" lang="en" data-aria-label-part="0">CrackMapExec - A swiss army knife for pentesting Windows/Active Directory environments <a href="https://t.co/7GN9aoT3yR" rel="nofollow" dir="ltr" data-expanded-url="http://github.com/byt3bl33d3r/CrackMapExec" class="twitter-timeline-link" target="_blank" title="http://github.com/byt3bl33d3r/CrackMapExec" ><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">github.com/byt3bl33d3r/Cr</span><span class="invisible">ackMapExec</span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span>…</span></a> <a href="/hashtag/python?src=hash" data-query-source="hashtag_click" class="twitter-hashtag pretty-link js-nav" dir="ltr" ><s>#</s><b>python</b></a></p>
 </div>
@@ -5844,21 +5844,21 @@ data-disclosure-type=""
 
 
 
-      
-        
 
-      
-      
+
+
+
+
   <div class="expanded-content js-tweet-details-dropdown">
-    
-      
+
+
   </div>
 
 
-      
+
       <div class="stream-item-footer">
-  
-    
+
+
 <a class="details with-icn js-details" href="/pythontrending/status/714491357117747200">
   <b>
       <span class="expand-stream-item js-view-details">Показать сводку</span>
@@ -5867,12 +5867,12 @@ data-disclosure-type=""
 </a>
 
 
-  
+
         <div class="ProfileTweet-actionCountList u-hiddenVisually">
-    
+
     <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
     <span class="ProfileTweet-action--retweet u-hiddenVisually">
-      
+
       <span class="ProfileTweet-actionCount"  data-tweet-stat-count="9">
         <span class="ProfileTweet-actionCountForAria" data-aria-label-part>9 ретвитов</span>
       </span>
@@ -5897,7 +5897,7 @@ data-disclosure-type=""
 </div>
       <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
   <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet"
-    
+
     data-modal="ProfileTweet-retweet"
     type="button">
     <div class="IconContainer js-tooltip" title="Ретвитнуть">
@@ -5948,7 +5948,7 @@ data-disclosure-type=""
       </div>
   </button>
 </div>
-      
+
 
         <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
     <div class="dropdown">
@@ -5964,14 +5964,14 @@ data-disclosure-type=""
     <div class="caret-inner"></div>
   </div>
   <ul>
-    
+
       <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
         <button type="button" class="dropdown-link">Скопировать ссылку на твит</button>
       </li>
       <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
         <button type="button" class="dropdown-link">Разместить твит</button>
       </li>
-        
+
   </ul>
 </div>
 
@@ -5982,12 +5982,12 @@ data-disclosure-type=""
     </div>
 
 </div>
-  
 
 
 
-      
-      
+
+
+
 
     </div>
   </div>
@@ -6061,17 +6061,17 @@ data-disclosure-type=""
                       <div class="Grid-cell">
                         <div class="ProfileSidebar ProfileSidebar--withRightAlignment">
                           <div class="MoveableModule">
-                            
+
 <div class="SidebarCommonModules">
 
 
       <div class="SignupCallOut js-signup-call-out
-  
-  
+
+
    SignupCallOut--fastSignup">
   <div class="SignupCallOut-header">
     <h3 class="SignupCallOut-title u-textBreak">
-        
+
   Не пользуетесь Твиттером?
 
     </h3>
@@ -6104,12 +6104,12 @@ data-disclosure-type=""
 
 
     <div class="Trends module trends hidden
-            
+
             ">
   <div class="trends-inner">
     <div class="flex-module trends-container ">
   <div class="flex-module-header">
-    
+
     <h3><span class="trend-location js-trend-location">Interwebs</span></h3>
   </div>
   <div class="flex-module-inner">
@@ -6166,7 +6166,7 @@ data-disclosure-type=""
 
       <div class="modal-header">
           <h3 class="modal-title">
-            
+
             Выбрать географическое положение
           </h3>
       </div>
@@ -6179,7 +6179,7 @@ data-disclosure-type=""
         </div>
 
         <div class="trends-wrapper" id="trends_dialog_content">
-          
+
           <div class="loading">
             <span class="spinner-bigger"></span>
           </div>
@@ -6192,7 +6192,7 @@ data-disclosure-type=""
 
           </div>
         </div>
-      
+
     </div>
     <div class="alert-messages hidden" id="message-drawer">
     <div class="message ">
@@ -6205,7 +6205,7 @@ data-disclosure-type=""
 </div>
 </div>
 
-    
+
 
 
 <div class="gallery-overlay"></div>
@@ -6267,7 +6267,7 @@ data-disclosure-type=""
         <div class="modal-inner">
           <form class="t1-form goto-user-form">
             <input class="input-block username-input" type="text" placeholder="Начните вводить имя, чтобы перейти к профилю" aria-label="Пользователь">
-            
+
 
 
 <div role="listbox" class="dropdown-menu typeahead">
@@ -6279,7 +6279,7 @@ data-disclosure-type=""
     <div role="presentation" class="typeahead-saved-searches">
   <h3 id="saved-searches-heading" class="typeahead-category-title saved-searches-title">Сохранённые параметры поиска</h3>
   <ul role="presentation" class="typeahead-items saved-searches-list">
-    
+
     <li role="presentation" class="typeahead-item typeahead-saved-search-item">
       <span class="Icon Icon--close" aria-hidden="true"><span class="visuallyhidden">Удалить</span></span>
       <a role="option" aria-describedby="saved-searches-heading" class="js-nav" href="" data-search-query="" data-query-source="" data-ds="saved_search" tabindex="-1"></a>
@@ -6288,18 +6288,18 @@ data-disclosure-type=""
 </div>
 
     <ul role="presentation" class="typeahead-items typeahead-topics">
-  
+
   <li role="presentation" class="typeahead-item typeahead-topic-item">
     <a role="option" class="js-nav" href="" data-search-query="" data-query-source="typeahead_click" data-ds="topics" tabindex="-1"></a>
   </li>
 </ul>
-    
+
 
 
 <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-  
+
   <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-    
+
     <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
       <img class="avatar size32" alt="">
       <span class="typeahead-user-item-info">
@@ -6315,7 +6315,7 @@ data-disclosure-type=""
 </ul>
 
     <ul role="presentation" class="typeahead-items typeahead-trend-locations-list">
-  
+
   <li role="presentation" class="typeahead-item typeahead-trend-locations-item"><a role="option" class="js-nav" href="" data-ds="trend_location" data-search-query="" tabindex="-1"></a></li>
 </ul>
     <div role="presentation" class="typeahead-user-select">
@@ -6323,9 +6323,9 @@ data-disclosure-type=""
     Предлагаемые пользователи
   </div>
   <ul role="presentation" class="typeahead-items typeahead-selected js-typeahead-selected">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-selected-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -6343,9 +6343,9 @@ data-disclosure-type=""
   </ul>
 
   <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -6402,7 +6402,7 @@ data-disclosure-type=""
           <span class="visuallyhidden" id="-label">Необязательный комментарий для ретвита</span>
           <div class="tweet-content">
             <div class="RichEditor">
-  
+
   <div class="RichEditor-mozillaCursorWorkaround">&nbsp;</div>
   <div class="RichEditor-scrollContainer">
 
@@ -6410,14 +6410,14 @@ data-disclosure-type=""
 
             <div aria-labelledby="-label" id="" class="tweet-box rich-editor"
               contenteditable="true" spellcheck="true" role="textbox" aria-multiline="true"></div>
-            
+
     <div class="RichEditor-pictographs" aria-hidden="true"></div>
   </div>
   <div class="RichEditor-mozillaCursorWorkaround">&nbsp;</div>
 </div>
 
           </div>
-          
+
 
 
 <div role="listbox" class="dropdown-menu typeahead">
@@ -6429,7 +6429,7 @@ data-disclosure-type=""
     <div role="presentation" class="typeahead-saved-searches">
   <h3 id="saved-searches-heading" class="typeahead-category-title saved-searches-title">Сохранённые параметры поиска</h3>
   <ul role="presentation" class="typeahead-items saved-searches-list">
-    
+
     <li role="presentation" class="typeahead-item typeahead-saved-search-item">
       <span class="Icon Icon--close" aria-hidden="true"><span class="visuallyhidden">Удалить</span></span>
       <a role="option" aria-describedby="saved-searches-heading" class="js-nav" href="" data-search-query="" data-query-source="" data-ds="saved_search" tabindex="-1"></a>
@@ -6438,18 +6438,18 @@ data-disclosure-type=""
 </div>
 
     <ul role="presentation" class="typeahead-items typeahead-topics">
-  
+
   <li role="presentation" class="typeahead-item typeahead-topic-item">
     <a role="option" class="js-nav" href="" data-search-query="" data-query-source="typeahead_click" data-ds="topics" tabindex="-1"></a>
   </li>
 </ul>
-    
+
 
 
 <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-  
+
   <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-    
+
     <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
       <img class="avatar size32" alt="">
       <span class="typeahead-user-item-info">
@@ -6465,7 +6465,7 @@ data-disclosure-type=""
 </ul>
 
     <ul role="presentation" class="typeahead-items typeahead-trend-locations-list">
-  
+
   <li role="presentation" class="typeahead-item typeahead-trend-locations-item"><a role="option" class="js-nav" href="" data-ds="trend_location" data-search-query="" tabindex="-1"></a></li>
 </ul>
     <div role="presentation" class="typeahead-user-select">
@@ -6473,9 +6473,9 @@ data-disclosure-type=""
     Предлагаемые пользователи
   </div>
   <ul role="presentation" class="typeahead-items typeahead-selected js-typeahead-selected">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-selected-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -6493,9 +6493,9 @@ data-disclosure-type=""
   </ul>
 
   <ul role="presentation" class="typeahead-items typeahead-accounts js-typeahead-accounts">
-    
+
     <li role="presentation" data-user-id="" data-user-screenname="" data-remote="true" data-score="" class="typeahead-item typeahead-account-item js-selectable">
-      
+
       <a role="option" class="js-nav" data-query-source="typeahead_click" data-search-query="" data-ds="account">
         <img class="avatar size32" alt="">
         <span class="typeahead-user-item-info">
@@ -6641,8 +6641,8 @@ data-disclosure-type=""
 
 
 
-  
-  
+
+
 
      <div id="geo-disabled-dropdown">
       <div tabindex="-1">
@@ -6746,7 +6746,7 @@ data-disclosure-type=""
         <h3 class="modal-title">Создать список</h3>
       </div>
       <div class="modal-body">
-        
+
 <div class="list-editor">
   <div class="field">
     <label class="t1-label" for="list-name">Название списка</label>
@@ -7009,7 +7009,7 @@ data-disclosure-type=""
         <h3 class="modal-title">Короткие номера для отправки и получения:</h3>
       </div>
       <div class="modal-body">
-        
+
 <table id="sms_codes" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
@@ -7150,7 +7150,7 @@ data-disclosure-type=""
 <div id="promptbird-modal-prompt" class="modal-container">
   <div class="close-modal-background-target"></div>
   <div class="modal">
-    
+
     <button type="button" class="modal-btn js-promptDismiss modal-close js-close">
       <span class="Icon Icon--close Icon--medium">
         <span class="visuallyhidden">Закрыть</span>
@@ -7218,7 +7218,7 @@ data-disclosure-type=""
 
 </div>
 
-    
+
     <div id="spoonbill-outer"></div>
   </body>
 </html>

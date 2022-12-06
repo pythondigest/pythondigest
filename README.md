@@ -1,12 +1,9 @@
 python-news-digest
 ==================
 
-[![Build Status](https://travis-ci.org/pythondigest/pythondigest.svg?branch=master)](https://travis-ci.org/pythondigest/pythondigest)
-[![Requirements Status](https://requires.io/github/pythondigest/pythondigest/requirements.svg?branch=master)](https://requires.io/github/pythondigest/pythondigest/requirements/?branch=master)
+[![build and deploy to server](https://github.com/pythondigest/pythondigest/actions/workflows/ci.yml/badge.svg)](https://github.com/pythondigest/pythondigest/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/pythondigest/pythondigest/badge.svg?branch=master)](https://coveralls.io/github/pythondigest/pythondigest?branch=master)
-[![Code Health](https://landscape.io/github/pythondigest/pythondigest/master/landscape.svg?style=flat)](https://landscape.io/github/pythondigest/pythondigest/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/pythondigest/pythondigest/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/pythondigest/pythondigest/?branch=master)
-[![Code Issues](https://www.quantifiedcode.com/api/v1/project/965ef841bdca428492ec06d4f018d360/badge.svg)](https://www.quantifiedcode.com/app/project/965ef841bdca428492ec06d4f018d360)
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://doge.mit-license.org)
 
 
@@ -37,7 +34,7 @@ In general, we follow the "fork-and-pull" Git workflow.
  1. **Fork** the repo on GitHub
  2. **Clone** the project to your own machine
  3. **Commit** changes to your own branch
- 4. **Push** your work back up to your fork 
+ 4. **Push** your work back up to your fork
  5. Submit a **Pull request** so that we can review your changes
 
 NOTE: Be sure to merge the latest from "upstream" before making a pull request!

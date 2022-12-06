@@ -1,8 +1,9 @@
-{% load staticfiles %}
+{% load static %}
 {% load ads_tags %}
 {% load compress %}
-{% load remdow %}
+{% load bootstrap3 %}
 {% load common %}
+{% load remdow %}
 
 <!DOCTYPE html>
 <html lang="{% locale %}">
@@ -17,24 +18,24 @@
     <meta charset="utf-8">
     <meta name="google-site-verification"
           content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM"/>
-    <meta name="mailhandler-verification" content="20170228224547-pythondigest.ru-verify">
 
     <link rel="icon" href="{% static 'img/favicon.ico' %}"/>
     <link rel="alternate" type="application/rss+xml" title="RSS"
           href="{% block rss_url %}{% url 'frontend:rss' %}{% endblock %}"/>
     {% block viewport %}
-        <meta name="viewport"
-              content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <meta name="viewport" content="width=device-width">
     {% endblock %}
 
+    <link rel="preload" href="{% bootstrap_url %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{% bootstrap_url %}"></noscript>
 
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></noscript>
 
     {% compress css %}
         {% block styles %}{% endblock %}
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="{% static 'css/vs.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/vs.css' %}">
     {% endcompress %}
 
 
@@ -46,13 +47,11 @@
             <![endif]-->
     {% endblock %}
 
-    <link href="https://mailhandler.ru/static/site/css/app/subscriber/form.css"
-      rel="stylesheet"/>
 
     <script type="text/javascript" async
-            src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN"></script>
+            src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN" async="async"></script>
     <script type="text/javascript"
-            src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+            src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" async="async"></script>
     {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}
@@ -69,7 +68,6 @@
 {% block top_menu %}
     {% include "blocks/_menu.html" %}
 {% endblock %}
-<br>
 
 {% block jumb %}
     {% include "blocks/_jumb.html" %}
@@ -114,15 +112,14 @@
 <!-- /container -->
 
 
-<script type="text/javascript"
-        src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+{% bootstrap_javascript %}
 
 {% compress js %}
-    <script type="text/javascript"
-            src="{% static 'js/vendor/orphus/orphus.js' %}"></script>
+    {% comment %} <script type="text/javascript"
+            src="{% static 'js/vendor/orphus/orphus.js' %}"></script> {% endcomment %}
     {% if likes_enable %}
         <script type="text/javascript"
-                src="{% static 'likes/includes/likes.js' %}"></script>
+                src="{% static 'likes/includes/likes.js' %}"  async="async"></script>
     {% endif %}
 {% endcompress %}
 
@@ -193,7 +190,7 @@
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
 <script type="text/javascript"
-        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"></script>
+        src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc" async="async"></script>
 
 
 {% block scripts %}{% endblock %}

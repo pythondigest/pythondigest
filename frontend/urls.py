@@ -1,32 +1,50 @@
-from django.conf.urls import url
+from django.conf import settings
+from django.urls import path
 
-from frontend.views import IndexView, Sitemap, FriendsView
-from .feeds import AllEntriesFeed, IssuesFeed, ItemArticleFeed, \
-    ItemBookDocFeed, ItemEventFeed, ItemNewsFeed, \
-    ItemPackagesFeed, ItemRecommendFeed, ItemReleaseFeed, \
-    ItemVideoFeed, RussianEntriesFeed, TwitterEntriesFeed, ItemAuthorsFeed, \
-    RawEntriesFeed
+from frontend.views import FriendsView, IndexView, Sitemap
 
-app_name = 'frontend'
+from .feeds import (
+    AllEntriesFeed,
+    IssuesFeed,
+    ItemArticleFeed,
+    ItemAuthorsFeed,
+    ItemBookDocFeed,
+    ItemEventFeed,
+    ItemNewsFeed,
+    ItemPackagesFeed,
+    ItemRecommendFeed,
+    ItemReleaseFeed,
+    ItemVideoFeed,
+    RawEntriesFeed,
+    RussianEntriesFeed,
+    TurboFeed,
+    TwitterEntriesFeed,
+)
+
+feed = TurboFeed()
+feed.configure_analytics_yandex(settings.YANDEX_METRIKA_ID)
+
+
+app_name = "frontend"
 urlpatterns = [
-    url(r'^rss/$', AllEntriesFeed(), name='rss'),
-    url(r'^rss/raw$', RawEntriesFeed(), name='rss_raw'),
-    url(r'^rss/direct/$', AllEntriesFeed(), name='rss_direct'),
-    url(r'^rss/twitter/$', TwitterEntriesFeed(), name='rss_twitter'),
-    url(r'^rss/ru/$', RussianEntriesFeed(), name='russian_rss'),
-    url(r'^rss/issues/$', IssuesFeed(), name='issues_rss'),  # hindi
+    path("", IndexView.as_view(), name="index"),
+    path("rss/", AllEntriesFeed(), name="rss"),
+    path("rss/raw", RawEntriesFeed(), name="rss_raw"),
+    path("rss/direct/", AllEntriesFeed(), name="rss_direct"),
+    path("rss/twitter/", TwitterEntriesFeed(), name="rss_twitter"),
+    path("rss/ru/", RussianEntriesFeed(), name="russian_rss"),
+    path("rss/issues/", IssuesFeed(), name="issues_rss"),  # hindi
     # solution
-    url(r'^rss/video/$', ItemVideoFeed(), name='video_rss'),
-    url(r'^rss/recommend/$', ItemRecommendFeed(), name='recommend_rss'),
-    url(r'^rss/news/$', ItemNewsFeed(), name='news_rss'),
-    url(r'^rss/bookdoc/$', ItemBookDocFeed(), name='book_doc_rss'),
-    url(r'^rss/event/$', ItemEventFeed(), name='event_rss'),
-    url(r'^rss/article/$', ItemArticleFeed(), name='article_rss'),
-    url(r'^rss/authors/$', ItemAuthorsFeed(), name='authors_rss'),
-    url(r'^rss/release/$', ItemReleaseFeed(), name='release_rss'),
-    url(r'^rss/packages/$', ItemPackagesFeed(), name='packages_rss'),
-
-    url(r'^sitemap\.xml$', Sitemap.as_view(), name='sitemap'),
-    url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^friends/$', FriendsView.as_view(), name='friends'),
+    path("rss/video/", ItemVideoFeed(), name="video_rss"),
+    path("rss/recommend/", ItemRecommendFeed(), name="recommend_rss"),
+    path("rss/news/", ItemNewsFeed(), name="news_rss"),
+    path("rss/bookdoc/", ItemBookDocFeed(), name="book_doc_rss"),
+    path("rss/event/", ItemEventFeed(), name="event_rss"),
+    path("rss/article/", ItemArticleFeed(), name="article_rss"),
+    path("rss/authors/", ItemAuthorsFeed(), name="authors_rss"),
+    path("rss/release/", ItemReleaseFeed(), name="release_rss"),
+    path("rss/packages/", ItemPackagesFeed(), name="packages_rss"),
+    path("turbo/", feed),
+    path(r"sitemap\.xml", Sitemap.as_view(), name="sitemap"),
+    path("friends/", FriendsView.as_view(), name="friends"),
 ]

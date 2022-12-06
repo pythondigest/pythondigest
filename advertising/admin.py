@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import AdPage, AdType, AdAlign, Advertising
+from .models import AdAlign, AdPage, AdType, Advertising
 
 admin.site.register(AdAlign)
 admin.site.register(AdPage)

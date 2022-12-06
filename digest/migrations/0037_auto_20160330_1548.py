@@ -23,15 +23,7 @@ class Migration(migrations.Migration):
                 'proxy': True,
             },
             bases=('digest.item',),
-            managers=[
-                ('_default_manager', django.db.models.manager.Manager()),
-            ],
-        ),
-        migrations.AlterModelManagers(
-            name='item',
-            managers=[
-                ('_default_manager', django.db.models.manager.Manager()),
-            ],
+
         ),
         migrations.RemoveField(
             model_name='item',

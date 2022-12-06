@@ -1,16 +1,15 @@
 {% load micawber_tags %}
-
-{% load remdow %}
 {% load video %}
+{% load common %}
 
 {% if item %}
 
     <noindex>
         <div class="issue-item">
-            {% include 'digest/blocks/_item_as_line.html' with item=item language=True link_class='issue-item-title' comment=True likes=True %}
+            {% include 'digest/blocks/_item_as_line.html' with item=item language=True link_class='issue-item-title' comment=False likes=False %}
 
-            {% if item.tags_as_links %}
-                {% for tag_name, tag_link in item.tags_as_links %}
+            {% if item.tags.all|tags_as_links %}
+                {% for tag_name, tag_link in item.tags.all|tags_as_links %}
                     <span class="badge issue-item-resource"><small><a
                             href="{{ tag_link }}">{{ tag_name }}</a></small>
                 </span>

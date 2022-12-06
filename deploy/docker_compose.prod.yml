@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  django:
+    image: pythondigest/pythondigest:${COMMIT_TAG}
+    container_name: pydigest_django
+    volumes:
+      - ${PWD}/static:/app/static/
+      - ${PWD}/media:/app/media/
+    environment:
+      - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+      - REDIS_URL=${REDIS_URL}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - SENTRY_DSN=${SENTRY_DSN}
+      - SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT}
+      - BASE_DOMAIN=${BASE_DOMAIN}
+      - USE_DOCKER=${USE_DOCKER}
+    ports:
+      - "127.0.0.1:8000:8000"
+    command: bash -c "
+      echo 'Prepare and run'
+      && echo 'Migrate migrations'
+      && python manage.py migrate --no-input
+      && python manage.py collectstatic --no-input
+      && cp /app/humans.txt /app/static/
+      && cp /app/robots.txt /app/static/
+      && uwsgi --ini deploy/uwsgi.ini"
+
+  # commands after pg_restore
+  # echo 'Fake exists migration (after restore backup)'
+  # && python manage.py migrate --no-input
+  # && python manage.py migrate secretballot 0001 --fake --no-input
+  # && python manage.py migrate thumbnail 0001 --fake --no-input
+  # && python manage.py migrate secretballot 0002 --fake --no-input

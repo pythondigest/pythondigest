@@ -28,7 +28,7 @@
     <div class="col-md-3">
 
         {% with lang=request.GET.lang|default:'any' %}
-            <div class="btn-group">
+            <div class="btn-group panel-search">
                 <a class="btn btn-default {% if lang == 'any' %}active{% endif %}"
                    href="{% modify_url 'del_query_param' 'lang' %}">Все</a>
                 <a class="btn btn-default {% if lang == 'ru' %}active{% endif %}"
@@ -46,6 +46,3 @@
 
 
 {% endblock %}
-
-
-

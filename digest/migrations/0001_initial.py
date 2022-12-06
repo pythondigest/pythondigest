@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import datetime
 
-import concurrency.fields
+
 from django.conf import settings
 from django.db import migrations, models
 
@@ -93,7 +93,7 @@ class Migration(migrations.Migration):
                                   '\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439'),
                                  (b'draft',
                                   '\u0427\u0435\u0440\u043d\u043e\u0432\u0438\u043a')])),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')), ],
             options={
@@ -164,12 +164,13 @@ class Migration(migrations.Migration):
                         default=0,
                         verbose_name='\u041f\u0440\u0438\u043e\u0440\u0438\u0442\u0435\u0442 \u043f\u0440\u0438 \u043f\u043e\u043a\u0430\u0437\u0435')
                      ),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')),
                     ('issue', models.ForeignKey(
                         verbose_name='\u0412\u044b\u043f\u0443\u0441\u043a \u0434\u0430\u0439\u0434\u0436\u0435\u0441\u0442\u0430',
                         blank=True,
+                        on_delete=models.CASCADE,
                         to='digest.Issue',
                         null=True)), ],
             options={
@@ -196,7 +197,7 @@ class Migration(migrations.Migration):
                     ('link', models.URLField(
                         max_length=255,
                         verbose_name='\u0421\u0441\u044b\u043b\u043a\u0430')),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')), ],
             options={
@@ -231,7 +232,7 @@ class Migration(migrations.Migration):
                             b'active',
                             '\u0410\u043a\u0442\u0438\u0432\u043d\u044b\u0439'
                         )])),
-                    ('version', concurrency.fields.IntegerVersionField(
+                    ('version', models.BigIntegerField(
                         default=1,
                         help_text='record revision number')),
                     ('habr_icon', models.CharField(
@@ -253,6 +254,7 @@ class Migration(migrations.Migration):
                 verbose_name='\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a',
                 blank=True,
                 to='digest.Resource',
+                on_delete=models.CASCADE,
                 null=True),
             preserve_default=True, ),
         migrations.AddField(
@@ -261,7 +263,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 verbose_name='\u0420\u0430\u0437\u0434\u0435\u043b',
                 blank=True,
-                to='digest.Section',
+                to='digest.Section', on_delete=models.CASCADE,
                 null=True),
             preserve_default=True, ),
         migrations.AddField(
@@ -271,6 +273,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 editable=False,
                 to=settings.AUTH_USER_MODEL,
+                on_delete=models.CASCADE,
                 null=True,
                 verbose_name='\u041a\u0442\u043e \u0434\u043e\u0431\u0430\u0432\u0438\u043b \u043d\u043e\u0432\u043e\u0441\u0442\u044c'),
             preserve_default=True, ),
@@ -280,6 +283,6 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 verbose_name='\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a',
                 blank=True,
-                to='digest.Resource',
+                to='digest.Resource', on_delete=models.CASCADE,
                 null=True),
             preserve_default=True, ), ]
