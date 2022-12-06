@@ -5,12 +5,6 @@
 BACKUP_DIR_PATH='/home/pythondigest/pythondigest/backups'
 BACKUP_FILE_PREFIX='postgresql-pythondigest'
 
-POSTGRES_HOST=127.0.0.1
-POSTGRES_PORT=5432
-POSTGRES_DB=pythondigest
-POSTGRES_USER=pythondigest
-POSTGRES_PASSWORD="7Wkg*2UB#ftpA8JPrBve5YEKz"
-
 mkdir -p $BACKUP_DIR_PATH
 
 

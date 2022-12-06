@@ -250,6 +250,22 @@ optional = false
 python-versions = ">=3.7"
 
 [[package]]
+name = "detect-secrets"
+version = "1.4.0"
+description = "Tool for detecting secrets in the codebase"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pyyaml = "*"
+requests = "*"
+
+[package.extras]
+gibberish = ["gibberish-detector"]
+word-list = ["pyahocorasick"]
+
+[[package]]
 name = "dill"
 version = "0.3.6"
 description = "serialize all of python"
@@ -1659,7 +1675,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "2a8f75cb61fd84dde33617de268c391b70198b94852f730ce47bb6ae4e9e4f65"
+content-hash = "16cda0c2e41a87622693b8256dd6fa11017592c95be61f1e40c989eea2f79729"
 
 [metadata.files]
 appdirs = [
@@ -1977,6 +1993,10 @@ coverage = [
 cssselect = [
     {file = "cssselect-1.2.0-py2.py3-none-any.whl", hash = "sha256:da1885f0c10b60c03ed5eccbb6b68d6eff248d91976fcde348f395d54c9fd35e"},
     {file = "cssselect-1.2.0.tar.gz", hash = "sha256:666b19839cfaddb9ce9d36bfe4c969132c647b92fc9088c4e23f786b30f1b3dc"},
+]
+detect-secrets = [
+    {file = "detect_secrets-1.4.0-py3-none-any.whl", hash = "sha256:d08ecabeee8b68c0acb0e8a354fb98d822a653f6ed05e520cead4c6fc1fc02cd"},
+    {file = "detect_secrets-1.4.0.tar.gz", hash = "sha256:d56787e339758cef48c9ccd6692f7a094b9963c979c9813580b0169e41132833"},
 ]
 dill = [
     {file = "dill-0.3.6-py3-none-any.whl", hash = "sha256:a07ffd2351b8c678dfc4a856a3005f8067aea51d6ba6c700796a4d9e280f39f0"},

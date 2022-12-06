@@ -73,6 +73,7 @@ pre-commit = "^2.20.0"
 django-extra-checks = "^0.13.0"
 django-migration-linter = "^4.1.0"
 autoflake = "^1.7.7"
+detect-secrets = "^1.4.0"
 
 [tool.black]
 line-length = 119
