@@ -42,6 +42,7 @@ ALLOWED_HOSTS = [
     "188.120.227.123",
     "127.0.0.1",
     "0.0.0.0",
+    "dev.pythondigest.ru",
 ]
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
@@ -508,6 +509,7 @@ X_FRAME_OPTIONS = "DENY"
 
 CSRF_TRUSTED_ORIGINS = [
     f"https://{BASE_DOMAIN}",
+    "https://dev.pythondigest.ru",
 ]
 
 # Sentry
