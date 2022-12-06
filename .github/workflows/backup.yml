@@ -1,7 +1,8 @@
 name: backup
+
 on:
   schedule:
-    - cron: "0 30 * * *" # Every day at 00:30
+    - cron: "0 30 * * *"
 
 jobs:
   backup_database:
