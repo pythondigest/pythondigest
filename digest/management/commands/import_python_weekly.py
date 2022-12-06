@@ -1,3 +1,9 @@
+"""
+python manage.py import_python_weekly URL
+
+example:
+python manage.py import_python_weekly 'https://python.thisweekin.io/python-weekly-issue-57-6773a17532df?source=rss----26a6525a27bc---4'
+"""
 from collections.abc import Sequence
 from typing import Union
 
@@ -31,44 +37,24 @@ def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
 
     content = response.text
     if content:
-        try:
-            page = html.fromstring(content)
-            result = page.find_class("bodyTable")[0]
-            result = result.xpath('//span[@style="font-size:14px"]')
-        except OSError:
-            page = BeautifulSoup(content, "lxml")
-            result = page.findAll("table", {"class": "bodyTable"})[0]
-            result = result.findAll("span", {"style": "font-size:14px"})
+        page = html.fromstring(content)
+        result = page.find_class("meteredContent")[0]
+        result = result.cssselect("a")
     return result
 
 
 def _get_block_item(block: Parseble) -> dict[str, str | int | Resource]:
     """Extract all data (link, title, description) from block"""
-    resource, created = Resource.objects.get_or_create(
+    resource, _ = Resource.objects.get_or_create(
         title="PythonWeekly", link="http://www.pythonweekly.com/"
     )
 
-    # Handle BeautifulSoup element
-    if isinstance(block, Tag):
-        link = block.findAll("a")[0]
-        url = link["href"]
-        title = link.string
-        try:
-            text = str(block.nextSibling.nextSibling)
-            text = text.replace("<br/>", "").strip()
-        except AttributeError:
-            return {}
+    link = block.cssselect("a")[0]
+    url = link.attrib["href"]
+    title = block.cssselect("h2")[0].text_content()
+    text = block.cssselect("h3")[0].text_content()
 
-    # Handle BeautifulSoup element
-    else:
-        link = block.cssselect("a")[0]
-        url = link.attrib["href"]
-        title = link.text
-        _text = block.getnext()
-        if _text is None:
-            return {}
-        text = etree.tostring(block.getnext()).decode("utf-8")
-        text = text.replace("<br/>", "").strip()
+    text = text.replace("<br/>", "").strip()
 
     return {
         "title": title,
@@ -103,8 +89,31 @@ def main(url):
     }
     _apply_rules = _apply_rules_wrap(**data)
 
-    block_items = map(_get_block_item, _get_blocks(url))
-    list(map(save_news_item, map(_apply_rules, block_items)))
+    block_domains = [
+        "medium.com",
+        "medium.",
+        "thisweekin.io",
+        "google.com",
+        "apple.com",
+        "tinyurl.com",
+    ]
+    rel_list = [
+        "noopener",
+        "follow",
+        "ugc",
+    ]
+    for block in _get_blocks(url):
+        if any([x in block.get("href") for x in block_domains]):
+            continue
+
+        rel = block.get("rel")
+        if any([x not in rel for x in rel_list]):
+            continue
+
+        block_item = _get_block_item(block)
+        _apply_rules(block_item)
+
+        save_news_item(block_item)
 
 
 # Написать тест с использованием ссылки
