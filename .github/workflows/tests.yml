@@ -3,6 +3,27 @@ name: run tests
 on: pull_request
 
 jobs:
+  linter:
+    runs-on: ubuntu-22.04
+    steps:
+
+      - name: Checkout Code Repository
+        uses: actions/checkout@v3
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+          cache: poetry
+
+      - run: poetry install
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.0
+
   test:
     name: Test
     runs-on: ubuntu-22.04
