@@ -2,7 +2,10 @@
 
 name: build and deploy to server
 
-on: push
+on:
+  push:
+    branches:
+      - 'master'
 
 jobs:
   test:
@@ -92,7 +95,7 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'remdow') }}
+            type=raw,value=latest,enable={{is_default_branch}}
       #----------------------------------------------
       # Prepare for building image
       #----------------------------------------------
