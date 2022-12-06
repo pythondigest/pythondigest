@@ -2,7 +2,7 @@ name: backup
 
 on:
   schedule:
-    - cron: "0 30 * * *"
+    - cron: "30 0 * * *"
 
 jobs:
   backup_database:
