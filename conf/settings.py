@@ -44,6 +44,8 @@ ALLOWED_HOSTS = [
     "0.0.0.0",
     "dev.pythondigest.ru",
 ]
+if "pythondigest.ru" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append("pythondigest.ru")
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
@@ -511,6 +513,8 @@ CSRF_TRUSTED_ORIGINS = [
     f"https://{BASE_DOMAIN}",
     "https://dev.pythondigest.ru",
 ]
+if "https://pythondigest.ru" not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append("https://pythondigest.ru")
 
 # Sentry
 # ------------------------------------------------------------------------------
