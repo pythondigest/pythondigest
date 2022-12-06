@@ -1,6 +1,5 @@
-from social_core.pipeline.partial import partial
-
 from django.shortcuts import redirect
+from social_core.pipeline.partial import partial
 
 
 @partial

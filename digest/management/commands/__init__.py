@@ -3,17 +3,15 @@ import pickle
 import random
 import re
 import time
-from typing import Optional
 
 import requests
 from bs4 import BeautifulSoup
 from cache_memoize import cache_memoize
+from django.conf import settings
+from django.core.management import call_command
 from readability import Document
 from requests.exceptions import InvalidSchema, ProxyError, SSLError
 from urllib3.exceptions import ConnectTimeoutError
-
-from django.conf import settings
-from django.core.management import call_command
 
 from digest.models import Item, Section
 
@@ -66,9 +64,7 @@ def _clojure_get_youtube_urls_from_page():
             for x in a:
                 _ = re.findall(reg_list, x)
                 if _:
-                    urls.extend(
-                        [x[0] for x in filter(lambda x: x and len(x) > 1 and x[0], _)]
-                    )
+                    urls.extend([x[0] for x in filter(lambda x: x and len(x) > 1 and x[0], _)])
                     break
 
             result = list(
@@ -100,15 +96,7 @@ def _date_to_julian_day(my_date):
     a = (14 - my_date.month) // 12
     y = my_date.year + 4800 - a
     m = my_date.month + 12 * a - 3
-    return (
-        my_date.day
-        + ((153 * m + 2) // 5)
-        + 365 * y
-        + y // 4
-        - y // 100
-        + y // 400
-        - 32045
-    )
+    return my_date.day + ((153 * m + 2) // 5) + 365 * y + y // 4 - y // 100 + y // 400 - 32045
 
 
 def get_readable_content(content):
@@ -136,9 +124,7 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
         return_tags = []
         for _, value in item_data.items():
             if isinstance(value, str) and value:
-                return_tags.extend(
-                    [tag for tag in tags_names if (tag.lower() in value.lower())]
-                )
+                return_tags.extend([tag for tag in tags_names if (tag.lower() in value.lower())])
         result = list(set(return_tags))
     except AssertionError:
         result = []
@@ -146,11 +132,9 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
 
 
 @cache_memoize(300)  # cache for 5 minutes
-def get_https_proxy() -> Optional[str]:
+def get_https_proxy() -> str | None:
     """Get actual http proxy for requests"""
-    proxy_list_url = (
-        "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt"
-    )
+    proxy_list_url = "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt"
 
     try:
         response = requests.get(proxy_list_url, timeout=20)
@@ -303,8 +287,7 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
     def _make_then_action_set(then_element: str, then_value: str):
         result = {}
         if (then_element == "status" and then_value in query_statuses) or (
-            then_element == "section"
-            and query_sections.filter(title=then_value).exists()
+            then_element == "section" and query_sections.filter(title=then_value).exists()
         ):
             result = {then_element: then_value}
 
@@ -327,9 +310,7 @@ def _make_then_action(then_action, rules, sections, statuses, tags):
 
     # ---------------------
 
-    def _make_then_action_remove_sub_string(
-        then_element: str, then_value: str, if_item: str
-    ):
+    def _make_then_action_remove_sub_string(then_element: str, then_value: str, if_item: str):
         result = {}
 
         if then_element in ["title", "description"] and then_value:
@@ -378,9 +359,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
     #     data['tags'] = list(_tags_of_item)
 
     for rule in query_rules.order_by("-weight"):
-        if rule.then_element == "status" and (
-            data.get("status") == "moderated" or data.get("status") == "active"
-        ):
+        if rule.then_element == "status" and (data.get("status") == "moderated" or data.get("status") == "active"):
             continue
         if rule.then_element == "section" and "section" in data:
             continue
@@ -393,7 +372,11 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
                 then_value = rule.then_value
 
                 function = _make_then_action(
-                    then_action, query_rules, query_sections, query_statuses, tags_names
+                    then_action,
+                    query_rules,
+                    query_sections,
+                    query_statuses,
+                    tags_names,
                 )
                 if then_action == "set":
                     data.update(function(then_element, then_value))
@@ -401,15 +384,9 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
                     data.update(function(then_element, then_value, if_item))
                 elif then_action == "add":
                     if then_element in data:
-                        data[then_element].extend(
-                            list(
-                                function(then_element, then_value).get(then_element, [])
-                            )
-                        )
+                        data[then_element].extend(list(function(then_element, then_value).get(then_element, [])))
                     else:
-                        data[then_element] = list(
-                            function(then_element, then_value).get(then_element, [])
-                        )
+                        data[then_element] = list(function(then_element, then_value).get(then_element, []))
 
     # исключений не должно быть,
     # ибо по коду везде очевидно что объект сущесвтует

@@ -1,33 +1,24 @@
 import datetime
 from random import choice
 
-from siteblocks.siteblocksapp import register_dynamic_block
-
 # Import the register function.
 from django.db.models import Q
 from django.views.generic import TemplateView
+from siteblocks.siteblocksapp import register_dynamic_block
 
 from digest.models import Item
 
 
 def get_active_items():
-    return Item.objects.filter(
-        status="active", activated_at__lte=datetime.datetime.now()
-    )
+    return Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now())
 
 
 def items_preset(items, max_cnt=20):
-    return items.prefetch_related("issue", "section").order_by(
-        "-created_at", "-related_to_date"
-    )[:max_cnt]
+    return items.prefetch_related("issue", "section").order_by("-created_at", "-related_to_date")[:max_cnt]
 
 
 def get_items_by_name(items, name):
-    filters = (
-        Q(title__icontains=name)
-        | Q(description__icontains=name)
-        | Q(tags__name__in=[name])
-    )
+    filters = Q(title__icontains=name) | Q(description__icontains=name) | Q(tags__name__in=[name])
     return items.filter(filters)
 
 
@@ -37,9 +28,7 @@ class DjangoPage(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["active_menu_item"] = "feed"
-        context["items"] = items_preset(
-            get_items_by_name(get_active_items(), "django"), 10
-        )
+        context["items"] = items_preset(get_items_by_name(get_active_items(), "django"), 10)
         return context
 
 

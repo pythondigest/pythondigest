@@ -69,7 +69,9 @@ class HoneypotFieldTest(TestCase):
 
         self.assertEqual(output, "foobar")
 
-    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(self):
+    def test_initial_not_in_EMPTY_VALUES_and_value_is_not_equal_to_initial(
+        self,
+    ):
         field = HoneypotField(initial="foobar")
 
         with self.assertRaises(ValidationError):

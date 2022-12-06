@@ -9,11 +9,10 @@ from pathlib import Path
 
 import environ
 import sentry_sdk
+from django.utils.translation import gettext_lazy as _
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
 from sentry_sdk.integrations.redis import RedisIntegration
-
-from django.utils.translation import gettext_lazy as _
 
 env = environ.Env()
 
@@ -114,9 +113,7 @@ if DEBUG:
     AUTH_PASSWORD_VALIDATORS = []
 else:
     AUTH_PASSWORD_VALIDATORS = [
-        {
-            "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
-        },
+        {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
         {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
         {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
         {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
@@ -299,10 +296,7 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
+        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}
     },
     "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
     "handlers": {
@@ -353,8 +347,8 @@ MICAWBER_TEMPLATE_EXTENSIONS = [
 
 # django-browser-reload
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ["django_browser_reload"]  # noqa F405
-MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]  # noqa F405
+INSTALLED_APPS += ["django_browser_reload"]
+MIDDLEWARE += ["django_browser_reload.middleware.BrowserReloadMiddleware"]
 
 CKEDITOR_CONFIGS = {
     "default": {
@@ -484,7 +478,7 @@ COMPRESS_ENABLED = env.bool("COMPRESS_ENABLED", default=True)
 # https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_STORAGE
 COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
 # https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_URL
-COMPRESS_URL = STATIC_URL  # noqa F405
+COMPRESS_URL = STATIC_URL
 LIBSASS_OUTPUT_STYLE = "compressed"
 # https://django-compressor.readthedocs.io/en/stable/settings.html#django.conf.settings.COMPRESS_FILTERS
 COMPRESS_FILTERS = {

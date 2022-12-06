@@ -12,11 +12,17 @@ repos:
       - id: detect-private-key
       - id: debug-statements
 
-  # - repo: https://github.com/asottile/pyupgrade
-  #   rev: v3.2.2
-  #   hooks:
-  #     - id: pyupgrade
-  #       args: [--py310-plus]
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.2.2
+    hooks:
+      - id: pyupgrade
+        args: [--py311-plus]
+
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        # args: ["--profile", "black"]
 
   - repo: https://github.com/psf/black
     rev: 22.10.0
@@ -24,22 +30,17 @@ repos:
       - id: black
         exclude: ^.*\b(migrations)\b.*$
 
-  # - repo: https://github.com/PyCQA/isort
-  #   rev: 5.10.1
-  #   hooks:
-  #     - id: isort
-
   -   repo: https://github.com/PyCQA/autoflake
       rev: v1.7.7
       hooks:
       -   id: autoflake
 
-  # - repo: https://github.com/PyCQA/flake8
-  #   rev: 5.0.4
-  #   hooks:
-  #     - id: flake8
-  #       args: ["--config=setup.cfg"]
-  #       additional_dependencies: [flake8-isort]
+#   - repo: https://github.com/PyCQA/flake8
+#     rev: 5.0.4
+#     hooks:
+#       - id: flake8
+#         args: ["--config=setup.cfg"]
+#         additional_dependencies: [flake8-isort]
 
   - repo:  https://github.com/python-jsonschema/check-jsonschema
     rev: 0.19.2
@@ -51,5 +52,5 @@ repos:
     rev: v1.9.0
     hooks:
       - id: python-use-type-annotations
-      # - id: python-check-blanket-noqa
+      - id: python-check-blanket-noqa
       # - id: python-no-eval

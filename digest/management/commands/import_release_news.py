@@ -6,7 +6,6 @@ import logging
 from time import mktime
 
 import feedparser
-
 from django.core.management.base import BaseCommand
 
 from digest.management.commands import save_news_item
@@ -22,13 +21,11 @@ def _generate_release_item(
     section: Section,
     package: Package,
 ):
-    name = "{} - {}".format(package.name, package_version)
+    name = f"{package.name} - {package_version}"
     description = (
         "{0}."
         ' Изменения описаны по ссылке <a href="{1}">{1}</a>. '
-        'Скачать можно по ссылке: <a href="{2}">{2}</a>'.format(
-            package.description, link, package.link
-        )
+        'Скачать можно по ссылке: <a href="{2}">{2}</a>'.format(package.description, link, package.link)
     )
     return {
         "title": name,
@@ -93,9 +90,7 @@ def parse_rss(package: Package):
             if news and check_previous_news_of_package(news, package):
                 off_other_release_news(news, package)
 
-            item_data = _generate_release_item(
-                package_version, n.link, resource, section, package
-            )
+            item_data = _generate_release_item(package_version, n.link, resource, section, package)
             save_news_item(item_data)
             print(f"> Save news for version - {package_version}")
         except Exception as e:

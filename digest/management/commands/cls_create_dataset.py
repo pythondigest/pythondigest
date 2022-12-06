@@ -51,9 +51,7 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("cnt_parts", type=int)  # сколько частей
         parser.add_argument("percent", type=int)  # сколько частей
-        parser.add_argument(
-            "dataset_folder", type=str
-        )  # ссылка на дополнительный датасет для объединения
+        parser.add_argument("dataset_folder", type=str)  # ссылка на дополнительный датасет для объединения
 
     def handle(self, *args, **options):
 
@@ -73,9 +71,7 @@ class Command(BaseCommand):
         for entry in urls:
             query = query | Q(link__contains=entry)
 
-        active_news = (
-            Item.objects.filter(status="active").exclude(section=None).exclude(query)
-        )
+        active_news = Item.objects.filter(status="active").exclude(section=None).exclude(query)
         links = active_news.all().values_list("link", flat=True).distinct()
         non_active_news = Item.objects.exclude(link__in=links).exclude(query)
 
@@ -115,5 +111,6 @@ class Command(BaseCommand):
             )
 
             save_function(
-                test_set[part * test_part_size : (part + 1) * test_part_size], test_name
+                test_set[part * test_part_size : (part + 1) * test_part_size],
+                test_name,
             )

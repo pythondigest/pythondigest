@@ -10,7 +10,9 @@ class AdType(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Title"))
     name = models.CharField(max_length=255, verbose_name=_("ID"))
     template = models.CharField(
-        max_length=255, verbose_name=_("Template"), help_text=_("Path to template")
+        max_length=255,
+        verbose_name=_("Template"),
+        help_text=_("Path to template"),
     )
 
     class Meta:
@@ -37,9 +39,7 @@ class AdAlign(models.Model):
 class AdPage(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Title"))
     slug = models.CharField(max_length=255, verbose_name=_("Slug"))
-    additional = models.CharField(
-        max_length=255, verbose_name=_("Additional info"), blank=True
-    )
+    additional = models.CharField(max_length=255, verbose_name=_("Additional info"), blank=True)
 
     @property
     def url(self):
@@ -93,17 +93,11 @@ class Advertising(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Title"))
     active = models.BooleanField(verbose_name=_("Active"), default=True)
     description = models.TextField(verbose_name=_("Description"))
-    type = models.ForeignKey(
-        AdType, verbose_name=_("Ads type"), on_delete=models.CASCADE
-    )
-    align = models.ForeignKey(
-        AdAlign, verbose_name=_("Ads align"), on_delete=models.CASCADE
-    )
+    type = models.ForeignKey(AdType, verbose_name=_("Ads type"), on_delete=models.CASCADE)
+    align = models.ForeignKey(AdAlign, verbose_name=_("Ads align"), on_delete=models.CASCADE)
     pages = models.ManyToManyField(AdPage, verbose_name=_("Ads pages"))
 
-    start_date = models.DateField(
-        verbose_name=_("Start date"), default=datetime.datetime.today
-    )
+    start_date = models.DateField(verbose_name=_("Start date"), default=datetime.datetime.today)
     end_date = models.DateField(verbose_name=_("End date"), default=week_delta)
 
     class Meta:

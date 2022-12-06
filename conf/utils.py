@@ -8,6 +8,4 @@ def likes_enable() -> bool:
     # Хочется, чтобы делалось 1 запросом это
     return False
 
-    return bool(
-        "likes" in settings.INSTALLED_APPS and "secretballot" in settings.INSTALLED_APPS
-    )
+    return bool("likes" in settings.INSTALLED_APPS and "secretballot" in settings.INSTALLED_APPS)

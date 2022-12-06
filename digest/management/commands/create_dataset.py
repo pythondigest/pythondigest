@@ -67,7 +67,5 @@ class Command(BaseCommand):
             queryset = train_set[part * train_part_size : (part + 1) * train_part_size]
             create_dataset(queryset, name)
 
-        with open(
-            os.path.join(settings.DATASET_FOLDER, "test_set_ids.txt"), "w"
-        ) as fio:
+        with open(os.path.join(settings.DATASET_FOLDER, "test_set_ids.txt"), "w") as fio:
             fio.writelines(["%s\n" % x for x in test_set.values_list("id", flat=True)])

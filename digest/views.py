@@ -1,12 +1,9 @@
 import datetime
 
 from digg_paginator import DiggPaginator
-
 from django.contrib import messages
-from django.db.models import Q, Subquery
+from django.db.models import Q
 from django.http import JsonResponse
-from django.template import loader
-from django.template.context import RequestContext
 from django.urls import reverse
 from django.views.generic import DetailView, FormView, ListView
 
@@ -41,9 +38,7 @@ class IssueView(CacheMixin, FavoriteItemsMixin, FeedItemsMixin, AdsMixin, Detail
     cache_timeout = 300
 
     def get_queryset(self):
-        return (
-            super().get_queryset().only("pk", "title", "description", "trend", "image")
-        )
+        return super().get_queryset().only("pk", "title", "description", "trend", "image")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -95,11 +90,7 @@ class ItemsByTagView(AdsMixin, FavoriteItemsMixin, CacheMixin, ListView):
     cache_timeout = 300
 
     def get_queryset(self):
-        items = (
-            super()
-            .get_queryset()
-            .filter(status="active", activated_at__lte=datetime.datetime.now())
-        )
+        items = super().get_queryset().filter(status="active", activated_at__lte=datetime.datetime.now())
         tag = self.request.GET.get("tag")
         if tag in ["ru", "en"]:
             items = items.filter(tags__name__in=tag)
@@ -120,11 +111,7 @@ class NewsList(FavoriteItemsMixin, CacheMixin, ListView):
     cache_timeout = 300
 
     def get_queryset(self):
-        items = (
-            super()
-            .get_queryset()
-            .filter(status="active", activated_at__lte=datetime.datetime.now())
-        )
+        items = super().get_queryset().filter(status="active", activated_at__lte=datetime.datetime.now())
         lang = self.request.GET.get("lang")
         if lang in ["ru", "en"]:
             items = items.filter(language=lang)

@@ -2,7 +2,6 @@ import datetime
 import json
 
 import requests
-
 from django.conf import settings
 from django.core.management import BaseCommand
 
@@ -50,8 +49,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         prev_date = datetime.datetime.now() - datetime.timedelta(days=10)
         items = Item.objects.filter(
-            id__in=ItemClsCheck.objects.filter(last_check__lte=prev_date).values_list(
-                "item", flat=True
-            )
+            id__in=ItemClsCheck.objects.filter(last_check__lte=prev_date).values_list("item", flat=True)
         )
         update_cls(items)

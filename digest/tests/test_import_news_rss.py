@@ -20,7 +20,9 @@ class ImportRSSTest(TestCase):
         requests_mock.return_value = response
 
         self.res_rss = AutoImportResource.objects.create(
-            title="Test2", link="https://planetpython.org/rss20.xml", type_res="rss"
+            title="Test2",
+            link="https://planetpython.org/rss20.xml",
+            type_res="rss",
         )
 
         self.section = Section(title="Статьи")
@@ -57,16 +59,24 @@ class ImportRSSTest(TestCase):
         rss_items = get_items_from_rss(self.res_rss.link)
 
         Item(
-            title=rss_items[0]["title"], link=rss_items[0]["link"], section=self.section
+            title=rss_items[0]["title"],
+            link=rss_items[0]["link"],
+            section=self.section,
         ).save()
         Item(
-            title=rss_items[1]["title"], link=rss_items[1]["link"], section=self.section
+            title=rss_items[1]["title"],
+            link=rss_items[1]["link"],
+            section=self.section,
         ).save()
         Item(
-            title=rss_items[2]["title"], link=rss_items[2]["link"], section=self.section
+            title=rss_items[2]["title"],
+            link=rss_items[2]["link"],
+            section=self.section,
         ).save()
         Item(
-            title=rss_items[3]["title"], link=rss_items[3]["link"], section=self.section
+            title=rss_items[3]["title"],
+            link=rss_items[3]["link"],
+            section=self.section,
         ).save()
 
         actual_items = [

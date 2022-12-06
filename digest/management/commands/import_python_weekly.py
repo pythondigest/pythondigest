@@ -9,17 +9,9 @@ from typing import Union
 
 import lxml.html as html
 from bs4 import BeautifulSoup
-from bs4.element import Tag
-from lxml import etree
-
 from django.core.management.base import BaseCommand
 
-from digest.management.commands import (
-    apply_parsing_rules,
-    apply_video_rules,
-    make_get_request,
-    save_news_item,
-)
+from digest.management.commands import apply_parsing_rules, apply_video_rules, make_get_request, save_news_item
 from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
 Parseble = Union[BeautifulSoup, html.HtmlElement]
@@ -45,9 +37,7 @@ def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
 
 def _get_block_item(block: Parseble) -> dict[str, str | int | Resource]:
     """Extract all data (link, title, description) from block"""
-    resource, _ = Resource.objects.get_or_create(
-        title="PythonWeekly", link="http://www.pythonweekly.com/"
-    )
+    resource, _ = Resource.objects.get_or_create(title="PythonWeekly", link="http://www.pythonweekly.com/")
 
     link = block.cssselect("a")[0]
     url = link.attrib["href"]
@@ -72,9 +62,7 @@ def _apply_rules_wrap(**kwargs):
     rules = kwargs
 
     def _apply_rules(item: dict) -> dict:
-        item.update(
-            apply_parsing_rules(item, **rules) if kwargs.get("query_rules") else {}
-        )
+        item.update(apply_parsing_rules(item, **rules) if kwargs.get("query_rules") else {})
         item.update(apply_video_rules(item))
         return item
 

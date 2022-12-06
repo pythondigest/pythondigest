@@ -2,7 +2,6 @@ import logging
 import re
 
 import requests
-
 from django import template
 from django.contrib.messages.utils import get_level_tags
 

@@ -1,11 +1,10 @@
 import datetime
 
 import pytils
-from yaturbo import YandexTurboFeed
-
 from django.conf import settings
 from django.contrib.syndication.views import Feed
 from django.utils.feedgenerator import Rss201rev2Feed
+from yaturbo import YandexTurboFeed
 
 from digest.models import Issue, Item, Section
 
@@ -13,9 +12,7 @@ from digest.models import Issue, Item, Section
 class DigestFeed(Feed):
     title = "Дайджест новостей о python"
     link = "/"
-    description = (
-        "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."
-    )
+    description = "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."
 
     def item_title(self, item):
         return item.title
@@ -54,10 +51,9 @@ class ItemDigestFeed(DigestFeed):
 
     @staticmethod
     def items():
-        _ = Item.objects.filter(
-            status="active",
-            activated_at__lte=datetime.datetime.now(),
-        ).order_by("-related_to_date")[:10]
+        _ = Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now(),).order_by(
+            "-related_to_date"
+        )[:10]
         mark_videos(_)
         return _
 
@@ -76,7 +72,9 @@ class TwitterEntriesFeed(ItemDigestFeed):
 class RussianEntriesFeed(ItemDigestFeed):
     """Лента РСС для русскоязычных новостей."""
 
-    description = "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."
+    description = (
+        "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях (только русскоязычные материалы)."
+    )
 
     def item_link(self, item):
         return item.internal_link
@@ -84,7 +82,9 @@ class RussianEntriesFeed(ItemDigestFeed):
     @staticmethod
     def items():
         return Item.objects.filter(
-            status="active", language="ru", activated_at__lte=datetime.datetime.now()
+            status="active",
+            language="ru",
+            activated_at__lte=datetime.datetime.now(),
         ).order_by("-modified_at")[:10]
 
 
@@ -99,9 +99,7 @@ class IssuesFeed(ItemDigestFeed):
 
     title = "Дайджест новостей о python - все выпуски"
     link = "/issues/"
-    description = (
-        "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."
-    )
+    description = "Рускоязычные анонсы свежих новостей о python и близлежащих технологиях."
 
     feed_type = CustomFeedGenerator
 
@@ -112,9 +110,7 @@ class IssuesFeed(ItemDigestFeed):
     def item_title(self, item):
         df = pytils.dt.ru_strftime("%d %B %Y", item.date_from, inflected=True)
         dt = pytils.dt.ru_strftime("%d %B %Y", item.date_to, inflected=True)
-        return "Python-digest #{}. Новости, интересные проекты, статьи и интервью [{} — {}]".format(
-            item.pk, df, dt
-        )
+        return f"Python-digest #{item.pk}. Новости, интересные проекты, статьи и интервью [{df} — {dt}]"
 
     def item_pubdate(self, item):
         if item.published_at is not None:
@@ -128,11 +124,7 @@ class IssuesFeed(ItemDigestFeed):
         the `add_item` call of the feed generator.
         Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
         """
-        return {
-            "image": "http://" + settings.BASE_DOMAIN + obj.image.url
-            if obj.image
-            else ""
-        }
+        return {"image": "http://" + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
 
 
 class SectionFeed(DigestFeed):
@@ -143,9 +135,9 @@ class SectionFeed(DigestFeed):
     def items(self):
         section = Section.objects.filter(title=self.section)
         if self.section == "all" or len(section) != 1:
-            result = Item.objects.filter(
-                status="active", activated_at__lte=datetime.datetime.now()
-            ).order_by("-related_to_date")[:10]
+            result = Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now()).order_by(
+                "-related_to_date"
+            )[:10]
         else:
             result = Item.objects.filter(
                 status="active",

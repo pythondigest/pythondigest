@@ -3,15 +3,16 @@ from functools import partial
 from time import mktime
 
 import feedparser
-from funcy import join
-
 from django.core.management.base import BaseCommand
+from funcy import join
 
 from jobs.models import AcceptedList, JobFeed, JobItem, RejectedList
 from jobs.utils import HhVacancyManager
 
 
-def prepare_link_title(item: feedparser.FeedParserDict) -> feedparser.FeedParserDict:
+def prepare_link_title(
+    item: feedparser.FeedParserDict,
+) -> feedparser.FeedParserDict:
     """
     Для RSS Item возвращает ссылку, заголовок и описание
     :param item:

@@ -7,11 +7,11 @@ from urllib.request import urlretrieve
 import requests
 import tweepy
 import twx
-from twx.botapi import TelegramBot
 
 # import vk
 from django.conf import settings
 from django.template.loader import render_to_string
+from twx.botapi import TelegramBot
 
 from digest.pub_digest_email import send_email
 
@@ -239,7 +239,11 @@ def pub_to_email(title: str, news):
 
 
 def pub_to_all(
-    title: str, text: str, digest_url: str, digest_image_url: str, news: list[dict]
+    title: str,
+    text: str,
+    digest_url: str,
+    digest_image_url: str,
+    news: list[dict],
 ):
     """
     digest_url ='http://pythondigest.ru/issue/101/'
@@ -255,11 +259,7 @@ def pub_to_all(
     #                         user_password=settings.VK_PASSWORD,
     #                         scope='wall,messages,offline')
     # api = vk.API(session, api_version='5.131')
-    twitter_text = (
-        "Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {}".format(
-            digest_url
-        )
-    )
+    twitter_text = f"Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {digest_url}"
     twitter_api = init_auth(
         settings.TWITTER_CONSUMER_KEY,
         settings.TWITTER_CONSUMER_SECRET,

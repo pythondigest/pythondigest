@@ -33,9 +33,7 @@ class Sitemap(TemplateView):
         for issue in Issue.objects.filter(status="active"):
             items.append({"loc": issue.link, "changefreq": "weekly"})
 
-        for item in Item.objects.filter(
-            status="active", activated_at__lte=datetime.datetime.now()
-        ):
+        for item in Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now()):
             items.append({"loc": f"/view/{item.pk}", "changefreq": "weekly"})
 
         ctx.update({"records": items, "domain": f"https://{settings.BASE_DOMAIN}"})
@@ -105,8 +103,6 @@ class ViewEditorMaterial(TemplateView):
         section = kwargs.get("section", "landing")
         slug = kwargs.get("slug")
 
-        material = get_object_or_404(
-            EditorMaterial, slug=slug, section=section, status="active"
-        )
+        material = get_object_or_404(EditorMaterial, slug=slug, section=section, status="active")
 
         return {"material": material}

@@ -61,28 +61,24 @@ class JobItem(models.Model):
     link = models.URLField("Ссылка")
     description = models.TextField("Описание вакансии", null=True, blank=True)
 
-    created_at = models.DateTimeField(
-        "Дата создания", auto_now_add=True, null=True, blank=True
-    )
-    updated_at = models.DateTimeField(
-        "Дата обновления", auto_now=True, null=True, blank=True
-    )
+    created_at = models.DateTimeField("Дата создания", auto_now_add=True, null=True, blank=True)
+    updated_at = models.DateTimeField("Дата обновления", auto_now=True, null=True, blank=True)
     published_at = models.DateTimeField("Дата публикации", null=True, editable=False)
 
     src_id = models.CharField("ID в источнике", max_length=50, null=True, blank=True)
-    src_place_name = models.CharField(
-        "Название места в источнике", max_length=255, null=True, blank=True
-    )
+    src_place_name = models.CharField("Название места в источнике", max_length=255, null=True, blank=True)
     src_place_id = models.CharField(
-        "ID места в источнике", max_length=20, db_index=True, null=True, blank=True
+        "ID места в источнике",
+        max_length=20,
+        db_index=True,
+        null=True,
+        blank=True,
     )
 
     url_api = models.URLField("URL API", null=True, blank=True)
     url_logo = models.URLField("URL логотипа", null=True, blank=True)
 
-    employer_name = models.CharField(
-        "Работодатель", max_length=255, null=True, blank=True
-    )
+    employer_name = models.CharField("Работодатель", max_length=255, null=True, blank=True)
 
     salary_from = models.PositiveIntegerField("Заработная плата", null=True, blank=True)
     salary_till = models.PositiveIntegerField("З/п до", null=True, blank=True)

@@ -215,11 +215,7 @@ class ItemAdmin(admin.ModelAdmin):
     external_link.short_description = "Ссылка"
 
     def get_queryset(self, request):
-        return (
-            super()
-            .get_queryset(request)
-            .prefetch_related("section", "resource", "user")
-        )
+        return super().get_queryset(request).prefetch_related("section", "resource", "user")
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
@@ -302,7 +298,13 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     )
 
     readonly_fields = ("external_link_edit",)
-    list_display = ("title", "status", "external_link", "cls_ok", "activated_at")
+    list_display = (
+        "title",
+        "status",
+        "external_link",
+        "cls_ok",
+        "activated_at",
+    )
 
     exclude = (("modified_at",),)
     radio_fields = {
@@ -393,16 +395,17 @@ class ItemModeratorAdmin(admin.ModelAdmin):
             before_issue = Issue.objects.filter(date_to=end_week - timedelta(days=7))
             assert len(before_issue) == 1
             if before_issue[0].status == "active":
-                current_issue = Issue.objects.filter(
-                    date_to=end_week, date_from=start_week
-                )
+                current_issue = Issue.objects.filter(date_to=end_week, date_from=start_week)
                 assert len(current_issue) == 1
                 current_issue = current_issue[0]
             else:
                 current_issue = before_issue[0]
 
             result = self.model.objects.filter(
-                related_to_date__range=[current_issue.date_from, current_issue.date_to]
+                related_to_date__range=[
+                    current_issue.date_from,
+                    current_issue.date_to,
+                ]
             )
 
             if current_issue.last_item is not None:
@@ -464,9 +467,9 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
             today = datetime.utcnow().date()
             yeasterday = today - timedelta(days=2)
 
-            result = self.model.objects.filter(
-                related_to_date__range=[yeasterday, today], status="active"
-            ).order_by("-pk")
+            result = self.model.objects.filter(related_to_date__range=[yeasterday, today], status="active").order_by(
+                "-pk"
+            )
         except AssertionError:
             result = super().get_queryset(request)
         return result
@@ -514,11 +517,7 @@ class ItemClsAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
-            return (
-                super()
-                .get_queryset(request)
-                .filter(pk__lte=Issue.objects.all().first().last_item)
-            )
+            return super().get_queryset(request).filter(pk__lte=Issue.objects.all().first().last_item)
         except ValueError as e:
             print(e)
             return super().get_queryset(request)

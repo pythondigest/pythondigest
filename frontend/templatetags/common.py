@@ -2,18 +2,14 @@ import logging
 import random
 import re
 
-import lxml.html
 from bootstrap3.templatetags.bootstrap3 import bootstrap_css_url
-from unidecode import unidecode as _unidecode
-from urlobject import URLObject
-
 from django import template
 from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, to_locale
-
-from conf.utils import likes_enable
+from unidecode import unidecode as _unidecode
+from urlobject import URLObject
 
 logger = logging.getLogger(__name__)
 name_re = re.compile(r"([^O])Auth")
@@ -119,9 +115,7 @@ def modify_url(context, operation, *params):
 def tags_as_links(tags):
     from digest.models import build_url
 
-    return [
-        (tag.name, build_url("digest:feed", params={"tag": tag.name})) for tag in tags
-    ]
+    return [(tag.name, build_url("digest:feed", params={"tag": tag.name})) for tag in tags]
 
 
 @register.filter

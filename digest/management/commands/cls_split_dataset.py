@@ -55,5 +55,6 @@ class Command(BaseCommand):
                 train_name,
             )
             save_dataset(
-                test_set[part * test_part_size : (part + 1) * test_part_size], test_name
+                test_set[part * test_part_size : (part + 1) * test_part_size],
+                test_name,
             )

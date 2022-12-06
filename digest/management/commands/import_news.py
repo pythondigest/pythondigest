@@ -8,9 +8,8 @@ from urllib.error import URLError
 import feedparser
 import requests
 from cache_memoize import cache_memoize
-from requests import TooManyRedirects
-
 from django.core.management.base import BaseCommand
+from requests import TooManyRedirects
 
 from digest.management.commands import (
     apply_parsing_rules,
@@ -22,13 +21,7 @@ from digest.management.commands import (
     parse_weekly_digest,
     save_news_item,
 )
-from digest.models import (
-    ITEM_STATUS_CHOICES,
-    AutoImportResource,
-    Item,
-    ParsingRules,
-    Section,
-)
+from digest.models import ITEM_STATUS_CHOICES, AutoImportResource, Item, ParsingRules, Section
 
 logger = logging.getLogger(__name__)
 
@@ -51,11 +44,7 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
 
 def get_tweets():
     result = []
-    news_sources = (
-        AutoImportResource.objects.filter(type_res="twitter")
-        .exclude(in_edit=True)
-        .exclude(is_active=False)
-    )
+    news_sources = AutoImportResource.objects.filter(type_res="twitter").exclude(in_edit=True).exclude(is_active=False)
     for source in news_sources:
         print("Process twitter", source)
         try:
@@ -86,11 +75,7 @@ def import_tweets(**kwargs):
                 parse_weekly_digest(item_data)
             else:
                 if apply_rules:
-                    data = (
-                        apply_parsing_rules(item_data, **kwargs)
-                        if kwargs.get("query_rules")
-                        else {}
-                    )
+                    data = apply_parsing_rules(item_data, **kwargs) if kwargs.get("query_rules") else {}
                     item_data.update(data)
             save_news_item(item_data)
         except (URLError, TooManyRedirects, socket.timeout) as e:
@@ -155,18 +140,14 @@ def is_skip_news(rss_item: dict, minimum_date=None) -> bool:
         return True
 
     # skip old duplicated news
-    if Item.objects.filter(
-        link=rss_item["link"], related_to_date__gte=minimum_date
-    ).exists():
+    if Item.objects.filter(link=rss_item["link"], related_to_date__gte=minimum_date).exists():
         return True
 
     return False
 
 
 def get_data_for_rss_item(rss_item: dict) -> dict:
-    if rss_item["link"].startswith("https://twitter.com") and rss_item.get(
-        "description"
-    ):
+    if rss_item["link"].startswith("https://twitter.com") and rss_item.get("description"):
         raw_content = rss_item["description"]
         http_code = str(200)
     else:
@@ -190,10 +171,7 @@ def get_data_for_rss_item(rss_item: dict) -> dict:
 def import_rss(**kwargs):
     logger.info("Import news from RSS feeds")
     news_sources = (
-        AutoImportResource.objects.filter(type_res="rss")
-        .exclude(in_edit=True)
-        .exclude(is_active=False)
-        .order_by("?")
+        AutoImportResource.objects.filter(type_res="rss").exclude(in_edit=True).exclude(is_active=False).order_by("?")
     )
 
     apply_rules = kwargs.get("apply_rules")
@@ -245,11 +223,7 @@ def import_rss(**kwargs):
 
                 if apply_rules:
                     logger.info("> Apply parsing rules for item")
-                    item.update(
-                        apply_parsing_rules(item, **kwargs)
-                        if kwargs.get("query_rules")
-                        else {}
-                    )
+                    item.update(apply_parsing_rules(item, **kwargs) if kwargs.get("query_rules") else {})
                     logger.debug("> Apply video rules for item")
                     item.update(apply_video_rules(item.copy()))
                 logger.info(f"> Save news item - {item['link']}")

@@ -7,16 +7,6 @@ import os
 
 import requests
 import requests.exceptions
-from django_remdow.templatetags.remdow import (
-    remdow_img_center,
-    remdow_img_local,
-    remdow_img_responsive,
-    remdow_lazy_img,
-)
-from readability.readability import Document, Unparseable
-from taggit.models import GenericTaggedItemBase, TagBase
-from taggit_autosuggest.managers import TaggableManager
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
@@ -27,8 +17,15 @@ from django.dispatch import receiver
 from django.http import QueryDict
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
-from frontend.models import Tip
+from django_remdow.templatetags.remdow import (
+    remdow_img_center,
+    remdow_img_local,
+    remdow_img_responsive,
+    remdow_lazy_img,
+)
+from readability.readability import Document, Unparseable
+from taggit.models import GenericTaggedItemBase, TagBase
+from taggit_autosuggest.managers import TaggableManager
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
@@ -110,7 +107,9 @@ class Keyword(TagBase):
 
 class KeywordGFK(GenericTaggedItemBase):
     tag = models.ForeignKey(
-        Keyword, related_name="%(app_label)s_%(class)s_items", on_delete=models.CASCADE
+        Keyword,
+        related_name="%(app_label)s_%(class)s_items",
+        on_delete=models.CASCADE,
     )
 
 
@@ -126,9 +125,7 @@ class Issue(models.Model):
     image = models.ImageField(verbose_name=_("Image"), upload_to="issues", blank=True)
     date_from = models.DateField(verbose_name=_("Start date"), null=True, blank=True)
     date_to = models.DateField(verbose_name=_("End date"), null=True, blank=True)
-    published_at = models.DateField(
-        verbose_name=_("Publication date"), null=True, blank=True
-    )
+    published_at = models.DateField(verbose_name=_("Publication date"), null=True, blank=True)
     status = models.CharField(
         verbose_name=_("Status"),
         max_length=10,
@@ -136,9 +133,7 @@ class Issue(models.Model):
         default=ISSUE_STATUS_DEFAULT,
     )
     trend = models.CharField(verbose_name=_("Trend"), blank=True, max_length=255)
-    last_item = models.IntegerField(
-        verbose_name=_("Latest moderated Item"), blank=True, null=True
-    )
+    last_item = models.IntegerField(verbose_name=_("Latest moderated Item"), blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -213,9 +208,7 @@ class Item(models.Model):
         on_delete=models.CASCADE,
     )
     title = models.CharField(verbose_name=_("Title"), max_length=255)
-    is_editors_choice = models.BooleanField(
-        verbose_name=_("Is editors choice"), default=True
-    )
+    is_editors_choice = models.BooleanField(verbose_name=_("Is editors choice"), default=True)
     description = models.TextField(verbose_name=_("Description"), blank=True)
     issue = models.ForeignKey(
         Issue,
@@ -233,7 +226,10 @@ class Item(models.Model):
     )
     link = models.URLField(verbose_name=_("URL"), max_length=255)
     additionally = models.CharField(
-        verbose_name=_("Additional info"), max_length=255, blank=True, null=True
+        verbose_name=_("Additional info"),
+        max_length=255,
+        blank=True,
+        null=True,
     )
     related_to_date = models.DateField(
         verbose_name=_("Date"),
@@ -253,9 +249,7 @@ class Item(models.Model):
         default=ITEM_LANGUAGE_DEFAULT,
     )
     created_at = models.DateField(verbose_name=_("Created date"), auto_now_add=True)
-    modified_at = models.DateTimeField(
-        verbose_name=_("modified date"), null=True, blank=True
-    )
+    modified_at = models.DateTimeField(verbose_name=_("modified date"), null=True, blank=True)
     activated_at = models.DateTimeField(
         verbose_name=_("Activated date"),
         default=datetime.datetime.now,
@@ -276,9 +270,7 @@ class Item(models.Model):
         path=settings.DATASET_ROOT,
     )
     tags = TaggableManager(blank=True)
-    keywords = TaggableManager(
-        verbose_name=_("Keywords"), through=KeywordGFK, blank=True
-    )
+    keywords = TaggableManager(verbose_name=_("Keywords"), through=KeywordGFK, blank=True)
 
     class Meta:
         verbose_name = _("News")
@@ -433,9 +425,7 @@ class ItemClsCheck(models.Model):
 
             try:
                 url = "{}/{}".format(settings.CLS_URL_BASE, "api/v1.0/classify/")
-                resp = requests.post(
-                    url, data=json.dumps({"links": [self.item.data4cls]})
-                )
+                resp = requests.post(url, data=json.dumps({"links": [self.item.data4cls]}))
                 self.score = resp.json()["links"][0].get(self.item.link, False)
             except (
                 requests.exceptions.RequestException,
@@ -617,7 +607,5 @@ def run_remdow(instance, **kwargs):
     if "img" not in description:
         return
 
-    instance.description = remdow_lazy_img(
-        remdow_img_responsive(remdow_img_center(remdow_img_local(description)))
-    )
+    instance.description = remdow_lazy_img(remdow_img_responsive(remdow_img_center(remdow_img_local(description))))
     instance.save_without_signals()

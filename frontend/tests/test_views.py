@@ -14,9 +14,7 @@ class IndexViewTest(TestCase):
 
     def test_context_var_items_if_has_related_not_active_items(self):
         date = timezone.now().date()
-        issue = Issue.objects.create(
-            title="Title 1", status="active", published_at=date
-        )
+        issue = Issue.objects.create(title="Title 1", status="active", published_at=date)
 
         section = Section.objects.create(title="Section 1 title", priority=1)
 
@@ -37,15 +35,18 @@ class IndexViewTest(TestCase):
     def test_context_var_items_if_has_no_related_active_items(self):
         past = timezone.now().date() - timezone.timedelta(days=1)
 
-        issue = Issue.objects.create(
-            title="Title 1", status="active", published_at=past
-        )
+        issue = Issue.objects.create(title="Title 1", status="active", published_at=past)
         Item.objects.create(
-            title="Item 1 title", link="pass@pass.com", issue=issue, status="active"
+            title="Item 1 title",
+            link="pass@pass.com",
+            issue=issue,
+            status="active",
         )
 
         Issue.objects.create(
-            title="Title 2", status="active", published_at=timezone.now().date()
+            title="Title 2",
+            status="active",
+            published_at=timezone.now().date(),
         )
 
         request = self.factory.get(self.url)
@@ -56,9 +57,7 @@ class IndexViewTest(TestCase):
 
     def test_context_var_items_if_has_related_active_items(self):
         date = timezone.now().date()
-        issue = Issue.objects.create(
-            title="Title 1", status="active", published_at=date
-        )
+        issue = Issue.objects.create(title="Title 1", status="active", published_at=date)
 
         section = Section.objects.create(title="Section 1 title", priority=1)
 
@@ -78,9 +77,7 @@ class IndexViewTest(TestCase):
 
     def test_context_var_items_ordering(self):
         date = timezone.now().date()
-        issue = Issue.objects.create(
-            title="Title 1", status="active", published_at=date
-        )
+        issue = Issue.objects.create(title="Title 1", status="active", published_at=date)
 
         section1 = Section.objects.create(title="Section 1 title", priority=1)
 
@@ -150,9 +147,7 @@ class IndexViewTest(TestCase):
         self,
     ):
         date = timezone.now().date()
-        issue = Issue.objects.create(
-            title="Title 1", status="active", published_at=date
-        )
+        issue = Issue.objects.create(title="Title 1", status="active", published_at=date)
 
         request = self.factory.get(self.url)
         response = IndexView.as_view()(request)

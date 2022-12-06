@@ -24,9 +24,7 @@ urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if "landings" in settings.INSTALLED_APPS:
     from landings.urls import urlpatterns as landings_url
 
-    urlpatterns.append(
-        path("", include((landings_url, "landings"), namespace="landings"))
-    )
+    urlpatterns.append(path("", include((landings_url, "landings"), namespace="landings")))
 
 if "jobs" in settings.INSTALLED_APPS:
     from jobs.urls import urlpatterns as jobs_url

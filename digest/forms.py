@@ -1,5 +1,4 @@
 from ckeditor.widgets import CKEditorWidget, json_encode
-
 from django import forms
 from django.contrib import admin
 from django.contrib.admin import widgets
@@ -27,8 +26,7 @@ class GlavRedWidget(CKEditorWidget):
         final_attrs = self.build_attrs(attrs, name=name)
         self._set_config()
         external_plugin_resources = [
-            [force_str(a), force_str(b), force_str(c)]
-            for a, b, c in self.external_plugin_resources
+            [force_str(a), force_str(b), force_str(c)] for a, b, c in self.external_plugin_resources
         ]
 
         return mark_safe(
@@ -48,9 +46,7 @@ class GlavRedWidget(CKEditorWidget):
 class ItemStatusForm(ModelForm):
     status = ChoiceField(
         label="Статус",
-        widget=widgets.AdminRadioSelect(
-            attrs={"class": get_ul_class(admin.HORIZONTAL)}
-        ),
+        widget=widgets.AdminRadioSelect(attrs={"class": get_ul_class(admin.HORIZONTAL)}),
         choices=ITEM_STATUS_CHOICES,
     )
 
@@ -89,11 +85,7 @@ class HoneypotField(forms.Field):
     widget = HoneypotWidget
 
     def clean(self, value):
-        if (
-            self.initial in EMPTY_VALUES
-            and value in EMPTY_VALUES
-            or value == self.initial
-        ):
+        if self.initial in EMPTY_VALUES and value in EMPTY_VALUES or value == self.initial:
             return value
 
         raise forms.ValidationError("Anti-spam field changed in value.")
@@ -113,9 +105,7 @@ class AddNewsForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
-        kwargs["initial"] = {
-            "section": 6
-        }  # На форме 6й section будет помечен как selected
+        kwargs["initial"] = {"section": 6}  # На форме 6й section будет помечен как selected
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs = {
             "class": "form-control small",

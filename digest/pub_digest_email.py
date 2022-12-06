@@ -1,5 +1,4 @@
 import requests
-
 from django.conf import settings
 
 
@@ -31,9 +30,7 @@ def send_email(subject, html_body):
             "html_body": html_body,
         }
         try:
-            response = requests.post(
-                get_url("message/send/"), json=data, headers=headers
-            )
+            response = requests.post(get_url("message/send/"), json=data, headers=headers)
         except Exception as e:
             print(e)
     return "Ok"
@@ -71,21 +68,9 @@ def get_id_list_by_name(lists, name):
 def get_user_emails(list_id):
     users = []
     response = req(get_url(f"sub/lists/{list_id}/subscribers/"))
-    users.extend(
-        [
-            x
-            for x in response.json()["results"]
-            if x["is_active"] and x["is_email_verified"]
-        ]
-    )
+    users.extend([x for x in response.json()["results"] if x["is_active"] and x["is_email_verified"]])
     while response.json()["next"] is not None:
         response = req(response.json()["next"])
-        users.extend(
-            [
-                x
-                for x in response.json()["results"]
-                if x["is_active"] and x["is_email_verified"]
-            ]
-        )
+        users.extend([x for x in response.json()["results"] if x["is_active"] and x["is_email_verified"]])
 
     return [x["email"] for x in users if x]

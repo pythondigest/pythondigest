@@ -4,7 +4,14 @@ from frontend.models import EditorMaterial, Tip
 
 
 class EditorMaterialAdmin(admin.ModelAdmin):
-    list_display = ("title", "link_html", "status", "section", "user", "created_at")
+    list_display = (
+        "title",
+        "link_html",
+        "status",
+        "section",
+        "user",
+        "created_at",
+    )
     search_fields = ("title", "announce", "contents")
     list_filter = ("status", "user", "section")
     prepopulated_fields = {
