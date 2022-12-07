@@ -45,6 +45,6 @@ urlpatterns = [
     path("rss/release/", ItemReleaseFeed(), name="release_rss"),
     path("rss/packages/", ItemPackagesFeed(), name="packages_rss"),
     path("turbo/", feed),
-    path(r"sitemap\.xml", Sitemap.as_view(), name="sitemap"),
+    path("sitemap.xml", Sitemap.as_view(), name="sitemap"),
     path("friends/", FriendsView.as_view(), name="friends"),
 ]
