@@ -38,10 +38,11 @@ BASE_DOMAIN = env("BASE_DOMAIN", default="pythondigest.ru")
 
 ALLOWED_HOSTS = [
     BASE_DOMAIN,
+    f"m.{BASE_DOMAIN}",
+    f"www.{BASE_DOMAIN}",
     "188.120.227.123",
     "127.0.0.1",
     "0.0.0.0",
-    "dev.pythondigest.ru",
 ]
 if "pythondigest.ru" not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append("pythondigest.ru")
@@ -505,6 +506,8 @@ X_FRAME_OPTIONS = "DENY"
 
 CSRF_TRUSTED_ORIGINS = [
     f"https://{BASE_DOMAIN}",
+    f"https://m.{BASE_DOMAIN}",
+    f"https://www.{BASE_DOMAIN}",
     "https://dev.pythondigest.ru",
 ]
 if "https://pythondigest.ru" not in CSRF_TRUSTED_ORIGINS:
