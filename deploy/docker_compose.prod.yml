@@ -23,16 +23,14 @@ services:
       - "127.0.0.1:8000:8000"
     command: bash -c "
       echo 'Prepare and run'
+      && echo 'Fake exists migration (after restore backup)'
+      && python manage.py migrate --no-input
+      && python manage.py migrate secretballot 0001 --fake --no-input
+      && python manage.py migrate thumbnail 0001 --fake --no-input
+      && python manage.py migrate secretballot 0002 --fake --no-input
       && echo 'Migrate migrations'
       && python manage.py migrate --no-input
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
       && uwsgi --ini deploy/uwsgi.ini"
-
-  # commands after pg_restore
-  # echo 'Fake exists migration (after restore backup)'
-  # && python manage.py migrate --no-input
-  # && python manage.py migrate secretballot 0001 --fake --no-input
-  # && python manage.py migrate thumbnail 0001 --fake --no-input
-  # && python manage.py migrate secretballot 0002 --fake --no-input
