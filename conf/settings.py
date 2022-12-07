@@ -40,7 +40,8 @@ ALLOWED_HOSTS = [
     BASE_DOMAIN,
     f"m.{BASE_DOMAIN}",
     f"www.{BASE_DOMAIN}",
-    "188.120.227.123",
+    "188.120.227.123",  # new server
+    "92.63.107.227",  # old server
     "127.0.0.1",
     "0.0.0.0",
 ]
