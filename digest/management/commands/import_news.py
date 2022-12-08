@@ -255,7 +255,7 @@ class Command(BaseCommand):
         """
         logger.info("Import news from RSS and Twitter")
 
-        apply_rules = False
+        apply_rules = True
 
         parsing(import_tweets, apply_rules=apply_rules)
         parsing(import_rss, apply_rules=apply_rules)
