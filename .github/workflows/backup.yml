@@ -9,12 +9,8 @@ jobs:
   backup_database:
     name: Backup PostgreSQL Database
     runs-on: ubuntu-22.04
+    environment: production
     steps:
-      #----------------------------------------------
-      # Set env name for all jobs in workflow
-      #----------------------------------------------
-      - name: Set env to production
-        run: echo "ENVIRONMENT=production" >> $GITHUB_ENV
       #----------------------------------------------
       # Copy backup script to server. Load repo
       #----------------------------------------------
