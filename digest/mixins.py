@@ -1,6 +1,7 @@
 import datetime
 import random
 
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.utils.cache import patch_response_headers
@@ -99,6 +100,8 @@ class CacheMixin:
         return self.cache_timeout
 
     def dispatch(self, *args, **kwargs):
+        if not settings.CACHE_PAGE_ENABLED:
+            return super().dispatch(*args, **kwargs)
         return cache_page(self.get_cache_timeout())(super().dispatch)(*args, **kwargs)
 
 

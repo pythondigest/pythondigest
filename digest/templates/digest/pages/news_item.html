@@ -5,14 +5,10 @@
 {% load static %}
 
 
-{% block page_title %}{{ object.title }}{% endblock %}
-{% block page_description %}
-    {% if object.description|trim %}
-        {{ object.description|trim|striptags|truncatechars:500 }}
-    {% else %}
-        {{ object.title|trim|striptags|truncatechars:500 }}
-    {% endif %}
-{% endblock %}
+{% block page_title %}{{ object.title}}{% endblock %}
+
+{% block page_description %}{% if object.description|trim|empty %}{{ object.title }}{% else%}{{ object.description|trim|default:object.title|striptags|truncatechars:500 }}{% endif%}{% endblock %}
+
 {% block page_keywords %}{{ object.keywords_as_str }} {% endblock %}
 
 {% block extra_head %}
@@ -27,9 +23,7 @@
     <meta name="twitter:url"
           content="https://pythondigest.ru{{ object.internal_link }}"/>
     <meta name="twitter:description"
-          content='{{ object.description|default:''|striptags|truncatechars:140 }}'>
-
-
+          content='{% if object.description|trim|empty %}{{ object.title }}{% else%}{{ object.description|trim|default:object.title|striptags|truncatechars:140 }}{% endif%}'>
 
     <meta property="og:type" content="article"/>
     <meta property="og:url"
@@ -37,7 +31,7 @@
     <meta property="og:title" content="{{ object.title }}"/>
     <meta property="og:site_name" content="Python Дайджест"/>
     <meta name="og:description"
-          content='{{ object.description|default:''|striptags|truncatechars:500 }}'>
+          content='{% if object.description|trim|empty %}{{ object.title }}{% else%}{{ object.description|trim|default:object.title|striptags|truncatechars:500 }}{% endif%}'>
     <meta property="og:image"
           content="https://pythondigest.ru{% static 'img/logo.png' %}"/>
     <meta property="og:image:secure_url"

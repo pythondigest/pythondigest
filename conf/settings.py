@@ -285,9 +285,13 @@ CACHES["site"] = {
     "LOCATION": "unique-snowflake",
 }
 
+CACHE_PAGE_ENABLED = env("CACHE_PAGE_ENABLED", default=True)
 CACHE_MIDDLEWARE_ALIAS = "site"  # The cache alias to use for storage and 'default' is **local-memory cache**.
 CACHE_MIDDLEWARE_SECONDS = 600  # number of seconds before each page is cached
 CACHE_MIDDLEWARE_KEY_PREFIX = ""
+
+if not CACHE_PAGE_ENABLED:
+    MIDDLEWARE.remove("django.middleware.cache.FetchFromCacheMiddleware")
 
 # LOGGING
 # ------------------------------------------------------------------------------

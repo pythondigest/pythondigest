@@ -39,6 +39,11 @@ def trim(value):
     return value.strip()
 
 
+@register.filter
+def empty(value):
+    return bool(value)
+
+
 @register.simple_tag()
 def get_message_tags(message):
     """
