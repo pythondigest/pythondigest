@@ -10,6 +10,7 @@ on:
   push:
     branches: [ "master", "main" ]
     paths-ignore: [ "docs/**" ]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.head_ref || github.run_id }}
