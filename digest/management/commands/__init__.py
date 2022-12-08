@@ -423,6 +423,9 @@ def save_news_item(item: dict):
     assert "resource" in item
     assert "link" in item
 
+    if Item.objects.filter(link=item.get("link")).exists():
+        return
+
     try:
         instance, _ = Item.objects.get_or_create(
             title=item.get("title")[:144],
