@@ -11,6 +11,7 @@ from django.conf import settings
 from django.core.management import call_command
 from readability import Document
 from requests.exceptions import InvalidSchema, ProxyError, SSLError
+from sentry_sdk import capture_exception
 from urllib3.exceptions import ConnectTimeoutError
 
 from digest.models import Item, Section
@@ -422,25 +423,26 @@ def save_news_item(item: dict):
     assert "resource" in item
     assert "link" in item
 
-    instance = Item(
-        title=item.get("title")[:144],
-        resource=item.get("resource"),
-        link=item.get("link"),
-        description=item.get("description", ""),
-        status=item.get("status", "autoimport"),
-        user_id=settings.BOT_USER_ID,
-        section=item.get("section", None),
-        additionally=item.get("additionally", None),
-        language=item.get("language") if item.get("language") else "en",
-    )
-
-    instance.save()
-
-    if item.get("tags"):
-        instance.tags.add(*item.get("tags"))
-        instance.save()
-    elif item.get("status") == "active":
-        instance.save()
+    try:
+        instance, _ = Item.objects.get_or_create(
+            title=item.get("title")[:144],
+            resource=item.get("resource"),
+            link=item.get("link"),
+            description=item.get("description", ""),
+            status=item.get("status", "autoimport"),
+            user_id=settings.BOT_USER_ID,
+            section=item.get("section", None),
+            additionally=item.get("additionally", None),
+            language=item.get("language") if item.get("language") else "en",
+        )
+    except Exception as e:
+        capture_exception(e)
+    else:
+        if item.get("tags"):
+            instance.tags.add(*item.get("tags"))
+            instance.save()
+        elif item.get("status") == "active":
+            instance.save()
 
 
 def save_pickle_file(filepath, data):
