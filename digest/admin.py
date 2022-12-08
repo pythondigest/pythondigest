@@ -62,8 +62,6 @@ def _save_item_model(request, item: Item, form, change) -> None:
 def _external_link(obj):
     lnk = escape(obj.link)
     ret = '<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
-    username = obj.user.username if obj.user else "Гость"
-    ret = f"{ret}<br>Добавил: {username}"
     return format_html(ret)
 
 
@@ -302,7 +300,8 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         "title",
         "status",
         "external_link",
-        "cls_ok",
+        # "cls_ok",
+        "section",
         "activated_at",
     )
 
@@ -414,7 +413,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
                 )
         except AssertionError:
             result = super().get_queryset(request)
-        return result
+        return result.prefetch_related("itemclscheck", "section")
 
     external_link = lambda s, obj: _external_link(obj)
     external_link.allow_tags = True

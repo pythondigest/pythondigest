@@ -316,6 +316,9 @@ class Item(models.Model):
 
     @property
     def cls_check(self):
+        if not settings.CLS_ENABLED:
+            return 0
+
         try:
             item = ItemClsCheck.objects.get(item=self)
             item.check_cls()

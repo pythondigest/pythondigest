@@ -20,10 +20,10 @@ ITEM_STATUS_CHOICES = (
 
 
 class GlavRedWidget(CKEditorWidget):
-    def render(self, name, value, attrs=None):
+    def render(self, name, value, attrs=None, renderer=None):
         if value is None:
             value = ""
-        final_attrs = self.build_attrs(attrs, name=name)
+        final_attrs = self.build_attrs(attrs, extra_attrs=dict(name=name))
         self._set_config()
         external_plugin_resources = [
             [force_str(a), force_str(b), force_str(c)] for a, b, c in self.external_plugin_resources
