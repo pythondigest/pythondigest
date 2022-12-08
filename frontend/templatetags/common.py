@@ -6,6 +6,7 @@ from bootstrap3.templatetags.bootstrap3 import bootstrap_css_url
 from django import template
 from django.conf import settings
 from django.contrib.messages.utils import get_level_tags
+from django.template.defaultfilters import stringfilter
 from django.utils.encoding import force_str
 from django.utils.translation import get_language, to_locale
 from unidecode import unidecode as _unidecode
@@ -30,6 +31,12 @@ def locale():
         return "ru"
     else:
         return to_locale(get_language())
+
+
+@register.filter
+@stringfilter
+def trim(value):
+    return value.strip()
 
 
 @register.simple_tag()

@@ -7,7 +7,12 @@
 
 {% block page_title %}{{ object.title }}{% endblock %}
 {% block page_description %}
-    {{ object.description|default:object.title|striptags|truncatechars:500 }}{% endblock %}
+    {% if object.description|trim %}
+        {{ object.description|trim|striptags|truncatechars:500 }}
+    {% else %}
+        {{ object.title|trim|striptags|truncatechars:500 }}
+    {% endif %}
+{% endblock %}
 {% block page_keywords %}{{ object.keywords_as_str }} {% endblock %}
 
 {% block extra_head %}
