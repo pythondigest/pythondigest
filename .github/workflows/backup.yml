@@ -35,7 +35,7 @@ jobs:
       # Make backup
       #----------------------------------------------
       - name: make backup
-        uses: appleboy/ssh-action@v0.1.5
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -59,7 +59,7 @@ jobs:
       # Upload backup to drive
       #----------------------------------------------
       - name: upload backup to drive
-        uses: appleboy/ssh-action@v0.1.5
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
@@ -77,7 +77,7 @@ jobs:
       # Upload media to drive
       #----------------------------------------------
       - name: upload media files to drive
-        uses: appleboy/ssh-action@v0.1.5
+        uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
