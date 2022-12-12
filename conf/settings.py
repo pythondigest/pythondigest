@@ -447,17 +447,18 @@ DATASET_NEGATIVE_KEYWORDS = [
 CLS_URL_BASE = ""
 CLS_ENABLED = env.bool("CLS_ENABLED", False)
 
-GITTER_TOKEN = ""
-TWITTER_CONSUMER_KEY = ""
-TWITTER_CONSUMER_SECRET = ""
-TWITTER_TOKEN = ""
-TWITTER_TOKEN_SECRET = ""
-TGM_BOT_ACCESS_TOKEN = ""
-TGM_CHANNEL = ""
-IFTTT_MAKER_KEY = ""
-VK_APP_ID = 0
-VK_LOGIN = ""
-VK_PASSWORD = ""
+GITTER_TOKEN = env.str("GITTER_TOKEN", default=None)
+TWITTER_CONSUMER_KEY = env.str("TWITTER_CONSUMER_KEY", default=None)
+TWITTER_CONSUMER_SECRET = env.str("TWITTER_CONSUMER_SECRET", default=None)
+TWITTER_TOKEN = env.str("TWITTER_TOKEN", default=None)
+TWITTER_TOKEN_SECRET = env.str("TWITTER_TOKEN_SECRET", default=None)
+TGM_BOT_ACCESS_TOKEN = env.str("TGM_BOT_ACCESS_TOKEN", default=None)
+TGM_CHANNEL = env.str("TGM_CHANNEL", default=None)
+IFTTT_MAKER_KEY = env.str("IFTTT_MAKER_KEY", default=None)
+# TODO: configure by oauth for pub digest
+VK_APP_ID = env.int("VK_APP_ID", default=0)
+VK_LOGIN = env.str("VK_LOGIN", default=None)
+VK_PASSWORD = env.str("VK_PASSWORD", default=None)
 
 YANDEX_METRIKA_ID = "36284495"
 

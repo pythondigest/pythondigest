@@ -45,7 +45,8 @@ def send_tweet_with_media(api, text, image):
         file_path = image
     else:
         if image == "https://pythondigest.ru/static/img/logo.png":
-            file_path = static("img/logo.png")
+            file_logo_path = static("img/logo.png")  # -> /static/img/logo.png
+            file_path = os.path.abspath(f".{file_logo_path}")  # to rel path
         else:
             # качаем файл из сети
             file_path = download_image(image)
