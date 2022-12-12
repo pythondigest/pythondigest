@@ -11,6 +11,7 @@ import twx
 # import vk
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.templatetags.static import static
 from twx.botapi import TelegramBot
 
 from digest.pub_digest_email import send_email
@@ -40,10 +41,12 @@ def send_tweet_with_media(api, text, image):
     if "http://" not in image and "https://" not in image:
         assert os.path.isfile(image)
         file_path = image
-
     else:
-        # качаем файл из сети
-        file_path = download_image(image)
+        if image == "https://pythondigest.ru/static/img/logo.png":
+            file_path = static("img/logo.png")
+        else:
+            # качаем файл из сети
+            file_path = download_image(image)
 
     assert file_path is not None, "Not found image (for twitter)"
     api.update_with_media(file_path, text)

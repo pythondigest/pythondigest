@@ -38,10 +38,14 @@ class Command(BaseCommand):
         issue = Issue.objects.get(pk=options["issue"])
         site = "http://pythondigest.ru"
 
+        issue_image_url = "https://pythondigest.ru/static/img/logo.png"
+        if issue.image:
+            issue_image_url = (f"{site}{issue.image.url}",)
+
         pub_to_all(
             issue.title,
             issue.announcement,
             f"{site}{issue.link}",
-            "{}{}".format(site, issue.image.url if issue.image else ""),
+            issue_image_url,
             prepare_issue_news(issue),
         )
