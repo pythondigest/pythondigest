@@ -14,13 +14,15 @@ from django.template.loader import render_to_string
 from django.templatetags.static import static
 from twx.botapi import TelegramBot
 
+from digest.management.commands import get_https_proxy
 from digest.pub_digest_email import send_email
 
 
 def init_auth(consumer_key, consumer_secret, access_token, access_token_secret):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
-    api = tweepy.API(auth)
+    proxy = get_https_proxy()
+    api = tweepy.API(auth_handler=auth, proxy=proxy)
     return api
 
 
@@ -49,7 +51,7 @@ def send_tweet_with_media(api, text, image):
             file_path = download_image(image)
 
     assert file_path is not None, "Not found image (for twitter)"
-    api.update_with_media(file_path, text)
+    api.update_with_media(status=text, filename=file_path)
 
 
 class GitterAPI:
