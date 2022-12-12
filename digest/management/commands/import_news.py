@@ -56,7 +56,7 @@ def get_tweets():
 
 def import_tweets(**kwargs):
     logger.info("Import news from Twitter feeds")
-    apply_rules = kwargs.get("apply_rules")
+    apply_rules = kwargs.pop("apply_rules", False)
     for i in get_tweets():
         try:
             # это помогает не парсить лишний раз ссылку, которая есть
@@ -174,7 +174,7 @@ def import_rss(**kwargs):
         AutoImportResource.objects.filter(type_res="rss").exclude(in_edit=True).exclude(is_active=False).order_by("?")
     )
 
-    apply_rules = kwargs.get("apply_rules")
+    apply_rules = kwargs.pop("apply_rules", False)
     logger.info(f"Apply rules: {apply_rules}")
 
     for source in news_sources:
