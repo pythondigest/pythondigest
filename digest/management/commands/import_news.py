@@ -149,6 +149,8 @@ def is_skip_news(rss_item: dict, minimum_date=None) -> bool:
 def get_data_for_rss_item(rss_item: dict) -> dict:
     if rss_item["link"].startswith("https://twitter.com") and rss_item.get("description"):
         raw_content = rss_item["description"]
+        if "http" in raw_content:
+            rss_item["link"] = re.search(r"(?P<url>https?://[^\s]+)", raw_content).group("url")
         http_code = str(200)
     else:
         response = make_get_request(rss_item["link"])
