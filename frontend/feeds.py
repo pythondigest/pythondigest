@@ -189,3 +189,6 @@ class TurboFeed(YandexTurboFeed, AllEntriesFeed):
 
     def item_link(self, item):
         return item.internal_link
+
+    def item_description(self, item):
+        return item.description or "Новость из Python Дайджест"
