@@ -48,9 +48,6 @@
             <![endif]-->
     {% endblock %}
 
-
-    <script type="text/javascript" async
-            src="https://relap.io/api/v6/head.js?token=n0kwmZcTi3aLjYiN" async="async"></script>
     <script type="text/javascript"
             src="//ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js" async="async"></script>
     {% lazy_script_include %}
@@ -61,6 +58,8 @@
 <body class="{% block body_class %}{% endblock %}"
       id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
+
+<iframe class="relap-runtime-iframe" style="position:absolute;top:-9999px;left:-9999px;visibility:hidden;" srcdoc="<script src='https://relap.io/v7/relap.js' data-relap-token='n0kwmZcTi3aLjYiN'></script>"></iframe>
 
 {% block nav_bar %}
 
