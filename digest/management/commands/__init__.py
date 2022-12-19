@@ -135,7 +135,7 @@ def _get_tags_for_item(item_data: dict, tags_names: list):
 @cache_memoize(300)  # cache for 5 minutes
 def get_https_proxy() -> str | None:
     """Get actual http proxy for requests"""
-    proxy_list_url = "https://raw.githubusercontent.com/ShiftyTR/Proxy-List/master/https.txt"
+    proxy_list_url = "https://raw.githubusercontent.com/mertguvencli/http-proxy-list/main/proxy-list/data.txt"
 
     try:
         response = requests.get(proxy_list_url, timeout=20)
