@@ -36,13 +36,14 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         issue = Issue.objects.get(pk=options["issue"])
-        site = "http://pythondigest.ru"
+        site = "https://pythondigest.ru"
 
         issue_image_url = "https://pythondigest.ru/static/img/logo.png"
         if issue.image:
             issue_image_url = (f"{site}{issue.image.url}",)
 
         pub_to_all(
+            issue.pk,
             issue.title,
             issue.announcement,
             f"{site}{issue.link}",

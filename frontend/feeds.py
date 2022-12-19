@@ -124,7 +124,7 @@ class IssuesFeed(ItemDigestFeed):
         the `add_item` call of the feed generator.
         Add the 'content' field of the 'Entry' item, to be used by the custom feed generator.
         """
-        return {"image": "http://" + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
+        return {"image": "https://" + settings.BASE_DOMAIN + obj.image.url if obj.image else ""}
 
 
 class SectionFeed(DigestFeed):

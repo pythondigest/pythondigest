@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import time
 from urllib.error import HTTPError
@@ -12,13 +13,16 @@ import twx
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.templatetags.static import static
+from sentry_sdk import capture_exception
 from twx.botapi import TelegramBot
 
 from digest.management.commands import get_https_proxy
 from digest.pub_digest_email import send_email
 
+logger = logging.getLogger(__name__)
 
-def init_auth(consumer_key, consumer_secret, access_token, access_token_secret):
+
+def init_auth(consumer_key, consumer_secret, access_token, access_token_secret, use_proxy=True):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     proxy = get_https_proxy()
@@ -164,8 +168,24 @@ def pub_to_gitter(text: str, token):
         time.sleep(1)
 
 
-def pub_to_twitter(text, image_path, api):
-    send_tweet_with_media(api, text, image_path)
+def pub_to_twitter(text, image_path, try_count=0):
+    if try_count == 5:
+        logger.info("Too many try for request")
+        return None
+
+    try:
+        api = init_auth(
+            settings.TWITTER_CONSUMER_KEY,
+            settings.TWITTER_CONSUMER_SECRET,
+            settings.TWITTER_TOKEN,
+            settings.TWITTER_TOKEN_SECRET,
+        )
+        send_tweet_with_media(api, text, image_path)
+    except Exception as e:
+        capture_exception(e)
+        get_https_proxy.invalidate()
+        logger.info(f"Exception error. Try refresh proxy. {e}")
+        return pub_to_twitter(text, image_path, try_count + 1)
 
 
 def pub_to_vk_users(text, api):
@@ -218,9 +238,9 @@ def pub_to_email(title: str, news):
     description = """
         Оставляйте свои комментарии к выпуcкам,
         пишите нам в <a href="https://python-ru.slack.com/messages/pythondigest/">Slack</a> (<a href="https://slack.python.ru/">инвайт</a>),
-        добавляйте свои новости через <a href="http://pythondigest.ru/add/">специальную форму</a>.
+        добавляйте свои новости через <a href="https://pythondigest.ru/add/">специальную форму</a>.
         Вы можете следить за нами с помощью
-        <a href="http://pythondigest.ru/rss/issues/">RSS</a>,
+        <a href="https://pythondigest.ru/rss/issues/">RSS</a>,
         <a href="https://twitter.com/pydigest">Twitter</a> или
         <a href="https://t.me/py_digest">Telegram @py_digest</a>
         <br><br>
@@ -245,6 +265,7 @@ def pub_to_email(title: str, news):
 
 
 def pub_to_all(
+    digest_pk: int,
     title: str,
     text: str,
     digest_url: str,
@@ -260,28 +281,21 @@ def pub_to_all(
     :param digest_url:
     :return:
     """
+    print("Send to telegram")
+    pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
+    print("Send to slack")
+    pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
+    print("Send to twitter")
+    twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
+    pub_to_twitter(twitter_text, digest_image_url)
     # session = vk.AuthSession(app_id=settings.VK_APP_ID,
     #                         user_login=settings.VK_LOGIN,
     #                         user_password=settings.VK_PASSWORD,
     #                         scope='wall,messages,offline')
     # api = vk.API(session, api_version='5.131')
-    twitter_text = f"Вот и свежий выпуск дайджеста новостей о #python. Приятного чтения: {digest_url}"
-    twitter_api = init_auth(
-        settings.TWITTER_CONSUMER_KEY,
-        settings.TWITTER_CONSUMER_SECRET,
-        settings.TWITTER_TOKEN,
-        settings.TWITTER_TOKEN_SECRET,
-    )
-
-    print("Send to slack")
-    pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
     # print("Send to vk groups")
     # pub_to_vk_groups(text, digest_url, api)
-    print("Send to telegram")
-    pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
     # print("Send to vk users")
     # pub_to_vk_users(text, api)
-    print("Send to twitter")
-    pub_to_twitter(twitter_text, digest_image_url, twitter_api)
     print("Send to email")
     # pub_to_email(title, news)

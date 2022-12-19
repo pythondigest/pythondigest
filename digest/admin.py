@@ -103,14 +103,21 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.short_description = "Просмотр"
 
     def make_published(self, request, queryset):
-        if len(queryset) == 1:
-            issue = queryset[0]
-            site = "http://pythondigest.ru"
-            pub_to_all(
-                issue.announcement,
-                f"{site}{issue.link}",
-                "{}{}".format(site, issue.image.url if issue.image else ""),
-            )
+        if queryset.count() != 1:
+            return
+
+        issue = queryset.first()
+        if not issue:
+            return
+
+        site = "https://pythondigest.ru"
+        # TODO - fixit
+        pub_to_all(
+            issue.pk,
+            issue.announcement,
+            f"{site}{issue.link}",
+            "{}{}".format(site, issue.image.url if issue.image else ""),
+        )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"
 
