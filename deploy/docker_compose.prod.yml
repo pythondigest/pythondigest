@@ -39,9 +39,9 @@ services:
       && python manage.py collectstatic --no-input
       && cp /app/humans.txt /app/static/
       && cp /app/robots.txt /app/static/
-      && uvicorn --host 0.0.0.0 --port 8000 --reload conf.asgi:application"
+      && uwsgi --ini deploy/uwsgi.ini"
 
-      # && uwsgi --ini deploy/uwsgi.ini"
+      # && uvicorn --host 0.0.0.0 --port 8000 --reload conf.asgi:application"
 
       # commands after restore old backup
       # && echo 'Fake exists migration (after restore backup)'
