@@ -37,7 +37,6 @@ def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
 
 def _get_block_item(block: Parseble) -> dict[str, str | int | Resource]:
     """Extract all data (link, title, description) from block"""
-    resource, _ = Resource.objects.get_or_create(title="PythonWeekly", link="http://www.pythonweekly.com/")
 
     link = block.cssselect("a")[0]
     url = link.attrib["href"]
@@ -53,7 +52,6 @@ def _get_block_item(block: Parseble) -> dict[str, str | int | Resource]:
         "http_code": 200,
         "content": text,
         "description": text,
-        "resource": resource,
         "language": "en",
     }
 
@@ -77,6 +75,8 @@ def main(url):
     }
     _apply_rules = _apply_rules_wrap(**data)
 
+    resource, _ = Resource.objects.get_or_create(title="PythonWeekly", link="http://www.pythonweekly.com/")
+
     block_domains = [
         "medium.com",
         "medium.",
@@ -99,6 +99,7 @@ def main(url):
             continue
 
         block_item = _get_block_item(block)
+        block_item["resource"] = resource
         _apply_rules(block_item)
 
         save_news_item(block_item)

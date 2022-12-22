@@ -20,9 +20,16 @@ logger = logging.getLogger(__name__)
 
 
 def parse_weekly_digest(item_data: dict):
-    if "Python Weekly" in item_data.get("title"):
-        logger.info("Run manage command for parse Python Weekly digest")
-        call_command("import_python_weekly", item_data.get("link"))
+    try:
+        if "Python Weekly" in item_data.get("title"):
+            logger.info("Run manage command for parse Python Weekly digest")
+            call_command("import_python_weekly", item_data.get("link"))
+
+        if item_data.get("link", "").startswith("https://pycoders.com/issues/"):
+            logger.info("Run manage command for parse PyCoders Weekly digest")
+            call_command("import_pycoders_weekly", item_data.get("link"))
+    except Exception as e:
+        capture_exception(e)
 
 
 def is_weekly_digest(item_data: dict) -> bool:
