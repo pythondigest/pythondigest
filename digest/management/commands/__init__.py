@@ -28,6 +28,10 @@ def parse_weekly_digest(item_data: dict):
         if item_data.get("link", "").startswith("https://pycoders.com/issues/"):
             logger.info("Run manage command for parse PyCoders Weekly digest")
             call_command("import_pycoders_weekly", item_data.get("link"))
+
+        if item_data.get("link", "").startswith("https://python.libhunt.com/newsletter/"):
+            logger.info("Run manage command for parse Awesome Python Weekly digest")
+            call_command("import_awesome_python_weekly", item_data.get("link"))
     except Exception as e:
         capture_exception(e)
 
