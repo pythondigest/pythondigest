@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 from cache_memoize import cache_memoize
 from django.conf import settings
 from django.core.management import call_command
+from lingua import Language, LanguageDetectorBuilder
 from readability import Document
 from requests.exceptions import InvalidSchema, ProxyError, SSLError
 from sentry_sdk import capture_exception
@@ -426,6 +427,12 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
 # -------------------
 
 
+def is_english(text):
+    languages = [Language.ENGLISH, Language.RUSSIAN]
+    detector = LanguageDetectorBuilder.from_languages(*languages).build()
+    return detector.detect_language_of(text) is Language.RUSSIAN
+
+
 def save_news_item(item: dict):
     if not item or item.get("link") is None:
         return
@@ -438,6 +445,8 @@ def save_news_item(item: dict):
         return
 
     try:
+        language_ru = is_russian(item.get("description", item.get("title")))
+
         instance, _ = Item.objects.get_or_create(
             title=item.get("title")[:144],
             resource=item.get("resource"),
@@ -447,7 +456,7 @@ def save_news_item(item: dict):
             user_id=settings.BOT_USER_ID,
             section=item.get("section", None),
             additionally=item.get("additionally", None),
-            language=item.get("language") if item.get("language") else "en",
+            language="ru" if language_ru else "en",
         )
     except Exception as e:
         capture_exception(e)

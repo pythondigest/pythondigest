@@ -55,6 +55,7 @@ django-htmlmin = "^0.11.0"
 uwsgi = "^2.0.21"
 whitenoise = {extras = ["brotli"], version = "^6.2.0"}
 uvicorn = "^0.20.0"
+lingua-language-detector = "^1.2.0"
 
 [tool.poetry.group.test.dependencies]
 django-stubs = "^1.13.0"
