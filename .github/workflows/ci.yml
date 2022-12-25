@@ -272,6 +272,13 @@ jobs:
             sudo chown -R :www-data static
             sudo chown -R :www-data media
 
+            # make link for serve django-remdow links:
+            # django-remdow download external image to local png file
+            # if original file is jpeg - download it and create symlink to png file
+            # this commands create link outside container to this symlinks
+            sudo mkdir -p /app/static/remdow/
+            sudo ln -s /home/pythondigest/pythondigest/deploy/static/remdow/img /app/static/remdow/img
+
             # validate and reload nginx
             sudo mkdir -p /var/log/nginx/pythondigest/
             sudo nginx -t && sudo service nginx reload
