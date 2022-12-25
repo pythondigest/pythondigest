@@ -5,11 +5,10 @@ DISTDIR=$(BASEDIR)/dist
 
 pip-tools:
 	pip install -U pip
-	pip install -U pip-tools
+	pip install -U poetry
 
 requirements: pip-tools
-	pip-compile --generate-hashes --reuse-hashes --build-isolation --pip-args "--retries 10 --timeout 30" requirements.in
-	pip-sync requirements.txt
+	poetry install
 
 test:
 	python manage.py test
