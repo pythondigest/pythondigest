@@ -32,6 +32,7 @@
 
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"></noscript>
+    <script async src="https://ad.mail.ru/static/ads-async.js"></script>
 
     {% compress css %}
         {% block styles %}{% endblock %}
@@ -58,8 +59,6 @@
 <body class="{% block body_class %}{% endblock %}"
       id="{% block body_id %}{% endblock %}"
         {% block body_extra_attributes %}{% endblock %}>
-
-<iframe class="relap-runtime-iframe" style="position:absolute;top:-9999px;left:-9999px;visibility:hidden;" srcdoc="<script src='https://relap.io/v7/relap.js' data-relap-token='n0kwmZcTi3aLjYiN'></script>"></iframe>
 
 {% block nav_bar %}
 
