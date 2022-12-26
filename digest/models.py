@@ -154,6 +154,10 @@ class Issue(models.Model):
         verbose_name_plural = _("Issues of digest")
 
 
+ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://pythondigest.ru/feed/">RSS</a>, <a href="https://twitter.com/pydigest">Twitter</a> или <a href="https://t.me/py_digest">Telegram @py_digest</a></p><br>
+<p><b>Поддержите проект</b> <a href='https://boosty.to/pydigest'>рублем</a> или <a href="https://firstvds.ru/?from=421453">купив сервер по ссылке</a>. Это покроет расходы на хостинг и домен, модерацию новостей.</p>"""
+
+
 class Section(models.Model):
     """
     Section is a category of news-item
@@ -290,9 +294,11 @@ class Item(models.Model):
                     old_issue = Issue.objects.latest("date_to")
                     cnt_issue = int(old_issue.title.replace("Выпуск ", "")) + 1
                     new_issue = Issue(
-                        title="Выпуск %s" % cnt_issue,
+                        title=f"Выпуск {cnt_issue}",
                         date_from=date_from,
                         date_to=date_to,
+                        published_at=date_to + datetime.timedelta(days=1),
+                        description=ISSUE_DESCRIPTION_DEFAULT,
                     )
                     new_issue.save()
                     self.issue = new_issue
