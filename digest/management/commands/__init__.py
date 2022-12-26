@@ -427,7 +427,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
 # -------------------
 
 
-def is_english(text):
+def is_russian(text):
     languages = [Language.ENGLISH, Language.RUSSIAN]
     detector = LanguageDetectorBuilder.from_languages(*languages).build()
     return detector.detect_language_of(text) is Language.RUSSIAN
@@ -435,6 +435,7 @@ def is_english(text):
 
 def save_news_item(item: dict):
     if not item or item.get("link") is None:
+        logger.info("Skip. Not found link for new Item")
         return
 
     assert "title" in item
@@ -442,11 +443,17 @@ def save_news_item(item: dict):
     assert "link" in item
 
     if Item.objects.filter(link=item.get("link")).exists():
+        logger.info("Skip. Item exists with this link")
         return
 
     try:
-        language_ru = is_russian(item.get("description", item.get("title")))
+        item_text = item.get("description", item.get("title", ""))
+        language_ru = is_russian(item_text)
+    except Exception as e:
+        capture_exception(e)
+        language_ru = item.get("language") == "ru"
 
+    try:
         instance, _ = Item.objects.get_or_create(
             title=item.get("title")[:144],
             resource=item.get("resource"),
