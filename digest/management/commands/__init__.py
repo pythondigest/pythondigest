@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.management import call_command
 from lingua import Language, LanguageDetectorBuilder
 from readability import Document
-from requests.exceptions import InvalidSchema, ProxyError, SSLError
+from requests.exceptions import ConnectionError, InvalidSchema, ProxyError, SSLError
 from sentry_sdk import capture_exception
 from urllib3.exceptions import ConnectTimeoutError
 
@@ -207,7 +207,7 @@ def make_get_request(url, timeout=29, try_count=0):
         logger.info("Proxy error. Try refresh proxy")
         get_https_proxy.invalidate()
         return make_get_request(url, timeout + 3, try_count + 1)
-    except InvalidSchema:
+    except (InvalidSchema, ConnectionError):
         return None
 
 
