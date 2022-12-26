@@ -454,7 +454,7 @@ def save_news_item(item: dict):
         language_ru = item.get("language") == "ru"
 
     try:
-        instance, _ = Item.objects.get_or_create(
+        instance = Item(
             title=item.get("title")[:144],
             resource=item.get("resource"),
             link=item.get("link"),
@@ -465,6 +465,8 @@ def save_news_item(item: dict):
             additionally=item.get("additionally", None),
             language="ru" if language_ru else "en",
         )
+        # run custom save method
+        instance.save()
     except Exception as e:
         capture_exception(e)
     else:
