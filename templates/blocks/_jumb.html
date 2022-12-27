@@ -1,6 +1,7 @@
 {% load i18n %}
 {% load account_tags %}
 {% load static %}
+{% load common %}
 
 
 <div class="jumb container-fluid">
@@ -11,8 +12,7 @@
         <div class="container text-center">
             <div class="jumb-text col-md-12">
               <h3>IT-новости про Python, которые стоит знать</h3>
-                <p><big>Собрали в одном месте самые важные ссылки<br>
-                <a href="https://t.me/axsapronov">консультируем про Python</a></big></p>
+                <p><big>Собрали в одном месте самые важные ссылки<br>{% autoescape off %}{% jumb_ads %}{% endautoescape %}</big></p>
             </div>
 {% comment %}
             <div class="col-md-3">

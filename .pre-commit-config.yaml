@@ -69,8 +69,8 @@ repos:
     hooks:
       - id: poetry-audit
 
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.0
-    hooks:
-    -   id: python-safety-dependencies-check
-        files: pyproject.toml
+  # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+  #   rev: v1.3.0
+  #   hooks:
+  #   -   id: python-safety-dependencies-check
+  #       files: pyproject.toml

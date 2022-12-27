@@ -147,3 +147,14 @@ def bootstrap_url():
     if isinstance(payload, str):
         return payload
     return payload.get("url")
+
+
+@register.simple_tag()
+def jumb_ads():
+    items = [
+        '<a href="https://t.me/whydaily">читайте авторский блог</a>',
+        '<a href="https://t.me/axsapronov">консультируем про IT, Python</a>',
+        '<a href="https://t.me/py_digest">читайте нас в Telegram</a>',
+        '<a href="https://twitter.com/pydigest">читайте нас в Twitter</a>',
+    ]
+    return random.choice(items)
