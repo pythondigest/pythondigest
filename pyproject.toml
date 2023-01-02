@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = {extras = ["argon2"], version = "^4.1.3"}
+django = {extras = ["argon2"], version = "^4.1.5"}
 django-bootstrap-form = ">=3.4"
 django-digg-paginator = ">=0.2.0"
 django-user-accounts = ">=2.1.0"
