@@ -15,15 +15,16 @@ from requests.exceptions import ConnectionError, InvalidSchema, ProxyError, SSLE
 from sentry_sdk import capture_exception
 from urllib3.exceptions import ConnectTimeoutError
 
-from digest.management.commands.import_awesome_python_weekly import main as parse_awesome_python_weekly
-from digest.management.commands.import_pycoders_weekly import main as parse_pycoders_weekly
-from digest.management.commands.import_python_weekly import main as parse_python_weekly
 from digest.models import Item, Section
 
 logger = logging.getLogger(__name__)
 
 
 def parse_weekly_digest(item_data: dict):
+    from digest.management.commands.import_awesome_python_weekly import main as parse_awesome_python_weekly
+    from digest.management.commands.import_pycoders_weekly import main as parse_pycoders_weekly
+    from digest.management.commands.import_python_weekly import main as parse_python_weekly
+
     try:
         if "Python Weekly" in item_data.get("title"):
             if not settings.USE_DOCKER:
@@ -55,7 +56,16 @@ def parse_weekly_digest(item_data: dict):
 
 def is_weekly_digest(item_data: dict) -> bool:
     title = item_data.get("title")
-    return bool("Python Weekly" in title)
+    link = item_data.get("link", "")
+
+    digest_names = ["Python Weekly"]
+
+    digest_links = [
+        "https://pycoders.com/issues/",
+        "https://python.libhunt.com/newsletter/",
+    ]
+
+    return bool(title in digest_names or link in digest_links)
 
 
 def _clojure_get_youtube_urls_from_page():
