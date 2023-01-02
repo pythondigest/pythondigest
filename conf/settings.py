@@ -50,7 +50,8 @@ if "pythondigest.ru" not in ALLOWED_HOSTS:
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#internal-ips
 INTERNAL_IPS = ["127.0.0.1", "10.0.2.2"]
-if env.bool("USE_DOCKER", default=False):
+USE_DOCKER = env.bool("USE_DOCKER", default=False)
+if USE_DOCKER:
     import socket
 
     hostname, __, ips = socket.gethostbyname_ex(socket.gethostname())
