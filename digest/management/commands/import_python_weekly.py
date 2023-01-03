@@ -11,7 +11,13 @@ import lxml.html as html
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 
-from digest.management.commands import apply_parsing_rules, apply_video_rules, make_get_request, save_news_item
+from digest.management.commands import (
+    apply_parsing_rules,
+    apply_video_rules,
+    ignore_url,
+    make_get_request,
+    save_news_item,
+)
 from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
 Parseble = Union[BeautifulSoup, html.HtmlElement]
@@ -77,21 +83,13 @@ def main(url):
 
     resource, _ = Resource.objects.get_or_create(title="PythonWeekly", link="http://www.pythonweekly.com/")
 
-    block_domains = [
-        "medium.com",
-        "medium.",
-        "thisweekin.io",
-        "google.com",
-        "apple.com",
-        "tinyurl.com",
-    ]
     rel_list = [
         "noopener",
         "follow",
         "ugc",
     ]
     for block in _get_blocks(url):
-        if any([x in block.get("href") for x in block_domains]):
+        if ignore_url(block.get("href")):
             continue
 
         rel = block.get("rel")

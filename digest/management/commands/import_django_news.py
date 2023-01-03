@@ -1,8 +1,8 @@
 """
-python manage.py import_python_weekly URL
+python manage.py import_django_news URL
 
 example:
-python manage.py import_pycoders_weekly 'https://pycoders.com/issues/556'
+python manage.py import_django_news 'https://django-news.com/issues/160'
 """
 
 import logging
@@ -10,6 +10,7 @@ from collections.abc import Sequence
 
 import lxml.html as html
 from django.core.management.base import BaseCommand
+from lxml import etree
 from sentry_sdk import capture_exception
 
 from digest.management.commands import ignore_url, make_get_request, save_news_item
@@ -19,7 +20,7 @@ from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 logger = logging.getLogger(__name__)
 
 
-def _get_blocks(url: str) -> Sequence[html.HtmlElement]:
+def _get_blocks(url: str, root_class, css_class) -> Sequence[html.HtmlElement]:
     """
     Grab all blocks containing news titles and links
     from URL
@@ -32,41 +33,31 @@ def _get_blocks(url: str) -> Sequence[html.HtmlElement]:
     content = response.text
     if content:
         page = html.fromstring(content)
-        result = page.xpath("//td[@id = 'bodyCell']")[0]
-        result = result.cssselect("span")
+        result = page.find_class(root_class)[0]
+        result = result.cssselect(css_class)
     return result
 
 
 def _get_block_item(block: html.HtmlElement) -> dict[str, str | int | Resource]:
     """Extract all data (link, title, description) from block"""
 
-    if "#AAAAAA" in block.attrib["style"]:
-        return
-
-    # print(etree.tostring(block))
-
     # extract link info
-    link = block.cssselect("a")[0]
+    link = block.cssselect("span.item__footer-link")[0].cssselect("a")[0]
     url = link.attrib["href"]
-    title = link.text_content()
+    title = block.cssselect("h3.item__title")[0].text_content().replace("\n", "").strip()
+    description = block.cssselect("p")
+    if description:
+        text = description[0].text_content().replace("\n", "").strip()
+    else:
+        text = ""
 
-    if url.startswith("https://pycoders.com/link/"):
+    if url.startswith("https://cur.at"):
         # Resolve original url
         try:
             response = make_get_request(url)
             url = response.url
         except Exception as e:
             capture_exception(e)
-
-    # extract description info
-    # getnext().getnext() because description info is not inner block
-    try:
-        description_block = block.getnext().getnext()
-    except AttributeError:
-        text = ""
-    else:
-        text = description_block.text_content()
-        text = text.replace("<br/>", "").strip()
 
     return {
         "title": title,
@@ -87,29 +78,22 @@ def main(url):
     }
     _apply_rules = _apply_rules_wrap(**data)
 
-    resource, _ = Resource.objects.get_or_create(title="PyCoders", link="https://pycoders.com")
+    resource, _ = Resource.objects.get_or_create(title="Django News", link="https://django-news.com/")
 
-    for block in _get_blocks(url):
-        if not block.cssselect("a"):
-            continue
+    # items
+    blocks = _get_blocks(url, "issue__body", "div.item--link")
 
-        link = block.cssselect("a")[0].attrib["href"]
-        logger.info(f"Work with url - {link}")
-
-        if link == "https://pycoders.com":
-            continue
-
+    for block in blocks:
+        # print(etree.tostring(block))
         block_item = _get_block_item(block)
         if not block_item:
             continue
 
-        link = block_item["link"]
-        if ignore_url(link):
+        if ignore_url(block_item["link"]):
             continue
 
+        # break
         block_item["resource"] = resource
-        # pprint.pprint(block_item)
-
         _apply_rules(block_item)
         save_news_item(block_item)
 

@@ -16,12 +16,14 @@ from sentry_sdk import capture_exception
 from urllib3.exceptions import ConnectTimeoutError
 
 from digest.models import Item, Section
+from digest.utils_strip_url_trackers import clean_url
 
 logger = logging.getLogger(__name__)
 
 
 def parse_weekly_digest(item_data: dict):
     from digest.management.commands.import_awesome_python_weekly import main as parse_awesome_python_weekly
+    from digest.management.commands.import_django_news import main as parse_django_news
     from digest.management.commands.import_pycoders_weekly import main as parse_pycoders_weekly
     from digest.management.commands.import_python_weekly import main as parse_python_weekly
 
@@ -50,6 +52,14 @@ def parse_weekly_digest(item_data: dict):
                 logger.info("Run code for parse Awesome Python Weekly digest")
                 parse_awesome_python_weekly(item_data.get("link"))
 
+        if item_data.get("link", "").startswith("https://django-news.com/issues/"):
+            if not settings.USE_DOCKER:
+                logger.info("Run manage command for parse Django News digest")
+                call_command("import_django_news", item_data.get("link"))
+            else:
+                logger.info("Run code for parse Django News digest")
+                parse_django_news(item_data.get("link"))
+
     except Exception as e:
         capture_exception(e)
 
@@ -63,6 +73,7 @@ def is_weekly_digest(item_data: dict) -> bool:
     digest_links = [
         "https://pycoders.com/issues/",
         "https://python.libhunt.com/newsletter/",
+        "https://django-news.com/issues/",
     ]
 
     return bool(title in digest_names or link in digest_links)
@@ -197,7 +208,7 @@ def get_https_proxy() -> str | None:
     return result
 
 
-def make_get_request(url, timeout=29, try_count=0):
+def make_get_request(url, timeout=10, try_count=0):
     MAX_RETRIES = 5
     SOFT_SLEEP = 5
     if try_count == MAX_RETRIES:
@@ -208,12 +219,13 @@ def make_get_request(url, timeout=29, try_count=0):
         timeout=timeout,
     )
 
-    proxy_https = get_https_proxy()
-    if proxy_https and try_count != 0:
-        requests_kwargs["proxies"] = {
-            "http": proxy_https,
-            "https": proxy_https,
-        }
+    if try_count != 0:
+        proxy_https = get_https_proxy()
+        if proxy_https:
+            requests_kwargs["proxies"] = {
+                "http": proxy_https,
+                "https": proxy_https,
+            }
 
     proxy_text = "with" if "proxies" in requests_kwargs else "without"
     logger.info(f"Get data for url {url} {proxy_text} proxy")
@@ -468,6 +480,9 @@ def save_news_item(item: dict):
     assert "resource" in item
     assert "link" in item
 
+    # remove utm tags
+    item["link"] = clean_url(item.get("link"))
+
     if Item.objects.filter(link=item.get("link")).exists():
         logger.info("Skip. Item exists with this link")
         return
@@ -511,3 +526,20 @@ def save_pickle_file(filepath, data):
 def load_pickle_file(filepath):
     with open(filepath, "rb") as fio:
         return pickle.load(fio)
+
+
+def ignore_url(link):
+    block_domains = [
+        "realpython.com/office-hours/",
+        "realpython.com/account/join-team/",
+        "thisweekin.io",
+        "python.libhunt.com",
+        "medium.",
+        "tinyurl.com",
+        "pycoders.com/issues/",
+        "www.meetup.com",
+        "medium.com",
+        "apple.com",
+        "google.com",
+    ]
+    return any([x in link for x in block_domains])
