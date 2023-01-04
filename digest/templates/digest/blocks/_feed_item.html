@@ -43,7 +43,7 @@
     <noindex>
         <div class="news-line-item">
 
-            <h3>
+            <h1>
                 {% if read_link %}
                     {{ object.title }}
 
@@ -69,7 +69,7 @@
                                 href="{{ tag_link }}">{{ tag_name }}</a></small></span>
                     {% endfor %}
                 {% endif %}
-            </h4>
+            </h1>
 
 
             <p>{{ object.description|default:''|safe }}</p>
