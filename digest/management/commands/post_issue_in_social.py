@@ -1,3 +1,9 @@
+"""
+
+Example
+python manage.py post_issue_in_social 467
+"""
+
 from django.core.management.base import BaseCommand
 
 from digest.models import Issue

@@ -2969,6 +2969,25 @@ docs = ["proselint (>=0.13)", "sphinx (>=5.3)", "sphinx-argparse (>=0.3.2)", "sp
 testing = ["coverage (>=6.2)", "coverage-enable-subprocess (>=1)", "flaky (>=3.7)", "packaging (>=21.3)", "pytest (>=7.0.1)", "pytest-env (>=0.6.2)", "pytest-freezegun (>=0.4.2)", "pytest-mock (>=3.6.1)", "pytest-randomly (>=3.10.3)", "pytest-timeout (>=2.1)"]
 
 [[package]]
+name = "vk"
+version = "3.0"
+description = "Python vk.com API wrapper"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "vk-3.0-py3-none-any.whl", hash = "sha256:92363319b6d036b8ba4c9d7caa514da8ee015e8e2c7c9f4beba818e8a224dc8b"},
+    {file = "vk-3.0.tar.gz", hash = "sha256:2d5ec6cd33b2774fc0f2da77d28bedc3e57a22b0c562ea817d95e792d7413b7f"},
+]
+
+[package.dependencies]
+requests = ">=2.24,<3.0"
+
+[package.extras]
+docs = ["sphinx (>=4)", "sphinx-autobuild (>=2021)", "sphinx-rtd-theme (>=1.0.0)"]
+test = ["pytest (>=6)", "pytest-cov (>=2.7)"]
+
+[[package]]
 name = "webencodings"
 version = "0.5.1"
 description = "Character encoding aliases for legacy web content"
@@ -3075,4 +3094,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "896469c2d8dbe903b4a67428a9cd500ac3bf36f3f42e3af7247fd988383fc34a"
+content-hash = "86911f7a0ffa5ca2ea526092d248543ecc03bdce4291e13cae6247fad9c22285"

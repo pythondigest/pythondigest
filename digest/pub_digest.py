@@ -8,6 +8,7 @@ from urllib.request import urlretrieve
 import requests
 import tweepy
 import twx
+import vk
 
 # import vk
 from django.conf import settings
@@ -110,7 +111,7 @@ def post_to_wall(api, owner_id, message, **kwargs):
         "from_group": 1,
         "owner_id": owner_id,
         "message": message,
-        "v": "5.73",
+        "v": "5.131",
     }
     data_dict.update(**kwargs)
     return api.wall.post(**data_dict)
@@ -120,7 +121,7 @@ def send_message(api, user_id, message, **kwargs):
     data_dict = {
         "user_id": user_id,
         "message": message,
-        "v": "5.73",
+        "v": "5.131",
     }
     data_dict.update(**kwargs)
     return api.messages.send(**data_dict)
@@ -155,7 +156,7 @@ def get_pydigest_groups() -> list:
         # (-38080744, 1),  # https://vk.com/python_programing
     ]
     # return [
-    #     (-105509411, 1),  # тестовая группа
+    #     (-218211268, 1),  # тестовая группа
     # ]
 
 
@@ -288,14 +289,15 @@ def pub_to_all(
     print("Send to twitter")
     twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
     pub_to_twitter(twitter_text, digest_image_url)
-    # session = vk.AuthSession(app_id=settings.VK_APP_ID,
-    #                         user_login=settings.VK_LOGIN,
-    #                         user_password=settings.VK_PASSWORD,
-    #                         scope='wall,messages,offline')
-    # api = vk.API(session, api_version='5.131')
-    # print("Send to vk groups")
-    # pub_to_vk_groups(text, digest_url, api)
+    print("Send to vk groups")
+    api = vk.UserAPI(
+        user_login=settings.VK_LOGIN,
+        user_password=settings.VK_PASSWORD,
+        scope="wall,messages,offline",
+        v="5.131",
+    )
+    pub_to_vk_groups(text, digest_url, api)
     # print("Send to vk users")
     # pub_to_vk_users(text, api)
-    print("Send to email")
+    # print("Send to email")
     # pub_to_email(title, news)
