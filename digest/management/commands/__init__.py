@@ -76,7 +76,7 @@ def is_weekly_digest(item_data: dict) -> bool:
         "https://django-news.com/issues/",
     ]
 
-    return bool(title in digest_names or link in digest_links)
+    return bool(title in digest_names or any([link.startswith(x) for x in digest_links]))
 
 
 def _clojure_get_youtube_urls_from_page():
