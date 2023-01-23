@@ -74,6 +74,7 @@ def is_weekly_digest(item_data: dict) -> bool:
         "https://pycoders.com/issues/",
         "https://python.libhunt.com/newsletter/",
         "https://django-news.com/issues/",
+        "https://python.thisweekin.io/python-weekly-issue",
     ]
 
     return bool(title in digest_names or any([link.startswith(x) for x in digest_links]))
