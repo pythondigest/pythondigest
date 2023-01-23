@@ -541,5 +541,6 @@ def ignore_url(link):
         "medium.com",
         "apple.com",
         "google.com",
+        "https://smartproxy.com",
     ]
     return any([x in link for x in block_domains])
