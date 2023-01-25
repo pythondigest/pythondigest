@@ -544,5 +544,6 @@ def ignore_url(link):
         "google.com",
         "https://smartproxy.com",
         "https://python.plainenglish.io",
+        "https://brightdata.com",
     ]
     return any([x in link for x in block_domains])
