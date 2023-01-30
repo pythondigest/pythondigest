@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load thumbnail %}
 {% load common %}
+{% load static %}
 
 {% block page_title %}Python Дайджест. Выпуск {{object.pk}}{% endblock %}
 {% block page_description %}{{ object.title }} - {{ block.super }}{% endblock %}
