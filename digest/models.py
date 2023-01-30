@@ -158,9 +158,9 @@ ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Pyth
 <p><b>Поддержите проект</b> <a href='https://boosty.to/pydigest'>рублем</a> или <a href="https://firstvds.ru/?from=421453">купив сервер по ссылке</a>. Это покроет расходы на хостинг и домен, модерацию новостей.</p>"""
 
 ANNOUNCEMENT_DEFAULT = """#python #pydigest
-IT-новости про Python, которые стоит знать перед вами.
+IT-новости про Python перед вами.
 
-Часть интересного из выпуска Python Дайджест:
+Часть материалов из выпуска Python Дайджест:
 
 links
 
