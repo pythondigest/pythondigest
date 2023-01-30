@@ -157,6 +157,16 @@ class Issue(models.Model):
 ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://pythondigest.ru/feed/">RSS</a>, <a href="https://twitter.com/pydigest">Twitter</a> или <a href="https://t.me/py_digest">Telegram @py_digest</a></p><br>
 <p><b>Поддержите проект</b> <a href='https://boosty.to/pydigest'>рублем</a> или <a href="https://firstvds.ru/?from=421453">купив сервер по ссылке</a>. Это покроет расходы на хостинг и домен, модерацию новостей.</p>"""
 
+ANNOUNCEMENT_DEFAULT = """#python #pydigest
+IT-новости про Python, которые стоит знать перед вами.
+
+Часть интересного из выпуска Python Дайджест:
+
+links
+
+Заходите в гости - {digest_url}
+"""
+
 
 class Section(models.Model):
     """
@@ -299,7 +309,11 @@ class Item(models.Model):
                         date_to=date_to,
                         published_at=date_to + datetime.timedelta(days=1),
                         description=ISSUE_DESCRIPTION_DEFAULT,
+                        announcement=ANNOUNCEMENT_DEFAULT.format(
+                            digest_url=f"https://pythondigest.ru/issue/{cnt_issue}/"
+                        ),
                     )
+
                     new_issue.save()
                     self.issue = new_issue
                 elif issue.count() == 1:
