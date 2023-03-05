@@ -107,7 +107,6 @@ def _clojure_get_youtube_urls_from_page():
         return result
 
     def parse_page(content):
-
         result = None
         try:
             a = filter(lambda x: "youtu" in x, content.split("\n"))
@@ -233,7 +232,7 @@ def make_get_request(url, timeout=10, try_count=0):
 
     try:
         return requests.get(url, **requests_kwargs)
-    except (requests.ConnectTimeout):
+    except requests.ConnectTimeout:
         # try again
         logger.info("Timeout error. Try again")
         return make_get_request(url, timeout + 3, try_count + 1)

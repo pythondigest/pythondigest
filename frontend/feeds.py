@@ -39,7 +39,9 @@ def mark_videos(query_set):
 class RawEntriesFeed(DigestFeed):
     @staticmethod
     def items():
-        _ = Item.objects.filter(activated_at__lte=datetime.datetime.now(),).order_by(
+        _ = Item.objects.filter(
+            activated_at__lte=datetime.datetime.now(),
+        ).order_by(
             "-related_to_date"
         )[:10]
         mark_videos(_)
@@ -51,7 +53,10 @@ class ItemDigestFeed(DigestFeed):
 
     @staticmethod
     def items():
-        _ = Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now(),).order_by(
+        _ = Item.objects.filter(
+            status="active",
+            activated_at__lte=datetime.datetime.now(),
+        ).order_by(
             "-related_to_date"
         )[:10]
         mark_videos(_)
@@ -184,7 +189,6 @@ class ItemAuthorsFeed(SectionFeed):
 
 
 class TurboFeed(YandexTurboFeed, AllEntriesFeed):
-
     turbo_sanitize = True
 
     def item_link(self, item):

@@ -54,7 +54,6 @@ class Command(BaseCommand):
         parser.add_argument("dataset_folder", type=str)  # ссылка на дополнительный датасет для объединения
 
     def handle(self, *args, **options):
-
         assert os.path.exists(options["dataset_folder"])
         additional_data = []
         for x in glob.glob("%s/*.json" % options["dataset_folder"]):

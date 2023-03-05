@@ -3,7 +3,7 @@ default_stages: [commit]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
@@ -13,25 +13,25 @@ repos:
       - id: debug-statements
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.2.2
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
         args: [--py311-plus]
 
   - repo: https://github.com/PyCQA/isort
-    rev: 5.10.1
+    rev: 5.12.0
     hooks:
       - id: isort
         # args: ["--profile", "black"]
 
   - repo: https://github.com/psf/black
-    rev: 22.10.0
+    rev: 23.1.0
     hooks:
       - id: black
         exclude: ^.*\b(migrations)\b.*$
 
   -   repo: https://github.com/PyCQA/autoflake
-      rev: v1.7.7
+      rev: v2.0.1
       hooks:
       -   id: autoflake
 
@@ -43,13 +43,13 @@ repos:
 #         additional_dependencies: [flake8-isort]
 
   - repo:  https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.19.2
+    rev: 0.21.0
     hooks:
       - id: check-github-workflows
       - id: check-dependabot
 
   - repo: https://github.com/pre-commit/pygrep-hooks
-    rev: v1.9.0
+    rev: v1.10.0
     hooks:
       - id: python-use-type-annotations
       - id: python-check-blanket-noqa
@@ -64,10 +64,10 @@ repos:
 
   # run pip-audit from custom action
   # because default is not support poetry
-  - repo: https://github.com/koyeung/ko-poetry-audit-plugin.git
-    rev: 0.6.0
-    hooks:
-      - id: poetry-audit
+  # - repo: https://github.com/koyeung/ko-poetry-audit-plugin.git
+  #   rev: 0.7.0
+  #   hooks:
+  #     - id: poetry-audit
 
   # - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
   #   rev: v1.3.0

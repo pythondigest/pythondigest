@@ -445,7 +445,6 @@ class ItemClsCheck(models.Model):
         # print('Run check: {}'.format(self.pk))
         prev_data = datetime.datetime.now() - datetime.timedelta(days=10)
         if force or self.last_check <= prev_data:
-
             try:
                 url = "{}/{}".format(settings.CLS_URL_BASE, "api/v1.0/classify/")
                 resp = requests.post(url, data=json.dumps({"links": [self.item.data4cls]}))

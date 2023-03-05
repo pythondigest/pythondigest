@@ -37,7 +37,6 @@ class Command(BaseCommand):
             os.makedirs(os.path.dirname(out_path))
 
         with open(out_path, "w") as fio:
-
             fieldnames = data[0].keys()
             writer = csv.DictWriter(fio, fieldnames=fieldnames)
             headers = {n: n for n in fieldnames}

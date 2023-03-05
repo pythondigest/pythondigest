@@ -390,7 +390,6 @@ class ItemModeratorAdmin(admin.ModelAdmin):
     _action_set_queue.short_description = "В очередь"
 
     def get_queryset(self, request):
-
         # todo
         # потом переписать на логику:
         # ищем связку выпусков
@@ -476,7 +475,6 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
-
             today = datetime.utcnow().date()
             yeasterday = today - timedelta(days=2)
 

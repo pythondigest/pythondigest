@@ -176,7 +176,7 @@ jobs:
       # Build and upload image
       #----------------------------------------------
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: deploy/django/Dockerfile
@@ -226,7 +226,7 @@ jobs:
       # Run docker compose
       #----------------------------------------------
       - name: executing remote ssh commands
-        uses: appleboy/ssh-action@v0.1.7
+        uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}

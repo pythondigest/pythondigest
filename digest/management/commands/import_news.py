@@ -30,7 +30,6 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     result = []
     excl = [s.strip() for s in (src.excl or "").split(",") if s]
     for text, link, http_code in data:
-
         try:
             excl_link = bool([i for i in excl if i in link])
         except TypeError as e:
@@ -101,7 +100,6 @@ def get_items_from_rss(rss_link: str, timeout=10) -> list[dict]:
         res_news = feedparser.parse(response.content)
 
         for n in res_news.entries:
-
             news_time = getattr(n, "published_parsed", None)
             if news_time is not None:
                 _timestamp = mktime(news_time)

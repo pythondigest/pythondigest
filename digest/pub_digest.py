@@ -235,7 +235,6 @@ def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
 
 
 def pub_to_email(title: str, news):
-
     description = """
         Оставляйте свои комментарии к выпуcкам,
         пишите нам в <a href="https://python-ru.slack.com/messages/pythondigest/">Slack</a> (<a href="https://slack.python.ru/">инвайт</a>),
