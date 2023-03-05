@@ -270,9 +270,16 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
 
 @admin.register(Package)
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ("name", "link", "show_link_rss")
+    list_display = (
+        "name",
+        "link",
+        "show_link_rss",
+        "is_active",
+    )
 
     search_fields = ("name", "link")
+
+    list_filter = ("is_active",)
 
     def show_link_rss(self, obj):
         link = obj.link_rss

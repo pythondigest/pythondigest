@@ -22,11 +22,7 @@ def _generate_release_item(
     package: Package,
 ):
     name = f"{package.name} - {package_version}"
-    description = (
-        "{0}."
-        ' Изменения описаны по ссылке <a href="{1}">{1}</a>. '
-        'Скачать можно по ссылке: <a href="{2}">{2}</a>'.format(package.description, link, package.link)
-    )
+    description = "{0}." 'Скачать можно по ссылке: <a href="{1}">{1}</a>'.format(package.description, package.link)
     return {
         "title": name,
         "link": link,
@@ -99,7 +95,7 @@ def parse_rss(package: Package):
 
 
 def parse_release_rss():
-    queryset = Package.objects.all()
+    queryset = Package.objects.filter(is_active=True)
     for package in queryset:
         print(f"Processing...{package.name}")
         parse_rss(package)

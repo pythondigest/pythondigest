@@ -516,6 +516,7 @@ class AutoImportResource(models.Model):
 
 
 class Package(models.Model):
+    is_active = models.BooleanField(verbose_name=_("Is active"), default=True)
     name = models.CharField(verbose_name=_("Name"), max_length=255)
     description = models.TextField(verbose_name=_("Description"), blank=True)
     link = models.URLField(verbose_name=_("URL"), max_length=255)
