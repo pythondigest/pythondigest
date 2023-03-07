@@ -67,7 +67,7 @@ factory-boy = "^3.2.1"
 mock = ">=3.0.5"
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^5.0.4"
+flake8 = "^6.0.0"
 flake8-isort = "^5.0.0"
 coverage = "^6.5.0"
 black = "^22.10.0"
