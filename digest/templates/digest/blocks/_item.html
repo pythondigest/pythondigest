@@ -38,10 +38,12 @@
 
             <p class="issue-item-description">{{ item.description|default:''|safe}}</p>
 
-            {% if item.additionally or item.section == 'Видео' %}
-                {% include 'digest/blocks/_item_video.html' with link=item.additionally %}
-            {% else %}
-                {% include 'digest/blocks/_item_video.html' with link=item.link %}
+            {% if not hide_video %}
+                {% if item.additionally or item.section == 'Видео' %}
+                    {% include 'digest/blocks/_item_video.html' with link=item.additionally %}
+                {% else %}
+                    {% include 'digest/blocks/_item_video.html' with link=item.link %}
+                {% endif %}
             {% endif %}
 
         </div>

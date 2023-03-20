@@ -55,6 +55,17 @@
 
     <div class="col-md-9">
 
+        {% if feed_items and feed_items.0 %}
+        <div class="row">
+            <div class="col-xs-12">
+                    <br>
+                    <span class="lead">Новый материал в ленте</span>
+                    {% include "digest/blocks/_item.html" with item=feed_items.0 hide_video=True %}
+                <hr>
+            </div>
+        </div>
+        {% endif %}
+
         {% if issue %}
             <div class="issue">
                 {% with object=issue %}

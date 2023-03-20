@@ -29,5 +29,5 @@
        {% if link_class %}class="{{ link_class }}"{% endif %}
        href="{{ item.link }}"
        onclick="trackUrl({{ item.pk }}, '{{ item.section }}', '{{ item.tags.all|tags_as_str }}');"
-       target="_blank">{{ item.title }}</a> {% if show_description and item.content %} -{{ item.content }}{% endif %}
+       target="_blank">{{ item.title }}</a> {% if show_description and item.description %} - {{ item.description|default:''|safe }}{% endif %}
 {% endif %}

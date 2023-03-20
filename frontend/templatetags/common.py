@@ -127,6 +127,8 @@ def modify_url(context, operation, *params):
 def tags_as_links(tags):
     from digest.models import build_url
 
+    if not tags:
+        return list()
     return [(tag.name, build_url("digest:feed", params={"tag": tag.name})) for tag in tags]
 
 
