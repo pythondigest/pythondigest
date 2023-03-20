@@ -22,7 +22,10 @@ def _generate_release_item(
     package: Package,
 ):
     name = f"{package.name} - {package_version}"
-    description = "{0}." 'Скачать можно по ссылке: <a href="{1}">{1}</a>'.format(package.description, package.link)
+    description = '{0}. Скачать можно по ссылке: <a href="{1}">{1}</a>'.format(
+        package.description,
+        package.link.replace("http", "https"),
+    )
     return {
         "title": name,
         "link": link,
