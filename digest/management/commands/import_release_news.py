@@ -74,6 +74,9 @@ def parse_rss(package: Package):
 
     for n in feedparser.parse(package_rss_releases).entries:
         package_version = n.title
+        # skip non stable versions
+        if "b" in package_version or "a" in package_version or "rc" in package_version:
+            continue
 
         if Item.objects.filter(link=n.link).exists():
             continue
