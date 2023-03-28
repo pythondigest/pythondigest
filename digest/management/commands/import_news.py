@@ -9,6 +9,7 @@ import feedparser
 import requests
 from cache_memoize import cache_memoize
 from django.core.management.base import BaseCommand
+from django.db.models import Q
 from requests import TooManyRedirects
 
 from digest.management.commands import (
@@ -137,8 +138,9 @@ def is_skip_news(rss_item: dict, minimum_date=None) -> bool:
     if rss_item["related_to_date"] < minimum_date:
         return True
 
-    # skip old duplicated news
-    if Item.objects.filter(link=rss_item["link"], related_to_date__gte=minimum_date).exists():
+    # skip old duplicated news - link and title
+    q_item = Q(link=rss_item["link"]) | Q(title=rss_item["title"])
+    if Item.objects.filter(q_item).filter(related_to_date__gte=minimum_date).exists():
         return True
 
     return False
