@@ -494,12 +494,18 @@ def save_news_item(item: dict):
         capture_exception(e)
         language_ru = item.get("language") == "ru"
 
+    description = item.get("description", "")
+    read_go = " Читать далее"
+    if description.endswith(read_go):
+        split_n = len(read_go) * -1
+        description = description[:split_n]
+
     try:
         instance = Item(
             title=item.get("title")[:144],
             resource=item.get("resource"),
             link=item.get("link"),
-            description=item.get("description", ""),
+            description=description,
             status=item.get("status", "autoimport"),
             user_id=settings.BOT_USER_ID,
             section=item.get("section", None),
