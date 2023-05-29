@@ -2442,7 +2442,7 @@ test = ["wrapt-timeout-decorator"]
 [package.source]
 type = "git"
 url = "https://github.com/buriy/python-readability.git"
-reference = "HEAD"
+reference = "master"
 resolved_reference = "b679ff761f8bfcfd19a3be9c9f4bc5168585884a"
 
 [[package]]
@@ -3240,4 +3240,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e0d12f131809e43b23d2d4a79f93a55fc61f273d932adecc4aeb52db024533a4"
+content-hash = "8fc813a830a7b00c99954831bf4e5091e64a43002f32350980a0529f1908814e"
