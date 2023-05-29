@@ -8,18 +8,16 @@
 
 {% block extra_head %}
 
-    {% if object.image %}
-        {% if object.image_exists %}
+    {% if object.image and object.image_exists %}
             {% thumbnail object.image "350" as im %}
                 <link rel="image_src" href="http://pythondigest.ru{{ im.url }}">
                 <meta name="twitter:image" content="http://pythondigest.ru{{ im.url }}"/>
                 <meta property="og:image"              content="http://pythondigest.ru{{ im.url }}" />
             {% endthumbnail %}
-        {% else %}
-                <link rel="image_src" href="https://pythondigest.ru{% static 'img/logo.png' %}">
-                <meta name="twitter:image" content="https://pythondigest.ru{% static 'img/logo.png' %}"/>
-                <meta property="og:image"              content="https://pythondigest.ru{% static 'img/logo.png' %}" />
-        {% endif %}
+    {% else %}
+            <link rel="image_src" href="https://pythondigest.ru{% static 'img/logo.png' %}">
+            <meta name="twitter:image" content="https://pythondigest.ru{% static 'img/logo.png' %}"/>
+            <meta property="og:image"              content="https://pythondigest.ru{% static 'img/logo.png' %}" />
     {% endif%}
 
         <meta name="twitter:card" content="summary_large_image"/>

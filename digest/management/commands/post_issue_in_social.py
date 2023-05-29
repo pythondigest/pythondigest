@@ -46,7 +46,7 @@ class Command(BaseCommand):
 
         issue_image_url = "https://pythondigest.ru/static/img/logo.png"
         if issue.image:
-            issue_image_url = (f"{site}{issue.image.url}",)
+            issue_image_url = f"{site}{issue.image.url}"
 
         pub_to_all(
             issue.pk,
