@@ -13,7 +13,7 @@ repos:
       - id: debug-statements
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.4.0
     hooks:
       - id: pyupgrade
         args: [--py311-plus]
@@ -25,13 +25,13 @@ repos:
         # args: ["--profile", "black"]
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
         exclude: ^.*\b(migrations)\b.*$
 
   -   repo: https://github.com/PyCQA/autoflake
-      rev: v2.0.2
+      rev: v2.1.1
       hooks:
       -   id: autoflake
 
@@ -43,7 +43,7 @@ repos:
 #         additional_dependencies: [flake8-isort]
 
   - repo:  https://github.com/python-jsonschema/check-jsonschema
-    rev: 0.22.0
+    rev: 0.23.0
     hooks:
       - id: check-github-workflows
       - id: check-dependabot
