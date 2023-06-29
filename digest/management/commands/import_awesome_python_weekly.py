@@ -102,7 +102,10 @@ def main(url):
     blocks.extend(_get_blocks(url, "newsletter-projects", "li.project"))
 
     for block in blocks:
-        link = block.cssselect("a.title")[0].attrib["href"]
+        try:
+            link = block.cssselect("a.title")[0].attrib["href"]
+        except IndexError:
+            continue
         logger.info(f"Work with url - {link}")
         if any([x in link for x in block_domains]):
             continue
