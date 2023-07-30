@@ -42,6 +42,6 @@ restore:
 check:
 	pre-commit run --show-diff-on-failure --color=always --all-files
 
-update:
+update: pip-tools
 	poetry update
 	pre-commit autoupdate
