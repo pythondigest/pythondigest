@@ -6,6 +6,7 @@ DISTDIR=$(BASEDIR)/dist
 pip-tools:
 	pip install -U pip
 	pip install -U poetry
+	poetry self add poetry-plugin-up
 
 requirements: pip-tools
 	poetry install
@@ -43,5 +44,5 @@ check:
 	pre-commit run --show-diff-on-failure --color=always --all-files
 
 update: pip-tools
-	poetry update
+	poetry up
 	pre-commit autoupdate
