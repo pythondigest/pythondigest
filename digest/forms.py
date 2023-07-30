@@ -1,14 +1,9 @@
-from ckeditor.widgets import CKEditorWidget, json_encode
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.admin.options import get_ul_class
 from django.forms import ChoiceField, ModelForm
-from django.forms.utils import flatatt
-from django.template.loader import render_to_string
-from django.utils.encoding import force_str
-from django.utils.html import conditional_escape
-from django.utils.safestring import mark_safe
 
 from digest.models import Item
 
@@ -17,30 +12,6 @@ ITEM_STATUS_CHOICES = (
     ("queue", "В очередь"),
     ("moderated", "Отмодерировано"),
 )
-
-
-class GlavRedWidget(CKEditorWidget):
-    def render(self, name, value, attrs=None, renderer=None):
-        if value is None:
-            value = ""
-        final_attrs = self.build_attrs(attrs, extra_attrs=dict(name=name))
-        self._set_config()
-        external_plugin_resources = [
-            [force_str(a), force_str(b), force_str(c)] for a, b, c in self.external_plugin_resources
-        ]
-
-        return mark_safe(
-            render_to_string(
-                "custom_widget/ckeditor_widget.html",
-                {
-                    "final_attrs": flatatt(final_attrs),
-                    "value": conditional_escape(force_str(value)),
-                    "id": final_attrs["id"],
-                    "config": json_encode(self.config),
-                    "external_plugin_resources": json_encode(external_plugin_resources),
-                },
-            )
-        )
 
 
 class ItemStatusForm(ModelForm):
@@ -54,7 +25,7 @@ class ItemStatusForm(ModelForm):
         model = Item
         fields = "__all__"
         widgets = {
-            "description": GlavRedWidget,
+            "description": CKEditorWidget,
         }
 
 
