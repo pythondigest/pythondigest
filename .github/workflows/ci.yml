@@ -25,7 +25,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v4
@@ -76,7 +76,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v4
@@ -138,7 +138,7 @@ jobs:
     needs: [test, linter]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       #----------------------------------------------
       # Prepare commit info for deploy
       #----------------------------------------------
@@ -200,7 +200,7 @@ jobs:
       # Copy docker compose production config
       #----------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       #----------------------------------------------
       # Prepare commit info for deploy
