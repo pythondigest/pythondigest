@@ -1,7 +1,6 @@
 import datetime
 import logging
 import re
-import socket
 from time import mktime
 from urllib.error import URLError
 
@@ -78,7 +77,7 @@ def import_tweets(**kwargs):
                     data = apply_parsing_rules(item_data, **kwargs) if kwargs.get("query_rules") else {}
                     item_data.update(data)
             save_news_item(item_data)
-        except (URLError, TooManyRedirects, socket.timeout) as e:
+        except (URLError, TooManyRedirects, TimeoutError) as e:
             print(i, str(e))
 
 
@@ -232,7 +231,7 @@ def import_rss(**kwargs):
                 save_news_item(item)
                 logger.info(f"> Saved")
 
-        except (URLError, TooManyRedirects, socket.timeout) as e:
+        except (URLError, TooManyRedirects, TimeoutError) as e:
             print(source, str(e))
 
 
