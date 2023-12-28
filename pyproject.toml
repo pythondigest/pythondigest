@@ -43,7 +43,7 @@ readability-lxml = {git = "https://github.com/buriy/python-readability.git", bra
 psycopg2-binary = "^2.9.6"
 pymemcache = "^4.0.0"
 django-browser-reload = "^1.11.0"
-django-bootstrap3 = "^22.2"
+django-bootstrap3 = "^23.6"
 django-yaturbo = "^1.0.1"
 bleach = "^5.0.1"
 django-environ = "<1.0"
