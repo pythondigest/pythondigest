@@ -54,7 +54,7 @@ django-cache-memoize = "^0.1.10"
 django-htmlmin = "^0.11.0"
 uwsgi = "^2.0.22"
 whitenoise = {extras = ["brotli"], version = "^6.5.0"}
-uvicorn = "^0.20.0"
+uvicorn = "^0.28.0"
 lingua-language-detector = "^1.3.2"
 vk = ">=3.0"
 
