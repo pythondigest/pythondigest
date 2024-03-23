@@ -25,10 +25,10 @@ build:
 	docker compose -f deploy/docker_compose.yml build
 
 run:
-	python manage.py compress --force && python manage.py runserver
+	poetry run python manage.py compress --force && poetry run python manage.py runserver
 
 import:
-	python manage.py import_news
+	poetry run python manage.py import_news
 
 clean:
 	docker compose -f deploy/docker_compose_infra.yml stop

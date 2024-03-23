@@ -60,7 +60,7 @@ repos:
       hooks:
       -   id: detect-secrets
           args: ['--baseline', '.secrets.baseline']
-          exclude: package.lock.json
+          exclude: package.lock.json|base.html
 
   # run pip-audit from custom action
   # because default is not support poetry
