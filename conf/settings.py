@@ -1,6 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
+
 import logging
 import os
 import sys

@@ -7,9 +7,10 @@ pip-tools:
 	pip install -U pip
 	pip install -U poetry
 	poetry add poetry-plugin-up --group dev
+	poetry add pre-commit --group dev
 
 requirements: pip-tools
-	poetry install
+	poetry install --with=dev,test
 
 test:
 	poetry run python manage.py test
@@ -41,9 +42,9 @@ restore:
 	docker compose -f deploy/docker_compose_infra.yml exec postgres restore postgresql-pythondigest-`date "+%Y-%m-%d"`.sqlc
 
 check:
-	pre-commit run --show-diff-on-failure --color=always --all-files
+	poetry run pre-commit run --show-diff-on-failure --color=always --all-files
 
 update: pip-tools
 	poetry update
 	poetry run poetry up
-	pre-commit autoupdate
+	poetry run pre-commit autoupdate

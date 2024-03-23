@@ -4,6 +4,7 @@ python manage.py import_python_weekly URL
 example:
 python manage.py import_python_weekly 'https://python.thisweekin.io/python-weekly-issue-57-6773a17532df?source=rss----26a6525a27bc---4'
 """
+
 from collections.abc import Sequence
 from typing import Union
 
