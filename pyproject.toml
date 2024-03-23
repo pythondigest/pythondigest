@@ -21,7 +21,7 @@ django-compressor = ">=4.4"
 django-secretballot = ">=2.0.0"
 django-likes = {git = "https://github.com/axsapronov/django-likes.git", rev = "django4-signals"}
 django-debug-toolbar = ">=4.3.0"
-django-remdow = ">=0.0.8"
+django-remdow = ">=0.0.9"
 requests = ">=2.31.0"
 lxml = ">=5.1.0"
 pyyaml = ">=6.0.1"

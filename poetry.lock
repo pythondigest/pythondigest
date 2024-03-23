@@ -1125,13 +1125,13 @@ hiredis = ["redis[hiredis] (>=3,!=4.0.0,!=4.0.1)"]
 
 [[package]]
 name = "django-remdow"
-version = "0.0.8"
+version = "0.0.9"
 description = "Django app for lazyload static files (img files)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-remdow-0.0.8.tar.gz", hash = "sha256:893e4c02acd0471fb94255c8f28c4f2a1bbdf40cae1b380f9257b3e845a304a9"},
-    {file = "django_remdow-0.0.8-py2.py3-none-any.whl", hash = "sha256:a1075ebbe3c81e08d050385746775bd79e02970c7b6169606ae2fb73e03d8f7b"},
+    {file = "django-remdow-0.0.9.tar.gz", hash = "sha256:f6600e32296da29ca7716f8e572b5470fdfe1bbb702d815fc47b9b889e76ab24"},
+    {file = "django_remdow-0.0.9-py2.py3-none-any.whl", hash = "sha256:32ffe76a2da3c1dbd716abc24d38a68bcb4eb01a1bfd8f92c028d157be3d3e62"},
 ]
 
 [package.dependencies]
@@ -4055,4 +4055,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b0bd7edf3e39d651e1debba290a09f984e6579f14d51f277d1031d8c1176bd21"
+content-hash = "9774d03357c51bd0e22d30914e28ad6daf0a70e4b9d926d84e51381928e6f648"
