@@ -60,7 +60,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" async="async"></script>
-    {% lazy_script_include %}
 
     {% block extra_head %}{% endblock %}
 </head>
@@ -164,49 +163,42 @@
 
     {% if not perms.admin %}
     <!-- Yandex.Metrika counter -->
-    <script type="text/javascript"> (function (d, w, c) {
-            (w[c] = w[c] || []).push(function () {
-                try {
-                    w.yaCounter36284495 = new Ya.Metrika({
-                        id: 36284495,
-                        clickmap: true,
-                        trackLinks: true,
-                        accurateTrackBounce: true,
-                        webvisor: true
-                    });
-                } catch (e) {
-                }
-            });
-            var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () {
-                n.parentNode.insertBefore(s, n);
-            };
-            s.type = "text/javascript";
-            s.async = true;
-            s.src = "https://mc.yandex.ru/metrika/watch.js";
-            if (w.opera == "[object Opera]") {
-                d.addEventListener("DOMContentLoaded", f, false);
-            } else {
-                f();
-            }
-        })(document, window, "yandex_metrika_callbacks"); </script>
+    <script
+        type="text/javascript"> (function (m, e, t, r, i, k, a) { m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) }; m[i].l = 1 * new Date(); for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } } k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a) })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(36284495, "init", { clickmap: true, trackLinks: true, accurateTrackBounce: true }); </script>
     <noscript>
-        <div><img src="https://mc.yandex.ru/watch/36284495" style="position:absolute; left:-9999px;"
-                alt="Yandex counter" /></div>
+        <div><img src="https://mc.yandex.ru/watch/36284495" style="position:absolute; left:-9999px;" alt="" /></div>
     </noscript> <!-- /Yandex.Metrika counter -->
     {% endif %}
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
     <script>
-        function analyticsOnScrollAddthis() {
+        function scriptOnScrollAddthis() {
             var head = document.getElementsByTagName('head')[0]
             var script = document.createElement('script')
             script.type = 'text/javascript';
             script.src = 'https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc'
             head.appendChild(script);
-            document.removeEventListener('scroll', analyticsOnScrollAddthis);
+            document.removeEventListener('scroll', scriptOnScrollAddthis);
         };
-        document.addEventListener('scroll', analyticsOnScrollAddthis);
+        document.addEventListener('scroll', scriptOnScrollAddthis);
     </script>
+
+    <script>
+        function scriptOnScrollLazy() {
+            var head = document.getElementsByTagName('head')[0]
+            var script = document.createElement('script')
+            script.type = 'text/javascript';
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/layzr.js/2.2.2/layzr.min.js'
+            script.integrity = "sha512-q3ExXBG4Bmc9V2hgntugdedBM9/GT7qt8OGHDv65+LEX5yURjaBkLXCBmtqGLN1kW0PvQB/8mdMEB+tNO3cWsQ=="
+            script.crossorigin = "anonymous"
+            script.referrerpolicy = "no-referrer"
+
+            head.appendChild(script);
+            document.removeEventListener('scroll', scriptOnScrollLazy);
+        };
+        document.addEventListener('scroll', scriptOnScrollLazy);
+    </script>
+    <script>var layzr = new Layzr();</script>
 
     {% block scripts %}{% endblock %}
 
