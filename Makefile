@@ -6,13 +6,13 @@ DISTDIR=$(BASEDIR)/dist
 pip-tools:
 	pip install -U pip
 	pip install -U poetry
-	poetry self add poetry-plugin-up
+	poetry add poetry-plugin-up --group dev
 
 requirements: pip-tools
 	poetry install
 
 test:
-	python manage.py test
+	poetry run python manage.py test
 
 run-infra:
 	docker compose -f deploy/docker_compose_infra.yml up --build
@@ -44,5 +44,6 @@ check:
 	pre-commit run --show-diff-on-failure --color=always --all-files
 
 update: pip-tools
-	poetry up
+	poetry update
+	poetry run poetry up
 	pre-commit autoupdate
