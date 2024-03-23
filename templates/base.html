@@ -129,7 +129,19 @@
     {% endcompress %}
 
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L3JGRC781D"></script>
+    <!-- Google Analytics load on scroll -->
+    <script>
+        function analyticsOnScroll() {
+            var head = document.getElementsByTagName('head')[0]
+            var script = document.createElement('script')
+            script.type = 'text/javascript';
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-L3JGRC781D'
+            head.appendChild(script);
+            document.removeEventListener('scroll', analyticsOnScroll);
+        };
+        document.addEventListener('scroll', analyticsOnScroll);
+    </script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -184,9 +196,17 @@
     {% endif %}
 
     <!-- Go to www.addthis.com/dashboard to customize your tools -->
-    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc"
-        async="async"></script>
-
+    <script>
+        function analyticsOnScrollAddthis() {
+            var head = document.getElementsByTagName('head')[0]
+            var script = document.createElement('script')
+            script.type = 'text/javascript';
+            script.src = 'https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-56e56461495537bc'
+            head.appendChild(script);
+            document.removeEventListener('scroll', analyticsOnScrollAddthis);
+        };
+        document.addEventListener('scroll', analyticsOnScrollAddthis);
+    </script>
 
     {% block scripts %}{% endblock %}
 
