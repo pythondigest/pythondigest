@@ -215,6 +215,9 @@ def make_get_request(url, timeout=10, try_count=0):
         logger.info("Too many try for request")
         return None
 
+    if not url or not url.strip():
+        return None
+
     requests_kwargs = dict(
         timeout=timeout,
     )
