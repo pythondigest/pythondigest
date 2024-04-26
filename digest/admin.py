@@ -331,6 +331,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         "_action_active_now",
         "_action_active_queue_8",
         "_action_active_queue_24",
+        "_action_active_queue_48",
     ]
 
     def cls_ok(self, obj):
@@ -374,15 +375,20 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         except Exception:
             pass
 
+    def _action_active_queue_48(self, request, queryset):
+        self._action_active_queue_n_hourn(48, queryset)
+
+    _action_active_queue_48.short_description = "Активировать по очереди (48 часа)"
+
     def _action_active_queue_24(self, request, queryset):
         self._action_active_queue_n_hourn(24, queryset)
 
-    _action_active_queue_24.short_description = "Активировать по очереди(24 часа)"
+    _action_active_queue_24.short_description = "Активировать по очереди (24 часа)"
 
     def _action_active_queue_8(self, request, queryset):
         self._action_active_queue_n_hourn(8, queryset)
 
-    _action_active_queue_8.short_description = "Активировать по очереди(8 часов)"
+    _action_active_queue_8.short_description = "Активировать по очереди (8 часов)"
 
     def _action_set_queue(self, request, queryset):
         queryset.update(status="queue")
