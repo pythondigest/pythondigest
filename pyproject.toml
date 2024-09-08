@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
-django = {extras = ["argon2"], version = "^4.2.15"}
+django = {extras = ["argon2"], version = "^4.2.16"}
 django-bootstrap-form = ">=3.4"
 django-digg-paginator = ">=0.2.0"
 django-user-accounts = ">=3.3.2"
@@ -34,7 +34,7 @@ urlobject = ">=2.4.3"
 micawber = ">=0.5.5"
 rsa = ">=4.9"
 twx-botapi = "3.6.1"
-google-api-python-client = ">=2.142.0"
+google-api-python-client = ">=2.144.0"
 tweepy = "<4"
 funcy = ">=2.0"
 pillow = ">=10.4.0"
@@ -62,7 +62,7 @@ vk = ">=3.0"
 django-stubs = ">=5.0.4"
 pytest = ">=8.3.2"
 pytest-sugar = ">=1.0.0"
-pytest-django = ">=4.8.0"
+pytest-django = ">=4.9.0"
 factory-boy = ">=3.3.1"
 mock = ">=5.1.0"
 
@@ -73,12 +73,13 @@ coverage = ">=7.6.1"
 black = ">=24.8.0"
 pylint-django = ">=2.5.5"
 pre-commit = ">=3.8.0"
-django-extra-checks = ">=0.15.0"
+django-extra-checks = ">=0.15.1"
 django-migration-linter = ">=5.1.0"
 autoflake = ">=2.3.1"
 detect-secrets = ">=1.5.0"
-safety = ">=3.2.6"
+safety = ">=3.2.7"
 poetry-plugin-up = "^0.7.1"
+ruff = "^0.6.4"
 
 [tool.black]
 line-length = 119
