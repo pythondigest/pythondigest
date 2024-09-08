@@ -60,9 +60,6 @@ docs/_build/
 # PyBuilder
 target/
 
-# pyenv
-.python-version
-
 # celery beat schedule file
 celerybeat-schedule
 
@@ -354,3 +351,4 @@ a.bash
 .coverage
 coverage.xml
 proxy.bash
+debug_*.py
