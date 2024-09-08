@@ -463,6 +463,8 @@ TGM_BOT_ACCESS_TOKEN = env.str("TGM_BOT_ACCESS_TOKEN", default=None)
 TGM_CHANNEL = env.str("TGM_CHANNEL", default=None)
 IFTTT_MAKER_KEY = env.str("IFTTT_MAKER_KEY", default=None)
 # TODO: configure by oauth for pub digest
+
+VK_USE_TOKEN = env.bool("VK_USE_TOKEN", default=True)
 VK_APP_ID = env.int("VK_APP_ID", default=0)
 VK_LOGIN = env.str("VK_LOGIN", default=None)
 VK_PASSWORD = env.str("VK_PASSWORD", default=None)

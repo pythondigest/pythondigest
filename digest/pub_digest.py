@@ -9,8 +9,6 @@ import requests
 import tweepy
 import twx
 import vk
-
-# import vk
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.templatetags.static import static
@@ -289,12 +287,26 @@ def pub_to_all(
     twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
     pub_to_twitter(twitter_text, digest_image_url)
     print("Send to vk groups")
-    api = vk.UserAPI(
-        user_login=settings.VK_LOGIN,
-        user_password=settings.VK_PASSWORD,
-        scope="wall,messages,offline",
-        v="5.131",
-    )
+
+    vk_api_version = "5.131"
+    vk_api_scope = "wall,messages,offline"
+    if settings.VK_USE_TOKEN:
+        url = f"https://oauth.vk.com/authorize?client_id={settings.VK_APP_ID}&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope={vk_api_scope}&response_type=token&v={vk_api_scope}"
+        print("Open url and extract access_token")
+        print(url)
+        access_token = input("Access token: ").strip()
+        api = vk.API(
+            access_token=access_token,
+            scope=vk_api_scope,
+            v=vk_api_version,
+        )
+    else:
+        api = vk.UserAPI(
+            user_login=settings.VK_LOGIN,
+            user_password=settings.VK_PASSWORD,
+            scope=vk_api_scope,
+            v=vk_api_version,
+        )
     pub_to_vk_groups(text, digest_url, api)
     # print("Send to vk users")
     # pub_to_vk_users(text, api)
