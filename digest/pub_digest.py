@@ -297,7 +297,6 @@ def pub_to_all(
         access_token = input("Access token: ").strip()
         api = vk.API(
             access_token=access_token,
-            scope=vk_api_scope,
             v=vk_api_version,
         )
     else:
