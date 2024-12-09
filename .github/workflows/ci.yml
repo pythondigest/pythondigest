@@ -143,7 +143,7 @@ jobs:
       # Prepare commit info for deploy
       #----------------------------------------------
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
+        uses: rlespinasse/github-slug-action@v5
       #----------------------------------------------
       # Extact commit info for build
       #----------------------------------------------
@@ -206,7 +206,7 @@ jobs:
       # Prepare commit info for deploy
       #----------------------------------------------
       - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
+        uses: rlespinasse/github-slug-action@v5
 
       #----------------------------------------------
       # Copy configs to server
