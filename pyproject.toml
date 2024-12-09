@@ -78,7 +78,7 @@ django-migration-linter = ">=5.1.0"
 autoflake = ">=2.3.1"
 detect-secrets = ">=1.5.0"
 safety = ">=3.2.11"
-poetry-plugin-up = "^0.7.1"
+poetry-plugin-up = "^0.8.0"
 ruff = "^0.8"
 
 [tool.black]
