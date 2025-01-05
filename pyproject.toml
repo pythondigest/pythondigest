@@ -56,7 +56,7 @@ django-htmlmin = "^0.11.0"
 uwsgi = "^2.0.28"
 whitenoise = {extras = ["brotli"], version = "^6.8.2"}
 uvicorn = "^0.32.1"
-lingua-language-detector = "^1.4.0"
+lingua-language-detector = "^2.0.2"
 vk = ">=3.0"
 langchain = "^0.2.17"
 jinja2 = "^3.1.5"
