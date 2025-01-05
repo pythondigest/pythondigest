@@ -54,7 +54,7 @@ jobs:
       # Run poetry
       #----------------------------------------------
       - name: Run pre-commit
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
 
 
   test:
@@ -115,7 +115,7 @@ jobs:
       # (requires CODECOV_TOKEN in repository secrets)
       #----------------------------------------------
       - name: Upload coverage
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}  # Only required for private repositories
           file: ./coverage.xml
