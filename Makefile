@@ -48,3 +48,6 @@ update: pip-tools
 	poetry update
 	poetry run poetry up
 	poetry run pre-commit autoupdate
+
+migrate:
+	poetry run python manage.py migrate

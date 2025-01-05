@@ -29,16 +29,20 @@ from taggit_autosuggest.managers import TaggableManager
 
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
+
+ISSUE_STATUS_ACTIVE = "active"
+ISSUE_STATUS_DRAFT = "draft"
 ISSUE_STATUS_CHOICES = (
-    ("active", _("Active")),
-    ("draft", _("Draft")),
+    (ISSUE_STATUS_ACTIVE, _("Active")),
+    (ISSUE_STATUS_DRAFT, _("Draft")),
 )
-ISSUE_STATUS_DEFAULT = "draft"
+ISSUE_STATUS_DEFAULT = ISSUE_STATUS_DRAFT
 ITEM_STATUS_DEFAULT = "pending"
 
+ITEM_STATUS_ACTIVE = "active"
 ITEM_STATUS_CHOICES = (
     ("pending", _("Pending")),
-    ("active", _("Active")),
+    (ITEM_STATUS_ACTIVE, _("Active")),
     ("draft", _("Draft")),
     ("moderated", _("Moderated")),
     ("autoimport", _("Imported")),

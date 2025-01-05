@@ -5,11 +5,13 @@ from django import forms
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.db import models
+from django.db.models.query import QuerySet
 from django.urls import reverse
 from django.utils.html import escape, format_html
 
 from conf.utils import likes_enable
 from digest.forms import ItemStatusForm
+from digest.genai.auto_announcement import generate_announcement
 from digest.models import (
     AutoImportResource,
     Issue,
@@ -83,7 +85,10 @@ class IssueAdmin(admin.ModelAdmin):
         "last_item",
         "version",
     )
-    actions = ["make_published"]
+    actions = [
+        "make_published",
+        "make_announcement",
+    ]
 
     def issue_date(self, obj):
         return f"С {obj.date_from} по {obj.date_to}"
@@ -102,7 +107,7 @@ class IssueAdmin(admin.ModelAdmin):
     frontend_link.allow_tags = True
     frontend_link.short_description = "Просмотр"
 
-    def make_published(self, request, queryset):
+    def make_published(self, request, queryset: QuerySet):
         if queryset.count() != 1:
             return
 
@@ -120,6 +125,19 @@ class IssueAdmin(admin.ModelAdmin):
         )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"
+
+    def make_announcement(self, request, queryset: QuerySet):
+        if queryset.count() != 1:
+            return
+
+        issue = queryset.first()
+        if not issue:
+            return
+
+        announcement = generate_announcement(issue.pk)
+        queryset.update(announcement=announcement)
+
+    make_announcement.short_description = "Сгенерировать анонс"
 
 
 class SectionAdmin(admin.ModelAdmin):
@@ -220,7 +238,15 @@ class ItemAdmin(admin.ModelAdmin):
     external_link.short_description = "Ссылка"
 
     def get_queryset(self, request):
-        return super().get_queryset(request).prefetch_related("section", "resource", "user")
+        return (
+            super()
+            .get_queryset(request)
+            .prefetch_related(
+                "section",
+                "resource",
+                "user",
+            )
+        )
 
     def save_model(self, request, obj, form, change):
         _save_item_model(request, obj, form, change)
@@ -413,7 +439,10 @@ class ItemModeratorAdmin(admin.ModelAdmin):
             before_issue = Issue.objects.filter(date_to=end_week - timedelta(days=7))
             assert len(before_issue) == 1
             if before_issue[0].status == "active":
-                current_issue = Issue.objects.filter(date_to=end_week, date_from=start_week)
+                current_issue = Issue.objects.filter(
+                    date_to=end_week,
+                    date_from=start_week,
+                )
                 assert len(current_issue) == 1
                 current_issue = current_issue[0]
             else:
@@ -484,9 +513,10 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
             today = datetime.utcnow().date()
             yeasterday = today - timedelta(days=2)
 
-            result = self.model.objects.filter(related_to_date__range=[yeasterday, today], status="active").order_by(
-                "-pk"
-            )
+            result = self.model.objects.filter(
+                related_to_date__range=[yeasterday, today],
+                status="active",
+            ).order_by("-pk")
         except AssertionError:
             result = super().get_queryset(request)
         return result
@@ -534,7 +564,13 @@ class ItemClsAdmin(admin.ModelAdmin):
 
     def get_queryset(self, request):
         try:
-            return super().get_queryset(request).filter(pk__lte=Issue.objects.all().first().last_item)
+            return (
+                super()
+                .get_queryset(request)
+                .filter(
+                    pk__lte=Issue.objects.all().first().last_item,
+                )
+            )
         except ValueError as e:
             print(e)
             return super().get_queryset(request)

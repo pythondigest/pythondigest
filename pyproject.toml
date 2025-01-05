@@ -58,6 +58,7 @@ whitenoise = {extras = ["brotli"], version = "^6.8.2"}
 uvicorn = "^0.32.1"
 lingua-language-detector = "^1.4.0"
 vk = ">=3.0"
+langchain = "^0.2.17"
 
 [tool.poetry.group.test.dependencies]
 django-stubs = ">=5.1.1"
