@@ -256,6 +256,8 @@ jobs:
             export VK_APP_ID="${{ secrets.VK_APP_ID }}"
             export VK_LOGIN="${{ secrets.VK_LOGIN }}"
             export VK_PASSWORD="${{ secrets.VK_PASSWORD }}"
+            export CHAD_API_KEY="${{ secrets.CHAD_API_KEY }}"
+            export CHAD_API_MODEL="${{ secrets.CHAD_API_MODEL }}"
 
             # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
