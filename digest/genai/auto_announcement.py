@@ -26,6 +26,7 @@ def format_issue(issue):
                 "description": x.description,
             }
             for x in issue.item_set.filter(status=ITEM_STATUS_ACTIVE).iterator()
+            if "%" not in x.title
         ],
     }
 
