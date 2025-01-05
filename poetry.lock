@@ -2488,17 +2488,17 @@ poetry-core = ">=1.7.0,<3.0.0"
 
 [[package]]
 name = "poetry-plugin-up"
-version = "0.7.2"
+version = "0.8.0"
 description = "Poetry plugin that updates dependencies and bumps their versions in pyproject.toml file"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "poetry_plugin_up-0.7.2-py3-none-any.whl", hash = "sha256:2af2a5167b6a24a0523327565e6643c0982e62e7159bc4b505c65626dc75a376"},
-    {file = "poetry_plugin_up-0.7.2.tar.gz", hash = "sha256:012e8f7d50d75664c26d431d5802bf80bb23d459c2c8632deabeb75cff910e32"},
+    {file = "poetry_plugin_up-0.8.0-py3-none-any.whl", hash = "sha256:990b8743ffcb747b0b5aec13238178977f34db0c3d378c4d57fa7ae9c3464aa2"},
+    {file = "poetry_plugin_up-0.8.0.tar.gz", hash = "sha256:b5e11bd5f0d42e263feae11aa1b18bc1609098f251e21f22285d5ddc157ec7f6"},
 ]
 
 [package.dependencies]
-poetry = ">=1.8.3,<2.0.0"
+poetry = ">=1.8.4,<2.0.0"
 
 [[package]]
 name = "pre-commit"
@@ -4271,4 +4271,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "183e1623de980e68bacf3742409883682d9aa886121533de854d212573fbf207"
+content-hash = "1f59749093b0548efb8bd8485c3a54c05ead279eaa3641ca95074d44b86a3b9b"
