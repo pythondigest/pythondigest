@@ -60,7 +60,7 @@ class Chad(LLM):
     @pre_init
     def validate_environment(cls, values: dict) -> dict:
         """Validate that api key exists in environment."""
-        chad_api_key = convert_to_secret_str(get_from_dict_or_env(values, "chad_api_key", "Chad_API_KEY"))
+        chad_api_key = convert_to_secret_str(get_from_dict_or_env(values, "chad_api_key", "CHAD_API_KEY"))
         values["chad_api_key"] = chad_api_key
         return values
 

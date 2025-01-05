@@ -30,6 +30,8 @@ services:
       - VK_APP_ID=${VK_APP_ID}
       - VK_LOGIN=${VK_LOGIN}
       - VK_PASSWORD=${VK_PASSWORD}
+      - CHAD_API_KEY=${CHAD_API_KEY}
+      - CHAD_API_MODEL=${CHAD_API_MODEL}
     ports:
       - "127.0.0.1:8000:8000"
     command: bash -c "
