@@ -22,7 +22,7 @@ We aggregator many different links from Python World:
 - etc
 
 PythonDigest is a `Open Source` project!
-We use `Python 3`
+We use `Python 3` and `poetry`
 
 Contributing
 ------------
@@ -51,27 +51,25 @@ Clone project
 git clone https://github.com/pythondigest/pythondigest.git
 ```
 
-Create `virtualenv` and install dependencies:
+Create install `poetry` by https://python-poetry.org/docs/#installation:
 
 ```
-virtualenv --python=python3 ./env
-source ./env/bin/activate
 cd pythondigest
-pip install -r requirements.txt
+make requirements # or poetry install
 ```
 
 Init database and install some fixtures:
 
 ```
-python manage.py migrate
-python manage.py migrate --run-syncdb
-python manage.py loaddata digest/fixtures/sections.yaml
-python manage.py loaddata digest/fixtures/parsing_rules.json
+poetry run python manage.py migrate
+poetry run python manage.py migrate --run-syncdb
+poetry run python manage.py loaddata digest/fixtures/sections.yaml
+poetry run python manage.py loaddata digest/fixtures/parsing_rules.json
 ```
 
 Create super user
 ```
-python manage.py createsuperuser
+poetry run python manage.py createsuperuser
 ```
 
 Ok! You are ready for work with Python Digest! (runserver...)
@@ -79,14 +77,14 @@ Ok! You are ready for work with Python Digest! (runserver...)
 For developers:
 
 ```
-python manage.py loaddata digest/fixtures/dev_issues.yaml
-python manage.py loaddata digest/fixtures/dev_resource.yaml
-python manage.py loaddata digest/fixtures/dev_items.yaml
+poetry run python manage.py loaddata digest/fixtures/dev_issues.yaml
+poetry run python manage.py loaddata digest/fixtures/dev_resource.yaml
+poetry run python manage.py loaddata digest/fixtures/dev_items.yaml
 ```
 
 Run tests
 ---------
 
 ```
-python manage.py test
+make test # or poetry run python manage.py test
 ```

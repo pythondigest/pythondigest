@@ -304,7 +304,9 @@ LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}
+        "verbose": {
+            "format": "%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s",
+        }
     },
     "filters": {"require_debug_false": {"()": "django.utils.log.RequireDebugFalse"}},
     "handlers": {
@@ -507,6 +509,12 @@ COMPRESS_FILTERS = {
 
 MAILHANDLER_RU_KEY = ""
 MAILHANDLER_RU_USER_LIST_ID = 413
+
+# GenAI
+# ------------------------------------------------------------------------------
+
+CHAD_API_KEY = env.str("CHAD_API_KEY", default=None)
+CHAD_API_MODEL = env.str("CHAD_API_MODEL", default=None)
 
 # SECURITY
 # ------------------------------------------------------------------------------
