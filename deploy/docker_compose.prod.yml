@@ -7,6 +7,8 @@ services:
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
+      - ${PWD}/dataset:/app/dataset/
+      - ${PWD}/report:/app/report/
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
       - REDIS_URL=${REDIS_URL}

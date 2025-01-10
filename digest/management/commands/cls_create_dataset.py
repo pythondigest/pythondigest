@@ -7,7 +7,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 
-from digest.models import Item
+from digest.models import ITEM_STATUS_ACTIVE, Item
 
 
 def check_exist_link(data, item):
@@ -63,14 +63,14 @@ class Command(BaseCommand):
 
         query = Q()
 
-        urls = [
+        excluded_domains = [
             "allmychanges.com",
             "stackoverflow.com",
         ]
-        for entry in urls:
+        for entry in excluded_domains:
             query = query | Q(link__contains=entry)
 
-        active_news = Item.objects.filter(status="active").exclude(section=None).exclude(query)
+        active_news = Item.objects.filter(status=ITEM_STATUS_ACTIVE).exclude(section=None).exclude(query)
         links = active_news.all().values_list("link", flat=True).distinct()
         non_active_news = Item.objects.exclude(link__in=links).exclude(query)
 
