@@ -466,13 +466,18 @@ class ItemClsCheck(models.Model):
         if force or self.last_check <= prev_data:
             try:
                 url = "{}/{}".format(settings.CLS_URL_BASE, "api/v1.0/classify/")
-                resp = requests.post(
+                response = requests.post(
                     url,
                     json={
                         "links": [self.item.data4cls],
                     },
-                )
-                self.score = resp.json()["links"][0].get(self.item.link, False)
+                ).json()
+
+                if "error" in response:
+                    print(response["error"])
+                    return
+                else:
+                    self.score = response["links"][0].get(self.item.link, False)
             except (
                 requests.exceptions.RequestException,
                 requests.exceptions.Timeout,
