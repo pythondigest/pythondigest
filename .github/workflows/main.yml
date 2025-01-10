@@ -265,8 +265,8 @@ jobs:
             cd ~/pythondigest/deploy/
 
             # deploy app
-            docker compose -f docker_compose.prod.yml pull
-            docker compose -f docker_compose.prod.yml up -d
+            docker compose -f docker_compose.prod.yml -p digest pull
+            docker compose -f docker_compose.prod.yml -p digest up -d
 
             # prepare static folders for serve
             cd ~/pythondigest/deploy/
