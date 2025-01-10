@@ -24,7 +24,7 @@ django-likes = {git = "https://github.com/axsapronov/django-likes.git", rev = "d
 django-debug-toolbar = ">=4.4.6"
 django-remdow = ">=0.0.9"
 requests = ">=2.32.3"
-lxml = "<5.2"
+lxml = "<5.4"
 pyyaml = ">=6.0.2"
 beautifulsoup4 = ">=4.12.3"
 feedparser = ">=6.0.11"
