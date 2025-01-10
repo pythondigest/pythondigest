@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/maintenance/backup_on_server.bash,deploy/maintenance/copy_backup_on_server.bash"
+          source: "deploy/postgres/maintenance/backup_on_server.bash,deploy/postgres/maintenance/copy_backup_on_server.bash"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -50,7 +50,7 @@ jobs:
             export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
             # change folder
-            cd ~/pythondigest/deploy/maintenance/
+            cd ~/pythondigest/deploy/postgres/maintenance/
 
             # make backup
             bash backup_on_server.bash
@@ -68,7 +68,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             # change folder
-            cd ~/pythondigest/deploy/maintenance/
+            cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload backups to drive
             screen -dmS backup-rsync bash copy_backup_on_server.bash
@@ -95,7 +95,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/maintenance/copy_media_on_server.bash"
+          source: "deploy/postgres/maintenance/copy_media_on_server.bash"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -111,7 +111,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             # change folder
-            cd ~/pythondigest/deploy/maintenance/
+            cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload media files to drive
             screen -dmS backup-rsync bash copy_media_on_server.bash
@@ -138,7 +138,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/maintenance/copy_zips_on_server.bash"
+          source: "deploy/postgres/maintenance/copy_zips_on_server.bash"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -154,7 +154,7 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
             # change folder
-            cd ~/pythondigest/deploy/maintenance/
+            cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload zip files to drive
             screen -dmS backup-rsync bash copy_zips_on_server.bash

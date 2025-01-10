@@ -9,7 +9,7 @@ env:
 on:
   push:
     branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    paths-ignore: [ "docs/**", ".github/workflows/backup.yml"]
   workflow_dispatch:
 
 concurrency:
