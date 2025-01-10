@@ -5,7 +5,7 @@ services:
     image: pythondigest/pythondigest:${COMMIT_TAG}
     container_name: pydigest_django
     extra_hosts:
-      - "host.docker.internal:host-gateway" # или используйте IP в коде
+      - "host.docker.internal:172.17.0.1"
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
@@ -38,7 +38,7 @@ services:
       - CHAD_API_KEY=${CHAD_API_KEY}
       - CHAD_API_MODEL=${CHAD_API_MODEL}
     ports:
-      - "127.0.0.1:8000:8000"
+      - "8000:8000"
     command: bash -c "
       echo 'Prepare and run'
       && echo 'Migrate migrations'
