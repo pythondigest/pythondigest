@@ -28,7 +28,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/postgres/maintenance/backup_on_server.bash,deploy/postgres/maintenance/copy_backup_on_server.bash,deploy/postgres/maintenance/copy_media_on_server.bash"
+          source: "deploy/maintenance/backup_on_server.bash,deploy/maintenance/copy_backup_on_server.bash"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -49,8 +49,8 @@ jobs:
             export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
             export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
 
-            # chown page
-            cd ~/pythondigest/deploy/postgres/maintenance/
+            # change folder
+            cd ~/pythondigest/deploy/maintenance/
 
             # make backup
             bash backup_on_server.bash
@@ -67,11 +67,36 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            # chown page
-            cd ~/pythondigest/deploy/postgres/maintenance/
+            # change folder
+            cd ~/pythondigest/deploy/maintenance/
 
             # upload backups to drive
             screen -dmS backup-rsync bash copy_backup_on_server.bash
+
+  backup_media:
+    name: Backup media
+    runs-on: ubuntu-22.04
+    environment: production
+    steps:
+      #----------------------------------------------
+      # Copy backup script to server. Load repo
+      #----------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      #----------------------------------------------
+      # Copy backup script
+      #----------------------------------------------
+      - name: copy backup scripts
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "deploy/maintenance/copy_media_on_server.bash"
+          target: "pythondigest/"
 
       #----------------------------------------------
       # Upload media to drive
@@ -85,8 +110,51 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            # chown page
-            cd ~/pythondigest/deploy/postgres/maintenance/
+            # change folder
+            cd ~/pythondigest/deploy/maintenance/
 
             # upload media files to drive
             screen -dmS backup-rsync bash copy_media_on_server.bash
+
+  backup_zips:
+    name: Backup dataset/pages
+    runs-on: ubuntu-22.04
+    environment: production
+    steps:
+      #----------------------------------------------
+      # Copy backup script to server. Load repo
+      #----------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      #----------------------------------------------
+      # Copy backup script
+      #----------------------------------------------
+      - name: copy backup scripts
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "deploy/maintenance/copy_zips_on_server.bash"
+          target: "pythondigest/"
+
+      #----------------------------------------------
+      # Upload zips to drive
+      #----------------------------------------------
+      - name: upload zip files to drive
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            # change folder
+            cd ~/pythondigest/deploy/maintenance/
+
+            # upload zip files to drive
+            screen -dmS backup-rsync bash copy_zips_on_server.bash
