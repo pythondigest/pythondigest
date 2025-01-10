@@ -1,3 +1,9 @@
+"""
+Собираем датасет для обучения и тестирования классификатора
+
+python manage.py create_dataset 30 80
+"""
+
 import json
 import math
 import os
@@ -75,10 +81,10 @@ class Command(BaseCommand):
             print(f"Work with {part} part....")
             name = f"data_{train_part_size}_{part}.json"
 
-            file_path = os.path.join(settings.DATASET_FOLDER, name)
+            file_path = os.path.join(settings.DATASET_ROOT, name)
 
             queryset: BaseManager[Item] = train_set[part * train_part_size : (part + 1) * train_part_size]
             create_dataset(queryset, file_path)
 
-        with open(os.path.join(settings.DATASET_FOLDER, "test_set_ids.txt"), "w") as fio:
+        with open(os.path.join(settings.DATASET_ROOT, "test_set_ids.txt"), "w") as fio:
             fio.writelines(["%s\n" % x for x in test_set.values_list("id", flat=True)])

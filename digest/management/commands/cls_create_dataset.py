@@ -21,7 +21,7 @@ def check_exist_link(data, item):
 def save_dataset(data_items, name):
     if not data_items:
         return
-    out_filepath = os.path.join(settings.DATASET_FOLDER, name)
+    out_filepath = os.path.join(settings.DATASET_ROOT, name)
     data = {"links": data_items}
 
     if not os.path.exists(os.path.dirname(out_filepath)):
@@ -34,7 +34,7 @@ def save_dataset(data_items, name):
 def save_queryset_dataset(queryset, name):
     if not queryset:
         return
-    out_filepath = os.path.join(settings.DATASET_FOLDER, name)
+    out_filepath = os.path.join(settings.DATASET_ROOT, name)
     with open(out_filepath, "w") as fio:
         fio.write('{"links": [\n')
         items_cnt = queryset.count()

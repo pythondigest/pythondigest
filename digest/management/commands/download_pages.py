@@ -23,6 +23,7 @@ def download_item(item: Item) -> str:
             text = item.text
         except Exception:
             text = ""
+            return
 
         fio.write(text)
         item.article_path = path
@@ -38,9 +39,7 @@ class Command(BaseCommand):
 
         with tqdm(total=dataset_queryset.count()) as t:
             for item in dataset_queryset.iterator():
-                path_incorrect = item.article_path is None or not item.article_path
-                path_exists = os.path.exists(item.article_path)
-                if path_incorrect or not path_exists:
+                if not item.is_exists_text:
                     download_item(item)
 
                 t.update(1)

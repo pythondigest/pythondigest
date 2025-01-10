@@ -273,6 +273,9 @@ jobs:
             sudo usermod -a -G pythondigest www-data
             sudo chown -R :www-data static
             sudo chown -R :www-data media
+            sudo chown -R :www-data dataset
+            sudo chown -R :www-data report
+            sudo chown -R :www-data pages
 
             # make link for serve django-remdow links:
             # django-remdow download external image to local png file
