@@ -460,7 +460,7 @@ DATASET_NEGATIVE_KEYWORDS = [
 ]
 
 CLS_URL_BASE = ""
-CLS_ENABLED = env.bool("CLS_ENABLED", False)
+CLS_ENABLED = env.bool("CLS_ENABLED", default=False)
 
 GITTER_TOKEN = env.str("GITTER_TOKEN", default=None)
 TWITTER_CONSUMER_KEY = env.str("TWITTER_CONSUMER_KEY", default=None)

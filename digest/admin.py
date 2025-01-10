@@ -340,7 +340,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         "title",
         "status",
         "external_link",
-        # "cls_ok",
+        "cls_ok",
         "section",
         "activated_at",
     )
@@ -360,7 +360,7 @@ class ItemModeratorAdmin(admin.ModelAdmin):
         "_action_active_queue_48",
     ]
 
-    def cls_ok(self, obj):
+    def cls_ok(self, obj: Item):
         return bool(obj.cls_check)
 
     cls_ok.boolean = True
