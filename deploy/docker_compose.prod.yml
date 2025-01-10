@@ -3,6 +3,8 @@ version: '3'
 services:
   django:
     image: pythondigest/pythondigest:${COMMIT_TAG}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     container_name: pydigest_django
     volumes:
       - ${PWD}/static:/app/static/
