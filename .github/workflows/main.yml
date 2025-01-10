@@ -258,6 +258,8 @@ jobs:
             export VK_PASSWORD="${{ secrets.VK_PASSWORD }}"
             export CHAD_API_KEY="${{ secrets.CHAD_API_KEY }}"
             export CHAD_API_MODEL="${{ secrets.CHAD_API_MODEL }}"
+            export CLS_ENABLED="${{ secrets.CLS_ENABLED }}"
+            export CLS_URL_BASE="${{ secrets.CLS_URL_BASE }}"
 
             # image tag
             export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}

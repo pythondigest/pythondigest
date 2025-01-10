@@ -35,6 +35,8 @@ services:
       - VK_PASSWORD=${VK_PASSWORD}
       - CHAD_API_KEY=${CHAD_API_KEY}
       - CHAD_API_MODEL=${CHAD_API_MODEL}
+      - CLS_ENABLED=${CLS_ENABLED}
+      - CLS_URL_BASE=${CLS_URL_BASE}
     ports:
       - "8000:8000"
     command: bash -c "

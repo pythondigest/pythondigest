@@ -459,7 +459,7 @@ DATASET_NEGATIVE_KEYWORDS = [
     "navbar",
 ]
 
-CLS_URL_BASE = ""
+CLS_URL_BASE = env.str("CLS_URL_BASE", default="http://classifier:8100")
 CLS_ENABLED = env.bool("CLS_ENABLED", default=False)
 
 GITTER_TOKEN = env.str("GITTER_TOKEN", default=None)
