@@ -4,8 +4,6 @@ services:
   django:
     image: pythondigest/pythondigest:${COMMIT_TAG}
     container_name: pydigest_django
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
@@ -57,8 +55,8 @@ services:
       # && python manage.py migrate secretballot 0002 --fake --no-input
       # && python manage.py migrate --no-input
     networks:
-      - mynetwork
+      - py_digest
 
 networks:
-  mynetwork:
-    driver: bridge
+  py_digest:
+    external: true
