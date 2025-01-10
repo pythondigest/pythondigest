@@ -1,5 +1,4 @@
 import datetime
-import json
 
 # import the logging library
 import logging
@@ -467,7 +466,12 @@ class ItemClsCheck(models.Model):
         if force or self.last_check <= prev_data:
             try:
                 url = "{}/{}".format(settings.CLS_URL_BASE, "api/v1.0/classify/")
-                resp = requests.post(url, data=json.dumps({"links": [self.item.data4cls]}))
+                resp = requests.post(
+                    url,
+                    json={
+                        "links": [self.item.data4cls],
+                    },
+                )
                 self.score = resp.json()["links"][0].get(self.item.link, False)
             except (
                 requests.exceptions.RequestException,
