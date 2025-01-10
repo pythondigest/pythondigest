@@ -48,8 +48,9 @@ def create_dataset(queryset_items: BaseManager[Item], file_path: str):
                 continue
             result.append(item_data)
 
-    with open(file_path, "w") as fio:
-        json.dump({"links": item_data}, fio)
+    if item_data:
+        with open(file_path, "w") as fio:
+            json.dump({"links": item_data}, fio)
 
 
 class Command(BaseCommand):

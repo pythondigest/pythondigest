@@ -38,7 +38,6 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   libpcre3 \
   libpcre3-dev \
   git \
-  vim \
   python3-all-dev && python -m pip install -U pip poetry
 
 # Requirements are installed here to ensure they will be cached.
@@ -60,6 +59,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing\
   # Translations dependencies
   gettext \
   git \
+  vim \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

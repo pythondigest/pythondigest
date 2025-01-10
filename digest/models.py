@@ -370,7 +370,9 @@ class Item(models.Model):
 
         try:
             resp = requests.get(self.link, timeout=15)
-            text = resp.text
+            text = resp.text.strip()
+            if not text:
+                return text
             try:
                 result = Document(
                     text,
@@ -378,6 +380,8 @@ class Item(models.Model):
                     positive_keywords=",".join(settings.DATASET_POSITIVE_KEYWORDS),
                     negative_keywords=",".join(settings.DATASET_NEGATIVE_KEYWORDS),
                 ).summary()
+            except Exception:
+                result = text
             except Unparseable:
                 result = text
         except (

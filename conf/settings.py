@@ -332,6 +332,11 @@ LOGGING = {
             "handlers": ["console"],
             "propagate": False,
         },
+        "readability.readability": {
+            "level": "ERROR",
+            "handlers": ["console"],
+            "propagate": False,
+        },
         # display sql requests
         # 'django.db.backends': {
         #     'level': 'DEBUG',
