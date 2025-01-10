@@ -1,10 +1,32 @@
+######################################################
+# Base Image
+######################################################
 ARG PYTHON_VERSION=3.11-slim-bullseye
-
-# define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
 
-# Python build stage
+ENV PYTHONUNBUFFERED=1 \
+         PYTHONDONTWRITEBYTECODE=1 \
+         PIP_NO_CACHE_DIR=off \
+         PIP_DISABLE_PIP_VERSION_CHECK=on \
+         PIP_DEFAULT_TIMEOUT=30 \
+         POETRY_NO_INTERACTION=1 \
+         POETRY_VIRTUALENVS_IN_PROJECT=true \
+         POETRY_HOME="/opt/poetry" \
+         PYSETUP_PATH="/app" \
+         VENV_PATH="/app/.venv" \
+         POETRY_VERSION=1.8.3 \
+         PIP_VERSION=24.2
+
+ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
+
+RUN pip install -U "pip==$PIP_VERSION" "poetry==$POETRY_VERSION"
+
+######################################################
+# Builder Image
+######################################################
 FROM python as python-build-stage
+
+WORKDIR $PYSETUP_PATH
 
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
@@ -23,19 +45,13 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
 # Create Python Dependency and Sub-Dependency Wheels.
 COPY pyproject.toml poetry.lock ./
 
-RUN poetry run pip install --upgrade pip\
-  && poetry export -f requirements.txt -o requirements.txt --without-hashes\
-  && pip wheel --wheel-dir /usr/src/app/wheels -r requirements.txt
+RUN poetry install --without=dev --no-ansi
 
-# Python 'run' stage
+######################################################
+# Production image
+######################################################
 FROM python as python-run-stage
 
-ARG APP_HOME=/app
-
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
-
-WORKDIR ${APP_HOME}
 
 # Install required system dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing\
@@ -50,11 +66,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing\
 
 # All absolute dir copies ignore workdir instruction. All relative dir copies are wrt to the workdir instruction
 # copy python dependency wheels from python-build-stage
-COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
+COPY --from=python-build-stage $PYSETUP_PATH $PYSETUP_PATH
 
-# use wheels to install python dependencies
-RUN pip install -U pip && pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
-	&& rm -rf /wheels/
+WORKDIR $PYSETUP_PATH
 
 # copy application code to WORKDIR
-COPY ./ ${APP_HOME}
+COPY ./ ${PYSETUP_PATH}
