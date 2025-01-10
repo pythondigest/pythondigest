@@ -4,6 +4,8 @@ services:
   django:
     image: pythondigest/pythondigest:${COMMIT_TAG}
     container_name: pydigest_django
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # или используйте IP в коде
     volumes:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
