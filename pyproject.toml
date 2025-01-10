@@ -83,7 +83,7 @@ autoflake = ">=2.3.1"
 detect-secrets = ">=1.5.0"
 safety = ">=3.2.14"
 poetry-plugin-up = "^0.8.0"
-ruff = "^0.8.6"
+ruff = "^0.9.1"
 
 [tool.black]
 line-length = 119
