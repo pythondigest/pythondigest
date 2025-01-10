@@ -2,14 +2,16 @@ import os
 
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from tqdm import tqdm
 
-from digest.models import Item
+from digest.models import ITEM_STATUS_ACTIVE, Item
 
 
-def get_article(item):
+def download_item(item: Item) -> str:
     path: str = os.path.join(settings.PAGES_ROOT, f"{item.id}.html")
     with open(path, "w") as fio:
         try:
+            # in this property i download files
             text = item.text
         except Exception:
             text = ""
@@ -21,17 +23,16 @@ def get_article(item):
 
 
 class Command(BaseCommand):
-    help = "Create dataset"
+    help = "Download html pages of items"
 
     def handle(self, *args, **options):
-        """
-        Основной метод - точка входа
-        """
-        if not os.path.isdir(settings.DATASET_ROOT):
-            os.makedirs(settings.DATASET_ROOT)
+        qs = Item.objects.filter(status=ITEM_STATUS_ACTIVE)
 
-        for item in Item.objects.all():
-            path_incorrect = item.article_path is None or not item.article_path
-            path_exists = os.path.exists(item.article_path)
-            if path_incorrect or not path_exists:
-                get_article(item)
+        with tqdm(total=qs.count()) as t:
+            for item in qs.iterator():
+                path_incorrect = item.article_path is None or not item.article_path
+                path_exists = os.path.exists(item.article_path)
+                if path_incorrect or not path_exists:
+                    download_item(item)
+
+                t.update(1)

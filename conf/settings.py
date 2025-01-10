@@ -391,6 +391,7 @@ CKEDITOR_CONFIGS = {
 DATASET_ROOT = path.join(BASE_DIR, "dataset")
 PAGES_ROOT = path.join(BASE_DIR, "pages")
 DATASET_FOLDER = ""
+DATASET_IGNORE_EMPTY_PAGES = True
 DATASET_POSITIVE_KEYWORDS = [
     "blog",
     "article",

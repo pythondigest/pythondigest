@@ -364,31 +364,35 @@ class Item(models.Model):
 
     @property
     def text(self):
-        nonempty_path = self.article_path is not None and self.article_path
-        if nonempty_path and os.path.exists(self.article_path):
+        existed_path = self.article_path is not None and self.article_path
+        if existed_path and os.path.exists(self.article_path):
             with open(self.article_path) as fio:
-                result = fio.read()
-        else:
+                return fio.read()
+
+        if settings.DATASET_IGNORE_EMPTY_PAGES:
+            return ""
+
+        try:
+            resp = requests.get(self.link, timeout=15)
+            text = resp.text
             try:
-                resp = requests.get(self.link)
-                text = resp.text
-                try:
-                    result = Document(
-                        text,
-                        min_text_length=50,
-                        positive_keywords=",".join(settings.DATASET_POSITIVE_KEYWORDS),
-                        negative_keywords=",".join(settings.DATASET_NEGATIVE_KEYWORDS),
-                    ).summary()
-                except Unparseable:
-                    result = text
-            except (
-                KeyError,
-                requests.exceptions.RequestException,
-                requests.exceptions.Timeout,
-                requests.exceptions.TooManyRedirects,
-            ) as e:
-                result = ""
-            self.article_path = os.path.join(settings.PAGES_ROOT, f"{self.id}.html")
+                result = Document(
+                    text,
+                    min_text_length=50,
+                    positive_keywords=",".join(settings.DATASET_POSITIVE_KEYWORDS),
+                    negative_keywords=",".join(settings.DATASET_NEGATIVE_KEYWORDS),
+                ).summary()
+            except Unparseable:
+                result = text
+        except (
+            KeyError,
+            requests.exceptions.RequestException,
+            requests.exceptions.Timeout,
+            requests.exceptions.TooManyRedirects,
+        ) as e:
+            result = ""
+        self.article_path = os.path.join(settings.PAGES_ROOT, f"{self.id}.html")
+        if result:
             with open(self.article_path, "w") as fio:
                 fio.write(result)
             self.save()

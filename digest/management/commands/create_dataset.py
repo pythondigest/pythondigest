@@ -6,37 +6,37 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.db.models import Q
 from django.db.models.manager import BaseManager
+from tqdm import tqdm
 
 from digest.models import Item
 
 
-def check_exist_link(data: dict, item: Item):
-    for info in data.get("links"):
-        if info["link"] == item.link:
-            return True
-    else:
-        return False
-
-
-def create_dataset(queryset_items: BaseManager[Item], name: str):
+def create_dataset(queryset_items: BaseManager[Item], file_path: str):
     if not queryset_items:
         return
-    out_filepath = os.path.join(settings.DATASET_FOLDER, name)
-    data = {"links": [x.get_data4cls(status=True) for x in queryset_items]}
 
-    if not os.path.exists(os.path.dirname(out_filepath)):
-        os.makedirs(os.path.dirname(out_filepath))
+    result = []
 
-    with open(out_filepath, "w") as fio:
-        json.dump(data, fio)
+    with tqdm(total=queryset_items.count()) as t:
+        for item in queryset_items.iterator():
+            t.update(1)
+            item_data = item.get_data4cls(status=True)
+            if not item_data or not item_data.get("data").get("text"):
+                continue
+            result.append(item_data)
+
+    with open(file_path, "w") as fio:
+        json.dump({"links": item_data}, fio)
 
 
 class Command(BaseCommand):
     help = "Create dataset"
 
     def add_arguments(self, parser):
-        parser.add_argument("train_parts", type=int)  # на сколько частей разбить обучение
-        parser.add_argument("train_percent", type=int)  # какого размера обучающая выборка
+        # на сколько частей разбить обучение
+        parser.add_argument("train_parts", type=int)
+        # какого размера обучающая выборка
+        parser.add_argument("train_percent", type=int)
 
     def handle(self, *args, **options):
         """
@@ -64,9 +64,13 @@ class Command(BaseCommand):
         test_set = items[train_size:]
 
         for part in range(options["train_parts"]):
+            print(f"Work with {part} part....")
             name = f"data_{train_part_size}_{part}.json"
+
+            file_path = os.path.join(settings.DATASET_FOLDER, name)
+
             queryset: BaseManager[Item] = train_set[part * train_part_size : (part + 1) * train_part_size]
-            create_dataset(queryset, name)
+            create_dataset(queryset, file_path)
 
         with open(os.path.join(settings.DATASET_FOLDER, "test_set_ids.txt"), "w") as fio:
             fio.writelines(["%s\n" % x for x in test_set.values_list("id", flat=True)])
