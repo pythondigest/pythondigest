@@ -7,7 +7,7 @@ from digest.models import Item
 
 
 def get_article(item):
-    path = os.path.join(settings.DATASET_ROOT, f"{item.id}.html")
+    path: str = os.path.join(settings.PAGES_ROOT, f"{item.id}.html")
     with open(path, "w") as fio:
         try:
             text = item.text

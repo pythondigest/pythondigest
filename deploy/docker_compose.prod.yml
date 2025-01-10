@@ -8,6 +8,7 @@ services:
       - ${PWD}/static:/app/static/
       - ${PWD}/media:/app/media/
       - ${PWD}/dataset:/app/dataset/
+      - ${PWD}/pages:/app/pages/
       - ${PWD}/report:/app/report/
     environment:
       - DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}

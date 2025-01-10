@@ -389,6 +389,7 @@ CKEDITOR_CONFIGS = {
 
 
 DATASET_ROOT = path.join(BASE_DIR, "dataset")
+PAGES_ROOT = path.join(BASE_DIR, "pages")
 DATASET_FOLDER = ""
 DATASET_POSITIVE_KEYWORDS = [
     "blog",
@@ -557,6 +558,10 @@ if SENTRY_DSN:
         environment=env("SENTRY_ENVIRONMENT", default="default"),
         traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
     )
+
+
+if not os.path.isdir(PAGES_ROOT):
+    os.makedirs(PAGES_ROOT)
 
 if not os.path.isdir(DATASET_ROOT):
     os.makedirs(DATASET_ROOT)

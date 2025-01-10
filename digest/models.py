@@ -285,7 +285,7 @@ class Item(models.Model):
     article_path = models.FilePathField(
         verbose_name=_("Article path"),
         blank=True,
-        path=settings.DATASET_ROOT,
+        path=settings.PAGES_ROOT,
     )
     tags = TaggableManager(blank=True)
     keywords = TaggableManager(verbose_name=_("Keywords"), through=KeywordGFK, blank=True)
@@ -388,7 +388,7 @@ class Item(models.Model):
                 requests.exceptions.TooManyRedirects,
             ) as e:
                 result = ""
-            self.article_path = os.path.join(settings.DATASET_ROOT, f"{self.id}.html")
+            self.article_path = os.path.join(settings.PAGES_ROOT, f"{self.id}.html")
             with open(self.article_path, "w") as fio:
                 fio.write(result)
             self.save()
