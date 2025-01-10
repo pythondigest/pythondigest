@@ -33,6 +33,10 @@ def create_dataset(queryset_items: BaseManager[Item], file_path: str):
     with tqdm(total=queryset_items.count()) as t:
         for item in queryset_items.iterator():
             t.update(1)
+
+            if settings.DATASET_IGNORE_EMPTY_PAGES and not item.is_exists_text:
+                continue
+
             item_data = item.get_data4cls(status=True)
             if not item_data or not item_data.get("data").get("text"):
                 continue

@@ -1,3 +1,9 @@
+"""
+Скачиваем html копии страниц новостей
+
+python manage.py download_pages
+"""
+
 import os
 
 from django.conf import settings

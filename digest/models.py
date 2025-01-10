@@ -364,13 +364,9 @@ class Item(models.Model):
 
     @property
     def text(self):
-        existed_path = self.article_path is not None and self.article_path
-        if existed_path and os.path.exists(self.article_path):
+        if self.is_exists_text:
             with open(self.article_path) as fio:
                 return fio.read()
-
-        if settings.DATASET_IGNORE_EMPTY_PAGES:
-            return ""
 
         try:
             resp = requests.get(self.link, timeout=15)
@@ -397,6 +393,18 @@ class Item(models.Model):
                 fio.write(result)
             self.save()
         return result
+
+    @property
+    def is_exists_text(self) -> bool:
+        existed_path = self.article_path is not None and self.article_path
+        if not existed_path:
+            return False
+
+        if not os.path.exists(self.article_path):
+            return False
+
+        with open(self.article_path) as fio:
+            return bool(fio.read())
 
     def get_data4cls(self, status=False):
         result = {
