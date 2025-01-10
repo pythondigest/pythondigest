@@ -7,7 +7,7 @@ from digest.models import ItemClsCheck
 
 
 class Command(BaseCommand):
-    help = "Create dataset"
+    help = "Create report"
 
     def add_arguments(self, parser):
         parser.add_argument("out_path", type=str)
