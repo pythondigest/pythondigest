@@ -44,13 +44,14 @@ def create_dataset(queryset_items: BaseManager[Item], file_path: str):
                 continue
 
             item_data = item.get_data4cls(status=True)
-            if not item_data or not item_data.get("data").get("text"):
+            if not item_data or not item_data.get("data").get("article"):
                 continue
+
             result.append(item_data)
 
-    if item_data:
+    if result:
         with open(file_path, "w") as fio:
-            json.dump({"links": item_data}, fio)
+            json.dump({"links": result}, fio)
 
 
 class Command(BaseCommand):
