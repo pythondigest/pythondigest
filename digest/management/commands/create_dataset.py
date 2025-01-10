@@ -11,6 +11,19 @@ from tqdm import tqdm
 from digest.models import Item
 
 
+def get_queryset_for_dataset():
+    query = Q()
+
+    urls = [
+        "allmychanges.com",
+        "stackoverflow.com",
+    ]
+    for entry in urls:
+        query = query | Q(link__contains=entry)
+
+    return Item.objects.all().exclude(query)
+
+
 def create_dataset(queryset_items: BaseManager[Item], file_path: str):
     if not queryset_items:
         return
@@ -43,25 +56,16 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
 
-        query = Q()
+        dataset_queryset = get_queryset_for_dataset()
 
-        urls = [
-            "allmychanges.com",
-            "stackoverflow.com",
-        ]
-        for entry in urls:
-            query = query | Q(link__contains=entry)
-
-        items = Item.objects.exclude(query).order_by("?")
-
-        items_cnt = items.count()
+        items_cnt = dataset_queryset.count()
         train_size = math.ceil(items_cnt * (options["train_percent"] / 100))
         # test_size = items_cnt - train_size
 
         train_part_size = math.ceil(train_size / options["train_parts"])
 
-        train_set = items[:train_size]
-        test_set = items[train_size:]
+        train_set = dataset_queryset[:train_size]
+        test_set = dataset_queryset[train_size:]
 
         for part in range(options["train_parts"]):
             print(f"Work with {part} part....")
