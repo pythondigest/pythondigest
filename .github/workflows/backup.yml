@@ -71,7 +71,7 @@ jobs:
             cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload backups to drive
-            screen -dmS backup-rsync bash copy_backup_on_server.bash
+            screen -dmS backup-postgresql-rsync bash copy_backup_on_server.bash
 
   backup_media:
     name: Backup media
@@ -114,7 +114,7 @@ jobs:
             cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload media files to drive
-            screen -dmS backup-rsync bash copy_media_on_server.bash
+            screen -dmS backup-media-rsync bash copy_media_on_server.bash
 
   backup_zips:
     name: Backup dataset/pages
@@ -157,4 +157,4 @@ jobs:
             cd ~/pythondigest/deploy/postgres/maintenance/
 
             # upload zip files to drive
-            screen -dmS backup-rsync bash copy_zips_on_server.bash
+            screen -dmS backup--zips-rsync bash copy_zips_on_server.bash
