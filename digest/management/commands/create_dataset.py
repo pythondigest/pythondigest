@@ -4,6 +4,7 @@
 python manage.py create_dataset 30 80
 """
 
+import datetime
 import json
 import math
 import os
@@ -19,15 +20,15 @@ from digest.models import Item
 
 def get_queryset_for_dataset():
     query = Q()
-
     urls = [
         "allmychanges.com",
         "stackoverflow.com",
     ]
     for entry in urls:
         query = query | Q(link__contains=entry)
-
-    return Item.objects.all().exclude(query)
+    N_YEARS = 3
+    check_period = datetime.datetime.now() - datetime.timedelta(days=365 * N_YEARS)
+    return Item.objects.filter(created_at__gte=check_period).exclude(query).order_by("-pk")
 
 
 def create_dataset(queryset_items: BaseManager[Item], file_path: str):
