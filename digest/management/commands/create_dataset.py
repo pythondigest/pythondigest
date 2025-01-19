@@ -26,7 +26,7 @@ def get_queryset_for_dataset():
     ]
     for entry in urls:
         query = query | Q(link__contains=entry)
-    N_YEARS = 3
+    N_YEARS = 5
     check_period = datetime.datetime.now() - datetime.timedelta(days=365 * N_YEARS)
     return Item.objects.filter(created_at__gte=check_period).exclude(query).order_by("-pk")
 
