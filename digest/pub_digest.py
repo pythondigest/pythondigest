@@ -143,7 +143,7 @@ def get_pydigest_groups() -> list:
     return [
         (-96469126, 1),  # https://vk.com/pynsk
         (-1540917, 0),  # https://vk.com/python_developers
-        (-54001977, 0),  # https://vk.com/pythonic_way
+        # (-54001977, 0),  # https://vk.com/pythonic_way
         (-52104930, 0),  # https://vk.com/club52104930
         (-24847633, 1),  # https://vk.com/club24847633     #
         (-69108280, 0),  # https://vk.com/pirsipy
@@ -283,9 +283,9 @@ def pub_to_all(
     pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
     print("Send to slack")
     pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
-    print("Send to twitter")
-    twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
-    pub_to_twitter(twitter_text, digest_image_url)
+    # print("Send to twitter")
+    # twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
+    # pub_to_twitter(twitter_text, digest_image_url)
     print("Send to vk groups")
 
     vk_api_version = "5.131"
