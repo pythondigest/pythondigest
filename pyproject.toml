@@ -8,7 +8,7 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.13"
-django = {extras = ["argon2"], version = "^4.2.18"}
+django = {extras = ["argon2"], version = "^5.1.6"}
 django-bootstrap-form = ">=3.4"
 django-digg-paginator = ">=0.2.0"
 django-user-accounts = ">=3.3.2"
