@@ -226,7 +226,7 @@ jobs:
       # Run docker compose
       #----------------------------------------------
       - name: executing remote ssh commands
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1.2.1
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
