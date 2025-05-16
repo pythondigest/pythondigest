@@ -157,7 +157,7 @@ class Issue(models.Model):
         verbose_name_plural = _("Issues of digest")
 
 
-ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://pythondigest.ru/feed/">RSS</a>, <a href="https://twitter.com/pydigest">Twitter</a> или <a href="https://t.me/py_digest">Telegram @py_digest</a></p><br>
+ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://t.me/py_digest">Telegram @py_digest</a>, <a href="https://pythondigest.ru/feed/">RSS</a></p><br>
 <p><b>Попробуйте</b> наш <b>симулятор IT инцидента <a href='https://incidenta.tech/'>Incidenta.tech</a></b>. Вы научитесь диагностировать самые популярные сбои в IT.</p>"""
 
 ANNOUNCEMENT_DEFAULT = """#python #pydigest
