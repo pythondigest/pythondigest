@@ -154,9 +154,6 @@ def bootstrap_url():
 @register.simple_tag()
 def jumb_ads():
     items = [
-        '<a href="https://t.me/whydaily">читайте авторский блог</a>',
-        '<a href="https://t.me/axsapronov">консультируем про IT, Python</a>',
-        '<a href="https://t.me/py_digest">читайте нас в Telegram</a>',
-        '<a href="https://twitter.com/pydigest">читайте нас в Twitter</a>',
+        'и сделали <a href="https://incidenta.tech/?utm_source=pydigest">Тренажер IT-инцидентов для DevOps/SRE</a>',
     ]
     return random.choice(items)
