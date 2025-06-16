@@ -154,6 +154,6 @@ def bootstrap_url():
 @register.simple_tag()
 def jumb_ads():
     items = [
-        'и сделали <a href="https://incidenta.tech/?utm_source=pydigest">Тренажер IT-инцидентов для DevOps/SRE</a>',
+        'и сделали <a href="https://app.incidenta.tech/welcome">Тренажер IT-инцидентов для DevOps/SRE</a>',
     ]
     return random.choice(items)
