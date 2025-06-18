@@ -37,9 +37,12 @@ clean:
 	docker volume rm pythondigest_pydigest_postgres_data_backups
 
 restore:
-	docker cp /home/axsapronov/Cloud/Dropbox/Backups/pydigest/postgresql-pythondigest-`date "+%Y-%m-%d"`.sqlc pydigest_postgres:/backups
+	echo "Run manually:"
+	docker cp $(ls ./backups/postgresql-pythondigest_*.sql.gz | grep `date "+%Y_%m_%d"` | sort -n | tail -1) pydigest_postgres:/backups
 	docker compose -f deploy/docker_compose_infra.yml exec postgres backups
-	docker compose -f deploy/docker_compose_infra.yml exec postgres restore postgresql-pythondigest-`date "+%Y-%m-%d"`.sqlc
+	echo "Run manually in docker:"
+	docker compose -f deploy/docker_compose_infra.yml exec postgres bash
+	restore $(cd /backups && ls -p | grep -v /backups  | sort -n | tail -1)
 
 check:
 	poetry run pre-commit run --show-diff-on-failure --color=always --all-files

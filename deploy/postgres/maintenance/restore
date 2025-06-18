@@ -51,10 +51,7 @@ message_info "Creating a new database..."
 createdb --owner="${POSTGRES_USER}"
 
 message_info "Applying the backup to the new database..."
-if [ "${backup_filename##*.}" = "sql.gz" ]; then
-    gunzip -c "${backup_filename}" | psql "${POSTGRES_DB}"
-else
-    pg_restore --create -U "${POSTGRES_USER}" -d "${POSTGRES_DB}" ${backup_filename}
-fi
+echo "Work with sql.gz: ${backup_filename}"
+gunzip -c "${backup_filename}" | psql -U "${POSTGRES_USER}" -d "${PGDATABASE}"
 
-message_success "The '${POSTGRES_DB}' database has been restored from the '${backup_filename}' backup."
+message_success "The '${PGDATABASE}' database has been restored from the '${backup_filename}' backup."

@@ -5,3 +5,5 @@ POSTGRES_PORT=5432
 POSTGRES_DB=pythondigest
 POSTGRES_USER=pythondigest
 POSTGRES_PASSWORD=debug
+
+BACKUP_DIR_PATH=/backups

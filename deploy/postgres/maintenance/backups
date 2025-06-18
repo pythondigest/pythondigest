@@ -19,4 +19,6 @@ source "${working_dir}/_sourced/messages.sh"
 
 message_welcome "These are the backups you have got:"
 
-ls -lht "${BACKUP_DIR_PATH}"
+mkdir -p "${BACKUP_DIR_PATH}"
+
+ls -lht "${BACKUP_DIR_PATH}" || true
