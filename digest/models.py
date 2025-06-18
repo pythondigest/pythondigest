@@ -320,6 +320,7 @@ class Item(models.Model, ModelMeta):
         "published_time": "activated_at",
         "modified_time": "modified_at",
         "locale": "meta_locale",
+        "url": "meta_link",
     }
 
     class Meta:
@@ -379,6 +380,10 @@ class Item(models.Model, ModelMeta):
         if self.language == "ru":
             return "ru_RU"
         return "en_US"
+
+    @property
+    def meta_link(self):
+        return reverse("digest:item", kwargs={"pk": self.pk})
 
     @property
     def cls_check(self):
