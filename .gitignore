@@ -352,3 +352,5 @@ a.bash
 coverage.xml
 proxy.bash
 debug_*.py
+
+backups/
