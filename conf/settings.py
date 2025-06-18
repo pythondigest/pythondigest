@@ -230,7 +230,7 @@ ADMINS = [("""Aleksandr Sapronov""", "a@sapronov.me")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-SESSION_SERIALIZER = "django.contrib.sessions.serializers.PickleSerializer"
+SESSION_SERIALIZER = "django.contrib.sessions.serializers.JSONSerializer"
 
 TIME_ZONE = "Europe/Moscow"
 LANGUAGE_CODE = "ru-ru"
