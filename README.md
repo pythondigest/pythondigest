@@ -88,3 +88,7 @@ Run tests
 ```
 make test # or poetry run python manage.py test
 ```
+
+
+
+Обновить Django до 5.2+

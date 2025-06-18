@@ -26,6 +26,8 @@ from readability.readability import Document, Unparseable
 from taggit.models import GenericTaggedItemBase, TagBase
 from taggit_autosuggest.managers import TaggableManager
 
+from conf.meta import BaseModelMeta as ModelMeta
+
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -116,7 +118,7 @@ class KeywordGFK(GenericTaggedItemBase):
     )
 
 
-class Issue(models.Model):
+class Issue(models.Model, ModelMeta):
     """
     The issue of the digest.
     It is collection of `Items`
@@ -138,6 +140,15 @@ class Issue(models.Model):
     trend = models.CharField(verbose_name=_("Trend"), blank=True, max_length=255)
     last_item = models.IntegerField(verbose_name=_("Latest moderated Item"), blank=True, null=True)
 
+    _metadata = {
+        "title": "title",
+        "description": "meta_description",
+        "published_time": "published_at",
+        "modified_time": "modified_at",
+        "image": "meta_image",
+        "url": "link",
+    }
+
     def __str__(self):
         return self.title
 
@@ -150,6 +161,20 @@ class Issue(models.Model):
         if not self.image:
             return False
         return default_storage.exists(self.image.path)
+
+    @property
+    def meta_title(self):
+        return f"Python Дайджест. Выпуск {self.id}"
+
+    @property
+    def meta_description(self):
+        return f"Выпуск еженедельного Python Дайджеста. Самые актуальные новости про Python за {self.date_from} - {self.date_to} на одной странице"
+
+    @property
+    def meta_image(self):
+        if not self.image:
+            return settings.STATIC_URL + "img/logo.png"
+        return default_storage.url(self.image.path)
 
     class Meta:
         ordering = ["-pk"]
@@ -212,7 +237,7 @@ class Resource(models.Model):
         verbose_name_plural = _("Resources")
 
 
-class Item(models.Model):
+class Item(models.Model, ModelMeta):
     """
     Item is a content, is a link
     """
@@ -289,6 +314,14 @@ class Item(models.Model):
     tags = TaggableManager(blank=True)
     keywords = TaggableManager(verbose_name=_("Keywords"), through=KeywordGFK, blank=True)
 
+    _metadata = {
+        "title": "title",
+        "description": "meta_description",
+        "published_time": "activated_at",
+        "modified_time": "modified_at",
+        "locale": "meta_locale",
+    }
+
     class Meta:
         verbose_name = _("News")
         verbose_name_plural = _("News")
@@ -336,6 +369,16 @@ class Item(models.Model):
         self._disable_signals = True
         self.save()
         self._disable_signals = False
+
+    @property
+    def meta_description(self):
+        return self.description[:300]
+
+    @property
+    def meta_locale(self):
+        if self.language == "ru":
+            return "ru_RU"
+        return "en_US"
 
     @property
     def cls_check(self):

@@ -36,6 +36,13 @@ THUMBNAIL_DEBUG = False
 VERSION = (1, 0, 0)
 
 BASE_DOMAIN = env("BASE_DOMAIN", default="pythondigest.ru")
+PROTOCOL = env("PROTOCOL", default="https")
+
+PROJECT_NAME = env("PROJECT_NAME", default="Python Дайджест")
+PROJECT_DESCRIPTION = env(
+    "PROJECT_DESCRIPTION",
+    default="IT-новости про Python, которые стоит знать. Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение.",
+)
 
 ALLOWED_HOSTS = [
     BASE_DOMAIN,
@@ -89,6 +96,8 @@ INSTALLED_APPS = [
     "siteblocks",
     # css
     "bootstrap3",
+    # seo
+    "meta",
 ]
 
 CACHALOT_ENABLED = env.bool("CACHALOT_ENABLED", False)
@@ -563,6 +572,43 @@ if SENTRY_DSN:
         environment=env("SENTRY_ENVIRONMENT", default="default"),
         traces_sample_rate=env.float("SENTRY_TRACES_SAMPLE_RATE", default=0.0),
     )
+
+
+# Meta
+# ------------------------------------------------------------------------------
+META_USE_OG_PROPERTIES = True
+META_USE_TWITTER_PROPERTIES = True
+META_USE_SCHEMAORG_PROPERTIES = True
+
+
+META_SITE_PROTOCOL = PROTOCOL
+META_SITE_DOMAIN = BASE_DOMAIN
+META_SITE_NAME = PROJECT_NAME
+META_DEFAULT_IMAGE = STATIC_URL + "img/logo.png"
+
+META_DEFAULT_KEYWORDS = [
+    "питон",
+    "python",
+    "python дайджест",
+    "python digest",
+    "пошаговое выполнение",
+    "django",
+    "fastapi",
+    "numpy",
+    "pandas",
+    "scikit-learn",
+    "scipy",
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "новости о python",
+    "python курсы",
+    "python новости",
+    "python статьи",
+    "python видео",
+    "python обучение",
+    "python релизах",
+]
 
 
 if not os.path.isdir(PAGES_ROOT):

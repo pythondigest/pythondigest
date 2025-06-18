@@ -1,9 +1,11 @@
 {% load static %}
+
 {% load ads_tags %}
 {% load compress %}
 {% load bootstrap3 %}
 {% load common %}
 {% load remdow %}
+{% load seo %}
 
 <!DOCTYPE html>
 <html lang="{% locale %}">
@@ -11,10 +13,7 @@
 <head>
     <title>{% block page_title %}Дайджест новостей о python{% endblock %}
         {% block head_title %}{% endblock %}</title>
-    <meta name="description"
-        content="{% block page_description %}Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение{% endblock %}">
-    <meta name="keywords" content="питон, python, django, flask, новости о python,
-                  {% block page_keywords %}{% endblock %}" />
+
     <meta charset="utf-8">
     <meta name="google-site-verification" content="xmFhSQB965UrnljIBWvhTpVpuCEM64LyC6WU-oPXTjM" />
     <meta name="yandex-verification" content="899259ccba94740a" />
@@ -25,6 +24,12 @@
     {% block viewport %}
     <meta name="viewport" content="width=device-width">
     {% endblock %}
+
+    {% if not meta %}
+      {% default_meta as meta %}
+    {% endif %}
+
+    {% include "meta/meta.html" %}
 
     <link rel="preload" href="{% bootstrap_url %}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
