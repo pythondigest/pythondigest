@@ -183,7 +183,7 @@ class Issue(models.Model, ModelMeta):
 
 
 ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://t.me/py_digest">Telegram @py_digest</a>, <a href="https://pythondigest.ru/feed/">RSS</a></p><br>
-<p><b>Попробуйте</b> наш <b>симулятор IT инцидента <a href='https://app.incidenta.tech/welcome'>https://app.incidenta.tech</a></b>. Вы научитесь диагностировать самые популярные сбои в IT.</p>"""
+<p><b>Попробуйте</b> наш <b>тренажер IT инцидентов <a href='https://app.incidenta.tech/welcome'>https://app.incidenta.tech</a></b>. Вы научитесь диагностировать самые популярные сбои в IT.</p>"""
 
 ANNOUNCEMENT_DEFAULT = """#python #pydigest
 IT-новости про Python перед вами.
