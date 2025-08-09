@@ -1,5 +1,3 @@
-import datetime
-
 # import the logging library
 import logging
 
@@ -10,7 +8,7 @@ from django.views.generic import TemplateView
 
 from advertising.mixins import AdsMixin
 from digest.mixins import CacheMixin, FavoriteItemsMixin, FeedItemsMixin
-from digest.models import Issue, Item
+from digest.models import Issue
 from frontend.models import EditorMaterial
 
 # Get an instance of a logger
@@ -29,13 +27,6 @@ class Sitemap(TemplateView):
             {"loc": reverse("digest:issues"), "changefreq": "weekly"},
             {"loc": reverse("digest:feed"), "changefreq": "daily"},
         ]
-
-        for issue in Issue.objects.filter(status="active"):
-            items.append({"loc": issue.link, "changefreq": "weekly"})
-
-        for item in Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now()):
-            items.append({"loc": f"/view/{item.pk}", "changefreq": "weekly"})
-
         ctx.update({"records": items, "domain": f"https://{settings.BASE_DOMAIN}"})
         return ctx
 
