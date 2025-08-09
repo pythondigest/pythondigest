@@ -58,7 +58,7 @@ class ItemDigestFeed(DigestFeed):
             activated_at__lte=datetime.datetime.now(),
         ).order_by(
             "-related_to_date"
-        )[:10]
+        )[:1000]
         mark_videos(_)
         return _
 
@@ -110,7 +110,7 @@ class IssuesFeed(ItemDigestFeed):
 
     @staticmethod
     def items():
-        return Issue.objects.filter(status="active").order_by("-published_at")[:10]
+        return Issue.objects.filter(status="active").order_by("-published_at")[:500]
 
     def item_title(self, item):
         df = pytils.dt.ru_strftime("%d %B %Y", item.date_from, inflected=True)
@@ -142,13 +142,13 @@ class SectionFeed(DigestFeed):
         if self.section == "all" or len(section) != 1:
             result = Item.objects.filter(status="active", activated_at__lte=datetime.datetime.now()).order_by(
                 "-related_to_date"
-            )[:10]
+            )[:1000]
         else:
             result = Item.objects.filter(
                 status="active",
                 section=section[0],
                 activated_at__lte=datetime.datetime.now(),
-            ).order_by("-related_to_date")[:10]
+            ).order_by("-related_to_date")[:1000]
         return result
 
 
