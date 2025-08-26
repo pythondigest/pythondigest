@@ -156,6 +156,9 @@ class Issue(models.Model, ModelMeta):
     def link(self):
         return reverse("digest:issue_view", kwargs={"pk": self.pk})
 
+    def get_absolute_url(self):
+        return reverse("digest:issue_view", kwargs={"pk": self.pk})
+
     @property
     def image_exists(self):
         if not self.image:
@@ -330,6 +333,9 @@ class Item(models.Model, ModelMeta):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._disable_signals = False
+
+    def get_absolute_url(self):
+        return reverse("digest:item", args=[self.pk])
 
     def save(self, *args, **kwargs):
         try:
