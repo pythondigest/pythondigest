@@ -6,56 +6,29 @@ from urllib.error import HTTPError
 from urllib.request import urlretrieve
 
 import requests
-import tweepy
 import twx
 import vk
 from django.conf import settings
 from django.template.loader import render_to_string
 from django.templatetags.static import static
 from sentry_sdk import capture_exception
+from tweepy import Client
 from twx.botapi import TelegramBot
 
-from digest.management.commands import get_https_proxy
 from digest.pub_digest_email import send_email
 
 logger = logging.getLogger(__name__)
-
-
-def init_auth(consumer_key, consumer_secret, access_token, access_token_secret, use_proxy=True):
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth.set_access_token(access_token, access_token_secret)
-    proxy = get_https_proxy()
-    api = tweepy.API(auth_handler=auth, proxy=proxy, timeout=15)
-    return api
 
 
 def download_image(url: str):
     try:
         file_path = os.path.abspath(os.path.split(url)[-1])
         urlretrieve(url, file_path)
-    except IndexError as e:
-        print(e)
+    except IndexError:
         file_path = None
-    except HTTPError as e:
-        print(e)
+    except HTTPError:
         file_path = None
     return file_path
-
-
-def send_tweet_with_media(api, text, image):
-    if "http://" not in image and "https://" not in image:
-        assert os.path.isfile(image)
-        file_path = image
-    else:
-        if image == "https://pythondigest.ru/static/img/logo.png":
-            file_logo_path = static("img/logo.png")  # -> /static/img/logo.png
-            file_path = os.path.abspath(f".{file_logo_path}")  # to rel path
-        else:
-            # качаем файл из сети
-            file_path = download_image(image)
-
-    assert file_path is not None, "Not found image (for twitter)"
-    api.update_with_media(status=text, filename=file_path)
 
 
 class GitterAPI:
@@ -173,17 +146,11 @@ def pub_to_twitter(text, image_path, try_count=0):
         return None
 
     try:
-        api = init_auth(
-            settings.TWITTER_CONSUMER_KEY,
-            settings.TWITTER_CONSUMER_SECRET,
-            settings.TWITTER_TOKEN,
-            settings.TWITTER_TOKEN_SECRET,
-        )
-        send_tweet_with_media(api, text, image_path)
+        client = Client(settings.TWITTER_BEARER_TOKEN)
+        client.create_tweet(text)
     except Exception as e:
         capture_exception(e)
-        get_https_proxy.invalidate()
-        logger.info(f"Exception error. Try refresh proxy. {e}")
+        logger.info(f"Exception error. {e}")
         return pub_to_twitter(text, image_path, try_count + 1)
 
 

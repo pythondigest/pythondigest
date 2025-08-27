@@ -476,6 +476,8 @@ TWITTER_CONSUMER_KEY = env.str("TWITTER_CONSUMER_KEY", default=None)
 TWITTER_CONSUMER_SECRET = env.str("TWITTER_CONSUMER_SECRET", default=None)
 TWITTER_TOKEN = env.str("TWITTER_TOKEN", default=None)
 TWITTER_TOKEN_SECRET = env.str("TWITTER_TOKEN_SECRET", default=None)
+TWITTER_BEARER_TOKEN = env.str("TWITTER_BEARER_TOKEN", default=None)
+
 TGM_BOT_ACCESS_TOKEN = env.str("TGM_BOT_ACCESS_TOKEN", default=None)
 TGM_CHANNEL = env.str("TGM_CHANNEL", default=None)
 IFTTT_MAKER_KEY = env.str("IFTTT_MAKER_KEY", default=None)
