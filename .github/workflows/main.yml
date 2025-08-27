@@ -25,7 +25,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v5
@@ -76,7 +76,7 @@ jobs:
       #       check-out repo and set-up python
       #----------------------------------------------
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up python
         id: setup-python
         uses: actions/setup-python@v5
@@ -121,16 +121,7 @@ jobs:
           coverage run --source='.' manage.py test
           coverage report
           coverage xml
-      #----------------------------------------------
-      #             upload coverage stats
-      # (requires CODECOV_TOKEN in repository secrets)
-      #----------------------------------------------
-      - name: Upload coverage
-        uses: codecov/codecov-action@v5
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}  # Only required for private repositories
-          file: ./coverage.xml
-          fail_ci_if_error: true
+
 
   build:
     name: Build
@@ -138,7 +129,7 @@ jobs:
     needs: [test, linter]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       #----------------------------------------------
       # Prepare commit info for deploy
       #----------------------------------------------
@@ -200,7 +191,7 @@ jobs:
       # Copy docker compose production config
       #----------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       #----------------------------------------------
       # Prepare commit info for deploy
