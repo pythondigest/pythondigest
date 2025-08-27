@@ -146,8 +146,14 @@ def pub_to_twitter(text, image_path, try_count=0):
         return None
 
     try:
-        client = Client(settings.TWITTER_BEARER_TOKEN)
-        client.create_tweet(text)
+        client = Client(
+            bearer_token=settings.TWITTER_BEARER_TOKEN,
+            consumer_key=settings.TWITTER_CONSUMER_KEY,
+            consumer_secret=settings.TWITTER_CONSUMER_SECRET,
+            access_token=settings.TWITTER_TOKEN,
+            access_token_secret=settings.TWITTER_TOKEN_SECRET,
+        )
+        client.create_tweet(text=text)
     except Exception as e:
         capture_exception(e)
         logger.info(f"Exception error. {e}")
