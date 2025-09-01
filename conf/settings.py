@@ -38,6 +38,7 @@ VERSION = (1, 0, 0)
 BASE_DOMAIN = env("BASE_DOMAIN", default="pythondigest.ru")
 PROTOCOL = env("PROTOCOL", default="https")
 
+PROJECT_SITE = env("PROJECT_SITE", default=f"{PROTOCOL}://{BASE_DOMAIN}")
 PROJECT_NAME = env("PROJECT_NAME", default="Python Дайджест")
 PROJECT_DESCRIPTION = env(
     "PROJECT_DESCRIPTION",
@@ -550,8 +551,8 @@ CSRF_TRUSTED_ORIGINS = [
     f"https://www.{BASE_DOMAIN}",
     "https://dev.pythondigest.ru",
 ]
-if "https://pythondigest.ru" not in CSRF_TRUSTED_ORIGINS:
-    CSRF_TRUSTED_ORIGINS.append("https://pythondigest.ru")
+if PROJECT_SITE not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append(PROJECT_SITE)
 
 # Sentry
 # ------------------------------------------------------------------------------

@@ -1,7 +1,9 @@
 import logging
 from datetime import datetime, timedelta
+from urllib.parse import urljoin
 
 from django import forms
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.sites.models import Site
 from django.db import models
@@ -115,13 +117,12 @@ class IssueAdmin(admin.ModelAdmin):
         if not issue:
             return
 
-        site = "https://pythondigest.ru"
         # TODO - fixit
         pub_to_all(
             issue.pk,
             issue.announcement,
-            f"{site}{issue.link}",
-            "{}{}".format(site, issue.image.url if issue.image else ""),
+            urljoin(settings.PROJECT_SITE, issue.link),
+            urljoin(settings.PROJECT_SITE, issue.image.url if issue.image else ""),
         )
 
     make_published.short_description = "Опубликовать анонс в социальные сети"

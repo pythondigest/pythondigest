@@ -77,7 +77,7 @@ class GitterAPI:
         return r
 
 
-def post_to_wall(api, owner_id, message, **kwargs):
+def post_to_wall(api: vk.API, owner_id, message, **kwargs):
     data_dict = {
         "from_group": 1,
         "owner_id": owner_id,
@@ -88,7 +88,7 @@ def post_to_wall(api, owner_id, message, **kwargs):
     return api.wall.post(**data_dict)
 
 
-def send_message(api, user_id, message, **kwargs):
+def send_message(api: vk.API, user_id, message, **kwargs):
     data_dict = {
         "user_id": user_id,
         "message": message,
@@ -160,25 +160,25 @@ def pub_to_twitter(text, image_path, try_count=0):
         return pub_to_twitter(text, image_path, try_count + 1)
 
 
-def pub_to_vk_users(text, api):
+def pub_to_vk_users(text, api: vk.API):
     user_text = "Привет. Вышел новый дайджест. Пример текста\n"
     user_text += text
     for user_id in get_pydigest_users():
         print("User ", user_id)
-        res = send_message(api, user_id=user_id, message=user_text)
+        res = send_message(api, user_id=user_id, message=user_text)  # type: ignore
         time.sleep(1)
         print(res)
 
 
-def pub_to_vk_groups(text, attachments, api):
+def pub_to_vk_groups(text: str, attachments, api: vk.API):
     for groupd_id, from_group in get_pydigest_groups():
         print(groupd_id, from_group)
         res = post_to_wall(
             api,
             groupd_id,
             text,
-            **{"attachments": attachments, "from_group": from_group},
-        )
+            **{"from_group": from_group},
+        )  # type: ignore
         print(res)
         time.sleep(1)
 
@@ -268,7 +268,7 @@ def pub_to_all(
         print("Open url and extract access_token")
         print(url)
         access_token = input("Access token: ").strip()
-        api = vk.API(
+        api: vk.API = vk.API(
             access_token=access_token,
             v=vk_api_version,
         )

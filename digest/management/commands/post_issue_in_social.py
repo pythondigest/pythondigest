@@ -4,6 +4,9 @@ Example
 python manage.py post_issue_in_social 467
 """
 
+from urllib.parse import urljoin
+
+from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from digest.models import Issue
@@ -42,17 +45,17 @@ class Command(BaseCommand):
         Основной метод - точка входа
         """
         issue = Issue.objects.get(pk=options["issue"])
-        site = "https://pythondigest.ru"
+        site = settings.PROJECT_SITE
 
-        issue_image_url = "https://pythondigest.ru/static/img/logo.png"
+        issue_image_url = urljoin(site, "static/img/logo.png")
         if issue.image:
-            issue_image_url = f"{site}{issue.image.url}"
+            issue_image_url = urljoin(site, issue.image.url)
 
         pub_to_all(
             issue.pk,
             issue.title,
             issue.announcement,
-            f"{site}{issue.link}",
+            urljoin(site, issue.link),
             issue_image_url,
             prepare_issue_news(issue),
         )
