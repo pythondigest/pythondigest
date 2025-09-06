@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.http import HttpResponse
 from django.urls import path
 
 from frontend.views import FriendsView, IndexView, Sitemap
@@ -25,9 +26,16 @@ feed = TurboFeed()
 feed.configure_analytics_yandex(settings.YANDEX_METRIKA_ID)
 
 
+def indexnow_key(request):
+    return HttpResponse(settings.SEO_INDEXNOW_KEY)
+
+
 app_name = "frontend"
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
+    # SEO
+    path(f"{settings.SEO_INDEXNOW_KEY}.txt", indexnow_key, name="indexnow-key"),
+    # RSS
     path("rss/", AllEntriesFeed(), name="rss"),
     path("rss/raw", RawEntriesFeed(), name="rss_raw"),
     path("rss/direct/", AllEntriesFeed(), name="rss_direct"),

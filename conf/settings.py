@@ -614,6 +614,11 @@ META_DEFAULT_KEYWORDS = [
 ]
 
 
+# SEO
+# ------------------------------------------------------------------------------
+SEO_INDEXNOW_KEY = env.str("SEO_INDEXNOW_KEY", default="b06fa1fa-f780-45c5-8353-8059c9c64179")
+
+
 if not os.path.isdir(PAGES_ROOT):
     os.makedirs(PAGES_ROOT)
 

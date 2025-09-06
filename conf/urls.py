@@ -9,6 +9,7 @@ from frontend.urls import urlpatterns as frontend_url
 
 admin.autodiscover()
 
+
 urlpatterns = [
     path("", include((frontend_url, "frontend"), namespace="frontend")),
     path("", include((digest_url, "digest"), namespace="digest")),
