@@ -58,7 +58,7 @@ whitenoise = {extras = ["brotli"], version = "^6.9.0"}
 uvicorn = "^0.34.3"
 lingua-language-detector = "^1.4.2"
 vk = "^3.0"
-langchain = "^0.2.17"
+langchain = "^1.0.2"
 jinja2 = "^3.1.6"
 tqdm = "^4.67.1"
 django-meta = "^2.5.0"
