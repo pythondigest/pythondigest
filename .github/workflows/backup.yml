@@ -15,7 +15,7 @@ jobs:
       # Copy backup script to server. Load repo
       #----------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       #----------------------------------------------
       # Copy backup script
@@ -82,7 +82,7 @@ jobs:
       # Copy backup script to server. Load repo
       #----------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       #----------------------------------------------
       # Copy backup script
@@ -125,7 +125,7 @@ jobs:
       # Copy backup script to server. Load repo
       #----------------------------------------------
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       #----------------------------------------------
       # Copy backup script
