@@ -23,7 +23,7 @@ def format_issue(issue):
 
 
 def get_examples() -> list[dict[str, Any]]:
-    examples_size = 4
+    examples_size = 6
     qs_issue = Issue.objects.filter(
         status=ISSUE_STATUS_ACTIVE,
     ).order_by(
