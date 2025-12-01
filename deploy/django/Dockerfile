@@ -18,6 +18,9 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$VENV_PATH/bin:$PATH"
 
 RUN pip install -U "pip==$PIP_VERSION" && \
+    # Install uv
+    apt-get update && \
+    apt-get install -y curl && \
     curl -LsSf https://astral.sh/uv/install.sh | sh -s -- --install-dir /usr/local/bin
 
 ######################################################
