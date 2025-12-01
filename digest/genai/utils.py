@@ -7,7 +7,7 @@ from .chad import Chad
 def get_llm(temperature: float = 0):
     if settings.LLM_PROVIDER == "openai":
         return ChatOpenAI(
-            model=settings.OPENAI_API_MODEL,
+            model=settings.OPENAI_MODEL,
             base_url=settings.OPENAI_BASE_URL,
             api_key=settings.OPENAI_API_KEY,
             temperature=temperature,
