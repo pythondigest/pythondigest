@@ -1,90 +1,105 @@
-[tool.poetry]
+[project]
 name = "pythondigest"
 version = "0.1.0"
 description = ""
-authors = ["axsapronov <a@sapronov.me>"]
+authors = [{ name = "Aleksandr Sapronov", email = "a@sapronov.me" }]
+requires-python = ">=3.11,<3.13"
 readme = "README.md"
-package-mode = false
+dependencies = [
+    "django[argon2]>=5.2.5,<6",
+    "django-bootstrap-form>=3.4,<4",
+    "django-digg-paginator>=0.2.0,<0.3",
+    "django-user-accounts>=3.3.2,<4",
+    "django-taggit-autosuggest>=0.4.2,<0.5",
+    "django-taggit>=6.1.0,<7",
+    "django-modeladmin-reorder>=0.3.1,<0.4",
+    "django-ckeditor>=6.7.3,<7",
+    "django-siteblocks>=1.2.1,<2",
+    "django-cachalot>=2.8.0,<3",
+    "django-compressor>=4.5.1,<5",
+    "django-secretballot>=2.0.0,<3",
+    "django-likes",
+    "django-debug-toolbar>=5.2.0,<6",
+    "django-remdow>=0.0.9,<0.0.10",
+    "requests>=2.32.5,<3",
+    "lxml>=5.4.0,<6",
+    "pyyaml>=6.0.2,<7",
+    "beautifulsoup4>=4.13.5,<5",
+    "feedparser>=6.0.11,<7",
+    "pytils>=0.4.4,<0.5",
+    "sorl-thumbnail>=12.11.0,<13",
+    "stem>=1.8.2,<2",
+    "urlobject>=2.4.3,<3",
+    "micawber>=0.5.6,<0.6",
+    "rsa>=4.9.1,<5",
+    "twx-botapi==3.6.1",
+    "google-api-python-client>=2.179.0,<3",
+    "tweepy>=4.16.0,<5",
+    "funcy>=2.0,<3",
+    "pillow>=11.3.0,<12",
+    "unidecode>=1.4.0,<2",
+    "readability-lxml",
+    "psycopg2-binary>=2.9.10,<3",
+    "pymemcache>=4.0.0,<5",
+    "django-browser-reload>=1.18.0,<2",
+    "django-bootstrap3>=25.2,<26",
+    "django-yaturbo>=1.0.1,<2",
+    "bleach>=6.2.0,<7",
+    "django-environ>=0.12.0,<0.13",
+    "django-redis>=5.4.0,<6",
+    "sentry-sdk>=2.35.1,<3",
+    "django-letsencrypt>=4.1.0,<5",
+    "django-cache-memoize>=0.2.1,<0.3",
+    "django-htmlmin>=0.11.0,<0.12",
+    "uwsgi>=2.0.30,<3",
+    "whitenoise[brotli]>=6.9.0,<7",
+    "uvicorn>=0.34.3,<0.35",
+    "lingua-language-detector>=1.4.2,<2",
+    "vk>=3.0,<4",
+    "jinja2>=3.1.6,<4",
+    "tqdm>=4.67.1,<5",
+    "django-meta>=2.5.0,<3",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.13"
-django = {extras = ["argon2"], version = "^5.2.5"}
-django-bootstrap-form = "^3.4"
-django-digg-paginator = "^0.2.0"
-django-user-accounts = "^3.3.2"
-django-taggit-autosuggest = "^0.4.2"
-django-taggit = "^6.1.0"
-django-modeladmin-reorder = "^0.3.1"
-django-ckeditor = "^6.7.3"
-django-siteblocks = "^1.2.1"
-django-cachalot = "^2.8.0"
-django-compressor = "^4.5.1"
-django-secretballot = "^2.0.0"
-django-likes = {git = "https://github.com/axsapronov/django-likes.git", rev = "v2.0.3"}
-django-debug-toolbar = "^5.2.0"
-django-remdow = "^0.0.9"
-requests = "^2.32.5"
-lxml = "^5.4.0"
-pyyaml = "^6.0.2"
-beautifulsoup4 = "^4.13.5"
-feedparser = "^6.0.11"
-pytils = "^0.4.4"
-sorl-thumbnail = "^12.11.0"
-stem = "^1.8.2"
-urlobject = "^2.4.3"
-micawber = "^0.5.6"
-rsa = "^4.9.1"
-twx-botapi = "3.6.1"
-google-api-python-client = "^2.179.0"
-tweepy = "^4.16.0"
-funcy = "^2.0"
-pillow = "^11.3.0"
-unidecode = "^1.4.0"
-readability-lxml = {git = "https://github.com/buriy/python-readability.git", branch = "master"}
-psycopg2-binary = "^2.9.10"
-pymemcache = "^4.0.0"
-django-browser-reload = "^1.18.0"
-django-bootstrap3 = "^25.2"
-django-yaturbo = "^1.0.1"
-bleach = "^6.2.0"
-django-environ = "^0.12.0"
-django-redis = "^5.4.0"
-sentry-sdk = "^2.35.1"
-django-letsencrypt = "^4.1.0"
-django-cache-memoize = "^0.2.1"
-django-htmlmin = "^0.11.0"
-uwsgi = "^2.0.30"
-whitenoise = {extras = ["brotli"], version = "^6.9.0"}
-uvicorn = "^0.34.3"
-lingua-language-detector = "^1.4.2"
-vk = "^3.0"
-langchain = "^0.2.17"
-jinja2 = "^3.1.6"
-tqdm = "^4.67.1"
-django-meta = "^2.5.0"
+[dependency-groups]
+test = [
+    "django-stubs>=5.2.2,<6",
+    "pytest>=8.4.1,<9",
+    "pytest-sugar>=1.1.1,<2",
+    "pytest-django>=4.11.1,<5",
+    "factory-boy>=3.3.3,<4",
+    "mock>=5.2.0,<6",
+]
+dev = [
+    "flake8>=7.3.0,<8",
+    "flake8-isort>=6.1.2,<7",
+    "coverage>=7.10.5,<8",
+    "black>=25.1.0,<26",
+    "pylint-django>=2.6.1,<3",
+    "pre-commit>=4.3.0,<5",
+    "django-extra-checks>=0.16.1,<0.17",
+    "django-migration-linter>=5.2.0,<6",
+    "autoflake>=2.3.1,<3",
+    "detect-secrets>=1.5.0,<2",
+    "safety>=3.6.0,<4",
+    "poetry-plugin-up>=0.9.0,<0.10",
+    "ruff>=0.9.10,<0.10",
+]
 
-[tool.poetry.group.test.dependencies]
-django-stubs = "^5.2.2"
-pytest = "^8.4.1"
-pytest-sugar = "^1.1.1"
-pytest-django = "^4.11.1"
-factory-boy = "^3.3.3"
-mock = "^5.2.0"
+[tool.uv]
+package = false
+default-groups = [
+    "test",
+    "dev",
+]
 
-[tool.poetry.group.dev.dependencies]
-flake8 = "^7.3.0"
-flake8-isort = "^6.1.2"
-coverage = "^7.10.5"
-black = "^25.1.0"
-pylint-django = "^2.6.1"
-pre-commit = "^4.3.0"
-django-extra-checks = "^0.16.1"
-django-migration-linter = "^5.2.0"
-autoflake = "^2.3.1"
-detect-secrets = "^1.5.0"
-safety = "^3.6.0"
-poetry-plugin-up = "^0.9.0"
-ruff = "^0.9.10"
+[tool.uv.sources]
+django-likes = { git = "https://github.com/axsapronov/django-likes.git", rev = "v2.0.3" }
+readability-lxml = { git = "https://github.com/buriy/python-readability.git", branch = "master" }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.black]
 line-length = 119
@@ -98,7 +113,3 @@ multi_line_output = 3
 include_trailing_comma = true
 use_parentheses = true
 ensure_newline_before_comments = true
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
