@@ -5,15 +5,13 @@ DISTDIR=$(BASEDIR)/dist
 
 pip-tools:
 	pip install -U pip
-	pip install -U poetry
-	poetry add poetry-plugin-up --group dev
-	poetry add pre-commit --group dev
+	curl -LsSf https://astral.sh/uv/install.sh | sh
 
 requirements: pip-tools
-	poetry install --with=dev,test
+	uv sync --group dev --group test
 
 test:
-	poetry run python manage.py test
+	uv run python manage.py test
 
 run-infra:
 	docker compose -f deploy/docker_compose_infra.yml up --build
@@ -25,10 +23,10 @@ build:
 	docker compose -f deploy/docker_compose.yml build
 
 run:
-	poetry run python manage.py compress --force && poetry run python manage.py runserver
+	uv run python manage.py compress --force && uv run python manage.py runserver
 
 import:
-	poetry run python manage.py import_news
+	uv run python manage.py import_news
 
 clean:
 	docker compose -f deploy/docker_compose_infra.yml stop
@@ -45,12 +43,11 @@ restore:
 	restore $(cd /backups && ls -p | grep -v /backups  | sort -n | tail -1)
 
 check:
-	poetry run pre-commit run --show-diff-on-failure --color=always --all-files
+	uv run pre-commit run --show-diff-on-failure --color=always --all-files
 
 update: pip-tools
-	poetry update
-	poetry run poetry up
-	poetry run pre-commit autoupdate
+	uv lock --upgrade
+	uv run pre-commit autoupdate
 
 migrate:
-	poetry run python manage.py migrate
+	uv run python manage.py migrate
