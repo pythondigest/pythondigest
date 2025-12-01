@@ -224,6 +224,10 @@ jobs:
             export VK_PASSWORD="${{ secrets.VK_PASSWORD }}"
             export CHAD_API_KEY="${{ secrets.CHAD_API_KEY }}"
             export CHAD_API_MODEL="${{ secrets.CHAD_API_MODEL }}"
+            export LLM_PROVIDER="${{ secrets.LLM_PROVIDER }}"
+            export OPENAI_BASE_URL="${{ secrets.OPENAI_BASE_URL }}"
+            export OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}"
+            export OPENAI_API_MODEL="${{ secrets.OPENAI_API_MODEL }}"
             export CLS_ENABLED="${{ secrets.CLS_ENABLED }}"
             export CLS_URL_BASE="${{ secrets.CLS_URL_BASE }}"
 

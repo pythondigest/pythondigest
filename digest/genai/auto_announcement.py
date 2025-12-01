@@ -18,16 +18,7 @@ def format_issue(issue):
     return {
         "id": issue.id,
         "announcement": issue.announcement,
-        "news": [
-            {
-                "category": x.section.title,
-                "link": x.link,
-                "title": x.title,
-                "description": x.description,
-            }
-            for x in issue.item_set.filter(status=ITEM_STATUS_ACTIVE).iterator()
-            if "%" not in x.title
-        ],
+        "news": [x.title for x in issue.item_set.filter(status=ITEM_STATUS_ACTIVE).iterator() if "%" not in x.title],
     }
 
 
@@ -47,7 +38,7 @@ def get_example_prompt() -> PromptTemplate:
 {{ announcement }}
 
 << Дайджест. Новости #{{ id }} >>
-{% for item in news %}- {{ item.title }}
+{% for item in news %}- {{ item }}
 {% endfor %}```
 """
     return PromptTemplate.from_template(template, template_format="jinja2")
@@ -77,25 +68,22 @@ IT-новости про Python перед вами.
 
 ```
 << Дайджест. Новости #{{id}} >>
-{% for item in news %}- {{ item.title }}
+{% for item in news %}- {{ item }}
 {% endfor %}```
 
-Выбери не больше 14 новостей.
-Убедись, что в итоговом тексте анонса используются ТОЛЬКО новости из списка для Дайджеста {{ id }}.
-Убедись, что не переводишь название новостей.
-Убедись, что новости выводишь списком без разделов.
+Правила:
+- Выбери не больше 14 новостей.
+- Убедись, что в итоговом тексте анонса используются ТОЛЬКО новости из списка для Дайджеста {{ id }}.
+- Убедись, что не переводишь название новостей.
+- Убедись, что новости выводишь списком без разделов.
+- В ответе верни только содержание анонса, без заголовка и дополнительных комментариев.
 """
 
 
 def generate_announcement(digest_id: int) -> str:
     issue = Issue.objects.get(pk=digest_id)
     issue_data = format_issue(issue)
-    news = [
-        {
-            "title": x.get("title"),
-        }
-        for x in issue_data["news"]
-    ]
+    news = issue_data["news"]
 
     # Load and process the text
     llm = get_llm()
@@ -107,7 +95,7 @@ def generate_announcement(digest_id: int) -> str:
         example_prompt=example_prompt,
         prefix="Ты опытный редактор новостей, который умеет выбрать наиболее интересные новости для составления дайджеста. Ты модерируешь сайт, который агрегирует ИТ-новости про Python экосистему. Сейчас я тебе покажу примеры составления дайджеста: итоговый текст и новости, которые использовались при составлении дайджеста. ",
         suffix=get_question_template(),
-        input_variables=["news"],
+        input_variables=["news", "id", "url"],
         template_format="jinja2",
     )
 
@@ -119,5 +107,8 @@ def generate_announcement(digest_id: int) -> str:
         }
     ).to_string()
 
-    result: str = llm.invoke(query)
-    return result
+    result = llm.invoke(query)
+    if isinstance(result, str):
+        return result
+    else:
+        return result.content

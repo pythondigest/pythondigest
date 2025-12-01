@@ -531,6 +531,14 @@ MAILHANDLER_RU_USER_LIST_ID = 413
 # GenAI
 # ------------------------------------------------------------------------------
 
+LLM_PROVIDER = env.str("LLM_PROVIDER", default="openai")
+
+# openai
+OPENAI_BASE_URL: str = env.str("OPENAI_BASE_URL", default=None)
+OPENAI_API_KEY = env.str("OPENAI_API_KEY", default=None)
+OPENAI_API_MODEL = env.str("OPENAI_API_MODEL", default="t-pro-it-2.0-awq")
+
+# chad
 CHAD_API_KEY = env.str("CHAD_API_KEY", default=None)
 CHAD_API_MODEL = env.str("CHAD_API_MODEL", default=None)
 
