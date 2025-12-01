@@ -11,17 +11,13 @@ ENV PYTHONUNBUFFERED=1 \
          PIP_DEFAULT_TIMEOUT=30 \
          PYSETUP_PATH="/app" \
          VENV_PATH="/app/.venv" \
-         PIP_VERSION=24.2 \
+         PIP_VERSION=25.3 \
          UV_PROJECT_ENVIRONMENT="/app/.venv" \
          UV_LINK_MODE="copy"
 
 ENV PATH="$VENV_PATH/bin:$PATH"
 
-RUN pip install -U "pip==$PIP_VERSION" && \
-    # Install uv
-    apt-get update && \
-    apt-get install -y curl && \
-    curl -LsSf https://astral.sh/uv/install.sh | sh -s -- --install-dir /usr/local/bin
+RUN pip install -U "pip==$PIP_VERSION" && pip install uv
 
 ######################################################
 # Builder Image
