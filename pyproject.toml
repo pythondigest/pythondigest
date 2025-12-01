@@ -59,7 +59,8 @@ dependencies = [
     "jinja2>=3.1.6,<4",
     "tqdm>=4.67.1,<5",
     "django-meta>=2.5.0,<3",
-    "langchain<1.0",
+    "langchain>=1.0",
+    "langchain-classic>=1.0.0",
 ]
 
 [dependency-groups]
