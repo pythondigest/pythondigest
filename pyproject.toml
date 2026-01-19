@@ -75,7 +75,7 @@ test = [
 ]
 dev = [
     "flake8>=7.3.0,<8",
-    "flake8-isort>=6.1.2,<7",
+    "flake8-isort>=6.1.2,<8",
     "coverage>=7.10.5,<8",
     "black>=25.1.0,<26",
     "pylint-django>=2.6.1,<3",
