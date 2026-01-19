@@ -536,7 +536,7 @@ LLM_PROVIDER = env.str("LLM_PROVIDER", default="openai")
 # openai
 OPENAI_BASE_URL: str = env.str("OPENAI_BASE_URL", default=None)
 OPENAI_API_KEY = env.str("OPENAI_API_KEY", default=None)
-OPENAI_MODEL = env.str("OPENAI_MODEL", default="t-pro-it-2.0-awq")
+OPENAI_MODEL = env.str("OPENAI_MODEL", default="t-pro-it-2.1")
 
 # chad
 CHAD_API_KEY = env.str("CHAD_API_KEY", default=None)
