@@ -204,6 +204,9 @@ elif env("POSTGRES_DB", default=None):
         "PASSWORD": env("POSTGRES_PASSWORD"),
         "HOST": env("POSTGRES_HOST"),
         "PORT": env.int("POSTGRES_PORT"),
+        "OPTIONS": {
+            "pool": True,
+        },
     }
 else:
     db_settings = {
