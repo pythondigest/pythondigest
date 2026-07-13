@@ -255,6 +255,13 @@ def pub_to_all(
     vk_api_version = "5.131"
     vk_api_scope = "wall,messages,offline"
     if settings.VK_USE_TOKEN:
+        url = (
+            f"https://oauth.vk.com/authorize?client_id={settings.VK_APP_ID}"
+            f"&display=page&redirect_uri=https://oauth.vk.com/blank.html"
+            f"&scope={vk_api_scope}&response_type=token&v={vk_api_version}"
+        )
+        logger.info("Open url and extract access_token")
+        logger.info(url)
         access_token = input("Access token: ").strip()
         api: vk.API = vk.API(
             access_token=access_token,
