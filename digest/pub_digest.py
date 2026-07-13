@@ -243,7 +243,7 @@ def pub_to_all(
     :param digest_url:
     :return:
     """
-    pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
+    # pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
     pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
     # print("Send to twitter")
     # twitter_text = (
