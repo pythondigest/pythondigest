@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 from conf.utils import likes_enable
 from digest.urls import urlpatterns as digest_url
@@ -16,7 +16,6 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("taggit_autosuggest/", include("taggit_autosuggest.urls")),
     # path('account/', include('account.urls')),
-    re_path(r"^\.well-known/", include("letsencrypt.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

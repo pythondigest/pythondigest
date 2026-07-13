@@ -81,7 +81,6 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "admin_reorder",
     "sorl.thumbnail",
-    "letsencrypt",
     "pytils",
     "ckeditor",
     "taggit",
