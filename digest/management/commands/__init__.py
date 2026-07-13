@@ -25,7 +25,6 @@ def parse_weekly_digest(item_data: dict):
     from digest.management.commands.import_awesome_python_weekly import main as parse_awesome_python_weekly
     from digest.management.commands.import_django_news import main as parse_django_news
     from digest.management.commands.import_pycoders_weekly import main as parse_pycoders_weekly
-    from digest.management.commands.import_python_weekly import main as parse_python_weekly
 
     try:
         if "Python Weekly" in item_data.get("title"):
@@ -96,7 +95,7 @@ def _clojure_get_youtube_urls_from_page():
         result = url
         _ = re.findall(reg_list, url)
         if _ and len(_) == 1 and len(_[0]) == 7:
-            result = "https://www.youtube.com/watch?v=%s" % _[0][6]
+            result = f"https://www.youtube.com/watch?v={_[0][6]}"
         return result
 
     def clean_urls(url):
@@ -308,8 +307,8 @@ def get_tweets_by_url(base_url: str) -> list:
             tw_lnk = p.find("a", "twitter-timeline-link").get("data-expanded-url")
             tw_text = p.contents[0]
             result.append([tw_text, tw_lnk, http_code])
-        except Exception as e:
-            print("| ", "tweets by url exception", str(e))
+        except Exception:
+            pass
 
     return result
 

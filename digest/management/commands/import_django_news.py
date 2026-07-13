@@ -10,7 +10,6 @@ from collections.abc import Sequence
 
 import lxml.html as html
 from django.core.management.base import BaseCommand
-from lxml import etree
 from sentry_sdk import capture_exception
 
 from digest.management.commands import ignore_url, make_get_request, save_news_item
@@ -109,4 +108,4 @@ class Command(BaseCommand):
         if "url" in options:
             main(options["url"])
         else:
-            print("Not found folder path")
+            pass

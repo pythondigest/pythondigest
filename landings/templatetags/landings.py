@@ -23,8 +23,8 @@ def rss2json(url):
     try:
         resp = requests.get(RSS2JSON_URLS[0].format(url))
         return resp.json()
-    except Exception as e:
-        print(e)
+    except Exception:
+        pass
     return result
 
 

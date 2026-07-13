@@ -33,7 +33,7 @@ def mark_videos(query_set):
 
     for x in query_set:
         if x.section is not None and x.section.id == video_id:
-            x.title = "[Видео] %s" % x.title
+            x.title = f"[Видео] {x.title}"
 
 
 class RawEntriesFeed(DigestFeed):
@@ -41,9 +41,7 @@ class RawEntriesFeed(DigestFeed):
     def items():
         _ = Item.objects.filter(
             activated_at__lte=datetime.datetime.now(),
-        ).order_by(
-            "-related_to_date"
-        )[:10]
+        ).order_by("-related_to_date")[:10]
         mark_videos(_)
         return _
 
@@ -56,9 +54,7 @@ class ItemDigestFeed(DigestFeed):
         _ = Item.objects.filter(
             status="active",
             activated_at__lte=datetime.datetime.now(),
-        ).order_by(
-            "-related_to_date"
-        )[:1000]
+        ).order_by("-related_to_date")[:1000]
         mark_videos(_)
         return _
 

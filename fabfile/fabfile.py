@@ -23,7 +23,7 @@ def deploy():
 
 
 def update_libs():
-    with prefix("source %s" % ENV_PATH):
+    with prefix(f"source {ENV_PATH}"):
         with cd(REPO_FOLDER):
             run("pip install -r requirements.txt")
 
@@ -34,12 +34,12 @@ def restart():
 
 
 def migrate():
-    with prefix("source %s" % ENV_PATH):
+    with prefix(f"source {ENV_PATH}"):
         with cd(REPO_FOLDER):
             run("python manage.py migrate --noinput")
 
 
 def static():
-    with prefix("source %s" % ENV_PATH):
+    with prefix(f"source {ENV_PATH}"):
         with cd(REPO_FOLDER):
             run("python manage.py collectstatic --noinput")

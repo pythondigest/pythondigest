@@ -6,7 +6,6 @@ python manage.py import_python_weekly 'https://python.thisweekin.io/python-weekl
 """
 
 from collections.abc import Sequence
-from typing import Union
 
 import lxml.html as html
 from bs4 import BeautifulSoup
@@ -21,7 +20,7 @@ from digest.management.commands import (
 )
 from digest.models import ITEM_STATUS_CHOICES, ParsingRules, Resource, Section
 
-Parseble = Union[BeautifulSoup, html.HtmlElement]
+Parseble = BeautifulSoup | html.HtmlElement
 
 
 def _get_blocks(url: str) -> Sequence[BeautifulSoup]:
@@ -121,4 +120,4 @@ class Command(BaseCommand):
         if "url" in options:
             main(options["url"])
         else:
-            print("Not found folder path")
+            pass

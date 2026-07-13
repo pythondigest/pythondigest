@@ -45,6 +45,12 @@ restore:
 check:
 	uv run pre-commit run --show-diff-on-failure --color=always --all-files
 
+format:
+	uv run ruff format .
+
+lint:
+	uv run ruff check .
+
 update: pip-tools
 	uv lock --upgrade
 	uv run pre-commit autoupdate

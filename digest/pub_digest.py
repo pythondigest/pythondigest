@@ -10,7 +10,6 @@ import twx
 import vk
 from django.conf import settings
 from django.template.loader import render_to_string
-from django.templatetags.static import static
 from sentry_sdk import capture_exception
 from tweepy import Client
 from twx.botapi import TelegramBot
@@ -164,22 +163,18 @@ def pub_to_vk_users(text, api: vk.API):
     user_text = "Привет. Вышел новый дайджест. Пример текста\n"
     user_text += text
     for user_id in get_pydigest_users():
-        print("User ", user_id)
-        res = send_message(api, user_id=user_id, message=user_text)  # type: ignore
+        send_message(api, user_id=user_id, message=user_text)  # type: ignore
         time.sleep(1)
-        print(res)
 
 
 def pub_to_vk_groups(text: str, attachments, api: vk.API):
     for groupd_id, from_group in get_pydigest_groups():
-        print(groupd_id, from_group)
-        res = post_to_wall(
+        post_to_wall(
             api,
             groupd_id,
             text,
             **{"from_group": from_group},
         )  # type: ignore
-        print(res)
         time.sleep(1)
 
 
@@ -187,13 +182,9 @@ def pub_to_telegram(text, bot_token, tg_channel):
     tgm_bot = TelegramBot(bot_token)
     answer = tgm_bot.send_message(tg_channel, text).wait()
     if isinstance(answer, twx.botapi.Error):
-        print(
-            "error code: %s\nerror description: %s\n",
-            answer.error_code,
-            answer.description,
-        )
+        pass
     else:
-        print("OK")
+        pass
 
 
 def pub_to_slack(text, digest_url, digest_image_url, ifttt_key):
@@ -252,21 +243,18 @@ def pub_to_all(
     :param digest_url:
     :return:
     """
-    print("Send to telegram")
     pub_to_telegram(text, settings.TGM_BOT_ACCESS_TOKEN, settings.TGM_CHANNEL)
-    print("Send to slack")
     pub_to_slack(text, digest_url, digest_image_url, settings.IFTTT_MAKER_KEY)
     # print("Send to twitter")
-    # twitter_text = f"{digest_pk} выпуск Дайджеста #python новостей. Интересные ссылки на одной странице: {digest_url}"
+    # twitter_text = (
+    #     f"{digest_pk} выпуск Дайджеста #python новостей. "
+    #     f"Интересные ссылки на одной странице: {digest_url}"
+    # )
     # pub_to_twitter(twitter_text, digest_image_url)
-    print("Send to vk groups")
 
     vk_api_version = "5.131"
     vk_api_scope = "wall,messages,offline"
     if settings.VK_USE_TOKEN:
-        url = f"https://oauth.vk.com/authorize?client_id={settings.VK_APP_ID}&display=page&redirect_uri=https://oauth.vk.com/blank.html&scope={vk_api_scope}&response_type=token&v={vk_api_scope}"
-        print("Open url and extract access_token")
-        print(url)
         access_token = input("Access token: ").strip()
         api: vk.API = vk.API(
             access_token=access_token,

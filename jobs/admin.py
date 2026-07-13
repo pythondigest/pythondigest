@@ -16,7 +16,9 @@ class JobFeedAdmin(admin.ModelAdmin):
         "is_activated",
     ]
 
-    link_html = lambda s, obj: link_html(obj)
+    def link_html(s, obj):
+        return link_html(obj)
+
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"
 
@@ -38,7 +40,9 @@ class JobItemAdmin(admin.ModelAdmin):
         "get_salary_str",
     )
 
-    link_html = lambda s, obj: link_html(obj)
+    def link_html(s, obj):
+        return link_html(obj)
+
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"
 

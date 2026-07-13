@@ -81,7 +81,6 @@ class Command(BaseCommand):
         test_set = dataset_queryset[train_size:]
 
         for part in range(options["train_parts"]):
-            print(f"Work with {part} part....")
             name = f"data_{train_part_size}_{part}.json"
 
             file_path = os.path.join(settings.DATASET_ROOT, name)
@@ -90,4 +89,4 @@ class Command(BaseCommand):
             create_dataset(queryset, file_path)
 
         with open(os.path.join(settings.DATASET_ROOT, "test_set_ids.txt"), "w") as fio:
-            fio.writelines(["%s\n" % x for x in test_set.values_list("id", flat=True)])
+            fio.writelines([f"{x}\n" for x in test_set.values_list("id", flat=True)])

@@ -125,4 +125,4 @@ class Command(BaseCommand):
         if "url" in options:
             main(options["url"])
         else:
-            print("Not found folder path")
+            pass

@@ -47,7 +47,7 @@ class HoneypotWidget(forms.TextInput):
         html = super().render(*args, **kwargs)
 
         if self.html_comment:
-            html = "<!-- %s -->" % html
+            html = f"<!-- {html} -->"
 
         return html
 

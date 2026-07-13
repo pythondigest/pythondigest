@@ -42,7 +42,11 @@ PROJECT_SITE = env("PROJECT_SITE", default=f"{PROTOCOL}://{BASE_DOMAIN}")
 PROJECT_NAME = env("PROJECT_NAME", default="Python Дайджест")
 PROJECT_DESCRIPTION = env(
     "PROJECT_DESCRIPTION",
-    default="IT-новости про Python, которые стоит знать. Еженедельная подборка свежих и самых значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек и проектов. Много контента про Django, Flask, numpy и машинное обучение.",
+    default=(
+        "IT-новости про Python, которые стоит знать. Еженедельная подборка свежих и самых "
+        "значимых новостей o Python. Видео, статьи, обучающие материалы, релизы библиотек "
+        "и проектов. Много контента про Django, Flask, numpy и машинное обучение."
+    ),
 )
 
 ALLOWED_HOSTS = [
@@ -103,12 +107,10 @@ INSTALLED_APPS = [
 
 CACHALOT_ENABLED = env.bool("CACHALOT_ENABLED", False)
 if CACHALOT_ENABLED:
-    try:
-        import cachalot
+    import importlib.util
 
+    if importlib.util.find_spec("cachalot") is not None:
         INSTALLED_APPS.append("cachalot")
-    except ImportError:
-        print("WARNING. You activate Cachalot, but i don't find package")
 
 
 # PASSWORDS

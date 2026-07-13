@@ -17,5 +17,4 @@ class Command(BaseCommand):
         parser.add_argument("issue", type=int)
 
     def handle(self, *args, **options):
-        announcement = generate_announcement(options["issue"])
-        print(announcement)
+        generate_announcement(options["issue"])

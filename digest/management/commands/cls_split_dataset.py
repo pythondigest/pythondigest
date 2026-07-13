@@ -12,7 +12,7 @@ from digest.management.commands.cls_create_dataset import save_dataset
 def load_data_from_folder(folder):
     assert os.path.exists(folder)
     result = []
-    for x in glob.glob("%s/*.json" % folder):
+    for x in glob.glob(f"{folder}/*.json"):
         with open(x) as fio:
             result.extend(json.load(fio)["links"])
     return result

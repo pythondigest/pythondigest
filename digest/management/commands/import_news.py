@@ -5,7 +5,6 @@ from time import mktime
 from urllib.error import URLError
 
 import feedparser
-import requests
 from cache_memoize import cache_memoize
 from django.core.management.base import BaseCommand
 from django.db.models import Q
@@ -32,8 +31,7 @@ def _parse_tweets_data(data: list, src: AutoImportResource) -> list:
     for text, link, http_code in data:
         try:
             excl_link = bool([i for i in excl if i in link])
-        except TypeError as e:
-            print(f"WARNING: (import_news): {e}")
+        except TypeError:
             excl_link = False
         if not excl_link and src.incl in text:
             tw_txt = text.replace(src.incl, "")
@@ -45,11 +43,10 @@ def get_tweets():
     result = []
     news_sources = AutoImportResource.objects.filter(type_res="twitter").exclude(in_edit=True).exclude(is_active=False)
     for source in news_sources:
-        print("Process twitter", source)
         try:
             result.extend(_parse_tweets_data(get_tweets_by_url(source.link), source))
-        except Exception as e:
-            print(e)
+        except Exception:
+            pass
     return result
 
 
@@ -77,8 +74,8 @@ def import_tweets(**kwargs):
                     data = apply_parsing_rules(item_data, **kwargs) if kwargs.get("query_rules") else {}
                     item_data.update(data)
             save_news_item(item_data)
-        except (URLError, TooManyRedirects, TimeoutError) as e:
-            print(i, str(e))
+        except (URLError, TooManyRedirects, TimeoutError):
+            pass
 
 
 @cache_memoize(300)
@@ -121,8 +118,7 @@ def get_items_from_rss(rss_link: str, timeout=10) -> list[dict]:
                     "related_to_date": news_date,
                 }
             )
-    except Exception as e:
-        print("Exception -> ", str(e))
+    except Exception:
         rss_items = []
 
     return rss_items
@@ -198,7 +194,7 @@ def import_rss(**kwargs):
                 news_items = news_rss_items
 
             if not news_items:
-                logger.info(f"> Not found new news in source")
+                logger.info("> Not found new news in source")
                 continue
             else:
                 logger.info(f"> Work with {len(news_items)} items")
@@ -229,10 +225,10 @@ def import_rss(**kwargs):
                     item.update(apply_video_rules(item.copy()))
                 logger.info(f"> Save news item - {item['link']}")
                 save_news_item(item)
-                logger.info(f"> Saved")
+                logger.info("> Saved")
 
-        except (URLError, TooManyRedirects, TimeoutError) as e:
-            print(source, str(e))
+        except (URLError, TooManyRedirects, TimeoutError):
+            pass
 
 
 def parsing(func, **kwargs):

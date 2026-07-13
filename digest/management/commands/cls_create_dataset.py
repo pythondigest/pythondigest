@@ -56,7 +56,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         assert os.path.exists(options["dataset_folder"])
         additional_data = []
-        for x in glob.glob("%s/*.json" % options["dataset_folder"]):
+        for x in glob.glob("{}/*.json".format(options["dataset_folder"])):
             with open(x) as fio:
                 additional_data.extend(json.load(fio)["links"])
         # TODO additional_data is off
@@ -100,7 +100,6 @@ class Command(BaseCommand):
         # save_function = save_dataset
 
         for part in range(options["cnt_parts"]):
-            print("Create part {} (of {})".format(part, options["cnt_parts"]))
             train_name = f"train_{train_part_size}_{part}.json"
             test_name = f"test_{test_part_size}_{part}.json"
 

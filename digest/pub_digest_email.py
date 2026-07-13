@@ -30,9 +30,9 @@ def send_email(subject, html_body):
             "html_body": html_body,
         }
         try:
-            response = requests.post(get_url("message/send/"), json=data, headers=headers)
-        except Exception as e:
-            print(e)
+            requests.post(get_url("message/send/"), json=data, headers=headers)
+        except Exception:
+            pass
     return "Ok"
 
 
@@ -62,7 +62,7 @@ def get_id_list_by_name(lists, name):
         if item.get("name", "") == name:
             return item["id"]
     else:
-        raise NotImplemented
+        raise NotImplementedError
 
 
 def get_user_emails(list_id):

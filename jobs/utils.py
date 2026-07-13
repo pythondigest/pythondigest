@@ -9,7 +9,7 @@ from jobs.signals import sig_integration_failed
 
 logger = logging.getLogger(__name__)
 
-USER_AGENT = "pydigest.ru/%s (pydigest@gmail.com)" % ".".join(map(str, settings.VERSION))
+USER_AGENT = "pydigest.ru/{} (pydigest@gmail.com)".format(".".join(map(str, settings.VERSION)))
 
 
 def format_currency(val):
@@ -78,11 +78,11 @@ class HhVacancyManager:
         :return:
         """
         base_url = "https://api.hh.ru/vacancies/"
-        query = "search_field=%(field)s&per_page=%(per_page)s" "&order_by=publication_time&period=1&text=%(term)s" % {
-            "term": "python",
-            "per_page": 500,
-            "field": "name",  # description
-        }
+        query = "search_field={field}&per_page={per_page}&order_by=publication_time&period=1&text={term}".format(
+            term="python",
+            per_page=500,
+            field="name",
+        )
 
         response = get_json(f"{base_url}?{query}")
 

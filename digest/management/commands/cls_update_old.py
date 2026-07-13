@@ -14,8 +14,6 @@ def update_cls(items, part_size=100):
     url = "{}/{}".format(settings.CLS_URL_BASE, "api/v1.0/classify/")
     items = list(items)
     while part_size * cur_part < cnt:
-        print(cur_part)
-
         links_items = items[part_size * cur_part : part_size * (cur_part + 1)]
         data = {"links": [x.item.data4cls for x in links_items]}
 
@@ -29,7 +27,7 @@ def update_cls(items, part_size=100):
             requests.exceptions.RequestException,
             requests.exceptions.Timeout,
             requests.exceptions.TooManyRedirects,
-        ) as e:
+        ):
             resp_data = None
 
         for x in links_items:

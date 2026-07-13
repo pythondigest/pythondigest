@@ -68,8 +68,7 @@ def parse_rss(package: Package):
 
         section = Section.objects.get(title="Релизы")
         resource = Resource.objects.get(title="PyPI")
-    except Exception as e:
-        print(e)
+    except Exception:
         return
 
     for n in feedparser.parse(package_rss_releases).entries:
@@ -94,16 +93,13 @@ def parse_rss(package: Package):
 
             item_data = _generate_release_item(package_version, n.link, resource, section, package)
             save_news_item(item_data)
-            print(f"> Save news for version - {package_version}")
-        except Exception as e:
-            print(e)
+        except Exception:
             continue
 
 
 def parse_release_rss():
     queryset = Package.objects.filter(is_active=True)
     for package in queryset:
-        print(f"Processing...{package.name}")
         parse_rss(package)
         # break
 

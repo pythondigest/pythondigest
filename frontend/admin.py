@@ -24,7 +24,7 @@ class EditorMaterialAdmin(admin.ModelAdmin):
     }
 
     def link_html(self, obj):
-        return '<a href="%s">читать</a>' % obj.link
+        return f'<a href="{obj.link}">читать</a>'
 
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"

@@ -26,9 +26,7 @@ def get_examples() -> list[dict[str, Any]]:
     examples_size = 6
     qs_issue = Issue.objects.filter(
         status=ISSUE_STATUS_ACTIVE,
-    ).order_by(
-        "-published_at"
-    )[:examples_size]
+    ).order_by("-published_at")[:examples_size]
     return [format_issue(x) for x in qs_issue]
 
 
@@ -93,7 +91,12 @@ def generate_announcement(digest_id: int) -> str:
     prompt = FewShotPromptTemplate(
         examples=examples,
         example_prompt=example_prompt,
-        prefix="Ты опытный редактор новостей, который умеет выбрать наиболее интересные новости для составления дайджеста. Ты модерируешь сайт, который агрегирует ИТ-новости про Python экосистему. Сейчас я тебе покажу примеры составления дайджеста: итоговый текст и новости, которые использовались при составлении дайджеста. ",
+        prefix=(
+            "Ты опытный редактор новостей, который умеет выбрать наиболее интересные новости "
+            "для составления дайджеста. Ты модерируешь сайт, который агрегирует ИТ-новости "
+            "про Python экосистему. Сейчас я тебе покажу примеры составления дайджеста: "
+            "итоговый текст и новости, которые использовались при составлении дайджеста. "
+        ),
         suffix=get_question_template(),
         input_variables=["news", "id", "url"],
         template_format="jinja2",

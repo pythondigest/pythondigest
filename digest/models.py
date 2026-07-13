@@ -171,7 +171,10 @@ class Issue(models.Model, ModelMeta):
 
     @property
     def meta_description(self):
-        return f"Выпуск еженедельного Python Дайджеста. Самые актуальные новости про Python за {self.date_from} - {self.date_to} на одной странице"
+        return (
+            f"Выпуск еженедельного Python Дайджеста. Самые актуальные новости про Python "
+            f"за {self.date_from} - {self.date_to} на одной странице"
+        )
 
     @property
     def meta_image(self):
@@ -185,8 +188,14 @@ class Issue(models.Model, ModelMeta):
         verbose_name_plural = _("Issues of digest")
 
 
-ISSUE_DESCRIPTION_DEFAULT = """<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p><p>Читайте нас через <a href="https://t.me/py_digest">Telegram @py_digest</a>, <a href="https://pythondigest.ru/feed/">RSS</a></p><br>
-<p><b>Попробуйте</b> наш <b>тренажер IT инцидентов <a href='https://app.incidenta.tech/welcome'>https://app.incidenta.tech</a></b>. Вы научитесь диагностировать самые популярные сбои в IT.</p>"""
+ISSUE_DESCRIPTION_DEFAULT = (
+    "<p>Сборник IT новостей про Python. Самые актуальные новости про Python на одной странице.</p>"
+    '<p>Читайте нас через <a href="https://t.me/py_digest">Telegram @py_digest</a>, '
+    '<a href="https://pythondigest.ru/feed/">RSS</a></p><br>'
+    "<p><b>Попробуйте</b> наш <b>тренажер IT инцидентов "
+    "<a href='https://app.incidenta.tech/welcome'>https://app.incidenta.tech</a></b>. "
+    "Вы научитесь диагностировать самые популярные сбои в IT.</p>"
+)
 
 ANNOUNCEMENT_DEFAULT = """#python #pydigest
 IT-новости про Python перед вами.
@@ -528,7 +537,6 @@ class ItemClsCheck(models.Model):
                 ).json()
 
                 if "error" in response:
-                    print(response["error"])
                     return
                 else:
                     self.score = response["links"][0].get(self.item.link, False)

@@ -48,7 +48,7 @@ def _save_item_model(request, item: Item, form, change) -> None:
                 la = qs.filter(status="active").order_by("-pk")[0:1].get()
                 # последний неактивный
                 lna = qs.filter(pk__gt=la.pk).order_by("pk")[0:1].get()
-            except Issue.DoesNotExist as e:
+            except Issue.DoesNotExist:
                 logger.warning("Not found last or recent issue")
 
             if la or lna:
@@ -65,7 +65,7 @@ def _save_item_model(request, item: Item, form, change) -> None:
 
 def _external_link(obj):
     lnk = escape(obj.link)
-    ret = '<a target="_blank" href="%s">Ссылка&nbsp;&gt;&gt;&gt;</a>' % lnk
+    ret = f'<a target="_blank" href="{lnk}">Ссылка&nbsp;&gt;&gt;&gt;</a>'
     return format_html(ret)
 
 
@@ -98,7 +98,7 @@ class IssueAdmin(admin.ModelAdmin):
     issue_date.short_description = "Период"
 
     def news_count(self, obj):
-        return "%s" % Item.objects.filter(issue__pk=obj.pk, status="active").count()
+        return "{}".format(Item.objects.filter(issue__pk=obj.pk, status="active").count())
 
     news_count.short_description = "Количество новостей"
 
@@ -234,7 +234,9 @@ class ItemAdmin(admin.ModelAdmin):
         "status": admin.HORIZONTAL,
     }
 
-    external_link = lambda s, obj: _external_link(obj)
+    def external_link(s, obj):
+        return _external_link(obj)
+
     external_link.allow_tags = True
     external_link.short_description = "Ссылка"
 
@@ -257,7 +259,9 @@ class ItemAdmin(admin.ModelAdmin):
 class ResourceAdmin(admin.ModelAdmin):
     list_display = ("title", "link_html")
 
-    link_html = lambda s, obj: link_html(obj)
+    def link_html(s, obj):
+        return link_html(obj)
+
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"
 
@@ -290,7 +294,9 @@ class AutoImportResourceAdmin(admin.ModelAdmin):
         models.TextField: {"widget": forms.Textarea(attrs={"cols": 45, "rows": 1})},
     }
 
-    link_html = lambda s, obj: link_html(obj)
+    def link_html(s, obj):
+        return link_html(obj)
+
     link_html.allow_tags = True
     link_html.short_description = "Ссылка"
 
@@ -464,11 +470,15 @@ class ItemModeratorAdmin(admin.ModelAdmin):
             result = super().get_queryset(request)
         return result.prefetch_related("itemclscheck", "section")
 
-    external_link = lambda s, obj: _external_link(obj)
+    def external_link(s, obj):
+        return _external_link(obj)
+
     external_link.allow_tags = True
     external_link.short_description = "Ссылка"
 
-    external_link_edit = lambda s, obj: link_html(obj)
+    def external_link_edit(s, obj):
+        return link_html(obj)
+
     external_link_edit.allow_tags = True
     external_link_edit.short_description = "Ссылка"
 
@@ -499,7 +509,9 @@ class ItemDailyModeratorAdmin(admin.ModelAdmin):
         "cls_ok",
     )
 
-    external_link = lambda s, obj: _external_link(obj)
+    def external_link(s, obj):
+        return _external_link(obj)
+
     external_link.allow_tags = True
     external_link.short_description = "Ссылка"
 
@@ -547,7 +559,9 @@ class ItemClsAdmin(admin.ModelAdmin):
     search_fields = ("title", "description", "link")
     list_display = ("title", "external_link", "status_ok", "cls_ok")
 
-    external_link = lambda s, obj: _external_link(obj)
+    def external_link(s, obj):
+        return _external_link(obj)
+
     external_link.allow_tags = True
     external_link.short_description = "Ссылка"
 
@@ -572,8 +586,7 @@ class ItemClsAdmin(admin.ModelAdmin):
                     pk__lte=Issue.objects.all().first().last_item,
                 )
             )
-        except ValueError as e:
-            print(e)
+        except ValueError:
             return super().get_queryset(request)
 
 
