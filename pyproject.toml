@@ -37,7 +37,7 @@ dependencies = [
     "readability-lxml",
     "pymemcache>=4.0.0,<5",
     "django-browser-reload>=1.18.0,<2",
-    "django-bootstrap3>=25.2,<26",
+    "django-bootstrap3>=25.2,<27",
     "django-yaturbo>=1.0.1,<2",
     "django-environ>=0.12.1,<0.13",
     "django-redis>=7.0.0,<8",
