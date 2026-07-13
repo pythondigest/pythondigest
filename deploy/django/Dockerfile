@@ -58,6 +58,9 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   libpq-dev \
   # uwsgi runtime dependency (linked at build time via libpcre3-dev)
   libpcre3 \
+  # lxml runtime dependencies
+  libxml2 \
+  libxslt1.1 \
   # Translations dependencies
   gettext \
   git \
