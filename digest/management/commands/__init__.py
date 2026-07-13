@@ -470,7 +470,7 @@ def apply_parsing_rules(item_data: dict, query_rules, query_sections, query_stat
 def is_russian(text):
     languages = [Language.ENGLISH, Language.RUSSIAN]
     detector = LanguageDetectorBuilder.from_languages(*languages).build()
-    return detector.detect_language_of(text) is Language.RUSSIAN
+    return detector.detect_language_of(text) == Language.RUSSIAN
 
 
 def save_news_item(item: dict):
