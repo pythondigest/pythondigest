@@ -74,7 +74,7 @@ def import_tweets(**kwargs):
                     data = apply_parsing_rules(item_data, **kwargs) if kwargs.get("query_rules") else {}
                     item_data.update(data)
             save_news_item(item_data)
-        except (URLError, TooManyRedirects, TimeoutError):
+        except URLError, TooManyRedirects, TimeoutError:
             pass
 
 
@@ -107,7 +107,7 @@ def get_items_from_rss(rss_link: str, timeout=10) -> list[dict]:
             # create data dict
             try:
                 summary = re.sub("<.*?>", "", n.summary)
-            except (AttributeError, KeyError):
+            except AttributeError, KeyError:
                 summary = ""
 
             rss_items.append(
@@ -227,7 +227,7 @@ def import_rss(**kwargs):
                 save_news_item(item)
                 logger.info("> Saved")
 
-        except (URLError, TooManyRedirects, TimeoutError):
+        except URLError, TooManyRedirects, TimeoutError:
             pass
 
 

@@ -243,11 +243,11 @@ def make_get_request(url, timeout=10, try_count=0):
             return None
         time.sleep(SOFT_SLEEP)
         return make_get_request(url, timeout, try_count + 1)
-    except (ProxyError, SSLError, ConnectTimeoutError):
+    except ProxyError, SSLError, ConnectTimeoutError:
         logger.info("Proxy error. Try refresh proxy")
         get_https_proxy.invalidate()
         return make_get_request(url, timeout + 3, try_count + 1)
-    except (InvalidSchema, ConnectionError):
+    except InvalidSchema, ConnectionError:
         return None
 
 

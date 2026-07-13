@@ -90,7 +90,7 @@ def load_library_sections():
     titles = ["Интересные проекты, инструменты, библиотеки", "Релизы"]
     try:
         LIBRARY_SECTIONS = [Section.objects.get(title=title) for title in titles]
-    except (ObjectDoesNotExist, Section.DoesNotExist):
+    except ObjectDoesNotExist, Section.DoesNotExist:
         LIBRARY_SECTIONS = []
 
 
@@ -408,7 +408,7 @@ class Item(models.Model, ModelMeta):
         try:
             item = ItemClsCheck.objects.get(item=self)
             item.check_cls()
-        except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
+        except ObjectDoesNotExist, ItemClsCheck.DoesNotExist:
             item = ItemClsCheck(item=self)
             item.save()
             item.check_cls(force=True)
@@ -703,7 +703,7 @@ def update_cls_score(instance, **kwargs):
     try:
         item = ItemClsCheck.objects.get(item=instance)
         item.check_cls(False)
-    except (ObjectDoesNotExist, ItemClsCheck.DoesNotExist):
+    except ObjectDoesNotExist, ItemClsCheck.DoesNotExist:
         item = ItemClsCheck(item=instance)
         item.save()
         item.check_cls(True)
