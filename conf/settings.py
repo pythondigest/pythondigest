@@ -80,7 +80,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.admin",
     "admin_reorder",
-    "bootstrapform",
     "sorl.thumbnail",
     "letsencrypt",
     "pytils",
