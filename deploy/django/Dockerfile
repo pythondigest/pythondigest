@@ -1,7 +1,7 @@
 ######################################################
 # Base Image
 ######################################################
-ARG PYTHON_VERSION=3.13-slim-bookworm
+ARG PYTHON_VERSION=3.14-slim-bookworm
 FROM python:${PYTHON_VERSION} as python
 
 ENV PYTHONUNBUFFERED=1 \
@@ -54,6 +54,8 @@ FROM python as python-run-stage
 RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   # psycopg2 dependencies
   libpq-dev \
+  # uwsgi runtime dependency (linked at build time via libpcre3-dev)
+  libpcre3 \
   # Translations dependencies
   gettext \
   git \
