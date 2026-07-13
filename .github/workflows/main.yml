@@ -174,6 +174,79 @@ jobs:
         uses: rlespinasse/github-slug-action@v5
 
       #----------------------------------------------
+      # Create .env file for production deploy
+      #----------------------------------------------
+      - name: Create .env file
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+          POSTGRES_PORT: ${{ secrets.POSTGRES_PORT }}
+          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+          SENTRY_ENVIRONMENT: ${{ secrets.SENTRY_ENVIRONMENT }}
+          BASE_DOMAIN: ${{ secrets.BASE_DOMAIN }}
+          USE_DOCKER: ${{ secrets.USE_DOCKER }}
+          GITTER_TOKEN: ${{ secrets.GITTER_TOKEN }}
+          TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+          TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+          TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
+          TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
+          TWITTER_BEARER_TOKEN: ${{ secrets.TWITTER_BEARER_TOKEN }}
+          TGM_BOT_ACCESS_TOKEN: ${{ secrets.TGM_BOT_ACCESS_TOKEN }}
+          TGM_CHANNEL: ${{ secrets.TGM_CHANNEL }}
+          IFTTT_MAKER_KEY: ${{ secrets.IFTTT_MAKER_KEY }}
+          VK_APP_ID: ${{ secrets.VK_APP_ID }}
+          VK_LOGIN: ${{ secrets.VK_LOGIN }}
+          VK_PASSWORD: ${{ secrets.VK_PASSWORD }}
+          CHAD_API_KEY: ${{ secrets.CHAD_API_KEY }}
+          CHAD_API_MODEL: ${{ secrets.CHAD_API_MODEL }}
+          LLM_PROVIDER: ${{ secrets.LLM_PROVIDER }}
+          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
+          CLS_ENABLED: ${{ secrets.CLS_ENABLED }}
+          CLS_URL_BASE: ${{ secrets.CLS_URL_BASE }}
+          COMMIT_TAG: ${{ env.GITHUB_REF_SLUG }}
+        run: |
+          cat > deploy/.env <<EOF
+          DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+          REDIS_URL=${REDIS_URL}
+          POSTGRES_HOST=${POSTGRES_HOST}
+          POSTGRES_PORT=${POSTGRES_PORT}
+          POSTGRES_DB=${POSTGRES_DB}
+          POSTGRES_USER=${POSTGRES_USER}
+          POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+          SENTRY_DSN=${SENTRY_DSN}
+          SENTRY_ENVIRONMENT=${SENTRY_ENVIRONMENT}
+          BASE_DOMAIN=${BASE_DOMAIN}
+          USE_DOCKER=${USE_DOCKER}
+          GITTER_TOKEN=${GITTER_TOKEN}
+          TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+          TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+          TWITTER_TOKEN=${TWITTER_TOKEN}
+          TWITTER_TOKEN_SECRET=${TWITTER_TOKEN_SECRET}
+          TWITTER_BEARER_TOKEN=${TWITTER_BEARER_TOKEN}
+          TGM_BOT_ACCESS_TOKEN=${TGM_BOT_ACCESS_TOKEN}
+          TGM_CHANNEL=${TGM_CHANNEL}
+          IFTTT_MAKER_KEY=${IFTTT_MAKER_KEY}
+          VK_APP_ID=${VK_APP_ID}
+          VK_LOGIN=${VK_LOGIN}
+          VK_PASSWORD=${VK_PASSWORD}
+          CHAD_API_KEY=${CHAD_API_KEY}
+          CHAD_API_MODEL=${CHAD_API_MODEL}
+          LLM_PROVIDER=${LLM_PROVIDER}
+          OPENAI_BASE_URL=${OPENAI_BASE_URL}
+          OPENAI_API_KEY=${OPENAI_API_KEY}
+          OPENAI_MODEL=${OPENAI_MODEL}
+          CLS_ENABLED=${CLS_ENABLED}
+          CLS_URL_BASE=${CLS_URL_BASE}
+          COMMIT_TAG=${COMMIT_TAG}
+          EOF
+
+      #----------------------------------------------
       # Copy configs to server
       #----------------------------------------------
       - name: copy configs
@@ -184,7 +257,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf,deploy/crontab.conf"
+          source: "deploy/docker_compose.prod.yml,deploy/nginx.conf,deploy/crontab.conf,deploy/.env"
           target: "pythondigest/"
 
       #----------------------------------------------
@@ -199,41 +272,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            export DJANGO_SECRET_KEY="${{ secrets.DJANGO_SECRET_KEY }}"
-            export REDIS_URL="${{ secrets.REDIS_URL }}"
-            export POSTGRES_HOST="${{ secrets.POSTGRES_HOST }}"
-            export POSTGRES_PORT="${{ secrets.POSTGRES_PORT }}"
-            export POSTGRES_DB="${{ secrets.POSTGRES_DB }}"
-            export POSTGRES_USER="${{ secrets.POSTGRES_USER }}"
-            export POSTGRES_PASSWORD="${{ secrets.POSTGRES_PASSWORD }}"
-            export SENTRY_DSN="${{ secrets.SENTRY_DSN }}"
-            export SENTRY_ENVIRONMENT="${{ secrets.SENTRY_ENVIRONMENT }}"
-            export BASE_DOMAIN="${{ secrets.BASE_DOMAIN }}"
-            export USE_DOCKER="${{ secrets.USE_DOCKER }}"
-            export GITTER_TOKEN="${{ secrets.GITTER_TOKEN }}"
-            export TWITTER_CONSUMER_KEY="${{ secrets.TWITTER_CONSUMER_KEY }}"
-            export TWITTER_CONSUMER_SECRET="${{ secrets.TWITTER_CONSUMER_SECRET }}"
-            export TWITTER_TOKEN="${{ secrets.TWITTER_TOKEN }}"
-            export TWITTER_TOKEN_SECRET="${{ secrets.TWITTER_TOKEN_SECRET }}"
-            export TWITTER_BEARER_TOKEN="${{ secrets.TWITTER_BEARER_TOKEN }}"
-            export TGM_BOT_ACCESS_TOKEN="${{ secrets.TGM_BOT_ACCESS_TOKEN }}"
-            export TGM_CHANNEL="${{ secrets.TGM_CHANNEL }}"
-            export IFTTT_MAKER_KEY="${{ secrets.IFTTT_MAKER_KEY }}"
-            export VK_APP_ID="${{ secrets.VK_APP_ID }}"
-            export VK_LOGIN="${{ secrets.VK_LOGIN }}"
-            export VK_PASSWORD="${{ secrets.VK_PASSWORD }}"
-            export CHAD_API_KEY="${{ secrets.CHAD_API_KEY }}"
-            export CHAD_API_MODEL="${{ secrets.CHAD_API_MODEL }}"
-            export LLM_PROVIDER="${{ secrets.LLM_PROVIDER }}"
-            export OPENAI_BASE_URL="${{ secrets.OPENAI_BASE_URL }}"
-            export OPENAI_API_KEY="${{ secrets.OPENAI_API_KEY }}"
-            export OPENAI_MODEL="${{ secrets.OPENAI_MODEL }}"
-            export CLS_ENABLED="${{ secrets.CLS_ENABLED }}"
-            export CLS_URL_BASE="${{ secrets.CLS_URL_BASE }}"
-
-            # image tag
-            export COMMIT_TAG=${{env.GITHUB_REF_SLUG}}
-
             cd ~/pythondigest/deploy/
 
             # deploy app
