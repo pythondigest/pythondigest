@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from conf.utils import likes_enable
+from conf.views import ping
 from digest.urls import urlpatterns as digest_url
 from frontend.urls import urlpatterns as frontend_url
 
@@ -11,6 +12,7 @@ admin.autodiscover()
 
 
 urlpatterns = [
+    path("ping", ping, name="ping"),
     path("", include((frontend_url, "frontend"), namespace="frontend")),
     path("", include((digest_url, "digest"), namespace="digest")),
     path("admin/", admin.site.urls),
