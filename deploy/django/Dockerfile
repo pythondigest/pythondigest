@@ -35,6 +35,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y --fix-missing \
   libffi-dev \
   libpcre3 \
   libpcre3-dev \
+  libxml2-dev \
+  libxslt1-dev \
   git \
   python3-all-dev
 

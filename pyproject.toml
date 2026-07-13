@@ -85,7 +85,7 @@ default-groups = [
 
 [tool.uv.sources]
 django-likes = { git = "https://github.com/axsapronov/django-likes.git", rev = "v2.0.3" }
-readability-lxml = { git = "https://github.com/buriy/python-readability.git", rev = "701833ccb24f9a15b463434f78229e4d6daf1c79" }  # pragma: allowlist secret
+readability-lxml = { git = "https://github.com/buriy/python-readability.git", rev = "701833ccb24f9a15b463434f78229e4d6daf1c79" }  # pragma: allowlist secret  # master, Python 3.14 support
 
 [build-system]
 requires = ["hatchling"]

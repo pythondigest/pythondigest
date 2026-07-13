@@ -32,6 +32,16 @@ jobs:
             **/uv.lock
             **/pyproject.toml
           # venv will be created in .venv thanks to UV_PROJECT_ENVIRONMENT
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential \
+            libffi-dev \
+            libpcre3-dev \
+            libpq-dev \
+            libxml2-dev \
+            libxslt1-dev
       #----------------------------------------------
       # install dependencies
       #----------------------------------------------
@@ -75,6 +85,16 @@ jobs:
       #----------------------------------------------
       # install dependencies
       #----------------------------------------------
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential \
+            libffi-dev \
+            libpcre3-dev \
+            libpq-dev \
+            libxml2-dev \
+            libxslt1-dev
       - name: Install dependencies
         run: uv sync --frozen
       #----------------------------------------------
