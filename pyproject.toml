@@ -37,9 +37,9 @@ dependencies = [
     "readability-lxml",
     "pymemcache>=4.0.0,<5",
     "django-browser-reload>=1.18.0,<2",
-    "django-bootstrap3>=25.2,<26",
+    "django-bootstrap3>=25.2,<27",
     "django-yaturbo>=1.0.1,<2",
-    "django-environ>=0.12.1,<0.13",
+    "django-environ>=0.12.1,<0.15",
     "django-redis>=7.0.0,<8",
     "sentry-sdk>=2.64.0,<3",
     "django-cache-memoize>=0.2.1,<0.3",
@@ -58,7 +58,7 @@ dependencies = [
 
 [dependency-groups]
 test = [
-    "django-stubs>=5.2.9,<6",
+    "django-stubs>=5.2.9,<7",
     "pytest>=8.4.1,<9",
     "pytest-sugar>=1.1.1,<2",
     "pytest-django>=4.12.0,<5",
@@ -69,7 +69,7 @@ dev = [
     "coverage>=7.15.1,<8",
     "pylint-django>=2.8.0,<3",
     "pre-commit>=4.6.0,<5",
-    "django-extra-checks>=0.16.1,<0.17",
+    "django-extra-checks>=0.16.1,<0.18",
     "django-migration-linter>=5.2.0,<6",
     "detect-secrets>=1.5.0,<2",
     "safety>=3.8.1,<4",
