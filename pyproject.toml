@@ -73,7 +73,7 @@ dev = [
     "django-migration-linter>=5.2.0,<6",
     "detect-secrets>=1.5.0,<2",
     "safety>=3.8.1,<4",
-    "ruff>=0.15.21,<0.16",
+    "ruff>=0.15.21,<0.17",
 ]
 
 [tool.uv]
