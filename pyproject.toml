@@ -18,7 +18,7 @@ dependencies = [
     "django-compressor>=4.5.1,<5",
     "django-secretballot>=2.0.0,<3",
     "django-likes",
-    "django-debug-toolbar>=5.2.0,<6",
+    "django-debug-toolbar>=5.2.0,<9",
     "django-remdow>=0.0.9,<0.0.10",
     "requests>=2.34.2,<3",
     "lxml>=5.4.0,<6",
