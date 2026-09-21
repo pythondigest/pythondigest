@@ -133,7 +133,7 @@ jobs:
       # Extact commit info for build
       #----------------------------------------------
       - name: Docker meta
-        uses: docker/metadata-action@v5
+        uses: docker/metadata-action@v6
         id: meta
         with:
           images: ${{ env.GITHUB_REPOSITORY }}
