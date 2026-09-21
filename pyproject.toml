@@ -6,7 +6,7 @@ authors = [{ name = "Aleksandr Sapronov", email = "a@sapronov.me" }]
 requires-python = ">=3.14,<3.15"
 readme = "README.md"
 dependencies = [
-    "django[argon2]>=5.2.16,<6",
+    "django[argon2]>=5.2.16,<7",
     "django-digg-paginator>=0.2.0,<0.3",
     "django-user-accounts>=3.3.2,<4",
     "django-taggit-autosuggest>=0.4.2,<0.5",
